@@ -1,0 +1,4110 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{beaner}
+\usepackage{xcolor}
+\usepackage[top=20mm,left=20mm,right=20mm,bottom=20mm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Arial}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Redacción de Proyectos de Investigación Científica},
+  pdfauthor={Edison Achalma},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Redacción de Proyectos de Investigación Científica}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Corporacion Académica Universitaria}
+\author{Edison Achalma}
+\date{2026-01-26}
+\begin{document}
+\maketitle
+
+
+\section{GENERACIÓN DE ESTRUCTURA DE MONOGRAFÍA CON
+IA}\label{generaciuxf3n-de-estructura-de-monografuxeda-con-ia}
+
+\subsection{Prompt Estructurado para Crear
+Capítulos}\label{prompt-estructurado-para-crear-capuxedtulos}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Prompt para Generar Estructura de
+Monografía}\label{prompt-para-generar-estructura-de-monografuxeda}
+
+\textbf{Leyenda de colores:} {Azul = Rol} {Verde = Contexto} {Naranja =
+Tarea} {Morado = Formato} {Rojo = Restricciones}
+
+{ROL:} Eres un asesor académico especializado en metodología de
+investigación y estructuración de monografías universitarias. Diseñas
+estructuras coherentes, lógicas y académicamente rigurosas.
+
+{CONTEXTO:} Monografía de nivel pregrado evaluada según criterios
+académicos estándar. Debe facilitar argumentación clara, desarrollo
+lógico y presentación sistemática.
+
+{TAREA:} Genera estructura completa (capítulos, subcapítulos,
+sub-subcapítulos) para:
+
+\textbf{Tema:} {[}INSERTAR AQUÍ{]}\\
+\textbf{Tipo:} {[}Compilación/Investigación{]}\\
+\textbf{Extensión:} {[}XX páginas{]}
+
+{FORMATO:} Introducción → Cap. 1-3 (con 1.1, 1.1.1, etc.) → Conclusiones
+→ Referencias
+
+{RESTRICCIONES:} 3-4 capítulos \textbar{} 3-5 subcapítulos/cap
+\textbar{} 2-4 sub-subcapítulos \textbar{} Máximo 3 niveles \textbar{}
+Títulos específicos, no genéricos \textbar{} Progresión lógica
+\textbar{} Equilibrio entre capítulos \textbar{} NO metodología en
+compilación
+
+{CALIDAD:} Coherencia temática, progresión lógica, especificidad,
+equilibrio, profundidad apropiada
+
+{EJEMPLO:} ``Gestión del agua en Ayacucho'' → Cap. 1: Sistemas
+tradicionales (1.1 Organización social: 1.1.1 Autoridades, 1.1.2 Normas,
+1.1.3 Conflictos \textbar{} 1.2 Conocimientos: 1.2.1 Calendario ritual,
+1.2.2 Señas naturales, 1.2.3 Técnicas almacenamiento)
+
+{IMPORTANTE:} Solo estructura (títulos y numeración), NO contenido.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Uso del Prompt}\label{uso-del-prompt}
+
+\textbf{1.} Copiar prompt completo \textbar{} \textbf{2.} Reemplazar
+{[}INSERTAR AQUÍ{]} con tu tema \textbar{} \textbf{3.} Pegar en
+ChatGPT/Claude/Gemini \textbar{} \textbf{4.} Revisar y ajustar
+\textbar{} \textbf{5.} Validar con asesor
+
+\textbf{Ejemplo de entrada:}
+
+Tema: ``Impacto de redes sociales en salud mental de adolescentes
+peruanos'' \textbar{} Tipo: Compilación \textbar{} Extensión: 60 páginas
+
+\textbf{Ejemplo de salida esperada:}
+
+\textbf{Cap. 1: Uso de redes sociales en adolescentes peruanos} → 1.1
+Patrones de acceso (1.1.1 Penetración internet, 1.1.2 Plataformas
+predominantes, 1.1.3 Tiempo exposición) \textbar{} 1.2 Motivaciones
+(1.2.1 Identidad digital, 1.2.2 Socialización, 1.2.3 Validación social)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Variaciones Específicas}\label{variaciones-especuxedficas}
+
+\textbf{Interdisciplinaria:} Agregar ``Integrar perspectivas de {[}X{]}
+y {[}Y{]}''
+
+\textbf{Comparativa:} Agregar ``Comparar {[}A{]} con {[}B{]}
+sistemáticamente''
+
+\textbf{Histórica:} Agregar ``Organizar cronológicamente por períodos''
+
+\textbf{Aplicada:} Agregar ``Incluir capítulo final con propuestas
+prácticas''
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Prompt para Desarrollar
+Capítulos}\label{prompt-para-desarrollar-capuxedtulos}
+
+\textbf{Leyenda:} {Azul = Rol} {Verde = Tarea} {Naranja = Formato} {Rojo
+= Restricción}
+
+{ROL:} Experto en {[}TU TEMA{]} que redacta contenido académico
+riguroso.
+
+{TAREA:} Desarrolla contenido para Cap. {[}\#{]}: {[}título{]}
+\textbar{} Subcap. {[}\#{]}: {[}título{]}
+
+{FORMATO:} {[}X{]} páginas \textbar{} Incluir definiciones, autores
+clave, ejemplos \textbar{} Estilo académico formal \textbar{} Indicar
+citas como {[}CITA: Autor, año{]}
+
+{RESTRICCIÓN:} NO inventar datos ni autores. Usar {[}AUTOR A{]},
+{[}AUTOR B{]} como marcadores.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Recomendaciones Finales}\label{recomendaciones-finales}
+
+\textbf{HACER}
+
+Revisar la estructura completa antes de empezar a escribir
+
+Validar con tu asesor académico
+
+Usar la IA como asistente, no como autor
+
+Completar las citas con fuentes reales
+
+Mantener coherencia entre capítulos
+
+\textbf{NO HACER}
+
+Copiar directamente el contenido que genera la IA
+
+Aceptar la primera estructura sin revisión crítica
+
+Usar la estructura sin adaptarla a tu tema específico
+
+Olvidar agregar tu análisis y reflexión personal
+
+Incluir más de 3 niveles de profundidad
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{FUNDAMENTOS}\label{fundamentos}
+
+\subsection{Bienvenida y Objetivos}\label{bienvenida-y-objetivos}
+
+\subsubsection{Objetivos de la Clase}\label{objetivos-de-la-clase}
+
+\begin{itemize}
+\tightlist
+\item
+  Dominar los principios de la redacción científica
+\item
+  Desarrollar habilidades de escritura académica
+\item
+  Aplicar herramientas de estilo
+\end{itemize}
+
+\subsubsection{Indice}\label{indice}
+
+\begin{itemize}
+\tightlist
+\item
+  Fundamentos
+\item
+  Proceso de Escritura
+\item
+  Herramientas Prácticas
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{¿Qué es la Escritura
+Científica?}\label{quuxe9-es-la-escritura-cientuxedfica}
+
+\subsubsection{Definición}\label{definiciuxf3n}
+
+\begin{quote}
+La escritura científica es una \textbf{práctica especializada} cuyo
+objetivo primordial es la \textbf{comunicación eficaz} de ideas y
+resultados de investigación a una comunidad.
+\end{quote}
+
+\subsubsection{Diferencias}\label{diferencias}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Literaria & Científica \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Entretener/Expresar & Informar \\
+Metáforas/Suspenso & Precisión/Claridad \\
+Subjetiva & Objetiva \\
+\end{longtable}
+
+\subsubsection{Propósito}\label{propuxf3sito}
+
+\begin{itemize}
+\tightlist
+\item
+  Informar hallazgos
+\item
+  Transferir conocimiento
+\item
+  Integrar al saber universal
+\item
+  Permitir replicación
+\end{itemize}
+
+\subsubsection{Impacto}\label{impacto}
+
+La investigación \textbf{NO termina} hasta que se publica en una revista
+con revisión por pares.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Los 4 Pilares de la Redacción
+Científica}\label{los-4-pilares-de-la-redacciuxf3n-cientuxedfica}
+
+\subsubsection{1. PRECISIÓN}\label{precisiuxf3n}
+
+\begin{itemize}
+\tightlist
+\item
+  Palabras exactas
+\item
+  Sin ambigüedades
+\item
+  Términos técnicos apropiados
+\item
+  No obligar al lector a ``adivinar''
+\end{itemize}
+
+\subsubsection{2. CLARIDAD}\label{claridad}
+
+\begin{itemize}
+\tightlist
+\item
+  Lenguaje sencillo
+\item
+  Lectura rápida
+\item
+  Oraciones bien construidas
+\item
+  Orden lógico
+\end{itemize}
+
+\subsubsection{3. BREVEDAD}\label{brevedad}
+
+\begin{itemize}
+\tightlist
+\item
+  Solo información pertinente
+\item
+  Mínimo de palabras
+\item
+  Evitar redundancia
+\item
+  \textbf{Promedio: 18 palabras/oración}
+\end{itemize}
+
+\subsubsection{4. FORMALIDAD}\label{formalidad}
+
+\begin{itemize}
+\tightlist
+\item
+  Registro nivelado
+\item
+  Sin coloquialismos
+\item
+  Sin localismos
+\item
+  Lenguaje profesional
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Honestidad Intelectual}\label{honestidad-intelectual}
+
+\subsubsection{Principios Éticos}\label{principios-uxe9ticos}
+
+\begin{itemize}
+\tightlist
+\item
+  Decir la verdad\\
+\item
+  Presentar todos los hechos relevantes\\
+\item
+  Reconocer contribuciones ajenas\\
+\item
+  Evitar el \textbf{PLAGIO}\\
+\item
+  Abierto a la crítica
+\end{itemize}
+
+\subsubsection{Tipos de Plagio}\label{tipos-de-plagio}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Literal:} Copiar textualmente sin citar
+\item
+  \textbf{Adaptado:} Parafrasear sin citar
+\item
+  \textbf{De ideas:} Usar ideas ajenas sin crédito
+\item
+  \textbf{Autoplagio:} Reutilizar trabajo propio sin avisar
+\end{itemize}
+
+\subsubsection{Consecuencias del Plagio}\label{consecuencias-del-plagio}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, rightrule=.15mm, breakable, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Impacto Grave}, toprule=.15mm, left=2mm, colback=white, colbacktitle=quarto-callout-warning-color!10!white, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, toptitle=1mm, opacityback=0, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, leftrule=.75mm]
+
+\begin{itemize}
+\tightlist
+\item
+  Pérdida de credibilidad
+\item
+  Rechazo de manuscritos
+\item
+  Sanciones académicas
+\item
+  Daño a la carrera profesional
+\end{itemize}
+
+\end{tcolorbox}
+
+\subsubsection{Cómo Evitarlo}\label{cuxf3mo-evitarlo}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Citar \textbf{SIEMPRE} las fuentes
+\item
+  Usar comillas para citas textuales
+\item
+  Parafrasear correctamente
+\item
+  Gestores bibliográficos (Mendeley, Zotero)
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Géneros Académicos: Formación
+vs.~Expertos}\label{guxe9neros-acaduxe9micos-formaciuxf3n-vs.-expertos}
+
+\subsubsection{Géneros de Formación}\label{guxe9neros-de-formaciuxf3n}
+
+\emph{(Estudiantes → Evaluación)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Examen parcial}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Presencial: tiempo/memoria limitados
+  \item
+    Domiciliario: género ``bisagra''
+  \end{itemize}
+\item
+  \textbf{Monografía}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Entrenamiento investigativo
+  \item
+    Toma de posición teórica
+  \item
+    Exhaustivo sobre un tema
+  \end{itemize}
+\item
+  \textbf{Informe de lectura}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Interpretación de textos
+  \item
+    Sin marco teórico obligatorio
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Géneros Expertos}\label{guxe9neros-expertos}
+
+\emph{(Profesionales → Comunicación)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Artículo científico}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Primera publicación de resultados
+  \item
+    Formato IMRyD
+  \item
+    Revisión por pares
+  \end{itemize}
+\item
+  \textbf{Nota de revisión}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Meta-análisis
+  \item
+    Síntesis de literatura
+  \end{itemize}
+\item
+  \textbf{Tesis doctoral}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Aporte original al conocimiento
+  \item
+    Investigación exhaustiva
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{La Monografía}\label{la-monografuxeda}
+
+\subsubsection{Definición}\label{definiciuxf3n-1}
+
+\begin{quote}
+Tratado \textbf{especial}, \textbf{exhaustivo} y \textbf{sistemático}
+sobre un asunto determinado dentro de una disciplina.
+\end{quote}
+
+\subsubsection{Objetivos}\label{objetivos}
+
+\begin{itemize}
+\tightlist
+\item
+  Entrenar capacidad investigativa
+\item
+  Tomar posición entre posturas diversas
+\item
+  Manejar marco teórico
+\item
+  Comunicar conocimientos rigurosamente
+\end{itemize}
+
+\subsubsection{Diferencias}\label{diferencias-1}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{vs.~Ensayo:} Requiere marco teórico y metodología
+\item
+  \textbf{vs.~Informe:} Exige posición del autor
+\end{itemize}
+
+\subsubsection{Tipos de Monografía}\label{tipos-de-monografuxeda}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Compilación}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Analiza y compara autores
+  \item
+    Opinión personal fundada
+  \end{itemize}
+\item
+  \textbf{Investigación}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Temas nuevos o poco explorados
+  \item
+    Aporte original
+  \end{itemize}
+\item
+  \textbf{Experiencia}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Basada en vivencias profesionales
+  \item
+    Sustento teórico a la práctica
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Errores Comunes}\label{errores-comunes}
+
+\begin{itemize}
+\tightlist
+\item
+  Tema excesivamente amplio
+\item
+  Mero ``hilván de fichas''
+\item
+  Falta de posición personal
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{ESTRUCTURA DE MONOGRAFÍA DE
+COMPILACIÓN}\label{estructura-de-monografuxeda-de-compilaciuxf3n}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{¿Qué es una Monografía de
+Compilación?}\label{quuxe9-es-una-monografuxeda-de-compilaciuxf3n}
+
+\textbf{Definición:}
+
+Trabajo académico que recopila, organiza y sintetiza información de
+diversas fuentes sobre un tema específico, sin generar datos originales.
+
+\textbf{Objetivo:}
+
+Presentar un panorama completo y ordenado del estado del conocimiento
+sobre un tema, integrando diferentes perspectivas y autores.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Estructura General: Monografía de
+Compilación}\label{estructura-general-monografuxeda-de-compilaciuxf3n}
+
+\textbf{PORTADA}
+
+Datos institucionales
+
+Universidad, facultad, escuela profesional, título, autor, asesor,
+lugar, año
+
+\textbf{ÍNDICE}
+
+Navegación
+
+Lista completa de capítulos, subcapítulos y páginas
+
+\textbf{INTRODUCCIÓN}
+
+Presentación
+
+Justificación, objetivos, alcances, limitaciones, metodología de
+compilación
+
+\textbf{CAPÍTULOS}
+
+Desarrollo
+
+2-4 capítulos temáticos con subcapítulos (núcleo del trabajo)
+
+\textbf{CONCLUSIONES}
+
+Síntesis
+
+Síntesis integradora, hallazgos principales, reflexiones finales
+
+\textbf{REFERENCIAS}
+
+Fuentes
+
+Bibliografía completa en formato APA, mínimo 15-20 fuentes
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{INTRODUCCIÓN: Cómo
+Redactar}\label{introducciuxf3n-cuxf3mo-redactar}
+
+\textbf{PÁRRAFO 1: CONTEXTUALIZACIÓN}
+
+{TEMA AMPLIO}
+
+La educación superior en América Latina ha experimentado
+transformaciones significativas en las últimas dos décadas. El acceso a
+la universidad se ha democratizado, pero persisten desafíos en términos
+de calidad educativa y pertinencia de los programas académicos.
+
+{ENFOQUE ESPECÍFICO}
+
+En particular, la formación docente universitaria requiere atención
+especial, dado su rol determinante en la calidad de los procesos de
+enseñanza-aprendizaje.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{INTRODUCCIÓN: Cómo Redactar
+(2)}\label{introducciuxf3n-cuxf3mo-redactar-2}
+
+\textbf{PÁRRAFO 2: JUSTIFICACIÓN}
+
+{IMPORTANCIA}
+
+Esta monografía se justifica por la necesidad de comprender
+integralmente los modelos de formación docente universitaria vigentes en
+la región.
+
+{VACÍO/NECESIDAD}
+
+Si bien existen estudios sobre aspectos específicos de esta formación,
+hace falta una síntesis que integre las diversas perspectivas teóricas y
+experiencias documentadas en la literatura especializada.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{INTRODUCCIÓN: Cómo Redactar
+(3)}\label{introducciuxf3n-cuxf3mo-redactar-3}
+
+\textbf{PÁRRAFO 3: OBJETIVOS}
+
+{OBJETIVO GENERAL}
+
+El objetivo de esta monografía es analizar y sintetizar las principales
+propuestas teóricas y experiencias prácticas sobre formación docente
+universitaria en América Latina, período 2010-2025.
+
+{OBJETIVOS ESPECÍFICOS}
+
+Específicamente, se busca: (a) identificar los modelos teóricos
+predominantes, (b) caracterizar las experiencias más relevantes, y (c)
+establecer tendencias y desafíos emergentes.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{INTRODUCCIÓN: Cómo Redactar
+(4)}\label{introducciuxf3n-cuxf3mo-redactar-4}
+
+\textbf{PÁRRAFO 4: METODOLOGÍA Y ESTRUCTURA}
+
+{METODOLOGÍA}
+
+La investigación documental se realizó mediante búsqueda sistemática en
+bases de datos académicas (Scopus, SciELO, Redalyc), seleccionando 45
+fuentes entre artículos científicos, libros especializados y documentos
+institucionales.
+
+{ESTRUCTURA}
+
+El trabajo se organiza en tres capítulos: el primero aborda los
+fundamentos teóricos, el segundo analiza experiencias nacionales
+destacadas, y el tercero discute tendencias y desafíos actuales.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{CAPÍTULOS: Cómo Redactar el
+Desarrollo}\label{capuxedtulos-cuxf3mo-redactar-el-desarrollo}
+
+\textbf{Cada capítulo debe tener:}
+
+\textbf{INTRODUCCIÓN DEL CAPÍTULO}
+
+Párrafo breve que presenta el contenido del capítulo y su conexión con
+el anterior
+
+\textbf{SUBCAPÍTULOS (2-4)}
+
+Cada uno desarrolla un aspecto específico del tema del capítulo
+
+\textbf{SÍNTESIS PARCIAL}
+
+Párrafo final que resume los puntos principales del capítulo
+
+\textbf{CONEXIÓN}
+
+Oración que anticipa el siguiente capítulo
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{CAPÍTULO: Ejemplo de Redacción
+Inicial}\label{capuxedtulo-ejemplo-de-redacciuxf3n-inicial}
+
+\textbf{CAPÍTULO 1: FUNDAMENTOS TEÓRICOS DE LA FORMACIÓN DOCENTE
+UNIVERSITARIA}
+
+{PRESENTACIÓN}
+
+Este primer capítulo examina las bases conceptuales que sustentan la
+formación docente universitaria.
+
+{CONTENIDO}
+
+Se analizan tres perspectivas teóricas fundamentales: el enfoque de
+competencias profesionales, la perspectiva del conocimiento pedagógico
+del contenido, y el modelo de desarrollo profesional continuo.
+
+{ORGANIZACIÓN}
+
+Cada enfoque se presenta en un subcapítulo que incluye sus principios
+centrales, autores representativos y aplicaciones al contexto
+universitario.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{SUBCAPÍTULO: Ejemplo de
+Desarrollo}\label{subcapuxedtulo-ejemplo-de-desarrollo}
+
+\textbf{1.1 Enfoque de competencias profesionales docentes}
+
+{DEFINICIÓN}
+
+El enfoque de competencias profesionales docentes surge en la década de
+1990 como respuesta a la necesidad de operacionalizar los saberes
+requeridos para el ejercicio efectivo de la docencia (Perrenoud, 2004).
+
+{AUTORES CLAVE}
+
+Según Zabalza (2009), las competencias docentes universitarias integran
+conocimientos disciplinares, habilidades pedagógicas y actitudes
+profesionales que permiten al docente diseñar, desarrollar y evaluar
+procesos formativos de calidad.
+
+{COMPONENTES}
+
+Este modelo identifica típicamente entre 8 y 12 competencias clave, que
+incluyen el dominio disciplinar, la planificación didáctica, la
+evaluación de aprendizajes, y el uso de tecnologías educativas, entre
+otras (Mas \& Olmos, 2016).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{CONCLUSIONES: Cómo
+Redactar}\label{conclusiones-cuxf3mo-redactar}
+
+\textbf{PÁRRAFO 1: SÍNTESIS INTEGRADORA}
+
+{RECAPITULACIÓN}
+
+Esta monografía ha examinado las principales dimensiones de la formación
+docente universitaria en América Latina, integrando aportes teóricos y
+experiencias documentadas en la literatura especializada del período
+2010-2025.
+
+{HALLAZGO PRINCIPAL}
+
+El análisis realizado evidencia una transición desde modelos centrados
+en la transmisión de conocimientos hacia propuestas que enfatizan el
+desarrollo de competencias profesionales complejas y el aprendizaje
+reflexivo.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{CONCLUSIONES: Cómo Redactar
+(2)}\label{conclusiones-cuxf3mo-redactar-2}
+
+\textbf{PÁRRAFO 2: HALLAZGOS POR OBJETIVO}
+
+{OBJETIVO 1}
+
+Respecto a los modelos teóricos, se identificaron tres perspectivas
+predominantes que coexisten y se complementan en las propuestas
+formativas actuales.
+
+{OBJETIVO 2}
+
+En cuanto a las experiencias prácticas, destacan iniciativas que
+combinan formación inicial, acompañamiento in situ y comunidades de
+práctica como estrategias efectivas.
+
+{OBJETIVO 3}
+
+Las tendencias emergentes apuntan hacia la internacionalización, la
+innovación pedagógica digital y el énfasis en la investigación educativa
+como ejes articuladores.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{CONCLUSIONES: Cómo Redactar
+(3)}\label{conclusiones-cuxf3mo-redactar-3}
+
+\textbf{PÁRRAFO 3: REFLEXIÓN FINAL}
+
+{IMPLICACIONES}
+
+Los hallazgos de esta compilación sugieren que la calidad de la
+formación docente universitaria requiere políticas institucionales
+integrales que articulen desarrollo profesional, condiciones laborales
+adecuadas y reconocimiento de la función docente.
+
+{PROSPECTIVA}
+
+Futuras investigaciones podrían profundizar en el impacto de estas
+propuestas formativas sobre los aprendizajes estudiantiles, así como en
+los factores institucionales que facilitan u obstaculizan su
+implementación efectiva.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{ESTRUCTURA DE MONOGRAFÍA DE
+INVESTIGACIÓN}\label{estructura-de-monografuxeda-de-investigaciuxf3n}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{¿Qué es una Monografía de
+Investigación?}\label{quuxe9-es-una-monografuxeda-de-investigaciuxf3n}
+
+\textbf{Definición:}
+
+Trabajo académico que presenta resultados de una investigación original,
+generando datos nuevos mediante trabajo de campo, experimentos o
+análisis de fuentes primarias.
+
+\textbf{Diferencia clave:}
+
+No solo recopila información existente, sino que produce conocimiento
+nuevo a través de metodología científica aplicada.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Estructura General: Monografía de
+Investigación}\label{estructura-general-monografuxeda-de-investigaciuxf3n}
+
+\textbf{PORTADA}
+
+Identificación
+
+Universidad, facultad, título, autor, asesor, lugar, año
+
+\textbf{RESUMEN}
+
+Síntesis
+
+Abstract ejecutivo (250-300 palabras): problema, método, resultados,
+conclusión
+
+\textbf{INTRODUCCIÓN}
+
+Marco general
+
+Problema, justificación, objetivos, hipótesis (si aplica)
+
+\textbf{MARCO TEÓRICO}
+
+Fundamentos
+
+Antecedentes, bases teóricas, definición de conceptos clave
+
+\textbf{METODOLOGÍA}
+
+Diseño
+
+Tipo, enfoque, población, muestra, instrumentos, procedimientos
+
+\textbf{RESULTADOS}
+
+Hallazgos
+
+Presentación organizada de datos obtenidos (tablas, gráficos, análisis)
+
+\textbf{DISCUSIÓN}
+
+Interpretación
+
+Interpretación de resultados, comparación con literatura, limitaciones
+
+\textbf{CONCLUSIONES}
+
+Cierre
+
+Respuesta a objetivos, recomendaciones, futuras investigaciones
+
+\textbf{REFERENCIAS}
+
+Fuentes
+
+Bibliografía completa en formato APA
+
+\textbf{ANEXOS}
+
+Materiales
+
+Instrumentos, transcripciones, datos complementarios
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{INTRODUCCIÓN: Cómo Redactar
+(Investigación)}\label{introducciuxf3n-cuxf3mo-redactar-investigaciuxf3n}
+
+\textbf{PÁRRAFO 1: PLANTEAMIENTO DEL PROBLEMA}
+
+{CONTEXTO}
+
+Las comunidades campesinas de Ayacucho han desarrollado históricamente
+sistemas de gestión del agua basados en conocimientos tradicionales que
+regulan el acceso, distribución y conservación de este recurso.
+
+{PROBLEMA}
+
+Sin embargo, estos sistemas enfrentan presiones crecientes debido al
+cambio climático, la migración juvenil y la introducción de tecnologías
+modernas que no siempre son compatibles con las prácticas locales.
+
+{PREGUNTA}
+
+¿Cómo se articulan los conocimientos tradicionales con las prácticas
+contemporáneas de gestión del agua en la comunidad campesina de Chuschi,
+Ayacucho?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{INTRODUCCIÓN: Cómo Redactar (Investigación)
+(2)}\label{introducciuxf3n-cuxf3mo-redactar-investigaciuxf3n-2}
+
+\textbf{PÁRRAFO 2: OBJETIVOS E HIPÓTESIS}
+
+{OBJETIVO GENERAL}
+
+Analizar los mecanismos de articulación entre conocimientos
+tradicionales y prácticas contemporáneas de gestión del agua en Chuschi
+durante el período 2023-2024.
+
+{OBJETIVOS ESPECÍFICOS}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Identificar los conocimientos tradicionales vigentes sobre gestión del
+  agua; (b) caracterizar las prácticas contemporáneas introducidas; (c)
+  determinar los puntos de tensión y complementariedad entre ambos
+  sistemas.
+\end{enumerate}
+
+{HIPÓTESIS}
+
+Se plantea que existe un proceso de hibridación selectiva donde la
+comunidad integra tecnologías modernas manteniendo los principios
+organizativos tradicionales de reciprocidad y gestión colectiva.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{MARCO TEÓRICO: Cómo
+Redactar}\label{marco-teuxf3rico-cuxf3mo-redactar}
+
+\textbf{ESTRUCTURA TÍPICA}
+
+{ANTECEDENTES}
+
+Investigaciones previas sobre el tema: ¿Qué se ha estudiado? ¿Qué
+hallazgos existen? ¿Qué vacíos persisten?
+
+{BASES TEÓRICAS}
+
+Teorías y enfoques que fundamentan tu investigación: conceptos clave,
+modelos explicativos, perspectivas disciplinares.
+
+{DEFINICIONES}
+
+Conceptos operacionales: ¿Cómo defines los términos centrales de tu
+investigación?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{MARCO TEÓRICO: Ejemplo de
+Redacción}\label{marco-teuxf3rico-ejemplo-de-redacciuxf3n}
+
+\textbf{2.1 Antecedentes de investigación}
+
+{INTERNACIONALES}
+
+Boelens (2008) analizó sistemas de gestión del agua en comunidades
+andinas de Ecuador, identificando tensiones entre normativas estatales y
+sistemas consuetudinarios locales.
+
+{NACIONALES}
+
+En el contexto peruano, Gelles (2000) documentó prácticas rituales
+asociadas a la gestión del agua en Cabanaconde, demostrando la
+integración de dimensiones técnicas y simbólicas.
+
+{LOCALES}
+
+Para Ayacucho específicamente, Rénique (2004) estudió cambios en
+sistemas agrícolas post-violencia política, aunque sin enfocarse en
+gestión hídrica.
+
+{VACÍO}
+
+No se han realizado estudios recientes sobre la articulación
+contemporánea de conocimientos tradicionales y modernos en gestión del
+agua en comunidades ayacuchanas.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{METODOLOGÍA: Cómo
+Redactar}\label{metodologuxeda-cuxf3mo-redactar}
+
+\textbf{PÁRRAFO 1: TIPO Y ENFOQUE}
+
+{TIPO}
+
+La investigación es de tipo básica, nivel descriptivo-explicativo, con
+diseño no experimental transversal.
+
+{ENFOQUE}
+
+Se adoptó un enfoque cualitativo con elementos etnográficos,
+privilegiando la comprensión profunda de significados y prácticas desde
+la perspectiva de los actores locales.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{METODOLOGÍA: Cómo Redactar
+(2)}\label{metodologuxeda-cuxf3mo-redactar-2}
+
+\textbf{PÁRRAFO 2: POBLACIÓN Y MUESTRA}
+
+{POBLACIÓN}
+
+La población de estudio estuvo conformada por los 180 comuneros activos
+de Chuschi registrados en el padrón comunal 2023.
+
+{MUESTRA}
+
+Se seleccionó una muestra no probabilística intencional de 32 comuneros:
+12 autoridades de riego (incluyendo 4 yaku alcaldes), 15 usuarios de
+riego con más de 20 años de experiencia, y 5 jóvenes comuneros con
+estudios técnicos.
+
+{CRITERIOS}
+
+Los criterios de inclusión fueron: residencia permanente, participación
+activa en faenas de agua, y disposición para participar en entrevistas.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{METODOLOGÍA: Cómo Redactar
+(3)}\label{metodologuxeda-cuxf3mo-redactar-3}
+
+\textbf{PÁRRAFO 3: TÉCNICAS E INSTRUMENTOS}
+
+{TÉCNICAS}
+
+Se utilizaron tres técnicas principales: (a) entrevistas
+semiestructuradas, (b) observación participante en faenas de agua, y (c)
+análisis documental de actas comunales.
+
+{INSTRUMENTOS}
+
+Los instrumentos incluyeron guías de entrevista con 15 preguntas
+abiertas, fichas de observación estructurada con 8 dimensiones, y matriz
+de análisis documental.
+
+{VALIDACIÓN}
+
+Los instrumentos fueron validados por juicio de tres expertos en
+antropología andina y recursos hídricos, alcanzando un coeficiente V de
+Aiken superior a 0.85.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{METODOLOGÍA: Cómo Redactar
+(4)}\label{metodologuxeda-cuxf3mo-redactar-4}
+
+\textbf{PÁRRAFO 4: PROCEDIMIENTO}
+
+{FASE 1}
+
+Coordinación con autoridades comunales y obtención de consentimiento
+informado (enero 2023).
+
+{FASE 2}
+
+Trabajo de campo: aplicación de entrevistas, observación de faenas y
+rituales, revisión de documentos (febrero-julio 2023).
+
+{FASE 3}
+
+Análisis de datos mediante codificación temática en software Atlas.ti,
+identificando categorías emergentes y patrones recurrentes
+(agosto-octubre 2023).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{RESULTADOS: Cómo
+Redactar}\label{resultados-cuxf3mo-redactar}
+
+\textbf{PRINCIPIOS BÁSICOS}
+
+{ORGANIZACIÓN}
+
+Presenta los hallazgos en el mismo orden que los objetivos específicos.
+
+{OBJETIVIDAD}
+
+Describe lo encontrado sin interpretarlo (la interpretación va en
+Discusión).
+
+{EVIDENCIA}
+
+Usa tablas, gráficos, citas textuales de entrevistas para sustentar tus
+afirmaciones.
+
+{TIEMPO VERBAL}
+
+Redacta en tiempo pasado: ``Se encontró\ldots{}'', ``Los datos
+mostraron\ldots{}'', ``El 65\% manifestó\ldots{}''
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{RESULTADOS: Ejemplo de
+Redacción}\label{resultados-ejemplo-de-redacciuxf3n}
+
+\textbf{4.1 Conocimientos tradicionales vigentes sobre gestión del agua}
+
+{HALLAZGO PRINCIPAL}
+
+Se identificaron cinco sistemas de conocimiento tradicional actualmente
+vigentes en Chuschi: (a) calendario hídrico ritual, (b) sistema de
+turnos, (c) señas naturales para predicción, (d) técnicas de
+almacenamiento, y (e) normas consuetudinarias de distribución.
+
+{DATOS ESPECÍFICOS}
+
+El 87\% de entrevistados (n=28) reconoció el calendario ritual asociado
+al agua, mientras que el 100\% afirmó participar en el sistema de
+turnos. La Tabla 3 presenta la distribución de conocimientos por grupos
+de edad.
+
+{EVIDENCIA CUALITATIVA}
+
+Un yaku alcalde señaló: ``El agua tiene su tiempo, su mes. Nosotros
+sabemos cuándo va a venir, cuándo va a faltar. Los abuelos nos enseñaron
+a mirar las nubes, los pájaros'' (Entrevista 07, 45 años).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{DISCUSIÓN: Cómo
+Redactar}\label{discusiuxf3n-cuxf3mo-redactar}
+
+\textbf{ESTRUCTURA DEL CAPÍTULO}
+
+{INTERPRETACIÓN}
+
+¿Qué significan tus resultados? ¿Por qué obtuviste estos hallazgos?
+
+{COMPARACIÓN}
+
+¿Cómo se relacionan tus hallazgos con la literatura revisada?
+¿Confirman, contradicen o matizan estudios previos?
+
+{LIMITACIONES}
+
+¿Qué factores pudieron influir en tus resultados? ¿Qué aspectos no
+pudiste abordar?
+
+{IMPLICACIONES}
+
+¿Qué implicaciones tienen tus hallazgos para la teoría, la práctica o
+las políticas?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{DISCUSIÓN: Ejemplo de
+Redacción}\label{discusiuxf3n-ejemplo-de-redacciuxf3n}
+
+\textbf{5.1 Interpretación de la persistencia de conocimientos
+tradicionales}
+
+{INTERPRETACIÓN}
+
+La alta vigencia de conocimientos tradicionales (87-100\% según
+dimensión) sugiere que estos sistemas no son meros ``residuos
+culturales'', sino estrategias adaptativas que continúan siendo
+funcionalmente efectivas en el contexto local.
+
+{COMPARACIÓN LITERATURA}
+
+Este hallazgo confirma la propuesta de Boelens (2008) sobre la
+resiliencia de sistemas consuetudinarios andinos, pero matiza su
+argumento al mostrar que la persistencia no es homogénea: algunos
+conocimientos (turnos, calendario) son universales, mientras otros
+(señas naturales) se concentran en generaciones mayores.
+
+{EXPLICACIÓN}
+
+La diferenciación generacional podría explicarse por el acceso
+diferencial a educación formal: los jóvenes con estudios técnicos
+tienden a priorizar indicadores meteorológicos formales sobre señas
+naturales tradicionales.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{CONCLUSIONES: Cómo Redactar
+(Investigación)}\label{conclusiones-cuxf3mo-redactar-investigaciuxf3n}
+
+\textbf{PÁRRAFO 1: RESPUESTA A OBJETIVOS}
+
+{OBJETIVO GENERAL}
+
+La investigación demostró que en Chuschi existe un proceso de
+articulación compleja entre conocimientos tradicionales y prácticas
+contemporáneas, caracterizado por hibridación selectiva antes que por
+reemplazo o conflicto absoluto.
+
+{OBJETIVO ESPECÍFICO 1}
+
+Se identificaron cinco sistemas de conocimiento tradicional vigentes,
+con diferentes grados de transmisión intergeneracional.
+
+{OBJETIVO ESPECÍFICO 2}
+
+Las prácticas contemporáneas introducidas incluyen tecnologías de riego
+tecnificado, pero su adopción está mediada por criterios de
+compatibilidad con la organización comunal.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{CONCLUSIONES: Cómo Redactar (Investigación)
+(2)}\label{conclusiones-cuxf3mo-redactar-investigaciuxf3n-2}
+
+\textbf{PÁRRAFO 2: RECOMENDACIONES}
+
+{PARA LA PRÁCTICA}
+
+Se recomienda que los programas de intervención en gestión hídrica
+incorporen espacios de diálogo intercultural que permitan integrar ambos
+sistemas de conocimiento, evitando imposiciones tecnológicas
+unidireccionales.
+
+{PARA LAS POLÍTICAS}
+
+Las políticas públicas de recursos hídricos deberían reconocer
+formalmente los sistemas consuetudinarios como formas legítimas de
+gobernanza del agua, no solo como ``usos y costumbres'' subordinados a
+la legislación estatal.
+
+{PARA LA INVESTIGACIÓN}
+
+Futuras investigaciones podrían profundizar en los mecanismos
+específicos de toma de decisiones comunales ante propuestas de
+innovación tecnológica, mediante estudios de caso longitudinales.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{ESTRUCTURA IMRyD}\label{estructura-imryd}
+
+\subsection{El Formato IMRyD}\label{el-formato-imryd}
+
+\subsubsection{¿Qué es IMRyD?}\label{quuxe9-es-imryd}
+
+\textbf{I}ntroducción\\
+\textbf{M}étodos\\
+\textbf{R}esultados\\
+\textbf{y} (and)\\
+\textbf{D}iscusión
+
+\subsubsection{Variante Extendida}\label{variante-extendida}
+
+\textbf{I}(AT)\textbf{MRyD}\\
+- \textbf{A}ntecedentes\\
+- \textbf{T}eorema/Marco Teórico
+
+\subsubsection{Estructura de ``Reloj de
+Arena''}\label{estructura-de-reloj-de-arena}
+
+\begin{verbatim}
+    General (Introducción)
+         ↓
+    Específico (Métodos)
+         ↓
+    Específico (Resultados)
+         ↓
+    General (Discusión)
+\end{verbatim}
+
+\subsubsection{Ventaja}\label{ventaja}
+
+Permite a especialistas \textbf{localizar rápidamente} la información
+que necesitan.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Título Atractivo}\label{tuxedtulo-atractivo}
+
+\subsubsection{Función del Título}\label{funciuxf3n-del-tuxedtulo}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Envoltorio del producto}
+\item
+  \textbf{Imán} para lectores
+\item
+  Primera impresión crítica
+\item
+  Permite decidir pertinencia
+\end{itemize}
+
+\subsubsection{Características}\label{caracteruxedsticas}
+
+\begin{itemize}
+\tightlist
+\item
+  Corto (\textless{} 120 caracteres / \textasciitilde14 palabras)\\
+\item
+  Sencillo y claro\\
+\item
+  Fiel al contenido\\
+\item
+  Provocador (opcional)\\
+\item
+  Sin abreviaturas/siglas
+\end{itemize}
+
+\subsubsection{Tipos}\label{tipos}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Descriptivo:} Qué se estudió
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{``Efecto del fuego sobre la diversidad de gramíneas''}
+  \end{itemize}
+\item
+  \textbf{Informativo:} Resultado principal
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{``El fuego incrementa la diversidad de gramíneas''}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Evitar}\label{evitar}
+
+\begin{itemize}
+\tightlist
+\item
+  Frases poco informativas:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ``Estudios sobre\ldots{}''
+  \item
+    ``Observaciones de\ldots{}''
+  \item
+    ``Investigaciones acerca de\ldots{}''
+  \end{itemize}
+\item
+  Exceso de detalle técnico
+\item
+  Limitación geográfica excesiva
+\item
+  Nombres científicos complejos
+\end{itemize}
+
+\subsubsection{Estrategias Creativas}\label{estrategias-creativas}
+
+\textbf{Título en dos partes} (Metáfora : Información)
+
+Ejemplos: - \emph{``De regreso al futuro: Evolución del cerebro
+humano''} - \emph{``¿Son mejores los cerebros más grandes?''}
+
+\subsubsection{Regla de Oro}\label{regla-de-oro}
+
+\begin{quote}
+Un título atractivo debe \textbf{prometer} básicamente lo que
+\textbf{muestra}.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Resumen (Abstract)}\label{resumen-abstract}
+
+\subsubsection{El Abstract como
+``Asamblea''}\label{el-abstract-como-asamblea}
+
+\begin{quote}
+Versión \textbf{en miniatura} del artículo que sintetiza propósito,
+métodos, resultados y conclusiones.
+\end{quote}
+
+\subsubsection{Estructura (Patrón de Reloj de
+Arena)}\label{estructura-patruxf3n-de-reloj-de-arena}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Introducción mini} → Propósito y contexto
+\item
+  \textbf{Métodos mini} → Procedimientos generales
+\item
+  \textbf{Resultados mini} → Hallazgos principales
+\item
+  \textbf{Discusión mini} → Conclusiones e implicaciones
+\end{enumerate}
+
+\subsubsection{Tipos}\label{tipos-1}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Informativo:} Comunica resultados y conclusiones (recomendado)
+\item
+  \textbf{Descriptivo:} Solo menciona tema y propósito
+\end{itemize}
+
+\subsubsection{Requisitos Formales}\label{requisitos-formales}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Extensión:} 150-300 palabras
+\item
+  \textbf{Formato:} Un solo párrafo
+\item
+  \textbf{Tiempo verbal:} Pasado
+\item
+  \textbf{Idiomas:} Original + inglés
+\item
+  \textbf{Sin:} Citas, referencias a tablas/figuras
+\end{itemize}
+
+\subsubsection{Errores Comunes}\label{errores-comunes-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Falta de claridad en mensaje principal\\
+\item
+  Datos inconsistentes con el texto\\
+\item
+  Conclusiones no justificadas\\
+\item
+  Omitir descubrimientos importantes
+\end{itemize}
+
+\subsubsection{Importancia}\label{importancia}
+
+Probabilidad de lectura: - \textbf{Solo título + abstract:} 10x -
+\textbf{Artículo completo:} 1x
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Introducción:
+Justificación}\label{introducciuxf3n-justificaciuxf3n}
+
+\subsubsection{Modelo CARS}\label{modelo-cars}
+
+\textbf{C}reate \textbf{A} \textbf{R}esearch \textbf{S}pace
+
+\paragraph{1. Establecer un Territorio}\label{establecer-un-territorio}
+
+\begin{itemize}
+\tightlist
+\item
+  Demostrar importancia del área
+\item
+  Introducir investigaciones previas
+\item
+  Marco conceptual general
+\end{itemize}
+
+\paragraph{2. Establecer un Nicho}\label{establecer-un-nicho}
+
+\begin{itemize}
+\tightlist
+\item
+  Señalar vacío de conocimiento
+\item
+  Plantear interrogante no resuelta
+\item
+  Extender línea de conocimiento
+\end{itemize}
+
+\paragraph{3. Ocupar el Nicho}\label{ocupar-el-nicho}
+
+\begin{itemize}
+\tightlist
+\item
+  Resumir cómo se llenará el vacío
+\item
+  Objetivos específicos
+\item
+  Hipótesis (si aplica)
+\end{itemize}
+
+\subsubsection{Patrón del Embudo}\label{patruxf3n-del-embudo}
+
+\begin{verbatim}
+  ╔═══════════════════╗
+  ║  Problema General ║
+  ╚═════════╦═════════╝
+            ║
+       ╔════╩════╗
+       ║ Contexto ║
+       ╚════╦════╝
+            ║
+        ╔═══╩═══╗
+        ║ Vacío  ║
+        ╚═══╦═══╝
+            ║
+          ╔═╩═╗
+          ║ ? ║  ← Pregunta específica
+          ╚═══╝
+\end{verbatim}
+
+\subsubsection{Extensión Recomendada}\label{extensiuxf3n-recomendada}
+
+\begin{itemize}
+\tightlist
+\item
+  1,000 palabras máximo
+\item
+  3-4 párrafos bien estructurados
+\item
+  Solo antecedentes necesarios
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Métodos y Materiales}\label{muxe9todos-y-materiales}
+
+\subsubsection{Objetivo Principal}\label{objetivo-principal}
+
+\begin{quote}
+Proveer \textbf{detalles suficientes} para que la investigación pueda
+ser \textbf{replicada} por otros científicos.
+\end{quote}
+
+\subsubsection{Preguntas Clave}\label{preguntas-clave}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{¿DÓNDE?} → Lugar del estudio
+\item
+  \textbf{¿CUÁNDO?} → Período temporal
+\item
+  \textbf{¿CÓMO?} → Procedimientos exactos
+\end{itemize}
+
+\subsubsection{Contenido}\label{contenido}
+
+\begin{itemize}
+\tightlist
+\item
+  Diseño experimental\\
+\item
+  Materiales utilizados\\
+\item
+  Técnicas de recolección\\
+\item
+  Análisis estadísticos\\
+\item
+  Consideraciones éticas\\
+\end{itemize}
+
+\subsubsection{Características de
+Redacción}\label{caracteruxedsticas-de-redacciuxf3n}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tiempo verbal:} Pasado
+\item
+  \textbf{Voz:} Preferentemente activa
+\item
+  \textbf{Detalle:} Técnico y preciso
+\item
+  \textbf{Orden:} Cronológico o lógico
+\end{itemize}
+
+\subsubsection{Nivel de Detalle}\label{nivel-de-detalle}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, rightrule=.15mm, breakable, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Regla Práctica}, toprule=.15mm, left=2mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, opacityback=0, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, leftrule=.75mm]
+
+Si un colega de tu campo \textbf{NO puede} repetir tu estudio leyendo
+esta sección, falta información crítica.
+
+\end{tcolorbox}
+
+\subsubsection{Elementos a Incluir}\label{elementos-a-incluir}
+
+\begin{itemize}
+\tightlist
+\item
+  Nombre científico de especies
+\item
+  Marcas/modelos de equipos
+\item
+  Concentraciones exactas
+\item
+  Tamaños de muestra
+\item
+  Software utilizado (versión)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Resultados: Presentación
+Objetiva}\label{resultados-presentaciuxf3n-objetiva}
+
+\subsubsection{Naturaleza de la
+Sección}\label{naturaleza-de-la-secciuxf3n}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Más objetiva} de todo el manuscrito
+\item
+  Presentación \textbf{sin interpretación}
+\item
+  No comparar con otros estudios
+\item
+  No explicar causas
+\end{itemize}
+
+\subsubsection{Elementos de
+Presentación}\label{elementos-de-presentaciuxf3n}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Texto narrativo}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hallazgos principales
+  \item
+    Patrones observados
+  \end{itemize}
+\item
+  \textbf{Tablas}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Datos numéricos precisos
+  \item
+    Comparaciones múltiples
+  \end{itemize}
+\item
+  \textbf{Figuras/Gráficos}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tendencias visuales
+  \item
+    Patrones biológicos
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Buenas Prácticas}\label{buenas-pruxe1cticas}
+
+\begin{itemize}
+\tightlist
+\item
+  Presentar datos en orden lógico\\
+\item
+  Destacar hallazgos importantes\\
+\item
+  Referirse a tablas/figuras\\
+\item
+  Usar subtítulos si es extenso
+\end{itemize}
+
+\subsubsection{Evitar}\label{evitar-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Repetir en texto lo que ya está en tablas\\
+\item
+  Incluir datos no mencionados en Métodos\\
+\item
+  Interpretar o especular\\
+\item
+  Citar literatura (va en Discusión)
+\end{itemize}
+
+\subsubsection{Tiempo Verbal}\label{tiempo-verbal}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Pasado:} ``Se observó\ldots{}'', ``Los datos
+  mostraron\ldots{}''
+\item
+  Describe lo que YA ocurrió en TU estudio
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Discusión: Interpretación y
+Cierre}\label{discusiuxf3n-interpretaciuxf3n-y-cierre}
+
+\subsubsection{La Sección Más
+Subjetiva}\label{la-secciuxf3n-muxe1s-subjetiva}
+
+\begin{quote}
+Aquí el autor \textbf{interpreta} hallazgos, \textbf{explica} causas y
+\textbf{compara} con conocimiento previo.
+\end{quote}
+
+\subsubsection{Estructura Recomendada}\label{estructura-recomendada}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Resumen breve} de hallazgos principales
+\item
+  \textbf{Interpretación} de resultados
+\item
+  \textbf{Comparación} con literatura
+\item
+  \textbf{Explicación} de diferencias/similitudes
+\item
+  \textbf{Limitaciones} del estudio
+\item
+  \textbf{Implicaciones} teóricas/prácticas
+\item
+  \textbf{Futuras investigaciones}
+\end{enumerate}
+
+\subsubsection{Relación con
+Introducción}\label{relaciuxf3n-con-introducciuxf3n}
+
+La Discusión debe \textbf{cerrar el bucle}: - Introducción: General →
+Específico - Discusión: Específico → General
+
+\subsubsection{Voz del Autor}\label{voz-del-autor}
+
+La subjetividad es aceptable y necesaria: - Proponer interpretaciones -
+Emitir opiniones fundamentadas - Autocrítica (limitaciones)
+
+\subsubsection{Errores Comunes}\label{errores-comunes-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Repetir Resultados sin interpretar\\
+\item
+  Introducir datos nuevos\\
+\item
+  Especular sin fundamento\\
+\item
+  Ignorar resultados contradictorios
+\end{itemize}
+
+\subsubsection{Arte de Convencer}\label{arte-de-convencer}
+
+\begin{quote}
+El éxito radica en \textbf{argumentar} de tal manera que el lector
+acepte tu interpretación como la más adecuada.
+\end{quote}
+
+\subsubsection{Honestidad}\label{honestidad}
+
+Reconocer limitaciones proyecta \textbf{integridad profesional}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{PROCESO DE COMPOSICIÓN}\label{proceso-de-composiciuxf3n}
+
+\subsection{Escribir NO es Transvasar
+Ideas}\label{escribir-no-es-transvasar-ideas}
+
+\subsubsection{Mito}\label{mito}
+
+\begin{quote}
+``Escribir es vaciar el cerebro al papel''
+\end{quote}
+
+\subsubsection{Realidad}\label{realidad}
+
+\begin{quote}
+Escribir es un \textbf{proceso creativo complejo} que requiere
+\textbf{reflexión} sobre el lenguaje
+\end{quote}
+
+\subsubsection{Dos Modelos}\label{dos-modelos}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Contar lo que sé}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Lineal y simple
+  \item
+    Vuelco directo de información
+  \end{itemize}
+\item
+  \textbf{Transformar el conocimiento}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Aprender escribiendo
+  \item
+    Reorganizar pensamientos
+  \item
+    Encontrar mejores argumentos
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Proceso No Lineal}\label{proceso-no-lineal}
+
+\begin{verbatim}
+Precomposición
+     ↓
+Redacción ←→ Revisión
+     ↓         ↑
+Redacción ←→ Revisión
+     ↓         ↑
+  Resultado
+\end{verbatim}
+
+\subsubsection{Beneficio}\label{beneficio}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, rightrule=.15mm, breakable, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Crecimiento Cognitivo}, toprule=.15mm, left=2mm, colback=white, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, opacityback=0, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, leftrule=.75mm]
+
+Al final del proceso, \textbf{sabes MÁS} sobre el tema que cuando
+empezaste.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Precomposición: El Paso
+Previo}\label{precomposiciuxf3n-el-paso-previo}
+
+\subsubsection{¿Qué es?}\label{quuxe9-es}
+
+\begin{quote}
+Etapa de \textbf{planificación} antes de escribir la primera línea.
+\end{quote}
+
+\subsubsection{3 Actividades
+Simultáneas}\label{actividades-simultuxe1neas}
+
+\paragraph{1. Toma de Conciencia}\label{toma-de-conciencia}
+
+\begin{itemize}
+\tightlist
+\item
+  Reflexión sobre el acto de escribir
+\item
+  Identificar género y función
+\item
+  Delimitar tema
+\item
+  Considerar audiencia
+\end{itemize}
+
+\paragraph{2. Descubrimiento}\label{descubrimiento}
+
+\begin{itemize}
+\tightlist
+\item
+  Exploración de memoria
+\item
+  Asociación libre de ideas
+\item
+  Generar conexiones nuevas
+\item
+  Mapas mentales
+\end{itemize}
+
+\paragraph{3. Investigación}\label{investigaciuxf3n}
+
+\begin{itemize}
+\tightlist
+\item
+  Acopio de información externa
+\item
+  Consulta bibliográfica
+\item
+  Entrevistas/experimentos
+\item
+  Dominar el tema
+\end{itemize}
+
+\subsubsection{Herramienta: Mapa de
+Ideas}\label{herramienta-mapa-de-ideas}
+
+\begin{verbatim}
+        TEMA CENTRAL
+       /     |     \
+      /      |      \
+  Idea A  Idea B  Idea C
+   /  \     |      /  \
+ ...  ... ...   ... ...
+\end{verbatim}
+
+\textbf{Transforma} pensamiento no lineal → discurso lineal
+
+\subsubsection{Meta}\label{meta}
+
+Pasar de \textbf{escribir para uno mismo} a \textbf{escribir para el
+lector}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Identificación del
+Público}\label{identificaciuxf3n-del-puxfablico}
+
+\subsubsection{``Cálculo del Lector''}\label{cuxe1lculo-del-lector}
+
+\begin{quote}
+Prever \textbf{reacciones}, \textbf{conocimientos} y
+\textbf{necesidades} del destinatario.
+\end{quote}
+
+\subsubsection{Preguntas}\label{preguntas}
+
+\begin{itemize}
+\tightlist
+\item
+  ¿Quiénes son mis lectores reales?
+\item
+  ¿Qué nivel cultural tienen?
+\item
+  ¿Cuánto saben del tema?
+\item
+  ¿Cuánto tiempo disponen para leer?
+\item
+  ¿Por qué les interesaría?
+\end{itemize}
+
+\subsubsection{Dos Figuras Discursivas}\label{dos-figuras-discursivas}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Autor textual}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Imagen que proyecto
+  \item
+    Rigor, inteligencia, credibilidad
+  \end{itemize}
+\item
+  \textbf{Lector textual}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Destinatario ideal construido
+  \item
+    Basado en lectores reales
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Registro y Tenor}\label{registro-y-tenor}
+
+El público determina: - Nivel de formalidad - Uso de tecnicismos -
+Cantidad de explicaciones - Tono (tú vs.~usted)
+
+\subsubsection{Lo Explícito
+vs.~Implícito}\label{lo-expluxedcito-vs.-impluxedcito}
+
+Decisión crítica: - ¿Cuánta información dar? - ¿Qué dejar a inferencias?
+
+\subsubsection{Errores}\label{errores}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Exceso:} Tratar al lector de ignorante\\
+\item
+  \textbf{Defecto:} Omitir datos necesarios
+\end{itemize}
+
+\subsubsection{Objetivo}\label{objetivo}
+
+Convertir al lector real en \textbf{interlocutor necesario} para
+comunicación eficaz.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Redacción: De lo No Lineal a lo
+Lineal}\label{redacciuxf3n-de-lo-no-lineal-a-lo-lineal}
+
+\subsubsection{Resolución de
+Problemas}\label{resoluciuxf3n-de-problemas}
+
+Escribir implica decidir simultáneamente: - \textbf{Qué} decir -
+\textbf{Cómo} decirlo - \textbf{Qué voz} adoptar - \textbf{Qué léxico}
+usar
+
+\subsubsection{Problemas Circulares}\label{problemas-circulares}
+
+Una solución estilística puede generar un nuevo problema conceptual.
+
+\subsubsection{Fórmula 18/50}\label{fuxf3rmula-1850}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{18 palabras} por oración\\
+\item
+  \textbf{50 palabras} por párrafo (\textasciitilde3 oraciones)
+\end{itemize}
+
+\subsubsection{Voz Activa \textgreater{}
+Pasiva}\label{voz-activa-pasiva}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Activa:} ``El investigador analizó los datos''\\
+\item
+  \textbf{Pasiva:} ``Los datos fueron analizados''
+\end{itemize}
+
+\subsubsection{Principios de
+Redacción}\label{principios-de-redacciuxf3n}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Claridad y sencillez}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Evitar ``lenguaje infiltrado''
+  \item
+    Prosa llana y directa
+  \end{itemize}
+\item
+  \textbf{Precisión léxica}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Palabras cortas y conocidas
+  \item
+    Evitar sinónimos inexactos
+  \end{itemize}
+\item
+  \textbf{Orden lógico}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sujeto + Verbo + Objeto
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{En Textos Científicos
+(IMRyD)}\label{en-textos-cientuxedficos-imryd}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Impersonal} y objetivo
+\item
+  Hallazgos publicados: \textbf{presente}
+\item
+  Resultados propios: \textbf{pasado}
+\end{itemize}
+
+\subsubsection{Ejemplo}\label{ejemplo}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Se observó un aumento del 23\%''\\
+\item
+  ``Hubo un incremento significativo''
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Borradores Sucesivos}\label{borradores-sucesivos}
+
+\subsubsection{Principio Fundamental}\label{principio-fundamental}
+
+\begin{quote}
+\textbf{Escribir y reescribir son la misma cosa.}
+\end{quote}
+
+\subsubsection{¿Por qué son
+necesarios?}\label{por-quuxe9-son-necesarios}
+
+\begin{itemize}
+\tightlist
+\item
+  El lenguaje es \textbf{ambiguo} por naturaleza
+\item
+  Primera versión rara vez es óptima
+\item
+  Ideas maduran con revisión
+\item
+  Claridad requiere ``afilar'' el texto
+\end{itemize}
+
+\subsubsection{Proceso de Revisión}\label{proceso-de-revisiuxf3n}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Escribir} primer borrador
+\item
+  \textbf{Dejar reposar} el texto
+\item
+  \textbf{Releer} con ojos frescos
+\item
+  \textbf{Tachar} lo superfluo
+\item
+  \textbf{Reorganizar} párrafos
+\item
+  \textbf{Someter} a lectura ajena
+\item
+  \textbf{Repetir} hasta satisfacción
+\end{enumerate}
+
+\subsubsection{Meta}\label{meta-1}
+
+Crear la \textbf{ilusión} de que el texto se escribió de una sola vez,
+con fluidez.
+
+\subsubsection{Técnica del Tachado}\label{tuxe9cnica-del-tachado}
+
+Preguntas durante revisión: - ¿Puedo decir esto con menos palabras? -
+¿Esta oración añade valor? - ¿Hay redundancia? - ¿El orden es lógico?
+
+\subsubsection{Límite del
+Perfeccionamiento}\label{luxedmite-del-perfeccionamiento}
+
+Llega un punto donde el texto se vuelve ``intratable'' → aceptar como
+definitivo.
+
+\subsubsection{Lectura Ajena}\label{lectura-ajena}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, rightrule=.15mm, breakable, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Consejo de Oro}, toprule=.15mm, left=2mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, opacityback=0, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, leftrule=.75mm]
+
+Incluso borradores ``finales'' se benefician de otra perspectiva para
+identificar pasajes oscuros.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{La oración}\label{la-oraciuxf3n}
+
+\subsubsection{Longitud de la Oración: Índice de
+Nebulosidad}\label{longitud-de-la-oraciuxf3n-uxedndice-de-nebulosidad}
+
+\textbf{Fórmula de Fernando Ávila (2003)}
+
+\[\text{Índice de Nebulosidad} = (A + B) \times 0.4\]
+
+Donde:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{A} = Número de palabras / Número de oraciones
+\item
+  \textbf{B} = (Palabras largas × 100) / Número total de palabras
+\end{itemize}
+
+\textbf{Índice ideal}: 10 (nivel ``Selecciones'')
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Ejemplo 1: Oración Larga
+Problemática}\label{ejemplo-1-oraciuxf3n-larga-problemuxe1tica}
+
+\textbf{VERSIÓN ORIGINAL} (134 palabras, 1 oración)
+
+De acuerdo con especialistas de nuestro departamento de calidad en
+metodología internacional para la presentación de trabajos escritos
+debidamente asesorados por una comisión de la Universidad Autónoma de la
+Nación, el texto de la novela con la que usted puede participar en el
+Decimonoveno Concurso Nacional de Narrativa, patrocinado por el
+Ministerio de Cultura, la Fundación para el Desarrollo de la
+Inteligencia Artística Continental y el grupo de editoriales educativas
+legalmente afincadas en el territorio de la patria, debe estar escrito
+originalmente en castellano, en letra cuerpo 12, sobre hojas de papel
+bond base 20 tamaño carta, a doble espacio, con sangría de cuatro
+espacios.
+
+\textbf{Problemas identificados}: Una sola oración, múltiples ideas,
+difícil seguimiento
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Ejemplo 1: Versión
+Mejorada}\label{ejemplo-1-versiuxf3n-mejorada}
+
+\textbf{VERSIÓN MEJORADA} (3 oraciones)
+
+Los especialistas de nuestro departamento han establecido los requisitos
+formales para el Decimonoveno Concurso Nacional de Narrativa.
+\textbf{{[}Oración 1: Contexto{]}}
+
+El texto debe estar escrito originalmente en castellano, en letra cuerpo
+12, sobre hojas de papel bond base 20 tamaño carta. \textbf{{[}Oración
+2: Requisitos técnicos{]}}
+
+Además, debe presentarse a doble espacio con sangría de cuatro espacios.
+\textbf{{[}Oración 3: Formato específico{]}}
+
+\textbf{Mejoras logradas}: Claridad, separación de ideas, lectura fluida
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura Oracional: Quién + Verbo + Qué +
+Complemento}\label{estructura-oracional-quiuxe9n-verbo-quuxe9-complemento}
+
+\textbf{QUIÉN} Sujeto Agente
+
+\textbf{VERBO} Acción Núcleo
+
+\textbf{QUÉ} Objeto directo Contenido
+
+\textbf{COMPLEMENTO} A quién, dónde,cuándo, cómo
+
+\textbf{Ejemplo aplicado:}
+
+{\textbf{Diego Pérez}} {\textbf{ofreció}} {\textbf{lo mejor de su
+repertorio}} {\textbf{a las jóvenes representantes}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Ejemplo 2: Reordenamiento de
+Estructura}\label{ejemplo-2-reordenamiento-de-estructura}
+
+\textbf{Versión original} (orden confuso):
+
+Entre el primero y el 31 de octubre del presente año, diseñado con gran
+esmero por una comisión conjunta, en el próximo seminario de
+actualización profesional pueden participar los egresados de la
+Universidad Autónoma.
+
+\textbf{Versión ordenada} (Quién + Verbo + Qué + Complementos):
+
+{\textbf{Los egresados de la Universidad Autónoma}} {\textbf{podrán
+participar}} {\textbf{en el próximo seminario de actualización
+profesional}} {\textbf{entre el 1 y 31 de octubre de 2022}}.
+
+Una comisión conjunta de egresados, profesores y alumnos diseñó el
+seminario con gran esmero.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Voz Activa vs.~Voz
+Pasiva}\label{voz-activa-vs.-voz-pasiva}
+
+\textbf{VOZ PASIVA} (Evitar)
+
+El experimento fue realizado por Pedro.
+
+Una nueva propuesta es entregada por Margarita a la Junta Directiva.
+
+Un libro de política es leído por Juan.
+
+\textbf{VOZ ACTIVA} (Preferir)
+
+Pedro realizó el experimento.
+
+Margarita entrega una nueva propuesta a la Junta Directiva.
+
+Juan lee un libro de política.
+
+\textbf{Razón}: La voz activa es más directa, clara y concisa.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Persona Gramatical:
+Consistencia}\label{persona-gramatical-consistencia}
+
+\textbf{Problema}: Cambio innecesario de persona
+
+Tenemos el gusto de ofrecerle nuestros servicios. \emph{{[}Primera
+persona plural{]}}
+
+Se darán descuentos a los primeros compradores. \emph{{[}Impersonal{]}}
+
+Le estaré informando de las promociones. \emph{{[}Primera persona
+singular{]}}
+
+\textbf{Solución}: Mantener la misma persona
+
+Tenemos el gusto de ofrecerle nuestros servicios. \emph{{[}Primera
+persona plural{]}}
+
+Daremos descuentos a los primeros cien compradores. \emph{{[}Primera
+persona plural{]}}
+
+Le informaremos oportunamente de las nuevas promociones.
+\emph{{[}Primera persona plural{]}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Tiempo Verbal en Textos
+Científicos}\label{tiempo-verbal-en-textos-cientuxedficos}
+
+\textbf{PRESENTE} Para conocimiento establecido
+
+El fármaco X \textbf{incide} en las tasas de fertilidad de la especie Y
+(Smith et al., 2019).
+
+La teoría de la relatividad \textbf{establece} que\ldots{}
+
+\textbf{PASADO} Para tus hallazgos específicos
+
+\textbf{Examinamos} el efecto del fármaco X en diez individuos.
+
+\textbf{Encontramos} que el 40\% de los participantes\ldots{}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{El Párrafo: Unidad de
+Pensamiento}\label{el-puxe1rrafo-unidad-de-pensamiento}
+
+\subsubsection{Definición}\label{definiciuxf3n-2}
+
+\begin{quote}
+Bloque constituyente que expresa y argumenta \textbf{una única idea
+central}.
+\end{quote}
+
+\subsubsection{Estructura del Párrafo
+Ideal}\label{estructura-del-puxe1rrafo-ideal}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Oración temática}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Presenta el tema
+  \item
+    Idea u opinión (NO hecho)
+  \end{itemize}
+\item
+  \textbf{Oraciones de apoyo} (2-5)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Justifican la oración temática
+  \item
+    Datos, ejemplos, información
+  \end{itemize}
+\item
+  \textbf{Oración concluyente}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Resumen O conexión al siguiente párrafo
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Extensión Recomendada}\label{extensiuxf3n-recomendada-1}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{7-14 líneas} (ideal)\\
+\item
+  \textbf{3-6 líneas} (ocasional, corto)\\
+\item
+  \textbf{15-20 líneas} (ocasional, largo)\\
+\end{itemize}
+
+\subsubsection{Errores Comunes}\label{errores-comunes-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Párrafo de \textbf{una sola oración}
+\item
+  Párrafo que ocupa \textbf{página entera}
+\item
+  \textbf{Múltiples ideas} en un párrafo
+\end{enumerate}
+
+\subsubsection{Soluciones}\label{soluciones}
+
+\textbf{Si no transmite idea:} ELIMINAR\\
+\textbf{Si transmite muchas:} FRAGMENTAR
+
+\subsubsection{Principios de Coherencia}\label{principios-de-coherencia}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidad:} Todas las oraciones relacionadas con idea principal\\
+\item
+  \textbf{Orden lógico:} Cronológico, importancia o alcance\\
+\item
+  \textbf{Independencia relativa:} Puede leerse solo
+\end{itemize}
+
+\subsubsection{Variedad}\label{variedad}
+
+Alternar párrafos de longitud media con cortos/largos evita monotonía.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura 1: Afirmación → Explicación →
+Ejemplo}\label{estructura-1-afirmaciuxf3n-explicaciuxf3n-ejemplo}
+
+\textbf{Esquema visual:}
+
+\begin{verbatim}
+[AFIRMACIÓN GENERAL] ────┐
+                          │
+[EXPLICACIÓN CONTEXTUAL] ─┼─ DESARROLLO
+                          │
+[EJEMPLO ESPECÍFICO] ─────┘
+\end{verbatim}
+
+\textbf{Ejemplo real} (Xie et al., 2011):
+
+{\textbf{El comportamiento humano está profundamente afectado por la
+influencia de individuos y de las redes sociales que los vinculan.}}
+Mucho antes de la proliferación de redes sociales on-line, los
+estudiosos ya habían reconocido las redes sociales off-line como un
+factor importante que determina cómo las sociedades se mueven hacia
+consensos. {En la sociología, trabajos sobre la difusión de innovaciones
+han enfatizado cómo los individuos adoptan nuevos comportamientos por
+influencia de sus vecinos.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura 2: Cadena Descriptiva → Afirmación
+Conclusiva}\label{estructura-2-cadena-descriptiva-afirmaciuxf3n-conclusiva}
+
+\textbf{Esquema visual:}
+
+\begin{verbatim}
+DESCRIPCIÓN 1 (contexto físico) ───┐
+                                    │
+DESCRIPCIÓN 2 (estado inicial) ────┼─ OBSERVACIONES
+                                    │
+DESCRIPCIÓN 3 (comportamiento) ────┤
+                                    ↓
+                            AFIRMACIÓN FINAL
+                          (significado/función)
+\end{verbatim}
+
+\textbf{Ejemplo real} (Dawkins, 1976):
+
+Las gaviotas de cabeza negra hacen sus nidos en grandes colonias, a
+pocos metros de distancia. Cuando los polluelos salen del cascarón son
+pequeños e indefensos y fáciles de tragar. Es bastante común que una
+gaviota espere hasta que un vecino le dé la espalda y entonces se
+abalance sobre uno de los polluelos del vecino y se lo trague entero.
+{\textbf{Así obtiene una buena comida nutritiva, sin tener que tomarse
+la molestia de pescar.}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura 3: Afirmación Incompleta →
+Aclaración}\label{estructura-3-afirmaciuxf3n-incompleta-aclaraciuxf3n}
+
+\textbf{Esquema visual:}
+
+\begin{verbatim}
+PARADOJA/PROBLEMA ──→ INTERROGANTE ──→ ACLARACIÓN ──→ RESOLUCIÓN
+\end{verbatim}
+
+\textbf{Ejemplo real} (Hernandez, 2011):
+
+{\textbf{Los casos de pérdida y recuperación de lenguas plantean una
+intrigante paradoja.}} Si en el cerebro se almacenan dos lenguas, ¿cómo
+es posible que una persona pueda perder una lengua y recuperarla? Mi
+propia experiencia y los casos de bilingüismo que leía sugerían un
+modelo muy diferente. {\textbf{Parecía que las lenguas podían ser
+inaccesibles aunque no se perdieran del todo.}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura 4: Afirmación → Justificación con
+Datos}\label{estructura-4-afirmaciuxf3n-justificaciuxf3n-con-datos}
+
+\textbf{Esquema visual:}
+
+\begin{verbatim}
+TESIS PRINCIPAL
+    ↓
+DATO 1 (cuantitativo) ─┐
+                        │
+DATO 2 (comparativo) ──┼─ EVIDENCIA EMPÍRICA
+                        │
+DATO 3 (estadístico) ──┘
+\end{verbatim}
+
+\textbf{Ejemplo real} (Bertrand et al., 2010):
+
+{\textbf{La presencia de hijos es el principal factor que contribuye a
+la menor experiencia laboral de las mujeres con MBA.}} Las mujeres con
+hijos tienen un déficit de unos 8 meses de experiencia en comparación
+con el hombre medio, mientras que las mujeres sin hijos tienen un
+déficit de 1,5 meses. Las mujeres con hijos suelen trabajar un 24\%
+menos de horas semanales; las mujeres sin hijos sólo trabajan un 3,3\%
+menos.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura 5: Juicio Negativo → Atenuación → Ejemplo
+Positivo}\label{estructura-5-juicio-negativo-atenuaciuxf3n-ejemplo-positivo}
+
+\textbf{Esquema visual:}
+
+\begin{verbatim}
+CRÍTICA INICIAL (fuerte) ──→ ATENUACIÓN (pero/sin embargo) ──→ CASO EXITOSO
+\end{verbatim}
+
+\textbf{Ejemplo real} (Bunge, 2012):
+
+{\textbf{Las hipótesis sobre equilibrio o armonía son tan imprecisas que
+no se las puede poner a prueba, de modo que no son científicas.}} Pero
+algunas de ellas son pasibles de refinamiento y pueden tornarse
+accesibles a la contrastación experimental. {\textbf{En efecto, la
+versión moderna de la idea de equilibrio corporal es el concepto
+fisiológico de homeostasis, propuesta por Claude Bernard y refinada por
+Walter Cannon.}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura 6: Descripción General → Detalles
+Secuenciales}\label{estructura-6-descripciuxf3n-general-detalles-secuenciales}
+
+\textbf{Esquema visual:}
+
+\begin{verbatim}
+PRESENTACIÓN GENERAL (contexto + n + muestra)
+    ↓
+    ├─ HALLAZGO 1 (principal)
+    ├─ HALLAZGO 2 (metodología específica)
+    ├─ HALLAZGO 3 (implicaciones)
+    └─ HALLAZGO 4 (contexto ampliado)
+\end{verbatim}
+
+\textbf{Ejemplo real} (Stoet et al., 2018):
+
+{\textbf{Presentamos un análisis del rendimiento académico de casi
+475.000 adolescentes de 67 países.}} Descubrimos que las mujeres y los
+hombres tienen capacidades similares en conocimientos científicos. Al
+mismo tiempo, es mucho más probable que las ciencias sean un punto
+fuerte para los chicos que para las chicas. La relación entre estas
+diferencias y las tasas de graduación en STEM es mayor en países con
+mayor igualdad de género.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura 7: Definición → Explicación → Ejemplo
+Contrastivo}\label{estructura-7-definiciuxf3n-explicaciuxf3n-ejemplo-contrastivo}
+
+\textbf{Esquema visual:}
+
+\begin{verbatim}
+DEFINICIÓN FORMAL
+    ↓
+CARACTERÍSTICAS DISTINTIVAS
+    ↓
+EJEMPLO ILUSTRATIVO ←→ CONTRASTE CON OTROS CASOS
+\end{verbatim}
+
+\textbf{Ejemplo real} (Mosterín, 1970):
+
+{\textbf{Los nombres son sucesiones de signos gráficos que designan
+algo: un número, una ciudad, una persona.}} Se diferencian por ser más
+cortos, más unívocos, más independientes del contexto. Si digo ``yo he
+comido'', ``yo'' actúa como designador que se refiere a mí, pero su
+referencia varía con el contexto. {\textbf{``Jesús Mosterín'' permanece
+invariable, utilice la sentencia quien la utilice.}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura 8: Interrogante → Respuesta → Justificación
+Implícita}\label{estructura-8-interrogante-respuesta-justificaciuxf3n-impluxedcita}
+
+\textbf{Esquema visual:}
+
+\begin{verbatim}
+ESCENARIO HIPOTÉTICO (gancho emocional)
+    ↓
+PREGUNTA FUNDAMENTAL
+    ↓
+RESPUESTA CONCISA + JUSTIFICACIÓN INTEGRADA
+\end{verbatim}
+
+\textbf{Ejemplo real} (Feynman, 1963):
+
+Si en algún cataclismo se destruyera todo el conocimiento científico y
+sólo se transmitiera una frase, ¿qué afirmación contendría la mayor
+cantidad de información? {\textbf{Creo que es la hipótesis de que todas
+las cosas están hechas de átomos: pequeñas partículas en perpetuo
+movimiento que se atraen a poca distancia pero se repelen cuando se
+aprietan.}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura 9: Interrogante → Aclaración Metodológica →
+Conexión}\label{estructura-9-interrogante-aclaraciuxf3n-metodoluxf3gica-conexiuxf3n}
+
+\textbf{Esquema visual:}
+
+\begin{verbatim}
+PREGUNTAS INICIALES (interés)
+    ↓
+ACLARACIÓN NECESARIA (perspectiva)
+    ↓
+CONEXIÓN EXPLÍCITA (siguiente párrafo)
+    ↓
+NUEVA PREGUNTA (momentum)
+\end{verbatim}
+
+\textbf{Ejemplo real} (Crystal, 2014):
+
+¿Cuántas lenguas están a punto de morir? ¿Cuántas están en peligro?
+{\textbf{Antes de estimar la magnitud del problema, debemos desarrollar
+un sentido de perspectiva.}} Las cifras sobre lenguas que mueren sólo
+tienen sentido si las relacionamos con el número total de lenguas vivas.
+{\textbf{Entonces, ¿cuántas lenguas hay?}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Características del Párrafo
+Efectivo}\label{caracteruxedsticas-del-puxe1rrafo-efectivo}
+
+\textbf{LO QUE SÍ DEBE TENER}
+
+\begin{itemize}
+\tightlist
+\item
+  Coherencia conceptual
+\item
+  Una idea principal clara
+\item
+  Extensión moderada (50-60 palabras promedio)
+\item
+  Conexión lógica interna
+\item
+  Independencia relativa del contexto
+\end{itemize}
+
+\textbf{LO QUE DEBE EVITAR}
+
+\begin{itemize}
+\tightlist
+\item
+  Párrafos de una sola oración
+\item
+  Párrafos que ocupan página entera
+\item
+  Múltiples ideas sin conexión
+\item
+  Dependencia total de otros párrafos
+\item
+  Más de cuatro oraciones largas
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Texto expositivo}\label{texto-expositivo}
+
+\subsubsection{Tipos de Estructura Textual:
+Comparativa}\label{tipos-de-estructura-textual-comparativa}
+
+Tipo
+
+Característica
+
+Ejemplo
+
+Temática
+
+Organización por conceptos o categorías
+
+Peñaherrera (2004): Geografía del Perú
+
+Histórica
+
+Organización cronológica pura
+
+Del Busto (2004): Conquista y virreinato
+
+Histórico-temática
+
+Períodos + temas dentro de cada período
+
+Harari (2011): Sapiens
+
+Histórico-crítica
+
+Cronología + análisis crítico
+
+Roll (1938): Historia del pensamiento económico
+
+Mixta
+
+Combina varios principios organizadores
+
+Medrano (2021): Quipus
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura Temática: Análisis
+Detallado}\label{estructura-temuxe1tica-anuxe1lisis-detallado}
+
+\textbf{Caso:} Peñaherrera (2004) - Geografía del Perú
+
+\textbf{Principio organizador:} De lo general a lo específico, por
+categorías geográficas
+
+\begin{verbatim}
+1. CONTEXTO AMPLIO
+   └─ El espacio nacional en América y el mundo
+
+2. HERRAMIENTAS
+   └─ Cartografía peruana
+
+3. PROCESOS FORMATIVOS
+   └─ La formación del relieve andino
+
+4. RESULTADOS FÍSICOS
+   ├─ Relieve del territorio peruano
+   └─ Las regiones naturales del Perú
+
+5. ELEMENTOS ESPECÍFICOS
+   ├─ Climas del Perú
+   ├─ El mar de Grau
+   ├─ Cuencas del Pacífico y del Titicaca
+   └─ Cuenca del Amazonas
+
+6. SÍNTESIS HUMANA
+   └─ Síntesis de geografía humana
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura Histórica: Análisis
+Detallado}\label{estructura-histuxf3rica-anuxe1lisis-detallado}
+
+\textbf{Caso:} Del Busto (2004) - Conquista y virreinato
+
+\textbf{Principio organizador:} Cronológico estricto + eventos clave
+
+\textbf{FASE 1: CONQUISTA}
+
+\begin{itemize}
+\tightlist
+\item
+  Los conquistadores españoles
+\item
+  Los viajes descubridores
+\item
+  La caída del Tahuantinsuyo
+\item
+  La fundación de ciudades
+\item
+  La resistencia incaica
+\end{itemize}
+
+\textbf{FASE 2: CONSOLIDACIÓN}
+
+\begin{itemize}
+\tightlist
+\item
+  Las guerras civiles
+\item
+  Los grandes descubrimientos
+\item
+  Los incas de Vilcabamba
+\end{itemize}
+
+\textbf{FASE 3: VIRREINATO}
+
+\begin{itemize}
+\tightlist
+\item
+  Administración central y virreinal
+\item
+  Sociedad virreinal
+\item
+  Catolicismo y religiosidad
+\item
+  Educación y vida intelectual
+\item
+  Comercio, industria y artesanía
+\item
+  Las rebeliones indígenas
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura Histórico-Temática: Análisis
+Detallado}\label{estructura-histuxf3rico-temuxe1tica-anuxe1lisis-detallado}
+
+\textbf{Caso:} Harari (2011) - Sapiens
+
+\textbf{Principio organizador:} Grandes revoluciones + temas dentro de
+cada una
+
+Revolución
+
+Temas
+
+Lógica
+
+Cognitiva
+
+Animal insignificante → Árbol conocimiento → Vida Adán y Eva
+
+Biológico → Mental → Social
+
+Agrícola
+
+Mayor fraude → Pirámides → Memoria → Justicia
+
+Cambio → Consecuencias → Problemas
+
+Unificación
+
+Flecha historia → Dinero → Imperios → Religión
+
+Proceso → Herramientas integradoras
+
+Científica
+
+Ignorancia → Imperio → Capitalismo → Revolución permanente
+
+Método → Alianzas → Transformación
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura Histórico-Crítica: Análisis
+Detallado}\label{estructura-histuxf3rico-cruxedtica-anuxe1lisis-detallado}
+
+\textbf{Caso:} Roll (1938) - Historia del pensamiento económico
+
+\textbf{Principio organizador:} Desarrollo histórico + análisis crítico
+de cada escuela
+
+\textbf{FASE 1: Comienzos} → Antiguo Testamento, Grecia, Roma,
+Cristianismo, Edad Media
+
+\textbf{FASE 2: Capitalismo comercial} → Declive escolástica,
+mercantilismo, lingotismo
+
+\textbf{FASE 3: Fundadores} → Filósofos políticos, Petty, Locke, Hume,
+Cantillon, fisiócratas
+
+\textbf{FASE 4: Sistema clásico} → {\textbf{Adam Smith (análisis
+extenso)}}, Ricardo, Malthus
+
+\textbf{FASE 5: Reacción} → Crítica a Malthus, románticos alemanes,
+crítica socialista
+
+\textbf{FASE 6: Marx} → {\textbf{Vida, método, teoría valor, plusvalía,
+competencia, desarrollo, valoración}}
+
+\textbf{FASE 7: Transición} → Escuela histórica, Jones, ruptura teoría
+valor, Senior, Mill
+
+\textbf{FASE 8-12: Economía moderna} → Utilidad marginal, contribución
+americana, entreguerras, macroeconomía, edad de la duda
+
+\textbf{CONCLUSIÓN:} Los fines de la economía
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Estructura Mixta: Análisis
+Detallado}\label{estructura-mixta-anuxe1lisis-detallado}
+
+\textbf{Caso:} Medrano (2021) - Quipus
+
+\textbf{Principio organizador:} Histórico (Parte 1) + Analítico
+contemporáneo (Parte 2)
+
+\textbf{PARTE 1: HISTÓRICA}
+
+Una historia en nudos
+
+\begin{itemize}
+\tightlist
+\item
+  Quipus tempranos
+\item
+  Quipus incaicos
+\item
+  Encuentros coloniales tempranos
+\item
+  Quipus coloniales y republicanos
+\end{itemize}
+
+{Narrativa cronológica tradicional}
+
+\textbf{PARTE 2: CONTEMPORÁNEA}
+
+Desciframientos presentes y futuros
+
+\begin{itemize}
+\tightlist
+\item
+  Hacia el quipu digital
+\item
+  Los quipus digitales como ``macrodatos''
+\end{itemize}
+
+{Análisis metodológico actual}
+
+\textbf{Ventaja de esta estructura:} Combina narrativa accesible
+histórica con análisis técnico especializado, permitiendo a diferentes
+audiencias encontrar valor en distintas secciones.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Texto Convincente: Elementos
+Esenciales}\label{texto-convincente-elementos-esenciales}
+
+\textbf{Según Reyes (p.~259), un texto académico convincente debe:}
+
+\textbf{ARGUMENTACIÓN}
+
+Propone argumentos válidos y suficientes
+
+\textbf{EVIDENCIA}
+
+Provee datos adecuados para el tema y lector
+
+\textbf{INFERENCIA}
+
+Permite que el lector llegue a conclusiones
+
+\textbf{CONEXIÓN}
+
+Conecta datos con la tesis defendida
+
+\textbf{CONTRASTE}
+
+Compara con tesis contrarias
+
+\textbf{APORTE}
+
+Amplía conocimientos del lector
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Lista de Verificación de Calidad
+Textual}\label{lista-de-verificaciuxf3n-de-calidad-textual}
+
+\textbf{Según Reyes (p.~272):}
+
+\textbf{CLARIDAD Y COHERENCIA}
+
+¿Ha quedado clara la intención del escrito?
+
+¿Se entiende todo bien?
+
+¿Están las conclusiones justificadas?
+
+¿Hay contradicciones?
+
+\textbf{ESTRUCTURA Y FORMA}
+
+¿Es adecuada la estructura?
+
+¿Son acertados registro y vocabulario?
+
+¿Son buenas las frases inicial y final?
+
+¿Está bien contextualizado el problema?
+
+\textbf{REVISIÓN EXTERNA}
+
+Siempre pedir opinión de otras personas: ¿se entiende todo bien?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Aplicación: De Teoría a
+Práctica}\label{aplicaciuxf3n-de-teoruxeda-a-pruxe1ctica}
+
+\textbf{Secuencia de redacción recomendada:}
+
+\begin{verbatim}
+1. PALABRA (precisa, conocida, apropiada)
+        ↓
+2. FRASE (corta, correcta, clara)
+        ↓
+3. ORACIÓN (18 palabras promedio, estructura lógica)
+        ↓
+4. PÁRRAFO (50 palabras promedio, una idea central)
+        ↓
+5. TEXTO (estructura clara, argumentación sólida)
+\end{verbatim}
+
+\textbf{Recuerde:} Cada nivel debe cumplir criterios específicos de
+calidad antes de pasar al siguiente. La revisión debe hacerse en orden
+inverso: primero la estructura general del texto, luego los párrafos,
+luego las oraciones, y finalmente las palabras individuales.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{MÓDULO 4: HERRAMIENTAS DE
+ESTILO}\label{muxf3dulo-4-herramientas-de-estilo}
+
+\subsection{Vocabulario Preciso: Propiedad
+Léxica}\label{vocabulario-preciso-propiedad-luxe9xica}
+
+\subsubsection{Definición}\label{definiciuxf3n-3}
+
+\begin{quote}
+Uso de \textbf{palabras exactas} que comunican lo que se desea decir,
+sin ambigüedades.
+\end{quote}
+
+\subsubsection{La Palabra Precisa}\label{la-palabra-precisa}
+
+Aquella que \textbf{NO puede cambiarse} por otra sin alterar el
+significado o matiz.
+
+\subsubsection{Peligro de Sinónimos}\label{peligro-de-sinuxf3nimos}
+
+``Sinónimos'' rara vez son idénticos: - Comparten zona de significado -
+Mantienen diferencias de matiz - Pueden alterar registro
+
+\subsubsection{Ejemplo}\label{ejemplo-1}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Propósito'' (compromiso profundo)\\
+  ``Fin'' (más general, menos profundo)
+\end{itemize}
+
+\subsubsection{Errores Comunes}\label{errores-comunes-4}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+- Incorrecto & - Correcto \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Cancelar (pagar) & Pagar cuota final \\
+Adolecer (carecer) & Adolecer = tener defecto \\
+Cotizar (pedir) & Solicitar presupuesto \\
+\end{longtable}
+
+\subsubsection{Preferencias}\label{preferencias}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Sencilla} sobre rebuscada\\
+\item
+  \textbf{Corta} sobre larga\\
+\item
+  \textbf{Conocida} sobre rara
+\end{itemize}
+
+\subsubsection{En Ciencia}\label{en-ciencia}
+
+\begin{itemize}
+\tightlist
+\item
+  Tecnicismos \textbf{necesarios}
+\item
+  Significado \textbf{unívoco}
+\item
+  Evitar vaguedades: ``mejor'', ``varios'', ``proclive''
+\end{itemize}
+
+\subsubsection{Herramientas}\label{herramientas}
+
+\begin{itemize}
+\tightlist
+\item
+  Diccionario RAE
+\item
+  Diccionario de uso (María Moliner)
+\item
+  Diccionario ideológico (Casares)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Conectores y Metadiscurso}\label{conectores-y-metadiscurso}
+
+\subsubsection{Conectores: Señales de
+Tránsito}\label{conectores-seuxf1ales-de-truxe1nsito}
+
+\begin{quote}
+Unidades lingüísticas que \textbf{guían inferencias} y manifiestan
+relaciones lógicas.
+\end{quote}
+
+\subsubsection{Tipos Principales}\label{tipos-principales}
+
+\paragraph{Aditivos}\label{aditivos}
+
+además, asimismo, también, todavía más
+
+\paragraph{Contraargumentativos}\label{contraargumentativos}
+
+sin embargo, no obstante, por el contrario, ahora bien
+
+\paragraph{Consecutivos}\label{consecutivos}
+
+por lo tanto, por consiguiente, así que, entonces
+
+\paragraph{Reformuladores}\label{reformuladores}
+
+es decir, o sea, mejor dicho, en resumen
+
+\paragraph{Ordenadores}\label{ordenadores}
+
+en primer lugar, a continuación, finalmente, por último
+
+\subsubsection{Funciones Clave}\label{funciones-clave}
+
+\begin{itemize}
+\tightlist
+\item
+  Garantizar ilación lógica\\
+\item
+  Orientar interpretación\\
+\item
+  Reducir ``nebulosidad''\\
+\item
+  Mantener coherencia
+\end{itemize}
+
+\subsubsection{Metadiscurso}\label{metadiscurso}
+
+\textbf{Interactivo:} - ``Como se señaló anteriormente'' - ``En la
+siguiente sección''
+
+\textbf{Interaccional:} - ``Posiblemente'' - ``Considero que'' -
+``Lamentablemente''
+
+\subsubsection{Impacto}\label{impacto-1}
+
+Construcción del \textbf{ethos} (credibilidad del autor)
+
+\subsubsection{Evitar}\label{evitar-2}
+
+Clichés burocráticos: - ``Es importante señalar que\ldots{}'' - ``En
+otro orden de ideas\ldots{}''
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Evitar Clichés: Lenguaje
+Infiltrado}\label{evitar-clichuxe9s-lenguaje-infiltrado}
+
+\subsubsection{¿Qué son los Clichés?}\label{quuxe9-son-los-clichuxe9s}
+
+\begin{quote}
+Fórmulas que por \textbf{uso excesivo} han perdido fuerza significativa
+y ``embotan la mente''.
+\end{quote}
+
+\subsubsection{Fuentes del ``Lenguaje
+Infiltrado''}\label{fuentes-del-lenguaje-infiltrado}
+
+\begin{itemize}
+\tightlist
+\item
+  Burocracia
+\item
+  Medios de comunicación
+\item
+  Libros de texto mal escritos
+\end{itemize}
+
+\subsubsection{Ejemplos Burocráticos}\label{ejemplos-burocruxe1ticos}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Es importante señalar que\ldots{}''\\
+\item
+  ``A la mayor brevedad posible''\\
+\item
+  ``Personalmente creemos''\\
+\item
+  ``El mismo/la misma'' (para evitar repetir)
+\end{itemize}
+
+\subsubsection{Clichés Literarios}\label{clichuxe9s-literarios}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Ojos de mirar profundo''\\
+\item
+  ``Dientes de perla''\\
+\item
+  ``Venir como anillo al dedo''\\
+\item
+  ``Más bueno que el pan''\\
+\end{itemize}
+
+\subsubsection{Consecuencias}\label{consecuencias}
+
+\begin{itemize}
+\tightlist
+\item
+  Prosa con \textbf{más palabras} de lo necesario
+\item
+  Abuso de \textbf{voz pasiva}
+\item
+  Texto estático y difícil
+\item
+  Pérdida de \textbf{originalidad}
+\end{itemize}
+
+\subsubsection{- Alternativa}\label{alternativa}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, rightrule=.15mm, breakable, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Cervantes sobre el Buen Español}, toprule=.15mm, left=2mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, opacityback=0, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, leftrule=.75mm]
+
+Procurar que la oración sea ``llana'', con palabras ``honestas y bien
+colocadas'', pintando la intención del autor \textbf{sin intrincar} los
+conceptos.
+
+\end{tcolorbox}
+
+\subsubsection{Estrategia de Revisión}\label{estrategia-de-revisiuxf3n}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Identificar expresiones vacías
+\item
+  Preguntar: ¿Puedo decir lo mismo con menos?
+\item
+  \textbf{Tachar inmisericordemente}
+\item
+  Asumir voz propia (uso del ``yo'')
+\end{enumerate}
+
+\subsubsection{Meta}\label{meta-2}
+
+Texto libre de lugares comunes = más \textbf{creíble} y
+\textbf{respetuoso} con el lector.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Puntuación Correcta}\label{puntuaciuxf3n-correcta}
+
+\subsubsection{Función}\label{funciuxf3n}
+
+\begin{quote}
+\textbf{Señales de tránsito} que mantienen flujo de información
+constante y sin tropiezos.
+\end{quote}
+
+\subsubsection{Preferencia: Más Puntos, Menos
+Comas}\label{preferencia-muxe1s-puntos-menos-comas}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Punto y seguido} para segmentar\\
+  \textbf{Comas} solo donde necesario
+\end{itemize}
+
+\subsubsection{La Coma (,)}\label{la-coma}
+
+\textbf{REGLA DE ORO:}\\
+- NUNCA entre sujeto y verbo (salvo incisos)
+
+\paragraph{Usos Correctos}\label{usos-correctos}
+
+\begin{itemize}
+\tightlist
+\item
+  Separar elementos en listas
+\item
+  Introducir incisos explicativos
+\item
+  Enmarcar marcadores (``sin embargo'')
+\end{itemize}
+
+\subsubsection{Punto y Coma (;)}\label{punto-y-coma}
+
+\begin{itemize}
+\tightlist
+\item
+  Pausa más larga que coma
+\item
+  Separar ítems complejos en listas
+\item
+  Vincular oraciones relacionadas
+\end{itemize}
+
+\subsubsection{Dos Puntos (:)}\label{dos-puntos}
+
+\begin{itemize}
+\tightlist
+\item
+  Introducir listas
+\item
+  Preceder ejemplos
+\item
+  Antes de citas directas
+\item
+  \begin{itemize}
+  \tightlist
+  \item
+    NO separar verbo de objeto
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Comillas (``\,``)}\label{comillas}
+
+\begin{itemize}
+\tightlist
+\item
+  Citas textuales
+\item
+  Indicar reserva/ironía
+\item
+  \begin{itemize}
+  \tightlist
+  \item
+    NO para resaltar (usar sintaxis)
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Impacto en Legibilidad}\label{impacto-en-legibilidad}
+
+Puntuación deficiente: - Obliga a \textbf{releer} varias veces - Crea
+\textbf{ambigüedades peligrosas} - Desmerece valor del trabajo
+
+\subsubsection{- Revisión Final}\label{revisiuxf3n-final}
+
+Leer en \textbf{voz alta} para verificar que pausas coinciden con
+intención comunicativa.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Legibilidad e Índice de
+Nebulosidad}\label{legibilidad-e-uxedndice-de-nebulosidad}
+
+\subsubsection{Legibilidad}\label{legibilidad}
+
+\begin{quote}
+Facilidad con la que un texto puede ser \textbf{procesado} y
+\textbf{comprendido} rápidamente.
+\end{quote}
+
+\subsubsection{Dimensiones}\label{dimensiones}
+
+\paragraph{1. Visual/Tipográfica}\label{visualtipogruxe1fica}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Letra romana} \textgreater{} Arial (remates ayudan)
+\item
+  \textbf{Minúsculas} \textgreater{} MAYÚSCULAS
+\item
+  Espacios en blanco
+\end{itemize}
+
+\paragraph{2. Léxica}\label{luxe9xica}
+
+\begin{itemize}
+\tightlist
+\item
+  Palabras cortas y conocidas
+\item
+  Evitar rebuscamiento
+\end{itemize}
+
+\paragraph{3. Estructural}\label{estructural}
+
+\begin{itemize}
+\tightlist
+\item
+  Oraciones: \textasciitilde18 palabras
+\item
+  Párrafos: \textasciitilde50 palabras
+\item
+  Voz activa preferida
+\end{itemize}
+
+\subsubsection{Índice de Nebulosidad (Fog
+Index)}\label{uxedndice-de-nebulosidad-fog-index}
+
+\textbf{Fórmula:}
+
+\begin{verbatim}
+A = Total palabras / Número oraciones
+B = (Palabras largas × 100) / Total palabras
+Índice = (A + B) × 0.4
+\end{verbatim}
+
+\textbf{Palabras largas:} \textgreater{} 3 grupos vocálicos
+
+\subsubsection{Valores}\label{valores}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Índice & Interpretación \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{10} & Ideal (lectura fluida) \\
+20-30 & Esfuerzo moderado \\
+35+ & Esfuerzo inusual \\
+84 & Textos legales (inadmisible) \\
+\end{longtable}
+
+\subsubsection{Cómo Reducir}\label{cuxf3mo-reducir}
+
+\begin{itemize}
+\tightlist
+\item
+  Fragmentar oraciones largas\\
+\item
+  Sustituir palabras complejas\\
+\item
+  Usar voz activa\\
+\item
+  Eliminar redundancia\\
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Interés Humano: El Toque
+Personal}\label{interuxe9s-humano-el-toque-personal}
+
+\subsubsection{Definición}\label{definiciuxf3n-4}
+
+\begin{quote}
+Inclusión de \textbf{personas de carne y hueso} en historias y
+descripciones.
+\end{quote}
+
+\subsubsection{¿Por qué es importante?}\label{por-quuxe9-es-importante}
+
+\begin{itemize}
+\tightlist
+\item
+  Distingue \textbf{relato} de mero \textbf{informe}
+\item
+  Dispara \textbf{número de lectores}
+\item
+  Genera \textbf{identificación}
+\item
+  Facilita \textbf{comprensión} de eventos masivos
+\end{itemize}
+
+\subsubsection{Estrategias}\label{estrategias}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Individualizar sucesos}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Víctima individual \textgreater{} estadística fría
+  \item
+    Protagonista concreto
+  \end{itemize}
+\item
+  \textbf{Concretar lo abstracto}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \begin{itemize}
+    \tightlist
+    \item
+      ``Reinaba el nerviosismo''
+    \end{itemize}
+  \item
+    \begin{itemize}
+    \tightlist
+    \item
+      ``Los asistentes estaban nerviosos y\ldots{}''
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Humanizar la información}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Mostrar reacciones
+  \item
+    Describir personas
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Impacto}\label{impacto-2}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, rightrule=.15mm, breakable, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Ejemplo}, toprule=.15mm, left=2mm, colback=white, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, toptitle=1mm, opacityback=0, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, leftrule=.75mm]
+
+Una tragedia con \textbf{10,000 muertos} (número) tiene menos impacto
+emocional que la historia de \textbf{UNA víctima} individual.
+
+\end{tcolorbox}
+
+\subsubsection{En Textos Académicos}\label{en-textos-acaduxe9micos}
+
+Aunque la objetividad es clave: - Ejemplos concretos \textgreater{}
+generalidades - Casos de estudio individuales - Testimonios (en
+investigación cualitativa)
+
+\subsubsection{Balance}\label{balance}
+
+Evitar: - Exceso de anécdota - Perder rigor científico
+
+Mantener: - Precisión de datos - Conclusiones fundamentadas
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Uso Ético de la Inteligencia
+Artificial}\label{uso-uxe9tico-de-la-inteligencia-artificial}
+
+\subsubsection{Advertencia: ``Desinteligencia''
+Artificial}\label{advertencia-desinteligencia-artificial}
+
+\begin{quote}
+La IA puede construir \textbf{``mentiras completas con verdades
+parciales''}.
+\end{quote}
+
+\subsubsection{Caso Real Documentado}\label{caso-real-documentado}
+
+ChatGPT inventó: - Título plausible de artículo - Coautores reales - DOI
+falso
+
+\textbf{Problema:} Parecía 100\% verdadero
+
+\subsubsection{Riesgos en Formación
+Académica}\label{riesgos-en-formaciuxf3n-acaduxe9mica}
+
+\begin{itemize}
+\tightlist
+\item
+  Desestimular lectura crítica\\
+\item
+  Afectar jerarquización de ideas\\
+\item
+  Sustituir razonamiento\\
+\item
+  Dependencia tecnológica\\
+\item
+  Erosión intelectual\\
+\end{itemize}
+
+\subsubsection{- Usos Éticos y
+Eficientes}\label{usos-uxe9ticos-y-eficientes}
+
+\textbf{Permitidos:} - Formatear referencias bibliográficas - Corrección
+gramatical - Scripts de programación - Tareas tediosas técnicas
+
+\textbf{Prohibidos:} - Generar contenido principal - Sustituir
+pensamiento crítico - Inventar datos/citas - Reemplazar lectura de
+fuentes
+
+\subsubsection{Regla de Oro}\label{regla-de-oro-1}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, rightrule=.15mm, breakable, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Principio Fundamental}, toprule=.15mm, left=2mm, colback=white, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, opacityback=0, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, leftrule=.75mm]
+
+Usar IA para \textbf{ahorrar tiempo} en procesos tediosos \textbf{SIN
+comprometer} creatividad ni honestidad intelectual.
+
+\end{tcolorbox}
+
+\subsubsection{El Científico Debe\ldots{}}\label{el-cientuxedfico-debe}
+
+Mantener capacidad de: - \textbf{Pensar} críticamente -
+\textbf{Reflexionar} profundamente - \textbf{Cuestionar} activamente
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Lectura Crítica: Herramienta
+Fundamental}\label{lectura-cruxedtica-herramienta-fundamental}
+
+\subsubsection{Definición}\label{definiciuxf3n-5}
+
+\begin{quote}
+Proceso de \textbf{interpretación}, \textbf{integración de fuentes} y
+\textbf{creación de información} que trasciende la decodificación.
+\end{quote}
+
+\subsubsection{Dos Niveles}\label{dos-niveles}
+
+\paragraph{1. Lectura Extractiva}\label{lectura-extractiva}
+
+\begin{itemize}
+\tightlist
+\item
+  Obtención de datos aislados
+\item
+  Conceptos y ejemplos
+\item
+  Útil pero insuficiente
+\end{itemize}
+
+\paragraph{2. Lectura Reflexiva y
+Crítica}\label{lectura-reflexiva-y-cruxedtica}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Sistemas de ideas} detrás de datos
+\item
+  Cadena de razonamientos
+\item
+  Relaciones lógicas entre conceptos
+\item
+  Posición teórica del autor
+\end{itemize}
+
+\subsubsection{Nivel Epistémico}\label{nivel-epistuxe9mico}
+
+Leer para: - Cuestionar concepción del mundo - Transformar conocimiento
+propio - Desarrollar autonomía
+
+\subsubsection{Herramientas de Lectura
+Crítica}\label{herramientas-de-lectura-cruxedtica}
+
+\paragraph{Intertextualidad}\label{intertextualidad}
+
+Reconocer que textos dialogan con otros
+
+\paragraph{Campos Semánticos}\label{campos-semuxe1nticos}
+
+Rastrear cadenas léxicas para identificar escuela teórica
+
+\paragraph{Diccionarios
+Especializados}\label{diccionarios-especializados}
+
+\begin{itemize}
+\tightlist
+\item
+  RAE (ortografía, existencia)
+\item
+  María Moliner (uso, construcción)
+\item
+  Casares (ideológico, sinónimos)
+\end{itemize}
+
+\subsubsection{En la Investigación}\label{en-la-investigaciuxf3n}
+
+\textbf{Enmarcar el trabajo:} - Identificar lo novedoso - Detectar
+vacíos (nicho) - Triangular evidencias
+
+\subsubsection{Meta}\label{meta-3}
+
+Dejar de ser \textbf{reproductor} para ser \textbf{participante activo}
+en construcción de conocimiento.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Actividad Práctica}\label{actividad-pruxe1ctica}
+
+\subsubsection{Ejercicio 1: Análisis de
+Abstract}\label{ejercicio-1-anuxe1lisis-de-abstract}
+
+\textbf{Tiempo:} 15 minutos
+
+\textbf{Tarea:} 1. Lee el abstract proporcionado 2. Identifica las 4
+secciones IMRyD 3. Evalúa claridad, precisión, brevedad
+
+\textbf{Criterios:} - ¿Está en un párrafo? - ¿Tiempo verbal correcto? -
+¿Contiene las 4 partes? - ¿Extensión adecuada?
+
+\subsubsection{Ejercicio 2: Reducir
+Nebulosidad}\label{ejercicio-2-reducir-nebulosidad}
+
+\textbf{Tiempo:} 10 minutos
+
+\textbf{Tarea:} Reescribe este párrafo reduciendo su índice:
+
+\begin{quote}
+\emph{``En el transcurso del desarrollo de la investigación que fue
+llevada a cabo, se procedió a la realización de un análisis exhaustivo
+de los datos que fueron recolectados\ldots{}''}
+\end{quote}
+
+\subsubsection{Ejercicio 3: Identificar
+Clichés}\label{ejercicio-3-identificar-clichuxe9s}
+
+\textbf{Tiempo:} 10 minutos
+
+\textbf{Tarea:} Encuentra y elimina clichés en:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ``A la mayor brevedad posible''
+\item
+  ``Es importante señalar que''
+\item
+  ``Venir como anillo al dedo''
+\item
+  ``Personalmente creemos''
+\end{enumerate}
+
+Propón alternativas directas.
+
+\subsubsection{Ejercicio 4: Crear Mapa de
+Ideas}\label{ejercicio-4-crear-mapa-de-ideas}
+
+\textbf{Tiempo:} 15 minutos
+
+\textbf{Tema:} Tu proyecto de investigación
+
+\textbf{Pasos:} 1. Escribe tema central 2. Ramifica en 3-5 ideas
+principales 3. Sub-ramifica cada idea 4. Identifica conexiones
+
+\textbf{Meta:} Base para tu Introducción
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Preguntas Frecuentes}\label{preguntas-frecuentes}
+
+\subsection{❓ ¿Cuándo usar primera
+persona?}\label{cuuxe1ndo-usar-primera-persona}
+
+\textbf{R:} Depende de la revista y campo: - Métodos: Aceptable
+(``Analizamos\ldots{}'') - Resultados: Preferible impersonal -
+Discusión: Aceptable para interpretaciones - \textbf{Tendencia actual:}
+Primera persona plural por claridad
+
+\subsection{❓ ¿Qué extensión debe tener mi
+manuscrito?}\label{quuxe9-extensiuxf3n-debe-tener-mi-manuscrito}
+
+\textbf{R:} Varía según revista: - Artículo completo: 3,000-8,000
+palabras - Nota breve: 1,500-3,000 palabras - Revisa
+\textbf{instrucciones para autores}
+
+\subsection{❓ ¿Cuántas referencias
+necesito?}\label{cuuxe1ntas-referencias-necesito}
+
+\textbf{R:} No hay número mágico: - Suficientes para respaldar
+argumentos - No excesivas (denota inseguridad) - Enfoque:
+\textbf{calidad} sobre cantidad
+
+\subsection{❓ ¿Puedo usar Wikipedia como
+fuente?}\label{puedo-usar-wikipedia-como-fuente}
+
+\textbf{R:} - \textbf{NO directamente} - Úsala como punto de partida -
+Verifica con fuentes primarias - Cita las fuentes originales, no
+Wikipedia
+
+\subsection{❓ ¿Cómo evito el plagio al
+parafrasear?}\label{cuxf3mo-evito-el-plagio-al-parafrasear}
+
+\textbf{R:} Técnica segura: 1. Leer y comprender la fuente 2. Cerrar el
+libro/documento 3. Escribir con tus propias palabras 4. Verificar que no
+sea similar 5. \textbf{SIEMPRE citar} la idea original
+
+\subsection{❓ ¿Qué hacer si mi índice de nebulosidad es
+alto?}\label{quuxe9-hacer-si-mi-uxedndice-de-nebulosidad-es-alto}
+
+\textbf{R:} Soluciones inmediatas: - Fragmentar oraciones (\textless{}
+20 palabras) - Sustituir palabras largas - Usar voz activa - Eliminar
+redundancias
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Checklist Final para tu
+Manuscrito}\label{checklist-final-para-tu-manuscrito}
+
+\subsection{Antes de Enviar}\label{antes-de-enviar}
+
+\subsubsection{Contenido}\label{contenido-1}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Título atractivo y descriptivo (\textless{} 14 palabras)
+\item[$\square$]
+  Abstract completo con 4 secciones IMRyD
+\item[$\square$]
+  Introducción sigue modelo CARS
+\item[$\square$]
+  Métodos permiten replicación
+\item[$\square$]
+  Resultados objetivos (sin interpretación)
+\item[$\square$]
+  Discusión cierra bucle con Introducción
+\item[$\square$]
+  Conclusiones fundamentadas en datos
+\end{itemize}
+
+\subsubsection{Formato}\label{formato}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Sigue estructura IMRyD
+\item[$\square$]
+  Referencias en formato correcto
+\item[$\square$]
+  Tablas y figuras numeradas
+\item[$\square$]
+  Pies de figura descriptivos
+\item[$\square$]
+  Palabras clave incluidas
+\end{itemize}
+
+\subsubsection{Estilo}\label{estilo}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Promedio \textasciitilde18 palabras/oración
+\item[$\square$]
+  Párrafos 7-14 líneas
+\item[$\square$]
+  Voz activa predominante
+\item[$\square$]
+  Sin clichés ni lenguaje infiltrado
+\item[$\square$]
+  Conectores adecuados
+\item[$\square$]
+  Puntuación correcta
+\item[$\square$]
+  Índice nebulosidad ≤ 10
+\end{itemize}
+
+\subsubsection{Ética}\label{uxe9tica}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Todas las fuentes citadas
+\item[$\square$]
+  Sin plagio (verificado)
+\item[$\square$]
+  Contribuciones reconocidas
+\item[$\square$]
+  Conflictos de interés declarados
+\item[$\square$]
+  Permisos obtenidos (si aplica)
+\item[$\square$]
+  IA usada responsablemente (si aplica)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{¡GRACIAS!}\label{gracias}
+
+\subsection{Contacto y Recursos}\label{contacto-y-recursos}
+
+\subsubsection{👨‍🏫 Edison Achalma}\label{edison-achalma}
+
+📧 Correo institucional\\
+🌐 \href{https://github.com/achalmed}{GitHub: github.com/achalmed}\\
+💼 \href{https://linkedin.com/in/achalmaedison}{LinkedIn:
+/in/achalmaedison}\\
+🐦 \href{https://x.com/achalmaedison}{X: @achalmaedison}\\
+📘 \href{https://bsky.app/profile/achalmaedison.bsky.social}{Bluesky:
+achalmaedison.bsky.social}
+
+\subsubsection{Universidad}\label{universidad}
+
+\textbf{Corporacion Académica Universitaria}\\
+Ayacucho, Perú
+
+\subsubsection{💬 Reflexión Final}\label{reflexiuxf3n-final}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, rightrule=.15mm, breakable, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Recuerda}, toprule=.15mm, left=2mm, colback=white, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, toptitle=1mm, opacityback=0, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, leftrule=.75mm]
+
+\begin{quote}
+``La investigación científica realmente termina cuando el artículo se
+\textbf{publica} en una revista sometida a revisión por pares, pues solo
+entonces el hallazgo se integra al \textbf{saber científico global}.''
+\end{quote}
+
+\end{tcolorbox}
+
+\subsubsection{🚀 ¡Éxito en tu Escritura
+Científica!}\label{uxe9xito-en-tu-escritura-cientuxedfica}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+
+
+
+\end{document}

@@ -1,0 +1,127 @@
+/*-- scss:defaults --*/
+
+// Colores principales
+$body-bg: #ffffff;
+$body-color: #212121;
+$link-color: #028090;
+$code-block-bg: #f4f4f4;
+
+// Tipografía
+$presentation-font-size-root: 40px;
+$presentation-h1-font-size: 2.5em;
+$presentation-h2-font-size: 1.8em;
+$presentation-h3-font-size: 1.4em;
+
+$font-family-sans-serif: "Calibri", "Arial", sans-serif;
+$presentation-heading-font: "Georgia", "Cambria", serif;
+
+// Colores de tema
+$primary: #1E2761;
+$secondary: #2C5F2D;
+$success: #028090;
+$info: #CADCFC;
+$warning: #F9E795;
+$danger: #F96167;
+
+/*-- scss:rules --*/
+
+// Personalización de elementos
+.reveal .slide-background {
+  background-size: cover;
+  background-position: center;
+}
+
+// Títulos con estilo
+.reveal h1 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.reveal h2 {
+  color: $primary;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+// Listas mejoradas
+.reveal ul {
+  list-style-type: none;
+  
+  li:before {
+    content: "▸ ";
+    color: $danger;
+    font-weight: bold;
+    margin-right: 0.5em;
+  }
+}
+
+// Tablas con estilo
+.reveal table {
+  th {
+    background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+  }
+  
+  tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+}
+
+// Bloques de código
+.reveal pre code {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+// Énfasis especial
+.reveal strong {
+  color: $danger;
+}
+
+.reveal em {
+  color: $secondary;
+}
+
+// Transiciones suaves
+.reveal section {
+  transition: all 0.3s ease-in-out;
+}
+
+// Footer mejorado
+.reveal .footer {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// Marca de agua con logo institucional
+.reveal .slide-background::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(25, 118, 210, 0.1); // Fondo azul transparente
+  background-image: url('/images/cau-logo.png'); // CAMBIA ESTA RUTA
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.08; // Ajusta la transparencia (0.05-0.15 recomendado)
+  z-index: -1;
+  pointer-events: none;
+}
+
+// Opcional: Ocultar marca de agua en portada y cierre
+.reveal .slide-background.title::after,
+.reveal .slide-background.thanks::after {
+  display: none;
+}
+
+
+

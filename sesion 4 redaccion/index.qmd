@@ -1,0 +1,3387 @@
+---
+title: "Redacción de Proyectos de Investigación Científica"
+subtitle: "Corporacion Académica Universitaria"
+author: "Edison Achalma"
+institute: "Corporacion Académica Universitaria"
+date: "2026-01-26"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    show-slide-number: all
+    transition: slide
+    background-transition: fade
+    preview-links: auto
+    footer: "Elaboracion de monografías | CAU - UNSCH | Prof. Edison Achalma"
+    logo: ""
+    css: styles.css
+    incremental: false
+    chalkboard: true
+    multiplex: true
+    include-after-body: particles-include.html
+---
+
+# GENERACIÓN DE ESTRUCTURA DE MONOGRAFÍA CON IA {background-color="#1E2761"}
+
+## Prompt Estructurado para Crear Capítulos
+
+---
+
+## Prompt para Generar Estructura de Monografía
+
+**Leyenda de colores:** <span style="background-color: #1976d2; color: white; padding: 2px 8px;">Azul = Rol</span> <span style="background-color: #388e3c; color: white; padding: 2px 8px;">Verde = Contexto</span> <span style="background-color: #f57c00; color: white; padding: 2px 8px;">Naranja = Tarea</span> <span style="background-color: #7b1fa2; color: white; padding: 2px 8px;">Morado = Formato</span> <span style="background-color: #c62828; color: white; padding: 2px 8px;">Rojo = Restricciones</span>
+
+<div style="background-color: #f5f5f5; padding: 15px; border-left: 5px solid #424242; font-size: 0.9em;">
+
+<span style="background-color: #1976d2; color: white; padding: 2px 6px;">ROL:</span> Eres un asesor académico especializado en metodología de investigación y estructuración de monografías universitarias. Diseñas estructuras coherentes, lógicas y académicamente rigurosas.
+
+<span style="background-color: #388e3c; color: white; padding: 2px 6px;">CONTEXTO:</span> Monografía de nivel pregrado evaluada según criterios académicos estándar. Debe facilitar argumentación clara, desarrollo lógico y presentación sistemática.
+
+<span style="background-color: #f57c00; color: white; padding: 2px 6px;">TAREA:</span> Genera estructura completa (capítulos, subcapítulos, sub-subcapítulos) para:
+
+**Tema:** [INSERTAR AQUÍ]  
+**Tipo:** [Compilación/Investigación]  
+**Extensión:** [XX páginas]
+
+<span style="background-color: #7b1fa2; color: white; padding: 2px 6px;">FORMATO:</span> Introducción → Cap. 1-3 (con 1.1, 1.1.1, etc.) → Conclusiones → Referencias
+
+<span style="background-color: #c62828; color: white; padding: 2px 6px;">RESTRICCIONES:</span> 3-4 capítulos | 3-5 subcapítulos/cap | 2-4 sub-subcapítulos | Máximo 3 niveles | Títulos específicos, no genéricos | Progresión lógica | Equilibrio entre capítulos | NO metodología en compilación
+
+<span style="background-color: #00796b; color: white; padding: 2px 6px;">CALIDAD:</span> Coherencia temática, progresión lógica, especificidad, equilibrio, profundidad apropiada
+
+<span style="background-color: #5e35b1; color: white; padding: 2px 6px;">EJEMPLO:</span> "Gestión del agua en Ayacucho" → Cap. 1: Sistemas tradicionales (1.1 Organización social: 1.1.1 Autoridades, 1.1.2 Normas, 1.1.3 Conflictos | 1.2 Conocimientos: 1.2.1 Calendario ritual, 1.2.2 Señas naturales, 1.2.3 Técnicas almacenamiento)
+
+<span style="background-color: #d32f2f; color: white; padding: 2px 6px;">IMPORTANTE:</span> Solo estructura (títulos y numeración), NO contenido.
+
+</div>
+
+---
+
+## Uso del Prompt
+
+**1.** Copiar prompt completo | **2.** Reemplazar [INSERTAR AQUÍ] con tu tema | **3.** Pegar en ChatGPT/Claude/Gemini | **4.** Revisar y ajustar | **5.** Validar con asesor
+
+**Ejemplo de entrada:**
+
+<div style="background-color: #fff3e0; padding: 10px; margin: 10px 0; border-left: 4px solid #f57c00; font-size: 0.9em;">
+
+Tema: "Impacto de redes sociales en salud mental de adolescentes peruanos" | Tipo: Compilación | Extensión: 60 páginas
+
+</div>
+
+**Ejemplo de salida esperada:**
+
+<div style="background-color: #f5f5f5; padding: 10px; margin: 10px 0; border-left: 4px solid #1976d2; font-size: 0.85em;">
+
+**Cap. 1: Uso de redes sociales en adolescentes peruanos** → 1.1 Patrones de acceso (1.1.1 Penetración internet, 1.1.2 Plataformas predominantes, 1.1.3 Tiempo exposición) | 1.2 Motivaciones (1.2.1 Identidad digital, 1.2.2 Socialización, 1.2.3 Validación social)
+
+</div>
+
+### Variaciones Específicas
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85em;">
+
+<div style="background-color: #e3f2fd; padding: 10px;">
+**Interdisciplinaria:** Agregar "Integrar perspectivas de [X] y [Y]"
+</div>
+
+<div style="background-color: #f3e5f5; padding: 10px;">
+**Comparativa:** Agregar "Comparar [A] con [B] sistemáticamente"
+</div>
+
+<div style="background-color: #fff3e0; padding: 10px;">
+**Histórica:** Agregar "Organizar cronológicamente por períodos"
+</div>
+
+<div style="background-color: #e8f5e9; padding: 10px;">
+**Aplicada:** Agregar "Incluir capítulo final con propuestas prácticas"
+</div>
+
+</div>
+
+---
+
+## Prompt para Desarrollar Capítulos
+
+**Leyenda:** <span style="background-color: #1976d2; color: white; padding: 2px 6px;">Azul = Rol</span> <span style="background-color: #388e3c; color: white; padding: 2px 6px;">Verde = Tarea</span> <span style="background-color: #f57c00; color: white; padding: 2px 6px;">Naranja = Formato</span> <span style="background-color: #c62828; color: white; padding: 2px 6px;">Rojo = Restricción</span>
+
+<div style="background-color: #f5f5f5; padding: 15px; border-left: 5px solid #424242; font-size: 0.85em;">
+
+<span style="background-color: #1976d2; color: white; padding: 2px 6px;">ROL:</span> Experto en [TU TEMA] que redacta contenido académico riguroso.
+
+<span style="background-color: #388e3c; color: white; padding: 2px 6px;">TAREA:</span> Desarrolla contenido para Cap. [#]: [título] | Subcap. [#]: [título]
+
+<span style="background-color: #f57c00; color: white; padding: 2px 6px;">FORMATO:</span> [X] páginas | Incluir definiciones, autores clave, ejemplos | Estilo académico formal | Indicar citas como [CITA: Autor, año]
+
+<span style="background-color: #c62828; color: white; padding: 2px 6px;">RESTRICCIÓN:</span> NO inventar datos ni autores. Usar [AUTOR A], [AUTOR B] como marcadores.
+
+</div>
+
+
+### Recomendaciones
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+
+<div style="background-color: #e8f5e9; padding: 15px;">
+
+**HACER**
+
+Revisar la estructura completa antes de empezar a escribir
+
+Validar con tu asesor académico
+
+Usar la IA como asistente, no como autor
+
+Completar las citas con fuentes reales
+
+Mantener coherencia entre capítulos
+
+</div>
+
+<div style="background-color: #ffebee; padding: 15px;">
+
+**NO HACER**
+
+Copiar directamente el contenido que genera la IA
+
+Aceptar la primera estructura sin revisión crítica
+
+Usar la estructura sin adaptarla a tu tema específico
+
+Olvidar agregar tu análisis y reflexión personal
+
+Incluir más de 3 niveles de profundidad
+
+</div>
+
+</div>
+
+
+---
+
+# FUNDAMENTOS {background-color="#1E2761"}
+
+
+---
+
+## ¿Qué es la Escritura Científica?
+
+:::: {.columns}
+::: {.column width="60%"}
+### Definición
+
+> La escritura científica es una **práctica especializada** cuyo objetivo primordial es la **comunicación eficaz** de ideas y resultados de investigación a una comunidad.
+
+### Diferencias
+
+| Literaria | Científica |
+|-----------|-----------|
+| Entretener/Expresar | Informar |
+| Metáforas/Suspenso | Precisión/Claridad |
+| Subjetiva | Objetiva |
+:::
+
+::: {.column width="40%"}
+### Propósito
+
+- Informar hallazgos
+- Transferir conocimiento
+- Integrar al saber universal
+- Permitir replicación
+
+### Impacto
+
+La investigación **NO termina** hasta que se publica en una revista con revisión por pares.
+:::
+::::
+
+---
+
+## Los 4 Pilares de la Redacción Científica
+
+:::: {.columns}
+::: {.column width="50%"}
+### 1. PRECISIÓN
+- Palabras exactas
+- Sin ambigüedades
+- Términos técnicos apropiados
+- No obligar al lector a "adivinar"
+
+### 2. CLARIDAD
+- Lenguaje sencillo
+- Lectura rápida
+- Oraciones bien construidas
+- Orden lógico
+:::
+
+::: {.column width="50%"}
+### 3. BREVEDAD
+- Solo información pertinente
+- Mínimo de palabras
+- Evitar redundancia
+- **Promedio: 18 palabras/oración**
+
+### 4. FORMALIDAD
+- Registro nivelado
+- Sin coloquialismos
+- Sin localismos
+- Lenguaje profesional
+:::
+::::
+
+---
+
+## Honestidad Intelectual
+
+:::: {.columns}
+::: {.column width="50%"}
+### Principios Éticos
+
+- Decir la verdad  
+- Presentar todos los hechos relevantes  
+- Reconocer contribuciones ajenas  
+- Evitar el **PLAGIO**  
+- Abierto a la crítica
+
+### Tipos de Plagio
+
+- **Literal:** Copiar textualmente sin citar
+- **Adaptado:** Parafrasear sin citar
+- **De ideas:** Usar ideas ajenas sin crédito
+- **Autoplagio:** Reutilizar trabajo propio sin avisar
+:::
+
+::: {.column width="50%"}
+### Consecuencias del Plagio
+
+::: {.callout-warning}
+## Impacto Grave
+- Pérdida de credibilidad
+- Rechazo de manuscritos
+- Sanciones académicas
+- Daño a la carrera profesional
+:::
+
+### Cómo Evitarlo
+
+1. Citar **SIEMPRE** las fuentes
+2. Usar comillas para citas textuales
+3. Parafrasear correctamente
+4. Gestores bibliográficos (Mendeley, Zotero)
+:::
+::::
+
+---
+
+## Géneros Académicos: Formación vs. Expertos
+
+:::: {.columns}
+::: {.column width="50%"}
+### Géneros de Formación
+*(Estudiantes → Evaluación)*
+
+- **Examen parcial**
+  - Presencial: tiempo/memoria limitados
+  - Domiciliario: género "bisagra"
+
+- **Monografía**
+  - Entrenamiento investigativo
+  - Toma de posición teórica
+  - Exhaustivo sobre un tema
+
+- **Informe de lectura**
+  - Interpretación de textos
+  - Sin marco teórico obligatorio
+:::
+
+::: {.column width="50%"}
+### Géneros Expertos
+*(Profesionales → Comunicación)*
+
+- **Artículo científico**
+  - Primera publicación de resultados
+  - Formato IMRyD
+  - Revisión por pares
+
+- **Nota de revisión**
+  - Meta-análisis
+  - Síntesis de literatura
+
+- **Tesis doctoral**
+  - Aporte original al conocimiento
+  - Investigación exhaustiva
+:::
+::::
+
+---
+
+## La Monografía
+
+:::: {.columns}
+::: {.column width="55%"}
+### Definición
+
+> Tratado **especial**, **exhaustivo** y **sistemático** sobre un asunto determinado dentro de una disciplina.
+
+### Objetivos
+
+- Entrenar capacidad investigativa
+- Tomar posición entre posturas diversas
+- Manejar marco teórico
+- Comunicar conocimientos rigurosamente
+
+### Diferencias
+
+- **vs. Ensayo:** Requiere marco teórico y metodología
+- **vs. Informe:** Exige posición del autor
+:::
+
+::: {.column width="45%"}
+### Tipos de Monografía
+
+1. **Compilación**
+   - Analiza y compara autores
+   - Opinión personal fundada
+
+2. **Investigación**
+   - Temas nuevos o poco explorados
+   - Aporte original
+
+3. **Experiencia**
+   - Basada en vivencias profesionales
+   - Sustento teórico a la práctica
+
+### Errores Comunes
+
+- Tema excesivamente amplio
+- Mero "hilván de fichas"
+- Falta de posición personal
+:::
+::::
+
+---
+
+
+# ESTRUCTURA DE MONOGRAFÍA DE COMPILACIÓN {background-color="#1E2761"}
+
+---
+
+## ¿Qué es una Monografía de Compilación?
+
+**Definición:**
+
+Trabajo académico que recopila, organiza y sintetiza información de diversas fuentes sobre un tema específico, sin generar datos originales.
+
+**Objetivo:**
+
+Presentar un panorama completo y ordenado del estado del conocimiento sobre un tema, integrando diferentes perspectivas y autores.
+
+
+### Estructura General: Monografía de Compilación
+
+<div style="display: grid; grid-template-columns: 1fr 3fr; gap: 20px;">
+
+<div style="background-color: #e3f2fd; padding: 15px;">
+
+**PORTADA**
+
+Datos institucionales
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Universidad, facultad, escuela profesional, título, autor, asesor, lugar, año
+
+</div>
+
+<div style="background-color: #fff3e0; padding: 15px;">
+
+**ÍNDICE**
+
+Navegación
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Lista completa de capítulos, subcapítulos y páginas
+
+</div>
+
+<div style="background-color: #e8f5e9; padding: 15px;">
+
+**INTRODUCCIÓN**
+
+Presentación
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Justificación, objetivos, alcances, limitaciones, metodología de compilación
+
+</div>
+
+<div style="background-color: #f3e5f5; padding: 15px;">
+
+**CAPÍTULOS**
+
+Desarrollo
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+2-4 capítulos temáticos con subcapítulos (núcleo del trabajo)
+
+</div>
+
+<div style="background-color: #fce4ec; padding: 15px;">
+
+**CONCLUSIONES**
+
+Síntesis
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Síntesis integradora, hallazgos principales, reflexiones finales
+
+</div>
+
+<div style="background-color: #e0f2f1; padding: 15px;">
+
+**REFERENCIAS**
+
+Fuentes
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Bibliografía completa en formato APA, mínimo 15-20 fuentes
+
+</div>
+
+</div>
+
+---
+
+## INTRODUCCIÓN: Cómo Redactar
+
+<div style="background-color: #e3f2fd; padding: 20px; border-left: 5px solid #1976d2;">
+
+**PÁRRAFO 1: CONTEXTUALIZACIÓN**
+
+<div style="padding: 15px; background-color: #bbdefb; margin-top: 10px;">
+
+<span style="background-color: #2196f3; color: white; padding: 3px 8px; border-radius: 3px;">TEMA AMPLIO</span>
+
+La educación superior en América Latina ha experimentado transformaciones significativas en las últimas dos décadas. El acceso a la universidad se ha democratizado, pero persisten desafíos en términos de calidad educativa y pertinencia de los programas académicos.
+
+<span style="background-color: #1976d2; color: white; padding: 3px 8px; border-radius: 3px;">ENFOQUE ESPECÍFICO</span>
+
+En particular, la formación docente universitaria requiere atención especial, dado su rol determinante en la calidad de los procesos de enseñanza-aprendizaje.
+
+</div>
+
+</div>
+
+
+
+<div style="background-color: #fff3e0; padding: 20px; border-left: 5px solid #f57c00;">
+
+**PÁRRAFO 2: JUSTIFICACIÓN**
+
+<div style="padding: 15px; background-color: #ffe0b2; margin-top: 10px;">
+
+<span style="background-color: #ff9800; color: white; padding: 3px 8px; border-radius: 3px;">IMPORTANCIA</span>
+
+Esta monografía se justifica por la necesidad de comprender integralmente los modelos de formación docente universitaria vigentes en la región.
+
+<span style="background-color: #f57c00; color: white; padding: 3px 8px; border-radius: 3px;">VACÍO/NECESIDAD</span>
+
+Si bien existen estudios sobre aspectos específicos de esta formación, hace falta una síntesis que integre las diversas perspectivas teóricas y experiencias documentadas en la literatura especializada.
+
+</div>
+
+</div>
+
+---
+
+## INTRODUCCIÓN: Cómo Redactar (2)
+
+<div style="background-color: #e8f5e9; padding: 20px; border-left: 5px solid #388e3c;">
+
+**PÁRRAFO 3: OBJETIVOS**
+
+<div style="padding: 15px; background-color: #c8e6c9; margin-top: 10px;">
+
+<span style="background-color: #4caf50; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVO GENERAL</span>
+
+El objetivo de esta monografía es analizar y sintetizar las principales propuestas teóricas y experiencias prácticas sobre formación docente universitaria en América Latina, período 2010-2025.
+
+<span style="background-color: #388e3c; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVOS ESPECÍFICOS</span>
+
+Específicamente, se busca: (a) identificar los modelos teóricos predominantes, (b) caracterizar las experiencias más relevantes, y (c) establecer tendencias y desafíos emergentes.
+
+</div>
+
+</div>
+
+
+
+<div style="background-color: #f3e5f5; padding: 20px; border-left: 5px solid #7b1fa2;">
+
+**PÁRRAFO 4: METODOLOGÍA Y ESTRUCTURA**
+
+<div style="padding: 15px; background-color: #e1bee7; margin-top: 10px;">
+
+<span style="background-color: #9c27b0; color: white; padding: 3px 8px; border-radius: 3px;">METODOLOGÍA</span>
+
+La investigación documental se realizó mediante búsqueda sistemática en bases de datos académicas (Scopus, SciELO, Redalyc), seleccionando 45 fuentes entre artículos científicos, libros especializados y documentos institucionales.
+
+<span style="background-color: #7b1fa2; color: white; padding: 3px 8px; border-radius: 3px;">ESTRUCTURA</span>
+
+El trabajo se organiza en tres capítulos: el primero aborda los fundamentos teóricos, el segundo analiza experiencias nacionales destacadas, y el tercero discute tendencias y desafíos actuales.
+
+</div>
+
+</div>
+
+---
+
+## CAPÍTULOS: Cómo Redactar el Desarrollo
+
+**Cada capítulo debe tener:**
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+
+<div style="background-color: #e3f2fd; padding: 15px;">
+
+**INTRODUCCIÓN DEL CAPÍTULO**
+
+<div style="margin-top: 10px; font-size: 0.9em;">
+
+Párrafo breve que presenta el contenido del capítulo y su conexión con el anterior
+
+</div>
+
+</div>
+
+<div style="background-color: #fff3e0; padding: 15px;">
+
+**SUBCAPÍTULOS (2-4)**
+
+<div style="margin-top: 10px; font-size: 0.9em;">
+
+Cada uno desarrolla un aspecto específico del tema del capítulo
+
+</div>
+
+</div>
+
+<div style="background-color: #e8f5e9; padding: 15px;">
+
+**SÍNTESIS PARCIAL**
+
+<div style="margin-top: 10px; font-size: 0.9em;">
+
+Párrafo final que resume los puntos principales del capítulo
+
+</div>
+
+</div>
+
+<div style="background-color: #f3e5f5; padding: 15px;">
+
+**CONEXIÓN**
+
+<div style="margin-top: 10px; font-size: 0.9em;">
+
+Oración que anticipa el siguiente capítulo
+
+</div>
+
+</div>
+
+</div>
+
+---
+
+## CAPÍTULO: Ejemplo de Redacción Inicial
+
+<div style="background-color: #e3f2fd; padding: 20px; border-left: 5px solid #1976d2;">
+
+**CAPÍTULO 1: FUNDAMENTOS TEÓRICOS DE LA FORMACIÓN DOCENTE UNIVERSITARIA**
+
+<div style="padding: 15px; background-color: #bbdefb; margin-top: 10px;">
+
+<span style="background-color: #2196f3; color: white; padding: 3px 8px; border-radius: 3px;">PRESENTACIÓN</span>
+
+Este primer capítulo examina las bases conceptuales que sustentan la formación docente universitaria.
+
+<span style="background-color: #1976d2; color: white; padding: 3px 8px; border-radius: 3px;">CONTENIDO</span>
+
+Se analizan tres perspectivas teóricas fundamentales: el enfoque de competencias profesionales, la perspectiva del conocimiento pedagógico del contenido, y el modelo de desarrollo profesional continuo.
+
+<span style="background-color: #0d47a1; color: white; padding: 3px 8px; border-radius: 3px;">ORGANIZACIÓN</span>
+
+Cada enfoque se presenta en un subcapítulo que incluye sus principios centrales, autores representativos y aplicaciones al contexto universitario.
+
+</div>
+
+</div>
+
+---
+
+## SUBCAPÍTULO: Ejemplo de Desarrollo
+
+<div style="background-color: #fff3e0; padding: 20px; border-left: 5px solid #f57c00;">
+
+**1.1 Enfoque de competencias profesionales docentes**
+
+<div style="padding: 15px; background-color: #ffe0b2; margin-top: 10px;">
+
+<span style="background-color: #ff9800; color: white; padding: 3px 8px; border-radius: 3px;">DEFINICIÓN</span>
+
+El enfoque de competencias profesionales docentes surge en la década de 1990 como respuesta a la necesidad de operacionalizar los saberes requeridos para el ejercicio efectivo de la docencia (Perrenoud, 2004).
+
+<span style="background-color: #f57c00; color: white; padding: 3px 8px; border-radius: 3px;">AUTORES CLAVE</span>
+
+Según Zabalza (2009), las competencias docentes universitarias integran conocimientos disciplinares, habilidades pedagógicas y actitudes profesionales que permiten al docente diseñar, desarrollar y evaluar procesos formativos de calidad.
+
+<span style="background-color: #ef6c00; color: white; padding: 3px 8px; border-radius: 3px;">COMPONENTES</span>
+
+Este modelo identifica típicamente entre 8 y 12 competencias clave, que incluyen el dominio disciplinar, la planificación didáctica, la evaluación de aprendizajes, y el uso de tecnologías educativas, entre otras (Mas & Olmos, 2016).
+
+</div>
+
+</div>
+
+---
+
+## CONCLUSIONES: Cómo Redactar
+
+<div style="background-color: #e8f5e9; padding: 20px; border-left: 5px solid #388e3c;">
+
+**PÁRRAFO 1: SÍNTESIS INTEGRADORA**
+
+<div style="padding: 15px; background-color: #c8e6c9; margin-top: 10px;">
+
+<span style="background-color: #4caf50; color: white; padding: 3px 8px; border-radius: 3px;">RECAPITULACIÓN</span>
+
+Esta monografía ha examinado las principales dimensiones de la formación docente universitaria en América Latina, integrando aportes teóricos y experiencias documentadas en la literatura especializada del período 2010-2025.
+
+<span style="background-color: #388e3c; color: white; padding: 3px 8px; border-radius: 3px;">HALLAZGO PRINCIPAL</span>
+
+El análisis realizado evidencia una transición desde modelos centrados en la transmisión de conocimientos hacia propuestas que enfatizan el desarrollo de competencias profesionales complejas y el aprendizaje reflexivo.
+
+</div>
+
+</div>
+
+---
+
+## CONCLUSIONES: Cómo Redactar (2)
+
+<div style="background-color: #fce4ec; padding: 20px; border-left: 5px solid #c2185b;">
+
+**PÁRRAFO 2: HALLAZGOS POR OBJETIVO**
+
+<div style="padding: 15px; background-color: #f8bbd0; margin-top: 10px;">
+
+<span style="background-color: #e91e63; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVO 1</span>
+
+Respecto a los modelos teóricos, se identificaron tres perspectivas predominantes que coexisten y se complementan en las propuestas formativas actuales.
+
+<span style="background-color: #c2185b; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVO 2</span>
+
+En cuanto a las experiencias prácticas, destacan iniciativas que combinan formación inicial, acompañamiento in situ y comunidades de práctica como estrategias efectivas.
+
+<span style="background-color: #880e4f; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVO 3</span>
+
+Las tendencias emergentes apuntan hacia la internacionalización, la innovación pedagógica digital y el énfasis en la investigación educativa como ejes articuladores.
+
+</div>
+
+</div>
+
+---
+
+## CONCLUSIONES: Cómo Redactar (3)
+
+<div style="background-color: #e0f2f1; padding: 20px; border-left: 5px solid #00796b;">
+
+**PÁRRAFO 3: REFLEXIÓN FINAL**
+
+<div style="padding: 15px; background-color: #b2dfdb; margin-top: 10px;">
+
+<span style="background-color: #009688; color: white; padding: 3px 8px; border-radius: 3px;">IMPLICACIONES</span>
+
+Los hallazgos de esta compilación sugieren que la calidad de la formación docente universitaria requiere políticas institucionales integrales que articulen desarrollo profesional, condiciones laborales adecuadas y reconocimiento de la función docente.
+
+<span style="background-color: #00796b; color: white; padding: 3px 8px; border-radius: 3px;">PROSPECTIVA</span>
+
+Futuras investigaciones podrían profundizar en el impacto de estas propuestas formativas sobre los aprendizajes estudiantiles, así como en los factores institucionales que facilitan u obstaculizan su implementación efectiva.
+
+</div>
+
+</div>
+
+---
+
+# ESTRUCTURA DE MONOGRAFÍA DE INVESTIGACIÓN {background-color="#1E2761"}
+
+---
+
+## ¿Qué es una Monografía de Investigación?
+
+**Definición:**
+
+Trabajo académico que presenta resultados de una investigación original, generando datos nuevos mediante trabajo de campo, experimentos o análisis de fuentes primarias.
+
+**Diferencia clave:**
+
+No solo recopila información existente, sino que produce conocimiento nuevo a través de metodología científica aplicada.
+
+
+### Estructura General: Monografía de Investigación
+
+<div style="display: grid; grid-template-columns: 1fr 3fr; gap: 20px;">
+
+<div style="background-color: #e3f2fd; padding: 15px;">
+
+**PORTADA**
+
+Identificación
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Universidad, facultad, título, autor, asesor, lugar, año
+
+</div>
+
+<div style="background-color: #fff3e0; padding: 15px;">
+
+**RESUMEN**
+
+Síntesis
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Abstract ejecutivo (250-300 palabras): problema, método, resultados, conclusión
+
+</div>
+
+<div style="background-color: #e8f5e9; padding: 15px;">
+
+**INTRODUCCIÓN**
+
+Marco general
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Problema, justificación, objetivos, hipótesis (si aplica)
+
+</div>
+
+<div style="background-color: #f3e5f5; padding: 15px;">
+
+**MARCO TEÓRICO**
+
+Fundamentos
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Antecedentes, bases teóricas, definición de conceptos clave
+
+</div>
+
+<div style="background-color: #fce4ec; padding: 15px;">
+
+**METODOLOGÍA**
+
+Diseño
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Tipo, enfoque, población, muestra, instrumentos, procedimientos
+
+</div>
+
+<div style="background-color: #e0f2f1; padding: 15px;">
+
+**RESULTADOS**
+
+Hallazgos
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Presentación organizada de datos obtenidos (tablas, gráficos, análisis)
+
+</div>
+
+<div style="background-color: #ede7f6; padding: 15px;">
+
+**DISCUSIÓN**
+
+Interpretación
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Interpretación de resultados, comparación con literatura, limitaciones
+
+</div>
+
+<div style="background-color: #fff9c4; padding: 15px;">
+
+**CONCLUSIONES**
+
+Cierre
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Respuesta a objetivos, recomendaciones, futuras investigaciones
+
+</div>
+
+<div style="background-color: #ffccbc; padding: 15px;">
+
+**REFERENCIAS**
+
+Fuentes
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Bibliografía completa en formato APA
+
+</div>
+
+<div style="background-color: #d1c4e9; padding: 15px;">
+
+**ANEXOS**
+
+Materiales
+
+</div>
+
+<div style="background-color: #f5f5f5; padding: 15px;">
+
+Instrumentos, transcripciones, datos complementarios
+
+</div>
+
+</div>
+
+---
+
+## INTRODUCCIÓN: Cómo Redactar (Investigación)
+
+<div style="background-color: #e3f2fd; padding: 20px; border-left: 5px solid #1976d2;">
+
+**PÁRRAFO 1: PLANTEAMIENTO DEL PROBLEMA**
+
+<div style="padding: 15px; background-color: #bbdefb; margin-top: 10px;">
+
+<span style="background-color: #2196f3; color: white; padding: 3px 8px; border-radius: 3px;">CONTEXTO</span>
+
+Las comunidades campesinas de Ayacucho han desarrollado históricamente sistemas de gestión del agua basados en conocimientos tradicionales que regulan el acceso, distribución y conservación de este recurso.
+
+<span style="background-color: #1976d2; color: white; padding: 3px 8px; border-radius: 3px;">PROBLEMA</span>
+
+Sin embargo, estos sistemas enfrentan presiones crecientes debido al cambio climático, la migración juvenil y la introducción de tecnologías modernas que no siempre son compatibles con las prácticas locales.
+
+<span style="background-color: #0d47a1; color: white; padding: 3px 8px; border-radius: 3px;">PREGUNTA</span>
+
+¿Cómo se articulan los conocimientos tradicionales con las prácticas contemporáneas de gestión del agua en la comunidad campesina de Chuschi, Ayacucho?
+
+</div>
+
+</div>
+
+---
+
+## INTRODUCCIÓN: Cómo Redactar (Investigación) (2)
+
+<div style="background-color: #e8f5e9; padding: 20px; border-left: 5px solid #388e3c;">
+
+**PÁRRAFO 2: OBJETIVOS E HIPÓTESIS**
+
+<div style="padding: 15px; background-color: #c8e6c9; margin-top: 10px;">
+
+<span style="background-color: #4caf50; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVO GENERAL</span>
+
+Analizar los mecanismos de articulación entre conocimientos tradicionales y prácticas contemporáneas de gestión del agua en Chuschi durante el período 2023-2024.
+
+<span style="background-color: #388e3c; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVOS ESPECÍFICOS</span>
+
+(a) Identificar los conocimientos tradicionales vigentes sobre gestión del agua; (b) caracterizar las prácticas contemporáneas introducidas; (c) determinar los puntos de tensión y complementariedad entre ambos sistemas.
+
+<span style="background-color: #2e7d32; color: white; padding: 3px 8px; border-radius: 3px;">HIPÓTESIS</span>
+
+Se plantea que existe un proceso de hibridación selectiva donde la comunidad integra tecnologías modernas manteniendo los principios organizativos tradicionales de reciprocidad y gestión colectiva.
+
+</div>
+
+</div>
+
+---
+
+## MARCO TEÓRICO: Cómo Redactar
+
+<div style="background-color: #f3e5f5; padding: 20px; border-left: 5px solid #7b1fa2;">
+
+**ESTRUCTURA TÍPICA**
+
+<div style="padding: 15px; background-color: #e1bee7; margin-top: 10px;">
+
+<span style="background-color: #9c27b0; color: white; padding: 3px 8px; border-radius: 3px;">ANTECEDENTES</span>
+
+Investigaciones previas sobre el tema: ¿Qué se ha estudiado? ¿Qué hallazgos existen? ¿Qué vacíos persisten?
+
+<span style="background-color: #7b1fa2; color: white; padding: 3px 8px; border-radius: 3px;">BASES TEÓRICAS</span>
+
+Teorías y enfoques que fundamentan tu investigación: conceptos clave, modelos explicativos, perspectivas disciplinares.
+
+<span style="background-color: #6a1b9a; color: white; padding: 3px 8px; border-radius: 3px;">DEFINICIONES</span>
+
+Conceptos operacionales: ¿Cómo defines los términos centrales de tu investigación?
+
+</div>
+
+</div>
+
+---
+
+## MARCO TEÓRICO: Ejemplo de Redacción
+
+<div style="background-color: #fff3e0; padding: 20px; border-left: 5px solid #f57c00;">
+
+**2.1 Antecedentes de investigación**
+
+<div style="padding: 15px; background-color: #ffe0b2; margin-top: 10px;">
+
+<span style="background-color: #ff9800; color: white; padding: 3px 8px; border-radius: 3px;">INTERNACIONALES</span>
+
+Boelens (2008) analizó sistemas de gestión del agua en comunidades andinas de Ecuador, identificando tensiones entre normativas estatales y sistemas consuetudinarios locales.
+
+<span style="background-color: #f57c00; color: white; padding: 3px 8px; border-radius: 3px;">NACIONALES</span>
+
+En el contexto peruano, Gelles (2000) documentó prácticas rituales asociadas a la gestión del agua en Cabanaconde, demostrando la integración de dimensiones técnicas y simbólicas.
+
+<span style="background-color: #ef6c00; color: white; padding: 3px 8px; border-radius: 3px;">LOCALES</span>
+
+Para Ayacucho específicamente, Rénique (2004) estudió cambios en sistemas agrícolas post-violencia política, aunque sin enfocarse en gestión hídrica.
+
+<span style="background-color: #e65100; color: white; padding: 3px 8px; border-radius: 3px;">VACÍO</span>
+
+No se han realizado estudios recientes sobre la articulación contemporánea de conocimientos tradicionales y modernos en gestión del agua en comunidades ayacuchanas.
+
+</div>
+
+</div>
+
+---
+
+## METODOLOGÍA: Cómo Redactar
+
+<div style="background-color: #fce4ec; padding: 20px; border-left: 5px solid #c2185b;">
+
+**PÁRRAFO 1: TIPO Y ENFOQUE**
+
+<div style="padding: 15px; background-color: #f8bbd0; margin-top: 10px;">
+
+<span style="background-color: #e91e63; color: white; padding: 3px 8px; border-radius: 3px;">TIPO</span>
+
+La investigación es de tipo básica, nivel descriptivo-explicativo, con diseño no experimental transversal.
+
+<span style="background-color: #c2185b; color: white; padding: 3px 8px; border-radius: 3px;">ENFOQUE</span>
+
+Se adoptó un enfoque cualitativo con elementos etnográficos, privilegiando la comprensión profunda de significados y prácticas desde la perspectiva de los actores locales.
+
+</div>
+
+</div>
+
+---
+
+## METODOLOGÍA: Cómo Redactar (2)
+
+<div style="background-color: #e0f2f1; padding: 20px; border-left: 5px solid #00796b;">
+
+**PÁRRAFO 2: POBLACIÓN Y MUESTRA**
+
+<div style="padding: 15px; background-color: #b2dfdb; margin-top: 10px;">
+
+<span style="background-color: #009688; color: white; padding: 3px 8px; border-radius: 3px;">POBLACIÓN</span>
+
+La población de estudio estuvo conformada por los 180 comuneros activos de Chuschi registrados en el padrón comunal 2023.
+
+<span style="background-color: #00796b; color: white; padding: 3px 8px; border-radius: 3px;">MUESTRA</span>
+
+Se seleccionó una muestra no probabilística intencional de 32 comuneros: 12 autoridades de riego (incluyendo 4 yaku alcaldes), 15 usuarios de riego con más de 20 años de experiencia, y 5 jóvenes comuneros con estudios técnicos.
+
+<span style="background-color: #00695c; color: white; padding: 3px 8px; border-radius: 3px;">CRITERIOS</span>
+
+Los criterios de inclusión fueron: residencia permanente, participación activa en faenas de agua, y disposición para participar en entrevistas.
+
+</div>
+
+</div>
+
+---
+
+## METODOLOGÍA: Cómo Redactar (3)
+
+<div style="background-color: #ede7f6; padding: 20px; border-left: 5px solid #5e35b1;">
+
+**PÁRRAFO 3: TÉCNICAS E INSTRUMENTOS**
+
+<div style="padding: 15px; background-color: #d1c4e9; margin-top: 10px;">
+
+<span style="background-color: #673ab7; color: white; padding: 3px 8px; border-radius: 3px;">TÉCNICAS</span>
+
+Se utilizaron tres técnicas principales: (a) entrevistas semiestructuradas, (b) observación participante en faenas de agua, y (c) análisis documental de actas comunales.
+
+<span style="background-color: #5e35b1; color: white; padding: 3px 8px; border-radius: 3px;">INSTRUMENTOS</span>
+
+Los instrumentos incluyeron guías de entrevista con 15 preguntas abiertas, fichas de observación estructurada con 8 dimensiones, y matriz de análisis documental.
+
+<span style="background-color: #4527a0; color: white; padding: 3px 8px; border-radius: 3px;">VALIDACIÓN</span>
+
+Los instrumentos fueron validados por juicio de tres expertos en antropología andina y recursos hídricos, alcanzando un coeficiente V de Aiken superior a 0.85.
+
+</div>
+
+</div>
+
+---
+
+## METODOLOGÍA: Cómo Redactar (4)
+
+<div style="background-color: #fff9c4; padding: 20px; border-left: 5px solid #f9a825;">
+
+**PÁRRAFO 4: PROCEDIMIENTO**
+
+<div style="padding: 15px; background-color: #fff59d; margin-top: 10px;">
+
+<span style="background-color: #fbc02d; color: white; padding: 3px 8px; border-radius: 3px;">FASE 1</span>
+
+Coordinación con autoridades comunales y obtención de consentimiento informado (enero 2023).
+
+<span style="background-color: #f9a825; color: white; padding: 3px 8px; border-radius: 3px;">FASE 2</span>
+
+Trabajo de campo: aplicación de entrevistas, observación de faenas y rituales, revisión de documentos (febrero-julio 2023).
+
+<span style="background-color: #f57f17; color: white; padding: 3px 8px; border-radius: 3px;">FASE 3</span>
+
+Análisis de datos mediante codificación temática en software Atlas.ti, identificando categorías emergentes y patrones recurrentes (agosto-octubre 2023).
+
+</div>
+
+</div>
+
+---
+
+## RESULTADOS: Cómo Redactar
+
+<div style="background-color: #e0f2f1; padding: 20px; border-left: 5px solid #00796b;">
+
+**PRINCIPIOS BÁSICOS**
+
+<div style="padding: 15px; background-color: #b2dfdb; margin-top: 10px;">
+
+<span style="background-color: #009688; color: white; padding: 3px 8px; border-radius: 3px;">ORGANIZACIÓN</span>
+
+Presenta los hallazgos en el mismo orden que los objetivos específicos.
+
+<span style="background-color: #00796b; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVIDAD</span>
+
+Describe lo encontrado sin interpretarlo (la interpretación va en Discusión).
+
+<span style="background-color: #00695c; color: white; padding: 3px 8px; border-radius: 3px;">EVIDENCIA</span>
+
+Usa tablas, gráficos, citas textuales de entrevistas para sustentar tus afirmaciones.
+
+<span style="background-color: #004d40; color: white; padding: 3px 8px; border-radius: 3px;">TIEMPO VERBAL</span>
+
+Redacta en tiempo pasado: "Se encontró...", "Los datos mostraron...", "El 65% manifestó..."
+
+</div>
+
+</div>
+
+---
+
+## RESULTADOS: Ejemplo de Redacción
+
+<div style="background-color: #e3f2fd; padding: 20px; border-left: 5px solid #1976d2;">
+
+**4.1 Conocimientos tradicionales vigentes sobre gestión del agua**
+
+<div style="padding: 15px; background-color: #bbdefb; margin-top: 10px;">
+
+<span style="background-color: #2196f3; color: white; padding: 3px 8px; border-radius: 3px;">HALLAZGO PRINCIPAL</span>
+
+Se identificaron cinco sistemas de conocimiento tradicional actualmente vigentes en Chuschi: (a) calendario hídrico ritual, (b) sistema de turnos, (c) señas naturales para predicción, (d) técnicas de almacenamiento, y (e) normas consuetudinarias de distribución.
+
+<span style="background-color: #1976d2; color: white; padding: 3px 8px; border-radius: 3px;">DATOS ESPECÍFICOS</span>
+
+El 87% de entrevistados (n=28) reconoció el calendario ritual asociado al agua, mientras que el 100% afirmó participar en el sistema de turnos. La Tabla 3 presenta la distribución de conocimientos por grupos de edad.
+
+<span style="background-color: #0d47a1; color: white; padding: 3px 8px; border-radius: 3px;">EVIDENCIA CUALITATIVA</span>
+
+Un yaku alcalde señaló: "El agua tiene su tiempo, su mes. Nosotros sabemos cuándo va a venir, cuándo va a faltar. Los abuelos nos enseñaron a mirar las nubes, los pájaros" (Entrevista 07, 45 años).
+
+</div>
+
+</div>
+
+---
+
+## DISCUSIÓN: Cómo Redactar
+
+<div style="background-color: #f3e5f5; padding: 20px; border-left: 5px solid #7b1fa2;">
+
+**ESTRUCTURA DEL CAPÍTULO**
+
+<div style="padding: 15px; background-color: #e1bee7; margin-top: 10px;">
+
+<span style="background-color: #9c27b0; color: white; padding: 3px 8px; border-radius: 3px;">INTERPRETACIÓN</span>
+
+¿Qué significan tus resultados? ¿Por qué obtuviste estos hallazgos?
+
+<span style="background-color: #7b1fa2; color: white; padding: 3px 8px; border-radius: 3px;">COMPARACIÓN</span>
+
+¿Cómo se relacionan tus hallazgos con la literatura revisada? ¿Confirman, contradicen o matizan estudios previos?
+
+<span style="background-color: #6a1b9a; color: white; padding: 3px 8px; border-radius: 3px;">LIMITACIONES</span>
+
+¿Qué factores pudieron influir en tus resultados? ¿Qué aspectos no pudiste abordar?
+
+<span style="background-color: #4a148c; color: white; padding: 3px 8px; border-radius: 3px;">IMPLICACIONES</span>
+
+¿Qué implicaciones tienen tus hallazgos para la teoría, la práctica o las políticas?
+
+</div>
+
+</div>
+
+---
+
+## DISCUSIÓN: Ejemplo de Redacción
+
+<div style="background-color: #fff3e0; padding: 20px; border-left: 5px solid #f57c00;">
+
+**5.1 Interpretación de la persistencia de conocimientos tradicionales**
+
+<div style="padding: 15px; background-color: #ffe0b2; margin-top: 10px;">
+
+<span style="background-color: #ff9800; color: white; padding: 3px 8px; border-radius: 3px;">INTERPRETACIÓN</span>
+
+La alta vigencia de conocimientos tradicionales (87-100% según dimensión) sugiere que estos sistemas no son meros "residuos culturales", sino estrategias adaptativas que continúan siendo funcionalmente efectivas en el contexto local.
+
+<span style="background-color: #f57c00; color: white; padding: 3px 8px; border-radius: 3px;">COMPARACIÓN LITERATURA</span>
+
+Este hallazgo confirma la propuesta de Boelens (2008) sobre la resiliencia de sistemas consuetudinarios andinos, pero matiza su argumento al mostrar que la persistencia no es homogénea: algunos conocimientos (turnos, calendario) son universales, mientras otros (señas naturales) se concentran en generaciones mayores.
+
+<span style="background-color: #ef6c00; color: white; padding: 3px 8px; border-radius: 3px;">EXPLICACIÓN</span>
+
+La diferenciación generacional podría explicarse por el acceso diferencial a educación formal: los jóvenes con estudios técnicos tienden a priorizar indicadores meteorológicos formales sobre señas naturales tradicionales.
+
+</div>
+
+</div>
+
+---
+
+## CONCLUSIONES: Cómo Redactar (Investigación)
+
+<div style="background-color: #e8f5e9; padding: 20px; border-left: 5px solid #388e3c;">
+
+**PÁRRAFO 1: RESPUESTA A OBJETIVOS**
+
+<div style="padding: 15px; background-color: #c8e6c9; margin-top: 10px;">
+
+<span style="background-color: #4caf50; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVO GENERAL</span>
+
+La investigación demostró que en Chuschi existe un proceso de articulación compleja entre conocimientos tradicionales y prácticas contemporáneas, caracterizado por hibridación selectiva antes que por reemplazo o conflicto absoluto.
+
+<span style="background-color: #388e3c; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVO ESPECÍFICO 1</span>
+
+Se identificaron cinco sistemas de conocimiento tradicional vigentes, con diferentes grados de transmisión intergeneracional.
+
+<span style="background-color: #2e7d32; color: white; padding: 3px 8px; border-radius: 3px;">OBJETIVO ESPECÍFICO 2</span>
+
+Las prácticas contemporáneas introducidas incluyen tecnologías de riego tecnificado, pero su adopción está mediada por criterios de compatibilidad con la organización comunal.
+
+</div>
+
+</div>
+
+---
+
+## CONCLUSIONES: Cómo Redactar (Investigación) (2)
+
+<div style="background-color: #fce4ec; padding: 20px; border-left: 5px solid #c2185b;">
+
+**PÁRRAFO 2: RECOMENDACIONES**
+
+<div style="padding: 15px; background-color: #f8bbd0; margin-top: 10px;">
+
+<span style="background-color: #e91e63; color: white; padding: 3px 8px; border-radius: 3px;">PARA LA PRÁCTICA</span>
+
+Se recomienda que los programas de intervención en gestión hídrica incorporen espacios de diálogo intercultural que permitan integrar ambos sistemas de conocimiento, evitando imposiciones tecnológicas unidireccionales.
+
+<span style="background-color: #c2185b; color: white; padding: 3px 8px; border-radius: 3px;">PARA LAS POLÍTICAS</span>
+
+Las políticas públicas de recursos hídricos deberían reconocer formalmente los sistemas consuetudinarios como formas legítimas de gobernanza del agua, no solo como "usos y costumbres" subordinados a la legislación estatal.
+
+<span style="background-color: #880e4f; color: white; padding: 3px 8px; border-radius: 3px;">PARA LA INVESTIGACIÓN</span>
+
+Futuras investigaciones podrían profundizar en los mecanismos específicos de toma de decisiones comunales ante propuestas de innovación tecnológica, mediante estudios de caso longitudinales.
+
+</div>
+
+</div>
+
+---
+
+# ESTRUCTURA IMRyD {background-color="#2C5F2D"}
+
+## El Formato IMRyD
+
+:::: {.columns}
+::: {.column width="50%"}
+### ¿Qué es IMRyD?
+
+**I**ntroducción  
+**M**étodos  
+**R**esultados  
+**y** (and)  
+**D**iscusión
+
+### Variante Extendida
+
+**I**(AT)**MRyD**  
+- **A**ntecedentes  
+- **T**eorema/Marco Teórico
+:::
+
+::: {.column width="50%"}
+### Estructura de "Reloj de Arena"
+
+```
+    General (Introducción)
+         ↓
+    Específico (Métodos)
+         ↓
+    Específico (Resultados)
+         ↓
+    General (Discusión)
+```
+
+### Ventaja
+
+Permite a especialistas **localizar rápidamente** la información que necesitan.
+:::
+::::
+
+---
+
+## Título Atractivo
+
+:::: {.columns}
+::: {.column width="50%"}
+### Función del Título
+
+- **Envoltorio del producto**
+- **Imán** para lectores
+- Primera impresión crítica
+- Permite decidir pertinencia
+
+### Características
+
+- Corto (< 120 caracteres / ~14 palabras)  
+- Sencillo y claro  
+- Fiel al contenido  
+- Provocador (opcional)  
+- Sin abreviaturas/siglas  
+
+### Tipos
+
+1. **Descriptivo:** Qué se estudió
+   - *"Efecto del fuego sobre la diversidad de gramíneas"*
+
+2. **Informativo:** Resultado principal
+   - *"El fuego incrementa la diversidad de gramíneas"*
+:::
+
+::: {.column width="50%"}
+### Evitar
+
+- Frases poco informativas:
+  - "Estudios sobre..."
+  - "Observaciones de..."
+  - "Investigaciones acerca de..."
+- Exceso de detalle técnico
+- Limitación geográfica excesiva
+- Nombres científicos complejos
+
+### Estrategias Creativas
+
+**Título en dos partes** (Metáfora : Información)
+
+Ejemplos:
+- *"De regreso al futuro: Evolución del cerebro humano"*
+- *"¿Son mejores los cerebros más grandes?"*
+
+:::
+::::
+
+---
+
+## Resumen (Abstract)
+
+:::: {.columns}
+::: {.column width="55%"}
+### El Abstract como "Asamblea"
+
+> Versión **en miniatura** del artículo que sintetiza propósito, métodos, resultados y conclusiones.
+
+### Estructura (Patrón de Reloj de Arena)
+
+1. **Introducción mini** → Propósito y contexto
+2. **Métodos mini** → Procedimientos generales
+3. **Resultados mini** → Hallazgos principales
+4. **Discusión mini** → Conclusiones e implicaciones
+
+### Tipos
+
+- **Informativo:** Comunica resultados y conclusiones (recomendado)
+- **Descriptivo:** Solo menciona tema y propósito
+:::
+
+::: {.column width="45%"}
+### Requisitos Formales
+
+- **Extensión:** 150-300 palabras
+- **Formato:** Un solo párrafo
+- **Tiempo verbal:** Pasado
+- **Idiomas:** Original + inglés
+- **Sin:** Citas, referencias a tablas/figuras
+
+### Errores Comunes
+
+- Falta de claridad en mensaje principal  
+- Datos inconsistentes con el texto  
+- Conclusiones no justificadas  
+- Omitir descubrimientos importantes  
+
+### Importancia
+
+Probabilidad de lectura:
+- **Solo título + abstract:** 10x
+- **Artículo completo:** 1x
+:::
+::::
+
+---
+
+## Introducción: Justificación
+
+:::: {.columns}
+::: {.column width="50%"}
+### Modelo CARS
+
+**C**reate **A** **R**esearch **S**pace
+
+#### 1. Establecer un Territorio
+- Demostrar importancia del área
+- Introducir investigaciones previas
+- Marco conceptual general
+
+#### 2. Establecer un Nicho
+- Señalar vacío de conocimiento
+- Plantear interrogante no resuelta
+- Extender línea de conocimiento
+
+#### 3. Ocupar el Nicho
+- Resumir cómo se llenará el vacío
+- Objetivos específicos
+- Hipótesis (si aplica)
+:::
+
+::: {.column width="50%"}
+### Patrón del Embudo
+
+```
+  ╔═══════════════════╗
+  ║  Problema General ║
+  ╚═════════╦═════════╝
+            ║
+       ╔════╩════╗
+       ║ Contexto ║
+       ╚════╦════╝
+            ║
+        ╔═══╩═══╗
+        ║ Vacío  ║
+        ╚═══╦═══╝
+            ║
+          ╔═╩═╗
+          ║ ? ║  ← Pregunta específica
+          ╚═══╝
+```
+
+### Extensión Recomendada
+
+- 1,000 palabras máximo
+- 3-4 párrafos bien estructurados
+- Solo antecedentes necesarios
+:::
+::::
+
+---
+
+## Métodos y Materiales
+
+:::: {.columns}
+::: {.column width="50%"}
+### Objetivo Principal
+
+> Proveer **detalles suficientes** para que la investigación pueda ser **replicada** por otros científicos.
+
+### Preguntas Clave
+
+- **¿DÓNDE?** → Lugar del estudio
+- **¿CUÁNDO?** → Período temporal
+- **¿CÓMO?** → Procedimientos exactos
+
+### Contenido
+
+- Diseño experimental  
+- Materiales utilizados  
+- Técnicas de recolección  
+- Análisis estadísticos  
+- Consideraciones éticas  
+:::
+
+::: {.column width="50%"}
+### Características de Redacción
+
+- **Tiempo verbal:** Pasado
+- **Voz:** Preferentemente activa
+- **Detalle:** Técnico y preciso
+- **Orden:** Cronológico o lógico
+
+### Nivel de Detalle
+
+::: {.callout-tip}
+## Regla Práctica
+Si un colega de tu campo **NO puede** repetir tu estudio leyendo esta sección, falta información crítica.
+:::
+
+### Elementos a Incluir
+
+- Nombre científico de especies
+- Marcas/modelos de equipos
+- Concentraciones exactas
+- Tamaños de muestra
+- Software utilizado (versión)
+:::
+::::
+
+---
+
+## Resultados: Presentación Objetiva
+
+:::: {.columns}
+::: {.column width="50%"}
+### Naturaleza de la Sección
+
+- **Más objetiva** de todo el manuscrito
+- Presentación **sin interpretación**
+- No comparar con otros estudios
+- No explicar causas
+
+### Elementos de Presentación
+
+1. **Texto narrativo**
+   - Hallazgos principales
+   - Patrones observados
+
+2. **Tablas**
+   - Datos numéricos precisos
+   - Comparaciones múltiples
+
+3. **Figuras/Gráficos**
+   - Tendencias visuales
+   - Patrones biológicos
+:::
+
+::: {.column width="50%"}
+### Buenas Prácticas
+
+- Presentar datos en orden lógico  
+- Destacar hallazgos importantes  
+- Referirse a tablas/figuras  
+- Usar subtítulos si es extenso  
+
+### Evitar
+
+- Repetir en texto lo que ya está en tablas  
+- Incluir datos no mencionados en Métodos  
+- Interpretar o especular  
+- Citar literatura (va en Discusión)  
+
+### Tiempo Verbal
+
+- **Pasado:** "Se observó...", "Los datos mostraron..."
+- Describe lo que YA ocurrió en TU estudio
+:::
+::::
+
+---
+
+## Discusión: Interpretación y Cierre
+
+:::: {.columns}
+::: {.column width="55%"}
+### La Sección Más Subjetiva
+
+> Aquí el autor **interpreta** hallazgos, **explica** causas y **compara** con conocimiento previo.
+
+### Estructura Recomendada
+
+1. **Resumen breve** de hallazgos principales
+2. **Interpretación** de resultados
+3. **Comparación** con literatura
+4. **Explicación** de diferencias/similitudes
+5. **Limitaciones** del estudio
+6. **Implicaciones** teóricas/prácticas
+7. **Futuras investigaciones**
+
+### Relación con Introducción
+
+La Discusión debe **cerrar el bucle**:
+- Introducción: General → Específico
+- Discusión: Específico → General
+:::
+
+::: {.column width="45%"}
+### Voz del Autor
+
+La subjetividad es aceptable y necesaria:
+- Proponer interpretaciones
+- Emitir opiniones fundamentadas
+- Autocrítica (limitaciones)
+
+### Errores Comunes
+
+- Repetir Resultados sin interpretar  
+- Introducir datos nuevos  
+- Especular sin fundamento  
+- Ignorar resultados contradictorios  
+
+### Arte de Convencer
+
+> El éxito radica en **argumentar** de tal manera que el lector acepte tu interpretación como la más adecuada.
+
+### Honestidad
+
+Reconocer limitaciones proyecta **integridad profesional**.
+:::
+::::
+
+---
+
+# PROCESO DE COMPOSICIÓN {background-color="#B85042"}
+
+## Escribir NO es Transvasar Ideas
+
+:::: {.columns}
+::: {.column width="50%"}
+### Mito
+
+> "Escribir es vaciar el cerebro al papel"
+
+### Realidad
+
+> Escribir es un **proceso creativo complejo** que requiere **reflexión** sobre el lenguaje
+
+### Dos Modelos
+
+1. **Contar lo que sé**
+   - Lineal y simple
+   - Vuelco directo de información
+
+2. **Transformar el conocimiento**
+   - Aprender escribiendo
+   - Reorganizar pensamientos
+   - Encontrar mejores argumentos
+:::
+
+::: {.column width="50%"}
+### Proceso No Lineal
+
+```
+Precomposición
+     ↓
+Redacción ←→ Revisión
+     ↓         ↑
+Redacción ←→ Revisión
+     ↓         ↑
+  Resultado
+```
+
+### Beneficio
+
+::: {.callout-important}
+## Crecimiento Cognitivo
+Al final del proceso, **sabes MÁS** sobre el tema que cuando empezaste.
+:::
+:::
+::::
+
+---
+
+## Precomposición: El Paso Previo
+
+:::: {.columns}
+::: {.column width="50%"}
+### ¿Qué es?
+
+> Etapa de **planificación** antes de escribir la primera línea.
+
+### 3 Actividades Simultáneas
+
+#### 1. Toma de Conciencia
+- Reflexión sobre el acto de escribir
+- Identificar género y función
+- Delimitar tema
+- Considerar audiencia
+
+#### 2. Descubrimiento
+- Exploración de memoria
+- Asociación libre de ideas
+- Generar conexiones nuevas
+- Mapas mentales
+:::
+
+::: {.column width="50%"}
+#### 3. Investigación
+- Acopio de información externa
+- Consulta bibliográfica
+- Entrevistas/experimentos
+- Dominar el tema
+
+### Herramienta: Mapa de Ideas
+
+```
+        TEMA CENTRAL
+       /     |     \
+      /      |      \
+  Idea A  Idea B  Idea C
+   /  \     |      /  \
+ ...  ... ...   ... ...
+```
+
+**Transforma** pensamiento no lineal → discurso lineal
+
+### Meta
+
+Pasar de **escribir para uno mismo** a **escribir para el lector**.
+:::
+::::
+
+---
+
+## Identificación del Público
+
+:::: {.columns}
+::: {.column width="55%"}
+### "Cálculo del Lector"
+
+> Prever **reacciones**, **conocimientos** y **necesidades** del destinatario.
+
+### Preguntas
+
+- ¿Quiénes son mis lectores reales?
+- ¿Qué nivel cultural tienen?
+- ¿Cuánto saben del tema?
+- ¿Cuánto tiempo disponen para leer?
+- ¿Por qué les interesaría?
+
+### Dos Figuras Discursivas
+
+1. **Autor textual**
+   - Imagen que proyecto
+   - Rigor, inteligencia, credibilidad
+
+
+:::
+
+::: {.column width="45%"}
+
+2. **Lector textual**
+   - Destinatario ideal construido
+   - Basado en lectores reales
+
+### Registro y Tenor
+
+El público determina:
+- Nivel de formalidad
+- Uso de tecnicismos
+- Cantidad de explicaciones
+- Tono (tú vs. usted)
+
+### Lo Explícito vs. Implícito
+
+Decisión crítica:
+- ¿Cuánta información dar?
+- ¿Qué dejar a inferencias?
+
+### Errores
+
+- **Exceso:** Tratar al lector de ignorante  
+- **Defecto:** Omitir datos necesarios  
+
+### Objetivo
+
+Convertir al lector real en **interlocutor necesario** para comunicación eficaz.
+:::
+::::
+
+---
+
+## Redacción: De lo No Lineal a lo Lineal
+
+:::: {.columns}
+::: {.column width="50%"}
+### Resolución de Problemas
+
+Escribir implica decidir simultáneamente:
+- **Qué** decir
+- **Cómo** decirlo
+- **Qué voz** adoptar
+- **Qué léxico** usar
+
+### Problemas Circulares
+
+Una solución estilística puede generar un nuevo problema conceptual.
+
+### Fórmula 18/50
+
+- **18 palabras** por oración  
+- **50 palabras** por párrafo (~3 oraciones)
+
+### Voz Activa > Pasiva
+
+- **Activa:** "El investigador analizó los datos"  
+- **Pasiva:** "Los datos fueron analizados"
+
+### Principios de Redacción
+
+1. **Claridad y sencillez**
+   - Evitar "lenguaje infiltrado"
+   - Prosa llana y directa
+:::
+
+::: {.column width="50%"}
+
+
+2. **Precisión léxica**
+   - Palabras cortas y conocidas
+   - Evitar sinónimos inexactos
+
+3. **Orden lógico**
+   - Sujeto + Verbo + Objeto
+
+### En Textos Científicos (IMRyD)
+
+- **Impersonal** y objetivo
+- Hallazgos publicados: **presente**
+- Resultados propios: **pasado**
+
+### Ejemplo
+
+- "Se observó un aumento del 23%"  
+- "Hubo un incremento significativo"
+:::
+::::
+
+---
+
+## Borradores Sucesivos
+
+:::: {.columns}
+::: {.column width="50%"}
+### Principio Fundamental
+
+> **Escribir y reescribir son la misma cosa.**
+
+### ¿Por qué son necesarios?
+
+- El lenguaje es **ambiguo** por naturaleza
+- Primera versión rara vez es óptima
+- Ideas maduran con revisión
+- Claridad requiere "afilar" el texto
+
+### Proceso de Revisión
+
+1. **Escribir** primer borrador
+2. **Dejar reposar** el texto
+3. **Releer** con ojos frescos
+4. **Tachar** lo superfluo
+5. **Reorganizar** párrafos
+6. **Someter** a lectura ajena
+7. **Repetir** hasta satisfacción
+:::
+
+::: {.column width="50%"}
+### Meta
+
+Crear la **ilusión** de que el texto se escribió de una sola vez, con fluidez.
+
+### Técnica del Tachado
+
+Preguntas durante revisión:
+- ¿Puedo decir esto con menos palabras?
+- ¿Esta oración añade valor?
+- ¿Hay redundancia?
+- ¿El orden es lógico?
+
+### Límite del Perfeccionamiento
+
+Llega un punto donde el texto se vuelve "intratable" → aceptar como definitivo.
+
+
+:::
+::::
+
+---
+
+
+## La oración
+
+### Longitud de la Oración: Índice de Nebulosidad
+
+**Fórmula de Fernando Ávila (2003)**
+
+$$\text{Índice de Nebulosidad} = (A + B) \times 0.4$$
+
+Donde:
+
+- **A** = Número de palabras / Número de oraciones
+- **B** = (Palabras largas × 100) / Número total de palabras
+
+**Índice ideal**: 10 (nivel "Selecciones")
+
+---
+
+### Ejemplo 1: Oración Larga Problemática
+
+<div style="background-color: #ffebee; padding: 20px; border-left: 5px solid #c62828;">
+
+**VERSIÓN ORIGINAL** (134 palabras, 1 oración)
+
+De acuerdo con especialistas de nuestro departamento de calidad en metodología internacional para la presentación de trabajos escritos debidamente asesorados por una comisión de la Universidad Autónoma de la Nación, el texto de la novela con la que usted puede participar en el Decimonoveno Concurso Nacional de Narrativa, patrocinado por el Ministerio de Cultura, la Fundación para el Desarrollo de la Inteligencia Artística Continental y el grupo de editoriales educativas legalmente afincadas en el territorio de la patria, debe estar escrito originalmente en castellano, en letra cuerpo 12, sobre hojas de papel bond base 20 tamaño carta, a doble espacio, con sangría de cuatro espacios.
+
+</div>
+
+**Problemas identificados**: Una sola oración, múltiples ideas, difícil seguimiento
+
+
+### Ejemplo 1: Versión Mejorada
+
+<div style="background-color: #e8f5e9; padding: 20px; border-left: 5px solid #2e7d32;">
+
+**VERSIÓN MEJORADA** (3 oraciones)
+
+Los especialistas de nuestro departamento han establecido los requisitos formales para el Decimonoveno Concurso Nacional de Narrativa. **[Oración 1: Contexto]**
+
+El texto debe estar escrito originalmente en castellano, en letra cuerpo 12, sobre hojas de papel bond base 20 tamaño carta. **[Oración 2: Requisitos técnicos]**
+
+Además, debe presentarse a doble espacio con sangría de cuatro espacios. **[Oración 3: Formato específico]**
+
+</div>
+
+**Mejoras logradas**: Claridad, separación de ideas, lectura fluida
+
+---
+
+### Estructura Oracional: Quién + Verbo + Qué + Complemento
+
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; text-align: center;">
+
+<div style="background-color: #e3f2fd; padding: 15px;">
+**QUIÉN**
+<br>Sujeto
+<br>Agente
+</div>
+
+<div style="background-color: #fff3e0; padding: 15px;">
+**VERBO**
+<br>Acción
+<br>Núcleo
+</div>
+
+<div style="background-color: #f3e5f5; padding: 15px;">
+**QUÉ**
+<br>Objeto directo
+<br>Contenido
+</div>
+
+<div style="background-color: #e0f2f1; padding: 15px;">
+**COMPLEMENTO**
+<br>A quién, dónde,<br>cuándo, cómo
+</div>
+
+</div>
+
+<br>
+
+**Ejemplo aplicado:**
+
+<div style="background-color: #fafafa; padding: 15px; font-size: 1.2em;">
+
+<span style="color: #1976d2;">**Diego Pérez**</span> 
+<span style="color: #f57c00;">**ofreció**</span> 
+<span style="color: #7b1fa2;">**lo mejor de su repertorio**</span> 
+<span style="color: #00796b;">**a las jóvenes representantes**</span>
+
+</div>
+
+---
+
+### Ejemplo 2: Reordenamiento de Estructura
+
+**Versión original** (orden confuso):
+
+<div style="background-color: #ffebee; padding: 15px;">
+
+Entre el primero y el 31 de octubre del presente año, diseñado con gran esmero por una comisión conjunta, en el próximo seminario de actualización profesional pueden participar los egresados de la Universidad Autónoma.
+
+</div>
+
+<br>
+
+**Versión ordenada** (Quién + Verbo + Qué + Complementos):
+
+<div style="background-color: #e8f5e9; padding: 15px;">
+
+<span style="color: #1976d2;">**Los egresados de la Universidad Autónoma**</span> 
+<span style="color: #f57c00;">**podrán participar**</span> 
+<span style="color: #7b1fa2;">**en el próximo seminario de actualización profesional**</span> 
+<span style="color: #00796b;">**entre el 1 y 31 de octubre de 2022**</span>.
+
+Una comisión conjunta de egresados, profesores y alumnos diseñó el seminario con gran esmero.
+
+</div>
+
+---
+
+### Voz Activa vs. Voz Pasiva
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+<div>
+
+**VOZ PASIVA** (Evitar)
+
+<div style="background-color: #ffebee; padding: 15px; margin-top: 10px;">
+
+El experimento fue realizado por Pedro.
+
+<br><br>
+
+Una nueva propuesta es entregada por Margarita a la Junta Directiva.
+
+<br><br>
+
+Un libro de política es leído por Juan.
+
+</div>
+
+</div>
+
+<div>
+
+**VOZ ACTIVA** (Preferir)
+
+<div style="background-color: #e8f5e9; padding: 15px; margin-top: 10px;">
+
+Pedro realizó el experimento.
+
+<br><br>
+
+Margarita entrega una nueva propuesta a la Junta Directiva.
+
+<br><br>
+
+Juan lee un libro de política.
+
+</div>
+
+</div>
+
+</div>
+
+<br>
+
+**Razón**: La voz activa es más directa, clara y concisa.
+
+---
+
+### Persona Gramatical: Consistencia
+
+**Problema**: Cambio innecesario de persona
+
+<div style="background-color: #ffebee; padding: 15px;">
+
+Tenemos el gusto de ofrecerle nuestros servicios. *[Primera persona plural]*
+
+Se darán descuentos a los primeros compradores. *[Impersonal]*
+
+Le estaré informando de las promociones. *[Primera persona singular]*
+
+</div>
+
+<br>
+
+**Solución**: Mantener la misma persona
+
+<div style="background-color: #e8f5e9; padding: 15px;">
+
+Tenemos el gusto de ofrecerle nuestros servicios. *[Primera persona plural]*
+
+Daremos descuentos a los primeros cien compradores. *[Primera persona plural]*
+
+Le informaremos oportunamente de las nuevas promociones. *[Primera persona plural]*
+
+</div>
+
+---
+
+### Tiempo Verbal en Textos Científicos
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+<div>
+
+**PRESENTE**
+<br>Para conocimiento establecido
+
+<div style="background-color: #e3f2fd; padding: 15px; margin-top: 10px;">
+
+El fármaco X **incide** en las tasas de fertilidad de la especie Y (Smith et al., 2019).
+
+<br><br>
+
+La teoría de la relatividad **establece** que...
+
+</div>
+
+</div>
+
+<div>
+
+**PASADO**
+<br>Para tus hallazgos específicos
+
+<div style="background-color: #fff3e0; padding: 15px; margin-top: 10px;">
+
+**Examinamos** el efecto del fármaco X en diez individuos.
+
+<br><br>
+
+**Encontramos** que el 40% de los participantes...
+
+</div>
+
+</div>
+
+</div>
+
+---
+
+
+## El Párrafo: Unidad de Pensamiento
+
+:::: {.columns}
+::: {.column width="50%"}
+### Definición
+
+> Bloque constituyente que expresa y argumenta **una única idea central**.
+
+### Estructura del Párrafo Ideal
+
+1. **Oración temática**
+   - Presenta el tema
+   - Idea u opinión (NO hecho)
+
+2. **Oraciones de apoyo** (2-5)
+   - Justifican la oración temática
+   - Datos, ejemplos, información
+
+3. **Oración concluyente**
+   - Resumen O conexión al siguiente párrafo
+
+### Extensión Recomendada
+
+- **7-14 líneas** (ideal)  
+- **3-6 líneas** (ocasional, corto)  
+- **15-20 líneas** (ocasional, largo)  
+:::
+
+::: {.column width="50%"}
+### Errores Comunes
+
+1. Párrafo de **una sola oración**
+2. Párrafo que ocupa **página entera**
+3. **Múltiples ideas** en un párrafo
+
+### Soluciones
+
+**Si no transmite idea:** ELIMINAR  
+**Si transmite muchas:** FRAGMENTAR
+
+### Principios de Coherencia
+
+- **Unidad:** Todas las oraciones relacionadas con idea principal  
+- **Orden lógico:** Cronológico, importancia o alcance  
+- **Independencia relativa:** Puede leerse solo  
+
+### Variedad
+
+Alternar párrafos de longitud media con cortos/largos evita monotonía.
+:::
+::::
+
+---
+
+### Estructura 1: Afirmación → Explicación → Ejemplo
+
+**Esquema visual:**
+
+```
+[AFIRMACIÓN GENERAL] ────┐
+                          │
+[EXPLICACIÓN CONTEXTUAL] ─┼─ DESARROLLO
+                          │
+[EJEMPLO ESPECÍFICO] ─────┘
+```
+
+<br>
+
+**Ejemplo** (Xie et al., 2011):
+
+<div style="border-left: 4px solid #1976d2; padding-left: 15px; background-color: #f5f5f5; padding: 15px;">
+
+<span style="background-color: #e3f2fd; padding: 3px;">**El comportamiento humano está profundamente afectado por la influencia de individuos y de las redes sociales que los vinculan.**</span> Mucho antes de la proliferación de redes sociales on-line, los estudiosos ya habían reconocido las redes sociales off-line como un factor importante que determina cómo las sociedades se mueven hacia consensos. <span style="background-color: #fff3e0; padding: 3px;">En la sociología, trabajos sobre la difusión de innovaciones han enfatizado cómo los individuos adoptan nuevos comportamientos por influencia de sus vecinos.</span>
+
+</div>
+
+---
+
+### Estructura 2: Cadena Descriptiva → Afirmación Conclusiva
+
+**Esquema visual:**
+
+```
+DESCRIPCIÓN 1 (contexto físico) ───┐
+                                    │
+DESCRIPCIÓN 2 (estado inicial) ────┼─ OBSERVACIONES
+                                    │
+DESCRIPCIÓN 3 (comportamiento) ────┤
+                                    ↓
+                            AFIRMACIÓN FINAL
+                          (significado/función)
+```
+
+<br>
+
+**Ejemplo** (Dawkins, 1976):
+
+<div style="border-left: 4px solid #2e7d32; padding-left: 15px; background-color: #f5f5f5; padding: 15px;">
+
+Las gaviotas de cabeza negra hacen sus nidos en grandes colonias, a pocos metros de distancia. Cuando los polluelos salen del cascarón son pequeños e indefensos y fáciles de tragar. Es bastante común que una gaviota espere hasta que un vecino le dé la espalda y entonces se abalance sobre uno de los polluelos del vecino y se lo trague entero. <span style="background-color: #e8f5e9; padding: 3px;">**Así obtiene una buena comida nutritiva, sin tener que tomarse la molestia de pescar.**</span>
+
+</div>
+
+---
+
+### Estructura 3: Afirmación Incompleta → Aclaración
+
+**Esquema visual:**
+
+```
+PARADOJA/PROBLEMA ──→ INTERROGANTE ──→ ACLARACIÓN ──→ RESOLUCIÓN
+```
+
+<br>
+
+**Ejemplo** (Hernandez, 2011):
+
+<div style="border-left: 4px solid #7b1fa2; padding-left: 15px; background-color: #f5f5f5; padding: 15px;">
+
+<span style="background-color: #f3e5f5; padding: 3px;">**Los casos de pérdida y recuperación de lenguas plantean una intrigante paradoja.**</span> Si en el cerebro se almacenan dos lenguas, ¿cómo es posible que una persona pueda perder una lengua y recuperarla? Mi propia experiencia y los casos de bilingüismo que leía sugerían un modelo muy diferente. <span style="background-color: #e1bee7; padding: 3px;">**Parecía que las lenguas podían ser inaccesibles aunque no se perdieran del todo.**</span>
+
+</div>
+
+---
+
+### Estructura 4: Afirmación → Justificación con Datos
+
+**Esquema visual:**
+
+```
+TESIS PRINCIPAL
+    ↓
+DATO 1 (cuantitativo) ─┐
+                        │
+DATO 2 (comparativo) ──┼─ EVIDENCIA EMPÍRICA
+                        │
+DATO 3 (estadístico) ──┘
+```
+
+<br>
+
+**Ejemplo** (Bertrand et al., 2010):
+
+<div style="border-left: 4px solid #00796b; padding-left: 15px; background-color: #f5f5f5; padding: 15px;">
+
+<span style="background-color: #e0f2f1; padding: 3px;">**La presencia de hijos es el principal factor que contribuye a la menor experiencia laboral de las mujeres con MBA.**</span> Las mujeres con hijos tienen un déficit de unos 8 meses de experiencia en comparación con el hombre medio, mientras que las mujeres sin hijos tienen un déficit de 1,5 meses. Las mujeres con hijos suelen trabajar un 24% menos de horas semanales; las mujeres sin hijos sólo trabajan un 3,3% menos.
+
+</div>
+
+---
+
+### Estructura 5: Juicio Negativo → Atenuación → Ejemplo Positivo
+
+**Esquema visual:**
+
+```
+CRÍTICA INICIAL (fuerte) ──→ ATENUACIÓN (pero/sin embargo) ──→ CASO EXITOSO
+```
+
+<br>
+
+**Ejemplo** (Bunge, 2012):
+
+<div style="border-left: 4px solid #c62828; padding-left: 15px; background-color: #f5f5f5; padding: 15px;">
+
+<span style="background-color: #ffebee; padding: 3px;">**Las hipótesis sobre equilibrio o armonía son tan imprecisas que no se las puede poner a prueba, de modo que no son científicas.**</span> Pero algunas de ellas son pasibles de refinamiento y pueden tornarse accesibles a la contrastación experimental. <span style="background-color: #e8f5e9; padding: 3px;">**En efecto, la versión moderna de la idea de equilibrio corporal es el concepto fisiológico de homeostasis, propuesta por Claude Bernard y refinada por Walter Cannon.**</span>
+
+</div>
+
+---
+
+### Estructura 6: Descripción General → Detalles Secuenciales
+
+**Esquema visual:**
+
+```
+PRESENTACIÓN GENERAL (contexto + n + muestra)
+    ↓
+    ├─ HALLAZGO 1 (principal)
+    ├─ HALLAZGO 2 (metodología específica)
+    ├─ HALLAZGO 3 (implicaciones)
+    └─ HALLAZGO 4 (contexto ampliado)
+```
+
+<br>
+
+**Ejemplo** (Stoet et al., 2018):
+
+<div style="border-left: 4px solid #f57c00; padding-left: 15px; background-color: #f5f5f5; padding: 15px;">
+
+<span style="background-color: #fff3e0; padding: 3px;">**Presentamos un análisis del rendimiento académico de casi 475.000 adolescentes de 67 países.**</span> Descubrimos que las mujeres y los hombres tienen capacidades similares en conocimientos científicos. Al mismo tiempo, es mucho más probable que las ciencias sean un punto fuerte para los chicos que para las chicas. La relación entre estas diferencias y las tasas de graduación en STEM es mayor en países con mayor igualdad de género.
+
+</div>
+
+---
+
+### Estructura 7: Definición → Explicación → Ejemplo Contrastivo
+
+**Esquema visual:**
+
+```
+DEFINICIÓN FORMAL
+    ↓
+CARACTERÍSTICAS DISTINTIVAS
+    ↓
+EJEMPLO ILUSTRATIVO ←→ CONTRASTE CON OTROS CASOS
+```
+
+<br>
+
+**Ejemplo** (Mosterín, 1970):
+
+<div style="border-left: 4px solid #5e35b1; padding-left: 15px; background-color: #f5f5f5; padding: 15px;">
+
+<span style="background-color: #ede7f6; padding: 3px;">**Los nombres son sucesiones de signos gráficos que designan algo: un número, una ciudad, una persona.**</span> Se diferencian por ser más cortos, más unívocos, más independientes del contexto. Si digo "yo he comido", "yo" actúa como designador que se refiere a mí, pero su referencia varía con el contexto. <span style="background-color: #d1c4e9; padding: 3px;">**"Jesús Mosterín" permanece invariable, utilice la sentencia quien la utilice.**</span>
+
+</div>
+
+---
+
+### Estructura 8: Interrogante → Respuesta → Justificación Implícita
+
+**Esquema visual:**
+
+```
+ESCENARIO HIPOTÉTICO (gancho emocional)
+    ↓
+PREGUNTA FUNDAMENTAL
+    ↓
+RESPUESTA CONCISA + JUSTIFICACIÓN INTEGRADA
+```
+
+<br>
+
+**Ejemplo** (Feynman, 1963):
+
+<div style="border-left: 4px solid #d32f2f; padding-left: 15px; background-color: #f5f5f5; padding: 15px;">
+
+Si en algún cataclismo se destruyera todo el conocimiento científico y sólo se transmitiera una frase, ¿qué afirmación contendría la mayor cantidad de información? <span style="background-color: #ffcdd2; padding: 3px;">**Creo que es la hipótesis de que todas las cosas están hechas de átomos: pequeñas partículas en perpetuo movimiento que se atraen a poca distancia pero se repelen cuando se aprietan.**</span>
+
+</div>
+
+---
+
+### Estructura 9: Interrogante → Aclaración Metodológica → Conexión
+
+**Esquema visual:**
+
+```
+PREGUNTAS INICIALES (interés)
+    ↓
+ACLARACIÓN NECESARIA (perspectiva)
+    ↓
+CONEXIÓN EXPLÍCITA (siguiente párrafo)
+    ↓
+NUEVA PREGUNTA (momentum)
+```
+
+<br>
+
+**Ejemplo** (Crystal, 2014):
+
+<div style="border-left: 4px solid #0288d1; padding-left: 15px; background-color: #f5f5f5; padding: 15px;">
+
+¿Cuántas lenguas están a punto de morir? ¿Cuántas están en peligro? <span style="background-color: #e1f5fe; padding: 3px;">**Antes de estimar la magnitud del problema, debemos desarrollar un sentido de perspectiva.**</span> Las cifras sobre lenguas que mueren sólo tienen sentido si las relacionamos con el número total de lenguas vivas. <span style="background-color: #b3e5fc; padding: 3px;">**Entonces, ¿cuántas lenguas hay?**</span>
+
+</div>
+
+---
+
+### Características del Párrafo Efectivo
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+<div style="background-color: #e8f5e9; padding: 20px;">
+
+**LO QUE SÍ DEBE TENER**
+
+- Coherencia conceptual
+- Una idea principal clara
+- Extensión moderada (50-60 palabras promedio)
+- Conexión lógica interna
+- Independencia relativa del contexto
+
+</div>
+
+<div style="background-color: #ffebee; padding: 20px;">
+
+**LO QUE DEBE EVITAR**
+
+- Párrafos de una sola oración
+- Párrafos que ocupan página entera
+- Múltiples ideas sin conexión
+- Dependencia total de otros párrafos
+- Más de cuatro oraciones largas
+
+</div>
+
+</div>
+
+---
+
+## Texto expositivo
+
+
+### Tipos de Estructura Textual: Comparativa
+
+<table style="width: 100%; border-collapse: collapse;">
+<tr style="background-color: #1976d2; color: white;">
+<th style="padding: 10px;">Tipo</th>
+<th style="padding: 10px;">Característica</th>
+<th style="padding: 10px;">Ejemplo</th>
+</tr>
+<tr style="background-color: #e3f2fd;">
+<td style="padding: 10px;"><strong>Temática</strong></td>
+<td style="padding: 10px;">Organización por conceptos o categorías</td>
+<td style="padding: 10px;">Peñaherrera (2004): Geografía del Perú</td>
+</tr>
+<tr style="background-color: white;">
+<td style="padding: 10px;"><strong>Histórica</strong></td>
+<td style="padding: 10px;">Organización cronológica pura</td>
+<td style="padding: 10px;">Del Busto (2004): Conquista y virreinato</td>
+</tr>
+<tr style="background-color: #e3f2fd;">
+<td style="padding: 10px;"><strong>Histórico-temática</strong></td>
+<td style="padding: 10px;">Períodos + temas dentro de cada período</td>
+<td style="padding: 10px;">Harari (2011): Sapiens</td>
+</tr>
+<tr style="background-color: white;">
+<td style="padding: 10px;"><strong>Histórico-crítica</strong></td>
+<td style="padding: 10px;">Cronología + análisis crítico</td>
+<td style="padding: 10px;">Roll (1938): Historia del pensamiento económico</td>
+</tr>
+<tr style="background-color: #e3f2fd;">
+<td style="padding: 10px;"><strong>Mixta</strong></td>
+<td style="padding: 10px;">Combina varios principios organizadores</td>
+<td style="padding: 10px;">Medrano (2021): Quipus</td>
+</tr>
+</table>
+
+---
+
+### Estructura Temática: Análisis Detallado
+
+**Caso:** Peñaherrera (2004) - Geografía del Perú
+
+<div style="background-color: #f5f5f5; padding: 20px;">
+
+**Principio organizador:** De lo general a lo específico, por categorías geográficas
+
+```
+1. CONTEXTO AMPLIO
+   └─ El espacio nacional en América y el mundo
+
+2. HERRAMIENTAS
+   └─ Cartografía peruana
+
+3. PROCESOS FORMATIVOS
+   └─ La formación del relieve andino
+
+4. RESULTADOS FÍSICOS
+   ├─ Relieve del territorio peruano
+   └─ Las regiones naturales del Perú
+
+5. ELEMENTOS ESPECÍFICOS
+   ├─ Climas del Perú
+   ├─ El mar de Grau
+   ├─ Cuencas del Pacífico y del Titicaca
+   └─ Cuenca del Amazonas
+
+6. SÍNTESIS HUMANA
+   └─ Síntesis de geografía humana
+```
+
+</div>
+
+---
+
+### Estructura Histórica: Análisis Detallado
+
+**Caso:** Del Busto (2004) - Conquista y virreinato
+
+<div style="background-color: #fff3e0; padding: 20px;">
+
+**Principio organizador:** Cronológico estricto + eventos clave
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+
+<div>
+
+**FASE 1: CONQUISTA**
+
+- Los conquistadores españoles
+- Los viajes descubridores
+- La caída del Tahuantinsuyo
+- La fundación de ciudades
+- La resistencia incaica
+
+</div>
+
+<div>
+
+**FASE 2: CONSOLIDACIÓN**
+
+- Las guerras civiles
+- Los grandes descubrimientos
+- Los incas de Vilcabamba
+
+</div>
+
+</div>
+
+<div style="margin-top: 15px;">
+
+**FASE 3: VIRREINATO**
+
+- Administración central y virreinal
+- Sociedad virreinal
+- Catolicismo y religiosidad
+- Educación y vida intelectual
+- Comercio, industria y artesanía
+- Las rebeliones indígenas
+
+</div>
+
+</div>
+
+---
+
+### Estructura Histórico-Temática: Análisis Detallado
+
+**Caso:** Harari (2011) - Sapiens
+
+<div style="background-color: #f3e5f5; padding: 20px;">
+
+**Principio organizador:** Grandes revoluciones + temas dentro de cada una
+
+<table style="width: 100%; margin-top: 15px;">
+<tr style="background-color: #7b1fa2; color: white;">
+<th style="padding: 8px;">Revolución</th>
+<th style="padding: 8px;">Temas</th>
+<th style="padding: 8px;">Lógica</th>
+</tr>
+<tr>
+<td style="padding: 8px; background-color: #e1bee7;"><strong>Cognitiva</strong></td>
+<td style="padding: 8px;">Animal insignificante → Árbol conocimiento → Vida Adán y Eva</td>
+<td style="padding: 8px;">Biológico → Mental → Social</td>
+</tr>
+<tr>
+<td style="padding: 8px; background-color: #ce93d8;"><strong>Agrícola</strong></td>
+<td style="padding: 8px;">Mayor fraude → Pirámides → Memoria → Justicia</td>
+<td style="padding: 8px;">Cambio → Consecuencias → Problemas</td>
+</tr>
+<tr>
+<td style="padding: 8px; background-color: #ba68c8;"><strong>Unificación</strong></td>
+<td style="padding: 8px;">Flecha historia → Dinero → Imperios → Religión</td>
+<td style="padding: 8px;">Proceso → Herramientas integradoras</td>
+</tr>
+<tr>
+<td style="padding: 8px; background-color: #ab47bc;"><strong>Científica</strong></td>
+<td style="padding: 8px;">Ignorancia → Imperio → Capitalismo → Revolución permanente</td>
+<td style="padding: 8px;">Método → Alianzas → Transformación</td>
+</tr>
+</table>
+
+</div>
+
+---
+
+### Estructura Histórico-Crítica: Análisis Detallado
+
+**Caso:** Roll (1938) - Historia del pensamiento económico
+
+<div style="background-color: #e0f2f1; padding: 20px;">
+
+**Principio organizador:** Desarrollo histórico + análisis crítico de cada escuela
+
+<div style="font-size: 0.9em;">
+
+**FASE 1: Comienzos** → Antiguo Testamento, Grecia, Roma, Cristianismo, Edad Media
+
+**FASE 2: Capitalismo comercial** → Declive escolástica, mercantilismo, lingotismo
+
+**FASE 3: Fundadores** → Filósofos políticos, Petty, Locke, Hume, Cantillon, fisiócratas
+
+**FASE 4: Sistema clásico** → <span style="background-color: #80cbc4; padding: 2px;">**Adam Smith (análisis extenso)**</span>, Ricardo, Malthus
+
+**FASE 5: Reacción** → Crítica a Malthus, románticos alemanes, crítica socialista
+
+**FASE 6: Marx** → <span style="background-color: #80cbc4; padding: 2px;">**Vida, método, teoría valor, plusvalía, competencia, desarrollo, valoración**</span>
+
+**FASE 7: Transición** → Escuela histórica, Jones, ruptura teoría valor, Senior, Mill
+
+**FASE 8-12: Economía moderna** → Utilidad marginal, contribución americana, entreguerras, macroeconomía, edad de la duda
+
+**CONCLUSIÓN:** Los fines de la economía
+
+</div>
+
+</div>
+
+---
+
+### Estructura Mixta: Análisis Detallado
+
+**Caso:** Medrano (2021) - Quipus
+
+<div style="background-color: #fce4ec; padding: 20px;">
+
+**Principio organizador:** Histórico (Parte 1) + Analítico contemporáneo (Parte 2)
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+
+<div style="background-color: #f8bbd0; padding: 15px;">
+
+**PARTE 1: HISTÓRICA**
+
+Una historia en nudos
+
+- Quipus tempranos
+- Quipus incaicos
+- Encuentros coloniales tempranos
+- Quipus coloniales y republicanos
+
+<span style="display: block; margin-top: 10px; font-style: italic;">Narrativa cronológica tradicional</span>
+
+</div>
+
+<div style="background-color: #f48fb1; padding: 15px;">
+
+**PARTE 2: CONTEMPORÁNEA**
+
+Desciframientos presentes y futuros
+
+- Hacia el quipu digital
+- Los quipus digitales como "macrodatos"
+
+<span style="display: block; margin-top: 10px; font-style: italic;">Análisis metodológico actual</span>
+
+</div>
+
+</div>
+
+<div style="margin-top: 15px; padding: 15px; background-color: #fce4ec;">
+
+**Ventaja de esta estructura:** Combina narrativa accesible histórica con análisis técnico especializado, permitiendo a diferentes audiencias encontrar valor en distintas secciones.
+
+</div>
+
+</div>
+
+---
+
+### Texto Convincente: Elementos Esenciales
+
+<div style="background-color: #e8f5e9; padding: 20px;">
+
+**Según Reyes (p. 259), un texto académico convincente debe:**
+
+<div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+
+<div style="background-color: #c8e6c9; padding: 15px;">
+
+**ARGUMENTACIÓN**
+
+Propone argumentos válidos y suficientes
+
+</div>
+
+<div style="background-color: #a5d6a7; padding: 15px;">
+
+**EVIDENCIA**
+
+Provee datos adecuados para el tema y lector
+
+</div>
+
+<div style="background-color: #81c784; padding: 15px;">
+
+**INFERENCIA**
+
+Permite que el lector llegue a conclusiones
+
+</div>
+
+<div style="background-color: #66bb6a; padding: 15px;">
+
+**CONEXIÓN**
+
+Conecta datos con la tesis defendida
+
+</div>
+
+<div style="background-color: #4caf50; padding: 15px;">
+
+**CONTRASTE**
+
+Compara con tesis contrarias
+
+</div>
+
+<div style="background-color: #43a047; padding: 15px;">
+
+**APORTE**
+
+Amplía conocimientos del lector
+
+</div>
+
+</div>
+
+</div>
+
+---
+
+### Lista de Verificación de Calidad Textual
+
+**Según Reyes (p. 272):**
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+
+<div>
+
+**CLARIDAD Y COHERENCIA**
+
+<div style="background-color: #e3f2fd; padding: 15px; margin-top: 10px;">
+
+¿Ha quedado clara la intención del escrito?
+
+¿Se entiende todo bien?
+
+¿Están las conclusiones justificadas?
+
+¿Hay contradicciones?
+
+</div>
+
+</div>
+
+<div>
+
+**ESTRUCTURA Y FORMA**
+
+<div style="background-color: #fff3e0; padding: 15px; margin-top: 10px;">
+
+¿Es adecuada la estructura?
+
+¿Son acertados registro y vocabulario?
+
+¿Son buenas las frases inicial y final?
+
+¿Está bien contextualizado el problema?
+
+</div>
+
+</div>
+
+</div>
+
+<div style="background-color: #f3e5f5; padding: 15px; margin-top: 20px;">
+
+**REVISIÓN EXTERNA**
+
+Siempre pedir opinión de otras personas: ¿se entiende todo bien?
+
+</div>
+
+---
+
+### Aplicación: De Teoría a Práctica
+
+**Secuencia de redacción recomendada:**
+
+<div style="margin-top: 20px;">
+
+```
+1. PALABRA (precisa, conocida, apropiada)
+        ↓
+2. FRASE (corta, correcta, clara)
+        ↓
+3. ORACIÓN (18 palabras promedio, estructura lógica)
+        ↓
+4. PÁRRAFO (50 palabras promedio, una idea central)
+        ↓
+5. TEXTO (estructura clara, argumentación sólida)
+```
+
+</div>
+
+<div style="background-color: #e8f5e9; padding: 20px; margin-top: 20px;">
+
+**Recuerde:** Cada nivel debe cumplir criterios específicos de calidad antes de pasar al siguiente. La revisión debe hacerse en orden inverso: primero la estructura general del texto, luego los párrafos, luego las oraciones, y finalmente las palabras individuales.
+
+</div>
+
+
+
+---
+
+# HERRAMIENTAS DE ESTILO {background-color="#028090"}
+
+## Vocabulario Preciso: Propiedad Léxica
+
+:::: {.columns}
+::: {.column width="50%"}
+### Definición
+
+> Uso de **palabras exactas** que comunican lo que se desea decir, sin ambigüedades.
+
+### La Palabra Precisa
+
+Aquella que **NO puede cambiarse** por otra sin alterar el significado o matiz.
+
+### Peligro de Sinónimos
+
+"Sinónimos" rara vez son idénticos:
+- Comparten zona de significado
+- Mantienen diferencias de matiz
+- Pueden alterar registro
+
+### Ejemplo
+
+- "Propósito" (compromiso profundo)  
+"Fin" (más general, menos profundo)
+:::
+
+::: {.column width="50%"}
+### Errores Comunes
+
+| - Incorrecto | - Correcto |
+|--------------|------------|
+| Cancelar (pagar) | Pagar cuota final |
+| Adolecer (carecer) | Adolecer = tener defecto |
+| Cotizar (pedir) | Solicitar presupuesto |
+
+### Preferencias
+
+- **Sencilla** sobre rebuscada  
+- **Corta** sobre larga  
+- **Conocida** sobre rara  
+
+### En Ciencia
+
+- Tecnicismos **necesarios**
+- Significado **unívoco**
+- Evitar vaguedades: "mejor", "varios", "proclive"
+
+### Herramientas
+
+- Diccionario RAE
+- Diccionario de uso (María Moliner)
+- Diccionario ideológico (Casares)
+:::
+::::
+
+---
+
+## Conectores y Metadiscurso
+
+:::: {.columns}
+::: {.column width="50%"}
+### Conectores: Señales de Tránsito
+
+> Unidades lingüísticas que **guían inferencias** y manifiestan relaciones lógicas.
+
+### Tipos Principales
+
+#### Aditivos
+además, asimismo, también, todavía más
+
+#### Contraargumentativos
+sin embargo, no obstante, por el contrario, ahora bien
+
+#### Consecutivos
+por lo tanto, por consiguiente, así que, entonces
+
+#### Reformuladores
+es decir, o sea, mejor dicho, en resumen
+
+#### Ordenadores
+en primer lugar, a continuación, finalmente, por último
+:::
+
+::: {.column width="50%"}
+### Funciones Clave
+
+- Garantizar ilación lógica  
+- Orientar interpretación  
+- Reducir "nebulosidad"  
+- Mantener coherencia  
+
+### Metadiscurso
+
+**Interactivo:**
+- "Como se señaló anteriormente"
+- "En la siguiente sección"
+
+**Interaccional:**
+- "Posiblemente"
+- "Considero que"
+- "Lamentablemente"
+
+### Impacto
+
+Construcción del **ethos** (credibilidad del autor)
+
+### Evitar
+
+Clichés burocráticos:
+- "Es importante señalar que..."
+- "En otro orden de ideas..."
+:::
+::::
+
+---
+
+## Evitar Clichés: Lenguaje Infiltrado
+
+:::: {.columns}
+::: {.column width="50%"}
+### ¿Qué son los Clichés?
+
+> Fórmulas que por **uso excesivo** han perdido fuerza significativa y "embotan la mente".
+
+### Fuentes del "Lenguaje Infiltrado"
+
+- Burocracia
+- Medios de comunicación
+- Libros de texto mal escritos
+
+### Ejemplos Burocráticos
+
+- "Es importante señalar que..."  
+- "A la mayor brevedad posible"  
+- "Personalmente creemos"  
+- "El mismo/la misma" (para evitar repetir)  
+
+### Clichés Literarios
+
+- "Ojos de mirar profundo"  
+- "Dientes de perla"  
+- "Venir como anillo al dedo"  
+- "Más bueno que el pan"  
+:::
+
+::: {.column width="50%"}
+### Consecuencias
+
+- Prosa con **más palabras** de lo necesario
+- Abuso de **voz pasiva**
+- Texto estático y difícil
+- Pérdida de **originalidad**
+
+### Alternativa
+
+::: {.callout-tip}
+## Cervantes sobre el Buen Español
+Procurar que la oración sea "llana", con palabras "honestas y bien colocadas", pintando la intención del autor **sin intrincar** los conceptos.
+:::
+
+### Estrategia de Revisión
+
+1. Identificar expresiones vacías
+2. Preguntar: ¿Puedo decir lo mismo con menos?
+3. **Tachar inmisericordemente**
+4. Asumir voz propia (uso del "yo")
+
+### Meta
+
+Texto libre de lugares comunes = más **creíble** y **respetuoso** con el lector.
+:::
+::::
+
+---
+
+## Puntuación Correcta
+
+:::: {.columns}
+::: {.column width="50%"}
+### Función
+
+> **Señales de tránsito** que mantienen flujo de información constante y sin tropiezos.
+
+### Preferencia: Más Puntos, Menos Comas
+
+- **Punto y seguido** para segmentar  
+**Comas** solo donde necesario  
+
+### La Coma (,)
+
+**REGLA DE ORO:**  
+- NUNCA entre sujeto y verbo (salvo incisos)
+
+#### Usos Correctos
+- Separar elementos en listas
+- Introducir incisos explicativos
+- Enmarcar marcadores ("sin embargo")
+
+### Punto y Coma (;)
+
+- Pausa más larga que coma
+- Separar ítems complejos en listas
+- Vincular oraciones relacionadas
+:::
+
+::: {.column width="50%"}
+### Dos Puntos (:)
+
+- Introducir listas
+- Preceder ejemplos
+- Antes de citas directas
+- NO separar verbo de objeto
+
+### Comillas ("")
+
+- Citas textuales
+- Indicar reserva/ironía
+- NO para resaltar (usar sintaxis)
+
+### Impacto en Legibilidad
+
+Puntuación deficiente:
+- Obliga a **releer** varias veces
+- Crea **ambigüedades peligrosas**
+- Desmerece valor del trabajo
+
+### - Revisión Final
+
+Leer en **voz alta** para verificar que pausas coinciden con intención comunicativa.
+:::
+::::
+
+---
+
+## Legibilidad e Índice de Nebulosidad
+
+:::: {.columns}
+::: {.column width="50%"}
+### Legibilidad
+
+> Facilidad con la que un texto puede ser **procesado** y **comprendido** rápidamente.
+
+### Dimensiones
+
+#### 1. Visual/Tipográfica
+- **Letra romana** > Arial (remates ayudan)
+- **Minúsculas** > MAYÚSCULAS
+- Espacios en blanco
+
+#### 2. Léxica
+- Palabras cortas y conocidas
+- Evitar rebuscamiento
+
+#### 3. Estructural
+- Oraciones: ~18 palabras
+- Párrafos: ~50 palabras
+- Voz activa preferida
+:::
+
+::: {.column width="50%"}
+### Índice de Nebulosidad (Fog Index)
+
+**Fórmula:**
+```
+A = Total palabras / Número oraciones
+B = (Palabras largas × 100) / Total palabras
+Índice = (A + B) × 0.4
+```
+
+**Palabras largas:** > 3 grupos vocálicos
+
+### Valores
+
+| Índice | Interpretación |
+|--------|---------------|
+| **10** | Ideal (lectura fluida) |
+| 20-30 | Esfuerzo moderado |
+| 35+ | Esfuerzo inusual |
+| 84 | Textos legales (inadmisible) |
+
+### Cómo Reducir
+
+- Fragmentar oraciones largas  
+- Sustituir palabras complejas  
+- Usar voz activa  
+- Eliminar redundancia  
+:::
+::::
+
+---
+
+## Interés Humano: El Toque Personal
+
+:::: {.columns}
+::: {.column width="60%"}
+### Definición
+
+> Inclusión de **personas de carne y hueso** en historias y descripciones.
+
+### ¿Por qué es importante?
+
+- Distingue **relato** de mero **informe**
+- Dispara **número de lectores**
+- Genera **identificación**
+- Facilita **comprensión** de eventos masivos
+
+### Estrategias
+
+1. **Individualizar sucesos**
+   - Víctima individual > estadística fría
+   - Protagonista concreto
+
+2. **Concretar lo abstracto**
+   - "Reinaba el nerviosismo"
+   - "Los asistentes estaban nerviosos y..."
+
+3. **Humanizar la información**
+   - Mostrar reacciones
+   - Describir personas
+:::
+
+::: {.column width="40%"}
+### Impacto
+
+::: {.callout-note}
+## Ejemplo
+Una tragedia con **10,000 muertos** (número) tiene menos impacto emocional que la historia de **UNA víctima** individual.
+:::
+
+### En Textos Académicos
+
+Aunque la objetividad es clave:
+- Ejemplos concretos > generalidades
+- Casos de estudio individuales
+- Testimonios (en investigación cualitativa)
+
+### Balance
+
+Evitar:
+- Exceso de anécdota
+- Perder rigor científico
+
+Mantener:
+- Precisión de datos
+- Conclusiones fundamentadas
+:::
+::::
+
+---
+
+## Uso Ético de la Inteligencia Artificial
+
+:::: {.columns}
+::: {.column width="50%"}
+### Advertencia: "Desinteligencia" Artificial
+
+> La IA puede construir **"mentiras completas con verdades parciales"**.
+
+### Caso Real Documentado
+
+ChatGPT inventó:
+- Título plausible de artículo
+- Coautores reales
+- DOI falso
+
+**Problema:** Parecía 100% verdadero
+
+### Riesgos en Formación Académica
+
+- Desestimular lectura crítica  
+- Afectar jerarquización de ideas  
+- Sustituir razonamiento  
+- Dependencia tecnológica  
+- Erosión intelectual  
+:::
+
+::: {.column width="50%"}
+### - Usos Éticos y Eficientes
+
+**Permitidos:**
+- Formatear referencias bibliográficas
+- Corrección gramatical
+- Scripts de programación
+- Tareas tediosas técnicas
+
+**Prohibidos:**
+- Generar contenido principal
+- Sustituir pensamiento crítico
+- Inventar datos/citas
+- Reemplazar lectura de fuentes
+
+### Regla de Oro
+
+::: {.callout-important}
+## Principio Fundamental
+Usar IA para **ahorrar tiempo** en procesos tediosos **SIN comprometer** creatividad ni honestidad intelectual.
+:::
+
+### El Científico Debe...
+
+Mantener capacidad de:
+- **Pensar** críticamente
+- **Reflexionar** profundamente
+- **Cuestionar** activamente
+:::
+::::
+
+---
+
+## Lectura Crítica: Herramienta Fundamental
+
+:::: {.columns}
+::: {.column width="50%"}
+### Definición
+
+> Proceso de **interpretación**, **integración de fuentes** y **creación de información** que trasciende la decodificación.
+
+### Dos Niveles
+
+#### 1. Lectura Extractiva
+- Obtención de datos aislados
+- Conceptos y ejemplos
+- Útil pero insuficiente
+
+#### 2. Lectura Reflexiva y Crítica
+- **Sistemas de ideas** detrás de datos
+- Cadena de razonamientos
+- Relaciones lógicas entre conceptos
+- Posición teórica del autor
+
+### Nivel Epistémico
+
+Leer para:
+- Cuestionar concepción del mundo
+- Transformar conocimiento propio
+- Desarrollar autonomía
+:::
+
+::: {.column width="50%"}
+### Herramientas de Lectura Crítica
+
+#### Intertextualidad
+Reconocer que textos dialogan con otros
+
+#### Campos Semánticos
+Rastrear cadenas léxicas para identificar escuela teórica
+
+#### Diccionarios Especializados
+- RAE (ortografía, existencia)
+- María Moliner (uso, construcción)
+- Casares (ideológico, sinónimos)
+
+### En la Investigación
+
+**Enmarcar el trabajo:**
+- Identificar lo novedoso
+- Detectar vacíos (nicho)
+- Triangular evidencias
+
+### Meta
+
+Dejar de ser **reproductor** para ser **participante activo** en construcción de conocimiento.
+:::
+::::
+
+---
+
+## Actividad Práctica
+
+:::: {.columns}
+::: {.column width="50%"}
+### Ejercicio 1: Análisis de Abstract
+
+**Tiempo:** 15 minutos
+
+**Tarea:**
+1. Lee el abstract proporcionado
+2. Identifica las 4 secciones IMRyD
+3. Evalúa claridad, precisión, brevedad
+
+**Criterios:**
+- ¿Está en un párrafo?
+- ¿Tiempo verbal correcto?
+- ¿Contiene las 4 partes?
+- ¿Extensión adecuada?
+
+### Ejercicio 2: Reducir Nebulosidad
+
+**Tiempo:** 10 minutos
+
+**Tarea:**
+Reescribe este párrafo reduciendo su índice:
+
+> *"En el transcurso del desarrollo de la investigación que fue llevada a cabo, se procedió a la realización de un análisis exhaustivo de los datos que fueron recolectados..."*
+:::
+
+::: {.column width="50%"}
+### Ejercicio 3: Identificar Clichés
+
+**Tiempo:** 10 minutos
+
+**Tarea:**
+Encuentra y elimina clichés en:
+
+1. "A la mayor brevedad posible"
+2. "Es importante señalar que"
+3. "Venir como anillo al dedo"
+4. "Personalmente creemos"
+
+Propón alternativas directas.
+
+### Ejercicio 4: Crear Mapa de Ideas
+
+**Tiempo:** 15 minutos
+
+**Tema:** Tu proyecto de investigación
+
+**Pasos:**
+1. Escribe tema central
+2. Ramifica en 3-5 ideas principales
+3. Sub-ramifica cada idea
+4. Identifica conexiones
+
+**Meta:** Base para tu Introducción
+:::
+::::
+
+---
+
+
+# ¡GRACIAS! {background-color="#1E2761"}
+
+## Contacto y Recursos
+
+:::: {.columns}
+::: {.column width="50%"}
+### 👨Edison Achalma
+ 
+🌐 [GitHub: github.com/achalmed](https://github.com/achalmed)  
+
+### Institución
+
+**Corporacion Académica Universitaria**  
+Ayacucho, Perú
+:::
+
+::: {.column width="50%"}
+
+
+### Recuerda
+> "La investigación científica realmente termina cuando el artículo se **publica** en una revista sometida a revisión por pares, pues solo entonces el hallazgo se integra al **saber científico global**."
+
+
+
+:::
+::::
+
+---

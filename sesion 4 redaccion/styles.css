@@ -1,0 +1,304 @@
+/* Estilos personalizados para la presentación de Redacción Científica */
+
+/* Variables de color */
+:root {
+  --color-primary: #1E2761;
+  --color-secondary: #2C5F2D;
+  --color-accent: #F96167;
+  --color-warning: #B85042;
+  --color-info: #028090;
+  --color-light: #F5F5F5;
+  --color-text: #212121;
+}
+
+/* Estilo general de diapositivas */
+.reveal {
+  font-family: 'Calibri', 'Arial', sans-serif;
+  font-size: 1.2em;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: 'Georgia', 'Cambria', serif;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.reveal h1 {
+  font-size: 2.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reveal h2 {
+  font-size: 2em;
+  border-bottom: 3px solid var(--color-accent);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.5em;
+}
+
+.reveal h3 {
+  font-size: 1.5em;
+  color: var(--color-secondary);
+}
+
+/* Columnas */
+.columns {
+  display: flex;
+  gap: 2em;
+}
+
+.column {
+  flex: 1;
+}
+
+/* Cajas de llamada */
+.callout {
+  padding: 1em;
+  margin: 1em 0;
+  border-left: 5px solid;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.callout-warning {
+  border-color: var(--color-warning);
+  background-color: rgba(185, 80, 66, 0.1);
+}
+
+.callout-tip {
+  border-color: var(--color-info);
+  background-color: rgba(2, 128, 144, 0.1);
+}
+
+.callout-important {
+  border-color: var(--color-accent);
+  background-color: rgba(249, 97, 103, 0.1);
+}
+
+.callout-note {
+  border-color: var(--color-primary);
+  background-color: rgba(30, 39, 97, 0.1);
+}
+
+/* Listas */
+.reveal ul, .reveal ol {
+  margin-left: 0;
+  line-height: 1.6;
+}
+
+.reveal li {
+  margin: 0.5em 0;
+}
+
+/* Tablas */
+.reveal table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+.reveal th {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.5em;
+  font-weight: bold;
+}
+
+.reveal td {
+  padding: 0.5em;
+  border-bottom: 1px solid #ddd;
+}
+
+.reveal tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Bloques de código */
+.reveal pre {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1em;
+  font-size: 0.8em;
+}
+
+.reveal code {
+  background-color: #f4f4f4;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: 'Consolas', 'Monaco', monospace;
+}
+
+/* Énfasis y marcadores */
+.reveal strong {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.reveal em {
+  color: var(--color-secondary);
+  font-style: italic;
+}
+
+/* Blockquotes */
+.reveal blockquote {
+  border-left: 5px solid var(--color-accent);
+  padding-left: 1em;
+  margin: 1em 0;
+  font-style: italic;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 1em;
+  border-radius: 5px;
+}
+
+/* Botones y enlaces */
+.reveal a {
+  color: var(--color-info);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.reveal a:hover {
+  border-bottom-color: var(--color-info);
+}
+
+/* Fondos de sección */
+.reveal section[data-background-color="#1E2761"],
+.reveal section[data-background-color="#2C5F2D"],
+.reveal section[data-background-color="#F96167"],
+.reveal section[data-background-color="#B85042"],
+.reveal section[data-background-color="#028090"] {
+  color: white;
+}
+
+.reveal section[data-background-color="#1E2761"] h1,
+.reveal section[data-background-color="#1E2761"] h2,
+.reveal section[data-background-color="#1E2761"] h3,
+.reveal section[data-background-color="#2C5F2D"] h1,
+.reveal section[data-background-color="#2C5F2D"] h2,
+.reveal section[data-background-color="#2C5F2D"] h3,
+.reveal section[data-background-color="#F96167"] h1,
+.reveal section[data-background-color="#F96167"] h2,
+.reveal section[data-background-color="#F96167"] h3,
+.reveal section[data-background-color="#B85042"] h1,
+.reveal section[data-background-color="#B85042"] h2,
+.reveal section[data-background-color="#B85042"] h3,
+.reveal section[data-background-color="#028090"] h1,
+.reveal section[data-background-color="#028090"] h2,
+.reveal section[data-background-color="#028090"] h3 {
+  color: white;
+}
+
+/* Iconos emoji con espacio */
+.reveal li::marker {
+  font-size: 1.2em;
+}
+
+/* Espaciado de secciones */
+.reveal section {
+  padding: 1em;
+  text-align: left;
+}
+
+/* Checklist */
+.reveal input[type="checkbox"] {
+  margin-right: 0.5em;
+  transform: scale(1.2);
+}
+
+/* Footer */
+.reveal .footer {
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  font-size: 0.6em;
+  color: #666;
+}
+
+/* Números de diapositiva */
+.reveal .slide-number {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.3em 0.6em;
+  border-radius: 3px;
+  font-size: 0.8em;
+}
+
+/* Animaciones suaves */
+.reveal .fragment {
+  transition: all 0.3s ease;
+}
+
+/* Ajustes responsive */
+@media (max-width: 768px) {
+  .columns {
+    flex-direction: column;
+  }
+  
+  .reveal {
+    font-size: 1em;
+  }
+  
+  .reveal h1 {
+    font-size: 2em;
+  }
+  
+  .reveal h2 {
+    font-size: 1.5em;
+  }
+}
+
+/* Estilo para texto pequeño */
+.smaller {
+  font-size: 0.8em;
+}
+
+/* Resaltados de color */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+/* Espaciado vertical */
+.reveal .r-stack {
+  margin: 1em 0;
+}
+
+
+/* Contenedor de partículas en el lado izquierdo */
+#particles-js {
+  position: fixed;
+  width: 30%;
+  /* Ocupa el 30% del lado izquierdo */
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Ajustar contenido para no sobreponerse */
+.reveal .slides {
+  margin-left: 5%;
+  /* Margen para evitar que el texto se sobreponga */
+}
+
+/* Ajuste mínimo del área de contenido para que no quede tapada */
+.reveal .slides {
+  margin-top: 52px !important;
+  margin-bottom: 44px !important;
+}
+
+/* Evitar que el contenido empuje o desplace los elementos fijos */
+.reveal-viewport {
+  overflow: hidden;
+}

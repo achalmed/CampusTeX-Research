@@ -1,0 +1,24 @@
+-- /home/achalmaedison/Documents/academia/sesion cau 2026 metodologia de investigacion/sesion 3 busqueda de informacion/sesion 3.sdr/metadata.pdf.lua
+return {
+    ["doc_pages"] = 72,
+    ["doc_path"] = "/home/achalmaedison/Documents/academia/sesion cau 2026 metodologia de investigacion/sesion 3 busqueda de informacion/sesion 3.pdf",
+    ["doc_props"] = {
+        ["authors"] = "Edison Achalma",
+        ["title"] = "Búsqueda y Gestión de Información Académica - Fundamentos para la investigación universitaria y el trabajo científico",
+    },
+    ["partial_md5_checksum"] = "07080cbd4588aa91ab7b0aee6b5ec386",
+    ["stats"] = {
+        ["authors"] = "Edison Achalma",
+        ["highlights"] = 0,
+        ["language"] = "N/A",
+        ["notes"] = 0,
+        ["pages"] = 72,
+        ["performance_in_pages"] = {},
+        ["series"] = "N/A",
+        ["title"] = "Búsqueda y Gestión de Información Académica - Fundamentos para la investigación universitaria y el trabajo científico",
+    },
+    ["summary"] = {
+        ["modified"] = "2026-02-04",
+        ["status"] = "complete",
+    },
+}
