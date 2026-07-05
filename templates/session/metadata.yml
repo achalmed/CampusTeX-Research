@@ -1,0 +1,46 @@
+# ============================================================
+# metadata.yml — Ficha técnica de la sesión
+# ============================================================
+# Fuente única de información de la sesión. Los scripts
+# (validate.sh, stats.sh) leen los campos marcados [script].
+
+# --- Identificación ------------------------------- [script]
+numero: {{NUMBER}}
+titulo: "{{TITLE}}"
+slug: {{SLUG}}
+unidad: 1
+semana: {{NUMBER}}
+fecha: null                # YYYY-MM-DD cuando se programe
+
+# --- Logística ------------------------------------ [script]
+duracion_minutos: {{DURATION}}
+modalidad: {{MODALITY}}
+nivel: {{LEVEL}}
+formato_slides: {{FORMAT}}   # latex-beamer | quarto-revealjs
+estado: en_preparacion       # en_preparacion | lista | impartida
+
+# --- Diseño instruccional --------------------------------
+competencias:
+  - ""
+capacidades:
+  - ""
+resultados_aprendizaje:
+  - ""
+indicadores:
+  - ""
+conocimientos_previos:
+  - ""
+
+# --- Recursos ---------------------------------------------
+material_requerido:
+  - "Proyector"
+  - "Pizarra y plumones"
+software:
+  - ""
+
+# --- Evaluación -------------------------------------------
+evaluacion: ""             # instrumento principal (quiz, rúbrica, etc.)
+
+# --- Bibliografía (claves de references.bib o texto libre) -
+bibliografia:
+  - ""

@@ -1,0 +1,46 @@
+# ============================================================
+# metadata.yml — Ficha técnica de la sesión
+# ============================================================
+# Fuente única de información de la sesión. Los scripts
+# (validate.sh, stats.sh) leen los campos marcados [script].
+
+# --- Identificación ------------------------------- [script]
+numero: 06
+titulo: "Inteligencia artificial aplicada"
+slug: inteligencia_artificial
+unidad: 1
+semana: 06
+fecha: null                # YYYY-MM-DD cuando se programe
+
+# --- Logística ------------------------------------ [script]
+duracion_minutos: 180
+modalidad: presencial
+nivel: pregrado
+formato_slides: latex-beamer   # latex-beamer | quarto-revealjs
+estado: impartida
+
+# --- Diseño instruccional --------------------------------
+competencias:
+  - ""
+capacidades:
+  - ""
+resultados_aprendizaje:
+  - ""
+indicadores:
+  - ""
+conocimientos_previos:
+  - ""
+
+# --- Recursos ---------------------------------------------
+material_requerido:
+  - "Proyector"
+  - "Pizarra y plumones"
+software:
+  - ""
+
+# --- Evaluación -------------------------------------------
+evaluacion: ""             # instrumento principal (quiz, rúbrica, etc.)
+
+# --- Bibliografía (claves de references.bib o texto libre) -
+bibliografia:
+  - ""

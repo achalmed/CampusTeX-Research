@@ -1,0 +1,49 @@
+---
+title: "{{TITLE}}"
+subtitle: "{{COURSE_SHORT}}"
+author: "{{TEACHER}}"
+institute: "{{INSTITUTION}}"
+date: "{{DATE}}"
+lang: es
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+    show-slide-number: all
+    transition: slide
+    background-transition: fade
+    preview-links: auto
+    footer: "{{COURSE_SHORT}} | {{CYCLE}} | Prof. {{TEACHER}}"
+    chalkboard: true
+    incremental: false
+# Para PDF adicional descomenta:
+#  beamer:
+#    aspectratio: {{ASPECT}}
+#    theme: {{THEME}}
+---
+
+# Introducción
+
+## Objetivos de la sesión
+
+Al finalizar esta sesión, serás capaz de:
+
+- ...
+- ...
+
+# Desarrollo
+
+## Primer tema
+
+- ...
+
+# Cierre
+
+## Síntesis
+
+- ...
+
+## ¿Preguntas?
+
+**{{TEACHER}}**
+`{{EMAIL}}`

@@ -1,0 +1,44 @@
+# ============================================================
+# config/course.yml — Configuración central del curso
+# ============================================================
+# Fuente única de verdad para la identidad del curso.
+# Los scripts de scripts/ leen este archivo para rellenar
+# plantillas al crear sesiones nuevas (new-session.sh).
+#
+# IMPORTANTE: los scripts usan un parser simple de YAML plano
+# (clave: valor). No anidar estructuras en las claves que
+# consumen los scripts (las marcadas [script]).
+# ============================================================
+
+# --- Identidad del curso -------------------------- [script]
+curso: "Inteligencia Artificial, Sistemas de Citación y Elaboración de Monografías"
+curso_corto: "Investigación y Monografías"
+codigo: "CAU-INV-2026"
+ciclo: "2026-I"
+
+# --- Docente -------------------------------------- [script]
+docente: "Edison Achalma"
+docente_titulo: "B.Sc. Econ."
+email: "elmer.achalma.09@unsch.edu.pe"
+github: "github.com/achalmed"
+
+# --- Institución ---------------------------------- [script]
+institucion: "Centro de Actualización Universitaria (CAU)"
+universidad: "Universidad Nacional de San Cristóbal de Huamanga"
+ciudad: "Ayacucho, Perú"
+
+# --- Identidad visual ----------------------------- [script]
+logo: "assets/branding/cau-logo.png"
+tema_beamer: "Madrid"
+aspecto: "169"           # aspectratio beamer
+idioma: "spanish"
+
+# --- Parámetros académicos ------------------------ [script]
+duracion_sesion_min: 180  # duración por defecto de una sesión (minutos)
+modalidad: "presencial"
+nivel: "pregrado"
+
+# --- Compilación ---------------------------------- [script]
+# Ruta al compilador universal del workspace (autodetecta motor).
+# Si no existe, build-session.sh usa pdflatex/xelatex/lualatex directo.
+compilador: "$HOME/Documents/scripts_for_latex/script_compilar_latex/main.sh"
