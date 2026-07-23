@@ -1,63 +1,63 @@
 #!/usr/bin/env bash
 # ============================================================
-# validate.sh — Valida la estructura del framework
+# validate.sh — Valida la estructura estándar 00–11
 # ============================================================
 # Uso:
-#   ./scripts/validate.sh
+#   ./scripts/validate.sh COURSE_DIR         # valida un curso
+#   ./scripts/validate.sh ACADEMIC_CLASS_DIR # valida todos sus course_*
 #
-# Comprueba:
-#   - Que exista config/course.yml con las claves mínimas.
-#   - Que cada sesión tenga la estructura canónica:
-#     metadata.yml, README.md, slides/ con fuente (.tex|.qmd),
-#     teaching/, practice/, evaluation/, homework/, resources/.
-#   - Que metadata.yml tenga los campos obligatorios.
+# Comprueba por curso:
+#   - Las 12 carpetas 00–11 + README.md.
+#   - Cada sesión (03_SESIONES/SNN_*): anatomía 01_Antes…07_Notas,
+#     metadata.yml (campos numero/titulo), README.md y deck en 02_Clase/.
 #
-# Devuelve código de salida distinto de 0 si hay errores
-# (los avisos [!!] no hacen fallar la validación).
+# Código de salida != 0 si hay errores (los [!!] no hacen fallar).
 # ============================================================
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
 
+[[ $# -ge 1 ]] || { sed -n '2,15p' "${BASH_SOURCE[0]}"; exit 1; }
+TARGET="$1"
+[[ -d "$TARGET" ]] || die "No existe: $TARGET"
+
 errors=0
 err() { error "$*"; errors=$((errors + 1)); }
 
-# --- Configuración global ------------------------------------
-[[ -f "$CONFIG_FILE" ]] || die "Falta config/course.yml"
-for key in curso docente institucion ciclo; do
-  [[ -n "$(config_get "$key")" ]] || err "config/course.yml: falta la clave '$key'"
-done
+COURSE_DIRS=(00_ADMINISTRACION 01_PLANIFICACION 02_CONTENIDO 03_SESIONES \
+  04_EVALUACIONES 05_ESTUDIANTES 06_RECURSOS 07_MULTIMEDIA 08_INVESTIGACION \
+  09_PUBLICACION 10_ARCHIVO 11_SEMESTRES)
+SESSION_DIRS=(01_Antes 02_Clase 03_Actividad 04_Evaluacion 05_Despues 06_Recursos 07_Notas)
 
-# --- Sesiones -------------------------------------------------
-REQUIRED_DIRS=(slides teaching practice evaluation homework resources)
-REQUIRED_META=(numero titulo duracion_minutos formato_slides estado)
-
-for dir in $(list_sessions); do
-  name="$(basename "$dir")"
-  info "Validando $name"
-
-  [[ -f "$dir/metadata.yml" ]] || { err "$name: falta metadata.yml"; continue; }
-  [[ -f "$dir/README.md" ]]    || err "$name: falta README.md"
-
-  for sub in "${REQUIRED_DIRS[@]}"; do
-    [[ -d "$dir/$sub" ]] || err "$name: falta el directorio $sub/"
+validate_course() {
+  local course="$1" name; name="$(basename "$course")"
+  info "Curso: $name"
+  for d in "${COURSE_DIRS[@]}"; do
+    [[ -d "$course/$d" ]] || err "$name: falta la carpeta $d/"
   done
+  [[ -f "$course/README.md" ]] || err "$name: falta README.md"
 
-  for key in "${REQUIRED_META[@]}"; do
-    grep -qE "^${key}:" "$dir/metadata.yml" || err "$name: metadata.yml sin campo '$key'"
+  for s in $(list_sessions "$course"); do
+    local sname; sname="$(basename "$s")"
+    [[ -f "$s/metadata.yml" ]] || err "$name/$sname: falta metadata.yml"
+    for k in numero titulo; do
+      grep -qE "^${k}:" "$s/metadata.yml" 2>/dev/null || err "$name/$sname: metadata sin '$k'"
+    done
+    for d in "${SESSION_DIRS[@]}"; do
+      [[ -d "$s/$d" ]] || err "$name/$sname: falta $d/"
+    done
+    local deck; deck="$(find "$s/02_Clase" \( -name '*.tex' -o -name '*.qmd' \) -not -path '*index_files*' 2>/dev/null | head -1)"
+    [[ -n "$deck" ]] || warn "$name/$sname: 02_Clase/ sin deck .tex ni .qmd"
   done
+}
 
-  src_count="$(find "$dir/slides" -maxdepth 2 \( -name '*.tex' -o -name '*.qmd' \) \
-    -not -path '*index_files*' 2>/dev/null | wc -l)"
-  [[ "$src_count" -gt 0 ]] || err "$name: slides/ sin fuente .tex ni .qmd"
-
-  pdf_count="$(find "$dir/slides" -maxdepth 2 -name '*.pdf' 2>/dev/null | wc -l)"
-  [[ "$pdf_count" -gt 0 ]] || warn "$name: sin PDF compilado (ejecuta build-session.sh)"
-done
+if is_course "$TARGET"; then
+  validate_course "$TARGET"
+else
+  mapfile -t courses < <(list_courses "$TARGET")
+  [[ ${#courses[@]} -gt 0 ]] || die "No es un curso ni contiene course_*: $TARGET"
+  for c in "${courses[@]}"; do validate_course "$c"; done
+fi
 
 echo
-if [[ "$errors" -eq 0 ]]; then
-  ok "Estructura válida. Sin errores."
-else
-  error "Validación con $errors error(es)."
-  exit 1
-fi
+if [[ "$errors" -eq 0 ]]; then ok "Estructura válida. Sin errores."
+else error "Validación con $errors error(es)."; exit 1; fi

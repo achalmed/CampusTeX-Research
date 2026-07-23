@@ -21,13 +21,13 @@ check() {
   fi
 }
 
-echo "Diagnóstico del entorno CampusTeX-Research"
-echo "=========================================="
+echo "Diagnóstico del entorno — Academic_Class Framework"
+echo "=================================================="
 check git      "Control de versiones"
 check pdflatex "Motor LaTeX estándar"
-check xelatex  "Motor LaTeX (fontspec, sesión 1)"
-check lualatex "Motor LaTeX (syllabus)"
-check quarto   "Quarto (sesión 4)"
+check xelatex  "Motor LaTeX (fontspec)"
+check lualatex "Motor LaTeX (yaac/luatex)"
+check quarto   "Quarto (decks RevealJS)"
 
 COMPILADOR="$(eval echo "$(config_get compilador)")"
 if [[ -x "$COMPILADOR" ]]; then

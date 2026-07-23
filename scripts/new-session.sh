@@ -1,87 +1,77 @@
 #!/usr/bin/env bash
 # ============================================================
-# new-session.sh — Crea una nueva sesión (unidad didáctica)
+# new-session.sh — Crea una sesión nueva en un curso
 # ============================================================
 # Uso:
-#   ./scripts/new-session.sh NUM "TÍTULO" [--quarto]
+#   ./scripts/new-session.sh COURSE_DIR NUM "TÍTULO" [--quarto]
 #
 # Ejemplos:
-#   ./scripts/new-session.sh 07 "Marco Teórico"
-#   ./scripts/new-session.sh 08 "Análisis de Datos" --quarto
+#   ./scripts/new-session.sh ~/Documents/Academic_Class-Estadistica/course_00_descriptiva 07 "Marco Teórico"
+#   ./scripts/new-session.sh "$C" 08 "Análisis de Datos" --quarto
 #
-# Genera course/sessions/session_NN_slug/ con la estructura
-# canónica completa, rellenando las plantillas de
-# templates/session/ con los datos de config/course.yml.
-# Por defecto las diapositivas son LaTeX Beamer; con --quarto
-# se genera un proyecto Quarto RevealJS.
+# Copia _PLANTILLAS/Plantilla_Sesion (anatomía 01_Antes…07_Notas)
+# al curso como 03_SESIONES/SNN_slug/ y rellena las plantillas
+# con los datos de config/course.yml. Por defecto el deck es
+# LaTeX Beamer (02_Clase/slides.tex); con --quarto, Quarto RevealJS.
 # ============================================================
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
 
-usage() { sed -n '2,17p' "${BASH_SOURCE[0]}"; exit 1; }
+usage() { sed -n '2,18p' "${BASH_SOURCE[0]}"; exit 1; }
+[[ $# -ge 3 ]] || usage
 
-[[ $# -ge 2 ]] || usage
-NUM="$(printf '%02d' "$((10#$1))")"
-TITLE="$2"
+COURSE="$1"
+NUM="$(printf '%02d' "$((10#$2))")"
+TITLE="$3"
 FORMAT="latex"
-[[ "${3:-}" == "--quarto" ]] && FORMAT="quarto"
+[[ "${4:-}" == "--quarto" ]] && FORMAT="quarto"
+
+is_course "$COURSE" || die "No parece un curso (falta 00_ADMINISTRACION/03_SESIONES): $COURSE"
+[[ -d "$PLANTILLAS_DIR/Plantilla_Sesion" ]] || die "Falta $PLANTILLAS_DIR/Plantilla_Sesion"
 
 SLUG="$(slugify "$TITLE")"
-DEST="$SESSIONS_DIR/session_${NUM}_${SLUG}"
-
-if session_dir "$NUM" >/dev/null 2>&1; then
-  die "Ya existe una sesión con el número $NUM: $(session_dir "$NUM")"
+if session_dir "$COURSE" "$NUM" >/dev/null 2>&1; then
+  die "Ya existe una sesión con número $NUM: $(session_dir "$COURSE" "$NUM")"
 fi
-[[ -d "$DEST" ]] && die "Ya existe: $DEST"
+DEST="$COURSE/03_SESIONES/S${NUM}_${SLUG}"
+[[ -e "$DEST" ]] && die "Ya existe: $DEST"
+
+# Etiqueta del curso desde el nombre de carpeta (course_NN_a_b -> "a b")
+COURSE_LABEL="$(basename "$COURSE" | sed -E 's/^course_[0-9]+_//; s/[_-]+/ /g')"
 
 info "Creando sesión $NUM: '$TITLE' (formato: $FORMAT)"
-mkdir -p "$DEST"/{slides,teaching,practice,evaluation,homework,resources/readings,archive}
-touch "$DEST"/{practice,evaluation,homework,resources/readings,archive}/.gitkeep
+cp -a "$PLANTILLAS_DIR/Plantilla_Sesion" "$DEST"
 
-# render_template ORIGEN DESTINO — sustituye {{PLACEHOLDERS}}
-render_template() {
-  sed -e "s|{{NUMBER}}|$NUM|g" \
-      -e "s|{{TITLE}}|$TITLE|g" \
-      -e "s|{{SLUG}}|$SLUG|g" \
-      -e "s|{{DATE}}|$(date +%Y-%m-%d)|g" \
-      -e "s|{{COURSE}}|$(config_get curso)|g" \
-      -e "s|{{COURSE_SHORT}}|$(config_get curso_corto)|g" \
-      -e "s|{{CYCLE}}|$(config_get ciclo)|g" \
-      -e "s|{{TEACHER}}|$(config_get docente)|g" \
-      -e "s|{{EMAIL}}|$(config_get email)|g" \
-      -e "s|{{INSTITUTION}}|$(config_get institucion)|g" \
-      -e "s|{{UNIVERSITY}}|$(config_get universidad)|g" \
-      -e "s|{{THEME}}|$(config_get tema_beamer Madrid)|g" \
-      -e "s|{{ASPECT}}|$(config_get aspecto 169)|g" \
-      -e "s|{{DURATION}}|$(config_get duracion_sesion_min 180)|g" \
-      -e "s|{{MODALITY}}|$(config_get modalidad presencial)|g" \
-      -e "s|{{LEVEL}}|$(config_get nivel pregrado)|g" \
-      -e "s|{{FORMAT}}|$FORMAT|g" \
-      "$1" > "$2"
-}
+# Elegir formato del deck
+if [[ "$FORMAT" == "quarto" ]]; then rm -f "$DEST/02_Clase/slides.tex"
+else rm -f "$DEST/02_Clase/slides.qmd"; fi
 
-T="$TEMPLATES_DIR/session"
-render_template "$T/metadata.yml"        "$DEST/metadata.yml"
-render_template "$T/README.md"           "$DEST/README.md"
-render_template "$T/lesson_plan.md"      "$DEST/teaching/lesson_plan.md"
-render_template "$T/teacher_notes.md"    "$DEST/teaching/teacher_notes.md"
-render_template "$T/retrospective.md"    "$DEST/teaching/retrospective.md"
-render_template "$T/links.md"            "$DEST/resources/links.md"
+# Rellenar {{PLACEHOLDERS}} en todos los archivos de texto
+while IFS= read -r -d '' f; do
+  sed -i \
+    -e "s|{{NUMBER}}|$NUM|g" \
+    -e "s|{{TITLE}}|$TITLE|g" \
+    -e "s|{{SLUG}}|$SLUG|g" \
+    -e "s|{{DATE}}|$(date +%Y-%m-%d)|g" \
+    -e "s|{{COURSE}}|$COURSE_LABEL|g" \
+    -e "s|{{COURSE_SHORT}}|$COURSE_LABEL|g" \
+    -e "s|{{CYCLE}}|$(config_get ciclo)|g" \
+    -e "s|{{TEACHER}}|$(config_get docente)|g" \
+    -e "s|{{EMAIL}}|$(config_get email)|g" \
+    -e "s|{{INSTITUTION}}|$(config_get institucion)|g" \
+    -e "s|{{UNIVERSITY}}|$(config_get universidad)|g" \
+    -e "s|{{THEME}}|$(config_get tema_beamer Madrid)|g" \
+    -e "s|{{ASPECT}}|$(config_get aspecto 169)|g" \
+    -e "s|{{DURATION}}|$(config_get duracion_sesion_min 180)|g" \
+    -e "s|{{MODALITY}}|$(config_get modalidad presencial)|g" \
+    -e "s|{{LEVEL}}|$(config_get nivel pregrado)|g" \
+    -e "s|{{FORMAT}}|$FORMAT|g" \
+    "$f"
+done < <(find "$DEST" -type f \( -name '*.md' -o -name '*.yml' -o -name '*.tex' -o -name '*.qmd' \) -print0)
 
-if [[ "$FORMAT" == "quarto" ]]; then
-  render_template "$T/slides.qmd" "$DEST/slides/slides.qmd"
-else
-  render_template "$T/slides.tex" "$DEST/slides/slides.tex"
-fi
+# Logo institucional junto al deck (autocontenido)
+LOGO="$FW_DIR/$(config_get logo)"
+[[ -f "$LOGO" ]] && cp "$LOGO" "$DEST/02_Clase/cau-logo.png"
 
-# Logo institucional junto a las diapositivas (los .tex lo
-# referencian en su propio directorio para ser autocontenidos).
-LOGO="$ROOT_DIR/$(config_get logo)"
-[[ -f "$LOGO" ]] && cp "$LOGO" "$DEST/slides/cau-logo.png"
-
-ok "Sesión creada: ${DEST#"$ROOT_DIR"/}"
-echo
-echo "Siguientes pasos:"
-echo "  1. Completa $DEST/metadata.yml"
-echo "  2. Edita las diapositivas en $DEST/slides/"
-echo "  3. Compila con: ./scripts/build-session.sh $NUM"
+ok "Sesión creada: $DEST"
+echo "Siguiente: edita 02_Clase/ y compila con ./scripts/build-session.sh \"$COURSE\" $NUM"

@@ -1,54 +1,44 @@
 #!/usr/bin/env bash
 # ============================================================
-# build-session.sh — Compila las diapositivas de una sesión
+# build-session.sh — Compila el/los deck(s) de una sesión
 # ============================================================
 # Uso:
-#   ./scripts/build-session.sh NUM
+#   ./scripts/build-session.sh COURSE_DIR NUM
 #
 # Ejemplo:
-#   ./scripts/build-session.sh 02
+#   ./scripts/build-session.sh "$C" 02
 #
-# Detecta el formato automáticamente:
-#   - slides/*.qmd  → quarto render (HTML RevealJS y/o PDF
-#                     según el YAML del propio .qmd)
-#   - slides/**.tex → LaTeX con motor autodetectado
-#                     (compila TODOS los .tex de la sesión,
-#                     útil en sesiones con varios decks como
-#                     session_05_apa)
+# Compila lo que haya en 02_Clase/:
+#   - *.qmd → quarto render
+#   - *.tex → LaTeX con motor autodetectado (todos los .tex,
+#             útil cuando 02_Clase/ tiene varios decks)
 # ============================================================
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
 
-[[ $# -ge 1 ]] || { sed -n '2,17p' "${BASH_SOURCE[0]}"; exit 1; }
+[[ $# -ge 2 ]] || { sed -n '2,15p' "${BASH_SOURCE[0]}"; exit 1; }
+COURSE="$1"
+DIR="$(session_dir "$COURSE" "$2")" || die "No existe la sesión $2 en $COURSE/03_SESIONES/"
+CLASE="$DIR/02_Clase"
+[[ -d "$CLASE" ]] || die "Falta 02_Clase/ en $(basename "$DIR")"
+info "Sesión: $(basename "$DIR")"
 
-DIR="$(session_dir "$1")" || die "No existe la sesión $1 en course/sessions/"
-SLIDES="$DIR/slides"
-info "Sesión: ${DIR#"$ROOT_DIR"/}"
-
-# --- Proyecto Quarto (excepción: sesión 4) -------------------
-qmd="$(find "$SLIDES" -maxdepth 1 -name '*.qmd' | head -1)"
+# --- Quarto ---------------------------------------------------
+qmd="$(find "$CLASE" -maxdepth 1 -name '*.qmd' | head -1)"
 if [[ -n "$qmd" ]]; then
   require_cmd quarto
-  info "Proyecto Quarto detectado: $(basename "$qmd")"
-  ( cd "$SLIDES" && quarto render "$(basename "$qmd")" )
-  ok "Render Quarto completado."
-  exit 0
+  info "Proyecto Quarto: $(basename "$qmd")"
+  ( cd "$CLASE" && quarto render "$(basename "$qmd")" )
+  ok "Render Quarto completado."; exit 0
 fi
 
-# --- Documentos LaTeX ----------------------------------------
-# Se compilan todos los .tex (hasta 2 niveles: master + subdecks),
-# excluyendo directorios generados.
-mapfile -t texfiles < <(find "$SLIDES" -maxdepth 2 -name '*.tex' \
-  -not -path '*index_files*' | sort)
-[[ ${#texfiles[@]} -gt 0 ]] || die "No hay .tex ni .qmd en $SLIDES"
+# --- LaTeX (todos los .tex, hasta 2 niveles) -----------------
+mapfile -t texfiles < <(find "$CLASE" -maxdepth 2 -name '*.tex' -not -path '*index_files*' | sort)
+[[ ${#texfiles[@]} -gt 0 ]] || die "No hay .tex ni .qmd en $CLASE"
 
 fail=0
 for tex in "${texfiles[@]}"; do
-  if compile_tex "$tex"; then
-    ok "PDF generado: ${tex%.tex}.pdf"
-  else
-    error "Falló la compilación de: $tex"
-    fail=1
-  fi
+  if compile_tex "$tex"; then ok "PDF: ${tex%.tex}.pdf"
+  else error "Falló: $tex"; fail=1; fi
 done
 exit "$fail"

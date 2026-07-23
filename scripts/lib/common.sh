@@ -4,17 +4,22 @@
 # ============================================================
 # Se carga con `source` desde todos los scripts de scripts/.
 # No ejecutar directamente.
+#
+# Modelo (ver ../README.md):
+#   - El framework aloja _PLANTILLAS/ y _BIBLIOTECA/ (compartido).
+#   - Los cursos viven FUERA, en ~/Documents/Academic_Class-*/course_NN_*/,
+#     con estructura 00–11 y sesiones 03_SESIONES/SNN_slug/ (02_Clase/…).
+#   - Por eso los helpers de curso/sesión reciben la RUTA del curso.
 # ============================================================
 
 set -euo pipefail
 
 # --- Rutas base ---------------------------------------------
-# ROOT_DIR = raíz del repositorio (dos niveles arriba de lib/)
 LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT_DIR="$(cd "$LIB_DIR/../.." && pwd)"
-CONFIG_FILE="$ROOT_DIR/config/course.yml"
-SESSIONS_DIR="$ROOT_DIR/course/sessions"
-TEMPLATES_DIR="$ROOT_DIR/templates"
+FW_DIR="$(cd "$LIB_DIR/../.." && pwd)"              # raíz del framework
+CONFIG_FILE="$FW_DIR/config/course.yml"            # valores por defecto del docente
+PLANTILLAS_DIR="$FW_DIR/_PLANTILLAS"
+BIBLIOTECA_DIR="$FW_DIR/_BIBLIOTECA"
 
 # --- Salida con color ---------------------------------------
 if [[ -t 1 ]]; then
@@ -30,9 +35,8 @@ warn()  { echo "${C_WARN}[!!]${C_OFF} $*" >&2; }
 error() { echo "${C_ERR}[ERROR]${C_OFF} $*" >&2; }
 die()   { error "$*"; exit 1; }
 
-# --- Configuración ------------------------------------------
-# config_get CLAVE [DEFAULT]
-# Lee una clave plana (clave: "valor") de config/course.yml.
+# --- Configuración (valores por defecto) --------------------
+# config_get CLAVE [DEFAULT] — lee una clave plana de config/course.yml.
 config_get() {
   local key="$1" default="${2:-}" value
   value="$(grep -E "^${key}:" "$CONFIG_FILE" 2>/dev/null | head -1 \
@@ -40,24 +44,29 @@ config_get() {
   echo "${value:-$default}"
 }
 
-# --- Sesiones -----------------------------------------------
-# session_dir NN → imprime la ruta de la sesión con ese número
+# --- Cursos y sesiones (reciben la RUTA del curso) ----------
+# is_course DIR — ¿DIR tiene pinta de curso 00–11?
+is_course() { [[ -d "$1/00_ADMINISTRACION" && -d "$1/03_SESIONES" ]]; }
+
+# sessions_root COURSE → ruta de 03_SESIONES
+sessions_root() { echo "$1/03_SESIONES"; }
+
+# session_dir COURSE NN → ruta de la sesión SNN_* de ese curso
 session_dir() {
-  local num
-  num="$(printf '%02d' "$((10#$1))")"
-  local match
-  match="$(find "$SESSIONS_DIR" -maxdepth 1 -type d -name "session_${num}_*" | head -1)"
+  local course="$1" num match
+  num="$(printf '%02d' "$((10#$2))")"
+  match="$(find "$course/03_SESIONES" -maxdepth 1 -type d -name "S${num}_*" 2>/dev/null | head -1)"
   [[ -n "$match" ]] || return 1
   echo "$match"
 }
 
-# list_sessions → imprime todas las carpetas de sesión ordenadas
-list_sessions() {
-  find "$SESSIONS_DIR" -maxdepth 1 -type d -name 'session_*' | sort
-}
+# list_sessions COURSE → carpetas de sesión ordenadas
+list_sessions() { find "$1/03_SESIONES" -maxdepth 1 -type d -name 'S[0-9]*' 2>/dev/null | sort; }
+
+# list_courses ACADEMIC_CLASS → carpetas de curso ordenadas
+list_courses() { find "$1" -maxdepth 1 -type d -name 'course_*' 2>/dev/null | sort; }
 
 # slugify "Texto Con Tildes" → texto_con_tildes
-# Translitera vocales acentuadas y ñ sin depender de iconv.
 slugify() {
   echo "$1" \
     | sed 'y/áéíóúüñÁÉÍÓÚÜÑ/aeiouunAEIOUUN/' \
@@ -67,7 +76,6 @@ slugify() {
 
 # --- Compilación LaTeX --------------------------------------
 # latex_engine ARCHIVO.tex → pdflatex | xelatex | lualatex
-# Detecta motor por comentario mágico %!TEX o uso de fontspec.
 latex_engine() {
   local tex="$1" magic
   magic="$(head -5 "$tex" | grep -oiE '%\s*!TEX\s+program\s*=\s*(pdflatex|xelatex|lualatex)' \
@@ -80,11 +88,8 @@ latex_engine() {
 }
 
 # compile_tex ARCHIVO.tex → compila en el directorio del archivo
-# Usa el compilador universal del workspace si existe;
-# si no, ejecuta el motor detectado dos veces.
 compile_tex() {
-  local tex="$1"
-  local compilador engine dir base
+  local tex="$1" compilador engine dir base
   compilador="$(eval echo "$(config_get compilador)")"
   dir="$(cd "$(dirname "$tex")" && pwd)"
   base="$(basename "$tex")"

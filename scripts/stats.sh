@@ -1,44 +1,36 @@
 #!/usr/bin/env bash
 # ============================================================
-# stats.sh — Estadísticas del curso
+# stats.sh — Resumen de un curso
 # ============================================================
 # Uso:
-#   ./scripts/stats.sh
+#   ./scripts/stats.sh COURSE_DIR
 #
-# Muestra un resumen por sesión: título (de metadata.yml),
-# formato, número de fuentes, PDFs compilados y materiales.
+# Muestra por sesión: número, título (metadata.yml), decks en
+# 02_Clase/, PDFs compilados y nº de actividades (03_Actividad/).
 # ============================================================
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
 
-meta_get() { # meta_get ARCHIVO CLAVE
-  grep -E "^$2:" "$1" 2>/dev/null | head -1 \
-    | sed -E 's/^[^:]+:[[:space:]]*//; s/[[:space:]]+#.*$//; s/^"//; s/"$//'
-}
+[[ $# -ge 1 ]] || { sed -n '2,11p' "${BASH_SOURCE[0]}"; exit 1; }
+COURSE="$1"
+is_course "$COURSE" || die "No parece un curso: $COURSE"
 
-printf '%s\n' "Curso: $(config_get curso) — $(config_get ciclo)"
-printf '%s\n' "Docente: $(config_get docente)"
-echo
+meta_get() { grep -E "^$2:" "$1" 2>/dev/null | head -1 \
+  | sed -E 's/^[^:]+:[[:space:]]*//; s/[[:space:]]+#.*$//; s/^"//; s/"$//'; }
 
+printf '%s\n\n' "Curso: $(basename "$COURSE")"
 total=0
-printf '%-4s %-38s %-9s %5s %5s %6s\n' "N°" "TÍTULO" "FORMATO" "SRC" "PDF" "PRÁCT"
-printf '%s\n' "--------------------------------------------------------------------------"
-for dir in $(list_sessions); do
+printf '%-4s %-34s %5s %5s %6s\n' "N°" "TÍTULO" "DECK" "PDF" "ACTIV"
+printf '%s\n' "------------------------------------------------------------"
+for s in $(list_sessions "$COURSE"); do
   total=$((total + 1))
-  meta="$dir/metadata.yml"
+  meta="$s/metadata.yml"
   num="$(meta_get "$meta" numero)"
   titulo="$(meta_get "$meta" titulo)"
-  formato="$(meta_get "$meta" formato_slides)"
-  # En proyectos Quarto la fuente es el .qmd (el .tex es generado)
-  if find "$dir/slides" -maxdepth 1 -name '*.qmd' 2>/dev/null | grep -q .; then
-    src="$(find "$dir/slides" -maxdepth 1 -name '*.qmd' | wc -l)"
-  else
-    src="$(find "$dir/slides" -maxdepth 2 -name '*.tex' 2>/dev/null | wc -l)"
-  fi
-  pdf="$(find "$dir/slides" -maxdepth 2 -name '*.pdf' 2>/dev/null | wc -l)"
-  pract="$(find "$dir/practice" -type f -not -name '.gitkeep' 2>/dev/null | wc -l)"
-  printf '%-4s %-38.38s %-9s %5s %5s %6s\n' \
-    "${num:-?}" "${titulo:-$(basename "$dir")}" "${formato:-?}" "$src" "$pdf" "$pract"
+  deck="$(find "$s/02_Clase" \( -name '*.tex' -o -name '*.qmd' \) -not -path '*index_files*' 2>/dev/null | wc -l)"
+  pdf="$(find "$s/02_Clase" -name '*.pdf' 2>/dev/null | wc -l)"
+  act="$(find "$s/03_Actividad" -type f -not -name '.gitkeep' 2>/dev/null | wc -l)"
+  printf '%-4s %-34.34s %5s %5s %6s\n' "${num:-?}" "${titulo:-$(basename "$s")}" "$deck" "$pdf" "$act"
 done
 echo
 echo "Total: $total sesiones"

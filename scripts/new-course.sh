@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# ============================================================
+# new-course.sh — Crea un curso nuevo (estructura 00–11)
+# ============================================================
+# Uso:
+#   ./scripts/new-course.sh ACADEMIC_CLASS_DIR NUM "TÍTULO"
+#
+# Ejemplo:
+#   ./scripts/new-course.sh ~/Documents/Academic_Class-Estadistica 00 "Estadística Descriptiva"
+#
+# Copia _PLANTILLAS/Plantilla_Curso (00–11) al Academic_Class
+# indicado como course_NN_<slug>/.
+# ============================================================
+
+source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
+
+usage() { sed -n '2,14p' "${BASH_SOURCE[0]}"; exit 1; }
+[[ $# -ge 3 ]] || usage
+
+AC="$1"
+NUM="$(printf '%02d' "$((10#$2))")"
+TITLE="$3"
+SLUG="$(slugify "$TITLE")"
+
+[[ -d "$AC" ]] || die "No existe el Academic_Class: $AC"
+[[ -d "$PLANTILLAS_DIR/Plantilla_Curso" ]] || die "Falta $PLANTILLAS_DIR/Plantilla_Curso"
+
+DEST="$AC/course_${NUM}_${SLUG}"
+[[ -e "$DEST" ]] && die "Ya existe: $DEST"
+
+info "Creando curso $NUM: '$TITLE'"
+cp -a "$PLANTILLAS_DIR/Plantilla_Curso" "$DEST"
+
+cat > "$DEST/README.md" <<EOF
+# $TITLE
+
+Curso \`course_${NUM}_${SLUG}\`. Estructura estándar 00–11
+(ver \`~/Documents/Academic_Class_Framework/README.md\`).
+
+- \`00_ADMINISTRACION\` … \`10_ARCHIVO\` — contenido canónico del curso.
+- \`11_SEMESTRES/<periodo>\` — cada dictado (crear con \`new-period.sh\`).
+EOF
+
+ok "Curso creado: $DEST"
+echo "Siguiente: ./scripts/new-session.sh \"$DEST\" 01 \"Título de la sesión\""
