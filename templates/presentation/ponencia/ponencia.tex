@@ -1,0 +1,35 @@
+% ============================================================================
+% PLANTILLA — PONENCIA (presentación de paper en congreso)
+% Compilar:  scripts/build.sh ponencia.tex   (XeLaTeX)
+% ============================================================================
+\documentclass{academic-beamer}
+\title{Título del paper}
+\subtitle{Congreso · año}
+\author{Edison Achalma \and Coautor}
+\institute{Universidad Nacional de San Cristóbal de Huamanga}
+\date{\today}
+
+\begin{document}
+\begin{frame}\titlepage\end{frame}
+
+\begin{frame}{Problema}
+\begin{itemize}\item Fenómeno y brecha en la literatura\end{itemize}
+\end{frame}
+
+\begin{frame}{Objetivo e hipótesis}
+\begin{block}{Hipótesis}$H_1$: relación esperada entre las variables.\end{block}
+\end{frame}
+
+\begin{frame}{Datos y método}
+\begin{itemize}\item Fuente y muestra \item Estrategia de identificación: $y_{it}=\alpha+\beta x_{it}+\mu_i+\varepsilon_{it}$\end{itemize}
+\end{frame}
+
+\begin{frame}{Resultados}
+\begin{table}\centering\begin{tabular}{lc}\toprule Variable & Coef. \\\midrule $x$ & 0.87\textsuperscript{***} \\\bottomrule\end{tabular}\end{table}
+\end{frame}
+
+\begin{frame}{Conclusiones}
+\begin{itemize}\item Contribución \item Limitaciones y agenda\end{itemize}
+\vfill\centering{\large\color{acento}Gracias.}
+\end{frame}
+\end{document}

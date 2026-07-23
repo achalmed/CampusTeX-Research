@@ -1,0 +1,36 @@
+% ============================================================================
+% PLANTILLA — WORKSHOP (taller práctico con software)
+% Compilar:  scripts/build.sh workshop.tex   (XeLaTeX)
+% ============================================================================
+\documentclass{academic-beamer}
+\title{Título del workshop}
+\subtitle{Herramienta / software}
+\author{Edison Achalma B.Sc. Econ.}
+\institute{Universidad Nacional de San Cristóbal de Huamanga}
+\date{\today}
+
+\begin{document}
+\begin{frame}\titlepage\end{frame}
+
+\begin{frame}{Objetivos y requisitos}
+\begin{itemize}\item Al terminar podrás\ldots \item Requisitos previos: software y datos\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Actividad 1 — Preparación}
+\begin{codigo}[language=R]
+library(tidyverse)
+datos <- read_csv("datos.csv")
+\end{codigo}
+\begin{nota}Consigna: cargar los datos y describirlos.\end{nota}
+\end{frame}
+
+\begin{frame}[fragile]{Actividad 2 — Análisis}
+\begin{codigo}[language=R]
+modelo <- lm(y ~ x, data = datos); summary(modelo)
+\end{codigo}
+\end{frame}
+
+\begin{frame}{Cierre}
+\begin{itemize}\item Qué construimos \item Recursos para seguir practicando\end{itemize}
+\end{frame}
+\end{document}

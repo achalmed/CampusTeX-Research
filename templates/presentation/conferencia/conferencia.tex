@@ -1,0 +1,40 @@
+% ============================================================================
+% PLANTILLA — CONFERENCIA (charla magistral / invitada)
+% SIN diseño: todo lo pone academic-beamer + el tema «Academic».
+% Compilar:  scripts/build.sh conferencia.tex   (XeLaTeX)
+% ============================================================================
+\documentclass{academic-beamer}
+\title{Título de la conferencia}
+\subtitle{Evento · lugar}
+\author{Edison Achalma B.Sc. Econ.}
+\institute{Universidad Nacional de San Cristóbal de Huamanga}
+\date{\today}
+
+\begin{document}
+\begin{frame}\titlepage\end{frame}
+\begin{frame}{Hoja de ruta}\tableofcontents\end{frame}
+
+\section{Motivación}
+\begin{frame}{Por qué importa}
+\begin{itemize}\item Problema o pregunta que motiva la charla \item Relevancia y contexto\end{itemize}
+\end{frame}
+
+\section{Argumento central}
+\begin{frame}{Tesis de la conferencia}
+\begin{block}{Idea principal}Enunciado del argumento que sostiene la charla.\end{block}
+\end{frame}
+\begin{frame}{Evidencia}
+\begin{itemize}\item Dato o resultado 1 \item Dato o resultado 2\end{itemize}
+\end{frame}
+
+\section{Implicancias}
+\begin{frame}{Qué se sigue de esto}
+\begin{importante}Consecuencia o llamado a la acción.\end{importante}
+\end{frame}
+
+\section*{Cierre}
+\begin{frame}{Conclusiones}
+\begin{itemize}\item Mensaje para llevar 1 \item Mensaje para llevar 2\end{itemize}
+\vfill\centering{\large\color{acento}Gracias.}
+\end{frame}
+\end{document}

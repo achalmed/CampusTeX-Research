@@ -1,0 +1,44 @@
+% ============================================================================
+% PLANTILLA — DEFENSA DE TESIS (sustentación)
+% Compilar:  scripts/build.sh defensa-tesis.tex   (XeLaTeX)
+% Nota: el DOCUMENTO de tesis usa el Academic_Writing_Framework; esta plantilla
+% es solo la PRESENTACIÓN de sustentación.
+% ============================================================================
+\documentclass{academic-beamer}
+\title{Título de la tesis}
+\subtitle{Tesis para optar el título profesional de Economista}
+\author{Bach. Nombre Apellido}
+\institute{Asesor: Mg. Nombre · UNSCH — E.P. de Economía}
+\date{\today}
+
+\begin{document}
+\begin{frame}\titlepage\end{frame}
+\begin{frame}{Contenido}\tableofcontents\end{frame}
+
+\section{Planteamiento}
+\begin{frame}{Problema de investigación}
+\begin{block}{Pregunta}¿\ldots?\end{block}
+\begin{itemize}\item Realidad problemática \item Justificación\end{itemize}
+\end{frame}
+
+\section{Objetivos e hipótesis}
+\begin{frame}{Objetivos e hipótesis}
+\begin{itemize}\item Objetivo general y específicos \item $H_1$: \ldots\end{itemize}
+\end{frame}
+
+\section{Metodología}
+\begin{frame}{Datos y modelo}
+Tipo y diseño; muestra; modelo: $y_{it}=\alpha+\beta x_{it}+\mu_i+\varepsilon_{it}$.
+\end{frame}
+
+\section{Resultados}
+\begin{frame}{Resultados principales}
+\begin{table}\centering\begin{tabular}{lc}\toprule Variable & Coef. \\\midrule $x$ & 0.87\textsuperscript{***} \\\bottomrule\end{tabular}\end{table}
+\end{frame}
+
+\section{Conclusiones}
+\begin{frame}{Conclusiones y aportes}
+\begin{itemize}\item Conclusión 1 \item Aporte y recomendaciones\end{itemize}
+\vfill\centering{\large\color{acento}Gracias.}
+\end{frame}
+\end{document}
