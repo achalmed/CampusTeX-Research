@@ -12,8 +12,8 @@
 \RequirePackage{academic-colors}
 \RequirePackage{academic-icons}
 
-% Estilo base: filete de acento a la izquierda, fondo suave, título sin filete.
-\tcbset{academic@base/.style={
+% Estilo base «academicbox»: filete de acento a la izquierda, fondo suave.
+\tcbset{academicbox/.style={
   enhanced, breakable, frame hidden, sharp corners,
   colback=cajafondo, colbacktitle=cajafondo, titlerule=0pt,
   borderline west={1.6pt}{0pt}{acento},
@@ -21,14 +21,19 @@
   before skip=8pt, after skip=8pt,
   coltitle=acento, fonttitle=\bfseries\small}}
 
-\newtcolorbox{nota}[1][Nota]{academic@base, title={\iconnota\ \textsc{#1}}}
-\newtcolorbox{ejemplo}[1][Ejemplo]{academic@base, title={\iconejemplo\ \textsc{#1}}}
-\newtcolorbox{definicion}[1][Definición]{academic@base, title={\icondefinicion\ \textsc{#1}}}
-\newtcolorbox{teorema}[1][Teorema]{academic@base, title={\iconteorema\ \textsc{#1}}}
-\newtcolorbox{observacion}[1][Observación]{academic@base, title={\iconobservacion\ \textsc{#1}}}
-\newtcolorbox{importante}[1][Importante]{academic@base, title={\iconimportante\ \textsc{#1}}}
-\newtcolorbox{instrucciones}[1][Instrucciones]{academic@base, title={\iconinstrucciones\ \textsc{#1}}}
-\newtcolorbox{formulario}[1][Formulario]{academic@base, title={\iconformulario\ \textsc{#1}}}
-\newtcolorbox{datos}[1][Datos]{academic@base, title={\icondatos\ \textsc{#1}}}
-\newtcolorbox{criterios}[1][Criterios]{academic@base, title={\iconcriterios\ \textsc{#1}}}
+% Cajas simples (título por defecto + override opcional) --------------------
+\newtcolorbox{nota}[1][Nota]{academicbox, title={\iconnota\ \textsc{#1}}}
+\newtcolorbox{ejemplo}[1][Ejemplo]{academicbox, title={\iconejemplo\ \textsc{#1}}}
+\newtcolorbox{observacion}[1][Observación]{academicbox, title={\iconobservacion\ \textsc{#1}}}
+\newtcolorbox{importante}[1][Importante]{academicbox, title={\iconimportante\ \textsc{#1}}}
+\newtcolorbox{instrucciones}[1][Instrucciones]{academicbox, title={\iconinstrucciones\ \textsc{#1}}}
+\newtcolorbox{formulario}[1][Formulario]{academicbox, title={\iconformulario\ \textsc{#1}}}
+\newtcolorbox{datos}[1][Datos]{academicbox, title={\icondatos\ \textsc{#1}}}
+\newtcolorbox{criterios}[1][Criterios]{academicbox, title={\iconcriterios\ \textsc{#1}}}
+
+% Cajas numeradas con nombre opcional (definición / teorema) ----------------
+\NewTColorBox[auto counter,number within=section]{definicion}{o}{academicbox,
+  title={\icondefinicion\ \textsc{Definición}~\thetcbcounter\IfValueT{#1}{\ \normalfont\itshape(#1)}}}
+\NewTColorBox[auto counter,number within=section]{teorema}{o}{academicbox,
+  title={\iconteorema\ \textsc{Teorema}~\thetcbcounter\IfValueT{#1}{\ \normalfont\itshape(#1)}}}
 \endinput
