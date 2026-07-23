@@ -1,0 +1,29 @@
+%% ============================================================================
+%% academic-tables.sty — Tablas editoriales (booktabs) e identidad de figuras
+%% ----------------------------------------------------------------------------
+%% Reglas finas en color «filete», sin líneas verticales, notas al pie estilo
+%% APA. Un solo estilo de tabla/caption para todo el sistema.
+%% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{academic-tables}[2026/07/23 v1 Tablas Academic]
+\RequirePackage{booktabs}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{threeparttable}
+\RequirePackage{colortbl}   % \arrayrulecolor
+\RequirePackage{siunitx}
+\RequirePackage{academic-colors}
+
+\arrayrulecolor{filete}
+\renewcommand{\arraystretch}{1.18}
+\setlength{\heavyrulewidth}{1pt}
+\setlength{\lightrulewidth}{0.5pt}
+
+% Columna X centrada / a la derecha para tabularx
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedleft\arraybackslash}X}
+
+% Nota al pie de tabla/figura, estilo APA
+\newcommand{\notatabla}[1]{\par\vspace{2pt}{\footnotesize\color{secundario}\textit{Nota.} #1\par}}
+\let\notafigura\notatabla
+\endinput

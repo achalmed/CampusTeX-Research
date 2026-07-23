@@ -5,13 +5,19 @@
 %% tema Beamer (beamerthemeAcademic). Un solo origen de verdad visual para todo
 %% el material docente: diapositivas, exámenes, reports y pósters.
 %%
-%% Motor: XeLaTeX exclusivamente.
+%% Motor: XeLaTeX exclusivamente.  Orden importante: amsmath antes de unicode-math
+%% (que carga academic-fonts vía libertinus).
 %% ============================================================================
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{academic}[2026/07/23 v1 Identidad Academic (XeLaTeX)]
 
-\RequirePackage{academic-colors}   % paleta (config/palette.tex)
-\RequirePackage{academic-fonts}    % tipografía fontspec (Libertinus + Inconsolata)
-% Fases siguientes cargarán aquí: academic-math, -boxes, -tables, -code,
-% -figures, -icons (todos parte de la misma identidad).
+\RequirePackage{amsmath}          % antes de unicode-math
+\RequirePackage{academic-colors}  % paleta (config/palette.tex)
+\RequirePackage{academic-fonts}   % tipografía fontspec (Libertinus→unicode-math + Inconsolata)
+\RequirePackage{academic-math}    % mathtools + operadores comunes
+\RequirePackage{academic-icons}   % iconografía (fontawesome5)
+\RequirePackage{academic-tables}  % tablas booktabs + notas
+\RequirePackage{academic-figures} % captions + figuras
+\RequirePackage{academic-boxes}   % cajas tcolorbox (nota, definición, teorema…)
+\RequirePackage{academic-code}    % código R/Python/Stata + salidas
 \endinput

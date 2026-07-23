@@ -1,0 +1,23 @@
+%% ============================================================================
+%% academic-math.sty — Matemática (unicode-math ya lo carga libertinus)
+%% ----------------------------------------------------------------------------
+%% amsmath se carga antes (en academic.sty, previo a unicode-math). Aquí:
+%% mathtools + operadores y macros comunes de economía/estadística.
+%% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{academic-math}[2026/07/23 v1 Matematica Academic]
+\RequirePackage{mathtools}
+
+% Conjuntos y operadores frecuentes
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\N}{\mathbb{N}}
+\providecommand{\Z}{\mathbb{Z}}
+\providecommand{\E}{\mathbb{E}}
+\providecommand{\Prob}{\mathbb{P}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\plim}{plim}
+\endinput

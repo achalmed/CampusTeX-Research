@@ -1,0 +1,23 @@
+%% ============================================================================
+%% academic-figures.sty — Figuras, captions y diagramas
+%% ----------------------------------------------------------------------------
+%% Caption editorial: etiqueta en acento, texto secundario, sin adornos.
+%% Base tikz/pgfplots disponible para diagramas limpios.
+%% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{academic-figures}[2026/07/23 v1 Figuras Academic]
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{academic-colors}
+
+\captionsetup{
+  font={small,color=textoprincipal},
+  labelfont={bf,color=acento},
+  labelsep=period,
+  justification=justified,
+  singlelinecheck=false,
+  skip=6pt}
+
+% Diagramas: tikz/pgfplots con estilo sobrio (se cargan bajo demanda por el
+% documento; aquí solo se fija la base para no imponer tiempo de compilación).
+\endinput

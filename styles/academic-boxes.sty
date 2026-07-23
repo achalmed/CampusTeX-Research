@@ -1,0 +1,34 @@
+%% ============================================================================
+%% academic-boxes.sty — Cajas informativas (tcolorbox), editorial minimalista
+%% ----------------------------------------------------------------------------
+%% Sin marcos completos, sin sombras, sin degradados: solo un filete de acento a
+%% la izquierda, fondo suave y rótulo en versalitas + icono. Idéntico en B/N.
+%% Un solo estilo base; cada caja semántica lo especializa con título propio.
+%% Uso: \begin{nota} ... \end{nota}   ·   \begin{nota}[Título propio] ...
+%% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{academic-boxes}[2026/07/23 v1 Cajas Academic]
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{academic-colors}
+\RequirePackage{academic-icons}
+
+% Estilo base: filete de acento a la izquierda, fondo suave, título sin filete.
+\tcbset{academic@base/.style={
+  enhanced, breakable, frame hidden, sharp corners,
+  colback=cajafondo, colbacktitle=cajafondo, titlerule=0pt,
+  borderline west={1.6pt}{0pt}{acento},
+  boxrule=0pt, left=10pt, right=8pt, top=6pt, bottom=6pt,
+  before skip=8pt, after skip=8pt,
+  coltitle=acento, fonttitle=\bfseries\small}}
+
+\newtcolorbox{nota}[1][Nota]{academic@base, title={\iconnota\ \textsc{#1}}}
+\newtcolorbox{ejemplo}[1][Ejemplo]{academic@base, title={\iconejemplo\ \textsc{#1}}}
+\newtcolorbox{definicion}[1][Definición]{academic@base, title={\icondefinicion\ \textsc{#1}}}
+\newtcolorbox{teorema}[1][Teorema]{academic@base, title={\iconteorema\ \textsc{#1}}}
+\newtcolorbox{observacion}[1][Observación]{academic@base, title={\iconobservacion\ \textsc{#1}}}
+\newtcolorbox{importante}[1][Importante]{academic@base, title={\iconimportante\ \textsc{#1}}}
+\newtcolorbox{instrucciones}[1][Instrucciones]{academic@base, title={\iconinstrucciones\ \textsc{#1}}}
+\newtcolorbox{formulario}[1][Formulario]{academic@base, title={\iconformulario\ \textsc{#1}}}
+\newtcolorbox{datos}[1][Datos]{academic@base, title={\icondatos\ \textsc{#1}}}
+\newtcolorbox{criterios}[1][Criterios]{academic@base, title={\iconcriterios\ \textsc{#1}}}
+\endinput
