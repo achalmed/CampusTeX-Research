@@ -1,13 +1,13 @@
 %% ============================================================================
-%% academic-report.cls — Documentos de gestión docente (XeLaTeX)
+%% academic-report.cls — Documentos de gestión docente (LuaLaTeX)
 %% ----------------------------------------------------------------------------
 %% Sílabos, calendarios, notas de docente (guiones de clase), manuales, guías,
 %% rúbricas. Hereda academic-base (identidad única) y añade metadatos +
 %% encabezado institucional + cabeceras/pie. El diseño vive en la base y styles/.
-%% Motor: XeLaTeX exclusivamente.
+%% Motor: LuaLaTeX exclusivamente.
 %% ============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{academic-report}[2026/07/23 v1 Gestion docente Academic (XeLaTeX)]
+\ProvidesClass{academic-report}[2026/07/23 v1 Gestion docente Academic (LuaLaTeX)]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{academic-base}}
 \ProcessOptions\relax

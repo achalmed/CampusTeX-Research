@@ -1,15 +1,15 @@
 %% ============================================================================
-%% academic-beamer.cls — Diapositivas y presentaciones (Beamer, XeLaTeX)
+%% academic-beamer.cls — Diapositivas y presentaciones (Beamer, LuaLaTeX)
 %% ----------------------------------------------------------------------------
 %% Clase delgada sobre `beamer` que aplica el tema «Academic». Comparte la
 %% identidad visual con academic-base/academic-exam (mismo styles/academic.sty,
 %% cargado por el tema). Las plantillas solo hacen \documentclass{academic-beamer}.
-%% Motor: XeLaTeX exclusivamente.
+%% Motor: LuaLaTeX exclusivamente.
 %%
 %% Opciones: se pasan a beamer (p. ej. aspectratio=169, handout).
 %% ============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{academic-beamer}[2026/07/23 v1 Presentaciones Academic (XeLaTeX)]
+\ProvidesClass{academic-beamer}[2026/07/23 v1 Presentaciones Academic (LuaLaTeX)]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
 \ProcessOptions\relax

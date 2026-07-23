@@ -1,4 +1,4 @@
-%!TEX program = pdflatex
+%!TEX program = lualatex
 % ============================================================
 % Sesión {{NUMBER}}: {{TITLE}}
 % Curso: {{COURSE}} ({{CYCLE}})
@@ -7,7 +7,8 @@
 % ============================================================
 \documentclass[xcolor=table,aspectratio={{ASPECT}},11pt]{beamer}
 
-\usepackage[utf8]{inputenc}
+% Motor: LuaLaTeX. UTF-8 es nativo (no se necesita inputenc); fontenc[T1] +
+% babel conservan las fuentes Latin Modern y la partición del español.
 \usepackage[T1]{fontenc}
 \usepackage[spanish,es-tabla]{babel}
 \usepackage{graphicx}

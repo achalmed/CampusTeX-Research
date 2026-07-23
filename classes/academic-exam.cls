@@ -1,15 +1,16 @@
 %% ============================================================================
 %% academic-exam.cls — Evaluaciones (exámenes, prácticas, bancos, solucionarios)
 %% ----------------------------------------------------------------------------
-%% Migración XeLaTeX de la antigua evaluacion.cls: hereda academic-base (identidad
+%% Sucesora de la antigua evaluacion.cls: hereda academic-base (identidad
 %% única: fuentes, paleta, cajas, código, tablas, math) y añade SOLO lo específico
 %% de evaluaciones. Preserva toda la funcionalidad y la API previa.
+%% (Motor: pdfLaTeX -> XeLaTeX -> LuaLaTeX en su historia; hoy LuaLaTeX.)
 %%
 %% Opciones:  soluciones · claves · compacto
-%% Motor: XeLaTeX exclusivamente.
+%% Motor: LuaLaTeX exclusivamente.
 %% ============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{academic-exam}[2026/07/23 v1 Evaluaciones Academic (XeLaTeX)]
+\ProvidesClass{academic-exam}[2026/07/23 v1 Evaluaciones Academic (LuaLaTeX)]
 
 % ---------------------------------------------------------------- opciones ---
 \newif\ifev@soluciones \ev@solucionesfalse
@@ -20,7 +21,7 @@
 \DeclareOption{compacto}{\ev@compactotrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{academic-base}}
 \ProcessOptions\relax
-\LoadClass{academic-base}     % identidad + article + XeLaTeX
+\LoadClass{academic-base}     % identidad + article + LuaLaTeX
 
 % Paquetes extra no provistos por la base/identidad
 \RequirePackage{fancyhdr}

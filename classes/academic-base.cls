@@ -1,13 +1,13 @@
 %% ============================================================================
-%% academic-base.cls — Clase base del framework (documentos de texto, XeLaTeX)
+%% academic-base.cls — Clase base del framework (documentos de texto, LuaLaTeX)
 %% ----------------------------------------------------------------------------
 %% Núcleo sobre `article` que carga la identidad única (styles/academic.sty) y el
 %% layout base. NO se usa directamente: de ella heredan academic-exam y
 %% academic-report. El diseño vive aquí y en styles/; nunca en los documentos.
-%% Motor: XeLaTeX exclusivamente.
+%% Motor: LuaLaTeX exclusivamente.
 %% ============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{academic-base}[2026/07/23 v1 Clase base Academic (XeLaTeX)]
+\ProvidesClass{academic-base}[2026/07/23 v1 Clase base Academic (LuaLaTeX)]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
