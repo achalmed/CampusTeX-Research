@@ -44,28 +44,40 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
   (colores, `config_get`, `slugify`, `latex_engine`, `compile_tex`, y los helpers
   `is_course`/`session_dir`/`list_sessions`/`list_courses` que reciben rutas). Los
   scripts de entrada solo orquestan. Nuevos parámetros → `config/course.yml`.
-- `_PLANTILLAS/` — esqueletos para copiar: `Plantilla_Curso` (00–11),
-  `Plantilla_Sesion` (anatomía + plantillas con `{{PLACEHOLDERS}}`),
-  `Plantilla_Periodo`, y plantillas de documento (`Plantilla_Examen/Practica/Rubrica/Caso/Lectura`).
-- `_BIBLIOTECA/` — bancos compartidos (`Banco_*`) + `Bibliografia/course.bib`.
-- `evaluaciones/` — sistema LaTeX de evaluaciones: **una sola clase**
-  `evaluacion.cls` (todo el diseño) + `plantillas/` (12 tipos) + `muestras/`.
-  Motor **pdfLaTeX** (2 pasadas por los totales del `.aux`), independiente del de
-  las diapositivas. Los cambios de diseño van **solo** en `evaluacion.cls`.
-- `assets/branding/` — logo institucional canónico.
-- `docs/` — documentación del tooling (incl. `docs/evaluaciones.md`).
+**Plataforma editorial (rediseño 2026-07-23, ver `docs/00-arquitectura.md` — fuente de verdad arquitectónica). Motor XeLaTeX exclusivo. Capas, cada una con responsabilidad única:**
 
-> Nota histórica: antes existían `course/` (extraído a
-> `Academic_Class-Metodologia-investigacion/course_03`), `templates/` (consolidado
-> en `_PLANTILLAS/`) y `bibliography/` (consolidado en `_BIBLIOTECA/Bibliografia/`).
+- `styles/` — **identidad visual única** (`academic.sty` carga colores, fuentes
+  fontspec Libertinus+Inconsolata, math, iconos, cajas, código, tablas, idioma).
+  La cargan por igual las clases de documento **y** el tema Beamer → un examen y
+  una diapositiva comparten diseño al carácter. **El único punto de cambio de
+  valores está en `config/palette.tex` y `config/fonts.tex`.**
+- `classes/` — clases delgadas que encapsulan el diseño: `academic-base` (núcleo
+  `article`), `academic-exam` (evaluaciones, 3 modos, hereda base), `academic-report`
+  (sílabo/calendario/nota-docente/rúbrica, hereda base), `academic-beamer` (beamer + tema).
+- `themes/` — tema Beamer propio `beamer{,color,font,inner,outer}themeAcademic` (minimalista; consume `styles/`).
+- `templates/` — documentos vacíos, **sin diseño** (`presentation/`, `exam/` 12 tipos, `report/`); solo `\documentclass{academic-*}` + contenido.
+- `scaffolds/` — esqueletos de **carpetas** (no compilables): `course` (00–11), `session` (01_Antes…07_Notas), `period`.
+- `libraries/` — bancos compartidos (`Banco_*`); `bibliography/` — `.bib`.
+- `assets/branding/` — logo canónico. `examples/` — ejemplos compilados. `config/` — `course.yml` (datos) + `palette.tex`/`fonts.tex` (identidad).
+- `docs/` — documentación técnica (`00-arquitectura.md` es la canónica).
+
+> Nota histórica: se retiraron `evaluaciones/` (→ `academic-exam` + `templates/exam/`),
+> `_PLANTILLAS/` (→ `templates/` + `scaffolds/`) y `_BIBLIOTECA/` (→ `libraries/` +
+> `bibliography/`) en el cutover del rediseño; el motor pasó de pdfLaTeX a XeLaTeX.
 
 ## Comandos
 
 ```bash
-# Scaffolding (copian desde _PLANTILLAS/ hacia un curso/Academic_Class)
+# Scaffolds de carpetas (copian desde scaffolds/ hacia un curso/Academic_Class)
 ./scripts/new-course.sh  <ACADEMIC_CLASS_DIR> NN "Título"          # curso 00–11
 ./scripts/new-session.sh <COURSE_DIR> NN "Título" [--quarto]        # sesión SNN_slug
 ./scripts/new-period.sh  <COURSE_DIR> <AAAA-ciclo>                  # dictado en 11_SEMESTRES
+
+# Documentos LaTeX (copian desde templates/ y compilan con XeLaTeX)
+./scripts/new-presentation.sh <COURSE_DIR> NN "Título" [--tipo clase]   # diapositivas → SNN/02_Clase (academic-beamer)
+./scripts/new-evaluacion.sh   <COURSE_DIR> <tipo|01-12> "Título"        # examen → 04_EVALUACIONES (academic-exam)
+./scripts/new-report.sh       <COURSE_DIR> <silabo|calendario|nota-docente|rubrica> "Título"  # academic-report
+./scripts/build.sh <ARCHIVO.tex> [--modo examen|claves|soluciones|todos]  # compila cualquier .tex con XeLaTeX
 
 # Validación y resumen
 ./scripts/validate.sh <COURSE_DIR | ACADEMIC_CLASS_DIR>            # invariantes 00–11 (exit!=0 si error)

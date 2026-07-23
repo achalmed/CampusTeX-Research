@@ -3,12 +3,18 @@
 > Repositorio **canónico** del estándar de carpetas, archivos y nomenclatura para
 > **todas** las carpetas `~/Documents/Academic_Class-*` — cualquier asignatura
 > universitaria (Economía, Matemática, Estadística, Programación, Investigación, …).
-> Este repo, además de definir el estándar, **aloja lo compartido** (`_PLANTILLAS/`,
-> `_BIBLIOTECA/`) y **produce los dos entregables LaTeX de cada curso**:
-> **diapositivas** de clase (Beamer, en `03_SESIONES/`) y **evaluaciones**
-> (exámenes/prácticas, en `04_EVALUACIONES/` — ver [`evaluaciones/`](evaluaciones/README.md)).
+> Este repo, además de definir el estándar, es una **plataforma editorial LaTeX
+> (XeLaTeX)** con identidad visual única que **produce todo el material docente**:
+> diapositivas, exámenes, sílabos, notas de docente, calendarios, rúbricas, pósters…
+> — todo desde `classes/` + `styles/` + `templates/`.
 >
 > Docente: **Edison Achalma B.Sc. Econ.** · Idioma de todo el contenido: **español**.
+
+> ⚙️ **Arquitectura (rediseño 2026-07-23):** la fuente de verdad arquitectónica es
+> [`docs/00-arquitectura.md`](docs/00-arquitectura.md) — capas (`classes/ styles/
+> themes/ templates/ scaffolds/ libraries/ config/`), motor XeLaTeX único y un solo
+> punto de cambio visual (`config/palette.tex`). Algunas secciones de más abajo aún
+> describen el layout previo (`_PLANTILLAS/`, `evaluaciones/`), retirado en el cutover.
 
 La idea rectora: **pensar como una universidad, no como un profesor que solo guarda
 archivos**. Lo compartido (plantillas, bancos) vive **una sola vez** aquí en el
