@@ -24,10 +24,11 @@ check() {
 echo "Diagnóstico del entorno — Academic_Class Framework"
 echo "=================================================="
 check git      "Control de versiones"
-check pdflatex "Motor LaTeX estándar"
-check xelatex  "Motor LaTeX (fontspec)"
-check lualatex "Motor LaTeX (yaac/luatex)"
+check lualatex "Motor LaTeX del framework — LuaLaTeX (fontspec + microtype)"
 check quarto   "Quarto (decks RevealJS)"
+# Motores alternativos: informativos. El framework es LuaLaTeX-only (2026).
+check xelatex  "Motor alternativo XeLaTeX (no soportado)"
+check pdflatex "Motor alternativo pdfLaTeX (no soportado)"
 
 COMPILADOR="$(eval echo "$(config_get compilador)")"
 if [[ -x "$COMPILADOR" ]]; then

@@ -76,16 +76,20 @@ slugify() {
 }
 
 # --- Compilación LaTeX --------------------------------------
-# latex_engine ARCHIVO.tex → pdflatex | xelatex | lualatex
+# latex_engine ARCHIVO.tex → motor a usar.
+#   El framework es LuaLaTeX-only (migración 2026). Se honra un override
+#   explícito `%!TEX program = pdflatex|xelatex|lualatex` (para documentos
+#   legacy que lo declaren) y, en su defecto, se usa lualatex. Se retiró la
+#   antigua heurística `fontspec → xelatex`: bajo LuaLaTeX fontspec es el
+#   caso nativo, y además fallaba con los documentos del framework (que solo
+#   hacen \documentclass{academic-*}, sin la cadena "fontspec" en el propio
+#   .tex, y caían por error a pdflatex).
 latex_engine() {
   local tex="$1" magic
   magic="$(head -5 "$tex" | grep -oiE '%\s*!TEX\s+program\s*=\s*(pdflatex|xelatex|lualatex)' \
     | sed -E 's/.*=\s*//' | tr '[:upper:]' '[:lower:]')" || true
   if [[ -n "$magic" ]]; then echo "$magic"; return; fi
-  if grep -qE '\\documentclass.*\{yaac-luatex\}' "$tex"; then echo "lualatex"; return; fi
-  if grep -qE '\\documentclass.*\{yaac-xelatex\}' "$tex"; then echo "xelatex"; return; fi
-  if grep -q 'fontspec' "$tex"; then echo "xelatex"; return; fi
-  echo "pdflatex"
+  echo "lualatex"   # motor por defecto del framework (LuaLaTeX-only)
 }
 
 # compile_tex ARCHIVO.tex → compila en el directorio del archivo

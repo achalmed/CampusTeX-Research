@@ -40,5 +40,5 @@ nivel: "pregrado"
 
 # --- Compilación ---------------------------------- [script]
 # Ruta al compilador universal del workspace (autodetecta motor).
-# Si no existe, build-session.sh usa pdflatex/xelatex/lualatex directo.
+# Si no existe, el framework compila con lualatex directo (motor único 2026).
 compilador: "$HOME/Documents/scripts_for_latex/script_compilar_latex/main.sh"

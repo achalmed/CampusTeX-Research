@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # ============================================================
-# build.sh — Compila CUALQUIER documento del framework (XeLaTeX)
+# build.sh — Compila CUALQUIER documento del framework (LuaLaTeX)
 # ============================================================
 # Uso:
 #   ./scripts/build.sh ARCHIVO.tex [--modo MODO] [--clean]
 #
-# Motor único: XeLaTeX (dos pasadas). Localiza clases, estilos, tema Beamer y
+# Motor único: LuaLaTeX (dos pasadas). Localiza clases, estilos, tema Beamer y
 # config vía TEXINPUTS, así el documento solo hace \documentclass{academic-*}.
 #
 # --modo (solo evaluaciones, academic-exam): examen | claves | soluciones | todos
@@ -13,8 +13,11 @@
 #   la salida ARCHIVO[-claves|-soluciones].pdf.
 # --clean : elimina auxiliares del documento.
 #
-# Reemplaza a build-session/build-course/build-evaluacion (todo es XeLaTeX ahora).
+# Reemplaza a build-session/build-course/build-evaluacion (todo es LuaLaTeX ahora).
 # ============================================================
+
+# Motor LaTeX (punto de conmutación único; LuaLaTeX es el soportado).
+ENGINE="${ENGINE:-lualatex}"
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
 
@@ -42,14 +45,14 @@ if [[ "$CLEAN" -eq 1 ]]; then
   ok "Auxiliares de $BASE eliminados."; exit 0
 fi
 
-require_cmd xelatex
+require_cmd "$ENGINE"
 
-# compila JOBNAME PREAMBULO — dos pasadas XeLaTeX
+# compila JOBNAME PREAMBULO — dos pasadas LuaLaTeX
 compila() {
   local jobname="$1" pre="$2"
   ( cd "$DIR" \
-    && xelatex -interaction=nonstopmode -halt-on-error -jobname "$jobname" "${pre}\\input{$BASE.tex}" >/dev/null 2>&1 \
-    && xelatex -interaction=nonstopmode -halt-on-error -jobname "$jobname" "${pre}\\input{$BASE.tex}" >/dev/null 2>&1 ) \
+    && "$ENGINE" -interaction=nonstopmode -halt-on-error -jobname "$jobname" "${pre}\\input{$BASE.tex}" >/dev/null 2>&1 \
+    && "$ENGINE" -interaction=nonstopmode -halt-on-error -jobname "$jobname" "${pre}\\input{$BASE.tex}" >/dev/null 2>&1 ) \
     && ok "PDF: $DIR/$jobname.pdf" || { error "Falló: $jobname. Revise $DIR/$jobname.log"; return 1; }
 }
 
