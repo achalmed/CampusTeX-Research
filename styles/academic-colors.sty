@@ -1,0 +1,31 @@
+%% ============================================================================
+%% academic-colors.sty — Paleta del framework (API de color estable)
+%% ----------------------------------------------------------------------------
+%% Define colores por defecto y luego carga config/palette.tex (que los
+%% sobrescribe). Expone ALIASES SEMÁNTICOS: usa \color{acento}, no un HEX.
+%% Parte de la identidad única «Academic»; la cargan clases y tema Beamer.
+%% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{academic-colors}[2026/07/23 v1 Paleta Academic]
+\RequirePackage{xcolor}
+
+% Valores por defecto (por si falta config/palette.tex) --------------------
+\definecolor{academicInk}{HTML}{1F2A37}
+\definecolor{academicText}{HTML}{1A1A1A}
+\definecolor{academicMuted}{HTML}{5B5B5B}
+\definecolor{academicRule}{HTML}{B7B7B7}
+\definecolor{academicSoft}{gray}{0.97}
+\definecolor{academicLink}{HTML}{1F2A37}
+
+% Los valores reales viven en config/palette.tex (único punto de cambio) ----
+\InputIfFileExists{palette.tex}{}{%
+  \PackageWarning{academic-colors}{config/palette.tex no encontrado; uso paleta por defecto}}
+
+% Aliases semánticos = API de color del framework --------------------------
+\colorlet{acento}{academicInk}       % el único acento
+\colorlet{textoprincipal}{academicText}
+\colorlet{secundario}{academicMuted} % jerarquía secundaria
+\colorlet{filete}{academicRule}      % líneas, bordes
+\colorlet{cajafondo}{academicSoft}   % fondo de cajas
+\colorlet{enlace}{academicLink}      % hyperref
+\endinput

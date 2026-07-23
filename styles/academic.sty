@@ -1,0 +1,17 @@
+%% ============================================================================
+%% academic.sty — Identidad visual «Academic» (meta-paquete, ÚNICO punto de entrada)
+%% ----------------------------------------------------------------------------
+%% La cargan por igual las clases de documento (academic-base y derivadas) y el
+%% tema Beamer (beamerthemeAcademic). Un solo origen de verdad visual para todo
+%% el material docente: diapositivas, exámenes, reports y pósters.
+%%
+%% Motor: XeLaTeX exclusivamente.
+%% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{academic}[2026/07/23 v1 Identidad Academic (XeLaTeX)]
+
+\RequirePackage{academic-colors}   % paleta (config/palette.tex)
+\RequirePackage{academic-fonts}    % tipografía fontspec (Libertinus + Inconsolata)
+% Fases siguientes cargarán aquí: academic-math, -boxes, -tables, -code,
+% -figures, -icons (todos parte de la misma identidad).
+\endinput

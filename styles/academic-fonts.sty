@@ -1,0 +1,28 @@
+%% ============================================================================
+%% academic-fonts.sty — Tipografía única del framework (XeLaTeX + fontspec)
+%% ----------------------------------------------------------------------------
+%% Serif/Sans/Math: Libertinus (OTF en texmf, vía el paquete libertinus, que
+%% carga unicode-math) · Mono: Inconsolata (cargada por ARCHIVO desde texmf,
+%% porque fontconfig no la lista). Microtipografía moderna (protrusion; la
+%% expansion es solo pdf/lua, XeLaTeX la ignora). SOLO XeLaTeX.
+%% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{academic-fonts}[2026/07/23 v1 Tipografia Academic (XeLaTeX)]
+
+\RequirePackage{fontspec}
+
+% Texto y matemática: Libertinus (Serif + Sans + Math; carga unicode-math).
+% Sin opción `mono` (pasarla dispara la carga de AnonymousPro); el mono lo
+% sobrescribimos abajo con Inconsolata.
+\RequirePackage{libertinus}
+
+% Monoespaciada: Inconsolata, por archivo OTF de texmf (kpathsea la encuentra).
+\setmonofont{InconsolataN}[
+  Extension   = .otf,
+  UprightFont = *-Regular,
+  BoldFont    = *-Bold,
+  Scale       = MatchLowercase]
+
+% Microtipografía (protrusion; expansion no aplica en XeLaTeX)
+\RequirePackage[protrusion=true,final]{microtype}
+\endinput
