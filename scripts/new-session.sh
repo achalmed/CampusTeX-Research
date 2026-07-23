@@ -27,7 +27,7 @@ FORMAT="latex"
 [[ "${4:-}" == "--quarto" ]] && FORMAT="quarto"
 
 is_course "$COURSE" || die "No parece un curso (falta 00_ADMINISTRACION/03_SESIONES): $COURSE"
-[[ -d "$PLANTILLAS_DIR/Plantilla_Sesion" ]] || die "Falta $PLANTILLAS_DIR/Plantilla_Sesion"
+[[ -d "$SCAFFOLDS_DIR/session" ]] || die "Falta $SCAFFOLDS_DIR/session"
 
 SLUG="$(slugify "$TITLE")"
 if session_dir "$COURSE" "$NUM" >/dev/null 2>&1; then
@@ -40,7 +40,7 @@ DEST="$COURSE/03_SESIONES/S${NUM}_${SLUG}"
 COURSE_LABEL="$(basename "$COURSE" | sed -E 's/^course_[0-9]+_//; s/[_-]+/ /g')"
 
 info "Creando sesión $NUM: '$TITLE' (formato: $FORMAT)"
-cp -a "$PLANTILLAS_DIR/Plantilla_Sesion" "$DEST"
+cp -a "$SCAFFOLDS_DIR/session" "$DEST"
 
 # Elegir formato del deck
 if [[ "$FORMAT" == "quarto" ]]; then rm -f "$DEST/02_Clase/slides.tex"

@@ -6,7 +6,7 @@
 # No ejecutar directamente.
 #
 # Modelo (ver ../README.md):
-#   - El framework aloja _PLANTILLAS/ y _BIBLIOTECA/ (compartido).
+#   - El framework aloja scaffolds/, libraries/, classes/, styles/, themes/, templates/.
 #   - Los cursos viven FUERA, en ~/Documents/Academic_Class-*/course_NN_*/,
 #     con estructura 00–11 y sesiones 03_SESIONES/SNN_slug/ (02_Clase/…).
 #   - Por eso los helpers de curso/sesión reciben la RUTA del curso.
@@ -18,9 +18,9 @@ set -euo pipefail
 LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 FW_DIR="$(cd "$LIB_DIR/../.." && pwd)"              # raíz del framework
 CONFIG_FILE="$FW_DIR/config/course.yml"            # valores por defecto del docente
-PLANTILLAS_DIR="$FW_DIR/_PLANTILLAS"
-BIBLIOTECA_DIR="$FW_DIR/_BIBLIOTECA"
-EVAL_DIR="$FW_DIR/evaluaciones"                    # sistema LaTeX de evaluaciones (evaluacion.cls)
+SCAFFOLDS_DIR="$FW_DIR/scaffolds"                    # esqueletos de carpetas (course/session/period)
+LIBRARIES_DIR="$FW_DIR/libraries"                    # bancos reutilizables
+BIBLIOGRAPHY_DIR="$FW_DIR/bibliography"              # archivos .bib
 
 # --- Salida con color ---------------------------------------
 if [[ -t 1 ]]; then

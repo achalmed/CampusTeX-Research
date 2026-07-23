@@ -23,13 +23,13 @@ TITLE="$3"
 SLUG="$(slugify "$TITLE")"
 
 [[ -d "$AC" ]] || die "No existe el Academic_Class: $AC"
-[[ -d "$PLANTILLAS_DIR/Plantilla_Curso" ]] || die "Falta $PLANTILLAS_DIR/Plantilla_Curso"
+[[ -d "$SCAFFOLDS_DIR/course" ]] || die "Falta $SCAFFOLDS_DIR/course"
 
 DEST="$AC/course_${NUM}_${SLUG}"
 [[ -e "$DEST" ]] && die "Ya existe: $DEST"
 
 info "Creando curso $NUM: '$TITLE'"
-cp -a "$PLANTILLAS_DIR/Plantilla_Curso" "$DEST"
+cp -a "$SCAFFOLDS_DIR/course" "$DEST"
 
 cat > "$DEST/README.md" <<EOF
 # $TITLE

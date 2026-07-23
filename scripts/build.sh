@@ -34,7 +34,7 @@ DIR="$(cd "$(dirname "$FILE")" && pwd)"
 BASE="$(basename "$FILE" .tex)"
 
 # TEXINPUTS: capas del framework (+ evaluaciones/ mientras exista, compat.)
-export TEXINPUTS=".:$FW_DIR/classes:$FW_DIR/styles:$FW_DIR/config:$FW_DIR/themes:$FW_DIR/assets:$FW_DIR/evaluaciones:${TEXINPUTS:-}"
+export TEXINPUTS=".:$FW_DIR/classes:$FW_DIR/styles:$FW_DIR/config:$FW_DIR/themes:$FW_DIR/assets:${TEXINPUTS:-}"
 
 if [[ "$CLEAN" -eq 1 ]]; then
   ( cd "$DIR" && rm -f "$BASE"*.aux "$BASE"*.log "$BASE"*.out "$BASE"*.toc \

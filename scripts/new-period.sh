@@ -22,11 +22,11 @@ COURSE="$1"
 PERIODO="$2"
 
 is_course "$COURSE" || die "No parece un curso: $COURSE"
-[[ -d "$PLANTILLAS_DIR/Plantilla_Periodo" ]] || die "Falta $PLANTILLAS_DIR/Plantilla_Periodo"
+[[ -d "$SCAFFOLDS_DIR/period" ]] || die "Falta $SCAFFOLDS_DIR/period"
 
 DEST="$COURSE/11_SEMESTRES/$PERIODO"
 [[ -e "$DEST" ]] && die "Ya existe el periodo: $DEST"
 
 mkdir -p "$COURSE/11_SEMESTRES"
-cp -a "$PLANTILLAS_DIR/Plantilla_Periodo" "$DEST"
+cp -a "$SCAFFOLDS_DIR/period" "$DEST"
 ok "Periodo creado: $DEST"
