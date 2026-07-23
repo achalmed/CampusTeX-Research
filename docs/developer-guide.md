@@ -4,7 +4,7 @@
 
 - **Bash** (scripts POSIX-ish con `set -euo pipefail`), sin dependencias
   más allá de coreutils + `iconv`.
-- **LaTeX** (pdflatex/xelatex/lualatex según documento) — ver
+- **LaTeX** (**lualatex**, motor único; migración 2026) — ver
   [architecture.md](architecture.md#compatibilidad).
 - **Quarto** solo para la sesión 4.
 - Configuración en **YAML plano** (`config/course.yml`), parseado con
@@ -38,9 +38,9 @@ de entrada solo orquestan. Nuevos valores configurables van a
   (clave `compilador:` en config, autodetecta motor y n.º de pasadas);
   fallback: motor de `latex_engine()` ejecutado 2 veces en el directorio
   del `.tex` (rutas relativas de imágenes dependen de esto).
-- **`latex_engine`** decide por este orden: comentario `%!TEX program`,
-  clase `yaac-luatex`/`yaac-xelatex`, presencia de `fontspec`, default
-  pdflatex.
+- **`latex_engine`** (framework LuaLaTeX-only): honra un override explícito
+  `%!TEX program = …` (para documentos legacy) y, en su defecto, usa
+  **lualatex**. Se retiraron las heurísticas `yaac-*` y `fontspec → xelatex`.
 - **Placeholders de plantillas**: `{{NUMBER}} {{TITLE}} {{SLUG}} {{DATE}}
   {{COURSE}} {{COURSE_SHORT}} {{CYCLE}} {{TEACHER}} {{EMAIL}}
   {{INSTITUTION}} {{UNIVERSITY}} {{THEME}} {{ASPECT}} {{DURATION}}

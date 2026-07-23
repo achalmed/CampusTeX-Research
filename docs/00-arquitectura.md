@@ -46,9 +46,10 @@ Ninguno es fatal hoy, pero todos escalan mal. El rediseño los elimina de raíz.
 4. **Un solo punto de cambio visual.** Cambiar un color, una fuente o un espaciado
    se hace en **un** archivo y afecta a diapositivas, exámenes, manuales y pósters
    a la vez.
-5. **XeLaTeX exclusivo.** Nada de pdfLaTeX ni LuaLaTeX. `fontspec`, Unicode,
-   OpenType/TrueType, `unicode-math`, microtipografía moderna (protrusion +
-   expansion), versalitas reales, números elzevirianos.
+5. **LuaLaTeX exclusivo** (migración 2026). Nada de pdfLaTeX ni XeLaTeX.
+   `fontspec`, Unicode, OpenType/TrueType, `unicode-math`, microtipografía
+   moderna (protrusion + **expansion** — esta última *efectiva solo bajo
+   LuaLaTeX*; XeLaTeX la ignoraba), versalitas reales, números elzevirianos.
 6. **El documento depende del framework, nunca al revés.** Una plantilla solo
    `\documentclass{academic-…}` y rellena contenido. Ningún estilo vive en los
    documentos.
@@ -97,7 +98,7 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 ```
 Academic_Class_Framework/
 │
-├── classes/                     ← CLASES LaTeX (encapsulan el diseño; XeLaTeX)
+├── classes/                     ← CLASES LaTeX (encapsulan el diseño; LuaLaTeX)
 │   ├── academic-base.cls        · núcleo sobre `article`: carga styles/ + config/, comandos comunes
 │   ├── academic-exam.cls        · exámenes, prácticas, bancos, solucionarios  (hereda base)
 │   ├── academic-report.cls      · sílabos, calendarios, manuales, guías, notas de docente, labs, rúbricas (hereda base)
@@ -156,11 +157,11 @@ Academic_Class_Framework/
 ├── assets/                      ← branding: logos, iconos, fuentes vendored
 │   ├── logos/  branding/  fonts/
 │
-├── scripts/                     ← AUTOMATIZACIÓN (XeLaTeX)
+├── scripts/                     ← AUTOMATIZACIÓN (LuaLaTeX)
 │   ├── lib/                     · common.sh · compile.sh · args.sh · clean.sh · env.sh · logging.sh
 │   ├── new-course.sh  new-session.sh  new-period.sh        · scaffolds de carpetas
 │   ├── new-presentation.sh  new-evaluacion.sh  new-report.sh  new-poster.sh · nuevos documentos desde templates/
-│   ├── build.sh                · compila cualquier .tex con XeLaTeX (reemplaza build-session/course/evaluacion)
+│   ├── build.sh                · compila cualquier .tex con LuaLaTeX (reemplaza build-session/course/evaluacion)
 │   ├── validate.sh  stats.sh  doctor.sh  clean.sh
 │
 ├── examples/                    ← EJEMPLOS compilados (un .tex + .pdf por clase/tipo; los "tests")
@@ -206,7 +207,7 @@ Academic_Class_Framework/
    colores/fuentes al mundo Beamer.
 5. `styles/academic-colors.sty` y `academic-fonts.sty` leen los valores de
    `config/palette.tex` y `config/fonts.tex`.
-6. `scripts/build.sh` compila con **XeLaTeX** (dos pasadas donde haga falta).
+6. `scripts/build.sh` compila con **LuaLaTeX** (dos pasadas donde haga falta).
 
 **El mismo `config/palette.tex`** alimenta a `academic-exam.cls` (vía
 `academic.sty`) y a `academic-report.cls`. Por eso **cambiar `\definecolor{acento}`
@@ -236,10 +237,11 @@ usan sus bases nativas (beamer / póster) y **comparten identidad** cargando
 `styles/academic.sty`. El resultado para el usuario es idéntico: una sola fuente de
 verdad visual.
 
-**D3 · XeLaTeX exclusivo.**
-Elimina la fractura actual (Beamer multi-motor + exámenes pdfLaTeX). Con `fontspec`
+**D3 · LuaLaTeX exclusivo.**
+Elimina la fractura previa (Beamer multi-motor + exámenes pdfLaTeX). Con `fontspec`
 + `unicode-math` + Libertinus OpenType se obtienen versalitas reales, números
-elzevirianos, ligaduras y `microtype` con protrusion/expansion — imposible de forma
+elzevirianos, ligaduras y `microtype` con protrusion **y expansion** (la expansion,
+algoritmo hz, ahora *sí* se aplica; XeLaTeX la ignoraba) — imposible de forma
 consistente en pdfLaTeX. Un solo motor = un solo toolchain, un solo `build.sh`.
 
 **D4 · `evaluacion.cls` → `academic-exam.cls`.**
@@ -258,7 +260,7 @@ carpetas" (algo que copias para organizar).
 
 **D6 · No duplicar `Academic_Writing_Framework`.**
 Tesis, monografías, ensayos y artículos son documentos de **redacción larga** con
-su framework maduro (XeLaTeX+Biber, APA). Este framework **no** los reimplementa.
+su framework maduro (LuaLaTeX+Biber, APA). Este framework **no** los reimplementa.
 Sí añade lo que faltaba para docencia: sílabos, calendarios, notas de clase,
 manuales, guías. (A futuro ambos frameworks pueden compartir una identidad común;
 hoy cada uno es autónomo.)
@@ -283,7 +285,7 @@ aspecto sea editable por separado.
 |---|---|
 | Cambiar un color → tocar N plantillas | Cambiar `config/palette.tex` → afecta a todo |
 | Diapositivas y exámenes con estilos distintos | Una sola identidad «Academic» en todo |
-| Dos motores (pdfLaTeX + multi-motor Beamer) | Un solo motor: XeLaTeX |
+| Dos motores (pdfLaTeX + multi-motor Beamer) | Un solo motor: LuaLaTeX |
 | Plantillas duplicadas (`_PLANTILLAS` vs `evaluaciones`) | Un único `templates/` |
 | Diseño mezclado en plantillas | Diseño solo en `classes/` + `styles/`; plantillas vacías |
 | `_PLANTILLAS/` hace dos trabajos | `templates/` (documentos) y `scaffolds/` (carpetas) separados |
@@ -302,18 +304,18 @@ compila y se mira el PDF; los `examples/` son los "tests").
   `libraries/`+`bibliography/`, `assets/branding`→`assets/`. Sin romper el tooling
   del estándar 00–11.
 - **Fase 1 — Identidad (`styles/` + `config/`).** Escribir los paquetes de
-  identidad en XeLaTeX (colores, fuentes fontspec, cajas, tablas, código, math,
+  identidad en LuaLaTeX (colores, fuentes fontspec, cajas, tablas, código, math,
   iconos) + `config/palette.tex`/`fonts.tex`. Es el corazón; todo lo demás la
   consume.
-- **Fase 2 — `academic-base.cls`** sobre `article`+XeLaTeX cargando `styles/`.
-- **Fase 3 — `academic-exam.cls`** (migración de `evaluacion.cls` a XeLaTeX sobre
+- **Fase 2 — `academic-base.cls`** sobre `article`+LuaLaTeX cargando `styles/`.
+- **Fase 3 — `academic-exam.cls`** (migración de `evaluacion.cls` (en su día a XeLaTeX; hoy LuaLaTeX) sobre
   base; preservar toda la funcionalidad) + `templates/exam/*` + ejemplos.
 - **Fase 4 — Tema Beamer** (`themes/beamer*Academic.sty`) + `academic-beamer.cls`
   + `templates/presentation/*` (8 tipos) + ejemplos.
 - **Fase 5 — `academic-report.cls`** + `templates/report/*` (sílabo, calendario,
   nota-docente, manual, guía, guía-lectura, rúbrica).
 - **Fase 6 — `academic-poster.cls`** + `templates/poster/`.
-- **Fase 7 — Scripts** (`build.sh` XeLaTeX + `new-*` unificados), `docs/`,
+- **Fase 7 — Scripts** (`build.sh` LuaLaTeX + `new-*` unificados), `docs/`,
   `Makefile`, y **actualización de los prompts** (§9). Retiro de `evaluaciones/` y
   `_PLANTILLAS/` una vez migrado todo.
 

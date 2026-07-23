@@ -5,11 +5,11 @@
 >
 > 1. **Define el estándar** de carpetas, archivos y nomenclatura de **todas** las
 >    `~/Documents/Academic_Class-*` (cualquier asignatura).
-> 2. Es la **plataforma editorial LaTeX (XeLaTeX)** con **identidad visual única**
+> 2. Es la **plataforma editorial LaTeX (LuaLaTeX)** con **identidad visual única**
 >    que produce **todo el material docente**: diapositivas, exámenes, sílabos,
 >    notas de docente, calendarios, rúbricas, pósters…
 >
-> **Motor:** XeLaTeX exclusivo. **Fuente de verdad arquitectónica:**
+> **Motor:** LuaLaTeX exclusivo (migración 2026). **Fuente de verdad arquitectónica:**
 > [`docs/00-arquitectura.md`](docs/00-arquitectura.md).
 
 Principio rector: **el documento depende del framework, nunca al revés.** El diseño
@@ -71,12 +71,12 @@ C="$AC/course_NN_<slug>"
 ./scripts/new-session.sh "$C" NN "Título de la sesión"
 ./scripts/new-period.sh  "$C" 2026-II
 
-# 2) Documentos LaTeX (identidad única, XeLaTeX)
+# 2) Documentos LaTeX (identidad única, LuaLaTeX)
 ./scripts/new-presentation.sh "$C" NN "Título" [--tipo clase|conferencia|seminario|…]
 ./scripts/new-evaluacion.sh   "$C" <tipo|01-12> "Título"     # → 04_EVALUACIONES/
 ./scripts/new-report.sh       "$C" <silabo|calendario|nota-docente|rubrica> "Título"
 
-# 3) Compilar cualquier .tex (XeLaTeX)
+# 3) Compilar cualquier .tex (LuaLaTeX)
 ./scripts/build.sh <archivo>.tex [--modo examen|claves|soluciones|todos]
 ```
 
@@ -90,7 +90,7 @@ C="$AC/course_NN_<slug>"
 | `new-presentation.sh` | diapositivas → `SNN/02_Clase/` (`academic-beamer`, 8 tipos) |
 | `new-evaluacion.sh` | examen/práctica → `04_EVALUACIONES/` (`academic-exam`, 12 tipos, modos claves/soluciones) |
 | `new-report.sh` | sílabo/calendario/nota-docente/rúbrica → carpeta 00–11 (`academic-report`) |
-| `build.sh` | compila cualquier `.tex` con XeLaTeX (2 pasadas, TEXINPUTS de todas las capas) |
+| `build.sh` | compila cualquier `.tex` con LuaLaTeX (2 pasadas, TEXINPUTS de todas las capas) |
 | `validate.sh` · `stats.sh` | valida la estructura 00–11 · resumen del curso |
 | `doctor.sh` · `clean.sh` | chequeo de entorno · limpiar auxiliares |
 
@@ -98,7 +98,8 @@ C="$AC/course_NN_<slug>"
 
 ## Convenciones
 
-- **XeLaTeX** exclusivo (fontspec, Libertinus + Inconsolata, `unicode-math`, microtype).
+- **LuaLaTeX** exclusivo (fontspec, Libertinus + Inconsolata, `unicode-math`,
+  microtype con **protrusion + expansion**).
 - **Nombres de carpeta ASCII** (portabilidad + scripts); **`.gitkeep`** en carpetas vacías.
 - **Un solo punto de cambio visual:** `config/palette.tex` y `config/fonts.tex`.
 - **El diseño vive en `styles/`+`classes/`**, nunca en los documentos ni en las plantillas.

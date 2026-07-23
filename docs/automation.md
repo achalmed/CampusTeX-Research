@@ -41,8 +41,9 @@ Con `--pdf` borra también los PDF que tengan `.tex`/`.qmd` fuente al lado
 
 ## `doctor.sh`
 
-Diagnóstico: git, pdflatex, xelatex, lualatex, quarto, iconv, compilador
-universal y config. Solo informa, no modifica nada.
+Diagnóstico: git, **lualatex** (motor del framework), quarto, iconv, compilador
+universal y config; además informa de xelatex/pdflatex como motores alternativos
+no soportados. Solo informa, no modifica nada.
 
 ## `stats.sh`
 

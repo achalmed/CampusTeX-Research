@@ -76,7 +76,8 @@ session_NN_slug/
 
 - Compilación preferente vía el compilador universal del workspace
   (`scripts_for_latex/script_compilar_latex/main.sh`, autodetección de motor);
-  si no está, `build-session.sh` usa el motor detectado por comentario
-  mágico `%!TEX`, clase `yaac-*` o presencia de `fontspec`.
-- Motores requeridos: syllabus → lualatex · sesión 1 → xelatex ·
-  topics/policies → xe/lualatex (fontspec) · resto → pdflatex.
+  si no está, el framework compila con **lualatex** (honra un override
+  `%!TEX program` para documentos legacy).
+- Motor único requerido: **lualatex** para todo el material (sílabos, sesiones,
+  exámenes, presentaciones, reports). Migración 2026: se retiró el esquema
+  multi-motor previo (pdfLaTeX/XeLaTeX según documento).

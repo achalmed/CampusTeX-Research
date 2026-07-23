@@ -44,7 +44,7 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
   (colores, `config_get`, `slugify`, `latex_engine`, `compile_tex`, y los helpers
   `is_course`/`session_dir`/`list_sessions`/`list_courses` que reciben rutas). Los
   scripts de entrada solo orquestan. Nuevos parámetros → `config/course.yml`.
-**Plataforma editorial (rediseño 2026-07-23, ver `docs/00-arquitectura.md` — fuente de verdad arquitectónica). Motor XeLaTeX exclusivo. Capas, cada una con responsabilidad única:**
+**Plataforma editorial (rediseño 2026-07-23, ver `docs/00-arquitectura.md` — fuente de verdad arquitectónica). Motor LuaLaTeX exclusivo (migración 2026). Capas, cada una con responsabilidad única:**
 
 - `styles/` — **identidad visual única** (`academic.sty` carga colores, fuentes
   fontspec Libertinus+Inconsolata, math, iconos, cajas, código, tablas, idioma).
@@ -63,7 +63,8 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 
 > Nota histórica: se retiraron `evaluaciones/` (→ `academic-exam` + `templates/exam/`),
 > `_PLANTILLAS/` (→ `templates/` + `scaffolds/`) y `_BIBLIOTECA/` (→ `libraries/` +
-> `bibliography/`) en el cutover del rediseño; el motor pasó de pdfLaTeX a XeLaTeX.
+> `bibliography/`) en el cutover del rediseño; el motor pasó de pdfLaTeX a XeLaTeX
+> y, en la migración de 2026, a **LuaLaTeX** (único motor soportado).
 
 ## Comandos
 
@@ -73,11 +74,11 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 ./scripts/new-session.sh <COURSE_DIR> NN "Título" [--quarto]        # sesión SNN_slug
 ./scripts/new-period.sh  <COURSE_DIR> <AAAA-ciclo>                  # dictado en 11_SEMESTRES
 
-# Documentos LaTeX (copian desde templates/ y compilan con XeLaTeX)
+# Documentos LaTeX (copian desde templates/ y compilan con LuaLaTeX)
 ./scripts/new-presentation.sh <COURSE_DIR> NN "Título" [--tipo clase]   # diapositivas → SNN/02_Clase (academic-beamer)
 ./scripts/new-evaluacion.sh   <COURSE_DIR> <tipo|01-12> "Título"        # examen → 04_EVALUACIONES (academic-exam)
 ./scripts/new-report.sh       <COURSE_DIR> <silabo|calendario|nota-docente|rubrica> "Título"  # academic-report
-./scripts/build.sh <ARCHIVO.tex> [--modo examen|claves|soluciones|todos]  # compila cualquier .tex con XeLaTeX
+./scripts/build.sh <ARCHIVO.tex> [--modo examen|claves|soluciones|todos]  # compila cualquier .tex con LuaLaTeX
 
 # Validación y resumen
 ./scripts/validate.sh <COURSE_DIR | ACADEMIC_CLASS_DIR>            # invariantes 00–11 (exit!=0 si error)
