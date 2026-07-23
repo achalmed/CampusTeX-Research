@@ -1,0 +1,34 @@
+% ============================================================================
+% PLANTILLA — CALENDARIO / CRONOGRAMA DEL CURSO
+% ----------------------------------------------------------------------------
+% Cronograma de sesiones. SIN diseño: lo pone academic-report + la identidad.
+% Compilar:  scripts/build.sh calendario.tex   (XeLaTeX)
+% ============================================================================
+\documentclass{academic-report}
+\tipodocumento{Calendario}
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\escuela{Escuela Profesional de Economía}
+\curso{Nombre del curso}\docente{Edison Achalma B.Sc. Econ.}\periodo{Semestre 2026-I}
+
+\begin{document}
+\encabezado
+
+\begin{table}[h]\centering
+\begin{tabularx}{\linewidth}{c c X l}
+\toprule
+\textbf{Sem.} & \textbf{Fecha} & \textbf{Tema} & \textbf{Actividad} \\\midrule
+1  & 00/00 & Introducción y presentación del curso        & Lectura 1 \\
+2  & 00/00 & Unidad 1 · Fundamentos                        & Práctica dirigida \\
+3  & 00/00 & Unidad 1 · Aplicaciones                       & Práctica calificada 1 \\
+4  & 00/00 & Unidad 2 · Modelos                            & Laboratorio \\
+\midrule
+8  & 00/00 & \textbf{Examen parcial}                       & EP \\
+\midrule
+9  & 00/00 & Unidad 3 · Extensiones                        & Control de lectura \\
+16 & 00/00 & \textbf{Examen final}                         & EF \\
+\bottomrule
+\end{tabularx}
+\notatabla{Fechas sujetas al calendario académico oficial del periodo.}
+\end{table}
+
+\end{document}

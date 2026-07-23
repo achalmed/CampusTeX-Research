@@ -1,0 +1,30 @@
+% ============================================================================
+% PLANTILLA — RÚBRICA DE EVALUACIÓN
+% ----------------------------------------------------------------------------
+% Rúbrica analítica (criterios × niveles). SIN diseño: lo pone academic-report.
+% Compilar:  scripts/build.sh rubrica.tex   (XeLaTeX)
+% ============================================================================
+\documentclass{academic-report}
+\tipodocumento{Rúbrica}
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\escuela{Escuela Profesional de Economía}
+\curso{Nombre del curso}\docente{Edison Achalma B.Sc. Econ.}\periodo{2026-I}
+\titulodocumento{Rúbrica — Nombre del producto evaluado}
+
+\begin{document}
+\encabezado
+
+\begin{table}[h]\centering\small
+\begin{tabularx}{\linewidth}{@{}l Y Y Y c@{}}
+\toprule
+\textbf{Criterio} & \textbf{Excelente} & \textbf{Aceptable} & \textbf{Insuficiente} & \textbf{Pts.} \\\midrule
+Dominio conceptual & Preciso y completo & Correcto con vacíos & Errores de fondo & 5 \\
+Argumentación      & Sólida y coherente & Adecuada           & Débil o ausente   & 5 \\
+Uso de evidencia   & Pertinente         & Parcial            & Inexistente       & 5 \\
+Redacción y formato& Impecable          & Aceptable          & Deficiente        & 5 \\
+\bottomrule
+\end{tabularx}
+\notatabla{Puntaje total: 20 puntos. Cada criterio se pondera según la columna alcanzada.}
+\end{table}
+
+\end{document}
