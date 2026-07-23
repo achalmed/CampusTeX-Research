@@ -1,0 +1,149 @@
+% ============================================================================
+% PLANTILLA 11 — BANCO DE PREGUNTAS
+% ----------------------------------------------------------------------------
+% Para: bancos de preguntas organizados por tema y nivel cognitivo
+% (Taxonomía de Bloom), con claves visibles para el docente.
+% Compila por defecto CON claves; para la versión sin claves cambie la
+% primera línea por \documentclass{evaluacion}.
+% Compilar: latexmk -pdf plantilla-11-banco-de-preguntas.tex
+% ============================================================================
+\documentclass[claves]{evaluacion}
+
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\facultad{Facultad de Ciencias Económicas, Administrativas y Contables}
+\escuela{Escuela Profesional de Economía}
+\curso{Macroeconomía I}
+\codigocurso{EC-243}
+\docente{Mg. Nombre Apellido}
+\periodo{Actualizado a julio de 2026}
+\tipoevaluacion{Banco de Preguntas}
+\fechaevaluacion{2026-07-21}
+\modalidad{Documento interno del docente}
+\autorevaluacion{Edison Achalma}
+
+\begin{document}
+\portada[Unidades 1--2 · Contabilidad nacional y modelo IS-LM\\
+         Versión con claves — uso exclusivo del docente]
+
+\begin{instrucciones}[Organización del banco]
+Cada pregunta indica entre corchetes el nivel cognitivo de la Taxonomía
+de Bloom: \textbf{[R]}ecordar, \textbf{[C]}omprender, \textbf{[A]}plicar,
+\textbf{[An]}alizar, \textbf{[E]}valuar, \textbf{[Cr]}ear. La numeración
+es corrida para poder citar preguntas por código
+(p.~ej.\ \enquote{B-\thepregunta}) al armar un examen.
+\end{instrucciones}
+
+% ======================================================================
+\section{Contabilidad nacional}
+
+\begin{pregunta}[][R · Opción múltiple]
+¿Cuál de los siguientes componentes \textbf{no} forma parte del PBI por
+el método del gasto?
+\begin{opciones}
+  \opcion Consumo privado.
+  \opcion Inversión bruta interna.
+  \opcion \correcta{Compra de un bono del tesoro por un hogar.}
+  \opcion Exportaciones netas.
+\end{opciones}
+\clave{c — es una transacción financiera, no producción corriente}
+\end{pregunta}
+
+\begin{pregunta}[][C · Verdadero/Falso]
+Indique verdadero o falso:
+\begin{tablavf}
+  \vf[V]{El PBI nominal puede crecer aunque el PBI real caiga.}
+  \vf[F]{El deflactor del PBI y el IPC miden exactamente la misma
+         canasta.}
+  \vf[V]{La depreciación explica la diferencia entre producto bruto y
+         producto neto.}
+\end{tablavf}
+\end{pregunta}
+
+\begin{pregunta}[][A · Cálculo]
+Una economía produce 100 quintales de papa a S/~80 y 40 fanegas de maíz a
+S/~120 en el año base; en el año corriente produce 110 y 38 a precios de
+S/~95 y S/~130. Calcule el PBI nominal, el PBI real y el deflactor del
+año corriente.
+\begin{solucion}
+Nominal: $110(95)+38(130) = 10\,450 + 4\,940 = 15\,390$.
+Real (precios base): $110(80)+38(120) = 8\,800+4\,560 = 13\,360$.
+Deflactor: $15\,390/13\,360 = 1{,}1519$ (115,2).
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[][An · Desarrollo]
+La economía informal supera el 70\,\% del empleo en el Perú. Analice dos
+consecuencias de este hecho para la medición del PBI y una estrategia que
+emplea el INEI para mitigarlas.
+\begin{solucion}
+Puntos esperados: subestimación del nivel del PBI (producción no
+registrada) y sesgo en la composición sectorial; volatilidad espuria
+cuando la formalización desplaza actividad ya existente hacia registros.
+Mitigación: métodos indirectos (encuestas de hogares ENAHO, coeficientes
+insumo-producto, consumo eléctrico) para imputar la producción informal.
+\end{solucion}
+\end{pregunta}
+
+% ======================================================================
+\section{El modelo IS-LM}
+
+\begin{pregunta}[][R · Completar]
+La curva IS recoge los equilibrios del mercado de
+\completar[bienes]{2.8cm} y la curva LM los del mercado de
+\completar[dinero]{2.8cm}; la pendiente de la IS es
+\completar[negativa]{2.8cm}.
+\end{pregunta}
+
+\begin{pregunta}[][A · Problema]
+Considere $C = 40 + 0{,}8(Y - T)$, $I = 150 - 10r$, $G = T = 100$,
+demanda real de dinero $L = 0{,}2Y - 8r$ y oferta real $M/P = 96$.
+\begin{apartados}
+  \item Derive las ecuaciones IS y LM. \pts{2}
+  \item Halle el equilibrio $(Y^{*}, r^{*})$. \pts{2}
+  \item Calcule el nuevo equilibrio si $G$ aumenta a 120 y cuantifique el
+        efecto expulsión. \pts{2}
+\end{apartados}
+\begin{solucion}
+\textbf{a)} IS: $Y = C+I+G = 40+0{,}8Y-80+150-10r+100
+\Rightarrow Y = 1\,050 - 50r$.
+LM: $0{,}2Y - 8r = 96 \Rightarrow Y = 480 + 40r$.
+
+\textbf{b)} $1\,050 - 50r = 480 + 40r \Rightarrow r^{*} = \frac{570}{90}
+= 6{,}33$; $Y^{*} = 480+40(6{,}33) = 733{,}3$.
+
+\textbf{c)} Con $G=120$: IS: $Y = 1\,150 - 50r$; igualando,
+$r^{*} = 7{,}44$, $Y^{*} = 777{,}8$. El multiplicador con tasa fija
+daría $\Delta Y = 5\times20 = 100$; el aumento efectivo es $44{,}4$:
+el efecto expulsión absorbe $55{,}6$ (la subida de $r$ en 1,11 puntos
+reduce la inversión en 11,1).
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[][E · Ensayo corto]
+Evalúe la utilidad del modelo IS-LM para analizar la política monetaria
+peruana actual, considerando que el BCRP fija la tasa de interés y no la
+oferta monetaria. ¿Qué modificación del modelo responde a esta crítica?
+\begin{solucion}
+Se espera la crítica de endogeneidad del dinero: con meta de tasa, la LM
+se vuelve horizontal al nivel de la tasa de política (modelo IS-MP de
+Romer). El estudiante debe reconocer que las conclusiones cualitativas de
+la política fiscal se mantienen, pero la transmisión monetaria se lee
+directamente como elección de $r$ y regla de reacción (tipo Taylor).
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[][Cr · Diseño]
+Diseñe un ejercicio numérico original de estática comparativa en IS-LM
+donde una política fiscal expansiva no altere el producto. Especifique
+los parámetros que lo hacen posible y la intuición económica.
+\begin{solucion}
+Respuesta modelo: demanda de dinero insensible a la tasa
+($L = kY$, LM vertical): todo aumento de $G$ eleva $r$ hasta expulsar
+exactamente la misma cantidad de inversión (efecto expulsión total).
+Se acepta cualquier parametrización coherente; se valora la intuición
+monetarista del caso.
+\end{solucion}
+\end{pregunta}
+
+\findelexamen
+\end{document}

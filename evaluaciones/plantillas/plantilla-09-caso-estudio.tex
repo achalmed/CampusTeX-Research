@@ -1,0 +1,174 @@
+% ============================================================================
+% PLANTILLA 09 — CASO DE ESTUDIO / ANÁLISIS DE DATOS
+% ----------------------------------------------------------------------------
+% Para: análisis de casos, interpretación de datos, gráficos y tablas
+% estadísticas. Incluye figura pgfplots y tabla de datos con siunitx.
+% Compilar: latexmk -pdf plantilla-09-caso-estudio.tex
+% Solucionario: \documentclass[soluciones]{evaluacion}
+% ============================================================================
+\documentclass{evaluacion}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\facultad{Facultad de Ciencias Económicas, Administrativas y Contables}
+\escuela{Escuela Profesional de Economía}
+\curso{Política Económica}
+\codigocurso{EC-442}
+\docente{Mg. Nombre Apellido}
+\periodo{Semestre 2026-I}
+\tipoevaluacion{Evaluación de Caso 01}
+\fechaevaluacion{21 de julio de 2026}
+\duracion{110 minutos}
+\modalidad{Presencial · grupal}
+
+\begin{document}
+\membrete
+
+\begin{instrucciones}
+\begin{itemize}
+  \item Lea íntegramente el caso antes de responder. Todas las preguntas
+        se refieren al material presentado (texto, tabla y figura).
+  \item Puede consultar apuntes de clase; no se permite internet.
+  \item Fundamente cada respuesta con los datos del caso: las opiniones
+        sin evidencia no reciben puntaje.
+\end{itemize}
+\end{instrucciones}
+
+% ================================================================== CASO ===
+\section*{\color{colorprimario}El caso · Choque inflacionario y respuesta
+de política, 2021--2024}
+
+Entre 2021 y 2023 la economía peruana experimentó el episodio
+inflacionario más intenso en dos décadas. El alza de los precios
+internacionales de alimentos y combustibles tras la pandemia y la guerra
+en Ucrania, sumada a factores internos, llevó la inflación interanual de
+Lima Metropolitana desde niveles cercanos a 2\,\% hasta un máximo de
+8{,}8\,\% en junio de 2022, muy por encima del rango meta del BCRP
+(1\,\%--3\,\%). El banco central respondió con el ciclo de alzas más
+agresivo de su historia: la tasa de referencia pasó de 0{,}25\,\% en
+julio de 2021 a 7{,}75\,\% en enero de 2023, donde permaneció hasta
+iniciar el ciclo de recortes en setiembre de 2023.
+
+\begin{datos}[Cuadro 1 · Indicadores macroeconómicos seleccionados]
+\centering
+\small
+\begin{tabular}{@{}l S[table-format=2.1] S[table-format=2.2]
+                 S[table-format=2.1] S[table-format=2.1]@{}}
+  \toprule
+  \textbf{Año} & {\textbf{Inflación} (\%)} & {\textbf{Tasa ref.} (\%, dic.)}
+   & {\textbf{PBI} (var.\ \%)} & {\textbf{Expectativas} (\%)}\\
+  \midrule
+  2020 &  2.0 & 0.25 & -10.9 & 1.7\\
+  2021 &  6.4 & 2.50 &  13.4 & 3.7\\
+  2022 &  8.5 & 7.50 &   2.7 & 4.3\\
+  2023 &  3.2 & 6.75 &  -0.6 & 3.1\\
+  2024 &  2.0 & 5.00 &   3.3 & 2.5\\
+  \bottomrule
+\end{tabular}
+\par\smallskip
+{\footnotesize Fuente: elaborado con datos del BCRP (cifras referenciales
+con fines pedagógicos). Expectativas de inflación a 12 meses, diciembre.}
+\end{datos}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.86\textwidth, height=6.2cm,
+  xlabel={Año}, ylabel={Porcentaje},
+  xtick={2020,2021,2022,2023,2024},
+  xticklabel style={/pgf/number format/1000 sep=},
+  ymin=0, ymax=10,
+  legend style={draw=none, fill=none, at={(0.98,0.95)}, anchor=north east,
+                font=\small},
+  grid=major, grid style={gray!20},
+  every axis plot/.append style={line width=1pt, mark size=2pt},
+]
+\addplot[color=colorenfasis, mark=*]
+  coordinates {(2020,2.0) (2021,6.4) (2022,8.5) (2023,3.2) (2024,2.0)};
+\addlegendentry{Inflación interanual}
+\addplot[color=colorprimario, mark=square*]
+  coordinates {(2020,0.25) (2021,2.50) (2022,7.50) (2023,6.75) (2024,5.00)};
+\addlegendentry{Tasa de referencia (dic.)}
+\addplot[color=gristexto, dashed, no marks]
+  coordinates {(2020,3) (2024,3)};
+\addlegendentry{Techo del rango meta}
+\end{axis}
+\end{tikzpicture}
+\caption{Inflación y tasa de política monetaria, 2020--2024.}
+\end{figure}
+
+% ============================================================ PREGUNTAS ====
+\begin{pregunta}[5][Interpretación de datos]
+Con el Cuadro~1 y la Figura~1, describa la cronología del episodio:
+¿cuándo se desancla la inflación del rango meta, cuándo reacciona la
+política monetaria y con qué rezago retorna la inflación al rango?
+Calcule la tasa de interés \emph{real ex ante} de diciembre de 2022
+(use las expectativas del cuadro) e interprete su signo.
+\lineasrespuesta{10}
+\begin{solucion}
+La inflación supera el techo de 3\,\% durante 2021 (cierra en 6,4\,\%);
+el BCRP inicia las alzas en agosto-2021 y alcanza el máximo de la tasa a
+inicios de 2023; la inflación retorna al rango recién en 2024: un rezago
+de transmisión de 18--24 meses, consistente con la literatura. Tasa real
+ex ante dic-2022: $i - \pi^{e} = 7{,}50 - 4{,}3 = 3{,}2\,\%$, claramente
+positiva y por encima de la tasa neutral estimada ($\approx 1{,}5\,\%$):
+la postura era contractiva.
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[5][Diagnóstico]
+¿El choque inflacionario fue de oferta, de demanda o mixto? Sustente con
+al menos dos hechos del caso y explique por qué el diagnóstico importa
+para la respuesta de política.
+\lineasrespuesta{10}
+\begin{solucion}
+Predominó el choque de oferta importado (alimentos y energía; la
+inflación sube en 2021--2022 mientras el PBI se desacelera de 13,4\,\% a
+2,7\,\%), con un componente de demanda por la recuperación pospandemia y
+los retiros de fondos. El diagnóstico importa porque ante choques de
+oferta la política monetaria no puede evitar el alza transitoria del
+nivel de precios: su papel es impedir efectos de segunda vuelta anclando
+expectativas — lo que justifica la reacción cuando las expectativas
+(4,3\,\% en 2022) superaron el rango meta.
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[5][Evaluación de política]
+Un congresista sostuvo que el BCRP \enquote{frenó la economía
+innecesariamente, pues la inflación igual iba a bajar cuando se
+normalizaran los precios internacionales}. Evalúe esta afirmación
+considerando el dato de PBI de 2023 y el papel de las expectativas.
+\lineasrespuesta{10}
+\begin{solucion}
+Respuesta equilibrada: es cierto que parte de la desinflación fue
+importada y que la contracción de 2023 ($-0{,}6\,\%$, agravada por El
+Niño y conflictividad) refleja en parte el apretón monetario. Pero la
+crítica omite el riesgo de desanclaje: con expectativas en 4,3\,\%, no
+subir la tasa habría validado una inflación persistente y exigido un
+ajuste posterior más costoso (desinflación à la Volcker). Se valora que
+el estudiante discuta el dilema producto-inflación y la credibilidad
+como activo del banco central.
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[5][Propuesta]
+Suponga que en 2026 ocurre un nuevo choque de oferta de magnitud similar.
+Formule una recomendación de \emph{policy mix} (monetaria y fiscal) para
+el Perú, indicando instrumento, oportunidad y un riesgo principal de su
+propuesta.
+\lineasrespuesta{10}
+\begin{solucion}
+Se acepta cualquier propuesta internamente consistente. Nivel excelente:
+respuesta monetaria condicionada a expectativas (subir solo si se
+desanclan), transferencias fiscales focalizadas y temporales a hogares
+vulnerables en lugar de subsidios generalizados a combustibles
+(regresivos y fiscalmente costosos), y uso de la posición fiscal
+contracíclica; riesgo señalado: dominancia fiscal o persistencia del
+choque que obligue a recalibrar.
+\end{solucion}
+\end{pregunta}
+
+\findelexamen
+\end{document}

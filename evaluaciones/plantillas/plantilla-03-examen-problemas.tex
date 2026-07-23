@@ -1,0 +1,172 @@
+% ============================================================================
+% PLANTILLA 03 — EXAMEN DE RESOLUCIÓN DE PROBLEMAS (ciencias / matemáticas)
+% ----------------------------------------------------------------------------
+% Para: cálculos, aplicación de fórmulas, demostraciones matemáticas y
+% problemas cuantitativos con composición matemática exigente.
+% Compilar: latexmk -pdf plantilla-03-examen-problemas.tex
+% Solucionario: \documentclass[soluciones]{evaluacion}
+% ============================================================================
+\documentclass{evaluacion}
+
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\facultad{Facultad de Ciencias Económicas, Administrativas y Contables}
+\escuela{Escuela Profesional de Economía}
+\curso{Matemática para Economistas II}
+\codigocurso{EC-243}
+\docente{Mg. Nombre Apellido}
+\periodo{Semestre 2026-I}
+\tipoevaluacion{Examen Final}
+\fechaevaluacion{21 de julio de 2026}
+\duracion{120 minutos}
+\modalidad{Presencial · individual}
+
+\begin{document}
+\membrete
+
+\begin{instrucciones}
+\begin{itemize}
+  \item Desarrolle cada problema de forma ordenada: el procedimiento vale
+        tanto como el resultado. Respuestas sin justificación no reciben
+        puntaje.
+  \item Se permite calculadora científica no programable. El formulario
+        adjunto es el único material autorizado.
+  \item Exprese los resultados finales con cuatro decimales cuando
+        corresponda.
+\end{itemize}
+\end{instrucciones}
+
+
+\begin{formulario}
+\begin{align*}
+  \frac{d}{dx}\,a^{x} &= a^{x}\ln a
+  &\int u\,dv &= uv-\int v\,du
+  &\det\!\begin{pmatrix} a & b\\ c & d\end{pmatrix} &= ad-bc
+\end{align*}
+Condiciones de segundo orden (dos variables): $H_1=f_{xx}$,\quad
+$H_2=f_{xx}f_{yy}-f_{xy}^{2}$.
+\end{formulario}
+
+% ============================================================ PROBLEMAS ====
+\begin{pregunta}[5][Optimización]
+Una empresa produce dos bienes en cantidades $x$ e $y$, con función de
+beneficio
+\[
+  \pi(x,y) = 64x - 2x^{2} + 4xy - 4y^{2} + 32y - 14.
+\]
+\begin{apartados}
+  \item Halle las condiciones de primer orden y el punto crítico. \pts{2}
+  \item Verifique las condiciones de segundo orden y clasifique el punto
+        crítico. \pts{2}
+  \item Calcule el beneficio máximo. \pts{1}
+\end{apartados}
+\espaciorespuesta{8cm}
+\begin{solucion}
+\textbf{a)} Las condiciones de primer orden son
+\[
+  \pi_x = 64 - 4x + 4y = 0, \qquad
+  \pi_y = 4x - 8y + 32 = 0.
+\]
+De la primera, $x = 16 + y$; sustituyendo en la segunda:
+$4(16+y) - 8y + 32 = 0 \Rightarrow y^{*} = 24$, $x^{*} = 40$.
+
+\textbf{b)} El hessiano es
+\[
+  H = \begin{pmatrix} \pi_{xx} & \pi_{xy}\\ \pi_{yx} & \pi_{yy}\end{pmatrix}
+    = \begin{pmatrix} -4 & 4\\ 4 & -8\end{pmatrix},
+  \qquad H_1 = -4 < 0,\quad H_2 = 32-16 = 16 > 0,
+\]
+por lo que $(40,24)$ es un \emph{máximo} local (y global, por concavidad
+estricta de $\pi$).
+
+\textbf{c)} $\pi(40,24) = 64(40) - 2(1600) + 4(960) - 4(576) + 32(24) - 14
+= 1\,650$.
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[5][Demostración]
+Sea $f\colon\mathbb{R}^{n}_{+}\to\mathbb{R}$ una función de producción
+homogénea de grado uno y diferenciable. Demuestre el teorema de Euler:
+\[
+  \sum_{i=1}^{n} x_i\,\frac{\partial f}{\partial x_i}(x) = f(x).
+\]
+Interprete económicamente el resultado bajo remuneración a productividades
+marginales.
+\espaciorespuesta{7cm}
+\begin{solucion}
+Por homogeneidad de grado uno, $f(\lambda x)=\lambda f(x)$ para todo
+$\lambda>0$. Derivando ambos lados respecto de $\lambda$:
+\[
+  \frac{d}{d\lambda} f(\lambda x)
+  = \sum_{i=1}^{n} \frac{\partial f}{\partial x_i}(\lambda x)\,x_i
+  = f(x).
+\]
+Evaluando en $\lambda = 1$ se obtiene
+$\sum_i x_i f_i(x) = f(x)$. \hfill$\blacksquare$
+
+\emph{Interpretación:} si cada factor se paga según su productividad
+marginal, el producto se agota exactamente entre los factores
+(teorema de agotamiento del producto); no quedan beneficios puros bajo
+rendimientos constantes a escala.
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[5][Ecuaciones diferenciales]
+El precio $p(t)$ de un mercado se ajusta según
+\[
+  \dot{p} = \alpha\,\bigl[D(p) - S(p)\bigr], \qquad \alpha > 0,
+\]
+con $D(p) = 24 - 2p$ y $S(p) = -6 + 4p$.
+\begin{apartados}
+  \item Halle el precio de equilibrio $p^{*}$ y resuelva la ecuación
+        diferencial para $p(0)=p_0$. \pts{3}
+  \item Analice la estabilidad dinámica del equilibrio. \pts{2}
+\end{apartados}
+\espaciorespuesta{7cm}
+\begin{solucion}
+\textbf{a)} En equilibrio $D=S$: $24-2p = -6+4p \Rightarrow p^{*}=5$.
+La ecuación se escribe $\dot p = \alpha(30 - 6p) = -6\alpha\,(p-5)$,
+ecuación lineal de primer orden cuya solución es
+\[
+  p(t) = 5 + (p_0 - 5)\,e^{-6\alpha t}.
+\]
+\textbf{b)} Como $-6\alpha<0$, $\lim_{t\to\infty}p(t)=5$ para cualquier
+$p_0$: el equilibrio es \emph{globalmente estable} y la convergencia es
+monótona a tasa $6\alpha$.
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[5][Álgebra lineal]
+Considere el modelo insumo-producto de Leontief con matriz de coeficientes
+técnicos y vector de demanda final
+\[
+  A = \begin{pmatrix} 0{,}2 & 0{,}3\\ 0{,}4 & 0{,}1 \end{pmatrix},
+  \qquad
+  d = \begin{pmatrix} 120\\ 90 \end{pmatrix}.
+\]
+\begin{apartados}
+  \item Verifique que la economía es productiva (condición de
+        Hawkins--Simon). \pts{2}
+  \item Calcule el vector de producción bruta $x = (I-A)^{-1}d$. \pts{3}
+\end{apartados}
+\espaciorespuesta{6.5cm}
+\begin{solucion}
+\textbf{a)} $I-A = \begin{pmatrix} 0{,}8 & -0{,}3\\ -0{,}4 & 0{,}9
+\end{pmatrix}$. Los menores principales dominantes son $0{,}8>0$ y
+$\det(I-A)=0{,}72-0{,}12=0{,}60>0$: se cumple Hawkins--Simon.
+
+\textbf{b)}
+\[
+  (I-A)^{-1} = \frac{1}{0{,}60}
+  \begin{pmatrix} 0{,}9 & 0{,}3\\ 0{,}4 & 0{,}8 \end{pmatrix}
+  = \begin{pmatrix} 1{,}5 & 0{,}5\\ 0{,}\overline{6} & 1{,}\overline{3}
+  \end{pmatrix},
+  \qquad
+  x = \begin{pmatrix} 1{,}5(120)+0{,}5(90)\\
+        0{,}\overline{6}(120)+1{,}\overline{3}(90)\end{pmatrix}
+    = \begin{pmatrix} 225\\ 200 \end{pmatrix}.
+\]
+\end{solucion}
+\end{pregunta}
+
+\findelexamen
+\end{document}

@@ -4,7 +4,9 @@
 > **todas** las carpetas `~/Documents/Academic_Class-*` — cualquier asignatura
 > universitaria (Economía, Matemática, Estadística, Programación, Investigación, …).
 > Este repo, además de definir el estándar, **aloja lo compartido** (`_PLANTILLAS/`,
-> `_BIBLIOTECA/`) que sirve a todos los `Academic_Class`.
+> `_BIBLIOTECA/`) y **produce los dos entregables LaTeX de cada curso**:
+> **diapositivas** de clase (Beamer, en `03_SESIONES/`) y **evaluaciones**
+> (exámenes/prácticas, en `04_EVALUACIONES/` — ver [`evaluaciones/`](evaluaciones/README.md)).
 >
 > Docente: **Edison Achalma B.Sc. Econ.** · Idioma de todo el contenido: **español**.
 
@@ -310,6 +312,8 @@ curso** (los cursos viven fuera del framework) y operan sobre `_PLANTILLAS/`.
 | `scripts/new-period.sh` | crea un dictado en `11_SEMESTRES/` (`COURSE_DIR AAAA-ciclo`) |
 | `scripts/validate.sh` | valida 00–11 (`COURSE_DIR` o `ACADEMIC_CLASS_DIR`) |
 | `scripts/stats.sh` · `build-session.sh` · `build-course.sh` | resumen y compilación (deck en `02_Clase/`) |
+| `scripts/new-evaluacion.sh` · `build-evaluacion.sh` | crear/compilar exámenes en `04_EVALUACIONES/` (ver `evaluaciones/`) |
+| `evaluaciones/` | sistema LaTeX de evaluaciones: `evaluacion.cls` + 12 plantillas + muestras |
 | `scripts/clean.sh` · `doctor.sh` | limpiar auxiliares LaTeX · chequeo de entorno |
 | `assets/branding/` | logo institucional canónico |
 

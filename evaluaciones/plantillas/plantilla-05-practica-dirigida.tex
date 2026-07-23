@@ -1,0 +1,127 @@
+% ============================================================================
+% PLANTILLA 05 — PRÁCTICA DIRIGIDA
+% ----------------------------------------------------------------------------
+% Para: sesiones guiadas — ejercicios modelo resueltos paso a paso
+% (entorno {desarrollo}, siempre visible) seguidos de ejercicios propuestos
+% para el estudiante.
+% Compilar: latexmk -pdf plantilla-05-practica-dirigida.tex
+% ============================================================================
+\documentclass{evaluacion}
+
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\facultad{Facultad de Ciencias Económicas, Administrativas y Contables}
+\escuela{Escuela Profesional de Economía}
+\curso{Econometría I}
+\codigocurso{EC-352}
+\docente{Mg. Nombre Apellido}
+\periodo{Semestre 2026-I}
+\tipoevaluacion{Práctica Dirigida 03}
+\fechaevaluacion{21 de julio de 2026}
+\duracion{2 horas}
+\modalidad{Presencial · grupal}
+
+\begin{document}
+\membrete
+
+\begin{instrucciones}[Objetivo de la sesión]
+Al finalizar la práctica, el estudiante estima e interpreta un modelo de
+regresión lineal simple por mínimos cuadrados ordinarios (MCO), evalúa la
+bondad de ajuste y realiza inferencia sobre los coeficientes.
+\end{instrucciones}
+
+\begin{definicion}[Estimador MCO]
+En el modelo $y_i = \beta_0 + \beta_1 x_i + u_i$, los estimadores de
+mínimos cuadrados ordinarios son
+\[
+  \hat{\beta}_1 = \frac{\sum_{i}(x_i-\bar{x})(y_i-\bar{y})}
+                       {\sum_{i}(x_i-\bar{x})^{2}},
+  \qquad
+  \hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x}.
+\]
+\end{definicion}
+
+% ==================================================== EJERCICIO MODELO =====
+\section*{\color{colorprimario}A · Ejercicio modelo}
+
+\begin{ejercicio}[][Regresión simple paso a paso]
+Con una muestra de 8 departamentos se tiene el gasto en educación por
+alumno ($x$, miles de soles) y el rendimiento promedio en la ECE ($y$,
+puntos estandarizados):
+
+\begin{datos}
+\centering
+\begin{tabular}{@{}l *{8}{S[table-format=3.1]}@{}}
+  \toprule
+  $x_i$ & 2.1 & 2.8 & 3.0 & 3.4 & 3.9 & 4.2 & 4.8 & 5.0\\
+  $y_i$ & 480.0 & 495.0 & 505.0 & 512.0 & 520.0 & 528.0 & 541.0 & 547.0\\
+  \bottomrule
+\end{tabular}
+\end{datos}
+
+Estime por MCO la recta $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$ e
+interprete los coeficientes.
+
+\begin{desarrollo}
+\textbf{Paso 1 — Medias.} $\bar{x} = 29{,}2/8 = 3{,}65$;\quad
+$\bar{y} = 4\,128/8 = 516$.
+
+\textbf{Paso 2 — Sumas de cuadrados y productos cruzados.}
+\[
+  S_{xx} = \sum (x_i-\bar{x})^{2} = 7{,}46, \qquad
+  S_{xy} = \sum (x_i-\bar{x})(y_i-\bar{y}) = 166{,}9.
+\]
+
+\textbf{Paso 3 — Estimadores.}
+\[
+  \hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{166{,}9}{7{,}46}
+  = 22{,}37,
+  \qquad
+  \hat{\beta}_0 = 516 - 22{,}37\,(3{,}65) = 434{,}33.
+\]
+
+\textbf{Paso 4 — Interpretación.} Un incremento de mil soles en el gasto
+por alumno se asocia con un aumento promedio de 22,4 puntos en el
+rendimiento; el intercepto (434,3) es el rendimiento esperado con gasto
+nulo, fuera del rango muestral y sin lectura económica directa.
+\end{desarrollo}
+\end{ejercicio}
+
+\begin{observacion}
+La pendiente MCO solo admite lectura \emph{causal} bajo el supuesto de
+exogeneidad, $E(u\mid x)=0$. Con datos observacionales como estos, la
+correlación puede reflejar factores omitidos (ruralidad, pobreza,
+gestión educativa).
+\end{observacion}
+
+% ================================================ EJERCICIOS PROPUESTOS ====
+\section*{\color{colorprimario}B · Ejercicios propuestos}
+
+\begin{ejercicio}[][Bondad de ajuste]
+Con los datos del ejercicio modelo, calcule la suma de cuadrados
+explicada, el coeficiente de determinación $R^{2}$ y el error estándar de
+la regresión. Interprete cada resultado.
+\lineasrespuesta{7}
+\end{ejercicio}
+
+\begin{ejercicio}[][Inferencia]
+Contraste $H_0\colon \beta_1 = 0$ contra $H_1\colon \beta_1 \neq 0$ al
+5\,\% de significancia. Reporte el estadístico $t$, el valor crítico y su
+conclusión.
+\lineasrespuesta{7}
+\end{ejercicio}
+
+\begin{ejercicio}[][Predicción]
+Prediga el rendimiento esperado para un gasto de 4,5 mil soles y comente
+qué precauciones exige extrapolar fuera del rango muestral
+$[2{,}1;\,5{,}0]$.
+\lineasrespuesta{6}
+\end{ejercicio}
+
+\begin{observacion}[Para la siguiente sesión]
+Replique la estimación en R con \texttt{lm(y \textasciitilde{} x)} y
+traiga impresa la salida de \texttt{summary()}. Compararemos los cálculos
+manuales con la salida computacional.
+\end{observacion}
+
+\findelexamen
+\end{document}

@@ -20,6 +20,7 @@ FW_DIR="$(cd "$LIB_DIR/../.." && pwd)"              # raíz del framework
 CONFIG_FILE="$FW_DIR/config/course.yml"            # valores por defecto del docente
 PLANTILLAS_DIR="$FW_DIR/_PLANTILLAS"
 BIBLIOTECA_DIR="$FW_DIR/_BIBLIOTECA"
+EVAL_DIR="$FW_DIR/evaluaciones"                    # sistema LaTeX de evaluaciones (evaluacion.cls)
 
 # --- Salida con color ---------------------------------------
 if [[ -t 1 ]]; then

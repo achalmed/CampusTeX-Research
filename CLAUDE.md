@@ -5,12 +5,16 @@ Guía para Claude Code (claude.ai/code) al trabajar en este repositorio.
 ## Qué es este repositorio
 
 El **framework canónico del estándar `Academic_Class`** (todo en **español** —
-mantener el contenido y las ediciones en español). Cumple dos funciones:
+mantener el contenido y las ediciones en español). Cumple tres funciones:
 
 1. **Define el estándar** de organización de cursos universitarios (estructura,
    nomenclatura, anatomía de sesión). El spec completo está en `README.md`.
 2. **Aloja lo compartido** que sirve a **todos** los `Academic_Class-*` del
    workspace: `_PLANTILLAS/` (esqueletos para copiar) y `_BIBLIOTECA/` (bancos).
+3. **Produce los entregables LaTeX** de cada curso: **diapositivas** de clase
+   (Beamer, en `03_SESIONES/`) y **evaluaciones** (exámenes/prácticas, en
+   `04_EVALUACIONES/`, vía el módulo `evaluaciones/` — ver `evaluaciones/README.md`
+   y `docs/evaluaciones.md`).
 
 **Los cursos reales NO viven aquí.** Viven en `~/Documents/Academic_Class-<Area>/`
 (p. ej. `Academic_Class-Metodologia-investigacion`), donde cada `Academic_Class` es
@@ -44,8 +48,12 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
   `Plantilla_Sesion` (anatomía + plantillas con `{{PLACEHOLDERS}}`),
   `Plantilla_Periodo`, y plantillas de documento (`Plantilla_Examen/Practica/Rubrica/Caso/Lectura`).
 - `_BIBLIOTECA/` — bancos compartidos (`Banco_*`) + `Bibliografia/course.bib`.
+- `evaluaciones/` — sistema LaTeX de evaluaciones: **una sola clase**
+  `evaluacion.cls` (todo el diseño) + `plantillas/` (12 tipos) + `muestras/`.
+  Motor **pdfLaTeX** (2 pasadas por los totales del `.aux`), independiente del de
+  las diapositivas. Los cambios de diseño van **solo** en `evaluacion.cls`.
 - `assets/branding/` — logo institucional canónico.
-- `docs/` — documentación del tooling.
+- `docs/` — documentación del tooling (incl. `docs/evaluaciones.md`).
 
 > Nota histórica: antes existían `course/` (extraído a
 > `Academic_Class-Metodologia-investigacion/course_03`), `templates/` (consolidado
@@ -63,9 +71,14 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 ./scripts/validate.sh <COURSE_DIR | ACADEMIC_CLASS_DIR>            # invariantes 00–11 (exit!=0 si error)
 ./scripts/stats.sh    <COURSE_DIR>                                # resumen por sesión
 
-# Compilación (decks en 02_Clase/)
+# Compilación de diapositivas (decks en 02_Clase/)
 ./scripts/build-session.sh <COURSE_DIR> NN
 ./scripts/build-course.sh  <COURSE_DIR> [--solo-sesiones]
+
+# Evaluaciones (exámenes/prácticas en 04_EVALUACIONES/)
+./scripts/new-evaluacion.sh  <COURSE_DIR> <tipo|01-12> "Título" [--fecha AAAAMMDD]
+./scripts/build-evaluacion.sh <ARCHIVO.tex> --modo examen|claves|soluciones|todos
+
 ./scripts/clean.sh [--pdf] [DIR]                                  # DIR por defecto = framework
 ./scripts/doctor.sh                                              # chequeo de entorno
 

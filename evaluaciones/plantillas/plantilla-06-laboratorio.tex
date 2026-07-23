@@ -1,0 +1,174 @@
+% ============================================================================
+% PLANTILLA 06 — LABORATORIO / PRÁCTICA CON SOFTWARE
+% ----------------------------------------------------------------------------
+% Para: laboratorios de cómputo, uso de software (R, Stata, Python, EViews,
+% SPSS), simulaciones y programación. Integra código, salidas de consola y
+% preguntas de interpretación.
+% Compilar: latexmk -pdf plantilla-06-laboratorio.tex
+% Solucionario: \documentclass[soluciones]{evaluacion}
+% ============================================================================
+\documentclass{evaluacion}
+
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\facultad{Facultad de Ciencias Económicas, Administrativas y Contables}
+\escuela{Escuela Profesional de Economía}
+\curso{Econometría II}
+\codigocurso{EC-453}
+\docente{Mg. Nombre Apellido}
+\periodo{Semestre 2026-I}
+\tipoevaluacion{Laboratorio 04}
+\fechaevaluacion{21 de julio de 2026}
+\duracion{2 horas}
+\modalidad{Laboratorio · individual}
+
+\begin{document}
+\membrete
+
+\begin{instrucciones}
+\begin{itemize}
+  \item Trabaje en la carpeta \texttt{lab04/} entregada por el docente;
+        la base de datos es \texttt{salarios.dta} ($n = 526$).
+  \item Entregue al final: el \emph{do-file} (o script) comentado y un
+        documento con las salidas y sus interpretaciones.
+  \item Se califica tanto la correcta ejecución del código como la
+        calidad de la interpretación económica.
+\end{itemize}
+\end{instrucciones}
+
+\begin{datos}[Descripción de variables]
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+  \texttt{wage}  & salario por hora, en dólares\\
+  \texttt{educ}  & años de educación\\
+  \texttt{exper} & años de experiencia laboral\\
+  \texttt{tenure}& años en el empleo actual\\
+  \texttt{female}& 1 si es mujer, 0 en otro caso\\
+\end{tabularx}
+\end{datos}
+
+% ============================================================ ACTIVIDADES ==
+\begin{ejercicio}[4][Preparación de datos]
+Cargue la base, genere la variable \texttt{lwage} (logaritmo natural del
+salario) y reporte estadísticos descriptivos de todas las variables.
+Escriba el código empleado.
+
+\recuadrorespuesta{4.5cm}
+\begin{solucion}
+En Stata:
+\begin{codigo}[language=Stata]
+use "salarios.dta", clear
+generate lwage = ln(wage)
+summarize wage lwage educ exper tenure female
+\end{codigo}
+Equivalente en R:
+\begin{codigo}[language=R]
+datos <- haven::read_dta("salarios.dta")
+datos$lwage <- log(datos$wage)
+summary(datos[, c("wage", "lwage", "educ", "exper", "tenure", "female")])
+\end{codigo}
+\end{solucion}
+\end{ejercicio}
+
+\begin{ejercicio}[6][Estimación e interpretación]
+Estime por MCO la ecuación de Mincer
+\[
+  \texttt{lwage} = \beta_0 + \beta_1\,\texttt{educ}
+  + \beta_2\,\texttt{exper} + \beta_3\,\texttt{tenure} + u
+\]
+y responda a partir de la salida siguiente:
+
+\begin{salida}
+      Source |       SS           df       MS      Number of obs   =       526
+-------------+----------------------------------   F(3, 522)       =     80.39
+       Model |  46.8741776         3  15.6247259   Prob > F        =    0.0000
+    Residual |  101.455574       522  .194359337   R-squared       =    0.3160
+-------------+----------------------------------   Adj R-squared   =    0.3121
+       Total |  148.329751       525  .282532860   Root MSE        =    .44086
+
+       lwage | Coefficient  Std. err.      t    P>|t|
+-------------+--------------------------------------------
+        educ |   .0920290   .0073299    12.56   0.000
+       exper |   .0041211   .0017233     2.39   0.017
+      tenure |   .0220672   .0030936     7.13   0.000
+       _cons |   .2843595   .1041904     2.73   0.007
+\end{salida}
+
+\begin{apartados}
+  \item Interprete el coeficiente de \texttt{educ} en términos
+        porcentuales. \pts{2}
+  \item Evalúe la significancia individual de cada regresor al 5\,\%. \pts{2}
+  \item Interprete el $R^{2}$ ajustado. \pts{2}
+\end{apartados}
+\lineasrespuesta{8}
+\begin{solucion}
+\textbf{a)} Un año adicional de educación se asocia con un salario por
+hora mayor en aproximadamente $9{,}2\,\%$
+($100\cdot\hat\beta_1$, aproximación log-nivel), manteniendo constantes
+experiencia y antigüedad.
+
+\textbf{b)} Los tres regresores son individualmente significativos al
+5\,\% ($p = 0{,}000$; $0{,}017$; $0{,}000 < 0{,}05$); la constante también
+lo es ($p=0{,}007$).
+
+\textbf{c)} El modelo explica el $31{,}2\,\%$ de la variabilidad del
+log-salario una vez penalizado el número de regresores — habitual en
+microdatos de corte transversal, donde la heterogeneidad individual no
+observada es amplia.
+\end{solucion}
+\end{ejercicio}
+
+\begin{ejercicio}[6][Diagnóstico]
+Contraste la presencia de heterocedasticidad con la prueba de
+Breusch--Pagan y, de ser necesario, reestime con errores estándar
+robustos. Escriba los comandos, reporte el valor-$p$ y concluya.
+
+\recuadrorespuesta{5cm}
+\begin{solucion}
+\begin{codigo}[language=Stata]
+regress lwage educ exper tenure
+estat hettest            // Breusch-Pagan: chi2(1) = 15.15, p = 0.0001
+regress lwage educ exper tenure, vce(robust)
+\end{codigo}
+Con $p = 0{,}0001 < 0{,}05$ se rechaza homocedasticidad; los errores
+estándar clásicos son inválidos. Al reestimar con \texttt{vce(robust)}
+los coeficientes no cambian (MCO sigue siendo insesgado) pero la
+inferencia se corrige; \texttt{educ} y \texttt{tenure} permanecen
+significativos al 1\,\%.
+\end{solucion}
+\end{ejercicio}
+
+\begin{ejercicio}[4][Simulación]
+Escriba un programa que simule 1\,000 muestras de tamaño 50 del modelo
+$y = 1 + 0{,}5x + u$, con $u\sim N(0,1)$, guarde los $\hat\beta_1$ y
+verifique empíricamente el insesgamiento del estimador MCO.
+
+\recuadrorespuesta{5cm}
+\begin{solucion}
+\begin{codigo}[language=R]
+set.seed(123)
+b1 <- replicate(1000, {
+  x <- rnorm(50, mean = 5, sd = 2)
+  y <- 1 + 0.5 * x + rnorm(50)
+  coef(lm(y ~ x))[2]
+})
+mean(b1)   # 0.5004: promedio ~ 0.5, consistente con insesgamiento
+sd(b1)     # dispersion muestral del estimador
+hist(b1, main = "Distribución de beta_1 estimado")
+\end{codigo}
+El promedio de los mil estimados ($\approx 0{,}500$) coincide con el
+parámetro poblacional: evidencia de que $E(\hat\beta_1)=\beta_1$.
+\end{solucion}
+\end{ejercicio}
+
+\begin{criterios}
+\begin{tabularx}{\linewidth}{@{}X c@{}}
+  \textbf{Criterio} & \textbf{Puntaje}\\
+  \arrayrulecolor{grislinea}\hline\addlinespace[3pt]
+  Código correcto, reproducible y comentado        & 8\\
+  Lectura correcta de salidas computacionales      & 6\\
+  Interpretación económica de los resultados       & 4\\
+  Orden y presentación del entregable              & 2\\
+\end{tabularx}
+\end{criterios}
+
+\findelexamen
+\end{document}

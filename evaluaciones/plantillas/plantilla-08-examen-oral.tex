@@ -1,0 +1,131 @@
+% ============================================================================
+% PLANTILLA 08 — EXAMEN ORAL / SUSTENTACIÓN
+% ----------------------------------------------------------------------------
+% Para: exámenes orales, defensas, sustentaciones y entrevistas académicas.
+% Documento de uso del jurado: guion de la sesión, banco de preguntas guía
+% y rúbrica de calificación individual.
+% Compilar: latexmk -pdf plantilla-08-examen-oral.tex
+% ============================================================================
+\documentclass{evaluacion}
+
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\facultad{Facultad de Ciencias Económicas, Administrativas y Contables}
+\escuela{Escuela Profesional de Economía}
+\curso{Proyectos de Inversión}
+\codigocurso{EC-461}
+\docente{Jurado: Mg. Nombre Apellido (presidente)}
+\periodo{Semestre 2026-I}
+\tipoevaluacion{Sustentación Oral}
+\fechaevaluacion{21 de julio de 2026}
+\duracion{25 minutos por estudiante}
+\modalidad{Presencial · individual}
+
+\begin{document}
+\membrete
+
+{\small
+\renewcommand{\arraystretch}{1.7}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries\color{colorprimario}}l X
+                              >{\bfseries\color{colorprimario}}l p{3.2cm}@{}}
+  Estudiante: & \hrulefill & Código: & \hrulefill\\
+  Proyecto sustentado: & \multicolumn{3}{@{}p{0.72\textwidth}@{}}{\hrulefill}\\
+\end{tabularx}}
+\par\vspace{0.7em}
+
+\begin{instrucciones}[Protocolo de la sesión]
+\begin{itemize}
+  \item \textbf{Exposición} (10 minutos): el estudiante presenta el
+        proyecto sin interrupciones. Al minuto 9 se avisa el cierre.
+  \item \textbf{Ronda de preguntas} (10 minutos): cada miembro del jurado
+        formula al menos una pregunta del banco guía o una repregunta.
+  \item \textbf{Deliberación} (5 minutos): el jurado califica con la
+        rúbrica adjunta, sin presencia del estudiante.
+  \item La nota final es el promedio simple de los tres jurados,
+        redondeado al medio punto.
+\end{itemize}
+\end{instrucciones}
+
+% ===================================================== BANCO DE PREGUNTAS ==
+\section*{\color{colorprimario}Preguntas guía del jurado}
+
+\begin{pregunta}[][Dominio conceptual]
+¿Qué criterios de decisión emplea su evaluación (VAN, TIR, ratio
+beneficio-costo) y por qué el VAN es el criterio dominante cuando ambos
+discrepan?
+\end{pregunta}
+
+\begin{pregunta}[][Supuestos]
+Justifique la tasa de descuento utilizada. ¿Cómo cambiaría el resultado
+si el costo de oportunidad del capital aumentara en dos puntos
+porcentuales?
+\end{pregunta}
+
+\begin{pregunta}[][Análisis de riesgo]
+Explique su análisis de sensibilidad: ¿cuáles son las dos variables más
+críticas del proyecto y qué umbral las vuelve inviables?
+\end{pregunta}
+
+\begin{pregunta}[][Repregunta de profundización]
+Si la demanda proyectada se redujera 20\,\%, ¿el proyecto seguiría siendo
+socialmente rentable? ¿Qué evidencia de su estudio de mercado respalda su
+respuesta?
+\end{pregunta}
+
+\begin{observacion}[Para el jurado]
+Valore la \emph{calidad del razonamiento} antes que la memorización:
+una respuesta que reconoce límites del propio trabajo y los discute con
+rigor puntúa más alto que una defensa cerrada sin matices.
+\end{observacion}
+
+% ================================================================ RÚBRICA ==
+\section*{\color{colorprimario}Rúbrica de calificación}
+
+{\small
+\renewcommand{\arraystretch}{1.45}
+\arrayrulecolor{grislinea}
+\begin{tabularx}{\textwidth}{@{}p{2.6cm} X X X c c@{}}
+  \textbf{Criterio} & \textbf{Excelente (4)} & \textbf{Suficiente (2--3)}
+    & \textbf{Insuficiente (0--1)} & \textbf{Peso} & \textbf{Nota}\\
+  \hline\addlinespace[4pt]
+  Dominio del tema &
+    Explica con precisión conceptos, métodos y resultados; responde
+    repreguntas sin apoyo. &
+    Domina lo esencial; duda en repreguntas de profundización. &
+    Errores conceptuales o incapacidad de sustentar resultados propios.
+    & 35\,\% & \\
+  \addlinespace[4pt]
+  Argumentación &
+    Razonamiento estructurado; distingue supuestos, evidencia y
+    conclusiones. &
+    Argumentos correctos pero incompletos o desordenados. &
+    Afirmaciones sin sustento o contradictorias. & 25\,\% & \\
+  \addlinespace[4pt]
+  Claridad expositiva &
+    Exposición ordenada, dentro del tiempo, con apoyo visual eficaz. &
+    Exposición comprensible con problemas menores de ritmo o soporte. &
+    Exposición confusa o fuera de tiempo. & 20\,\% & \\
+  \addlinespace[4pt]
+  Respuesta a preguntas &
+    Responde de forma directa, honesta y fundamentada. &
+    Responde parcialmente o con rodeos. &
+    Evade o no responde. & 20\,\% & \\
+  \addlinespace[6pt]\hline\addlinespace[6pt]
+  \multicolumn{4}{r}{\textbf{Nota final (sobre 20):}} &
+  \multicolumn{2}{l}{\hrulefill}\\
+\end{tabularx}
+\arrayrulecolor{black}}
+
+\vspace{1.6em}
+{\small
+\begin{tabularx}{\textwidth}{@{}X X X@{}}
+  \centering\rule{0.85\linewidth}{0.4pt}\par
+  \centering\scshape Presidente del jurado &
+  \centering\rule{0.85\linewidth}{0.4pt}\par
+  \centering\scshape Primer miembro &
+  \centering\rule{0.85\linewidth}{0.4pt}\par
+  \centering\scshape Segundo miembro
+  \tabularnewline
+\end{tabularx}}
+
+\findelexamen
+\end{document}
