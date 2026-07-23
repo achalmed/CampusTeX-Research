@@ -1,0 +1,131 @@
+% ============================================================================
+% PLANTILLA 01 — EXAMEN DE DESARROLLO (teórico)
+% ----------------------------------------------------------------------------
+% Para: exámenes parciales/finales/sustitutorios con preguntas de desarrollo,
+% definiciones, conceptualización, comparaciones, respuesta corta y ensayo.
+% Compilar: latexmk -pdf plantilla-01-examen-desarrollo.tex
+% Solucionario: cambie la línea \documentclass por
+%   \documentclass[soluciones]{academic-exam}
+% ============================================================================
+\documentclass{academic-exam}
+
+% ------------------------------------------------------- metadatos ----------
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\facultad{Facultad de Ciencias Económicas, Administrativas y Contables}
+\escuela{Escuela Profesional de Economía}
+\curso{Macroeconomía II}
+\codigocurso{EC-344}
+\docente{Mg. Nombre Apellido}
+\periodo{Semestre 2026-I}
+\tipoevaluacion{Examen Parcial}
+\fechaevaluacion{21 de julio de 2026}
+\duracion{110 minutos}
+\modalidad{Presencial}
+
+\begin{document}
+\membrete
+
+\begin{instrucciones}
+\begin{itemize}
+  \item Lea cada pregunta con atención antes de responder. La claridad,
+        el orden y la ortografía forman parte de la calificación.
+  \item Responda únicamente en los espacios asignados, con lapicero azul
+        o negro. No se aceptan respuestas a lápiz.
+  \item Está prohibido el uso de apuntes, libros o dispositivos electrónicos.
+  \item El examen consta de \totalpreguntas{} preguntas y suma
+        \totalpuntos{} puntos.
+\end{itemize}
+\end{instrucciones}
+
+
+% ============================================================ PREGUNTAS ====
+\begin{pregunta}[4]
+Defina con precisión los siguientes conceptos y proporcione un ejemplo
+aplicado a la economía peruana para cada uno:
+\begin{apartados}
+  \item Política monetaria no convencional. \pts{2}
+  \item Trampa de liquidez. \pts{2}
+\end{apartados}
+\lineasrespuesta{8}
+\begin{solucion}
+\textbf{a)} La política monetaria no convencional agrupa los instrumentos
+que emplea el banco central cuando la tasa de interés de referencia se
+aproxima a su límite inferior efectivo: expansión cuantitativa, forward
+guidance y operaciones de reporte ampliadas. \emph{Ejemplo:} las
+operaciones de reporte de cartera del BCRP durante 2020 (programa
+Reactiva Perú).
+
+\textbf{b)} La trampa de liquidez es la situación en la que la demanda de
+dinero se vuelve perfectamente elástica a la tasa de interés vigente, de
+modo que aumentos de la oferta monetaria no reducen la tasa ni estimulan
+la demanda agregada.
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[4]
+Compare el enfoque keynesiano y el enfoque monetarista respecto de la
+efectividad de la política fiscal. Organice su respuesta en un cuadro con,
+al menos, tres criterios de comparación (supuestos, mecanismo de
+transmisión y evidencia empírica).
+\espaciorespuesta{7cm}
+\begin{solucion}
+Una respuesta completa debe contrastar: (i) \emph{supuestos} — rigideces
+nominales y demanda efectiva frente a flexibilidad de precios y expectativas
+adaptativas; (ii) \emph{mecanismo} — multiplicador fiscal mayor que uno
+frente a efecto expulsión (\emph{crowding out}) vía tasa de interés;
+(iii) \emph{evidencia} — multiplicadores altos en recesiones profundas
+(Auerbach y Gorodnichenko, 2012) frente a multiplicadores bajos en
+economías abiertas con tipo de cambio flexible.
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[6]
+\enquote{La dolarización financiera limita la potencia de la política
+monetaria en economías emergentes.} Analice críticamente esta afirmación
+considerando el caso peruano entre 2002 y 2024. Su respuesta debe incluir:
+\begin{apartados}
+  \item El canal de hoja de balance y el descalce cambiario. \pts{2}
+  \item El papel del esquema de metas explícitas de inflación. \pts{2}
+  \item Al menos una política de desdolarización aplicada por el BCRP. \pts{2}
+\end{apartados}
+\lineasrespuesta{12}
+\begin{solucion}
+El descalce cambiario hace que una depreciación deteriore la hoja de
+balance de los deudores en dólares con ingresos en soles, lo que genera un
+canal contractivo que compite con el canal expansivo tradicional del tipo
+de cambio. El esquema de metas de inflación (desde 2002) ancló las
+expectativas y redujo el traspaso cambiario, mientras que los encajes
+diferenciados en moneda extranjera y el programa de repos de sustitución
+(2014--2016) aceleraron la desdolarización del crédito, que pasó de
+alrededor de 80\,\% a menos de 25\,\%.
+\end{solucion}
+\end{pregunta}
+
+\begin{pregunta}[6]
+Redacte un ensayo breve (máximo dos carillas) sobre el siguiente tema:
+\emph{¿Debe el Banco Central de Reserva incorporar objetivos de empleo en
+su mandato?} Tome una posición y defiéndala con argumentos teóricos y
+evidencia empírica.
+
+\begin{criterios}
+\begin{tabularx}{\linewidth}{@{}X c@{}}
+  \textbf{Criterio} & \textbf{Puntaje}\\
+  \arrayrulecolor{grislinea}\hline\addlinespace[3pt]
+  Tesis clara y posición definida            & 1{,}5 \\
+  Argumentación teórica consistente          & 2{,}0 \\
+  Uso pertinente de evidencia empírica       & 1{,}5 \\
+  Redacción, estructura y ortografía         & 1{,}0 \\
+\end{tabularx}
+\end{criterios}
+\lineasrespuesta{10}
+\begin{solucion}
+No existe una única respuesta correcta: se califica la solidez de la
+argumentación según la rúbrica. Una respuesta de nivel excelente discute
+el mandato dual de la Reserva Federal, la divina coincidencia
+(Blanchard y Galí, 2007), los riesgos de dominancia fiscal y la evidencia
+sobre credibilidad de bancos centrales con mandato único.
+\end{solucion}
+\end{pregunta}
+
+\findelexamen
+\end{document}

@@ -25,4 +25,9 @@
 
 % Microtipografía (protrusion; expansion no aplica en XeLaTeX)
 \RequirePackage[protrusion=true,final]{microtype}
+
+% Idioma (XeLaTeX-native) y comillas tipográficas -------------------------
+\RequirePackage{polyglossia}
+\setdefaultlanguage{spanish}
+\RequirePackage[autostyle=true]{csquotes}   % \enquote sigue el idioma
 \endinput
