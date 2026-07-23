@@ -1,60 +1,52 @@
 #!/usr/bin/env bash
 # ============================================================
-# new-evaluacion.sh — Crea una evaluación en un curso
+# new-evaluacion.sh — Crea una evaluación en un curso (academic-exam)
 # ============================================================
 # Uso:
 #   ./scripts/new-evaluacion.sh COURSE_DIR TIPO "TÍTULO" [--fecha AAAAMMDD]
-#
-# Ejemplo:
-#   ./scripts/new-evaluacion.sh "$C" examen-desarrollo "Examen Parcial 01"
-#   ./scripts/new-evaluacion.sh "$C" 04 "Práctica Calificada 02" --fecha 20260815
 #
 # TIPO (número 01–12 o nombre): examen-desarrollo, examen-objetivo,
 #   examen-problemas, practica-calificada, practica-dirigida, laboratorio,
 #   control-de-lectura, examen-oral, caso-estudio, tarea, banco-de-preguntas,
 #   solucionario.
 #
-# Copia la plantilla a  <curso>/04_EVALUACIONES/<subcarpeta>/AAAAMMDD_SIGLA.tex,
-# rellena los metadatos (curso, docente, universidad, periodo, tipo, fecha) desde
-# config/course.yml y el nombre del curso. Compila con build-evaluacion.sh.
+# Copia templates/exam/<tipo>/ a <curso>/04_EVALUACIONES/<subcarpeta>/AAAAMMDD_SIGLA.tex,
+# rellena metadatos desde config/course.yml. Compilar con build.sh --modo todos.
 # ============================================================
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
 
-usage() { sed -n '2,25p' "${BASH_SOURCE[0]}"; exit 1; }
+usage() { sed -n '2,18p' "${BASH_SOURCE[0]}"; exit 1; }
 [[ $# -ge 3 ]] || usage
 
 COURSE="$1"; TIPO="$2"; TITULO="$3"; FECHA=""
 [[ "${4:-}" == "--fecha" ]] && FECHA="$5"
 [[ -n "$FECHA" ]] || FECHA="$(date +%Y%m%d)"
+is_course "$COURSE" || die "No parece un curso: $COURSE"
 
-is_course "$COURSE" || die "No parece un curso (falta 00_ADMINISTRACION/03_SESIONES): $COURSE"
-
-# --- Tabla: TIPO → (NN plantilla · subcarpeta de 04_EVALUACIONES · SIGLA) -----
+# TIPO → (nombre de plantilla · subcarpeta de 04_EVALUACIONES · sigla)
 case "$TIPO" in
-  01|examen-desarrollo)     NN=01; SUB=examen_parcial;  SIG=EP  ;;
-  02|examen-objetivo)       NN=02; SUB=examen_parcial;  SIG=EP  ;;
-  03|examen-problemas)      NN=03; SUB=examen_parcial;  SIG=EP  ;;
-  04|practica-calificada)   NN=04; SUB=practicas;       SIG=PC  ;;
-  05|practica-dirigida)     NN=05; SUB=practicas;       SIG=PD  ;;
-  06|laboratorio)           NN=06; SUB=laboratorios;    SIG=LAB ;;
-  07|control-de-lectura)    NN=07; SUB=tareas;          SIG=CL  ;;
-  08|examen-oral)           NN=08; SUB=examen_final;    SIG=EO  ;;
-  09|caso-estudio)          NN=09; SUB=proyectos;       SIG=CASO;;
-  10|tarea)                 NN=10; SUB=tareas;          SIG=TAR ;;
-  11|banco-de-preguntas)    NN=11; SUB=banco_preguntas; SIG=BP  ;;
-  12|solucionario)          NN=12; SUB=soluciones;      SIG=SOL ;;
-  *) die "TIPO no reconocido: $TIPO (01–12 o nombre; ver --help)" ;;
+  01|examen-desarrollo)   NAME=examen-desarrollo;   SUB=examen_parcial;  SIG=EP  ;;
+  02|examen-objetivo)     NAME=examen-objetivo;     SUB=examen_parcial;  SIG=EP  ;;
+  03|examen-problemas)    NAME=examen-problemas;    SUB=examen_parcial;  SIG=EP  ;;
+  04|practica-calificada) NAME=practica-calificada; SUB=practicas;       SIG=PC  ;;
+  05|practica-dirigida)   NAME=practica-dirigida;   SUB=practicas;       SIG=PD  ;;
+  06|laboratorio)         NAME=laboratorio;         SUB=laboratorios;    SIG=LAB ;;
+  07|control-de-lectura)  NAME=control-de-lectura;  SUB=tareas;          SIG=CL  ;;
+  08|examen-oral)         NAME=examen-oral;         SUB=examen_final;    SIG=EO  ;;
+  09|caso-estudio)        NAME=caso-estudio;        SUB=proyectos;       SIG=CASO;;
+  10|tarea)               NAME=tarea;               SUB=tareas;          SIG=TAR ;;
+  11|banco-de-preguntas)  NAME=banco-de-preguntas;  SUB=banco_preguntas; SIG=BP  ;;
+  12|solucionario)        NAME=solucionario;        SUB=soluciones;      SIG=SOL ;;
+  *) die "TIPO no reconocido: $TIPO" ;;
 esac
 
-TPL="$(find "$EVAL_DIR/plantillas" -name "plantilla-${NN}-*.tex" | head -1)"
-[[ -f "$TPL" ]] || die "No se encontró la plantilla $NN en $EVAL_DIR/plantillas/"
-
+TPL="$FW_DIR/templates/exam/$NAME/$NAME.tex"
+[[ -f "$TPL" ]] || die "Falta la plantilla $TPL"
 DESTDIR="$COURSE/04_EVALUACIONES/$SUB"; mkdir -p "$DESTDIR"
 DEST="$DESTDIR/${FECHA}_${SIG}.tex"
 [[ -e "$DEST" ]] && die "Ya existe: $DEST (use otra --fecha)"
 
-# Datos para metadatos
 CURSO_LABEL="$(basename "$COURSE" | sed -E 's/^course_[0-9]+_//; s/[_-]+/ /g')"
 DOC="$(config_get docente)"; DT="$(config_get docente_titulo)"; [[ -n "$DT" ]] && DOC="$DT $DOC"
 FECHA_LARGA="$(date -d "$FECHA" '+%d de %B de %Y' 2>/dev/null || echo "$FECHA")"
@@ -70,7 +62,4 @@ sed -i -E \
   "$DEST"
 
 ok "Evaluación creada: ${DEST}"
-echo "Siguiente:"
-echo "  1. Edita las preguntas en $DEST"
-echo "  2. Compila:  ./scripts/build-evaluacion.sh \"$DEST\" --modo todos"
-echo "     (genera examen, hoja de claves y solucionario)"
+echo "Compila:  ./scripts/build.sh \"$DEST\" --modo todos   (examen · claves · soluciones)"
