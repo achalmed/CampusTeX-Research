@@ -1,0 +1,50 @@
+%% ============================================================================
+%% beamerinnerthemeAcademic.sty — Estructura interna (listas, bloques, portada)
+%% ----------------------------------------------------------------------------
+%% Marcadores de lista sobrios (guión / punto), bloques sin sombra ni marco,
+%% portada editorial. Nada decorativo.
+%% ============================================================================
+\ProvidesPackage{beamerinnerthemeAcademic}[2026/07/23 v1 Interior Academic]
+\mode<presentation>
+
+% --- Marcadores de lista: guión de acento (nivel 1), punto (nivel 2) ---------
+\setbeamertemplate{itemize item}{\color{acento}\textendash}
+\setbeamertemplate{itemize subitem}{\color{secundario}\textperiodcentered}
+\setbeamertemplate{itemize subsubitem}{\color{secundario}\textperiodcentered}
+\setbeamertemplate{enumerate item}{\color{acento}\insertenumlabel.}
+\setbeamertemplate{sections/subsections in toc}[square]
+
+% --- Bloques: sin sombra, filete fino de acento a la izquierda ---------------
+\setbeamertemplate{blocks}[default]
+\setbeamertemplate{block begin}{%
+  \par\vskip4pt%
+  \begin{beamercolorbox}[colsep*=0pt,leftskip=8pt,rightskip=4pt]{block title}%
+    \usebeamerfont{block title}\insertblocktitle\par%
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}[colsep*=0pt,leftskip=8pt,rightskip=4pt,vmode]{block body}%
+    \vskip2pt}
+\setbeamertemplate{block end}{\vskip2pt\end{beamercolorbox}\vskip6pt}
+
+% --- Portada editorial: título en acento, filete, autor/afiliación -----------
+\setbeamertemplate{title page}{%
+  \vfill
+  \begingroup
+  \raggedright
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \ifx\insertsubtitle\@empty\else
+    \vskip0.4ex{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+  \fi
+  \vskip1.0ex{\color{filete}\hrule height 0.8pt}\vskip1.4ex
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+  \vskip0.3ex{\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+  \vskip0.8ex{\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
+  \endgroup
+  \vfill
+}
+
+% --- Figuras y leyendas: etiqueta en acento ---------------------------------
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{. }
+
+\mode<all>

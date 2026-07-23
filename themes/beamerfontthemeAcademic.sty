@@ -1,0 +1,28 @@
+%% ============================================================================
+%% beamerfontthemeAcademic.sty — Tipografía del tema (identidad «Academic»)
+%% ----------------------------------------------------------------------------
+%% Las familias (Libertinus Serif/Sans/Math, Inconsolata) las fija academic-fonts
+%% vía fontspec. Aquí solo la jerarquía de tamaños/pesos, con cuerpo SERIF
+%% (editorial, tipo Tufte/Harvard), no el sans por defecto de Beamer.
+%% ============================================================================
+\ProvidesPackage{beamerfontthemeAcademic}[2026/07/23 v1 Tipografia Academic]
+\mode<presentation>
+
+\usefonttheme{professionalfonts} % no sustituir las fuentes fontspec/math
+\renewcommand{\familydefault}{\rmdefault} % cuerpo serif (Libertinus Serif)
+
+\setbeamerfont{title}{family=\rmfamily, series=\bfseries, size=\huge}
+\setbeamerfont{subtitle}{family=\rmfamily, shape=\itshape, size=\large}
+\setbeamerfont{author}{family=\rmfamily, size=\normalsize}
+\setbeamerfont{institute}{family=\rmfamily, size=\small}
+\setbeamerfont{date}{family=\rmfamily, size=\small}
+\setbeamerfont{frametitle}{family=\rmfamily, series=\bfseries, size=\Large}
+\setbeamerfont{framesubtitle}{family=\rmfamily, shape=\itshape, size=\normalsize}
+\setbeamerfont{block title}{family=\rmfamily, series=\bfseries, size=\normalsize}
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\small}
+\setbeamerfont{footline}{family=\rmfamily, size=\scriptsize}
+\setbeamerfont{caption}{size=\small}
+\setbeamerfont{caption name}{series=\bfseries}
+
+\mode<all>

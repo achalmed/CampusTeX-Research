@@ -1,0 +1,34 @@
+%% ============================================================================
+%% beamercolorthemeAcademic.sty — Colores del tema (mapea la paleta «Academic»)
+%% ----------------------------------------------------------------------------
+%% NO define colores propios: usa los aliases de styles/academic-colors.sty
+%% (acento, secundario, textoprincipal, filete, cajafondo). Monocromo + 1 acento.
+%% ============================================================================
+\ProvidesPackage{beamercolorthemeAcademic}[2026/07/23 v1 Colores Academic]
+\mode<presentation>
+
+\setbeamercolor{normal text}{fg=textoprincipal, bg=white}
+\setbeamercolor{structure}{fg=acento}
+\setbeamercolor{alerted text}{fg=acento}
+\setbeamercolor{title}{fg=acento}
+\setbeamercolor{subtitle}{fg=secundario}
+\setbeamercolor{author}{fg=textoprincipal}
+\setbeamercolor{institute}{fg=secundario}
+\setbeamercolor{date}{fg=secundario}
+\setbeamercolor{frametitle}{fg=acento, bg=white}
+\setbeamercolor{framesubtitle}{fg=secundario, bg=white}
+\setbeamercolor{itemize item}{fg=acento}
+\setbeamercolor{itemize subitem}{fg=secundario}
+\setbeamercolor{enumerate item}{fg=acento}
+\setbeamercolor{section in toc}{fg=textoprincipal}
+\setbeamercolor{section number projected}{fg=white, bg=acento}
+% Bloques: sin color fuerte; título en acento, cuerpo con fondo suave.
+\setbeamercolor{block title}{fg=acento, bg=cajafondo}
+\setbeamercolor{block body}{fg=textoprincipal, bg=cajafondo}
+\setbeamercolor{block title alerted}{fg=white, bg=acento}
+\setbeamercolor{block body alerted}{fg=textoprincipal, bg=cajafondo}
+\setbeamercolor{footline}{fg=secundario}
+\setbeamercolor{page number in head/foot}{fg=secundario}
+\setbeamercolor{caption name}{fg=acento}
+
+\mode<all>

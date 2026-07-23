@@ -1,0 +1,58 @@
+% ============================================================================
+% PLANTILLA — CLASE (diapositivas de sesión)
+% ----------------------------------------------------------------------------
+% Presentación de una clase. SIN diseño: todo lo pone academic-beamer + el tema
+% «Academic». Solo se elige la clase y se rellena el contenido.
+% Compilar:  scripts/build.sh clase.tex   (XeLaTeX)
+% ============================================================================
+\documentclass{academic-beamer}
+
+\title{Título de la clase}
+\subtitle{Unidad · tema}
+\author{Edison Achalma B.Sc. Econ.}
+\institute{Universidad Nacional de San Cristóbal de Huamanga}
+\date{Semestre 2026-I}
+
+\begin{document}
+
+\begin{frame}\titlepage\end{frame}
+
+\begin{frame}{Objetivos de la sesión}
+\begin{itemize}
+  \item Objetivo de aprendizaje 1
+  \item Objetivo de aprendizaje 2
+  \item Objetivo de aprendizaje 3
+\end{itemize}
+\end{frame}
+
+\section{Primer tema}
+\begin{frame}{Idea principal}
+\begin{itemize}
+  \item Punto clave
+  \begin{itemize}\item Detalle o ejemplo\end{itemize}
+\end{itemize}
+\begin{block}{Definición}
+Enunciado formal del concepto.
+\end{block}
+\end{frame}
+
+\begin{frame}{Formalización}
+Ecuación o modelo: $\displaystyle y = f(x;\theta)$.
+\begin{nota} Observación o matiz importante para la clase. \end{nota}
+\end{frame}
+
+\begin{frame}[fragile]{Aplicación en software}
+\begin{codigo}[language=R]
+modelo <- lm(y ~ x, data = datos)
+summary(modelo)
+\end{codigo}
+\end{frame}
+
+\begin{frame}{Síntesis}
+\begin{itemize}
+  \item Idea de cierre 1
+  \item Idea de cierre 2
+\end{itemize}
+\end{frame}
+
+\end{document}

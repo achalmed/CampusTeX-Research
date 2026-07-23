@@ -1,0 +1,42 @@
+%% ============================================================================
+%% beamerouterthemeAcademic.sty — Estructura externa (título de frame, pie)
+%% ----------------------------------------------------------------------------
+%% Minimalismo editorial: sin barras de navegación, sin cabecera, sin sombras.
+%% Título de frame en acento con un filete fino debajo; pie discreto de una línea
+%% (título corto · sección · número de página).
+%% ============================================================================
+\ProvidesPackage{beamerouterthemeAcademic}[2026/07/23 v1 Estructura Academic]
+\mode<presentation>
+
+\setbeamertemplate{navigation symbols}{}   % sin símbolos de navegación
+\setbeamertemplate{headline}{}              % sin cabecera
+
+% --- Título de frame: texto en acento + filete fino de acento debajo ---------
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \vskip1.1ex
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=\dimexpr\beamer@leftmargin\relax,
+                         rightskip=\beamer@rightmargin]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle%
+    \ifx\insertframesubtitle\@empty\else
+      \\[0.1ex]{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}%
+    \fi
+    \par\vskip0.6ex%
+    {\color{filete}\hrule height 0.6pt}%
+  \end{beamercolorbox}%
+  \vskip0.6ex
+}
+
+% --- Pie discreto de una sola línea -----------------------------------------
+\setbeamertemplate{footline}{%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.4ex,dp=1.2ex,
+        leftskip=\beamer@leftmargin,rightskip=\beamer@rightmargin]{footline}%
+      \usebeamerfont{footline}%
+      {\scshape\insertshorttitle}\hfill
+      \insertsectionhead\hfill
+      \insertframenumber\,/\,\inserttotalframenumber%
+    \end{beamercolorbox}}%
+}
+
+\mode<all>

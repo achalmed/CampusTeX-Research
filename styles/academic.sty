@@ -17,7 +17,9 @@
 \RequirePackage{academic-math}    % mathtools + operadores comunes
 \RequirePackage{academic-icons}   % iconografía (fontawesome5)
 \RequirePackage{academic-tables}  % tablas booktabs + notas
-\RequirePackage{academic-figures} % captions + figuras
+% academic-figures carga `caption`, que choca con Beamer (maneja sus propias
+% leyendas). En diapositivas se omite; en documentos sí se carga.
+\@ifclassloaded{beamer}{}{\RequirePackage{academic-figures}}
 \RequirePackage{academic-boxes}   % cajas tcolorbox (nota, definición, teorema…)
 \RequirePackage{academic-code}    % código R/Python/Stata + salidas
 \endinput
