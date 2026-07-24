@@ -31,7 +31,7 @@ Academic_Class_Framework/
 ├── themes/       Tema Beamer propio: beamer{,color,font,inner,outer}themeAcademic (minimalista)
 ├── config/       palette.tex (ÚNICO punto de cambio de color) · course.yml (datos del docente)
 ├── templates/    Documentos vacíos, sin diseño: presentation/ (8 tipos) · exam/ (12) · report/ (4)
-├── scaffolds/    Esqueletos de CARPETAS (no compilables): course (00–11) · session · period
+├── scaffolds/    Esqueletos de CARPETAS (no compilables): course (00–09) · session · period
 ├── libraries/    Bancos reutilizables (Banco_*) · bibliography/ (.bib) · assets/ (branding)
 ├── examples/     Ejemplos compilados (documentación viva)
 ├── scripts/      Automatización (crear/compilar/validar)
@@ -40,21 +40,21 @@ Academic_Class_Framework/
 
 ---
 
-## El estándar 00–11 (organización de los Academic_Class)
+## El estándar 00–09 (organización de los Academic_Class)
 
 Un `Academic_Class-<Área>` es un **contenedor de cursos**. Cada `course_NN_<slug>/`
-tiene **12 carpetas 00–11** + `README.md`:
+tiene **10 carpetas 00–09** + `README.md`:
 
 ```
 00_ADMINISTRACION 01_PLANIFICACION 02_CONTENIDO 03_SESIONES 04_EVALUACIONES
-05_ESTUDIANTES 06_RECURSOS 07_MULTIMEDIA 08_INVESTIGACION 09_PUBLICACION
-10_ARCHIVO 11_SEMESTRES
+05_ESTUDIANTES 06_RECURSOS 07_MULTIMEDIA 08_INVESTIGACION 09_SEMESTRES
 ```
 
 Cada sesión (`03_SESIONES/SNN_<slug>/`) sigue la anatomía
 `01_Antes 02_Clase 03_Actividad 04_Evaluacion 05_Despues 06_Recursos 07_Notas`.
-`11_SEMESTRES/<AAAA-ciclo>/` guarda cada dictado (listas, notas, evidencias).
-Detalle completo del estándar: [`docs/09-estandar-00-11.md`] (o la sección
+`09_SEMESTRES/<AAAA-ciclo>/` guarda cada dictado: registro privado (listas, notas,
+evidencias) **+ publicación** (el MOOC por sesión, que se congela poco a poco).
+Detalle completo del estándar: [`docs/09-estandar-00-09.md`] (o la sección
 correspondiente de `docs/`).
 
 ---
@@ -65,7 +65,7 @@ correspondiente de `docs/`).
 cd ~/Documents/Academic_Class_Framework
 AC=~/Documents/Academic_Class-<Área>
 
-# 1) Carpetas (estándar 00–11)
+# 1) Carpetas (estándar 00–09)
 ./scripts/new-course.sh  "$AC" NN "Título del curso"
 C="$AC/course_NN_<slug>"
 ./scripts/new-session.sh "$C" NN "Título de la sesión"
@@ -89,9 +89,10 @@ C="$AC/course_NN_<slug>"
 | `new-course.sh` · `new-session.sh` · `new-period.sh` | esqueletos de carpetas desde `scaffolds/` |
 | `new-presentation.sh` | diapositivas → `SNN/02_Clase/` (`academic-beamer`, 8 tipos) |
 | `new-evaluacion.sh` | examen/práctica → `04_EVALUACIONES/` (`academic-exam`, 12 tipos, modos claves/soluciones) |
-| `new-report.sh` | sílabo/calendario/nota-docente/rúbrica → carpeta 00–11 (`academic-report`) |
+| `new-report.sh` | sílabo/calendario/nota-docente/rúbrica → carpeta 00–09 (`academic-report`) |
+| `publish-session.sh` | publica y **congela** una sesión → `09_SEMESTRES/<periodo>/publicacion/SNN/` (instantánea solo-lectura) |
 | `build.sh` | compila cualquier `.tex` con LuaLaTeX (2 pasadas, TEXINPUTS de todas las capas) |
-| `validate.sh` · `stats.sh` | valida la estructura 00–11 · resumen del curso |
+| `validate.sh` · `stats.sh` | valida la estructura 00–09 · resumen del curso |
 | `doctor.sh` · `clean.sh` | chequeo de entorno · limpiar auxiliares |
 
 ---

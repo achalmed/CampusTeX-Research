@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# new-period.sh — Crea un dictado (periodo) en 11_SEMESTRES/
+# new-period.sh — Crea un dictado (periodo) en 09_SEMESTRES/
 # ============================================================
 # Uso:
 #   ./scripts/new-period.sh COURSE_DIR PERIODO
@@ -8,9 +8,9 @@
 # Ejemplo:
 #   ./scripts/new-period.sh "$C" 2026-II
 #
-# Copia _PLANTILLAS/Plantilla_Periodo al curso como
-# 11_SEMESTRES/<periodo>/ (estudiantes, calificaciones,
-# evidencias, publicacion…).
+# Copia scaffolds/period al curso como 09_SEMESTRES/<periodo>/:
+# registro privado (estudiantes, calificaciones, cronograma,
+# evaluaciones_aplicadas, evidencias) + publicacion (MOOC por sesión).
 # ============================================================
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
@@ -24,9 +24,9 @@ PERIODO="$2"
 is_course "$COURSE" || die "No parece un curso: $COURSE"
 [[ -d "$SCAFFOLDS_DIR/period" ]] || die "Falta $SCAFFOLDS_DIR/period"
 
-DEST="$COURSE/11_SEMESTRES/$PERIODO"
+DEST="$COURSE/09_SEMESTRES/$PERIODO"
 [[ -e "$DEST" ]] && die "Ya existe el periodo: $DEST"
 
-mkdir -p "$COURSE/11_SEMESTRES"
+mkdir -p "$COURSE/09_SEMESTRES"
 cp -a "$SCAFFOLDS_DIR/period" "$DEST"
 ok "Periodo creado: $DEST"

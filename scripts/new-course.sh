@@ -37,8 +37,9 @@ cat > "$DEST/README.md" <<EOF
 Curso \`course_${NUM}_${SLUG}\`. Estructura estándar 00–11
 (ver \`~/Documents/Academic_Class_Framework/README.md\`).
 
-- \`00_ADMINISTRACION\` … \`10_ARCHIVO\` — contenido canónico del curso.
-- \`11_SEMESTRES/<periodo>\` — cada dictado (crear con \`new-period.sh\`).
+- \`00_ADMINISTRACION\` … \`08_INVESTIGACION\` — contenido canónico y atemporal del curso.
+- \`09_SEMESTRES/<periodo>\` — cada dictado: registro privado + publicación MOOC
+  (crear con \`new-period.sh\`; se congela por sesión).
 EOF
 
 ok "Curso creado: $DEST"

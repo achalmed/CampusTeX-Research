@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # ============================================================
-# validate.sh — Valida la estructura estándar 00–11
+# validate.sh — Valida la estructura estándar 00–09
 # ============================================================
 # Uso:
 #   ./scripts/validate.sh COURSE_DIR         # valida un curso
 #   ./scripts/validate.sh ACADEMIC_CLASS_DIR # valida todos sus course_*
 #
 # Comprueba por curso:
-#   - Las 12 carpetas 00–11 + README.md.
+#   - Las 10 carpetas 00–09 + README.md.
 #   - Cada sesión (03_SESIONES/SNN_*): anatomía 01_Antes…07_Notas,
 #     metadata.yml (campos numero/titulo), README.md y deck en 02_Clase/.
 #
@@ -25,7 +25,7 @@ err() { error "$*"; errors=$((errors + 1)); }
 
 COURSE_DIRS=(00_ADMINISTRACION 01_PLANIFICACION 02_CONTENIDO 03_SESIONES \
   04_EVALUACIONES 05_ESTUDIANTES 06_RECURSOS 07_MULTIMEDIA 08_INVESTIGACION \
-  09_PUBLICACION 10_ARCHIVO 11_SEMESTRES)
+  09_SEMESTRES)
 SESSION_DIRS=(01_Antes 02_Clase 03_Actividad 04_Evaluacion 05_Despues 06_Recursos 07_Notas)
 
 validate_course() {

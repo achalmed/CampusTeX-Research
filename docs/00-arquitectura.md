@@ -27,7 +27,7 @@ La estructura actual creció por acreción y mezcla responsabilidades:
 | **Duplicidad de plantillas** | `_PLANTILLAS/Plantilla_Examen/` vs `evaluaciones/plantillas/` | dos orígenes de verdad para "un examen" |
 | **Dos motores** | Beamer usa el compilador universal (pdf/xe/lua); `evaluacion.cls` usa **pdfLaTeX** | dos toolchains, dos identidades tipográficas |
 | **Identidad fragmentada** | diapositivas (Beamer Madrid) y exámenes (evaluacion.cls) no comparten fuentes, paleta ni cajas | el material no "se siente" un solo sistema |
-| **Responsabilidades mezcladas** | `_PLANTILLAS/` contiene a la vez esqueletos de carpetas (00–11) y plantillas de documento | el mismo directorio hace dos trabajos distintos |
+| **Responsabilidades mezcladas** | `_PLANTILLAS/` contiene a la vez esqueletos de carpetas (00–09) y plantillas de documento | el mismo directorio hace dos trabajos distintos |
 | **`config/course.yml` sobrecargado** | identidad del docente + parámetros de compilación | mezcla datos con configuración de motor |
 | **Sin capa de estilos compartida** | no existe un punto único de identidad visual | imposible "cambiar un color y que afecte a todo" |
 
@@ -143,9 +143,9 @@ Academic_Class_Framework/
 │   └── poster/                 · \documentclass{academic-poster}
 │
 ├── scaffolds/                   ← ESQUELETOS DE CARPETAS (filesystem, NO compilables)
-│   ├── course/                  · árbol 00–11 (estándar del Academic_Class)
+│   ├── course/                  · árbol 00–09 (estándar del Academic_Class)
 │   ├── session/                 · anatomía 01_Antes…07_Notas
-│   └── period/                  · 11_SEMESTRES/<periodo>
+│   └── period/                  · 09_SEMESTRES/<periodo> (registro privado + publicación MOOC)
 │
 ├── libraries/                   ← BANCOS reutilizables (contenido compartido entre cursos)
 │   ├── Banco_Preguntas/  Banco_Ejercicios/  Banco_Diapositivas/
@@ -184,7 +184,7 @@ Academic_Class_Framework/
 | `themes/` | el tema Beamer (5 archivos) | identidad propia — la toma de `styles/` |
 | `config/` | valores tunables (paleta, fuentes, espaciados) + datos del docente | lógica |
 | `templates/` | documentos vacíos que solo llaman a una clase | diseño, estilos |
-| `scaffolds/` | esqueletos de carpetas del estándar 00–11 | documentos compilables |
+| `scaffolds/` | esqueletos de carpetas del estándar 00–09 | documentos compilables |
 | `libraries/` | bancos de contenido reutilizable | plantillas, clases |
 | `bibliography/` | archivos `.bib` | otra cosa |
 | `assets/` | logos, iconos, fuentes | código |
@@ -254,7 +254,7 @@ saca el diseño.
 **D5 · `templates/` único; `scaffolds/` aparte.**
 Se elimina la duplicidad `evaluaciones/plantillas/` vs `_PLANTILLAS/`: **todas** las
 plantillas de documento viven en `templates/`. Los esqueletos de **carpetas** (el
-árbol 00–11, la anatomía de sesión) son otra responsabilidad y viven en
+árbol 00–09, la anatomía de sesión) son otra responsabilidad y viven en
 `scaffolds/`. "Plantilla de documento" (algo que compilas) ≠ "esqueleto de
 carpetas" (algo que copias para organizar).
 
@@ -302,7 +302,7 @@ compila y se mira el PDF; los `examples/` son los "tests").
 - **Fase 0 — Andamiaje.** Crear el árbol vacío (`classes/ styles/ themes/ config/
   templates/ scaffolds/ libraries/ bibliography/ examples/`), mover `_BIBLIOTECA`→
   `libraries/`+`bibliography/`, `assets/branding`→`assets/`. Sin romper el tooling
-  del estándar 00–11.
+  del estándar 00–09.
 - **Fase 1 — Identidad (`styles/` + `config/`).** Escribir los paquetes de
   identidad en LuaLaTeX (colores, fuentes fontspec, cajas, tablas, código, math,
   iconos) + `config/palette.tex`/`fonts.tex`. Es el corazón; todo lo demás la
@@ -319,7 +319,7 @@ compila y se mira el PDF; los `examples/` son los "tests").
   `Makefile`, y **actualización de los prompts** (§9). Retiro de `evaluaciones/` y
   `_PLANTILLAS/` una vez migrado todo.
 
-Compatibilidad: mientras dure la migración, el tooling del estándar 00–11
+Compatibilidad: mientras dure la migración, el tooling del estándar 00–09
 (`new-course/session/period`, `validate`) sigue funcionando intacto.
 
 ---

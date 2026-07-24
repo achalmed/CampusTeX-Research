@@ -27,14 +27,15 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 ## El estándar (resumen; detalle en README.md)
 
 - Un `Academic_Class-<Area>/` contiene `course_NN_<slug>/` directamente.
-- Cada curso tiene **12 carpetas 00–11** + `README.md`:
+- Cada curso tiene **10 carpetas 00–09** + `README.md`:
   `00_ADMINISTRACION 01_PLANIFICACION 02_CONTENIDO 03_SESIONES 04_EVALUACIONES
-  05_ESTUDIANTES 06_RECURSOS 07_MULTIMEDIA 08_INVESTIGACION 09_PUBLICACION
-  10_ARCHIVO 11_SEMESTRES`.
+  05_ESTUDIANTES 06_RECURSOS 07_MULTIMEDIA 08_INVESTIGACION 09_SEMESTRES`.
 - Cada sesión (`03_SESIONES/SNN_<slug>/`) tiene la anatomía
   `01_Antes 02_Clase 03_Actividad 04_Evaluacion 05_Despues 06_Recursos 07_Notas`
   + `metadata.yml` + `README.md`. **El deck (`.tex`/`.qmd`) va en `02_Clase/`.**
-- `11_SEMESTRES/<AAAA-ciclo>/` = cada dictado (estudiantes, calificaciones, evidencias).
+- `09_SEMESTRES/<AAAA-ciclo>/` = cada dictado: registro privado (estudiantes,
+  calificaciones, evidencias) **+ publicación** (MOOC por sesión, se congela poco a
+  poco). Fusiona las antiguas `09_PUBLICACION`/`10_ARCHIVO`/`11_SEMESTRES`.
 
 ## Arquitectura del repo
 
@@ -56,7 +57,7 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
   (sílabo/calendario/nota-docente/rúbrica, hereda base), `academic-beamer` (beamer + tema).
 - `themes/` — tema Beamer propio `beamer{,color,font,inner,outer}themeAcademic` (minimalista; consume `styles/`).
 - `templates/` — documentos vacíos, **sin diseño** (`presentation/`, `exam/` 12 tipos, `report/`); solo `\documentclass{academic-*}` + contenido.
-- `scaffolds/` — esqueletos de **carpetas** (no compilables): `course` (00–11), `session` (01_Antes…07_Notas), `period`.
+- `scaffolds/` — esqueletos de **carpetas** (no compilables): `course` (00–09), `session` (01_Antes…07_Notas), `period` (dictado: registro privado + publicación MOOC).
 - `libraries/` — bancos compartidos (`Banco_*`); `bibliography/` — `.bib`.
 - `assets/branding/` — logo canónico. `examples/` — ejemplos compilados. `config/` — `course.yml` (datos) + `palette.tex`/`fonts.tex` (identidad).
 - `docs/` — documentación técnica (`00-arquitectura.md` es la canónica).
@@ -70,9 +71,9 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 
 ```bash
 # Scaffolds de carpetas (copian desde scaffolds/ hacia un curso/Academic_Class)
-./scripts/new-course.sh  <ACADEMIC_CLASS_DIR> NN "Título"          # curso 00–11
+./scripts/new-course.sh  <ACADEMIC_CLASS_DIR> NN "Título"          # curso 00–09
 ./scripts/new-session.sh <COURSE_DIR> NN "Título" [--quarto]        # sesión SNN_slug
-./scripts/new-period.sh  <COURSE_DIR> <AAAA-ciclo>                  # dictado en 11_SEMESTRES
+./scripts/new-period.sh  <COURSE_DIR> <AAAA-ciclo>                  # dictado en 09_SEMESTRES
 
 # Documentos LaTeX (copian desde templates/ y compilan con LuaLaTeX)
 ./scripts/new-presentation.sh <COURSE_DIR> NN "Título" [--tipo clase]   # diapositivas → SNN/02_Clase (academic-beamer)
@@ -81,12 +82,15 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 ./scripts/build.sh <ARCHIVO.tex> [--modo examen|claves|soluciones|todos]  # compila cualquier .tex con LuaLaTeX
 
 # Validación y resumen
-./scripts/validate.sh <COURSE_DIR | ACADEMIC_CLASS_DIR>            # invariantes 00–11 (exit!=0 si error)
+./scripts/validate.sh <COURSE_DIR | ACADEMIC_CLASS_DIR>            # invariantes 00–09 (exit!=0 si error)
 ./scripts/stats.sh    <COURSE_DIR>                                # resumen por sesión
 
 # Compilación de diapositivas (decks en 02_Clase/)
 ./scripts/build-session.sh <COURSE_DIR> NN
 ./scripts/build-course.sh  <COURSE_DIR> [--solo-sesiones]
+
+# Publicación MOOC (publicar = congelar la sesión en el dictado)
+./scripts/publish-session.sh <COURSE_DIR> NN <AAAA-ciclo> [--refrescar]  # → 09_SEMESTRES/<periodo>/publicacion/SNN/
 
 # Evaluaciones (exámenes/prácticas en 04_EVALUACIONES/)
 ./scripts/new-evaluacion.sh  <COURSE_DIR> <tipo|01-12> "Título" [--fecha AAAAMMDD]
@@ -111,9 +115,10 @@ si no existe, usa el motor detectado por `latex_engine()` (comentario `%!TEX`, c
   anatomía interna de sesiones); si un deck deja de compilar, se reconstruye.
 - Los decks Beamer son **autocontenidos** (preámbulo propio + copia local del logo).
   Al mover un deck, mover su carpeta **completa** (los assets son hermanos del `.tex`).
-- **Reversibilidad**: los árboles `Academic_Class-*` **no** son repos Git; sus
-  reorganizaciones dejan backup + `_ESTANDARIZACION/UNDO*.sh`. Este framework **sí**
-  es Git (revertir con git).
+- **Reversibilidad por git (todo)**: tanto este framework como los árboles
+  `Academic_Class-*` son repos Git (se hace `git init` donde falte). La reversibilidad
+  de cualquier reorganización es por git: commit del estado previo → migrar → commit.
+  Ya no se usan backups + `_ESTANDARIZACION/UNDO*.sh`.
 - `*.sdr/` = metadatos de KOReader; ignorar.
 
 ## Pendiente
