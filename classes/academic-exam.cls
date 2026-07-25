@@ -185,7 +185,12 @@
 \setlist[apartados,1]{label=\textbf{\alph*)},leftmargin=2.1em,itemsep=5pt}
 \setlist[apartados,2]{label=\roman*.,leftmargin=1.9em,itemsep=3pt}
 \setlist[apartados,3]{label=\arabic*.,leftmargin=1.8em}
-\newcommand{\pts}[1]{\hfill{\footnotesize\itshape\color{gristexto}(#1 p.)}}
+% Puntaje de subpregunta SIEMPRE pegado al margen derecho (idiom flush-right o,
+% si no cabe, en su propio renglón también a la derecha), alineado con el puntaje
+% de la pregunta principal. \parfillskip=0 se fija localmente y se restaura solo.
+\newcommand{\pts}[1]{\unskip\nobreak\hfil\penalty50\hskip1em\hbox{}\nobreak\hfil
+  {\footnotesize\itshape\color{gristexto}(#1 p.)}%
+  {\parfillskip=0pt\finalhyphendemerits=0\par}}
 
 % ================================================== PREGUNTAS OBJETIVAS =====
 \NewTasks[label={\textbf{\alph*)}},label-width=1.5em,item-indent=2.1em,label-offset=0.35em,after-item-skip=3pt plus 1pt]{opciones}[\opcion](2)
@@ -211,11 +216,13 @@
 \newcommand{\completar}[2][]{\underline{\makebox[#2]{\ifev@claves{\itshape\color{colorexito}#1}\else\strut\fi}}}
 
 % ======================================================= ESPACIOS EN BLANCO =
-\newcommand{\lineasrespuesta}[1]{\ifev@soluciones\else\par\nobreak\begingroup\count@=0
-  \@whilenum\count@<#1\relax\do{\advance\count@\@ne\noindent{\color{grislinea}\rule[-0.9em]{\linewidth}{0.4pt}}\par\nobreak}\endgroup\par\fi}
-\newcommand{\espaciorespuesta}[1]{\ifev@soluciones\else\vspace*{#1}\fi}
-\newcommand{\recuadrorespuesta}[1]{\ifev@soluciones\else\par\medskip\noindent
-  {\color{grislinea}\fbox{\parbox[t][#1][t]{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\strut}}}\par\medskip\fi}
+% Espacios de respuesta NEUTRALIZADOS: el examen va compacto (las preguntas van
+% juntas). No se reserva espacio para responder: el estudiante decide la extensión
+% de su respuesta en su propia hoja. Se conservan los comandos por compatibilidad
+% (los .tex existentes los usan) pero no imprimen nada, en ningún modo.
+\newcommand{\lineasrespuesta}[1]{}
+\newcommand{\espaciorespuesta}[1]{}
+\newcommand{\recuadrorespuesta}[1]{}
 
 % ================================================================ SOLUCIÓN ==
 % Bloque de solución/desarrollo con el estilo de caja compartido (academicbox).
