@@ -67,5 +67,5 @@
 
 % Metadatos del PDF
 \AtBeginDocument{\hypersetup{pdftitle={\ar@tipodocumento\ — \ar@curso},
-  pdfauthor={\ar@docente}, pdflang={es-PE}}}
+  pdfauthor={\academicauthor}, pdflang={es-PE}}}
 \endinput

@@ -268,7 +268,7 @@
 
 % ------------------------------------------------------- metadatos del PDF --
 \AtBeginDocument{%
-  \ifdefempty{\ev@autor}{\def\ev@pdfauthor{\ev@docente}}{\def\ev@pdfauthor{\ev@autor}}%
+  \ifdefempty{\ev@autor}{\def\ev@pdfauthor{\academicauthor}}{\def\ev@pdfauthor{\ev@autor}}%
   \hypersetup{pdftitle={\ev@tipoevaluacion\ — \ev@curso}, pdfauthor={\ev@pdfauthor},
     pdfsubject={\ev@universidad\ · \ev@periodo}, pdflang={es-PE}}}
 \endinput

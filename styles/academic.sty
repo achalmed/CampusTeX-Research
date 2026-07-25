@@ -11,6 +11,11 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{academic}[2026/07/23 v1 Identidad Academic (LuaLaTeX)]
 
+% Autor del framework: metadatos PDF (pdfauthor) de TODOS los documentos —
+% exámenes, presentaciones, reports, pósters. Punto único; redefinible con
+% \renewcommand si otro docente usa el framework.
+\providecommand{\academicauthor}{Elmer Edison Achalma Mendoza}
+
 \RequirePackage{amsmath}          % antes de unicode-math
 \RequirePackage{academic-colors}  % paleta (config/palette.tex)
 \RequirePackage{academic-fonts}   % tipografía fontspec (Libertinus→unicode-math + Inconsolata)
