@@ -113,7 +113,8 @@
   {\small\setlength{\parskip}{0.18em}\setlength{\parindent}{0pt}%
    \ev@filauna{Curso}{\ev@curso\ifdefempty{\ev@codigocurso}{}{\ \ (\ev@codigocurso)}}%
    \ev@filauna{Docente}{\ev@docente}%
-   \makebox[2.4cm][l]{\ev@lbl{Estudiante}}\ev@estudiante\hfill
+   \makebox[2.4cm][l]{\ev@lbl{Estudiante}}%
+     \ifev@soluciones\ev@estudiante\else\makebox[6cm][l]{\hrulefill}\fi\hfill
      \makebox[5cm][l]{\ev@lbl{Código:}\ \ev@campocorto{\ev@codigoestudiante}}\par
    \makebox[2.4cm][l]{\ev@lbl{Fecha}}\ev@fechaevaluacion\hfill
      \makebox[5cm][l]{\ifdefempty{\ev@duracion}{}{\ev@lbl{Duración:}\ \ev@duracion}}\par}%
