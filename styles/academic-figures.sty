@@ -20,4 +20,18 @@
 
 % Diagramas: tikz/pgfplots con estilo sobrio (se cargan bajo demanda por el
 % documento; aquí solo se fija la base para no imponer tiempo de compilación).
+%
+% Estilos de SERIE para gráficos de datos: color muted (paleta de datos) + patrón
+% de línea, de modo que las líneas se distinguen tanto en color como en blanco y
+% negro. Así la leyenda va limpia ("Urbano", "Rural") sin describir la línea
+% ("más pendiente", etc.). Se definen solo si el documento cargó pgfplots.
+\AtBeginDocument{%
+  \@ifpackageloaded{pgfplots}{%
+    \pgfplotsset{%
+      serie1/.style={color=academicData1, line width=1pt, solid,          mark=none},
+      serie2/.style={color=academicData2, line width=1pt, densely dashed, mark=none},
+      serie3/.style={color=academicData3, line width=1pt, densely dotted, mark=none},
+      serie4/.style={color=academicData4, line width=1pt, dash dot,       mark=none}}%
+  }{}%
+}
 \endinput
