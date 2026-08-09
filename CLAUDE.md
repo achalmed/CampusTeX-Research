@@ -127,3 +127,14 @@ si no existe, usa el motor detectado por `latex_engine()` (comentario `%!TEX`, c
   (rotura previa); se reconstruyen al usarlos, no se "arreglan" borrando contenido.
 - Replicar el estándar a los otros 22 `Academic_Class-*` (usar `new-course.sh` +
   migración asistida como en el piloto).
+
+## Ecosistema de aprendizaje (contexto externo)
+
+Los `Academic_Class-*` no solo contienen docencia: en `course_NN/02_CONTENIDO/Unidad_NN/`
+viven también **apuntes de estudio** generados por el `learning-skill`
+(`git-awesome-ai-prompts/learning-skill/`, preset `apuntes_clase` — prefijos
+`clase/libro/informe/paper/conf NN`, markdown puro, frontmatter con
+`calibre_id`/`zotero_key`). No los muevas ni les cambies el formato desde este
+repo: su dueño es el skill. El contrato entre piezas está en
+`~/Documents/git-awesome-ai-prompts/ECOSISTEMA_APRENDIZAJE.md`; si un cambio del
+estándar 00–09 los afecta, pasa por su checklist de propagación.

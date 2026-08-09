@@ -113,3 +113,15 @@ C="$AC/course_NN_<slug>"
 |---|---|
 | [`docs/00-arquitectura.md`](docs/00-arquitectura.md) | **Blueprint canónico**: capas, decisiones, árbol, roadmap |
 | `docs/` (resto) | flujo de compilación, identidad visual, clases, tema Beamer, evaluaciones, plantillas |
+
+---
+
+## Ecosistema de aprendizaje
+
+Este framework es la pieza de **docencia y estándar** del ecosistema: define el
+00–09 que los apuntes de estudio (`learning-skill`, en `02_CONTENIDO/Unidad_NN/`)
+y las demás piezas respetan. Las funciones hermanas — apuntes, fichas de
+investigación (`prompts_for_zotero`), vault (`meta/`), sync Calibre ⇄ KOReader ⇄
+Zotero (`scripts_for_calibre/`) — y el contrato completo (casos de uso, claves
+compartidas, enlaces recíprocos, checklist de propagación) viven en un solo
+lugar: `~/Documents/git-awesome-ai-prompts/ECOSISTEMA_APRENDIZAJE.md`.
