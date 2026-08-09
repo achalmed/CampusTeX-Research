@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# new-course.sh — Crea un curso nuevo (estructura 00–11)
+# new-course.sh — Crea un curso nuevo (estructura 00–09)
 # ============================================================
 # Uso:
 #   ./scripts/new-course.sh ACADEMIC_CLASS_DIR NUM "TÍTULO"
@@ -8,7 +8,7 @@
 # Ejemplo:
 #   ./scripts/new-course.sh ~/Documents/Academic_Class-Estadistica 00 "Estadística Descriptiva"
 #
-# Copia _PLANTILLAS/Plantilla_Curso (00–11) al Academic_Class
+# Copia scaffolds/course (00–09) al Academic_Class
 # indicado como course_NN_<slug>/.
 # ============================================================
 
@@ -34,7 +34,7 @@ cp -a "$SCAFFOLDS_DIR/course" "$DEST"
 cat > "$DEST/README.md" <<EOF
 # $TITLE
 
-Curso \`course_${NUM}_${SLUG}\`. Estructura estándar 00–11
+Curso \`course_${NUM}_${SLUG}\`. Estructura estándar 00–09
 (ver \`~/Documents/Academic_Class_Framework/README.md\`).
 
 - \`00_ADMINISTRACION\` … \`08_INVESTIGACION\` — contenido canónico y atemporal del curso.

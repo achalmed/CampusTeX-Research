@@ -8,7 +8,7 @@
 # TIPO: silabo, calendario, nota-docente, rubrica, manual, guia
 #   (los que existan en templates/report/).
 #
-# Copia la plantilla a la carpeta 00–11 que le corresponde y rellena metadatos.
+# Copia la plantilla a la carpeta 00–09 que le corresponde y rellena metadatos.
 # Compila con build.sh.
 # ============================================================
 
@@ -19,7 +19,7 @@ usage() { sed -n '2,14p' "${BASH_SOURCE[0]}"; exit 1; }
 COURSE="$1"; TIPO="$2"; TITULO="$3"
 is_course "$COURSE" || die "No parece un curso: $COURSE"
 
-# TIPO → subcarpeta 00–11 destino
+# TIPO → subcarpeta 00–09 destino
 case "$TIPO" in
   silabo)       SUB=00_ADMINISTRACION ;;
   calendario)   SUB=00_ADMINISTRACION ;;

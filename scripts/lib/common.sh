@@ -8,7 +8,7 @@
 # Modelo (ver ../README.md):
 #   - El framework aloja scaffolds/, libraries/, classes/, styles/, themes/, templates/.
 #   - Los cursos viven FUERA, en ~/Documents/Academic_Class-*/course_NN_*/,
-#     con estructura 00–11 y sesiones 03_SESIONES/SNN_slug/ (02_Clase/…).
+#     con estructura 00–09 y sesiones 03_SESIONES/SNN_slug/ (02_Clase/…).
 #   - Por eso los helpers de curso/sesión reciben la RUTA del curso.
 # ============================================================
 
@@ -46,7 +46,7 @@ config_get() {
 }
 
 # --- Cursos y sesiones (reciben la RUTA del curso) ----------
-# is_course DIR — ¿DIR tiene pinta de curso 00–11?
+# is_course DIR — ¿DIR tiene pinta de curso 00–09?
 is_course() { [[ -d "$1/00_ADMINISTRACION" && -d "$1/03_SESIONES" ]]; }
 
 # sessions_root COURSE → ruta de 03_SESIONES
@@ -98,6 +98,15 @@ compile_tex() {
   compilador="$(eval echo "$(config_get compilador)")"
   dir="$(cd "$(dirname "$tex")" && pwd)"
   base="$(basename "$tex")"
+  # Los documentos del framework (\documentclass{academic-*}) exigen LuaLaTeX
+  # + TEXINPUTS de las capas del framework; el compilador universal no resuelve
+  # las clases academic-* ni respeta %!TEX (auditoría A1). Van SIEMPRE por
+  # scripts/build.sh, que es quien define ese entorno.
+  if grep -qE '\\documentclass(\[[^]]*\])?\{academic-' "$tex"; then
+    info "Documento del framework → scripts/build.sh: $base"
+    bash "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/build.sh" "$tex"
+    return
+  fi
   if [[ -n "$compilador" && -x "$compilador" ]]; then
     info "Compilando con compilador universal: $base"
     "$compilador" -s "$dir/${base%.tex}"
