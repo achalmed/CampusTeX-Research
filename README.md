@@ -54,8 +54,7 @@ Cada sesión (`03_SESIONES/SNN_<slug>/`) sigue la anatomía
 `01_Antes 02_Clase 03_Actividad 04_Evaluacion 05_Despues 06_Recursos 07_Notas`.
 `09_SEMESTRES/<AAAA-ciclo>/` guarda cada dictado: registro privado (listas, notas,
 evidencias) **+ publicación** (el MOOC por sesión, que se congela poco a poco).
-Detalle completo del estándar: [`docs/09-estandar-00-09.md`] (o la sección
-correspondiente de `docs/`).
+Detalle completo del estándar: [`docs/09-estandar-00-09.md`](docs/09-estandar-00-09.md).
 
 ---
 
@@ -102,7 +101,8 @@ C="$AC/course_NN_<slug>"
 - **LuaLaTeX** exclusivo (fontspec, Libertinus + Inconsolata, `unicode-math`,
   microtype con **protrusion + expansion**).
 - **Nombres de carpeta ASCII** (portabilidad + scripts); **`.gitkeep`** en carpetas vacías.
-- **Un solo punto de cambio visual:** `config/palette.tex` y `config/fonts.tex`.
+- **Un solo punto de cambio visual:** `config/palette.tex` (color) y
+  `styles/academic-fonts.sty` (tipografías).
 - **El diseño vive en `styles/`+`classes/`**, nunca en los documentos ni en las plantillas.
 - Tesis, monografías, ensayos y artículos tienen su propio framework
   (`Academic_Writing_Framework`); este repo cubre la **docencia**.

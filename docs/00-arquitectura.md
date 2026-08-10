@@ -108,7 +108,7 @@ Academic_Class_Framework/
 ├── styles/                      ← IDENTIDAD VISUAL ÚNICA (paquetes .sty, agnósticos al motor)
 │   ├── academic.sty             · meta-paquete: carga todo lo de abajo (ÚNICO punto de entrada)
 │   ├── academic-colors.sty      · paleta monocroma + 1 acento (lee config/palette.tex)
-│   ├── academic-fonts.sty       · fontspec: Libertinus Serif/Sans/Math + Inconsolata (lee config/fonts.tex)
+│   ├── academic-fonts.sty       · fontspec: Libertinus Serif/Sans/Math + Inconsolata (define aquí las familias)
 │   ├── academic-math.sty        · unicode-math
 │   ├── academic-boxes.sty       · cajas tcolorbox (instrucciones, definición, teorema, nota, ejemplo…)
 │   ├── academic-tables.sty      · tablas booktabs + notas al pie de tabla
@@ -126,7 +126,7 @@ Academic_Class_Framework/
 ├── config/                      ← INFRAESTRUCTURA: 1 archivo = 1 responsabilidad (el punto de cambio)
 │   ├── identity.yml             · datos del docente/institución (defaults de metadatos)
 │   ├── palette.tex              · valores de color  ← editar aquí cambia TODO
-│   ├── fonts.tex                · elección de familias tipográficas
+│   │                              (las familias tipográficas se eligen en styles/academic-fonts.sty)
 │   ├── spacing.tex · margins.tex · headers.tex · footers.tex · captions.tex · toc.tex
 │
 ├── templates/                   ← PLANTILLAS: documentos vacíos, SIN diseño (solo \documentclass + contenido)
@@ -205,8 +205,8 @@ Academic_Class_Framework/
 3. `academic-beamer.cls` carga `themes/beamerthemeAcademic.sty`.
 4. `beamerthemeAcademic.sty` carga `styles/academic.sty` (la identidad) y mapea sus
    colores/fuentes al mundo Beamer.
-5. `styles/academic-colors.sty` y `academic-fonts.sty` leen los valores de
-   `config/palette.tex` y `config/fonts.tex`.
+5. `styles/academic-colors.sty` lee los valores de `config/palette.tex`;
+   `academic-fonts.sty` define las familias tipográficas en el propio paquete.
 6. `scripts/build.sh` compila con **LuaLaTeX** (dos pasadas donde haga falta).
 
 **El mismo `config/palette.tex`** alimenta a `academic-exam.cls` (vía
@@ -305,8 +305,8 @@ compila y se mira el PDF; los `examples/` son los "tests").
   del estándar 00–09.
 - **Fase 1 — Identidad (`styles/` + `config/`).** Escribir los paquetes de
   identidad en LuaLaTeX (colores, fuentes fontspec, cajas, tablas, código, math,
-  iconos) + `config/palette.tex`/`fonts.tex`. Es el corazón; todo lo demás la
-  consume.
+  iconos); el color se externaliza a `config/palette.tex` y las tipografías se
+  fijan en `styles/academic-fonts.sty`. Es el corazón; todo lo demás la consume.
 - **Fase 2 — `academic-base.cls`** sobre `article`+LuaLaTeX cargando `styles/`.
 - **Fase 3 — `academic-exam.cls`** (migración de `evaluacion.cls` (en su día a XeLaTeX; hoy LuaLaTeX) sobre
   base; preservar toda la funcionalidad) + `templates/exam/*` + ejemplos.

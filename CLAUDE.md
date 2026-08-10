@@ -10,11 +10,12 @@ mantener el contenido y las ediciones en español). Cumple tres funciones:
 1. **Define el estándar** de organización de cursos universitarios (estructura,
    nomenclatura, anatomía de sesión). El spec completo está en `README.md`.
 2. **Aloja lo compartido** que sirve a **todos** los `Academic_Class-*` del
-   workspace: `_PLANTILLAS/` (esqueletos para copiar) y `_BIBLIOTECA/` (bancos).
+   workspace: `scaffolds/` (esqueletos de carpetas) y `templates/` (documentos
+   vacíos) para copiar, y `libraries/` + `bibliography/` (bancos y `.bib`).
 3. **Produce los entregables LaTeX** de cada curso: **diapositivas** de clase
    (Beamer, en `03_SESIONES/`) y **evaluaciones** (exámenes/prácticas, en
-   `04_EVALUACIONES/`, vía el módulo `evaluaciones/` — ver `evaluaciones/README.md`
-   y `docs/evaluaciones.md`).
+   `04_EVALUACIONES/`, vía la clase `academic-exam` + `templates/exam/` — ver
+   `docs/00-arquitectura.md`).
 
 **Los cursos reales NO viven aquí.** Viven en `~/Documents/Academic_Class-<Area>/`
 (p. ej. `Academic_Class-Metodologia-investigacion`), donde cada `Academic_Class` es
@@ -50,8 +51,8 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 - `styles/` — **identidad visual única** (`academic.sty` carga colores, fuentes
   fontspec Libertinus+Inconsolata, math, iconos, cajas, código, tablas, idioma).
   La cargan por igual las clases de documento **y** el tema Beamer → un examen y
-  una diapositiva comparten diseño al carácter. **El único punto de cambio de
-  valores está en `config/palette.tex` y `config/fonts.tex`.**
+  una diapositiva comparten diseño al carácter. **El color se cambia en un solo
+  sitio, `config/palette.tex`; las tipografías, en `styles/academic-fonts.sty`.**
 - `classes/` — clases delgadas que encapsulan el diseño: `academic-base` (núcleo
   `article`), `academic-exam` (evaluaciones, 3 modos, hereda base), `academic-report`
   (sílabo/calendario/nota-docente/rúbrica, hereda base), `academic-beamer` (beamer + tema).
@@ -59,7 +60,7 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 - `templates/` — documentos vacíos, **sin diseño** (`presentation/`, `exam/` 12 tipos, `report/`); solo `\documentclass{academic-*}` + contenido.
 - `scaffolds/` — esqueletos de **carpetas** (no compilables): `course` (00–09), `session` (01_Antes…07_Notas), `period` (dictado: registro privado + publicación MOOC).
 - `libraries/` — bancos compartidos (`Banco_*`); `bibliography/` — `.bib`.
-- `assets/branding/` — logo canónico. `examples/` — ejemplos compilados. `config/` — `course.yml` (datos) + `palette.tex`/`fonts.tex` (identidad).
+- `assets/branding/` — logo canónico. `examples/` — ejemplos compilados. `config/` — `course.yml` (datos) + `palette.tex` (color); las tipografías viven en `styles/academic-fonts.sty`.
 - `docs/` — documentación técnica (`00-arquitectura.md` es la canónica).
 
 > Nota histórica: se retiraron `evaluaciones/` (→ `academic-exam` + `templates/exam/`),
@@ -94,7 +95,7 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 
 # Evaluaciones (exámenes/prácticas en 04_EVALUACIONES/)
 ./scripts/new-evaluacion.sh  <COURSE_DIR> <tipo|01-12> "Título" [--fecha AAAAMMDD]
-./scripts/build-evaluacion.sh <ARCHIVO.tex> --modo examen|claves|soluciones|todos
+./scripts/build.sh <ARCHIVO.tex> --modo examen|claves|soluciones|todos  # compila la evaluación
 
 ./scripts/clean.sh [--pdf] [DIR]                                  # DIR por defecto = framework
 ./scripts/doctor.sh                                              # chequeo de entorno
@@ -121,12 +122,13 @@ si no existe, usa el motor detectado por `latex_engine()` (comentario `%!TEX`, c
   Ya no se usan backups + `_ESTANDARIZACION/UNDO*.sh`.
 - `*.sdr/` = metadatos de KOReader; ignorar.
 
-## Pendiente
+## Estado
 
+- **Estándar replicado a las 23 áreas**: los **61/61** `course_*` de los
+  `Academic_Class-*` cumplen el 00–09 (`00_ADMINISTRACION`…`09_SEMESTRES`). La
+  réplica ya no está pendiente; para un curso nuevo, usar `new-course.sh`.
 - Los decks del piloto `session_02`/`session_06` referencian imágenes no incluidas
   (rotura previa); se reconstruyen al usarlos, no se "arreglan" borrando contenido.
-- Replicar el estándar a los otros 22 `Academic_Class-*` (usar `new-course.sh` +
-  migración asistida como en el piloto).
 
 ## Ecosistema de aprendizaje (contexto externo)
 

@@ -9,7 +9,7 @@
 #   ./scripts/new-session.sh ~/Documents/Academic_Class-Estadistica/course_00_descriptiva 07 "Marco Teórico"
 #   ./scripts/new-session.sh "$C" 08 "Análisis de Datos" --quarto
 #
-# Copia _PLANTILLAS/Plantilla_Sesion (anatomía 01_Antes…07_Notas)
+# Copia scaffolds/session (anatomía 01_Antes…07_Notas)
 # al curso como 03_SESIONES/SNN_slug/ y rellena las plantillas
 # con los datos de config/course.yml. Por defecto el deck es
 # LaTeX Beamer (02_Clase/slides.tex); con --quarto, Quarto RevealJS.
