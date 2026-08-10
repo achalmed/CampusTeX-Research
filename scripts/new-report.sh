@@ -5,8 +5,9 @@
 # Uso:
 #   ./scripts/new-report.sh COURSE_DIR TIPO "TÍTULO"
 #
-# TIPO: silabo, calendario, nota-docente, rubrica, manual, guia
-#   (los que existan en templates/report/).
+# TIPO: uno de los subdirectorios reales de templates/report/
+#   (hoy: silabo, calendario, nota-docente, rubrica). Se validan en tiempo
+#   de ejecución contra las plantillas existentes.
 #
 # Copia la plantilla a la carpeta 00–09 que le corresponde y rellena metadatos.
 # Compila con build.sh.
@@ -19,17 +20,31 @@ usage() { sed -n '2,14p' "${BASH_SOURCE[0]}"; exit 1; }
 COURSE="$1"; TIPO="$2"; TITULO="$3"
 is_course "$COURSE" || die "No parece un curso: $COURSE"
 
-# TIPO → subcarpeta 00–09 destino
+# Tipos válidos = subdirectorios REALES de templates/report/ que traen su .tex.
+# Se listan dinámicamente para que el script no prometa plantillas inexistentes.
+REPORT_TPL_DIR="$FW_DIR/templates/report"
+VALIDOS=""
+for _d in "$REPORT_TPL_DIR"/*/; do
+  _t="$(basename "$_d")"
+  [[ -f "$_d/$_t.tex" ]] && VALIDOS="${VALIDOS:+$VALIDOS }$_t"
+done
+[[ -n "$VALIDOS" ]] || die "No hay plantillas en $REPORT_TPL_DIR/"
+
+# Rechazo temprano con mensaje claro si el TIPO no corresponde a una plantilla real.
+case " $VALIDOS " in
+  *" $TIPO "*) : ;;
+  *) die "TIPO no reconocido: '$TIPO'. Válidos: $VALIDOS" ;;
+esac
+
+# TIPO → subcarpeta 00–09 destino (solo tipos ya validados contra las plantillas)
 case "$TIPO" in
   silabo)       SUB=00_ADMINISTRACION ;;
   calendario)   SUB=00_ADMINISTRACION ;;
   nota-docente) SUB=01_PLANIFICACION ;;
   rubrica)      SUB=04_EVALUACIONES/rubricas ;;
-  manual|guia)  SUB=06_RECURSOS ;;
-  *) die "TIPO no reconocido: $TIPO" ;;
+  *)            SUB=06_RECURSOS ;;
 esac
-TPL="$FW_DIR/templates/report/$TIPO/$TIPO.tex"
-[[ -f "$TPL" ]] || die "No existe la plantilla templates/report/$TIPO/"
+TPL="$REPORT_TPL_DIR/$TIPO/$TIPO.tex"
 DESTDIR="$COURSE/$SUB"; mkdir -p "$DESTDIR"
 DEST="$DESTDIR/$TIPO.tex"
 [[ -e "$DEST" ]] && die "Ya existe: $DEST"
