@@ -18,7 +18,7 @@ def _simbolo(etiqueta):
     Sin símbolo corto entre paréntesis, no se antepone nada (solo el número)."""
     if "(" in etiqueta and ")" in etiqueta:
         s = etiqueta[etiqueta.find("(") + 1:etiqueta.find(")")].strip().strip("$")
-        if 0 < len(s) <= 3 and s != "%":
+        if 0 < len(s) <= 3 and s != "%" and "^" not in s and "*" not in s:
             return f"${s}^*{{=}}$"
     return ""
 
