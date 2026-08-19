@@ -42,6 +42,14 @@ def _resultados(p):
             "% del efecto ya materializado": 100 * float(acum[-1]) / total}
 
 
+def _ecuaciones_calibradas(p):
+    chat = p["c"] * (1 - p["t"])
+    k = 1 / (1 - chat)
+    return [f"$\\hat{{c}} = {p['c']:.2f}\\,(1-{p['t']:.2f}) = {chat:.2f}$",
+            f"$k = 1/(1-{chat:.2f}) = {k:.2f}$",
+            f"$\\Delta Y = {k:.2f} \\times {p['dG']:.0f} = {k * p['dG']:,.1f}$"]
+
+
 _P0 = {"dG": 100.0, "c": 0.8, "t": 0.0, "rondas": 20.0}
 
 
@@ -84,9 +92,17 @@ MODELO = Modelo(
     ],
     curvas=_curvas,
     resultados=_resultados,
+    ecuaciones_calibradas=_ecuaciones_calibradas,
     ficha=Ficha(
         pregunta=("¿Cuánto producto total genera un sol adicional de gasto — y por qué "
                   "más que un sol?"),
+        variables=[("ΔY", "variación acumulada del producto — endógena"),
+                   ("ΔG", "impulso inicial de gasto — exógeno"),
+                   ("n", "ronda de gasto (tiempo lógico del proceso)"),
+                   ("ĉ = c(1−t)", "fracción re-gastada efectiva — parámetro compuesto")],
+        derivacion=["\\Delta Y = \\Delta G\\,(1 + \\hat{c} + \\hat{c}^2 + \\dots)",
+                    "\\sum_{n=0}^{\\infty} \\hat{c}^{\\,n} = \\frac{1}{1-\\hat{c}} \\;\\;(0 \\le \\hat{c} < 1)",
+                    "k = \\frac{1}{1 - c\\,(1-t)}"],
         contexto=("En el debate británico sobre las obras públicas contra el desempleo, "
                   "Richard Kahn (1931) formalizó cuánto empleo total generaba un empleo "
                   "público adicional; Keynes (1936) convirtió esa aritmética en la pieza "

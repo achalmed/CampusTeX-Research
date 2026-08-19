@@ -53,6 +53,14 @@ def _resultados(p):
                 _adas.estructura(p)[2], p["M"] + p["dM"], p["Ystar"])}
 
 
+def _ecuaciones_calibradas(p):
+    F, bh, Ac = _adas.estructura(p)
+    Y, P, r = _equilibrio(p)
+    return [f"$AD:\\; Y = ({F + p['dG']:.0f} + {bh:.1f} \\times {p['M'] + p['dM']:.0f}/P)\\,/\\,{Ac:.2f}$",
+            f"$SRAS:\\; P = {p['Pe'] + p['ds']:.2f} + {p['lam']:.3f}\\,(Y - {p['Ystar']:.0f})$",
+            f"$Y = {Y:,.1f}, \\quad P = {P:.2f}, \\quad r = {r:.2f}$"]
+
+
 _P0 = {"dG": 0.0, "dM": 0.0, "ds": 0.0,
        "c0": 100.0, "c1": 0.6, "I0": 150.0, "b": 20.0, "G": 200.0, "T": 100.0,
        "k": 0.5, "h": 10.0, "M": 590.0, "Pe": 2.0, "lam": 0.004, "Ystar": 700.0}
@@ -97,27 +105,51 @@ MODELO = Modelo(
     nombre="Modelo AD-AS completo",
     xlabel="Producto ($Y$)", ylabel="Nivel de precios ($P$)",
     parametros=[
-        Parametro("dG", _P0["dG"], -100, 100, 10, "Shock fiscal dG"),
-        Parametro("dM", _P0["dM"], -150, 150, 10, "Shock monetario dM"),
-        Parametro("ds", _P0["ds"], -0.4, 0.6, 0.05, "Shock de costos ds"),
-        Parametro("Pe", _P0["Pe"], 1.2, 3.0, 0.1, "Precio esperado Pe"),
-        Parametro("lam", _P0["lam"], 0.001, 0.012, 0.001, "Rigidez λ (pendiente SRAS)"),
-        Parametro("Ystar", _P0["Ystar"], 600, 800, 10, "Producto potencial Y*"),
-        Parametro("M", _P0["M"], 400, 800, 10, "Dinero nominal M"),
-        Parametro("G", _P0["G"], 100, 350, 10, "Gasto público G"),
-        Parametro("T", _P0["T"], 0, 300, 10, "Impuestos T"),
-        Parametro("c1", _P0["c1"], 0.2, 0.9, 0.05, "Propensión a consumir c1"),
-        Parametro("b", _P0["b"], 5, 40, 1, "Sensibilidad de I a r (b)"),
-        Parametro("k", _P0["k"], 0.2, 1.0, 0.05, "Demanda de dinero por Y (k)"),
-        Parametro("h", _P0["h"], 4, 25, 1, "Demanda de dinero por r (h)"),
-        Parametro("c0", _P0["c0"], 50, 200, 10, "Consumo autónomo c0"),
-        Parametro("I0", _P0["I0"], 50, 300, 10, "Inversión autónoma I0"),
+        Parametro("dG", _P0["dG"], -100, 100, 10, "Shock fiscal dG", grupo="experimento",
+                  definicion="desplaza la AD vía gasto"),
+        Parametro("dM", _P0["dM"], -150, 150, 10, "Shock monetario dM", grupo="experimento",
+                  definicion="desplaza la AD vía saldos reales"),
+        Parametro("ds", _P0["ds"], -0.4, 0.6, 0.05, "Shock de costos ds", grupo="experimento",
+                  definicion="desplaza la SRAS (petróleo, clima, salarios)"),
+        Parametro("Pe", _P0["Pe"], 1.2, 3.0, 0.1, "Precio esperado Pe", grupo="oferta agregada",
+                  definicion="posición de la SRAS: lo que los contratos esperaban"),
+        Parametro("lam", _P0["lam"], 0.001, 0.012, 0.001, "Rigidez λ", grupo="oferta agregada",
+                  definicion="pendiente de la SRAS: presión de precios por unidad de brecha"),
+        Parametro("Ystar", _P0["Ystar"], 600, 800, 10, "Producto potencial Y*", grupo="oferta agregada",
+                  definicion="ancla de largo plazo (su interior es el nivel 5)"),
+        Parametro("M", _P0["M"], 400, 800, 10, "Dinero nominal M", grupo="mercado de dinero",
+                  definicion="lo fija el banco central; real es M/P"),
+        Parametro("k", _P0["k"], 0.2, 1.0, 0.05, "Demanda de dinero por Y (k)", grupo="mercado de dinero",
+                  definicion="liquidez transaccional"),
+        Parametro("h", _P0["h"], 4, 25, 1, "Demanda de dinero por r (h)", grupo="mercado de dinero",
+                  definicion="sustitución dinero-bonos"),
+        Parametro("G", _P0["G"], 100, 350, 10, "Gasto público G", grupo="mercado de bienes",
+                  definicion="componente fiscal del gasto autónomo"),
+        Parametro("T", _P0["T"], 0, 300, 10, "Impuestos T", grupo="mercado de bienes",
+                  definicion="entran vía renta disponible"),
+        Parametro("c1", _P0["c1"], 0.2, 0.9, 0.05, "Propensión a consumir c1", grupo="mercado de bienes",
+                  definicion="re-gasto marginal de los hogares"),
+        Parametro("b", _P0["b"], 5, 40, 1, "Sensibilidad de I a r (b)", grupo="mercado de bienes",
+                  definicion="inversión descartada por punto de tasa"),
+        Parametro("c0", _P0["c0"], 50, 200, 10, "Consumo autónomo c0", grupo="mercado de bienes",
+                  definicion="consumo independiente del ingreso"),
+        Parametro("I0", _P0["I0"], 50, 300, 10, "Inversión autónoma I0", grupo="mercado de bienes",
+                  definicion="ánimo inversor autónomo"),
     ],
     curvas=_curvas,
     resultados=_resultados,
+    ecuaciones_calibradas=_ecuaciones_calibradas,
     ficha=Ficha(
         pregunta=("¿Cómo responden producto, precios y tasa de interés — a la vez — "
                   "ante shocks de demanda y de oferta?"),
+        variables=[("Y, P, r", "producto, precios y tasa — endógenas simultáneas"),
+                   ("dG, dM, ds", "shocks de política y de costos — exógenos"),
+                   ("Pe", "expectativas de precios — dadas en el período (m25 las mueve)"),
+                   ("Y*", "producto potencial — ancla de largo plazo (m22)")],
+        derivacion=["A_c\\,Y = F + \\frac{b}{h}\\,\\frac{M}{P} \\;\\;(AD)",
+                    "P = P^e + ds + \\lambda\\,(Y - Y^*) \\;\\;(SRAS)",
+                    "A_c\\,Y\\,P(Y) = F\\,P(Y) + \\frac{b}{h}\\,M",
+                    "a_2\\,Y^2 + a_1\\,Y + a_0 = 0 \\;\\to\\; Y^{+} \\;(raíz\\;positiva)"],
         contexto=("El aparato con el que la síntesis neoclásica enseñó macroeconomía "
                   "medio siglo: demanda derivada del IS-LM (m20), oferta de corto "
                   "plazo con expectativas (m21) y ancla clásica de largo plazo (m22), "

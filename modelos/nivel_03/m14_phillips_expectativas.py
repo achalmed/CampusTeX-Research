@@ -46,6 +46,14 @@ def _resultados(p):
             "π acumulada sobre la inicial (pp)": float(pi[-1]) - p["pi0"]}
 
 
+def _ecuaciones_calibradas(p):
+    _, pi = _simular(p)
+    dpi = p["alpha"] * (p["un"] - p["u_mantenida"])
+    return [f"$\\pi_t = \\pi_{{t-1}} + {p['alpha']:.1f}\\,({p['un']:.1f} - {p['u_mantenida']:.1f})$",
+            f"$\\Delta\\pi = {dpi:+.2f}$",
+            f"$\\pi_{{T={int(round(p['T']))}}} = {pi[-1]:.1f}$"]
+
+
 _P0 = {"alpha": 1.5, "un": 6.0, "u_mantenida": 5.0, "pi0": 2.0, "T": 15.0}
 
 
@@ -84,9 +92,17 @@ MODELO = Modelo(
     ],
     curvas=_curvas,
     resultados=_resultados,
+    ecuaciones_calibradas=_ecuaciones_calibradas,
     ficha=Ficha(
         pregunta=("¿Qué pasa con la inflación si la política intenta sostener el "
                   "desempleo por debajo de su tasa natural?"),
+        variables=[("π_t", "inflación — endógena"),
+                   ("πe_t", "inflación esperada — endógena (adaptativa: π_{t−1})"),
+                   ("u", "desempleo — aquí instrumento de la política"),
+                   ("un", "tasa natural — ancla real exógena")],
+        derivacion=["\\pi_t = \\pi^e_t - \\alpha\\,(u - u_n)",
+                    "\\pi^e_t = \\pi_{t-1} \\;\\;(adaptativas)",
+                    "\\Rightarrow\\; \\pi_t - \\pi_{t-1} = \\alpha\\,(u_n - u)"],
         contexto=("En 1967-68, con la Phillips original en su apogeo, Friedman y Phelps "
                   "predijeron su colapso: los trabajadores negocian salarios REALES, así "
                   "que la inflación pasada se incorpora a las expectativas y la curva se "

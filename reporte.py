@@ -70,12 +70,16 @@ def render(modelo, dir_salidas=None):
         if F.equilibrio:
             md += ["## Equilibrio y estabilidad", "", F.equilibrio, ""]
 
-    # --- parámetros y resultados base ---
-    md += ["## Parámetros", "",
-           _tabla([(p.nombre, p.etiqueta, base.fmt(p.valor),
-                    f"[{base.fmt(p.minimo)}, {base.fmt(p.maximo)}]")
-                   for p in modelo.parametros],
-                  ("parámetro", "significado", "valor", "rango")), ""]
+    # --- parámetros (con grupo temático y definición si el modelo los declara) ---
+    con_grupo = any(p.grupo for p in modelo.parametros)
+    filas_p = []
+    for p in modelo.parametros:
+        significado = p.etiqueta + (f" — {p.definicion}" if p.definicion else "")
+        fila = (p.grupo, p.nombre, significado) if con_grupo else (p.nombre, significado)
+        filas_p.append(fila + (base.fmt(p.valor), f"[{base.fmt(p.minimo)}, {base.fmt(p.maximo)}]"))
+    cab = (("grupo", "parámetro", "significado") if con_grupo
+           else ("parámetro", "significado")) + ("valor", "rango")
+    md += ["## Parámetros", "", _tabla(filas_p, cab), ""]
 
     res_base = modelo.calcular()
     if res_base:

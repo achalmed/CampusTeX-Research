@@ -42,6 +42,13 @@ def _resultados(p):
             f"PMeC en Yd={yd:,.0f}": C / yd}
 
 
+def _ecuaciones_calibradas(p):
+    niv = p["C0"] / (1 - p["c"])
+    return [f"$C = {p['C0']:.0f} + {p['c']:.2f}\\,Y_d$",
+            f"$S = -{p['C0']:.0f} + {1 - p['c']:.2f}\\,Y_d$",
+            f"$Y_d^{{niv}} = {p['C0']:.0f}/(1-{p['c']:.2f}) = {niv:,.1f}$"]
+
+
 _P0 = {"C0": 100.0, "c": 0.8, "Yd_max": 1000.0}
 
 
@@ -86,9 +93,17 @@ MODELO = Modelo(
     ],
     curvas=_curvas,
     resultados=_resultados,
+    ecuaciones_calibradas=_ecuaciones_calibradas,
     ficha=Ficha(
         pregunta=("¿De qué depende el consumo de los hogares y cuánto se re-gasta de "
                   "cada sol adicional de ingreso?"),
+        variables=[("Yd", "renta disponible — exógena en este modelo"),
+                   ("C", "consumo — endógena"),
+                   ("S", "ahorro — endógena (el residuo Yd − C)"),
+                   ("C0, c", "conducta de los hogares — parámetros")],
+        derivacion=["C = C_0 + c\\,Y_d",
+                    "S = Y_d - C = -C_0 + (1-c)\\,Y_d",
+                    "C = Y_d \\;\\Rightarrow\\; Y_d^{niv} = \\frac{C_0}{1-c}"],
         contexto=("En plena Gran Depresión, Keynes necesitaba explicar por qué la demanda "
                   "podía quedarse sistemáticamente corta. La pieza central fue una teoría "
                   "del consumo: los hogares gastan una parte estable de cada unidad "

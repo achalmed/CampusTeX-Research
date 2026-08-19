@@ -56,6 +56,18 @@ def _resultados(p):
             "multiplicador simple 1/(1−c1)": 1 / (1 - p["c1"])}
 
 
+def _ecuaciones_calibradas(p):
+    Ye, re, trampa = _equilibrio(p)
+    k = 1 / (1 - p["c1"])
+    F = p["c0"] - p["c1"] * p["T"] + p["I0"] + p["G"]
+    if trampa:
+        return [f"$r^* = 0 \\;\\;(piso)$",
+                f"$Y^* = k\\,F = {k:.2f} \\times {F:.0f} = {Ye:,.1f}$",
+                f"$dY/dG = k = {k:.2f}$"]
+    return [f"$Y^* = {Ye:,.1f}, \\quad r^* = {re:.2f} > 0$",
+            f"$dY/dG < {k:.2f}$"]
+
+
 _P0 = {"c0": 60.0, "c1": 0.6, "I0": 80.0, "b": 20.0, "G": 150.0, "T": 100.0,
        "k": 0.5, "h": 10.0, "MP": 300.0, "dMP": 100.0}
 
@@ -103,9 +115,17 @@ MODELO = Modelo(
     ],
     curvas=_curvas,
     resultados=_resultados,
+    ecuaciones_calibradas=_ecuaciones_calibradas,
     ficha=Ficha(
         pregunta=("¿Por qué con tasas en cero el dinero deja de funcionar y el gasto "
                   "público recupera toda su potencia?"),
+        variables=[("Y, r", "producto y tasa — endógenas"),
+                   ("régimen", "dentro/fuera de la trampa — ENDÓGENO (frontera r=0)"),
+                   ("dMP, G", "instrumentos monetario y fiscal — exógenos"),
+                   ("c0, I0", "el 'ánimo' de la demanda — deciden si se cae en la trampa")],
+        derivacion=["r_u = \\frac{k\\,Y_u - M/P}{h} \\;\\;(solución\\;sin\\;piso)",
+                    "r_u < 0 \\;\\Rightarrow\\; r^* = 0 \\;(el\\;piso\\;ata)",
+                    "Y^*\\big|_{r=0} = \\frac{c_0 - c_1 T + I_0 + G}{1-c_1}"],
         contexto=("Keynes especuló con una situación en la que la política monetaria "
                   "'empuja una cuerda': con tasas ya en el suelo y expectativas "
                   "deprimidas, el dinero extra se atesora en vez de prestarse. Hicks la "
