@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
-# main.py — laboratorio de macroeconomía computacional (datafw/simuladores).
+# main.py — Laboratorio de Economía Computacional (datafw/simuladores).
 #
 #   listar                                modelos implementados, por nivel del currículo
 #   ficha <modelo>                        ficha pedagógica en terminal
+#   experimento <modelo> [--escenario E]  MODO LABORATORIO: hipótesis → ejecutar →
+#                                         verificar predicciones → mecanismo → ¿por qué?
 #   simular <modelo> [--escenario E] [--param k=v ...]
-#                                         resultados de equilibrio; con escenario o
-#                                         --param imprime tabla comparativa base vs cambio
+#                                         resultados de equilibrio; tabla base vs cambio
+#   comparar <modelo> esc1 [esc2 ...]     comparación de políticas lado a lado
+#   sensibilidad <modelo> --param P [--magnitud M] [--grafico]
+#                                         ∂magnitud/∂parámetro + tabla en malla
 #   demo <modelo> --param G --valores 100,200,300 [--salida f.pdf]
-#                                         PDF headless: sensibilidad a un parámetro
-#   reporte [<modelo>|--todos]            informe MD + figuras en salidas/
+#   reporte [<modelo>|--todos]            informe MD + láminas de experimento en salidas/
 #   verificar [<modelo>]                  chequeos numéricos (identidades, convergencias)
-#   interactivo <modelo>                  ventana con sliders (requiere display)
+#   laboratorio <modelo>                  ventana: selector de experimentos (requiere display)
+#   interactivo <modelo>                  modo avanzado: sliders libres (requiere display)
 #
 # <modelo> acepta id curricular (m03), slug (funcion_consumo) o archivo
 # (m03_funcion_consumo). Currículo completo: docs/LABORATORIO_MACRO.md.
-# Añadir un modelo = un archivo en modelos/nivel_NN/ con ficha + escenarios +
-# verificaciones (patrón en modelos/nivel_01/m03_funcion_consumo.py).
 
 import argparse
 import importlib
@@ -25,6 +27,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import base
 import config
+import graficos
+import laboratorio as lab
 import reporte as reporte_mod
 
 
@@ -82,7 +86,7 @@ def cmd_listar(_a):
             print(f"  Nivel {m.nivel}" if m.nivel else "  (sin nivel)")
         extras = []
         if m.escenarios:
-            extras.append(f"{len(m.escenarios)} escenarios")
+            extras.append(f"{len(m.escenarios)} experimentos")
         if m.verificaciones:
             extras.append(f"{len(m.verificaciones)} verificaciones")
         marca = f" — {', '.join(extras)}" if extras else ""
@@ -96,15 +100,25 @@ def cmd_ficha(a):
     print(f"═══ {m.nombre} ({m.id or 'sin id'}, nivel {m.nivel or '—'}) ═══\n")
     if not F:
         print("(modelo sin ficha pedagógica; solo motor numérico)"); return 0
+    if F.pregunta:
+        print(f"PREGUNTA ECONÓMICA\n  {F.pregunta}\n")
     print(f"CONTEXTO HISTÓRICO\n  {F.contexto}\n")
     print(f"AUTORES Y ESCUELAS\n  {F.autores}\n")
     print("SUPUESTOS")
     for s in F.supuestos:
         print(f"  - {s}")
+    if F.variables:
+        print("\nVARIABLES")
+        for simbolo, desc in F.variables:
+            print(f"  {simbolo:<10} {desc}")
     print("\nECUACIONES")
     for e in F.ecuaciones:
         print(f"  [{e.nombre}]  {e.latex}")
         print(f"      {e.significado}")
+    if F.derivacion:
+        print("\nDERIVACIÓN DEL EQUILIBRIO")
+        for paso in F.derivacion:
+            print(f"    {paso}")
     print(f"\nINTUICIÓN\n  {F.intuicion}")
     if F.equilibrio:
         print(f"\nEQUILIBRIO Y ESTABILIDAD\n  {F.equilibrio}")
@@ -115,10 +129,78 @@ def cmd_ficha(a):
     if F.evolucion:
         print(f"\nEVOLUCIÓN\n  {F.evolucion}")
     if m.escenarios:
-        print("\nESCENARIOS DISPONIBLES (simular --escenario <nombre>)")
+        print("\nEXPERIMENTOS DISPONIBLES (experimento/simular --escenario <nombre>)")
         for e in m.escenarios:
             print(f"  {e.nombre:<22} {e.descripcion}")
     print(f"\nPROCEDENCIA\n  {F.procedencia}")
+    return 0
+
+
+def _leer_prediccion(pregunta):
+    equivalencias = {"↑": "↑", "u": "↑", "s": "↑", "+": "↑", "sube": "↑",
+                     "↓": "↓", "d": "↓", "b": "↓", "-": "↓", "baja": "↓",
+                     "=": "=", "0": "=", "igual": "="}
+    while True:
+        r = input(f"    {pregunta}  [↑/↓/=] → ").strip().lower()
+        if r in equivalencias:
+            return equivalencias[r]
+        print("      (responde ↑, ↓ o = — también valen s/b/= )")
+
+
+def cmd_experimento(a):
+    """El corazón pedagógico: hipótesis → ejecutar → verificar → mecanismo."""
+    m = _cargar(a.modelo)
+    if not m.escenarios:
+        sys.exit(f"[✗] {m.id} no tiene experimentos declarados")
+    esc = m.escenario(a.escenario) if a.escenario else None
+    print(f"═══ LABORATORIO · {m.nombre} ({m.id}) ═══\n")
+    if m.ficha and m.ficha.pregunta:
+        print(f"  Pregunta del modelo: {m.ficha.pregunta}\n")
+    if esc is None:
+        print("  Experimentos disponibles:")
+        for i, e in enumerate(m.escenarios, 1):
+            print(f"    {i}. {e.nombre:<22} {e.descripcion}")
+        idx = input("\n  Elige un experimento [número] → ").strip()
+        try:
+            esc = m.escenarios[int(idx) - 1]
+        except (ValueError, IndexError):
+            sys.exit("[✗] selección inválida")
+    cambios = ", ".join(f"{k}: {base.fmt(m.parametro(k).valor)} → {base.fmt(v)}"
+                        for k, v in esc.cambios.items())
+    print(f"\n  🧪 Experimento: {esc.descripcion}")
+    print(f"     Cambio: {cambios}")
+    if m.ficha and m.ficha.supuestos:
+        print(f"     Recuerda el supuesto clave: {m.ficha.supuestos[0]}")
+
+    res0 = m.calcular()
+    res1 = m.calcular(**esc.cambios)
+    claves = [k for k in res0
+              if isinstance(res0[k], (int, float)) and isinstance(res1.get(k), (int, float))][:4]
+
+    print("\n  Antes de ejecutar — TU HIPÓTESIS: ¿qué pasará con…?")
+    predicciones = {k: _leer_prediccion(k) for k in claves}
+
+    print("\n  ▶ EJECUTANDO EXPERIMENTO…\n")
+    aciertos = 0
+    ancho = max(len(k) for k in claves)
+    print(f"    {'magnitud'.ljust(ancho)}  {'tu hipótesis':>12}  {'resultado':>10}  ")
+    for k in claves:
+        real = base.signo(res1[k] - res0[k])
+        ok = predicciones[k] == real
+        aciertos += ok
+        print(f"    {k.ljust(ancho)}  {predicciones[k]:>12}  {real:>9}  {'✔' if ok else '✘'}")
+    print(f"\n  Puntaje: {aciertos}/{len(claves)}")
+
+    print(f"\n  RESULTADOS")
+    for k in claves:
+        print(f"    {k.ljust(ancho)}  {base.fmt(res0[k]):>10} → {base.fmt(res1[k]):>10}  "
+              f"(Δ {base.fmt(res1[k] - res0[k])})")
+    if esc.cadena:
+        print(f"\n  MECANISMO DE TRANSMISIÓN\n    " + "  →  ".join(esc.cadena))
+    if esc.lectura:
+        print(f"\n  ¿POR QUÉ?\n    {esc.lectura}")
+    if m.ficha and m.ficha.evolucion:
+        print(f"\n  PARA SEGUIR: {m.ficha.evolucion.split('.')[0]}.")
     return 0
 
 
@@ -147,10 +229,47 @@ def cmd_simular(a):
             if isinstance(v0, (int, float)) and isinstance(v1, (int, float)):
                 print(f"    {k.ljust(ancho)}  {base.fmt(v0):>12}  {base.fmt(v1):>12}  "
                       f"{base.fmt(v1 - v0):>12}")
+        if etiqueta and etiqueta.cadena:
+            print(f"\n  Mecanismo: " + " → ".join(etiqueta.cadena))
         if etiqueta and etiqueta.lectura:
-            print(f"\n  Lectura económica: {etiqueta.lectura}")
+            print(f"\n  ¿Por qué?: {etiqueta.lectura}")
     if m.notas:
         print(f"\n  Nota: {m.notas}")
+    return 0
+
+
+def cmd_comparar(a):
+    m = _cargar(a.modelo)
+    magnitudes, columnas = base.comparar(m, a.escenarios)
+    nombres = list(columnas)
+    ancho = max(len(k) for k in magnitudes)
+    anchos_col = [max(12, len(n) + 2) for n in nombres]
+    print(f"── {m.nombre} — comparación de políticas ──\n")
+    print("    " + "magnitud".ljust(ancho) + "".join(
+        n.rjust(w) for n, w in zip(nombres, anchos_col)))
+    for k in magnitudes:
+        fila = "    " + k.ljust(ancho)
+        for n, w in zip(nombres, anchos_col):
+            fila += base.fmt(columnas[n][k]).rjust(w)
+        print(fila)
+    print("\n  (columna 'base' = parámetros por defecto; cada escenario aplica sus cambios)")
+    return 0
+
+
+def cmd_sensibilidad(a):
+    m = _cargar(a.modelo)
+    sens = base.sensibilidad(m, a.param, a.magnitud, n=a.puntos)
+    print(f"── {m.nombre} — sensibilidad de «{sens['magnitud']}» respecto a {a.param} ──\n")
+    for v, y in sens["filas"]:
+        marca = "  ← base" if abs(v - sens["base"]) < 1e-9 else ""
+        print(f"    {a.param} = {base.fmt(v):>10}   →   {base.fmt(y)}{marca}")
+    print(f"\n    ∂({sens['magnitud']})/∂{a.param} = {sens['derivada']:.4f}  (en la base)")
+    if a.grafico:
+        config.DIR_SALIDAS.mkdir(parents=True, exist_ok=True)
+        ruta = config.DIR_SALIDAS / f"sensibilidad_{m.id}_{a.param}.png"
+        fig = graficos.figura_sensibilidad(m, sens)
+        fig.savefig(ruta, dpi=config.DPI)
+        print(f"\n[✓] gráfico → {ruta}")
     return 0
 
 
@@ -159,7 +278,7 @@ def cmd_demo(a):
     valores = [float(v) for v in a.valores.split(",")]
     config.DIR_SALIDAS.mkdir(parents=True, exist_ok=True)
     salida = a.salida or str(config.DIR_SALIDAS / f"demo_{a.modelo}_{a.param}.pdf")
-    ruta = base.demo(modelo, a.param, valores, salida)
+    ruta = graficos.demo(modelo, a.param, valores, salida)
     print(f"[✓] demo → {ruta}")
     print(f"    {modelo.nombre}: efecto de {a.param} en {valores}")
     if modelo.notas:
@@ -193,39 +312,61 @@ def cmd_verificar(a):
     return 1 if fallos else 0
 
 
+def cmd_laboratorio(a):
+    lab.laboratorio(_cargar(a.modelo))
+    return 0
+
+
 def cmd_interactivo(a):
-    base.interactivo(_cargar(a.modelo))
+    lab.interactivo(_cargar(a.modelo))
     return 0
 
 
 def main():
     ap = argparse.ArgumentParser(prog="datafw-simuladores",
-        description="Laboratorio de macroeconomía computacional: modelos con ficha "
-                    "pedagógica, simulación de escenarios y verificación numérica.")
+        description="Laboratorio de Economía Computacional: teoría → hipótesis → "
+                    "experimento → mecanismo → verificación.")
     sub = ap.add_subparsers(dest="comando", required=True)
     sub.add_parser("listar", help="modelos implementados por nivel")
     pf = sub.add_parser("ficha", help="ficha pedagógica de un modelo")
     pf.add_argument("modelo")
-    ps = sub.add_parser("simular", help="resultados de equilibrio / experimento")
+    pe = sub.add_parser("experimento", help="modo laboratorio: hipótesis → ejecutar → verificar")
+    pe.add_argument("modelo")
+    pe.add_argument("--escenario", help="experimento concreto (si no, menú)")
+    ps = sub.add_parser("simular", help="resultados de equilibrio / experimento directo")
     ps.add_argument("modelo")
     ps.add_argument("--escenario", help="nombre de un escenario predefinido")
     ps.add_argument("--param", action="append", metavar="k=v",
                     help="cambio manual de parámetro (repetible)")
+    pc = sub.add_parser("comparar", help="comparación de políticas (varios escenarios)")
+    pc.add_argument("modelo")
+    pc.add_argument("escenarios", nargs="+", metavar="escenario")
+    pn = sub.add_parser("sensibilidad", help="∂magnitud/∂parámetro + tabla en malla")
+    pn.add_argument("modelo")
+    pn.add_argument("--param", required=True)
+    pn.add_argument("--magnitud", help="clave de resultados() (default: la primera)")
+    pn.add_argument("--puntos", type=int, default=9)
+    pn.add_argument("--grafico", action="store_true", help="guardar PNG en salidas/")
     pd = sub.add_parser("demo", help="PDF headless de sensibilidad a un parámetro")
     pd.add_argument("modelo"); pd.add_argument("--param", required=True)
     pd.add_argument("--valores", required=True); pd.add_argument("--salida")
-    pr = sub.add_parser("reporte", help="informe MD + figuras en salidas/")
+    pr = sub.add_parser("reporte", help="informe MD + láminas en salidas/")
     pr.add_argument("modelo", nargs="?")
     pr.add_argument("--todos", action="store_true")
     pv = sub.add_parser("verificar", help="chequeos numéricos de los modelos")
     pv.add_argument("modelo", nargs="?")
-    pi = sub.add_parser("interactivo", help="ventana con sliders")
+    pl = sub.add_parser("laboratorio", help="ventana con selector de experimentos")
+    pl.add_argument("modelo")
+    pi = sub.add_parser("interactivo", help="modo avanzado: sliders libres")
     pi.add_argument("modelo")
     a = ap.parse_args()
     if a.comando == "reporte" and not a.todos and not a.modelo:
         ap.error("reporte requiere <modelo> o --todos")
-    sys.exit({"listar": cmd_listar, "ficha": cmd_ficha, "simular": cmd_simular,
-              "demo": cmd_demo, "reporte": cmd_reporte, "verificar": cmd_verificar,
+    sys.exit({"listar": cmd_listar, "ficha": cmd_ficha, "experimento": cmd_experimento,
+              "simular": cmd_simular, "comparar": cmd_comparar,
+              "sensibilidad": cmd_sensibilidad, "demo": cmd_demo,
+              "reporte": cmd_reporte, "verificar": cmd_verificar,
+              "laboratorio": cmd_laboratorio,
               "interactivo": cmd_interactivo}[a.comando](a))
 
 

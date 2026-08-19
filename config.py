@@ -3,9 +3,16 @@
 # Todo lo ajustable vive aquí: rutas de salida, paleta, formato de figuras y
 # tipografía académica. Las libs (base.py, reporte.py) no hardcodean nada de esto.
 
+import os
 from pathlib import Path
 
 import matplotlib
+
+# Plasma/Wayland: el plugin Qt "wayland" puede faltar; xcb (X11) es el
+# fallback estable para los modos interactivos. Solo se toca si el usuario
+# no lo definió ya.
+if os.environ.get("WAYLAND_DISPLAY") and "QT_QPA_PLATFORM" not in os.environ:
+    os.environ["QT_QPA_PLATFORM"] = "xcb"
 
 DIR_BASE = Path(__file__).resolve().parent
 DIR_MODELOS = DIR_BASE / "modelos"

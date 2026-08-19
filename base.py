@@ -1,35 +1,31 @@
-# base.py — núcleo del laboratorio de macroeconomía computacional.
+# base.py — NÚCLEO del laboratorio (capa de modelo, sin matplotlib).
 #
-# Un modelo del laboratorio une tres capas (diseño: docs/LABORATORIO_MACRO.md):
+# Separación de capas (observación de Edison, 2026-08-19):
+#   base.py        → el MODELO: dataclasses, cálculo, verificación, sensibilidad
+#   graficos.py    → el RENDER: dibujo matplotlib, figuras, demo de sensibilidad
+#   laboratorio.py → la EXPERIENCIA: lámina de experimento, modos interactivos
+#   reporte.py     → informe MD por modelo
+# Así el mismo modelo alimenta CLI, láminas, reportes y (futuro) web/notebook
+# sin duplicar ecuaciones.
 #
-#   1. FICHA PEDAGÓGICA (Ficha): contexto histórico, autores/escuelas, supuestos,
-#      ecuaciones explicadas una a una, intuición, equilibrio, limitaciones y
-#      evolución (qué modelo lo supera y por qué). Es el "por qué" del modelo.
-#   2. MOTOR NUMÉRICO: curvas(params) -> dict con lo graficable, y
-#      resultados(params) -> dict con las magnitudes de equilibrio. El "cómo".
-#   3. CONTRATOS DE CALIDAD: escenarios (experimentos nombrados con lectura
-#      económica) y verificaciones (chequeos numéricos: las identidades
-#      contables se exigen EXACTAS, las convergencias con tolerancia).
+# Un modelo une tres capas (diseño: docs/LABORATORIO_MACRO.md):
+#   1. FICHA PEDAGÓGICA (Ficha): pregunta económica, contexto histórico,
+#      autores, supuestos, variables, ecuaciones explicadas, derivación,
+#      intuición, limitaciones y evolución.
+#   2. MOTOR NUMÉRICO: curvas(params) -> dict graficable, y
+#      resultados(params) -> dict de magnitudes de equilibrio.
+#   3. CONTRATOS DE CALIDAD: escenarios (experimentos con mecanismo de
+#      transmisión y lectura económica) y verificaciones (identidades exactas,
+#      convergencias con tolerancia).
 #
 # curvas(params) devuelve un dict con claves opcionales:
 #   "lineas":     {etiqueta: (x, y, color)}
-#   "barras":     (categorias, valores, colores)      — una serie de barras
-#   "puntos":     [(x, y, etiqueta)]                  — puntos destacados
-#   "equilibrio": (x, y)                              — punto de equilibrio
-#   "anotacion":  str                                 — texto en la esquina
-#
-# Modos de uso: interactivo() (sliders, requiere display), demo() (PDF headless
-# de sensibilidad), y reporte.py (informe MD con figuras por escenario).
-# Compatible con modelos antiguos: todos los campos nuevos tienen default.
+#   "barras":     (categorias, valores, colores)
+#   "puntos":     [(x, y, etiqueta)]
+#   "equilibrio": (x, y)
+#   "anotacion":  str
 
 from dataclasses import dataclass, field
-
-import matplotlib
-import matplotlib.pyplot as plt
-
-import config
-
-config.aplicar_estilo()          # tipografía académica global (serif + mathtext STIX)
 
 
 @dataclass
@@ -40,6 +36,9 @@ class Parametro:
     maximo: float
     paso: float = 0.1
     etiqueta: str = ""
+    grupo: str = ""          # bloque temático ("mercado de bienes", "política fiscal", …)
+    definicion: str = ""     # qué significa económicamente (para paneles/reportes)
+    unidad: str = ""         # "%", "u.m.", "pp", …
 
 
 @dataclass
@@ -61,6 +60,9 @@ class Ficha:
     equilibrio: str = ""             # condición de equilibrio y estabilidad
     limitaciones: list = field(default_factory=list)   # críticas y problemas empíricos
     evolucion: str = ""              # qué modelo del currículo lo supera y por qué
+    pregunta: str = ""               # la PREGUNTA ECONÓMICA que el modelo investiga
+    variables: list = field(default_factory=list)      # [(símbolo, descripción endóg./exóg.)]
+    derivacion: list = field(default_factory=list)     # pasos LaTeX de la derivación del equilibrio
     procedencia: str = "conocimiento macroeconómico general (manuales estándar de macro intermedia); NO verificado contra edición específica"
     referencias: list = field(default_factory=list)
 
@@ -70,7 +72,9 @@ class Escenario:
     nombre: str         # clave para la CLI (sin espacios)
     descripcion: str    # qué experimento es ("aumento del gasto público en 100")
     cambios: dict       # {parametro: nuevo_valor}
-    lectura: str = ""   # interpretación económica del resultado esperado
+    lectura: str = ""   # interpretación económica del resultado ("¿por qué?")
+    cadena: list = field(default_factory=list)  # mecanismo de transmisión paso a paso
+                                                #   ["↑G", "↑DA", "IS→derecha", "↑Y", …]
 
 
 @dataclass
@@ -94,9 +98,17 @@ class Modelo:
     escenarios: list = field(default_factory=list)      # list[Escenario]
     resultados: object = None              # fn(dict) -> dict[str, float]
     verificaciones: list = field(default_factory=list)  # list[Verificacion]
+    ecuaciones_calibradas: object = None   # fn(dict) -> list[str] — ecuaciones CON los
+                                           #   valores vigentes en LaTeX ("C = 100 + 0.80(Y-100)")
 
     def dict_params(self):
         return {p.nombre: p.valor for p in self.parametros}
+
+    def parametro(self, nombre):
+        for p in self.parametros:
+            if p.nombre == nombre:
+                return p
+        raise KeyError(f"parámetro '{nombre}' no existe en {self.id or self.nombre}")
 
     def escenario(self, nombre):
         for e in self.escenarios:
@@ -127,112 +139,54 @@ def fmt(v):
     return f"{v:.3f}"
 
 
-def _simbolo(etiqueta):
-    """Símbolo del eje para anotar el equilibrio: 'Producto ($Y$)' → '$Y^*{=}$'.
-    Sin símbolo corto entre paréntesis, no se antepone nada (solo el número)."""
-    if "(" in etiqueta and ")" in etiqueta:
-        s = etiqueta[etiqueta.find("(") + 1:etiqueta.find(")")].strip().strip("$")
-        if 0 < len(s) <= 3 and s != "%":
-            return f"${s}^*{{=}}$"
-    return ""
+def signo(delta, tolerancia=1e-9):
+    """Dirección de un cambio: '↑', '↓' o '=' (para el modo experimento)."""
+    if delta > tolerancia:
+        return "↑"
+    if delta < -tolerancia:
+        return "↓"
+    return "="
 
 
-def _dibujar(ax, modelo, params):
-    ax.clear()
-    datos = modelo.curvas(params)
-    barras = datos.get("barras")
-    if barras:
-        cats, vals, cols = barras
-        pos = range(len(cats))
-        ax.bar(pos, vals, color=cols, width=0.62)
-        ax.set_xticks(list(pos))
-        ax.set_xticklabels(cats)
-        for i, v in enumerate(vals):
-            ax.annotate(fmt(v), (i, v), ha="center", fontsize=9,
-                        va="bottom" if v >= 0 else "top", color=config.AZUL)
-        ax.axhline(0, color=config.GRIS, lw=0.8)
-    for etq, (x, y, color) in datos.get("lineas", {}).items():
-        ax.plot(x, y, label=etq, color=color, lw=2)
-    for (px, py, etq) in datos.get("puntos", []):
-        ax.plot([px], [py], "o", color=config.DORADO, ms=8, zorder=5)
-        ax.annotate(f"  {etq}", (px, py), fontsize=9, color=config.AZUL,
-                    fontweight="bold")
-    eq = datos.get("equilibrio")
-    if eq:
-        ax.plot([eq[0]], [eq[1]], "o", color=config.DORADO, ms=9, zorder=5)
-        sx, sy = _simbolo(modelo.xlabel), _simbolo(modelo.ylabel)
-        ax.annotate(f"  ({sx}{eq[0]:.1f}, {sy}{eq[1]:.2f})",
-                    (eq[0], eq[1]), fontsize=9, color=config.AZUL, fontweight="bold")
-    if datos.get("anotacion"):
-        ax.text(0.02, 0.98, datos["anotacion"], transform=ax.transAxes,
-                va="top", ha="left", fontsize=9, color=config.AZUL,
-                bbox=dict(boxstyle="round,pad=0.35", fc="white", ec=config.GRIS, alpha=0.9))
-    ax.set_xlabel(modelo.xlabel); ax.set_ylabel(modelo.ylabel)
-    ax.set_title(modelo.nombre, color=config.AZUL, fontweight="bold", loc="left")
-    if datos.get("lineas"):
-        ax.legend(frameon=False, loc="best")
-    ax.grid(color=config.GRIS, alpha=0.3)
-    ax.spines["top"].set_visible(False); ax.spines["right"].set_visible(False)
+def comparar(modelo, nombres_escenarios):
+    """Tabla de comparación de políticas: base vs cada escenario.
+    Devuelve (magnitudes, {nombre_columna: dict_resultados})."""
+    columnas = {"base": modelo.calcular()}
+    for nombre in nombres_escenarios:
+        esc = modelo.escenario(nombre)
+        columnas[esc.nombre] = modelo.calcular(**esc.cambios)
+    magnitudes = [k for k, v in columnas["base"].items() if isinstance(v, (int, float))]
+    return magnitudes, columnas
 
 
-def figura(modelo, params=None, titulo=None):
-    """Figura suelta (headless) del modelo con `params`; para reporte.py."""
-    matplotlib.use("Agg")
-    fig, ax = plt.subplots(figsize=config.TAMANO_FIGURA)
-    _dibujar(ax, modelo, params or modelo.dict_params())
-    if titulo:
-        ax.set_title(f"{modelo.nombre} — {titulo}", color=config.AZUL,
-                     fontweight="bold", loc="left")
-    fig.tight_layout()
-    return fig
+def sensibilidad(modelo, nombre_param, magnitud=None, n=9):
+    """Análisis de sensibilidad genérico: evalúa una magnitud de resultados()
+    sobre una malla del parámetro (su rango declarado) y aproxima la derivada
+    ∂magnitud/∂parámetro en el valor base (diferencia central con paso h=paso).
 
-
-def interactivo(modelo):
-    """Ventana con sliders (requiere backend interactivo / display)."""
-    from matplotlib.widgets import Slider
-    n = len(modelo.parametros)
-    fig, ax = plt.subplots(figsize=(9, 6))
-    plt.subplots_adjust(bottom=0.10 + 0.045 * n)
-    sliders = []
-    for i, p in enumerate(modelo.parametros):
-        eje = plt.axes([0.15, 0.02 + 0.045 * i, 0.7, 0.03])
-        s = Slider(eje, p.etiqueta or p.nombre, p.minimo, p.maximo,
-                   valinit=p.valor, valstep=p.paso)
-        sliders.append((p.nombre, s))
-
-    def actualizar(_):
-        params = {nombre: s.val for nombre, s in sliders}
-        _dibujar(ax, modelo, params)
-        fig.canvas.draw_idle()
-
-    for _, s in sliders:
-        s.on_changed(actualizar)
-    _dibujar(ax, modelo, modelo.dict_params())
-    plt.show()
-
-
-def demo(modelo, parametro, valores, ruta):
-    """Headless: renderiza el modelo a varios valores de `parametro` en una
-    grilla y guarda un PDF (demuestra el efecto comparativo de ese parámetro)."""
-    matplotlib.use("Agg")
-    ncols = min(3, len(valores))
-    nrows = (len(valores) + ncols - 1) // ncols
-    fig, axes = plt.subplots(nrows, ncols, figsize=(5.5 * ncols, 4 * nrows),
-                             squeeze=False)
-    base = modelo.dict_params()
-    for k, v in enumerate(valores):
-        ax = axes[k // ncols][k % ncols]
-        params = dict(base, **{parametro: v})
-        _dibujar(ax, modelo, params)
-        ax.set_title(f"{parametro} = {v}", color=config.AZUL, fontweight="bold",
-                     loc="left", fontsize=10)
-    for k in range(len(valores), nrows * ncols):
-        axes[k // ncols][k % ncols].axis("off")
-    fig.suptitle(f"{modelo.nombre} — sensibilidad a {parametro}",
-                 color=config.AZUL, fontweight="bold", fontsize=13)
-    fig.tight_layout(rect=[0, 0, 1, 0.97])
-    fig.savefig(ruta, bbox_inches="tight"); plt.close(fig)
-    return ruta
+    Método: diferencias finitas centrales — (f(x+h)−f(x−h))/2h.
+    Objetivo: estática comparativa numérica sin exigir derivadas analíticas
+    por modelo. Fundamento: cálculo numérico elemental (conocimiento general).
+    Alternativa: derivada analítica por modelo (más exacta; no generalizable).
+    """
+    par = modelo.parametro(nombre_param)
+    res_base = modelo.calcular()
+    if magnitud is None:
+        magnitud = next(k for k, v in res_base.items() if isinstance(v, (int, float)))
+    if magnitud not in res_base:
+        raise KeyError(f"magnitud '{magnitud}' no está en resultados() "
+                       f"(disponibles: {', '.join(res_base)})")
+    malla, filas = [], []
+    for i in range(n):
+        v = par.minimo + i * (par.maximo - par.minimo) / (n - 1)
+        malla.append(v)
+        filas.append((v, modelo.calcular(**{nombre_param: v})[magnitud]))
+    h = par.paso
+    f_mas = modelo.calcular(**{nombre_param: par.valor + h})[magnitud]
+    f_menos = modelo.calcular(**{nombre_param: par.valor - h})[magnitud]
+    derivada = (f_mas - f_menos) / (2 * h)
+    return {"magnitud": magnitud, "parametro": nombre_param, "base": par.valor,
+            "filas": filas, "derivada": derivada}
 
 
 def verificar(modelo):

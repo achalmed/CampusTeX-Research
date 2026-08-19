@@ -1,7 +1,8 @@
 # reporte.py — informe Markdown por modelo del laboratorio.
 #
 # Renderiza la ficha pedagógica completa + resultados base + una tabla y una
-# figura por escenario + el resultado de las verificaciones. La salida va a
+# LÁMINA DE EXPERIMENTO por escenario (5 zonas: contexto, gráfico E1→E2,
+# resultados, mecanismo, ecuaciones) + verificaciones. La salida va a
 # salidas/nivel_NN/<id>_<slug>/reporte.md (regenerable; no se versiona).
 # El MD usa bloques $$...$$ para las ecuaciones: se lee bien en Obsidian.
 
@@ -9,6 +10,8 @@ import matplotlib.pyplot as plt
 
 import base
 import config
+import graficos
+import laboratorio
 
 
 def _tabla(filas, cabecera):
@@ -45,15 +48,24 @@ def render(modelo, dir_salidas=None):
     if modelo.id:
         md += [f"**Posición curricular:** {modelo.id} (nivel {modelo.nivel}) — "
                f"ver `docs/LABORATORIO_MACRO.md`", ""]
+    if F and F.pregunta:
+        md += [f"> **Pregunta económica:** {F.pregunta}", ""]
 
     if F:
         md += ["## Contexto histórico", "", F.contexto, "",
                "## Autores y escuelas", "", F.autores, "",
                "## Supuestos", ""]
         md += [f"- {s}" for s in F.supuestos]
+        if F.variables:
+            md += ["", "## Variables", ""]
+            md += [f"- **{simbolo}** — {descripcion}" for simbolo, descripcion in F.variables]
         md += ["", "## Ecuaciones", ""]
         for e in F.ecuaciones:
             md += [f"**{e.nombre}**", "", f"$${e.latex}$$", "", e.significado, ""]
+        if F.derivacion:
+            md += ["## Derivación del equilibrio", ""]
+            for paso in F.derivacion:
+                md += [f"$${paso}$$", ""]
         md += ["## Intuición económica", "", F.intuicion, ""]
         if F.equilibrio:
             md += ["## Equilibrio y estabilidad", "", F.equilibrio, ""]
@@ -71,28 +83,27 @@ def render(modelo, dir_salidas=None):
                _tabla([(k, base.fmt(v)) for k, v in res_base.items()],
                       ("magnitud", "valor")), ""]
 
-    fig = base.figura(modelo)
+    fig = graficos.figura(modelo)
     fig.savefig(carpeta / "fig_base.png", dpi=config.DPI, bbox_inches="tight")
     plt.close(fig)
     md += ["![situación base](fig_base.png)", ""]
 
-    # --- escenarios: experimento, tabla comparativa, figura, lectura ---
+    # --- escenarios: experimento con lámina de laboratorio + mecanismo ---
     if modelo.escenarios:
-        md += ["## Escenarios (experimentos de simulación)", ""]
+        md += ["## Experimentos de laboratorio", ""]
         for esc in modelo.escenarios:
             cambios = ", ".join(f"{k} → {base.fmt(v)}" for k, v in esc.cambios.items())
-            md += [f"### {esc.nombre}", "", f"{esc.descripcion} ({cambios})", ""]
+            md += [f"### 🧪 {esc.nombre}", "", f"{esc.descripcion} ({cambios})", ""]
             res_esc = modelo.calcular(**esc.cambios)
             if res_base and res_esc:
                 md += [_comparacion(res_base, res_esc), ""]
-            fig = base.figura(modelo, dict(modelo.dict_params(), **esc.cambios),
-                              titulo=esc.nombre)
-            nombre_fig = f"fig_{esc.nombre}.png"
-            fig.savefig(carpeta / nombre_fig, dpi=config.DPI, bbox_inches="tight")
-            plt.close(fig)
+            if esc.cadena:
+                md += ["**Mecanismo de transmisión:** " + " → ".join(esc.cadena), ""]
+            nombre_fig = f"lamina_{esc.nombre}.png"
+            laboratorio.lamina(modelo, esc, carpeta / nombre_fig)
             md += [f"![{esc.nombre}]({nombre_fig})", ""]
             if esc.lectura:
-                md += [f"**Lectura económica:** {esc.lectura}", ""]
+                md += [f"**¿Por qué?** {esc.lectura}", ""]
 
     # --- limitaciones y evolución (el puente curricular) ---
     if F:
