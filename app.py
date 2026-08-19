@@ -106,6 +106,8 @@ class Laboratorio:
         self.b_b = Button(self.ax_b, "", color="#EDEFF3", hovercolor="#DDE2EA")
         self.b_c = Button(self.ax_c, "", color=config.AZUL, hovercolor="#2E5496")
         self.b_c.label.set_color("white")
+        for boton in (self.b_a, self.b_b, self.b_c):
+            boton.label.set_fontfamily("DejaVu Sans")   # glifos ⌂◀▶▲▼ (no están en STIX)
         self.b_a.on_clicked(self._accion_a)
         self.b_b.on_clicked(self._accion_b)
         self.b_c.on_clicked(self._accion_c)
@@ -221,7 +223,7 @@ class Laboratorio:
                               fontsize=10, color=config.ROJO, fontweight="bold")
                 y -= 0.028
             sel = (i == self.cursor)
-            marca = "▶ " if sel else "   "
+            marca = "» " if sel else "   "
             self.fig.text(0.075, y, f"{marca}{m.id}  {m.nombre}",
                           fontsize=10, color=config.AZUL if sel else _TINTA,
                           fontweight="bold" if sel else "normal")
@@ -231,7 +233,7 @@ class Laboratorio:
                           fontsize=9, color=config.GRIS)
         m = self.modelos[self.cursor]
         if m.ficha and m.ficha.pregunta:
-            self.fig.text(0.045, 0.118, _wrap(f"❝ {m.ficha.pregunta} ❞", 120),
+            self.fig.text(0.045, 0.118, _wrap(f"« {m.ficha.pregunta} »", 120),
                           fontsize=11, color=config.AZUL, style="italic")
         self._botones("▲ Subir", "▼ Bajar", "Entrar  ▶")
 
@@ -249,15 +251,15 @@ class Laboratorio:
     def _paso_portada(self, _):
         m, F = self.m, self.m.ficha
         if F and F.pregunta:
-            self._texto(0.10, 0.76, _wrap(f"❝ {F.pregunta} ❞", 78), 17, config.AZUL,
+            self._texto(0.10, 0.76, _wrap(f"« {F.pregunta} »", 78), 17, config.AZUL,
                         style="italic")
         ok, tot = self._verif[m.id]
         self._texto(0.10, 0.50,
                     f"Experimentos disponibles: {len(m.escenarios)}\n"
-                    f"Verificaciones internas del modelo: {ok}/{tot} ✔\n"
+                    f"Verificaciones internas del modelo: {ok}/{tot} superadas\n"
                     f"Procedencia: {_wrap(F.procedencia, 90) if F else '—'}", 10.5)
-        self._texto(0.10, 0.24, "Usa  ◀ ▶  (o las flechas del teclado) para avanzar "
-                                "por el recorrido.", 10, config.GRIS)
+        self._texto(0.10, 0.24, "Usa los botones (o las flechas del teclado) para "
+                                "avanzar por el recorrido.", 10, config.GRIS)
 
     def _paso_contexto(self, _):
         F = self.m.ficha
@@ -425,7 +427,7 @@ class Laboratorio:
             destino.mkdir(parents=True, exist_ok=True)
             ruta = destino / f"{m.id}_experimento_libre.png"
             laboratorio.lamina(m, esc, ruta)
-            b_g.label.set_text("✔ guardada")
+            b_g.label.set_text("lámina guardada")
             self.fig.canvas.draw_idle()
 
         b_r.on_clicked(_reset)
