@@ -71,6 +71,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Qué combinaciones de producto y tasa equilibran el mercado de "
+                  "dinero — y cómo las mueve la emisión?"),
         contexto=("La otra mitad del aparato de Hicks: LM por Liquidity-Money. Si m08 "
                   "encontraba la tasa que vacía el mercado de dinero para UN ingreso "
                   "dado, la LM repite el ejercicio para todos los ingresos posibles: a "

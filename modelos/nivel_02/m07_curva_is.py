@@ -96,6 +96,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Qué combinaciones de producto y tasa de interés equilibran el "
+                  "mercado de bienes — y qué las desplaza?"),
         contexto=("Hicks bautizó la curva 'IS' por Investment-Saving: sobre ella, la "
                   "inversión deseada iguala al ahorro deseado. Es la mitad 'real' del "
                   "aparato con el que la síntesis neoclásica ordenó el debate keynesiano: "

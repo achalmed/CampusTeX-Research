@@ -111,6 +111,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="Ante un shock petrolero, ¿acomodar o resistir — y quién paga cada opción?",
         contexto=("1973-1982: dos shocks petroleros, inflación de dos dígitos y "
                   "desempleo récord en las economías industriales — al mismo tiempo. "
                   "La palabra 'estanflación' nombró lo que la teoría de los 60 no "

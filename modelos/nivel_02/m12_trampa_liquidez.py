@@ -104,6 +104,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Por qué con tasas en cero el dinero deja de funcionar y el gasto "
+                  "público recupera toda su potencia?"),
         contexto=("Keynes especuló con una situación en la que la política monetaria "
                   "'empuja una cuerda': con tasas ya en el suelo y expectativas "
                   "deprimidas, el dinero extra se atesora en vez de prestarse. Hicks la "
@@ -151,15 +153,21 @@ MODELO = Modelo(
         Escenario("mas_dinero_aun", "duplicar la inyección monetaria (dMP = 200)",
                   {"dMP": 200.0},
                   "la LM verde se corre más a la derecha… y el equilibrio no se mueve un "
-                  "milímetro: en la trampa, emitir es empujar la cuerda."),
+                  "milímetro: en la trampa, emitir es empujar la cuerda.",
+                  cadena=["↑↑M/P", "r ya está en 0 (piso)", "el dinero se atesora",
+                          "el tramo plano se alarga pero no baja", "ΔY = 0"]),
         Escenario("rescate_fiscal", "el gasto sube de 150 a 200",
                   {"G": 200.0},
                   "la IS sale del tramo plano: Y sube con multiplicador pleno mientras "
-                  "dura la trampa, y al salir (r*>0) reaparece la expulsión."),
+                  "dura la trampa, y al salir (r*>0) reaparece la expulsión.",
+                  cadena=["↑G", "IS → derecha SOBRE el tramo plano", "Δr = 0",
+                          "sin expulsión", "multiplicador pleno", "posible salida de la trampa"]),
         Escenario("depresion_profunda", "el ánimo inversor se hunde (I0: 80→60)",
                   {"I0": 60.0},
                   "más adentro de la trampa: la brecha que la política monetaria no puede "
-                  "cerrar se agranda — el caso Japón."),
+                  "cerrar se agranda — el caso Japón.",
+                  cadena=["↓I0 (pesimismo)", "IS → izquierda", "más hondo en el tramo plano",
+                          "la brecha que el dinero no puede cerrar crece"]),
     ],
     verificaciones=[
         Verificacion("la calibración base cae en la trampa (r*=0)", _v_en_trampa),

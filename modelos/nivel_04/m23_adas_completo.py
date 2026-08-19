@@ -116,6 +116,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Cómo responden producto, precios y tasa de interés — a la vez — "
+                  "ante shocks de demanda y de oferta?"),
         contexto=("El aparato con el que la síntesis neoclásica enseñó macroeconomía "
                   "medio siglo: demanda derivada del IS-LM (m20), oferta de corto "
                   "plazo con expectativas (m21) y ancla clásica de largo plazo (m22), "

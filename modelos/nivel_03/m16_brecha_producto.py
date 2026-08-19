@@ -90,6 +90,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="¿Cuán honda y cuán larga es una recesión — y cuánto PIB cuesta en total?",
         contexto=("Si el PIB potencial es lo que la economía PUEDE producir sin "
                   "tensionar precios, la brecha mide cuán lejos está de lograrlo. Es el "
                   "termómetro operativo de la macro de corto plazo: los bancos "

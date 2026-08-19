@@ -75,6 +75,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Cómo se mide el producto de una economía — y qué NO dice esa "
+                  "medición sobre las causas?"),
         contexto=("La Gran Depresión encontró a los gobiernos sin estadísticas agregadas: "
                   "no se sabía cuánto caía la producción. Simon Kuznets desarrolló las "
                   "primeras cuentas de ingreso nacional de EE.UU. (informe al Congreso, "
@@ -122,15 +124,19 @@ MODELO = Modelo(
         Escenario("shock_consumo", "el consumo cae 10% (crisis de confianza)",
                   {"C": 585.0},
                   "contablemente el PIB cae exactamente en ΔC; en un modelo con "
-                  "comportamiento (m04) la caída sería MAYOR por las rondas de gasto."),
+                  "comportamiento (m04) la caída sería MAYOR por las rondas de gasto.",
+                  cadena=["↓C", "ΔY = ΔC (identidad ex post)", "sin rondas ni multiplicador",
+                          "solo contabilidad — el comportamiento llega en m03-m04"]),
         Escenario("impulso_fiscal", "el gasto público sube 20%",
                   {"G": 156.0},
                   "ΔY = ΔG = 26, uno a uno: la identidad no multiplica ni expulsa; "
-                  "comparar con m04 (multiplicador) y m11 (expulsión)."),
+                  "comparar con m04 (multiplicador) y m11 (expulsión).",
+                  cadena=["↑G", "ΔY = ΔG uno a uno", "la identidad no multiplica ni expulsa"]),
         Escenario("shock_exportador", "las exportaciones caen 20% (menor demanda externa)",
                   {"X": 200.0},
                   "sensibilidad de una economía abierta a sus mercados de destino; para "
-                  "Perú el canal real pasa por los términos de intercambio (nivel 12)."),
+                  "Perú el canal real pasa por los términos de intercambio (nivel 12).",
+                  cadena=["↓X", "↓XN", "ΔY = ΔX contable", "los canales reales llegan en niveles 2-3"]),
     ],
     verificaciones=[
         Verificacion("identidad exacta Y = C+I+G+X−M", _v_identidad),

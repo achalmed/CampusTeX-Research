@@ -85,6 +85,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Qué pasa con la inflación si la política intenta sostener el "
+                  "desempleo por debajo de su tasa natural?"),
         contexto=("En 1967-68, con la Phillips original en su apogeo, Friedman y Phelps "
                   "predijeron su colapso: los trabajadores negocian salarios REALES, así "
                   "que la inflación pasada se incorpora a las expectativas y la curva se "

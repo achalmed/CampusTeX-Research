@@ -75,6 +75,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="¿Qué determina la tasa de interés cuando el banco central fija la cantidad de dinero?",
         contexto=("¿Por qué alguien guardaría dinero, que no rinde, en vez de bonos, que "
                   "pagan r? Keynes respondió con la preferencia por la liquidez: se "
                   "demanda dinero para transar (crece con Y) y se sacrifica liquidez solo "

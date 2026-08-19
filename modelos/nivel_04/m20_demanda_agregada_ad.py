@@ -101,6 +101,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Por qué la demanda agregada cae cuando sube el nivel de precios, "
+                  "si no es la demanda de un bien?"),
         contexto=("m18 usó una AD 'porque sí'; este modelo la construye. La pregunta "
                   "incómoda era: ¿por qué una demanda AGREGADA caería con el nivel de "
                   "precios, si no es la demanda de un bien? La síntesis respondió con "

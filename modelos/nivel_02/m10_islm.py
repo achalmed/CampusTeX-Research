@@ -43,6 +43,14 @@ def _resultados(p):
             "comprobación Y = C+I+G": C + I + p["G"]}
 
 
+def _ecuaciones_calibradas(p):
+    Y, r, _ = _equilibrio(p)
+    return [f"$C = {p['c0']:.0f} + {p['c1']:.2f}\\,(Y - {p['T']:.0f})$",
+            f"$I = {p['I0']:.0f} - {p['b']:.0f}\\,r$",
+            f"$M/P = {p['MP']:.0f} = {p['k']:.2f}\\,Y - {p['h']:.0f}\\,r$",
+            f"$Y^* = {Y:,.1f}, \\quad r^* = {r:.2f}$"]
+
+
 _P0 = {"G": 200.0, "MP": 300.0, "T": 100.0, "c1": 0.6, "b": 20.0,
        "k": 0.5, "h": 10.0, "c0": 100.0, "I0": 150.0}
 
@@ -82,19 +90,44 @@ MODELO = Modelo(
     id="m10", nivel=2,
     nombre="Modelo IS-LM",
     parametros=[
-        Parametro("G", _P0["G"], 0, 500, 10, "Gasto público G (fiscal)"),
-        Parametro("MP", _P0["MP"], 100, 600, 10, "Oferta real de dinero M/P (monetaria)"),
-        Parametro("T", _P0["T"], 0, 400, 10, "Impuestos T"),
-        Parametro("c1", _P0["c1"], 0.1, 0.9, 0.05, "Propensión a consumir c1"),
-        Parametro("b", _P0["b"], 5, 50, 1, "Sensibilidad inversión a r (b)"),
-        Parametro("k", _P0["k"], 0.1, 1.0, 0.05, "Demanda dinero por Y (k)"),
-        Parametro("h", _P0["h"], 2, 30, 1, "Demanda dinero por r (h)"),
-        Parametro("c0", _P0["c0"], 0, 300, 10, "Consumo autónomo c0"),
-        Parametro("I0", _P0["I0"], 0, 400, 10, "Inversión autónoma I0"),
+        Parametro("G", _P0["G"], 0, 500, 10, "Gasto público G", grupo="política fiscal",
+                  definicion="compras del gobierno; desplaza la IS", unidad="u.m."),
+        Parametro("MP", _P0["MP"], 100, 600, 10, "Oferta real de dinero M/P", grupo="política monetaria",
+                  definicion="saldos reales que fija el banco central; desplaza la LM", unidad="u.m."),
+        Parametro("T", _P0["T"], 0, 400, 10, "Impuestos T", grupo="política fiscal",
+                  definicion="impuestos de suma fija; entran vía renta disponible", unidad="u.m."),
+        Parametro("c1", _P0["c1"], 0.1, 0.9, 0.05, "Propensión a consumir c1", grupo="mercado de bienes",
+                  definicion="fracción re-gastada de cada unidad de renta disponible"),
+        Parametro("b", _P0["b"], 5, 50, 1, "Sensibilidad de I a r (b)", grupo="mercado de bienes",
+                  definicion="inversión descartada por cada punto de tasa"),
+        Parametro("k", _P0["k"], 0.1, 1.0, 0.05, "Demanda de dinero por Y (k)", grupo="mercado de dinero",
+                  definicion="liquidez requerida por las transacciones"),
+        Parametro("h", _P0["h"], 2, 30, 1, "Demanda de dinero por r (h)", grupo="mercado de dinero",
+                  definicion="liquidez que se libera cuando la tasa premia los bonos"),
+        Parametro("c0", _P0["c0"], 0, 300, 10, "Consumo autónomo c0", grupo="mercado de bienes",
+                  definicion="consumo independiente del ingreso corriente"),
+        Parametro("I0", _P0["I0"], 0, 400, 10, "Inversión autónoma I0", grupo="mercado de bienes",
+                  definicion="ánimo inversor (animal spirits) independiente de la tasa"),
     ],
     curvas=_curvas,
     resultados=_resultados,
+    ecuaciones_calibradas=_ecuaciones_calibradas,
     ficha=Ficha(
+        pregunta=("¿Qué ocurre con el producto y la tasa de interés cuando el gobierno "
+                  "aumenta el gasto público — y quién termina financiándolo?"),
+        variables=[("Y", "producto/ingreso — endógena"),
+                   ("r", "tasa de interés — endógena"),
+                   ("C, I", "consumo e inversión — endógenas (derivadas de Y y r)"),
+                   ("G, T", "instrumentos fiscales — exógenas"),
+                   ("M/P", "oferta real de dinero — exógena (instrumento monetario)")],
+        derivacion=[
+            "Y = c_0 + c_1(Y-T) + I_0 - b\\,r + G",
+            "(1-c_1)\\,Y = c_0 - c_1 T + I_0 + G - b\\,r",
+            "r = \\frac{k\\,Y - M/P}{h} \\;\\; (LM)",
+            "(1-c_1)\\,Y = c_0 - c_1T + I_0 + G - \\frac{b}{h}\\Big(k\\,Y - \\frac{M}{P}\\Big)",
+            "\\Big[(1-c_1) + \\frac{b\\,k}{h}\\Big]\\,Y = c_0 - c_1T + I_0 + G + \\frac{b}{h}\\,\\frac{M}{P}",
+            "Y^* = \\frac{c_0 - c_1T + I_0 + G + \\frac{b}{h}\\frac{M}{P}}{(1-c_1) + \\frac{b\\,k}{h}}",
+        ],
         contexto=("Un año después de la Teoría General, John Hicks ('Mr. Keynes and the "
                   "Classics', 1937) tradujo el libro a un sistema de dos ecuaciones y dos "
                   "incógnitas (Y, r) que se volvió el lenguaje común de la macroeconomía "
@@ -149,20 +182,30 @@ MODELO = Modelo(
                   "IS se desplaza a la derecha: Y y r suben; parte del impulso se pierde "
                   "en inversión expulsada (crowding out, m11). Con shocks grandes esta "
                   "especificación lineal puede llevar I* por debajo de cero — artefacto "
-                  "del modelo, no economía."),
+                  "del modelo, no economía.",
+                  cadena=["↑G", "↑ demanda de bienes", "IS → derecha", "↑Y (multiplicador)",
+                          "↑ demanda de dinero k·Y", "M/P fija ⇒ ↑r", "↓I = −b·Δr",
+                          "expulsión parcial (m11)"]),
         Escenario("expansion_monetaria", "la oferta real de dinero sube de 300 a 400",
                   {"MP": 400.0},
                   "LM se desplaza a la derecha: Y sube con r MENOR — estimula la "
-                  "inversión en vez de expulsarla."),
+                  "inversión en vez de expulsarla.",
+                  cadena=["↑M/P", "exceso de liquidez", "compra de bonos ⇒ ↑ precio",
+                          "↓r", "LM → derecha", "↑I", "↑Y (multiplicador)"]),
         Escenario("contraccion_monetaria", "el banco central retira liquidez (M/P: 300→200)",
                   {"MP": 200.0},
                   "LM a la izquierda: r sube y el producto cae — la receta clásica "
-                  "contra el sobrecalentamiento."),
+                  "contra el sobrecalentamiento.",
+                  cadena=["↓M/P", "escasez de liquidez", "venta de bonos", "↑r",
+                          "LM → izquierda", "↓I", "↓Y"]),
         Escenario("politica_mixta", "expansión fiscal CON acomodo monetario",
                   {"G": 300.0, "MP": 400.0},
                   "si el banco central acomoda, la tasa casi no sube y el multiplicador "
                   "se acerca al del nivel 1: la mezcla de políticas importa tanto como "
-                  "cada política."),
+                  "cada política.",
+                  cadena=["↑G (IS → derecha)", "↑M/P (LM → derecha)",
+                          "las presiones sobre r se compensan", "Δr pequeño",
+                          "casi sin expulsión", "ΔY cercano a k·ΔG (m04)"]),
     ],
     verificaciones=[
         Verificacion("(Y*, r*) satisface IS y LM a la vez", _v_equilibrio),

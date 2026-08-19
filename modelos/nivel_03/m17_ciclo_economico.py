@@ -96,6 +96,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="¿Pueden shocks aleatorios sin ningún ciclo dentro generar los ciclos que vemos?",
         contexto=("¿Por qué hay ciclos? Las teorías del siglo XIX buscaban causas "
                   "cíclicas (cosechas, crédito, manchas solares). Slutsky (1927) mostró "
                   "algo desconcertante: SUMAR shocks aleatorios sin ningún ciclo dentro "

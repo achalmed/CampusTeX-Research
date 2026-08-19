@@ -67,6 +67,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="¿Existe un menú entre inflación y desempleo que la política pueda elegir?",
         contexto=("A. W. Phillips (1958) graficó casi un siglo de datos británicos "
                   "(1861-1957) y encontró una relación negativa asombrosamente estable "
                   "entre desempleo e inflación salarial. Samuelson y Solow (1960) la "

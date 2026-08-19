@@ -97,6 +97,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="¿Qué determina el producto potencial — y por qué el dinero no puede moverlo?",
         contexto=("La otra mitad de la síntesis: a largo plazo, cuando todos los "
                   "contratos se renegociaron y no quedan sorpresas, el producto lo "
                   "determina la CAPACIDAD — tecnología, capital, trabajo — y la "

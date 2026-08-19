@@ -92,6 +92,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="¿Cómo se reparte un shock de gasto entre más producto y más precios?",
         contexto=("El nivel 2 mantuvo los precios congelados; el nivel 3 los despierta. "
                   "Este modelo introduce el plano (Y, P) con el que la síntesis "
                   "neoclásica reconcilió a Keynes con los clásicos: una demanda "

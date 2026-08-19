@@ -75,6 +75,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="¿Cuánto crecimiento hace falta para bajar el desempleo en un punto?",
         contexto=("Arthur Okun (1962), asesor de Kennedy, necesitaba responder una "
                   "pregunta política: ¿cuánto crecimiento hace falta para bajar el "
                   "desempleo? Su regla empírica — cada punto de crecimiento por encima "

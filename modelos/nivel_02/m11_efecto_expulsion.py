@@ -93,6 +93,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Cuánto del impulso fiscal se pierde porque la tasa de interés "
+                  "expulsa inversión privada?"),
         contexto=("¿El gasto público crea demanda o solo desplaza a la privada? La "
                   "'Treasury view' británica de los años 20 sostenía que cada libra "
                   "gastada por el Estado era una libra menos de inversión privada; Keynes "
@@ -142,15 +144,21 @@ MODELO = Modelo(
         Escenario("mundo_monetarista", "demanda de dinero insensible a r (h = 2)",
                   {"h": 2.0},
                   "LM casi vertical: el 93% del impulso se expulsa — el gasto público "
-                  "'solo mueve la composición, no el nivel' (posición monetarista)."),
+                  "'solo mueve la composición, no el nivel' (posición monetarista).",
+                  cadena=["h pequeño ⇒ LM casi vertical", "↑G", "fuerte ↑r", "↓↓I",
+                          "expulsión ≈ total"]),
         Escenario("mundo_keynesiano", "dinero muy sensible a r y poca b (h=30, b=5)",
                   {"h": 30.0, "b": 5.0},
                   "LM plana e inversión insensible: expulsión de un dígito — el gasto "
-                  "rinde casi el multiplicador pleno (posición keynesiana)."),
+                  "rinde casi el multiplicador pleno (posición keynesiana).",
+                  cadena=["h grande, b chico ⇒ LM plana", "↑G", "r casi no sube",
+                          "I casi intacta", "expulsión mínima", "k casi pleno"]),
         Escenario("acomodo_monetario", "el banco central emite dMP=125 junto al impulso",
                   {"dMP": 125.0},
                   "Δr = 0 exacto: la 'monetización' del impulso recupera el multiplicador "
-                  "del nivel 1 — con la semilla inflacionaria que el nivel 3 cobrará."),
+                  "del nivel 1 — con la semilla inflacionaria que el nivel 3 cobrará.",
+                  cadena=["↑G + emisión calibrada dMP", "la mayor demanda de dinero se abastece",
+                          "Δr = 0 exacto", "sin expulsión", "ΔY = k·ΔG (m04)"]),
     ],
     verificaciones=[
         Verificacion("identidad ΔY = k·(ΔG+ΔI)", _v_identidad),

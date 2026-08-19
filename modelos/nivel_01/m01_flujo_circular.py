@@ -87,6 +87,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Por qué el gasto de unos es el ingreso de otros, y qué nivel de "
+                  "ingreso puede sostener el circuito?"),
         contexto=("Es la imagen fundacional de la macroeconomía: el gasto de un agente "
                   "es el ingreso de otro. El antecedente clásico es el Tableau économique "
                   "de François Quesnay (1758), que representó la economía como circulación "
@@ -140,15 +142,21 @@ MODELO = Modelo(
         Escenario("mayor_inversion", "las empresas elevan la inversión de 200 a 300",
                   {"I": 300.0},
                   "una inyección adicional expande TODO el circuito: Y* sube más que la "
-                  "propia ΔI (multiplicador), y con él suben C, S, T y M."),
+                  "propia ΔI (multiplicador), y con él suben C, S, T y M.",
+                  cadena=["↑I", "↑ inyecciones", "el circuito se expande", "↑Y*",
+                          "↑S, ↑T, ↑M hasta reequilibrar filtraciones e inyecciones"]),
         Escenario("apertura_importadora", "la propensión a importar sube de 0.20 a 0.30",
                   {"m": 0.30},
                   "una filtración mayor drena el circuito: el mismo nivel de inyecciones "
-                  "sostiene un Y* menor."),
+                  "sostiene un Y* menor.",
+                  cadena=["↑m", "mayor filtración externa", "↓ re-gasto interno",
+                          "↓Y*", "el circuito reequilibra más abajo"]),
         Escenario("mas_frugalidad", "los hogares consumen menos de su renta (c: 0.8→0.7)",
                   {"c": 0.70},
                   "el intento colectivo de ahorrar más encoge el circuito — anticipo de la "
-                  "paradoja del ahorro (m05)."),
+                  "paradoja del ahorro (m05).",
+                  cadena=["↓c", "↑ filtración por ahorro", "↓ re-gasto", "↓Y*",
+                          "anticipo de la paradoja (m05)"]),
     ],
     verificaciones=[
         Verificacion("filtraciones = inyecciones en Y*", _v_circuito),

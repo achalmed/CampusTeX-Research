@@ -82,6 +82,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="¿Cómo cambia el equilibrio del mercado de bienes cuando el crédito se encarece?",
         contexto=("El nivel 1 dejó una promesa pendiente: la inversión 'caía del cielo'. "
                   "El primer paso de la síntesis keynesiana (Hicks, Hansen y los manuales "
                   "de posguerra) fue hacerla depender de la tasa de interés: financiar un "

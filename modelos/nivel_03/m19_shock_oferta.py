@@ -95,6 +95,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Por qué un shock de costos crea inflación Y recesión a la vez — y "
+                  "qué puede hacer la política?"),
         contexto=("Octubre de 1973: la OPEP cuadruplica el precio del petróleo y las "
                   "economías industriales descubren una combinación que su teoría "
                   "declaraba imposible: inflación Y desempleo subiendo a la vez. La "

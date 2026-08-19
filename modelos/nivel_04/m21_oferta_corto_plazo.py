@@ -71,6 +71,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="¿Por qué producir más exige precios más altos solo en el corto plazo?",
         contexto=("¿Por qué producir MÁS exige precios más altos solo en el corto "
                   "plazo? Porque hay compromisos nominales tomados con expectativas: "
                   "salarios pactados esperando Pe, precios de catálogo, contratos. "

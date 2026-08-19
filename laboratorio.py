@@ -112,15 +112,16 @@ def _componer(fig, modelo, esc):
 
     # ── zona A: contexto ────────────────────────────────────────────────────
     F = modelo.ficha
-    fig.text(0.035, 0.975, "LABORATORIO MACROECONÓMICO",
+    fig.text(0.035, 0.978, "LABORATORIO MACROECONÓMICO",
              fontsize=9.5, color=config.GRIS, fontweight="bold")
-    fig.text(0.035, 0.945, f"{modelo.nombre}  ·  nivel {modelo.nivel}  ·  {modelo.id}",
+    fig.text(0.035, 0.950, f"{modelo.nombre}  ·  nivel {modelo.nivel}  ·  {modelo.id}",
              fontsize=15, color=config.AZUL, fontweight="bold")
-    y = 0.915
+    y = 0.928
     if F and F.pregunta:
-        fig.text(0.035, y, _wrap(f"Pregunta: {F.pregunta}", 110),
+        texto = _wrap(f"Pregunta: {F.pregunta}", 110)
+        fig.text(0.035, y, texto, va="top",
                  fontsize=10.5, color="#222222", style="italic")
-        y -= 0.030
+        y -= 0.026 * (texto.count("\n") + 1) + 0.008
     if esc:
         cambios = ", ".join(f"{k}: {base.fmt(modelo.parametro(k).valor)} → {base.fmt(v)}"
                             for k, v in esc.cambios.items())

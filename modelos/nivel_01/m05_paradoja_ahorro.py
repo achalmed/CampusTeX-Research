@@ -84,6 +84,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="Si todos los hogares deciden ahorrar más, ¿ahorra más la sociedad?",
         contexto=("Si cada hogar decide ahorrar más, ¿ahorra más la sociedad? La "
                   "respuesta keynesiana en recesión es NO: el menor consumo reduce el "
                   "ingreso de otros, y con él su capacidad de ahorrar. La virtud privada "
@@ -137,15 +138,21 @@ MODELO = Modelo(
     escenarios=[
         Escenario("frugalidad_leve", "los hogares recortan el consumo autónomo en 25",
                   {"dC0": 25.0},
-                  "Y* cae 125 (= 5×25); el ahorro agregado no se mueve un céntimo."),
+                  "Y* cae 125 (= 5×25); el ahorro agregado no se mueve un céntimo.",
+                  cadena=["↓C0 (deseo de ahorrar más)", "↓DA", "↓Y (multiplicador en reversa)",
+                          "↓ renta disponible", "S* anclado en I+G−T", "ΔS = 0: paradoja"]),
         Escenario("frugalidad_fuerte", "recorte severo del consumo autónomo (100)",
                   {"dC0": 100.0},
                   "la renta cae 500 y el ahorro sigue clavado en I+G−T: mientras más "
-                  "intentan ahorrar todos, más pobres terminan todos — sin ahorrar más."),
+                  "intentan ahorrar todos, más pobres terminan todos — sin ahorrar más.",
+                  cadena=["↓↓C0", "↓↓DA", "↓↓Y (k=5 amplifica)", "el ingreso cae hasta que el",
+                          "ahorro DESEADO vuelve a caber en I+G−T", "ΔS = 0"]),
         Escenario("hogares_gastadores", "con PMC alta (c = 0.9) el castigo es mayor",
                   {"c": 0.9},
                   "k = 10: la misma frugalidad hunde el doble la renta — economías de "
-                  "alto re-gasto amplifican la paradoja."),
+                  "alto re-gasto amplifican la paradoja.",
+                  cadena=["↑c", "↑k = 10", "la misma frugalidad", "↓↓Y (doble caída)",
+                          "paradoja amplificada"]),
     ],
     verificaciones=[
         Verificacion("ΔS* = 0 (la paradoja, exacta)", _v_paradoja),

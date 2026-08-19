@@ -85,6 +85,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿Cuánto producto total genera un sol adicional de gasto — y por qué "
+                  "más que un sol?"),
         contexto=("En el debate británico sobre las obras públicas contra el desempleo, "
                   "Richard Kahn (1931) formalizó cuánto empleo total generaba un empleo "
                   "público adicional; Keynes (1936) convirtió esa aritmética en la pieza "
@@ -135,14 +137,19 @@ MODELO = Modelo(
         Escenario("pmc_alta", "hogares que re-gastan casi todo (c = 0.9)",
                   {"c": 0.9},
                   "k salta de 5 a 10: economías con poco ahorro amplifican los shocks "
-                  "de demanda — en ambas direcciones."),
+                  "de demanda — en ambas direcciones.",
+                  cadena=["↑c", "más re-gasto en cada ronda", "la serie decae más lento",
+                          "↑k = 1/(1−c)", "ΔY total mayor"]),
         Escenario("pmc_baja", "hogares más ahorradores (c = 0.6)",
                   {"c": 0.6},
-                  "k cae a 2.5: el mismo impulso fiscal rinde la mitad."),
+                  "k cae a 2.5: el mismo impulso fiscal rinde la mitad.",
+                  cadena=["↓c", "↑ filtración por ahorro en cada ronda", "la serie muere antes", "↓k"]),
         Escenario("con_impuestos", "se introduce una tasa impositiva t = 0.2",
                   {"t": 0.2},
                   "el fisco es un estabilizador automático: filtra ingreso en cada ronda "
-                  "y amortigua el ciclo (k: 5 → 2.8)."),
+                  "y amortigua el ciclo (k: 5 → 2.8).",
+                  cadena=["t > 0", "el fisco filtra ingreso en cada ronda", "ĉ = c(1−t) menor",
+                          "↓k", "estabilizador automático"]),
     ],
     verificaciones=[
         Verificacion("suma por rondas = fórmula cerrada", _v_suma),

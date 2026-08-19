@@ -117,6 +117,7 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta="¿Cómo y cuán rápido vuelve la economía al potencial tras un impulso de demanda?",
         contexto=("La síntesis neoclásica prometía que 'a largo plazo' la economía "
                   "vuelve sola al potencial — pero ¿cómo y cuán rápido? Este modelo "
                   "muestra el mecanismo: cada período con brecha positiva sorprende "

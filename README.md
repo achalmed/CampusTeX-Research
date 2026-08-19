@@ -19,13 +19,15 @@ Dependencias: `numpy` + `matplotlib` (las de `pipeline/requirements.txt`).
 ```bash
 python3 main.py listar                        # qué hay implementado, por nivel
 python3 main.py ficha m05                     # la ficha pedagógica en terminal
-python3 main.py simular m05                   # resultados de equilibrio (base)
+python3 main.py experimento m10               # hipótesis → ejecutar → ✔/✘ → mecanismo
 python3 main.py simular m10 --escenario expansion_fiscal
-python3 main.py simular m04 --param c=0.9     # experimento manual
-python3 main.py reporte --todos               # informes MD + PNG → salidas/
+python3 main.py comparar m10 expansion_fiscal politica_mixta   # políticas lado a lado
+python3 main.py sensibilidad m10 --param G --grafico           # ∂Y*/∂G + malla
+python3 main.py reporte --todos               # informes MD + láminas → salidas/
 python3 main.py verificar                     # validación numérica (debe dar 100%)
 python3 main.py demo m10 --param G --valores 100,200,300   # PDF de sensibilidad
-python3 main.py interactivo m10               # sliders en vivo (requiere display)
+python3 main.py laboratorio m10               # ventana con selector de experimentos
+python3 main.py interactivo m10               # modo avanzado: sliders libres
 ```
 
 Un modelo se nombra por id curricular (`m10`), slug (`islm`) o archivo

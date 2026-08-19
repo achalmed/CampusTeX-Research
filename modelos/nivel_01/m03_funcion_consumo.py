@@ -87,6 +87,8 @@ MODELO = Modelo(
     curvas=_curvas,
     resultados=_resultados,
     ficha=Ficha(
+        pregunta=("¿De qué depende el consumo de los hogares y cuánto se re-gasta de "
+                  "cada sol adicional de ingreso?"),
         contexto=("En plena Gran Depresión, Keynes necesitaba explicar por qué la demanda "
                   "podía quedarse sistemáticamente corta. La pieza central fue una teoría "
                   "del consumo: los hogares gastan una parte estable de cada unidad "
@@ -141,11 +143,15 @@ MODELO = Modelo(
         Escenario("optimismo_autonomo", "el consumo autónomo sube de 100 a 150",
                   {"C0": 150.0},
                   "la recta se desplaza en paralelo hacia arriba: se consume más a "
-                  "CUALQUIER nivel de renta y la nivelación se aleja (750)."),
+                  "CUALQUIER nivel de renta y la nivelación se aleja (750).",
+                  cadena=["↑C0", "la recta de consumo sube en paralelo",
+                          "más consumo a toda renta", "nivelación S=0 más lejos"]),
         Escenario("prudencia", "la PMC cae de 0.80 a 0.70",
                   {"c": 0.70},
                   "la recta gira: menos pendiente, nivelación más cercana (333) — y en "
-                  "m04 significará un multiplicador mucho menor (5 → 3.3)."),
+                  "m04 significará un multiplicador mucho menor (5 → 3.3).",
+                  cadena=["↓c", "la recta gira (menos pendiente)", "↓ re-gasto marginal",
+                          "nivelación más cerca", "en m04: ↓k"]),
     ],
     verificaciones=[
         Verificacion("pendiente numérica = PMC", _v_pendiente),
