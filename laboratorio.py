@@ -138,6 +138,7 @@ def _componer(fig, modelo, esc):
     graficos._dibujar(ax_g, modelo, params1)
     if esc:
         graficos.marcar_transicion(ax_g, modelo, params0, params1)
+    ax_g.set_title("")            # la cabecera ya nombra al modelo (evita choque)
 
     # ── zona C: resultados (tabla Δ) ────────────────────────────────────────
     ax_r = fig.add_subplot(gs[0, 1])
