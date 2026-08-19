@@ -6,11 +6,12 @@ limitaciones → evolución), simulación de escenarios con lectura económica y
 verificación numérica de sus teoremas. Diseño y currículo completo (115
 modelos, 12 niveles): [docs/LABORATORIO_MACRO.md](../docs/LABORATORIO_MACRO.md).
 
-**Estado**: niveles 1-6 completos (m01-m42) — 42 modelos, 160 verificaciones
-numéricas. El nivel 6 monta el régimen monetario moderno completo: teoría
-cuantitativa → neutralidad dinámica → señoreaje (Laffer de Cagan) →
-multiplicador bancario → regla de Taylor → corredor de tasas → metas de
-inflación → credibilidad (Barro-Gordon) → expectativas racionales. Incluye modelos dinámicos (m14, m16, m25, m27-m33), estocástico con
+**Estado**: niveles 1-7 completos (m01-m50) — 50 modelos, 193 verificaciones
+numéricas. El nivel 7 abre la economía: balanza de pagos → cuenta corriente
+(gemelos) → tipos de cambio nominal y real (el "hámster" verificado) → PPP →
+UIP (la FED deprecia HOY) → **Mundell-Fleming** (4 teoremas de eficacia
+exactos según el régimen) → el trilema con su reloj T* = RIN0/fuga. Es el
+último peldaño teórico antes del laboratorio del Perú (nivel 12). Incluye modelos dinámicos (m14, m16, m25, m27-m33), estocástico con
 semilla reproducible (m17), regímenes endógenos (m12, m31 con histéresis y big
 push), el aparato AD-AS con la demanda derivada del IS-LM (m20-m25) y el bloque
 completo de crecimiento (Solow → regla de oro → progreso técnico → convergencia
