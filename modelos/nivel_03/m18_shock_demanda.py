@@ -29,11 +29,11 @@ def _curvas(p):
     sras = p["Pe"] + p["lam"] * (Y - p["Ystar"])
     (Y0, P0), (Y1, P1) = _eq(p, 0.0), _eq(p, p["dA"])
     return {"lineas": {"AD base": (Y, ad0, config.AZUL2),
-                       "AD con shock (dA)": (Y, ad1, config.ROJO),
+                       "AD con shock ($dA$)": (Y, ad1, config.ROJO),
                        "SRAS": (Y, sras, config.VERDE)},
-            "puntos": [(Y0, P0, f"antes ({Y0:,.0f}, {P0:.2f})"),
-                       (Y1, P1, f"después ({Y1:,.0f}, {P1:.2f})")],
-            "anotacion": (f"ΔY = {Y1 - Y0:+.1f}, ΔP = {P1 - P0:+.2f}\n"
+            "puntos": [(Y0, P0, f"antes $({Y0:,.0f},\\,{P0:.2f})$"),
+                       (Y1, P1, f"después $({Y1:,.0f},\\,{P1:.2f})$")],
+            "anotacion": (f"$\\Delta Y = {Y1 - Y0:+.1f}$,  $\\Delta P = {P1 - P0:+.2f}$\n"
                           "misma dirección: firma del shock de DEMANDA")}
 
 
@@ -80,7 +80,7 @@ def _v_reparto():
 MODELO = Modelo(
     id="m18", nivel=3,
     nombre="Shock de demanda agregada",
-    xlabel="Producto (Y)", ylabel="Nivel de precios (P)",
+    xlabel="Producto ($Y$)", ylabel="Nivel de precios ($P$)",
     parametros=[
         Parametro("dA", _P0["dA"], -120, 120, 10, "Shock de demanda dA"),
         Parametro("lam", _P0["lam"], 0.0, 0.06, 0.005, "Pendiente de la SRAS (λ)"),

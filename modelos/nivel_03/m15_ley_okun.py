@@ -22,13 +22,15 @@ def _du(g, p):
 def _curvas(p):
     g = np.linspace(-4, 8, 200)
     du = _du(g, p)
-    return {"lineas": {"Δu = −β(g − g*)": (g, du, config.AZUL2),
-                       "Δu = 0": (g, np.zeros_like(g), config.GRIS)},
-            "puntos": [(p["g_pot"], 0.0, f"g* = {p['g_pot']:.1f}%"),
+    return {"lineas": {"$\\Delta u = -\\beta\\,(g - g^*)$": (g, du, config.AZUL2),
+                       "$\\Delta u = 0$": (g, np.zeros_like(g), config.GRIS)},
+            "puntos": [(p["g_pot"], 0.0, f"$g^* = {p['g_pot']:.1f}\\%$"),
                        (p["g_actual"], _du(p["g_actual"], p), "situación elegida")],
-            "anotacion": (f"con g = {p['g_actual']:.1f}%: Δu = {_du(p['g_actual'], p):+.2f} pp/año\n"
-                          f"u pasaría de {p['u0']:.1f}% a "
-                          f"{p['u0'] + p['anios'] * _du(p['g_actual'], p):.1f}% en {p['anios']:.0f} años")}
+            "anotacion": (f"con $g = {p['g_actual']:.1f}\\%$: $\\Delta u = "
+                          f"{_du(p['g_actual'], p):+.2f}$ pp/año\n"
+                          f"$u$ pasaría de ${p['u0']:.1f}\\%$ a "
+                          f"${p['u0'] + p['anios'] * _du(p['g_actual'], p):.1f}\\%$ "
+                          f"en {p['anios']:.0f} años")}
 
 
 def _resultados(p):
@@ -62,7 +64,7 @@ def _v_proyeccion():
 MODELO = Modelo(
     id="m15", nivel=3,
     nombre="Ley de Okun",
-    xlabel="Crecimiento del PIB g (%)", ylabel="Variación del desempleo Δu (pp/año)",
+    xlabel="Crecimiento del PIB $g$ (%)", ylabel="Variación del desempleo $\\Delta u$ (pp/año)",
     parametros=[
         Parametro("g_actual", _P0["g_actual"], -4.0, 8.0, 0.5, "Crecimiento efectivo g"),
         Parametro("beta", _P0["beta"], 0.1, 1.0, 0.05, "Coeficiente de Okun β"),

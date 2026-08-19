@@ -24,14 +24,14 @@ def _curvas(p):
     Ya, Yd_ = _equilibrio(C0a, p), _equilibrio(C0d, p)
     Y = np.linspace(0, max(Ya, Yd_) * 1.25, 300)
     da = lambda C0: C0 + p["c"] * (Y - p["T"]) + p["I"] + p["G"]
-    return {"lineas": {"DA antes": (Y, da(C0a), config.AZUL2),
-                       "DA después (↑ahorro deseado)": (Y, da(C0d), config.ROJO),
-                       "recta de 45° (DA = Y)": (Y, Y, config.GRIS)},
-            "puntos": [(Ya, Ya, f"antes: Y*={Ya:,.0f}"),
-                       (Yd_, Yd_, f"después: Y*={Yd_:,.0f}")],
-            "anotacion": (f"ΔY = {Yd_ - Ya:,.1f} = −k·ΔC0\n"
-                          f"ahorro de equilibrio: S* = I + G − T = "
-                          f"{p['I'] + p['G'] - p['T']:,.1f} (no cambia)")}
+    return {"lineas": {"$DA$ antes": (Y, da(C0a), config.AZUL2),
+                       "$DA$ después (↑ ahorro deseado)": (Y, da(C0d), config.ROJO),
+                       "recta de 45° ($DA = Y$)": (Y, Y, config.GRIS)},
+            "puntos": [(Ya, Ya, f"antes: $Y^*{{=}}{Ya:,.0f}$"),
+                       (Yd_, Yd_, f"después: $Y^*{{=}}{Yd_:,.0f}$")],
+            "anotacion": (f"$\\Delta Y = {Yd_ - Ya:,.1f} = -k\\,\\Delta C_0$\n"
+                          f"ahorro de equilibrio: $S^* = I + G - T = "
+                          f"{p['I'] + p['G'] - p['T']:,.1f}$ (no cambia)")}
 
 
 def _resultados(p):
@@ -72,7 +72,7 @@ def _v_caida():
 MODELO = Modelo(
     id="m05", nivel=1,
     nombre="Paradoja del ahorro",
-    xlabel="Producto (Y)", ylabel="Demanda agregada (DA)",
+    xlabel="Producto ($Y$)", ylabel="Demanda agregada ($DA$)",
     parametros=[
         Parametro("C0", _P0["C0"], 50, 300, 10, "Consumo autónomo inicial C0"),
         Parametro("dC0", _P0["dC0"], 0, 120, 5, "Aumento del ahorro deseado (caída de C0)"),

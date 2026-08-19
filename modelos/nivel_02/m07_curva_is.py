@@ -26,9 +26,9 @@ def _curvas(p):
     k = 1 / (1 - p["c1"])
     dY = k * p["dG"] - p["c1"] * k * p["dT"] + k * p["dI0"]
     return {"lineas": {"IS base": (Y, base, config.AZUL2),
-                       "IS con shock (dG, dT, dI0)": (Y, alt, config.ROJO)},
-            "anotacion": (f"pendiente = −(1−c1)/b = {-(1 - p['c1']) / p['b']:.3f}\n"
-                          f"desplazamiento horizontal = {dY:,.1f}\n"
+                       "IS con shock ($dG,\\,dT,\\,dI_0$)": (Y, alt, config.ROJO)},
+            "anotacion": (f"pendiente $= -(1-c_1)/b = {-(1 - p['c1']) / p['b']:.3f}$\n"
+                          f"desplazamiento horizontal $= {dY:,.1f}$\n"
                           "sin LM no hay equilibrio: la IS es un lugar geométrico")}
 
 
@@ -81,7 +81,7 @@ def _v_es_equilibrio():
 MODELO = Modelo(
     id="m07", nivel=2,
     nombre="Curva IS",
-    xlabel="Producto (Y)", ylabel="Tasa de interés (r)",
+    xlabel="Producto ($Y$)", ylabel="Tasa de interés ($r$)",
     parametros=[
         Parametro("dG", _P0["dG"], -150, 150, 10, "Shock de gasto dG (desplaza IS)"),
         Parametro("dT", _P0["dT"], -150, 150, 10, "Shock de impuestos dT"),

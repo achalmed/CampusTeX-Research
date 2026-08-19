@@ -29,13 +29,13 @@ def _simular(p):
 def _curvas(p):
     t, Ypot, Y, brecha = _simular(p)
     i_max = int(np.argmax(np.abs(brecha)))
-    return {"lineas": {"PIB potencial Y*": (t, Ypot, config.GRIS),
-                       "PIB observado Y": (t, Y, config.AZUL2)},
+    return {"lineas": {"PIB potencial $Y^*$": (t, Ypot, config.GRIS),
+                       "PIB observado $Y$": (t, Y, config.AZUL2)},
             "puntos": [(float(t[i_max]), float(Y[i_max]),
-                        f"brecha {brecha[i_max]:+.1f}%")],
-            "anotacion": (f"shock de {p['shock']:+.1f}% en t={int(p['t_shock'])}\n"
-                          f"velocidad de cierre λ = {p['lam']:.2f}\n"
-                          f"PIB-años perdidos = {np.sum(brecha):+.1f} puntos de Y*")}
+                        f"brecha ${brecha[i_max]:+.1f}\\%$")],
+            "anotacion": (f"shock de ${p['shock']:+.1f}\\%$ en $t={int(p['t_shock'])}$\n"
+                          f"velocidad de cierre $\\lambda = {p['lam']:.2f}$\n"
+                          f"PIB-años perdidos $= {np.sum(brecha):+.1f}$ puntos de $Y^*$")}
 
 
 def _resultados(p):
@@ -78,7 +78,7 @@ def _v_semivida():
 MODELO = Modelo(
     id="m16", nivel=3,
     nombre="Brecha del producto (output gap)",
-    xlabel="Período t", ylabel="PIB (índice, Y0=100)",
+    xlabel="Período $t$", ylabel="PIB (índice, $Y_0=100$)",
     parametros=[
         Parametro("shock", _P0["shock"], -12.0, 6.0, 0.5, "Tamaño del shock (% de Y*)"),
         Parametro("lam", _P0["lam"], 0.05, 0.8, 0.05, "Velocidad de cierre λ"),

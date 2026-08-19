@@ -27,13 +27,14 @@ def _simular(p):
 def _curvas(p):
     t, pi = _simular(p)
     pe = np.concatenate(([p["pi0"]], pi[:-1]))          # πe_t = π_{t−1}
-    return {"lineas": {"inflación π_t": (t, pi, config.AZUL2),
-                       "expectativas πe_t = π_{t−1}": (t, pe, config.ROJO),
-                       "π inicial": (t, np.full_like(pi, p["pi0"]), config.GRIS)},
+    return {"lineas": {"inflación $\\pi_t$": (t, pi, config.AZUL2),
+                       "expectativas $\\pi^e_t = \\pi_{t-1}$": (t, pe, config.ROJO),
+                       "$\\pi_0$ inicial": (t, np.full_like(pi, p["pi0"]), config.GRIS)},
             "equilibrio": (float(t[-1]), float(pi[-1])),
-            "anotacion": (f"u mantenida = {p['u_mantenida']:.1f}% (un = {p['un']:.1f}%)\n"
-                          f"Δπ por período = α(un−u) = {p['alpha'] * (p['un'] - p['u_mantenida']):+.2f} pp\n"
-                          f"π tras {int(p['T'])} períodos: {pi[-1]:.1f}%")}
+            "anotacion": (f"$u$ mantenida $= {p['u_mantenida']:.1f}\\%$  ($u_n = {p['un']:.1f}\\%$)\n"
+                          f"$\\Delta\\pi$ por período $= \\alpha(u_n-u) = "
+                          f"{p['alpha'] * (p['un'] - p['u_mantenida']):+.2f}$ pp\n"
+                          f"$\\pi$ tras {int(p['T'])} períodos: ${pi[-1]:.1f}\\%$")}
 
 
 def _resultados(p):
@@ -73,7 +74,7 @@ def _v_desinflacion_simetrica():
 MODELO = Modelo(
     id="m14", nivel=3,
     nombre="Phillips aumentada por expectativas",
-    xlabel="Período t", ylabel="Inflación (%)",
+    xlabel="Período $t$", ylabel="Inflación $\\pi$ (%)",
     parametros=[
         Parametro("u_mantenida", _P0["u_mantenida"], 3.0, 9.0, 0.25, "Desempleo que la política mantiene"),
         Parametro("un", _P0["un"], 4.0, 8.0, 0.5, "Tasa natural un"),

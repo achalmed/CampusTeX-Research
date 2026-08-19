@@ -28,12 +28,12 @@ def _curvas(p):
     sras0 = p["Pe"] + p["lam"] * (Y - p["Ystar"])
     sras1 = p["Pe"] + p["ds"] + p["lam"] * (Y - p["Ystar"])
     (Y0, P0), (Y1, P1) = _eq(p, 0.0, 0.0), _eq(p, p["ds"], p["dA"])
-    return {"lineas": {"AD (con respuesta dA)": (Y, ad, config.AZUL2),
+    return {"lineas": {"AD (con respuesta $dA$)": (Y, ad, config.AZUL2),
                        "SRAS base": (Y, sras0, config.VERDE),
-                       "SRAS con shock de costos (ds)": (Y, sras1, config.ROJO)},
-            "puntos": [(Y0, P0, f"antes ({Y0:,.0f}, {P0:.2f})"),
-                       (Y1, P1, f"después ({Y1:,.0f}, {P1:.2f})")],
-            "anotacion": (f"ΔY = {Y1 - Y0:+.1f}, ΔP = {P1 - P0:+.2f}\n"
+                       "SRAS con shock de costos ($ds$)": (Y, sras1, config.ROJO)},
+            "puntos": [(Y0, P0, f"antes $({Y0:,.0f},\\,{P0:.2f})$"),
+                       (Y1, P1, f"después $({Y1:,.0f},\\,{P1:.2f})$")],
+            "anotacion": (f"$\\Delta Y = {Y1 - Y0:+.1f}$,  $\\Delta P = {P1 - P0:+.2f}$\n"
                           "direcciones opuestas: ESTANFLACIÓN")}
 
 
@@ -82,7 +82,7 @@ def _v_resistencia():
 MODELO = Modelo(
     id="m19", nivel=3,
     nombre="Shock de oferta (estanflación)",
-    xlabel="Producto (Y)", ylabel="Nivel de precios (P)",
+    xlabel="Producto ($Y$)", ylabel="Nivel de precios ($P$)",
     parametros=[
         Parametro("ds", _P0["ds"], -0.6, 1.2, 0.1, "Shock de costos ds (petróleo, clima)"),
         Parametro("dA", _P0["dA"], -60, 60, 5, "Respuesta de demanda dA (política)"),

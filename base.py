@@ -29,6 +29,8 @@ import matplotlib.pyplot as plt
 
 import config
 
+config.aplicar_estilo()          # tipografía académica global (serif + mathtext STIX)
+
 
 @dataclass
 class Parametro:
@@ -82,8 +84,8 @@ class Modelo:
     nombre: str
     parametros: list                       # list[Parametro]
     curvas: object                         # fn(dict) -> dict (ver cabecera)
-    xlabel: str = "Producto (Y)"
-    ylabel: str = "Tasa de interés (r)"
+    xlabel: str = "Producto ($Y$)"
+    ylabel: str = "Tasa de interés ($r$)"
     notas: str = ""
     # --- capas del laboratorio (todas opcionales para compatibilidad) ---
     id: str = ""                           # posición curricular ("m03")
@@ -126,12 +128,12 @@ def fmt(v):
 
 
 def _simbolo(etiqueta):
-    """Símbolo económico del eje para anotar el equilibrio: 'Producto (Y)' → 'Y*='.
+    """Símbolo del eje para anotar el equilibrio: 'Producto ($Y$)' → '$Y^*{=}$'.
     Sin símbolo corto entre paréntesis, no se antepone nada (solo el número)."""
     if "(" in etiqueta and ")" in etiqueta:
-        s = etiqueta[etiqueta.find("(") + 1:etiqueta.find(")")]
+        s = etiqueta[etiqueta.find("(") + 1:etiqueta.find(")")].strip().strip("$")
         if 0 < len(s) <= 3 and s != "%":
-            return f"{s}*="
+            return f"${s}^*{{=}}$"
     return ""
 
 

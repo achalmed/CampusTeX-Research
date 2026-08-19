@@ -1,9 +1,11 @@
 # config.py — laboratorio de macroeconomía computacional (simuladores/).
 #
-# Todo lo ajustable vive aquí: rutas de salida, paleta y formato de figuras.
-# Las libs (base.py, reporte.py) no hardcodean nada de esto.
+# Todo lo ajustable vive aquí: rutas de salida, paleta, formato de figuras y
+# tipografía académica. Las libs (base.py, reporte.py) no hardcodean nada de esto.
 
 from pathlib import Path
+
+import matplotlib
 
 DIR_BASE = Path(__file__).resolve().parent
 DIR_MODELOS = DIR_BASE / "modelos"
@@ -19,3 +21,31 @@ VERDE = "#3A7D44"     # inyecciones / tercera serie
 
 DPI = 150                    # resolución de PNG en reportes
 TAMANO_FIGURA = (9.0, 5.5)   # una figura por escenario en el reporte
+
+# --- Tipografía académica (pedida por Edison, 2026-08-19) ---
+# mathtext + STIX: las cadenas $...$ de ejes, leyendas y anotaciones se
+# renderizan como matemática de libro SIN depender de una instalación LaTeX
+# (funciona headless y cubre π, Δ, ↑ …). Poner USAR_TEX_COMPLETO = True para
+# usar el LaTeX real del sistema (más lento; requiere TeX Live instalado).
+USAR_TEX_COMPLETO = False
+
+
+def aplicar_estilo():
+    """Aplica la identidad tipográfica del laboratorio a matplotlib (global)."""
+    matplotlib.rcParams.update({
+        "font.family": "serif",
+        "font.serif": ["STIXGeneral", "STIX Two Text", "DejaVu Serif"],
+        "mathtext.fontset": "stix",
+        "axes.unicode_minus": False,
+        "font.size": 11,
+        "axes.titlesize": 13,
+        "axes.labelsize": 11.5,
+        "legend.fontsize": 10,
+        "xtick.labelsize": 10,
+        "ytick.labelsize": 10,
+    })
+    if USAR_TEX_COMPLETO:
+        matplotlib.rcParams.update({
+            "text.usetex": True,
+            "text.latex.preamble": r"\usepackage{amsmath}\usepackage[utf8]{inputenc}",
+        })

@@ -31,10 +31,11 @@ def _curvas(p):
     t, Ypot, Y, brecha = _simular(p)
     sd_teo = p["sigma"] / np.sqrt(1 - p["rho"] ** 2)
     recesiones = int(np.sum((brecha[1:] < 0) & (brecha[:-1] >= 0)))
-    return {"lineas": {"PIB potencial Y*": (t, Ypot, config.GRIS),
-                       "PIB observado Y (shocks AR(1))": (t, Y, config.AZUL2)},
-            "anotacion": (f"ρ = {p['rho']:.2f}, σ = {p['sigma']:.2f}, semilla = {int(p['semilla'])}\n"
-                          f"sd teórica de la brecha = {sd_teo:.2f}%\n"
+    return {"lineas": {"PIB potencial $Y^*$": (t, Ypot, config.GRIS),
+                       "PIB observado $Y$ (shocks AR(1))": (t, Y, config.AZUL2)},
+            "anotacion": (f"$\\rho = {p['rho']:.2f}$,  $\\sigma = {p['sigma']:.2f}$,  "
+                          f"semilla $= {int(p['semilla'])}$\n"
+                          f"sd teórica $= \\sigma/\\sqrt{{1-\\rho^2}} = {sd_teo:.2f}\\%$\n"
                           f"episodios recesivos en la muestra: {recesiones}")}
 
 
@@ -83,7 +84,7 @@ def _v_estacionario():
 MODELO = Modelo(
     id="m17", nivel=3,
     nombre="Ciclo económico (impulso-propagación)",
-    xlabel="Período t", ylabel="PIB (índice, Y0=100)",
+    xlabel="Período $t$", ylabel="PIB (índice, $Y_0=100$)",
     parametros=[
         Parametro("rho", _P0["rho"], 0.0, 0.95, 0.05, "Persistencia ρ (propagación)"),
         Parametro("sigma", _P0["sigma"], 0.3, 4.0, 0.1, "Volatilidad de shocks σ (impulso)"),

@@ -29,13 +29,14 @@ def _efectos(p):
 
 def _curvas(p):
     e = _efectos(p)
-    cats = ["k·ΔG\n(nivel 1)", "ΔY efectivo\n(IS-LM)", "ΔI\n(expulsada)"]
+    cats = ["$k\\,\\Delta G$\n(nivel 1)", "$\\Delta Y$ efectivo\n(IS-LM)", "$\\Delta I$\n(expulsada)"]
     vals = [e["dY_simple"], e["dY"], e["dI"]]
     cols = [config.GRIS, config.AZUL2, config.ROJO]
     return {"barras": (cats, vals, cols),
-            "anotacion": (f"Δr = {e['dr']:+.2f} pp\n"
-                          f"grado de expulsión = {100 * e['grado']:.0f}%\n"
-                          f"identidad: ΔY = k·(ΔG+ΔI) = {e['k_simple'] * (p['dG'] + e['dI']):,.1f}")}
+            "anotacion": (f"$\\Delta r = {e['dr']:+.2f}$ pp\n"
+                          f"grado de expulsión $= {100 * e['grado']:.0f}\\%$\n"
+                          f"identidad: $\\Delta Y = k(\\Delta G+\\Delta I) = "
+                          f"{e['k_simple'] * (p['dG'] + e['dI']):,.1f}$")}
 
 
 def _resultados(p):

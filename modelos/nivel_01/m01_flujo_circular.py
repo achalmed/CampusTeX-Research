@@ -24,14 +24,14 @@ def _flujos(p):
 
 def _curvas(p):
     f = _flujos(p)
-    cats = ["S", "T", "M", "I", "G", "X"]
+    cats = ["$S$", "$T$", "$M$", "$I$", "$G$", "$X$"]
     vals = [f["S"], f["T"], f["M"], p["I"], p["G"], p["X"]]
     cols = [config.ROJO] * 3 + [config.VERDE] * 3
     filt = f["S"] + f["T"] + f["M"]
     return {"barras": (cats, vals, cols),
-            "anotacion": (f"Y* = {f['Y']:,.1f}\n"
-                          f"filtraciones (rojo) = {filt:,.1f}\n"
-                          f"inyecciones (verde) = {p['I'] + p['G'] + p['X']:,.1f}")}
+            "anotacion": (f"$Y^* = {f['Y']:,.1f}$\n"
+                          f"filtraciones $S{{+}}T{{+}}M$ = {filt:,.1f}\n"
+                          f"inyecciones $I{{+}}G{{+}}X$ = {p['I'] + p['G'] + p['X']:,.1f}")}
 
 
 def _resultados(p):

@@ -26,11 +26,11 @@ def _curvas(p):
     L = p["k"] * p["Y"] - p["h"] * r          # saldos demandados a cada tasa
     r_star = _r_eq(p)
     r_oferta = np.linspace(0, 12, 2)
-    return {"lineas": {"demanda L(Y,r) = kY − hr": (L, r, config.AZUL2),
-                       "oferta M/P (banco central)": (np.full(2, p["MP"]), r_oferta, config.ROJO)},
+    return {"lineas": {"demanda $L(Y,r) = kY - hr$": (L, r, config.AZUL2),
+                       "oferta $M/P$ (banco central)": (np.full(2, p["MP"]), r_oferta, config.ROJO)},
             "equilibrio": (p["MP"], r_star),
-            "anotacion": (f"r* = (kY − M/P)/h = {r_star:.2f}%\n"
-                          f"demanda por transacciones kY = {p['k'] * p['Y']:,.1f}")}
+            "anotacion": (f"$r^* = (kY - M/P)/h = {r_star:.2f}\\%$\n"
+                          f"demanda por transacciones $kY = {p['k'] * p['Y']:,.1f}$")}
 
 
 def _resultados(p):
@@ -65,7 +65,7 @@ def _v_mas_actividad_sube_r():
 MODELO = Modelo(
     id="m08", nivel=2,
     nombre="Mercado monetario (preferencia por la liquidez)",
-    xlabel="Saldos reales (M/P, L)", ylabel="Tasa de interés (r)",
+    xlabel="Saldos reales ($M/P$, $L$)", ylabel="Tasa de interés ($r$)",
     parametros=[
         Parametro("MP", _P0["MP"], 100, 600, 10, "Oferta real de dinero M/P"),
         Parametro("Y", _P0["Y"], 300, 1100, 25, "Ingreso Y (exógeno aquí)"),

@@ -20,12 +20,13 @@ def _curvas(p):
     C = C0 + c * Yd
     S = Yd - C
     niv = C0 / (1 - c)
-    return {"lineas": {"C = C0 + c·Yd": (Yd, C, config.AZUL2),
-                       "recta de 45° (C = Yd)": (Yd, Yd, config.GRIS),
-                       "S = Yd − C": (Yd, S, config.ROJO)},
+    return {"lineas": {"$C = C_0 + c\\,Y_d$": (Yd, C, config.AZUL2),
+                       "recta de 45° ($C = Y_d$)": (Yd, Yd, config.GRIS),
+                       "$S = Y_d - C$": (Yd, S, config.ROJO)},
             "equilibrio": (niv, niv),
-            "puntos": [(niv, 0.0, "S = 0")],
-            "anotacion": f"nivelación: Yd = C0/(1−c) = {niv:,.1f}\nPMC = {c:.2f}, PMS = {1 - c:.2f}"}
+            "puntos": [(niv, 0.0, "$S = 0$")],
+            "anotacion": (f"nivelación: $Y_d = C_0/(1-c) = {niv:,.1f}$\n"
+                          f"$PMC = {c:.2f}$,  $PMS = {1 - c:.2f}$")}
 
 
 def _resultados(p):
@@ -77,7 +78,7 @@ def _v_nivelacion():
 MODELO = Modelo(
     id="m03", nivel=1,
     nombre="Función de consumo keynesiana",
-    xlabel="Renta disponible (Yd)", ylabel="Consumo / Ahorro",
+    xlabel="Renta disponible ($Y_d$)", ylabel="Consumo / Ahorro",
     parametros=[
         Parametro("C0", _P0["C0"], 0, 300, 10, "Consumo autónomo C0"),
         Parametro("c", _P0["c"], 0.1, 0.95, 0.05, "Propensión marginal a consumir c"),

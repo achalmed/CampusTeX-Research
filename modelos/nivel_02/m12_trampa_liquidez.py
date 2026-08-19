@@ -38,12 +38,12 @@ def _curvas(p):
     lm1 = np.maximum(0.0, (p["k"] * Y - (p["MP"] + p["dMP"])) / p["h"])
     Ye, re, trampa = _equilibrio(p)
     return {"lineas": {"IS": (Y, r_is, config.AZUL2),
-                       "LM (piso r=0)": (Y, lm0, config.ROJO),
-                       "LM con más dinero (dMP)": (Y, lm1, config.VERDE)},
+                       "LM (piso $r=0$)": (Y, lm0, config.ROJO),
+                       "LM con más dinero ($dMP$)": (Y, lm1, config.VERDE)},
             "equilibrio": (Ye, re),
             "anotacion": (f"{'EN LA TRAMPA: la IS corta el tramo plano' if trampa else 'fuera de la trampa'}\n"
-                          f"Y* = {Ye:,.1f}, r* = {re:.2f}%\n"
-                          f"el dinero extra (dMP={p['dMP']:.0f}) {'NO mueve Y' if trampa else 'sí opera'}")}
+                          f"$Y^* = {Ye:,.1f}$,  $r^* = {re:.2f}\\%$\n"
+                          f"el dinero extra ($dMP={p['dMP']:.0f}$) {'NO mueve Y' if trampa else 'sí opera'}")}
 
 
 def _resultados(p):
@@ -88,7 +88,7 @@ def _v_salida_fiscal():
 MODELO = Modelo(
     id="m12", nivel=2,
     nombre="Trampa de liquidez",
-    xlabel="Producto (Y)", ylabel="Tasa de interés (r)",
+    xlabel="Producto ($Y$)", ylabel="Tasa de interés ($r$)",
     parametros=[
         Parametro("dMP", _P0["dMP"], 0, 300, 10, "Dinero extra dMP (para ver su impotencia)"),
         Parametro("G", _P0["G"], 50, 350, 10, "Gasto público G"),

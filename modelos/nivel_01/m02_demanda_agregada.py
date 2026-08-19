@@ -22,11 +22,12 @@ def _y(p):
 
 def _curvas(p):
     Y = _y(p)
-    cats = ["C", "I", "G", "X", "−M", "PIB"]
+    cats = ["$C$", "$I$", "$G$", "$X$", "$-M$", "PIB"]
     vals = [p["C"], p["I"], p["G"], p["X"], -p["M"], Y]
     cols = [config.AZUL2] * 4 + [config.ROJO, config.DORADO]
     return {"barras": (cats, vals, cols),
-            "anotacion": f"Y = C+I+G+X−M = {Y:,.1f}\nXN = {p['X'] - p['M']:,.1f}"}
+            "anotacion": (f"$Y = C+I+G+X-M = {Y:,.1f}$\n"
+                          f"$XN = X - M = {p['X'] - p['M']:,.1f}$")}
 
 
 def _resultados(p):

@@ -21,9 +21,9 @@ def _r_lm(Y, MP, p):
 def _curvas(p):
     Y = np.linspace(200, 1200, 300)
     return {"lineas": {"LM base": (Y, _r_lm(Y, p["MP"], p), config.ROJO),
-                       "LM con dinero extra (dMP)": (Y, _r_lm(Y, p["MP"] + p["dMP"], p), config.VERDE)},
-            "anotacion": (f"pendiente = k/h = {p['k'] / p['h']:.3f}\n"
-                          f"desplazamiento horizontal = dMP/k = {p['dMP'] / p['k']:,.1f}\n"
+                       "LM con dinero extra ($dMP$)": (Y, _r_lm(Y, p["MP"] + p["dMP"], p), config.VERDE)},
+            "anotacion": (f"pendiente $= k/h = {p['k'] / p['h']:.3f}$\n"
+                          f"desplazamiento horizontal $= dMP/k = {p['dMP'] / p['k']:,.1f}$\n"
                           "sin IS no hay equilibrio: la LM es un lugar geométrico")}
 
 
@@ -61,7 +61,7 @@ def _v_es_equilibrio():
 MODELO = Modelo(
     id="m09", nivel=2,
     nombre="Curva LM",
-    xlabel="Producto (Y)", ylabel="Tasa de interés (r)",
+    xlabel="Producto ($Y$)", ylabel="Tasa de interés ($r$)",
     parametros=[
         Parametro("dMP", _P0["dMP"], -150, 150, 10, "Inyección de dinero dMP (desplaza LM)"),
         Parametro("MP", _P0["MP"], 100, 600, 10, "Oferta real de dinero base M/P"),

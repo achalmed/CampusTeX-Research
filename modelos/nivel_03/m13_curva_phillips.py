@@ -21,12 +21,12 @@ def _pi(u, p):
 def _curvas(p):
     u = np.linspace(2, 12, 200)
     pi = _pi(u, p)
-    return {"lineas": {"curva de Phillips": (u, pi, config.AZUL2),
+    return {"lineas": {"$\\pi = \\pi^e - \\alpha\\,(u - u_n)$": (u, pi, config.AZUL2),
                        "inflación cero": (u, np.zeros_like(u), config.GRIS)},
-            "puntos": [(p["un"], p["pe"], f"tasa natural un={p['un']:.0f}%"),
+            "puntos": [(p["un"], p["pe"], f"tasa natural $u_n={p['un']:.0f}\\%$"),
                        (p["u_actual"], _pi(p["u_actual"], p), "posición elegida")],
-            "anotacion": (f"π en u={p['u_actual']:.1f}%: {_pi(p['u_actual'], p):+.1f}%\n"
-                          f"'precio' de −1 pp de desempleo: +{p['alpha']:.1f} pp de inflación")}
+            "anotacion": (f"$\\pi$ en $u={p['u_actual']:.1f}\\%$: ${_pi(p['u_actual'], p):+.1f}\\%$\n"
+                          f"'precio' de $-1$ pp de desempleo: $+{p['alpha']:.1f}$ pp de inflación")}
 
 
 def _resultados(p):
@@ -57,7 +57,7 @@ def _v_menu():
 MODELO = Modelo(
     id="m13", nivel=3,
     nombre="Curva de Phillips (original)",
-    xlabel="Desempleo u (%)", ylabel="Inflación π (%)",
+    xlabel="Desempleo $u$ (%)", ylabel="Inflación $\\pi$ (%)",
     parametros=[
         Parametro("u_actual", _P0["u_actual"], 2.0, 11.0, 0.5, "Desempleo elegido por la política"),
         Parametro("alpha", _P0["alpha"], 0.3, 3.0, 0.1, "Sensibilidad α (pendiente)"),

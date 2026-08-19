@@ -23,12 +23,12 @@ def _serie(p):
 def _curvas(p):
     n, aporte, acum, k = _serie(p)
     tope = np.full_like(n, k * p["dG"], dtype=float)
-    return {"lineas": {"ΔY acumulado": (n, acum, config.AZUL2),
-                       "gasto de la ronda n": (n, aporte, config.ROJO),
-                       "límite k·ΔG": (n, tope, config.GRIS)},
+    return {"lineas": {"$\\Delta Y$ acumulado": (n, acum, config.AZUL2),
+                       "gasto de la ronda $n$": (n, aporte, config.ROJO),
+                       "límite $k\\,\\Delta G$": (n, tope, config.GRIS)},
             "equilibrio": (float(n[-1]), float(acum[-1])),
-            "anotacion": (f"k = 1/(1−c(1−t)) = {k:.2f}\n"
-                          f"ΔY total teórico = {k * p['dG']:,.1f}\n"
+            "anotacion": (f"$k = 1/(1-c(1-t)) = {k:.2f}$\n"
+                          f"$\\Delta Y$ total teórico = {k * p['dG']:,.1f}\n"
                           f"alcanzado tras {int(n[-1])} rondas: {acum[-1]:,.1f}")}
 
 
@@ -75,7 +75,7 @@ def _v_impuestos():
 MODELO = Modelo(
     id="m04", nivel=1,
     nombre="Multiplicador keynesiano",
-    xlabel="Ronda de gasto (n)", ylabel="Variación del producto (ΔY)",
+    xlabel="Ronda de gasto ($n$)", ylabel="Variación del producto ($\\Delta Y$)",
     parametros=[
         Parametro("dG", _P0["dG"], 10, 300, 10, "Impulso inicial de gasto ΔG"),
         Parametro("c", _P0["c"], 0.1, 0.95, 0.05, "Propensión marginal a consumir c"),

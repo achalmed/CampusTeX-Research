@@ -23,11 +23,11 @@ def _curvas(p):
     Y = np.linspace(0, 1200, 300)
     DA = p["c0"] + p["c1"] * (Y - p["T"]) + p["I0"] - p["b"] * p["r"] + p["G"]
     Ye = _y_eq(p)
-    return {"lineas": {"DA(Y; r dado)": (Y, DA, config.AZUL2),
-                       "recta de 45° (DA = Y)": (Y, Y, config.GRIS)},
+    return {"lineas": {"$DA(Y;\\,\\bar{r})$": (Y, DA, config.AZUL2),
+                       "recta de 45° ($DA = Y$)": (Y, Y, config.GRIS)},
             "equilibrio": (Ye, Ye),
-            "anotacion": (f"r = {p['r']:.1f}% → I = {p['I0'] - p['b'] * p['r']:,.1f}\n"
-                          f"Y*(r) = {Ye:,.1f}")}
+            "anotacion": (f"$r = {p['r']:.1f}\\%$ → $I = {p['I0'] - p['b'] * p['r']:,.1f}$\n"
+                          f"$Y^*(r) = {Ye:,.1f}$")}
 
 
 def _resultados(p):
@@ -69,7 +69,7 @@ def _v_inversion_decreciente():
 MODELO = Modelo(
     id="m06", nivel=2,
     nombre="Mercado de bienes (inversión sensible a la tasa)",
-    xlabel="Producto (Y)", ylabel="Demanda agregada (DA)",
+    xlabel="Producto ($Y$)", ylabel="Demanda agregada ($DA$)",
     parametros=[
         Parametro("r", _P0["r"], 0.0, 7.0, 0.5, "Tasa de interés r (exógena aquí)"),
         Parametro("G", _P0["G"], 0, 500, 10, "Gasto público G"),
