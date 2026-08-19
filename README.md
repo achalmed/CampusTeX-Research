@@ -6,9 +6,11 @@ limitaciones → evolución), simulación de escenarios con lectura económica y
 verificación numérica de sus teoremas. Diseño y currículo completo (115
 modelos, 12 niveles): [docs/LABORATORIO_MACRO.md](../docs/LABORATORIO_MACRO.md).
 
-**Estado**: niveles 1-3 completos (m01-m19) — 19 modelos, 68 verificaciones
-numéricas. Incluye los primeros modelos dinámicos (m14, m16), el primer
-estocástico con semilla reproducible (m17) y el primer régimen endógeno (m12).
+**Estado**: niveles 1-4 completos (m01-m25) — 25 modelos, 92 verificaciones
+numéricas. Incluye modelos dinámicos (m14, m16, m25), estocástico con semilla
+reproducible (m17), régimen endógeno (m12) y el aparato AD-AS con la demanda
+derivada del IS-LM (m20-m25). Figuras con tipografía académica (serif +
+matemática STIX): ejes, leyendas y anotaciones en notación LaTeX.
 
 Dependencias: `numpy` + `matplotlib` (las de `pipeline/requirements.txt`).
 
