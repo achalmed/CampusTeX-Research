@@ -9,7 +9,7 @@
 
 import numpy as np
 import matplotlib
-import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 
 import base
 import config
@@ -185,9 +185,9 @@ def marcar_transicion(ax, modelo, params_antes, params_despues):
 
 
 def figura(modelo, params=None, titulo=None):
-    """Figura suelta (headless) del modelo con `params`; para reporte.py."""
-    matplotlib.use("Agg")
-    fig, ax = plt.subplots(figsize=config.TAMANO_FIGURA)
+    """Figura suelta (sin pyplot: no toca el backend ni las ventanas abiertas)."""
+    fig = Figure(figsize=config.TAMANO_FIGURA)
+    ax = fig.add_subplot()
     _dibujar(ax, modelo, params or modelo.dict_params())
     if titulo:
         ax.set_title(f"{modelo.nombre} — {titulo}", color=config.AZUL,
@@ -198,8 +198,8 @@ def figura(modelo, params=None, titulo=None):
 
 def figura_sensibilidad(modelo, sens):
     """Gráfico del análisis de sensibilidad (base.sensibilidad) — magnitud vs parámetro."""
-    matplotlib.use("Agg")
-    fig, ax = plt.subplots(figsize=(7.5, 4.8))
+    fig = Figure(figsize=(7.5, 4.8))
+    ax = fig.add_subplot()
     xs = [f[0] for f in sens["filas"]]; ys = [f[1] for f in sens["filas"]]
     ax.plot(xs, ys, "o-", color=config.AZUL2, lw=2, ms=5)
     ax.axvline(sens["base"], color=config.GRIS, lw=1, ls="--")
@@ -217,11 +217,10 @@ def figura_sensibilidad(modelo, sens):
 def demo(modelo, parametro, valores, ruta):
     """Headless: renderiza el modelo a varios valores de `parametro` en una
     grilla y guarda un PDF (demuestra el efecto comparativo de ese parámetro)."""
-    matplotlib.use("Agg")
     ncols = min(3, len(valores))
     nrows = (len(valores) + ncols - 1) // ncols
-    fig, axes = plt.subplots(nrows, ncols, figsize=(5.5 * ncols, 4 * nrows),
-                             squeeze=False)
+    fig = Figure(figsize=(5.5 * ncols, 4 * nrows))
+    axes = fig.subplots(nrows, ncols, squeeze=False)
     base_p = modelo.dict_params()
     for k, v in enumerate(valores):
         ax = axes[k // ncols][k % ncols]
@@ -234,5 +233,5 @@ def demo(modelo, parametro, valores, ruta):
     fig.suptitle(f"{modelo.nombre} — sensibilidad a {parametro}",
                  color=config.AZUL, fontweight="bold", fontsize=13)
     fig.tight_layout(rect=[0, 0, 1, 0.97])
-    fig.savefig(ruta, bbox_inches="tight"); plt.close(fig)
+    fig.savefig(ruta, bbox_inches="tight")
     return ruta

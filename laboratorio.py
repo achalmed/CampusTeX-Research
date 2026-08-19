@@ -79,8 +79,8 @@ def _panel_texto(ax, titulo, cuerpo, tam=9.5):
     ax.axis("off")
     ax.text(0.0, 1.0, titulo, transform=ax.transAxes, va="top", ha="left",
             fontsize=10.5, color=config.AZUL, fontweight="bold")
-    ax.text(0.0, 0.80, cuerpo, transform=ax.transAxes, va="top", ha="left",
-            fontsize=tam, color="#222222", linespacing=1.55)
+    return ax.text(0.0, 0.80, cuerpo, transform=ax.transAxes, va="top", ha="left",
+                   fontsize=tam, color="#222222", linespacing=1.55)
 
 
 def _tabla_resultados(ax, filas):
@@ -125,7 +125,7 @@ def _componer(fig, modelo, esc):
     if esc:
         cambios = ", ".join(f"{k}: {base.fmt(modelo.parametro(k).valor)} → {base.fmt(v)}"
                             for k, v in esc.cambios.items())
-        fig.text(0.035, y, f"🧪 Experimento «{esc.nombre}»: {esc.descripcion}  ({cambios})",
+        fig.text(0.035, y, f"Experimento «{esc.nombre}»: {esc.descripcion}  ({cambios})",
                  fontsize=10.5, color=config.ROJO)
 
     gs = fig.add_gridspec(nrows=2, ncols=2, left=0.055, right=0.97,
@@ -166,12 +166,12 @@ def _componer(fig, modelo, esc):
 
 
 def lamina(modelo, esc, ruta):
-    """Hoja de experimento (headless): las 5 zonas en un PNG para el reporte."""
-    matplotlib.use("Agg")
-    fig = plt.figure(figsize=(13.0, 8.6))
+    """Hoja de experimento: las 5 zonas en un PNG (sin pyplot: no toca el
+    backend, se puede invocar desde la app interactiva o desde la CLI)."""
+    from matplotlib.figure import Figure
+    fig = Figure(figsize=(13.0, 8.6))
     _componer(fig, modelo, esc)
     fig.savefig(ruta, dpi=config.DPI)
-    plt.close(fig)
     return ruta
 
 

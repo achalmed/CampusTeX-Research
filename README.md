@@ -19,18 +19,25 @@ Dependencias: `numpy` + `matplotlib` (las de `pipeline/requirements.txt`).
 ## Uso
 
 ```bash
-python3 main.py listar                        # qué hay implementado, por nivel
-python3 main.py ficha m05                     # la ficha pedagógica en terminal
-python3 main.py experimento m10               # hipótesis → ejecutar → ✔/✘ → mecanismo
-python3 main.py simular m10 --escenario expansion_fiscal
-python3 main.py comparar m10 expansion_fiscal politica_mixta   # políticas lado a lado
-python3 main.py sensibilidad m10 --param G --grafico           # ∂Y*/∂G + malla
-python3 main.py reporte --todos               # informes MD + láminas → salidas/
-python3 main.py verificar                     # validación numérica (debe dar 100%)
-python3 main.py demo m10 --param G --valores 100,200,300   # PDF de sensibilidad
-python3 main.py laboratorio m10               # ventana con selector de experimentos
-python3 main.py interactivo m10               # modo avanzado: sliders libres
+python3 main.py        # ← abre el Laboratorio Interactivo (LA aplicación)
 ```
+
+Dentro de la app: eliges un modelo del currículo y lo recorres paso a paso
+(pregunta → contexto → supuestos → cada ecuación → construcción del gráfico
+curva a curva → equilibrio → experimentos con mecanismo → **experimentación
+libre en vivo** → comparación de políticas → limitaciones → siguiente modelo).
+Teclado: ↑/↓/Enter en el menú; ←/→ para avanzar; M vuelve al menú.
+
+<details><summary>Herramientas técnicas por terminal (automatización/CI)</summary>
+
+```bash
+python3 main.py verificar                     # control de calidad (debe dar 100%)
+python3 main.py reporte --todos               # regenera informes MD + láminas
+python3 main.py ficha m05 · simular m10 --escenario expansion_fiscal ·
+        experimento m10 · comparar m10 esc1 esc2 · sensibilidad m10 --param G ·
+        demo m10 --param G --valores 100,200,300 · laboratorio m10 · interactivo m10
+```
+</details>
 
 Un modelo se nombra por id curricular (`m10`), slug (`islm`) o archivo
 (`m10_islm`). `salidas/` es regenerable y no se versiona.

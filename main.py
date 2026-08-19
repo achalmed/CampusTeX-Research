@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 # main.py — Laboratorio de Economía Computacional (datafw/simuladores).
 #
-#   listar                                modelos implementados, por nivel del currículo
-#   ficha <modelo>                        ficha pedagógica en terminal
-#   experimento <modelo> [--escenario E]  MODO LABORATORIO: hipótesis → ejecutar →
-#                                         verificar predicciones → mecanismo → ¿por qué?
-#   simular <modelo> [--escenario E] [--param k=v ...]
-#                                         resultados de equilibrio; tabla base vs cambio
-#   comparar <modelo> esc1 [esc2 ...]     comparación de políticas lado a lado
-#   sensibilidad <modelo> --param P [--magnitud M] [--grafico]
-#                                         ∂magnitud/∂parámetro + tabla en malla
-#   demo <modelo> --param G --valores 100,200,300 [--salida f.pdf]
-#   reporte [<modelo>|--todos]            informe MD + láminas de experimento en salidas/
-#   verificar [<modelo>]                  chequeos numéricos (identidades, convergencias)
-#   laboratorio <modelo>                  ventana: selector de experimentos (requiere display)
-#   interactivo <modelo>                  modo avanzado: sliders libres (requiere display)
+# USO NORMAL (la aplicación única):
+#
+#   python3 main.py            ← abre el Laboratorio Interactivo de Economía
+#
+#   Todo vive dentro: elegir modelo, recorrido pedagógico progresivo
+#   (pregunta → construcción → equilibrio → experimentos → interpretación),
+#   experimentación libre con actualización en vivo, comparaciones y láminas.
+#
+# HERRAMIENTAS TÉCNICAS (automatización/desarrollo; el usuario final no las
+# necesita):
+#   verificar [<modelo>]     control de calidad: chequeos numéricos (100% exigido)
+#   reporte [<modelo>|--todos]  regenera informes MD + láminas en salidas/
+#   listar · ficha · simular · experimento · comparar · sensibilidad · demo ·
+#   laboratorio · interactivo   equivalentes por terminal de lo que la app
+#                               hace por dentro (útiles para scripts y CI)
 #
 # <modelo> acepta id curricular (m03), slug (funcion_consumo) o archivo
 # (m03_funcion_consumo). Currículo completo: docs/LABORATORIO_MACRO.md.
@@ -322,11 +323,21 @@ def cmd_interactivo(a):
     return 0
 
 
+def cmd_app(_a=None):
+    import app
+    app.ejecutar(_todos())
+    return 0
+
+
 def main():
+    if len(sys.argv) == 1:              # sin argumentos → la aplicación única
+        sys.exit(cmd_app())
     ap = argparse.ArgumentParser(prog="datafw-simuladores",
-        description="Laboratorio de Economía Computacional: teoría → hipótesis → "
-                    "experimento → mecanismo → verificación.")
+        description="Laboratorio de Economía Computacional. Sin argumentos abre "
+                    "la aplicación única; los subcomandos son herramientas "
+                    "técnicas para automatización.")
     sub = ap.add_subparsers(dest="comando", required=True)
+    sub.add_parser("app", help="abrir el Laboratorio Interactivo (= sin argumentos)")
     sub.add_parser("listar", help="modelos implementados por nivel")
     pf = sub.add_parser("ficha", help="ficha pedagógica de un modelo")
     pf.add_argument("modelo")
@@ -362,10 +373,10 @@ def main():
     a = ap.parse_args()
     if a.comando == "reporte" and not a.todos and not a.modelo:
         ap.error("reporte requiere <modelo> o --todos")
-    sys.exit({"listar": cmd_listar, "ficha": cmd_ficha, "experimento": cmd_experimento,
-              "simular": cmd_simular, "comparar": cmd_comparar,
-              "sensibilidad": cmd_sensibilidad, "demo": cmd_demo,
-              "reporte": cmd_reporte, "verificar": cmd_verificar,
+    sys.exit({"app": cmd_app, "listar": cmd_listar, "ficha": cmd_ficha,
+              "experimento": cmd_experimento, "simular": cmd_simular,
+              "comparar": cmd_comparar, "sensibilidad": cmd_sensibilidad,
+              "demo": cmd_demo, "reporte": cmd_reporte, "verificar": cmd_verificar,
               "laboratorio": cmd_laboratorio,
               "interactivo": cmd_interactivo}[a.comando](a))
 
