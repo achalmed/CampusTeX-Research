@@ -149,19 +149,27 @@ MODELO = Modelo(
         Escenario("opep_1973", "shock de costos ds = +0.5 sin respuesta de política",
                   {"ds": 0.5, "dA": 0.0},
                   "producto cae, precios suben, desempleo sube (Okun): la tripleta de "
-                  "la estanflación que la Phillips original declaraba imposible."),
+                  "la estanflación que la Phillips original declaraba imposible.",
+                  cadena=["↑ds (costos)", "SRAS → arriba", "sobre la AD: ↑P con ↓Y",
+                          "Okun: ↑u", "estanflación"]),
         Escenario("acomodo_monetario", "el banco central expande demanda (dA = +25)",
                   {"ds": 0.5, "dA": 25.0},
                   "Y vuelve exactamente a Y*... y la inflación se duplica: acomodar "
-                  "convalida el shock — el camino de los 70."),
+                  "convalida el shock — el camino de los 70.",
+                  cadena=["shock ds + ↑dA", "AD → derecha", "Y vuelve a Y*",
+                          "P sube el DOBLE", "shock convalidado en precios"]),
         Escenario("resistencia", "contracción para defender precios (dA = −25)",
                   {"ds": 0.5, "dA": -25.0},
                   "la inflación se contiene a costa de una recesión doble: el camino "
-                  "de Volcker, adelantado una década."),
+                  "de Volcker, adelantado una década.",
+                  cadena=["shock ds + ↓dA", "AD → izquierda", "P contenido",
+                          "recesión doble: el precio de resistir"]),
         Escenario("shock_favorable", "abaratamiento de costos ds = −0.3 (años 90)",
                   {"ds": -0.3, "dA": 0.0},
                   "el espejo virtuoso: más producto CON menos inflación — los "
-                  "'vientos de cola' que hacen fácil cualquier política."),
+                  "'vientos de cola' que hacen fácil cualquier política.",
+                  cadena=["↓ds", "SRAS → abajo", "↑Y con ↓P",
+                          "el viento de cola de los 90"]),
     ],
     verificaciones=[
         Verificacion("equilibrio satisface AD y SRAS con shock", _v_equilibrio),

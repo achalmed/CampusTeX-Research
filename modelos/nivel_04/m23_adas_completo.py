@@ -164,19 +164,27 @@ MODELO = Modelo(
                   {"dG": 50.0},
                   "Y sube pero MENOS que en IS-LM puro (los precios se comen parte) y "
                   "r sube por partida doble (ingreso y precios): brecha positiva que "
-                  "m25 hará pagar."),
+                  "m25 hará pagar.",
+                  cadena=["↑dG", "AD → derecha", "sobre la SRAS: ↑Y y ↑P",
+                          "↑P ⇒ ↓M/P ⇒ ↑r (doble freno)", "brecha positiva (m25 la cobrará)"]),
         Escenario("expansion_monetaria", "dM = +60",
                   {"dM": 60.0},
                   "a corto plazo el dinero NO es neutral: Y sube — compárese con el "
-                  "mismo experimento en m22, donde solo movía precios."),
+                  "mismo experimento en m22, donde solo movía precios.",
+                  cadena=["↑dM", "AD → derecha", "↑Y y ↑P a corto plazo",
+                          "NO neutral a CP (contraste con m22)"]),
         Escenario("shock_de_costos", "ds = +0.3 (petróleo/alimentos)",
                   {"ds": 0.3},
                   "estanflación en el aparato completo: Y cae, P sube y la r implícita "
-                  "también se tensa — los 70 en una figura."),
+                  "también se tensa — los 70 en una figura.",
+                  cadena=["↑ds", "SRAS → arriba", "↑P con ↓Y (estanflación)",
+                          "↑P ⇒ ↓M/P ⇒ r se tensa también"]),
         Escenario("enfriamiento", "contracción monetaria dM = −80",
                   {"dM": -80.0},
                   "la receta desinflacionaria: brecha negativa hoy a cambio de menos "
-                  "presión de precios — el costo lo cuantifica el sacrificio de m14."),
+                  "presión de precios — el costo lo cuantifica el sacrificio de m14.",
+                  cadena=["↓dM", "AD → izquierda", "↓P y ↓Y (brecha negativa)",
+                          "desinflación pagada en producto (m14)"]),
     ],
     verificaciones=[
         Verificacion("la base descansa en el largo plazo (Y*, Pe)", _v_base_largo_plazo),

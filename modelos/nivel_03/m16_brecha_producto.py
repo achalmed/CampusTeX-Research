@@ -137,15 +137,21 @@ MODELO = Modelo(
         Escenario("recesion_profunda", "desplome de −10% (estilo crisis mayor)",
                   {"shock": -10.0},
                   "la brecha máxima casi duplica el caso base y los PIB-años perdidos "
-                  "crecen más que proporcionalmente."),
+                  "crecen más que proporcionalmente.",
+                  cadena=["shock −10%", "brecha máxima −10", "cierre geométrico a razón (1−λ)",
+                          "PIB-años perdidos ∝ shock/λ"]),
         Escenario("recuperacion_lenta", "cierre lento λ = 0.1 (semivida ~6.6 períodos)",
                   {"lam": 0.1},
                   "el mismo golpe cuesta el triple en PIB-años: la velocidad de cierre "
-                  "importa más que la profundidad — el argumento de la política contracíclica."),
+                  "importa más que la profundidad — el argumento de la política contracíclica.",
+                  cadena=["↓λ", "la semivida ln2/(−ln(1−λ)) se alarga",
+                          "la misma herida queda abierta más años", "costo acumulado ×3"]),
         Escenario("sobrecalentamiento", "brecha POSITIVA de +4%",
                   {"shock": 4.0},
                   "producir sobre el potencial no es gratis: es la antesala de la "
-                  "inflación (m18) — la brecha positiva es el caso que Taylor castiga (m38)."),
+                  "inflación (m18) — la brecha positiva es el caso que Taylor castiga (m38).",
+                  cadena=["shock +4%", "Y sobre el potencial", "recursos exprimidos",
+                          "presión inflacionaria (m18)", "Taylor responderá (m38)"]),
     ],
     verificaciones=[
         Verificacion("decaimiento geométrico exacto (1−λ)", _v_geometrico),

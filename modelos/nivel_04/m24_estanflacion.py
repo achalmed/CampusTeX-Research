@@ -158,19 +158,27 @@ MODELO = Modelo(
     escenarios=[
         Escenario("opep_sin_respuesta", "shock ds=0.4, política pasiva",
                   {"ds": 0.4, "dM": 0.0, "dG": 0.0},
-                  "la tripleta imposible en el tablero: π>0, Δu>0, brecha negativa."),
+                  "la tripleta imposible en el tablero: π>0, Δu>0, brecha negativa.",
+                  cadena=["↑ds", "SRAS → arriba", "↓Y con ↑P", "Okun: ↑u",
+                          "π y u suben JUNTOS: estanflación"]),
         Escenario("fed_de_burns", "acomodar con dM=+100",
                   {"ds": 0.4, "dM": 100.0},
                   "el producto casi vuelve… y la inflación del episodio se duplica: "
-                  "así se enquistó la inflación de los 70."),
+                  "así se enquistó la inflación de los 70.",
+                  cadena=["shock + ↑dM", "AD → derecha", "Y casi vuelve",
+                          "P sube el doble", "inflación enquistada (Burns)"]),
         Escenario("volcker", "resistir con dM=−80",
                   {"ds": 0.4, "dM": -80.0},
                   "los precios ceden pero la brecha se hace el doble de honda: la "
-                  "recesión de 1982 como precio de la credibilidad."),
+                  "recesión de 1982 como precio de la credibilidad.",
+                  cadena=["shock + ↓dM", "AD → izquierda", "P cede",
+                          "brecha doble", "la recesión de 1982 (Volcker)"]),
         Escenario("doble_shock", "1979: segundo shock encima del primero (ds=0.8)",
                   {"ds": 0.8, "dM": 0.0},
                   "con el doble de shock, TODO empeora más que al doble en producto: "
-                  "la no linealidad de la AD (M/P) muerde."),
+                  "la no linealidad de la AD (M/P) muerde.",
+                  cadena=["ds ×2 (1979 sobre 1973)", "SRAS mucho más arriba",
+                          "la AD hiperbólica castiga más que al doble", "1979-1982"]),
     ],
     verificaciones=[
         Verificacion("π y Δu suben a la vez (imposible para m13)", _v_tablero_imposible),

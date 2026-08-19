@@ -146,15 +146,21 @@ MODELO = Modelo(
                   {"dM": 118.0},
                   "P sube exactamente 20% y Y* ni se entera: la neutralidad como "
                   "identidad de largo plazo — contrástese con m23, donde el MISMO dM "
-                  "sí mueve Y a corto plazo."),
+                  "sí mueve Y a corto plazo.",
+                  cadena=["↑M +20%", "(a corto plazo movería Y: m23)", "expectativas ajustan",
+                          "solo ↑P +20%", "M/P y Y* intactos: neutralidad"]),
         Escenario("progreso_tecnico", "la productividad A sube 10%",
                   {"A": 0.77},
                   "el potencial sube 10% y (con M fija) los precios de largo plazo "
-                  "BAJAN: el crecimiento es deflacionario si el dinero no acompaña."),
+                  "BAJAN: el crecimiento es deflacionario si el dinero no acompaña.",
+                  cadena=["↑A", "↑Y* uno a uno", "LRAS → derecha",
+                          "con M fija: ↓P de largo plazo"]),
         Escenario("acumulacion_capital", "el stock de capital sube 20%",
                   {"K": 1200.0},
                   "Y* sube solo ~6% (elasticidad α=0.33): acumular factores rinde "
-                  "menos que mejorar tecnología — el presagio de Solow (m26)."),
+                  "menos que mejorar tecnología — el presagio de Solow (m26).",
+                  cadena=["↑K +20%", "↑Y* solo α·20% ≈ 6.6%",
+                          "rendimientos decrecientes del factor", "la puerta a Solow (m26)"]),
     ],
     verificaciones=[
         Verificacion("neutralidad exacta: P escala con M", _v_neutralidad),

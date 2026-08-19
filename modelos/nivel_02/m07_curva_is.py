@@ -143,15 +143,21 @@ MODELO = Modelo(
         Escenario("expansion_fiscal", "shock de gasto dG = +100",
                   {"dG": 100.0, "dT": 0.0, "dI0": 0.0},
                   "la IS se corre 250 a la derecha (k·dG): a CUALQUIER tasa, el mercado "
-                  "de bienes ahora equilibra con más producto."),
+                  "de bienes ahora equilibra con más producto.",
+                  cadena=["↑dG", "más gasto autónomo a CADA tasa", "IS → derecha en k·dG",
+                          "el punto final lo decidirá la LM (m10)"]),
         Escenario("alza_de_impuestos", "shock impositivo dT = +100 (sin tocar G)",
                   {"dG": 0.0, "dT": 100.0, "dI0": 0.0},
                   "la IS se corre 150 a la IZQUIERDA (−c1·k·dT): menos que un recorte de "
-                  "gasto igual — base del multiplicador del presupuesto equilibrado."),
+                  "gasto igual — base del multiplicador del presupuesto equilibrado.",
+                  cadena=["↑dT", "↓ renta disponible", "solo c1 de cada sol se gastaba",
+                          "IS → izquierda en c1·k·dT"]),
         Escenario("pesimismo_inversion", "colapso del ánimo inversor dI0 = −50",
                   {"dG": 0.0, "dT": 0.0, "dI0": -50.0},
                   "un shock privado desplaza la IS exactamente como uno fiscal del mismo "
-                  "monto: la demanda agregada no distingue de quién viene el gasto."),
+                  "monto: la demanda agregada no distingue de quién viene el gasto.",
+                  cadena=["↓I0", "menos gasto autónomo a cada tasa",
+                          "IS → izquierda en k·dI0", "shock privado ≡ shock fiscal"]),
     ],
     verificaciones=[
         Verificacion("desplazamiento por dG = k·dG", _v_desplazamiento_g),

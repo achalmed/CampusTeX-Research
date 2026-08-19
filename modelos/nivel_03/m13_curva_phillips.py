@@ -110,14 +110,20 @@ MODELO = Modelo(
         Escenario("pleno_empleo_60s", "la política empuja u hasta 4% (bajo un=6%)",
                   {"u_actual": 4.0},
                   "π sube a +3%: el punto exacto que los 60 creyeron sostenible para "
-                  "siempre — m14 muestra qué pasa cuando πe despierta."),
+                  "siempre — m14 muestra qué pasa cuando πe despierta.",
+                  cadena=["política de demanda ↑", "↓u bajo un", "mercado laboral apretado",
+                          "↑ salarios", "↑π (movimiento SOBRE la curva)"]),
         Escenario("disciplina", "se tolera u=8% para enfriar precios",
                   {"u_actual": 8.0},
-                  "π cae a −3% (deflación): el mismo menú leído al revés."),
+                  "π cae a −3% (deflación): el mismo menú leído al revés.",
+                  cadena=["demanda contenida", "↑u sobre un", "poder salarial cede",
+                          "↓π hasta la deflación"]),
         Escenario("curva_empinada", "salarios muy sensibles (α = 2.5)",
                   {"alpha": 2.5},
                   "cada punto de desempleo 'compra' más desinflación: α es el término de "
-                  "intercambio del menú."),
+                  "intercambio del menú.",
+                  cadena=["↑α", "salarios más sensibles a la brecha",
+                          "el mismo Δu compra más Δπ", "menú más empinado"]),
     ],
     verificaciones=[
         Verificacion("π(un) = πe", _v_natural),

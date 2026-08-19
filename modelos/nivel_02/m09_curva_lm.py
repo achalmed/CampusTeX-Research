@@ -118,15 +118,21 @@ MODELO = Modelo(
         Escenario("expansion_monetaria", "inyección dMP = +100",
                   {"dMP": 100.0},
                   "la LM se corre 200 a la derecha (dMP/k): a cada tasa, el dinero extra "
-                  "sostiene más transacciones."),
+                  "sostiene más transacciones.",
+                  cadena=["↑dMP", "sobra liquidez a cada Y", "↓r para cada Y",
+                          "LM → derecha en dMP/k"]),
         Escenario("contraccion_monetaria", "retiro de liquidez dMP = −100",
                   {"dMP": -100.0},
                   "la LM a la izquierda: el mismo nivel de actividad exige ahora una tasa "
-                  "mayor para racionar la liquidez."),
+                  "mayor para racionar la liquidez.",
+                  cadena=["↓dMP", "falta liquidez a cada Y", "↑r para cada Y",
+                          "LM → izquierda"]),
         Escenario("demanda_muy_sensible", "h sube de 10 a 25 (dinero y bonos casi sustitutos)",
                   {"h": 25.0},
                   "la LM se aplana: cambios de Y casi no mueven r — cuando h→∞ la curva "
-                  "es horizontal y la política monetaria pierde tracción (trampa, m12)."),
+                  "es horizontal y la política monetaria pierde tracción (trampa, m12).",
+                  cadena=["↑h", "dinero y bonos casi sustitutos", "pendiente k/h cae",
+                          "LM se aplana (antesala de m12)"]),
     ],
     verificaciones=[
         Verificacion("pendiente = k/h > 0", _v_pendiente),

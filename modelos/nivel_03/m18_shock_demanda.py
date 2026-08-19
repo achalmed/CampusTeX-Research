@@ -143,15 +143,21 @@ MODELO = Modelo(
         Escenario("estimulo", "impulso de demanda dA = +60",
                   {"dA": 60.0},
                   "con λ=0.02 el 50% del impulso se hace producto y el resto precios: "
-                  "el multiplicador ya no es el del nivel 1 — los precios cobran peaje."),
+                  "el multiplicador ya no es el del nivel 1 — los precios cobran peaje.",
+                  cadena=["↑dA", "AD → derecha", "sobre la SRAS: ↑Y y ↑P juntos",
+                          "reparto según 1/(1+bλ)"]),
         Escenario("colapso_demanda", "desplome dA = −80 (estilo 2008-2009)",
                   {"dA": -80.0},
                   "recesión CON desinflación: la firma de demanda en reversa — y la "
-                  "razón por la que 2009 trajo inflación baja, no alta."),
+                  "razón por la que 2009 trajo inflación baja, no alta.",
+                  cadena=["↓dA", "AD → izquierda", "↓Y y ↓P juntos",
+                          "recesión desinflacionaria (2009)"]),
         Escenario("oferta_rigida", "el mismo estímulo con λ = 0.05",
                   {"lam": 0.05},
                   "cerca del pleno empleo la oferta empina: el estímulo rinde 29% en "
-                  "producto y el resto se evapora en precios."),
+                  "producto y el resto se evapora en precios.",
+                  cadena=["↑λ (cerca del pleno empleo)", "SRAS más empinada",
+                          "el mismo dA rinde menos Y", "y más P: el peaje sube"]),
     ],
     verificaciones=[
         Verificacion("equilibrio satisface AD y SRAS", _v_equilibrio),

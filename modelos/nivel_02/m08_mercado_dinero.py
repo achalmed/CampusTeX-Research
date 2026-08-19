@@ -123,14 +123,20 @@ MODELO = Modelo(
         Escenario("inyeccion_liquidez", "el banco central sube M/P de 300 a 330",
                   {"MP": 330.0},
                   "sobra liquidez → se compran bonos → r* cae de 5% a 2%: el mecanismo "
-                  "diario de la política monetaria expansiva."),
+                  "diario de la política monetaria expansiva.",
+                  cadena=["↑M/P", "exceso de liquidez al r vigente", "compra de bonos",
+                          "↑ precio de los bonos", "↓r*"]),
         Escenario("contraccion", "venta de bonos del banco central (M/P: 300→250)",
                   {"MP": 250.0},
-                  "falta liquidez → r* salta a 10%: el costo del dinero como freno."),
+                  "falta liquidez → r* salta a 10%: el costo del dinero como freno.",
+                  cadena=["↓M/P", "escasez de liquidez", "venta de bonos",
+                          "↓ precio de los bonos", "↑r*"]),
         Escenario("auge_de_actividad", "el ingreso sube de 700 a 800 con M fija",
                   {"Y": 800.0},
                   "más transacciones demandan más liquidez y, con oferta fija, r* sube a "
-                  "10%: por esto la curva LM tendrá pendiente positiva (m09)."),
+                  "10%: por esto la curva LM tendrá pendiente positiva (m09).",
+                  cadena=["↑Y", "↑ demanda transaccional kY", "M/P fija: falta liquidez",
+                          "↑r* — la semilla de la LM"]),
     ],
     verificaciones=[
         Verificacion("vaciado del mercado: L(r*) = M/P", _v_vaciado),

@@ -171,19 +171,27 @@ MODELO = Modelo(
         Escenario("fiscal_permanente", "dG=+50 para siempre",
                   {"dG": 50.0, "dM": 0.0},
                   "t=0: Y salta a 720 (keynesiano); t→∞: Y de vuelta en 700 y P 9% "
-                  "más alto (clásico) — la síntesis en una trayectoria."),
+                  "más alto (clásico) — la síntesis en una trayectoria.",
+                  cadena=["↑G permanente", "t=0: ↑Y (SRAS dada)", "brecha ⇒ P > Pe",
+                          "Pe(t+1)=P(t): SRAS sube", "Y regresa a Y*", "ΔY_LP = 0, solo precios"]),
         Escenario("monetario_permanente", "dM=+60 para siempre",
                   {"dG": 0.0, "dM": 60.0},
                   "misma película con motor monetario: a largo plazo solo P sube "
-                  "(~10%) — la neutralidad de m22 alcanzada dinámicamente."),
+                  "(~10%) — la neutralidad de m22 alcanzada dinámicamente.",
+                  cadena=["↑M permanente", "t=0: ↑Y", "sorpresas de precios",
+                          "la SRAS sube período a período", "neutralidad alcanzada DINÁMICAMENTE"]),
         Escenario("precios_agiles", "λ alta (0.01): el ajuste corre",
                   {"lam": 0.01},
                   "la brecha se cierra en pocos períodos: con precios flexibles el "
-                  "mundo es casi clásico desde el día uno — λ es el 'largo' del corto plazo."),
+                  "mundo es casi clásico desde el día uno — λ es el 'largo' del corto plazo.",
+                  cadena=["↑λ", "cada brecha genera más sorpresa de precios",
+                          "Pe converge rápido", "el 'largo plazo' llega en pocos períodos"]),
         Escenario("austeridad_permanente", "dG=−50: la película en reversa",
                   {"dG": -50.0},
                   "recesión transitoria y deflación permanente: el ajuste también "
-                  "funciona hacia abajo… si los precios bajan (rigidez asimétrica, m21)."),
+                  "funciona hacia abajo… si los precios bajan (rigidez asimétrica, m21).",
+                  cadena=["↓G permanente", "t=0: ↓Y (recesión)", "P < Pe",
+                          "la SRAS baja período a período", "Y vuelve a Y* con P menor"]),
     ],
     verificaciones=[
         Verificacion("neutralidad de largo plazo: Y_∞ = Y* exacto", _v_neutralidad_demanda),

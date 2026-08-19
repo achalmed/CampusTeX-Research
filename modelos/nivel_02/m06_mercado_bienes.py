@@ -131,19 +131,27 @@ MODELO = Modelo(
         Escenario("credito_caro", "la tasa sube de 5% a 7%",
                   {"r": 7.0},
                   "cada punto de tasa cuesta 50 de producto (dY/dr = −50): el crédito caro "
-                  "descarta proyectos y el multiplicador propaga la caída."),
+                  "descarta proyectos y el multiplicador propaga la caída.",
+                  cadena=["↑r", "proyectos con rendimiento < r se descartan", "↓I = −b·Δr",
+                          "↓DA", "el multiplicador propaga", "↓Y*"]),
         Escenario("credito_barato", "la tasa baja de 5% a 3%",
                   {"r": 3.0},
                   "el abaratamiento del crédito estimula inversión y, vía multiplicador, "
-                  "el producto: el canal de transmisión de la futura política monetaria."),
+                  "el producto: el canal de transmisión de la futura política monetaria.",
+                  cadena=["↓r", "más proyectos superan el costo del crédito", "↑I",
+                          "↑DA", "multiplicador", "↑Y*"]),
         Escenario("expansion_fiscal", "el gasto sube de 200 a 250 con r fija",
                   {"G": 250.0},
                   "con r CONGELADA el multiplicador es el pleno (2.5): compárese con m10, "
-                  "donde la respuesta de r se lo come en parte."),
+                  "donde la respuesta de r se lo come en parte.",
+                  cadena=["↑G con r̄ congelada", "↑DA", "multiplicador pleno",
+                          "↑Y* = k·ΔG (compárese con m10)"]),
         Escenario("pesimismo_empresarial", "el ánimo inversor cae (I0: 150→130)",
                   {"I0": 130.0},
                   "los 'animal spirits' de Keynes: una caída autónoma de I se multiplica "
-                  "igual que un recorte de gasto público."),
+                  "igual que un recorte de gasto público.",
+                  cadena=["↓I0 (animal spirits)", "↓DA autónoma",
+                          "multiplicador en reversa", "↓Y*"]),
     ],
     verificaciones=[
         Verificacion("equilibrio exacto DA(Y*)=Y*", _v_equilibrio),

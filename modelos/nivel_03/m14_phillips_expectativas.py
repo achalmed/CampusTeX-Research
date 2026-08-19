@@ -138,15 +138,21 @@ MODELO = Modelo(
         Escenario("espiral_de_los_70", "mantener u=5% (1 pp bajo la natural) 15 períodos",
                   {"u_mantenida": 5.0},
                   "la inflación sube 1.5 pp CADA período: de 2% a 24.5% — la espiral que "
-                  "convirtió el menú de los 60 en la pesadilla de los 70."),
+                  "convirtió el menú de los 60 en la pesadilla de los 70.",
+                  cadena=["u < un sostenido", "π sorprende a πe", "πe = π_{t−1} se revisa al alza",
+                          "la curva de CP se desplaza", "π acelera α(un−u) CADA período"]),
         Escenario("volcker", "recesión deliberada: u=8% hasta domar la inflación",
                   {"u_mantenida": 8.0, "pi0": 10.0},
                   "π baja 3 pp por período desde 10%: la desinflación funciona, pero su "
-                  "precio en desempleo acumulado es la tasa de sacrificio."),
+                  "precio en desempleo acumulado es la tasa de sacrificio.",
+                  cadena=["u > un sostenido", "π queda bajo πe", "expectativas se revisan a la baja",
+                          "desinflación de α(u−un) por período", "costo acumulado = sacrificio"]),
         Escenario("en_la_natural", "la política respeta un: u = 6%",
                   {"u_mantenida": 6.0},
                   "π se queda exactamente en π0 para siempre: cualquier inflación es "
-                  "estable en un — por eso el largo plazo es vertical."),
+                  "estable en un — por eso el largo plazo es vertical.",
+                  cadena=["u = un", "sin sorpresas de precios", "πe alcanza a π",
+                          "π constante en π0", "Phillips de largo plazo VERTICAL"]),
     ],
     verificaciones=[
         Verificacion("aceleración constante α(un−u)", _v_aceleracion),

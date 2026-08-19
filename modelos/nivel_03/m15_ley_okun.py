@@ -118,15 +118,21 @@ MODELO = Modelo(
         Escenario("recesion", "la economía cae 2% un año",
                   {"g_actual": -2.0},
                   "Δu = +2.2 pp en un solo año: las recesiones destruyen empleo mucho "
-                  "más rápido de lo que las expansiones lo reconstruyen."),
+                  "más rápido de lo que las expansiones lo reconstruyen.",
+                  cadena=["g < g*", "capacidad ociosa y despidos",
+                          "Δu = −β(g−g*) > 0", "u sube 2.2 pp en un año"]),
         Escenario("auge", "crecimiento de 6% sostenido",
                   {"g_actual": 6.0},
                   "Δu = −1 pp/año: incluso un boom tarda años en deshacer una recesión — "
-                  "la aritmética de la recuperación es lenta."),
+                  "la aritmética de la recuperación es lenta.",
+                  cadena=["g > g*", "la contratación supera a demografía+productividad",
+                          "Δu < 0", "recuperar lo perdido toma años"]),
         Escenario("empleo_rigido", "economía informal: β = 0.15",
                   {"beta": 0.15},
                   "el desempleo abierto casi no responde al ciclo: la foto peruana — el "
-                  "ajuste real está en la informalidad y el subempleo, no en u."),
+                  "ajuste real está en la informalidad y el subempleo, no en u.",
+                  cadena=["↓β (informalidad alta)", "el ajuste migra a subempleo e informalidad",
+                          "u abierta casi no responde", "leer ENAHO, no solo u (m112)"]),
     ],
     verificaciones=[
         Verificacion("crecer a g* deja u constante", _v_neutral),

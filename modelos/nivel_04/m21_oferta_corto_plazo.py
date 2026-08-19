@@ -119,14 +119,20 @@ MODELO = Modelo(
         Escenario("expectativas_al_alza", "los contratos se firman esperando más inflación (dPe=+0.3)",
                   {"dPe": 0.3},
                   "la SRAS entera sube 0.3: mismas cantidades, todo más caro — así se "
-                  "propaga una inflación esperada aunque la demanda no cambie."),
+                  "propaga una inflación esperada aunque la demanda no cambie.",
+                  cadena=["↑Pe (contratos esperan más inflación)", "producir cualquier Y cuesta más",
+                          "SRAS → arriba en dPe", "inflación esperada = inflación efectiva"]),
         Escenario("desinflacion_creible", "expectativas a la baja (dPe=−0.3)",
                   {"dPe": -0.3},
                   "una promesa creíble de menos inflación BAJA la SRAS: la credibilidad "
-                  "(m41) ahorra recesión — el argumento central de las metas de inflación."),
+                  "(m41) ahorra recesión — el argumento central de las metas de inflación.",
+                  cadena=["↓Pe creíble", "los contratos se firman más baratos",
+                          "SRAS → abajo", "desinflar sin recesión (m40-m41)"]),
         Escenario("oferta_flexible", "λ pequeño (0.002): precios lentos, cantidades rápidas",
                   {"lam": 0.002},
-                  "mundo más keynesiano: la misma brecha presiona menos los precios."),
+                  "mundo más keynesiano: la misma brecha presiona menos los precios.",
+                  cadena=["↓λ", "los precios responden poco a la brecha",
+                          "SRAS más plana", "el corto plazo keynesiano se alarga"]),
     ],
     verificaciones=[
         Verificacion("ancla: P(Y*) = Pe", _v_ancla),

@@ -150,19 +150,27 @@ MODELO = Modelo(
         Escenario("shocks_persistentes", "economía con mucha inercia (ρ = 0.9)",
                   {"rho": 0.9},
                   "la misma mala suerte dura años: la sd del ciclo se duplica sin tocar "
-                  "σ — la propagación, no el impulso, hace la diferencia."),
+                  "σ — la propagación, no el impulso, hace la diferencia.",
+                  cadena=["↑ρ", "cada shock deja huella más larga",
+                          "sd = σ/√(1−ρ²) crece", "ciclos amplios sin tocar σ"]),
         Escenario("shocks_violentos", "impulsos grandes (σ = 3)",
                   {"sigma": 3.0},
                   "economía expuesta (materias primas, clima): ciclo violento aun con "
-                  "propagación normal — el caso de economías pequeñas y abiertas."),
+                  "propagación normal — el caso de economías pequeñas y abiertas.",
+                  cadena=["↑σ", "impulsos externos mayores", "misma propagación ρ",
+                          "ciclo violento (economía expuesta)"]),
         Escenario("economia_estable", "poca inercia y shocks suaves (ρ=0.4, σ=0.8)",
                   {"rho": 0.4, "sigma": 0.8},
                   "la 'Gran Moderación': ciclos apenas visibles — hasta que la "
-                  "estructura cambia (nivel 10)."),
+                  "estructura cambia (nivel 10).",
+                  cadena=["↓ρ y ↓σ", "poca memoria, golpes suaves",
+                          "sd de la brecha mínima", "la 'Gran Moderación'"]),
         Escenario("otra_historia", "la misma economía con otra suerte (semilla 7)",
                   {"semilla": 7.0},
                   "idénticos parámetros, historia distinta: separar estructura de azar "
-                  "es LA lección metodológica de este modelo."),
+                  "es LA lección metodológica de este modelo.",
+                  cadena=["misma estructura (ρ, σ)", "otra semilla", "otra secuencia de shocks",
+                          "otra historia: separar azar de estructura"]),
     ],
     verificaciones=[
         Verificacion("reproducibilidad exacta por semilla", _v_reproducible),

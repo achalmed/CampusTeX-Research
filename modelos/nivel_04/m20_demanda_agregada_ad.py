@@ -150,15 +150,20 @@ MODELO = Modelo(
         Escenario("expansion_fiscal", "dG = +100 (desplaza AD a la derecha)",
                   {"dG": 100.0, "dM": 0.0},
                   "a cada nivel de precios, el equilibrio IS-LM subyacente tiene más "
-                  "producto: la AD entera se corre dG/Ac = 71."),
+                  "producto: la AD entera se corre dG/Ac = 71.",
+                  cadena=["↑dG", "a cada P, el IS-LM subyacente rinde más Y",
+                          "AD → derecha en dG/Ac", "cuánto va a P lo dirá la oferta (m23)"]),
         Escenario("expansion_monetaria", "dM = +100 con dG = 0",
                   {"dG": 0.0, "dM": 100.0},
                   "más dinero nominal sostiene más saldos reales a cada P: la AD se "
-                  "corre a la derecha — más en los P bajos (el shift depende de 1/P)."),
+                  "corre a la derecha — más en los P bajos (el shift depende de 1/P).",
+                  cadena=["↑dM", "↑M/P a cada nivel de precios", "↓r ⇒ ↑I (IS-LM subyacente)",
+                          "AD → derecha en (b/h)dM/(P·Ac)"]),
         Escenario("dinero_escaso", "contracción monetaria dM = −150",
                   {"dG": 0.0, "dM": -150.0},
                   "la AD a la izquierda: el mismo P sostiene menos actividad — la "
-                  "receta desinflacionaria que m23 evaluará contra la SRAS."),
+                  "receta desinflacionaria que m23 evaluará contra la SRAS.",
+                  cadena=["↓dM", "↓M/P a cada P", "↑r ⇒ ↓I", "AD → izquierda"]),
     ],
     verificaciones=[
         Verificacion("cada punto de la AD es un IS-LM (P=2 ≡ m10)", _v_es_islm),
