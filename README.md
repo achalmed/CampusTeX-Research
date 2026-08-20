@@ -6,8 +6,8 @@ limitaciones → evolución), simulación de escenarios con lectura económica y
 verificación numérica de sus teoremas. Diseño y currículo completo (115
 modelos, 12 niveles): [docs/LABORATORIO_MACRO.md](../docs/LABORATORIO_MACRO.md).
 
-**Estado**: niveles 1-11 completos (m01-m96) + nivel 12 en curso (m97-m109) —
-109 modelos, 539 verificaciones numéricas (430 de contenido + un guardia de
+**Estado**: niveles 1-11 completos (m01-m96) + nivel 12 en curso (m97-m110) —
+110 modelos, 544 verificaciones numéricas (434 de contenido + un guardia de
 coherencia por modelo). El nivel
 11 son 16 EPISODIOS que combinan los mecanismos de todo el currículo sobre el
 motor compartido `_episodio.py`: COVID (el doble shock que explica 2020 y 2021
