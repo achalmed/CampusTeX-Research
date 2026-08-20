@@ -6,9 +6,14 @@ limitaciones → evolución), simulación de escenarios con lectura económica y
 verificación numérica de sus teoremas. Diseño y currículo completo (115
 modelos, 12 niveles): [docs/LABORATORIO_MACRO.md](../docs/LABORATORIO_MACRO.md).
 
-**Estado**: niveles 1-11 completos (m01-m96) + nivel 12 en curso (m97-m113) —
-113 modelos, 559 verificaciones numéricas (446 de contenido + un guardia de
-coherencia por modelo). El nivel
+**Estado**: **currículo macro COMPLETO — 115 modelos en 12 niveles (m01-m115),
+569 verificaciones numéricas** (454 de contenido + un guardia de coherencia por
+modelo). El nivel 12 (el laboratorio del Perú con datos reales del BCRP) cierra
+con m115, un modelo de síntesis donde un shock (cobre/FED/fiscal) se propaga por
+los cinco canales del nivel (externo real, externo financiero, monetario, fiscal
+y estructural) y retrata al Perú entero. Lo que sigue: micro, econometría y
+matemática para economistas (misma filosofía; la econometría no duplica
+`pipeline/`). El nivel
 11 son 16 EPISODIOS que combinan los mecanismos de todo el currículo sobre el
 motor compartido `_episodio.py`: COVID (el doble shock que explica 2020 y 2021
 con el mismo modelo), shocks de oferta (petróleo, alimentos), la dimensión
