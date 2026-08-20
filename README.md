@@ -6,8 +6,9 @@ limitaciones → evolución), simulación de escenarios con lectura económica y
 verificación numérica de sus teoremas. Diseño y currículo completo (115
 modelos, 12 niveles): [docs/LABORATORIO_MACRO.md](../docs/LABORATORIO_MACRO.md).
 
-**Estado**: niveles 1-11 completos (m01-m96) — 96 modelos, 474 verificaciones
-numéricas (378 de contenido + un guardia de coherencia por modelo). El nivel
+**Estado**: niveles 1-11 completos (m01-m96) + nivel 12 en curso (m97-m102) —
+102 modelos, 504 verificaciones numéricas (402 de contenido + un guardia de
+coherencia por modelo). El nivel
 11 son 16 EPISODIOS que combinan los mecanismos de todo el currículo sobre el
 motor compartido `_episodio.py`: COVID (el doble shock que explica 2020 y 2021
 con el mismo modelo), shocks de oferta (petróleo, alimentos), la dimensión
@@ -16,8 +17,14 @@ episodios de política (estanflación de los 70, deflación de Fisher, trampa de
 liquidez de Japón, crisis soberana de Grecia/Argentina). Con el nivel 10 había
 terminado el currículo TEÓRICO troncal (los mecanismos previos se rompen:
 corridas de Diamond-Dybvig m73, ataque cambiario que anticipa m74, zona de
-crisis de deuda m76, acelerador κ=λ²·impacto m79, contagio en red m80); solo
-falta el nivel 12 (el laboratorio del Perú con datos del BCRP). Incluye modelos dinámicos (m14, m16, m25, m27-m33), estocástico con
+crisis de deuda m76, acelerador κ=λ²·impacto m79, contagio en red m80). El
+**nivel 12 es el laboratorio del Perú con datos reales del BCRP**: m97-m102
+descargan 6 series macro (PBI, IPC, tasa de referencia, tipo de cambio;
+2004-2024) vía `connectors/bcrp`, destilan un snapshot anual embebido
+(`_series_bcrp.py`, para ser auto-contenidos) y **verifican contra el dato
+real** en vez de una calibración didáctica — con honestidad econométrica
+explícita (el coeficiente Taylor 0.55<1 como sesgo de variable omitida en m100;
+la correlación tasa-inflación como causalidad inversa en m101). Incluye modelos dinámicos (m14, m16, m25, m27-m33), estocástico con
 semilla reproducible (m17), regímenes endógenos (m12, m31 con histéresis y big
 push), el aparato AD-AS con la demanda derivada del IS-LM (m20-m25) y el bloque
 completo de crecimiento (Solow → regla de oro → progreso técnico → convergencia
