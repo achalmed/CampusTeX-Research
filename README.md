@@ -6,8 +6,8 @@ limitaciones → evolución), simulación de escenarios con lectura económica y
 verificación numérica de sus teoremas. Diseño y currículo completo (115
 modelos, 12 niveles): [docs/LABORATORIO_MACRO.md](../docs/LABORATORIO_MACRO.md).
 
-**Estado**: niveles 1-11 completos (m01-m96) + nivel 12 en curso (m97-m104) —
-104 modelos, 514 verificaciones numéricas (410 de contenido + un guardia de
+**Estado**: niveles 1-11 completos (m01-m96) + nivel 12 en curso (m97-m105) —
+105 modelos, 519 verificaciones numéricas (414 de contenido + un guardia de
 coherencia por modelo). El nivel
 11 son 16 EPISODIOS que combinan los mecanismos de todo el currículo sobre el
 motor compartido `_episodio.py`: COVID (el doble shock que explica 2020 y 2021
@@ -27,7 +27,9 @@ explícita (el coeficiente Taylor 0.55<1 como sesgo de variable omitida en m100;
 la correlación tasa-inflación como causalidad inversa en m101; el canal del
 cobre sobre el crecimiento en m103, corr Δcobre-g=+0.45; y sobre el tipo de
 cambio en m104, donde los niveles engañan y el canal se rompe en 2021 —
-cobre récord con sol débil, la fuga de capitales m111 venció al comercio).
+cobre récord con sol débil, la fuga de capitales m111 venció al comercio; y
+m105, donde los términos de intercambio mueven el INGRESO nacional, no el
+PBI-volumen, disolviendo la paradoja de la TdI récord de 2024 con PBI +3.5%).
 Incluye modelos dinámicos (m14, m16, m25, m27-m33), estocástico con
 semilla reproducible (m17), regímenes endógenos (m12, m31 con histéresis y big
 push), el aparato AD-AS con la demanda derivada del IS-LM (m20-m25) y el bloque
