@@ -6,12 +6,14 @@ limitaciones → evolución), simulación de escenarios con lectura económica y
 verificación numérica de sus teoremas. Diseño y currículo completo (115
 modelos, 12 niveles): [docs/LABORATORIO_MACRO.md](../docs/LABORATORIO_MACRO.md).
 
-**Estado**: niveles 1-9 completos (m01-m70) — 70 modelos, 274 verificaciones
-numéricas. El nivel 9 cierra el arco fiscal: la restricción presupuestaria →
-la bola de nieve → **la ecuación central Δb ≈ b(r−g) − sp** → sostenibilidad
-con prueba de estrés → estructural vs cíclico → equivalencia ricardiana →
-la contracíclica (con el ratchet en escalera) → la paradoja de la austeridad
-(mult* = 100/b0) → el juicio empírico condicional de los multiplicadores. Incluye modelos dinámicos (m14, m16, m25, m27-m33), estocástico con
+**Estado**: niveles 1-10 completos (m01-m80) — 80 modelos, 314 verificaciones
+numéricas. Con el nivel 10 (crisis) termina el currículo TEÓRICO troncal: los
+mecanismos previos se rompen — el multiplicador bancario en reversa (corridas
+de Diamond-Dybvig, m73), el reloj del trilema con expectativas (m74), la deuda
+en la "zona de crisis" (m76), el acelerador financiero κ=λ²·impacto (m79) y el
+contagio en red (m80, robust-yet-fragile). El nivel 9 había cerrado el arco
+fiscal con **la ecuación central Δb ≈ b(r−g) − sp** y la trampa de deuda (m78)
+lo conecta con las crisis. Incluye modelos dinámicos (m14, m16, m25, m27-m33), estocástico con
 semilla reproducible (m17), regímenes endógenos (m12, m31 con histéresis y big
 push), el aparato AD-AS con la demanda derivada del IS-LM (m20-m25) y el bloque
 completo de crecimiento (Solow → regla de oro → progreso técnico → convergencia

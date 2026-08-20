@@ -118,7 +118,7 @@ MODELO = Modelo(
                    ("ventas", "el desapalancamiento — contractivo por diseño (m79)")],
         derivacion=["E = A - D, \\quad \\lambda = A/E",
                     "\\Delta E = -shock\\cdot A \\;\\Rightarrow\\; \\frac{\\Delta E}{E} = -shock\\cdot\\lambda",
-                    "insolvencia \\iff shock \\ge 1/\\lambda"],
+                    "insolvencia \\iff shock \\geq 1/\\lambda"],
         contexto=("Los intermediarios financieros son máquinas de apalancamiento: "
                   "un banco de inversión pre-2008 operaba con λ de 30 o más — 30 "
                   "dólares de activos por cada dólar de capital. La aritmética del "
@@ -142,7 +142,7 @@ MODELO = Modelo(
             Ecuacion("\\frac{\\Delta E}{E} = -shock\\cdot\\lambda", "la amplificación",
                      "el apalancamiento no crea el shock: lo MULTIPLICA — cada punto de caída de "
                      "activos son λ puntos de capital perdido (verificado exacto)."),
-            Ecuacion("shock \\ge 1/\\lambda \\Rightarrow insolvencia", "el margen de seguridad",
+            Ecuacion("shock \\geq 1/\\lambda \\Rightarrow insolvencia", "el margen de seguridad",
                      "con λ=20 el colchón es 5%: la distancia entre 'sólido' e 'insolvente' es una "
                      "corrección de mercado ordinaria — por eso el apalancamiento se regula (Basilea, mención)."),
         ],
