@@ -6,8 +6,8 @@ limitaciones → evolución), simulación de escenarios con lectura económica y
 verificación numérica de sus teoremas. Diseño y currículo completo (115
 modelos, 12 niveles): [docs/LABORATORIO_MACRO.md](../docs/LABORATORIO_MACRO.md).
 
-**Estado**: niveles 1-11 completos (m01-m96) + nivel 12 en curso (m97-m106, m109) —
-107 modelos, 529 verificaciones numéricas (422 de contenido + un guardia de
+**Estado**: niveles 1-11 completos (m01-m96) + nivel 12 en curso (m97-m109) —
+109 modelos, 539 verificaciones numéricas (430 de contenido + un guardia de
 coherencia por modelo). El nivel
 11 son 16 EPISODIOS que combinan los mecanismos de todo el currículo sobre el
 motor compartido `_episodio.py`: COVID (el doble shock que explica 2020 y 2021
@@ -30,11 +30,15 @@ cambio en m104, donde los niveles engañan y el canal se rompe en 2021 —
 cobre récord con sol débil, la fuga de capitales m111 venció al comercio; y
 m105, donde los términos de intercambio mueven el INGRESO nacional, no el
 PBI-volumen, disolviendo la paradoja de la TdI récord de 2024 con PBI +3.5%; y
-el par fiscal/real m106-m109, con su contraste metodológico: la inversión
+el bloque fiscal m106-m108, con su contraste metodológico: la inversión
 pública correlaciona ~0 con el crecimiento porque es contracíclica y endógena
 —el estímulo de 2009 es el caso de manual, m69— mientras que las exportaciones
-correlacionan +0.74 porque son exógenas —la correlación revela causa solo
-cuando el impulsor no reacciona al ciclo, m70—).
+(m109) correlacionan +0.74 porque son exógenas —la correlación revela causa solo
+cuando el impulsor no reacciona al ciclo, m70—; m107 lleva esa endogeneidad al
+multiplicador fiscal (naive ~0.1 sesgado, identificado ~0.5-1, condicional al
+estado) y m108 aplica la aritmética de la deuda de m64 a la trayectoria real del
+Perú —45% en 2004 al mínimo de 19% en 2013 por la disciplina del boom, salto a
+34% con el COVID: sostenible, el contraejemplo virtuoso de m96—).
 Incluye modelos dinámicos (m14, m16, m25, m27-m33), estocástico con
 semilla reproducible (m17), regímenes endógenos (m12, m31 con histéresis y big
 push), el aparato AD-AS con la demanda derivada del IS-LM (m20-m25) y el bloque
