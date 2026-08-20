@@ -6,14 +6,18 @@ limitaciones → evolución), simulación de escenarios con lectura económica y
 verificación numérica de sus teoremas. Diseño y currículo completo (115
 modelos, 12 niveles): [docs/LABORATORIO_MACRO.md](../docs/LABORATORIO_MACRO.md).
 
-**Estado**: niveles 1-10 completos (m01-m80) — 80 modelos, 314 verificaciones
-numéricas. Con el nivel 10 (crisis) termina el currículo TEÓRICO troncal: los
-mecanismos previos se rompen — el multiplicador bancario en reversa (corridas
-de Diamond-Dybvig, m73), el reloj del trilema con expectativas (m74), la deuda
-en la "zona de crisis" (m76), el acelerador financiero κ=λ²·impacto (m79) y el
-contagio en red (m80, robust-yet-fragile). El nivel 9 había cerrado el arco
-fiscal con **la ecuación central Δb ≈ b(r−g) − sp** y la trampa de deuda (m78)
-lo conecta con las crisis. Incluye modelos dinámicos (m14, m16, m25, m27-m33), estocástico con
+**Estado**: niveles 1-11 completos (m01-m96) — 96 modelos, 474 verificaciones
+numéricas (378 de contenido + un guardia de coherencia por modelo). El nivel
+11 son 16 EPISODIOS que combinan los mecanismos de todo el currículo sobre el
+motor compartido `_episodio.py`: COVID (el doble shock que explica 2020 y 2021
+con el mismo modelo), shocks de oferta (petróleo, alimentos), la dimensión
+externa (devaluación, FED, salida de capitales, caída del cobre) y los grandes
+episodios de política (estanflación de los 70, deflación de Fisher, trampa de
+liquidez de Japón, crisis soberana de Grecia/Argentina). Con el nivel 10 había
+terminado el currículo TEÓRICO troncal (los mecanismos previos se rompen:
+corridas de Diamond-Dybvig m73, ataque cambiario que anticipa m74, zona de
+crisis de deuda m76, acelerador κ=λ²·impacto m79, contagio en red m80); solo
+falta el nivel 12 (el laboratorio del Perú con datos del BCRP). Incluye modelos dinámicos (m14, m16, m25, m27-m33), estocástico con
 semilla reproducible (m17), regímenes endógenos (m12, m31 con histéresis y big
 push), el aparato AD-AS con la demanda derivada del IS-LM (m20-m25) y el bloque
 completo de crecimiento (Solow → regla de oro → progreso técnico → convergencia

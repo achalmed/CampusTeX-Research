@@ -189,9 +189,26 @@ def sensibilidad(modelo, nombre_param, magnitud=None, n=9):
             "filas": filas, "derivada": derivada}
 
 
+def _verificar_coherencia(modelo):
+    """Guardia estructural: los parámetros por defecto deben bastar para CALCULAR.
+    Atrapa el bug de claves usadas en curvas/resultados pero no expuestas como
+    Parametro (las verificaciones usan _P0 y no lo detectan; reportes y app sí
+    fallan). Devuelve (ok, detalle)."""
+    try:
+        modelo.calcular()
+        modelo.curvas(modelo.dict_params())
+        return True, "los parámetros por defecto bastan para calcular y graficar"
+    except KeyError as exc:
+        return False, (f"parámetro huérfano {exc}: usado en el modelo pero no expuesto "
+                       "como Parametro (dict_params no lo incluye)")
+    except Exception as exc:
+        return False, f"el cálculo base falla: {exc}"
+
+
 def verificar(modelo):
-    """Corre las verificaciones del modelo; devuelve [(nombre, ok, detalle)]."""
-    salida = []
+    """Corre las verificaciones del modelo; devuelve [(nombre, ok, detalle)].
+    Antepone un chequeo de coherencia estructural (parámetros completos)."""
+    salida = [("coherencia (params completos)",) + _verificar_coherencia(modelo)]
     for v in modelo.verificaciones:
         try:
             ok, detalle = v.fn()
