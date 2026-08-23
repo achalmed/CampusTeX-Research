@@ -150,9 +150,21 @@ duplicará `pipeline/` (hará fichas sobre los métodos ya implementados allí).
   - **e17 media aritmética** (sec. II): la media como centro de masa
     (Σ(xᵢ−x̄)=0) y minimizador del error cuadrático (x̄=argmin Σ(xᵢ−a)², semilla
     de la regresión); y su fragilidad (punto de ruptura 0%).
-  Total: **2 modelos, 10 verificaciones**; `python3 main.py verificar` al 100%. ✔
-- **Siguiente:** completar la sección II (e18 mediana, e19 moda, …, e27 varianza,
-  e32-e33 robustez — el demo `demos/robustez_interactiva.py` pasa a ser la vista
-  interactiva de e32); luego la `app.py` interactiva (adaptada del motor con
-  las secciones de `config.SECCIONES`); y las animaciones Manim por tema. Ir
-  sección por sección (239 temas es un maratón).
+  Total: 2 modelos, 10 verificaciones. ✔
+- **Hito 2 (2026-08-20): núcleo de la sección II (descriptiva).** Tres modelos
+  más que completan centro + dispersión + robustez:
+  - **e18 mediana**: minimiza el error ABSOLUTO Σ|xᵢ−a| (el par de e17), parte
+    los datos 50/50, robusta (ruptura 50%); media≫mediana ⇒ cola derecha.
+  - **e27 varianza y desviación estándar**: promedio de desviaciones² y su raíz
+    (unidades); fórmula König-Huygens Var=E[X²]−μ²; y la **corrección de Bessel**
+    (n−1) demostrada por simulación (s²ₙ subestima, s²ₙ₋₁ acierta σ²).
+  - **e32 medidas robustas y detección de atípicos**: punto de ruptura (media/σ
+    0% vs mediana/MAD 50%); MAD; z modificado para detectar atípicos. El demo
+    `demos/robustez_interactiva.py` es su vista interactiva.
+  Total acumulado: **5 modelos, 25 verificaciones**; `python3 main.py verificar`
+  al 100%. ✔
+- **Siguiente:** resto de la sección II (e19 moda, e20-22 medias
+  ponderada/geométrica/armónica, e23-25 cuantiles, e26 rango, e29 coef. de
+  variación, e30-31 asimetría/curtosis); luego la `app.py` interactiva (adaptada
+  del motor con `config.SECCIONES`) y las animaciones Manim por tema. Sección por
+  sección (239 temas es un maratón).
