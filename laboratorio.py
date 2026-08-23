@@ -68,6 +68,8 @@ def _math_seguro(latex):
     s = re.sub(r"\\ge(?![a-zA-Z])", r"\\geq", s)
     # \sqrt n → \sqrt{n} (mathtext exige llaves para el argumento)
     s = re.sub(r"\\sqrt\s+([A-Za-z0-9])", r"\\sqrt{\1}", s)
+    # \xrightarrow{...}/\xleftarrow{...} → flecha simple (mathtext no tiene flechas extensibles)
+    s = re.sub(r"\\x(right|left)arrow\{[^{}]*\}", lambda mo: "\\long" + mo.group(1) + "arrow", s)
     linea = s if s.startswith("$") else f"${s}$"
     try:
         from matplotlib.mathtext import MathTextParser

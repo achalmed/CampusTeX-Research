@@ -172,6 +172,16 @@ duplicará `pipeline/` (hará fichas sobre los métodos ya implementados allí).
   secciones, recorrido por tema (pregunta → derivación → simulación → resultados
   → experimentos → libre con **slider en vivo** → cierre), ecuaciones calibradas
   en vivo (se pulió su render mathtext: bare-math con `\text{}`). ✔
-- **Siguiente:** resto de la sección II (e19 moda, e20-22 medias, e23-25
-  cuantiles, e26 rango, e29 coef. de variación, e30-31 asimetría/curtosis) y
-  animaciones Manim por tema. Sección por sección (239 temas es un maratón).
+- **Hito 4 (2026-08-20): SECCIÓN II COMPLETA (descriptiva, temas 17-33).** Los 17
+  temas, uno por modelo (sin combinar): centro (media e17, mediana e18, moda e19,
+  ponderada e20, geométrica e21, armónica e22 — con la cadena HM≤GM≤AM),
+  posición (cuartiles e23, percentiles e24, deciles e25 con el índice D9/D1 de
+  desigualdad), dispersión (rango e26, varianza/Bessel e27, desviación+regla
+  empírica+z e28, coef. de variación e29), forma (asimetría e30, curtosis e31) y
+  robustez (medidas robustas e32, detección de atípicos e33 con la regla de
+  Tukey y el enmascaramiento). **18 modelos, 90 verificaciones. ✔**
+- **Sección III iniciada (probabilidad):** e34 experimentos aleatorios (la
+  frecuencia relativa converge a la probabilidad; azar individual → orden
+  colectivo; falacia del jugador). **19 modelos, 95 verificaciones, 100%.**
+- **Siguiente:** completar la sección III (e35 espacio muestral … e48 función de
+  distribución) y animaciones Manim por tema. Sección por sección.
