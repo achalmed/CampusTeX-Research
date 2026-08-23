@@ -103,7 +103,7 @@ MODELO = Modelo(
                    ("mediana", "el valor central: parte la muestra en dos mitades"),
                    ("a", "candidato de centro (para ver qué minimiza la mediana)"),
                    ("Σ|xᵢ−a|", "error absoluto total respecto a a")],
-        derivacion=["ordenar los datos: x_{(1)} \\le \\dots \\le x_{(n)}",
+        derivacion=["\\text{ordenar los datos: } x_{(1)} \\leq \\dots \\leq x_{(n)}",
                     "n \\text{ impar}: \\; \\text{mediana} = x_{((n+1)/2)} \\;(\\text{el del medio})",
                     "n \\text{ par}: \\; \\text{mediana} = \\tfrac{1}{2}\\big(x_{(n/2)} + x_{(n/2+1)}\\big)",
                     "\\text{propiedad}: \\; \\text{mediana} = \\arg\\min_a \\sum |x_i-a|"],

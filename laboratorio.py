@@ -16,6 +16,7 @@
 #     El modo de sliders clásico sigue disponible (interactivo()) como
 #     "modo avanzado" para tocar parámetros libres.
 
+import re
 import textwrap
 
 import matplotlib
@@ -52,9 +53,21 @@ def _texto_mecanismo(esc, ancho=52):
 
 def _math_seguro(latex):
     """Adapta LaTeX de ficha (pensado para MathJax) al subconjunto mathtext de
-    matplotlib; devuelve '$...$' o None si la línea no es renderizable."""
-    s = (latex.replace("\\Big", "").replace("\\big", "")
-              .replace("\\boxed", "").replace("\\text{", "\\mathrm{"))
+    matplotlib; devuelve '$...$' o None si la línea no es renderizable.
+    mathtext no soporta \\tfrac/\\dfrac (solo \\frac) ni \\le/\\ge (solo
+    \\leq/\\geq); se normalizan aquí para no obligar a cada ficha a recordarlo."""
+    s = (latex.replace("\\tfrac", "\\frac").replace("\\dfrac", "\\frac")
+              .replace("\\Big", "").replace("\\big", "").replace("\\boxed", ""))
+    # \text{...} → \mathrm{...} ESCAPANDO los espacios (mathtext los colapsa en
+    # modo math): \text{con media} → \mathrm{con\ media}, si no sale "conmedia".
+    s = re.sub(r"\\text\{([^{}]*)\}",
+               lambda mo: "\\mathrm{" + mo.group(1).replace(" ", "\\ ") + "}", s)
+    s = s.replace("\\text{", "\\mathrm{")   # fallback: \text{} con llaves anidadas
+    # \le/\ge → \leq/\geq SIN tocar \left, \leftrightarrow, \gets… (lookahead)
+    s = re.sub(r"\\le(?![a-zA-Z])", r"\\leq", s)
+    s = re.sub(r"\\ge(?![a-zA-Z])", r"\\geq", s)
+    # \sqrt n → \sqrt{n} (mathtext exige llaves para el argumento)
+    s = re.sub(r"\\sqrt\s+([A-Za-z0-9])", r"\\sqrt{\1}", s)
     linea = s if s.startswith("$") else f"${s}$"
     try:
         from matplotlib.mathtext import MathTextParser

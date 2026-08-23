@@ -124,10 +124,10 @@ MODELO = Modelo(
                    ("n", "tamaño de la muestra"),
                    ("x̄, s", "ESTADÍSTICOS de la muestra (aleatorios: cambian con cada muestra)"),
                    ("SE = σ/√n", "error estándar: cuánto varía x̄ de muestra a muestra")],
-        derivacion=["población \\{x_1,\\dots,x_N\\} \\text{ con media } \\mu \\text{ y desv. } \\sigma",
-                    "muestra aleatoria de n \\Rightarrow \\bar x = \\tfrac{1}{n}\\sum_{i=1}^{n} x_i",
+        derivacion=["\\text{población } \\{x_1,\\dots,x_N\\} \\text{ con media } \\mu, \\text{ desv. } \\sigma",
+                    "\\text{muestra aleatoria de } n \\;\\Rightarrow\\; \\bar x = \\tfrac{1}{n}\\sum_{i=1}^{n} x_i",
                     "E[\\bar x] = \\mu \\quad (\\text{insesgada})",
-                    "Var(\\bar x) = \\dfrac{\\sigma^2}{n} \\Rightarrow SE(\\bar x) = \\dfrac{\\sigma}{\\sqrt n}"],
+                    "\\mathrm{Var}(\\bar x) = \\dfrac{\\sigma^2}{n} \\;\\Rightarrow\\; \\mathrm{SE}(\\bar x) = \\dfrac{\\sigma}{\\sqrt n}"],
         contexto=("Toda la estadística inferencial nace de una idea audaz: que no "
                   "hace falta medir a TODOS para saber algo confiable sobre el "
                   "conjunto — que una MUESTRA bien extraída lleva información sobre "
