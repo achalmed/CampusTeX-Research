@@ -23,7 +23,7 @@ import numpy as np
 from modelos.nivel_12 import _series_bcrp
 
 # raíz de datos crudos (…/datafw/data/raw/peru/bcrp)
-_RAIZ_RAW = Path(__file__).resolve().parents[3] / "data" / "raw" / "peru" / "bcrp"
+_RAIZ_RAW = Path(__file__).resolve().parents[4] / "data" / "raw" / "peru" / "bcrp"
 
 _MES = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6,
         "Jul": 7, "Ago": 8, "Set": 9, "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12}

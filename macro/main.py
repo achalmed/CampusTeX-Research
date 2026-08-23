@@ -25,7 +25,9 @@ import importlib
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+_AQUI = Path(__file__).resolve().parent          # simuladores/macro (config, modelos, app)
+sys.path.insert(0, str(_AQUI.parent))            # simuladores/ (MOTOR: base, graficos, reporte, laboratorio)
+sys.path.insert(0, str(_AQUI))                   # la disciplina PRIMERO (su config/modelos ganan)
 import base
 import config
 import graficos
