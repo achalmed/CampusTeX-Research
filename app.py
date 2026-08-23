@@ -1,7 +1,10 @@
-# app.py — LABORATORIO INTERACTIVO DE ECONOMÍA: la aplicación única.
+# app.py — LA APLICACIÓN ÚNICA del laboratorio (MOTOR COMPARTIDO, raíz).
 #
-# Un solo punto de entrada (python3 main.py) y una sola ventana. El usuario
-# elige un modelo del currículo y lo recorre de forma PROGRESIVA y pedagógica:
+# Genérica y agnóstica a la disciplina: la usan macro/ y estadistica/ (y futuras)
+# vía `import app`; las etiquetas propias (secciones, títulos, "equilibrio") salen
+# de config.SECCIONES/APP_* de la disciplina activa. Un solo punto de entrada
+# (python3 main.py) y una sola ventana. El usuario elige un modelo del currículo
+# y lo recorre de forma PROGRESIVA y pedagógica:
 #
 #   pregunta → contexto → supuestos y variables → construcción de cada
 #   ecuación → derivación → construcción gráfica CURVA A CURVA → equilibrio →
@@ -23,12 +26,10 @@ import config
 import graficos
 import laboratorio
 
-NIVELES = {1: "Fundamentos macroeconómicos", 2: "Mercado de bienes e IS-LM",
-           3: "Inflación, desempleo y ciclo", 4: "El aparato AD-AS",
-           5: "Crecimiento económico", 6: "Dinero y política monetaria",
-           7: "Macroeconomía abierta", 8: "Modelos modernos",
-           9: "Política fiscal", 10: "Crisis", 11: "Escenarios aplicados",
-           12: "Laboratorio del Perú"}
+# app.py es MOTOR COMPARTIDO (raíz): el recorrido pedagógico es genérico (se
+# construye desde la Ficha). Las etiquetas propias de cada disciplina —secciones,
+# títulos, la palabra "equilibrio"— se leen de config (config.SECCIONES,
+# config.APP_*), que resuelve a la disciplina activa por el sys.path.
 
 _TINTA = "#222222"
 
@@ -74,10 +75,10 @@ def _titulo_paso(m, tipo, dato):
     return {"portada": "La pregunta",
             "contexto": "Contexto histórico y autores",
             "supuestos": "Supuestos y variables",
-            "derivacion": "Derivación del equilibrio, paso a paso",
-            "equilibrio": "El equilibrio del modelo",
+            "derivacion": "Derivación, paso a paso",
+            "equilibrio": config.APP_PASO_RESULTADOS,
             "libre": "Experimentación libre",
-            "comparacion": "Comparación de políticas",
+            "comparacion": config.APP_PASO_COMPARACION,
             "cierre": "Límites del modelo y el camino que abre"}[tipo]
 
 
@@ -96,7 +97,7 @@ class Laboratorio:
     def mostrar(self):
         self.fig = plt.figure(figsize=(13.6, 8.9))
         try:
-            self.fig.canvas.manager.set_window_title("Laboratorio de Economía Computacional")
+            self.fig.canvas.manager.set_window_title(config.APP_VENTANA)
         except Exception:
             pass
         self.ax_a = self.fig.add_axes([0.045, 0.015, 0.11, 0.046])
@@ -186,7 +187,7 @@ class Laboratorio:
         return ax
 
     def _cabecera(self, titulo, sub=""):
-        self.fig.text(0.045, 0.972, "LABORATORIO DE ECONOMÍA COMPUTACIONAL",
+        self.fig.text(0.045, 0.972, config.APP_NOMBRE,
                       fontsize=9, color=config.GRIS, fontweight="bold")
         self.fig.text(0.045, 0.935, titulo, fontsize=16, color=config.AZUL,
                       fontweight="bold")
@@ -211,15 +212,13 @@ class Laboratorio:
         self.fig.canvas.draw_idle()
 
     def _render_menu(self):
-        self._cabecera("Laboratorio Interactivo de Economía",
-                       "Elige un modelo y recórrelo: pregunta → construcción → equilibrio → "
-                       "experimentos → interpretación.  (↑/↓ y Enter)")
+        self._cabecera(config.APP_TITULO, config.APP_RECORRIDO)
         y, nivel_previo = 0.855, None
         ini = max(0, self.cursor - 12)
         for i, m in enumerate(self.modelos[ini:ini + 20], start=ini):
             if m.nivel != nivel_previo:
                 nivel_previo = m.nivel
-                self.fig.text(0.06, y, f"Nivel {m.nivel} — {NIVELES.get(m.nivel, '')}",
+                self.fig.text(0.06, y, f"{config.APP_UNIDAD_NIVEL} {m.nivel} — {config.SECCIONES.get(m.nivel, '')}",
                               fontsize=10, color=config.ROJO, fontweight="bold")
                 y -= 0.028
             sel = (i == self.cursor)
@@ -241,7 +240,7 @@ class Laboratorio:
         m, F = self.m, self.m.ficha
         tipo, dato = self.pasos[self.i_paso]
         prog = f"Paso {self.i_paso + 1}/{len(self.pasos)} — {_titulo_paso(m, tipo, dato)}"
-        self._cabecera(f"{m.nombre}   ·   nivel {m.nivel} · {m.id}", prog)
+        self._cabecera(f"{m.nombre}   ·   {config.APP_UNIDAD_NIVEL.lower()} {m.nivel} · {m.id}", prog)
         getattr(self, f"_paso_{tipo}")(dato)
         ultimo = self.i_paso == len(self.pasos) - 1
         self._botones("⌂ Modelos", "◀ Anterior",
@@ -335,7 +334,7 @@ class Laboratorio:
         laboratorio._tabla_resultados(lado, filas)
         if m.ficha and m.ficha.equilibrio:
             abajo = self._panel([0.65, 0.12, 0.33, 0.26])
-            laboratorio._panel_texto(abajo, "EQUILIBRIO Y ESTABILIDAD",
+            laboratorio._panel_texto(abajo, config.APP_PANEL_RESULTADOS,
                                      _wrap(m.ficha.equilibrio, 52), 9)
 
     def _paso_experimento(self, i):

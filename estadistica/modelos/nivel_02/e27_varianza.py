@@ -63,8 +63,8 @@ def _resultados(p):
 
 def _ecuaciones_calibradas(p):
     n = int(p["n"])
-    return [f"$\\sigma^2 = \\frac{{1}}{{N}}\\sum (x_i-\\mu)^2$ ; $\\;\\sigma = \\sqrt{{\\sigma^2}}$ (unidades originales)",
-            f"muestral insesgada: $s^2 = \\frac{{1}}{{n-1}}\\sum (x_i-\\bar x)^2$ (Bessel: $\\div\\,(n-1)$, no $n$)"]
+    return [f"\\sigma^2 = \\frac{{1}}{{N}}\\sum (x_i-\\mu)^2 \\qquad \\sigma = \\sqrt{{\\sigma^2}}\\ \\text{{(unidades originales)}}",
+            f"s^2 = \\frac{{1}}{{n-1}}\\sum (x_i-\\bar x)^2\\ \\text{{(insesgada, Bessel: }}n-1\\text{{)}}"]
 
 
 _P0 = {"n": 5}

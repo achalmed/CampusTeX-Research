@@ -48,8 +48,8 @@ def _resultados(p):
 
 
 def _ecuaciones_calibradas(p):
-    return [f"mediana $= {_MEDIANA:.0f}$ (valor central) ; media $= {_MEDIA:.1f}$ (arrastrada por el outlier)",
-            f"mediana $= \\arg\\min_a \\sum |x_i-a|$ (error absoluto) ; punto de ruptura $50\\%$"]
+    return [f"\\text{{mediana}} = {_MEDIANA:.0f}\\qquad \\text{{media}} = {_MEDIA:.1f}\\ \\text{{(arrastrada por el outlier)}}",
+            f"\\text{{mediana}} = \\arg\\min_a \\sum |x_i-a|\\qquad \\text{{ruptura}} = 50\\%"]
 
 
 _P0 = {"a": 7.0}

@@ -67,8 +67,8 @@ def _resultados(p):
 def _ecuaciones_calibradas(p):
     o = p["outlier"]
     s = _stats(o)
-    return [f"outlier={o:.0f}: media={s['media']:.1f} (movida), mediana={s['mediana']:.1f} (firme)",
-            f"MAD $= \\mathrm{{med}}(|x_i-\\mathrm{{med}}(x)|)$ ; z robusto $= 0.6745\\,(x-\\mathrm{{med}})/\\mathrm{{MAD}}$"]
+    return [f"\\text{{outlier}}={o:.0f}:\\ \\text{{media}}={s['media']:.1f}\\ \\text{{(movida)}},\\ \\text{{mediana}}={s['mediana']:.1f}\\ \\text{{(firme)}}",
+            f"\\mathrm{{MAD}} = \\mathrm{{med}}(|x_i-\\mathrm{{med}}(x)|)\\qquad z = 0.6745\\,(x-\\mathrm{{med}})/\\mathrm{{MAD}}"]
 
 
 _P0 = {"outlier": 8.0}

@@ -47,8 +47,8 @@ def _resultados(p):
 
 
 def _ecuaciones_calibradas(p):
-    return [f"$\\bar x = \\dfrac{{1}}{{{_N}}}\\sum x_i = \\dfrac{{{int(_DATOS.sum())}}}{{{_N}}} = {_XBAR:.1f}$",
-            f"$\\sum (x_i-\\bar x) = 0$ ; $\\;\\bar x = \\arg\\min_a \\sum (x_i-a)^2$ (mínimos cuadrados)"]
+    return [f"\\bar x = \\frac{{1}}{{{_N}}}\\sum x_i = \\frac{{{int(_DATOS.sum())}}}{{{_N}}} = {_XBAR:.1f}",
+            f"\\sum (x_i-\\bar x) = 0 \\qquad \\bar x = \\arg\\min_a \\sum (x_i-a)^2\\ \\text{{(mínimos cuadrados)}}"]
 
 
 _P0 = {"a": 8.0}

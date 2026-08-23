@@ -163,8 +163,15 @@ duplicará `pipeline/` (hará fichas sobre los métodos ya implementados allí).
     `demos/robustez_interactiva.py` es su vista interactiva.
   Total acumulado: **5 modelos, 25 verificaciones**; `python3 main.py verificar`
   al 100%. ✔
-- **Siguiente:** resto de la sección II (e19 moda, e20-22 medias
-  ponderada/geométrica/armónica, e23-25 cuantiles, e26 rango, e29 coef. de
-  variación, e30-31 asimetría/curtosis); luego la `app.py` interactiva (adaptada
-  del motor con `config.SECCIONES`) y las animaciones Manim por tema. Sección por
-  sección (239 temas es un maratón).
+- **Hito 3 (2026-08-20): la app interactiva, compartida.** `app.py` se promovió
+  al MOTOR de la raíz (`simuladores/app.py`): el recorrido pedagógico es genérico
+  (se construye desde la Ficha), y las etiquetas propias de cada disciplina
+  —secciones, títulos, la palabra "equilibrio"— salen de `config.SECCIONES` y
+  `config.APP_*`. Así macro y estadística comparten UNA sola app (cero
+  duplicación). `python3 main.py` abre el laboratorio de estadística: menú por
+  secciones, recorrido por tema (pregunta → derivación → simulación → resultados
+  → experimentos → libre con **slider en vivo** → cierre), ecuaciones calibradas
+  en vivo (se pulió su render mathtext: bare-math con `\text{}`). ✔
+- **Siguiente:** resto de la sección II (e19 moda, e20-22 medias, e23-25
+  cuantiles, e26 rango, e29 coef. de variación, e30-31 asimetría/curtosis) y
+  animaciones Manim por tema. Sección por sección (239 temas es un maratón).

@@ -53,6 +53,17 @@ SECCIONES = {
     20: "XX · Computacional y ML",
 }
 
+# Etiquetas de la app compartida (simuladores/app.py las lee por disciplina)
+APP_VENTANA = "Laboratorio de Estadística Computacional"
+APP_NOMBRE = "LABORATORIO DE ESTADÍSTICA COMPUTACIONAL"
+APP_TITULO = "Laboratorio Interactivo de Estadística"
+APP_RECORRIDO = ("Elige un tema y recórrelo: pregunta → derivación → simulación → "
+                 "resultados → experimentos.  (↑/↓ y Enter)")
+APP_UNIDAD_NIVEL = "Sección"
+APP_PASO_RESULTADOS = "Resultados y propiedades"
+APP_PANEL_RESULTADOS = "PROPIEDADES"
+APP_PASO_COMPARACION = "Comparación de escenarios"
+
 USAR_TEX_COMPLETO = False
 
 

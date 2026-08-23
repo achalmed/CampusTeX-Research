@@ -66,8 +66,8 @@ def _resultados(p):
 
 def _ecuaciones_calibradas(p):
     n = int(p["n"])
-    return [f"parámetro $\\mu = {_MU:.1f}$ (fijo) ; estadístico $\\bar x$ (varía con la muestra)",
-            f"$E[\\bar x] = \\mu$ (insesgada) ; $SE(\\bar x) = \\sigma/\\sqrt{{n}} = {_SIGMA/np.sqrt(n):.2f}$"]
+    return [f"\\mu = {_MU:.1f}\\ \\text{{(parámetro, fijo)}}\\quad \\bar x\\ \\text{{(estadístico, varía)}}",
+            f"E[\\bar x] = \\mu\\ \\text{{(insesgada)}}\\qquad SE(\\bar x) = \\sigma/\\sqrt{{n}} = {_SIGMA/np.sqrt(n):.2f}"]
 
 
 _P0 = {"n": 30}

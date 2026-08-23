@@ -29,6 +29,25 @@ VERDE = "#3A7D44"     # inyecciones / tercera serie
 DPI = 150                    # resolución de PNG en reportes
 TAMANO_FIGURA = (9.0, 5.5)   # una figura por escenario en el reporte
 
+# Currículo por nivel (para `listar` y la app compartida)
+SECCIONES = {1: "Fundamentos macroeconómicos", 2: "Mercado de bienes e IS-LM",
+             3: "Inflación, desempleo y ciclo", 4: "El aparato AD-AS",
+             5: "Crecimiento económico", 6: "Dinero y política monetaria",
+             7: "Macroeconomía abierta", 8: "Modelos modernos",
+             9: "Política fiscal", 10: "Crisis", 11: "Escenarios aplicados",
+             12: "Laboratorio del Perú"}
+
+# Etiquetas de la app compartida (simuladores/app.py las lee por disciplina)
+APP_VENTANA = "Laboratorio de Economía Computacional"
+APP_NOMBRE = "LABORATORIO DE ECONOMÍA COMPUTACIONAL"
+APP_TITULO = "Laboratorio Interactivo de Economía"
+APP_RECORRIDO = ("Elige un modelo y recórrelo: pregunta → construcción → equilibrio → "
+                 "experimentos → interpretación.  (↑/↓ y Enter)")
+APP_UNIDAD_NIVEL = "Nivel"
+APP_PASO_RESULTADOS = "El equilibrio del modelo"
+APP_PANEL_RESULTADOS = "EQUILIBRIO Y ESTABILIDAD"
+APP_PASO_COMPARACION = "Comparación de políticas"
+
 # --- Tipografía académica (pedida por Edison, 2026-08-19) ---
 # mathtext + STIX: las cadenas $...$ de ejes, leyendas y anotaciones se
 # renderizan como matemática de libro SIN depender de una instalación LaTeX
