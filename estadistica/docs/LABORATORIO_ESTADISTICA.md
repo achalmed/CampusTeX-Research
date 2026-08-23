@@ -137,11 +137,22 @@ duplicará `pipeline/` (hará fichas sobre los métodos ya implementados allí).
 
 - **Hito 0 (2026-08-20): capa de animación Manim VALIDADA.** Entorno conda
   `manim-datafw` (Manim 0.20.1) sobre ffmpeg 8 + TeX Live 2025. Primera escena:
-  `animaciones/e67_tcl.py` (Teorema Central del Límite) — la media muestral de
-  una población exponencial converge a la normal, con la fórmula en LaTeX real.
-  Utilidades compartidas en `animaciones/_comun.py` (paleta, `histograma`,
-  `pdf_normal`). ✔
-- **Siguiente:** scaffolding del lab (`config.py`, `main.py`, `app.py` adaptados
-  del motor); sección I (fundamentos) y II (descriptiva) como primeros modelos
-  `base.py` con la triple visualización (estática + interactiva + animación),
-  estableciendo el patrón — como se hizo con `nivel_01` del macro-lab.
+  `animaciones/e67_tcl.py` (Teorema Central del Límite). Utilidades compartidas
+  en `animaciones/_comun.py`. ✔
+- **Hito 1 (2026-08-20): scaffolding + primeros modelos.** `config.py` (paletas,
+  rutas, secciones) y `main.py` (CLI `verificar`/`reporte`/`listar`/`ficha`/…,
+  descubrimiento con id genérico `eNN`) reusan el motor de la raíz. Primeros dos
+  modelos, uno por sección ancla, con Ficha completa + verificaciones (los
+  teoremas):
+  - **e02 población y muestra** (sec. I): el modelo FUNDACIONAL. Población
+    bimodal conocida → miles de muestras → x̄ insesgada (E[x̄]=μ), error estándar
+    σ/√n, precisión ∝ √n. Verifica los 4 teoremas del muestreo.
+  - **e17 media aritmética** (sec. II): la media como centro de masa
+    (Σ(xᵢ−x̄)=0) y minimizador del error cuadrático (x̄=argmin Σ(xᵢ−a)², semilla
+    de la regresión); y su fragilidad (punto de ruptura 0%).
+  Total: **2 modelos, 10 verificaciones**; `python3 main.py verificar` al 100%. ✔
+- **Siguiente:** completar la sección II (e18 mediana, e19 moda, …, e27 varianza,
+  e32-e33 robustez — el demo `demos/robustez_interactiva.py` pasa a ser la vista
+  interactiva de e32); luego la `app.py` interactiva (adaptada del motor con
+  las secciones de `config.SECCIONES`); y las animaciones Manim por tema. Ir
+  sección por sección (239 temas es un maratón).
