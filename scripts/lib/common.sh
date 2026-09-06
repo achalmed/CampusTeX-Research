@@ -7,7 +7,7 @@
 #
 # Modelo (ver ../README.md):
 #   - El framework aloja scaffolds/, libraries/, classes/, styles/, themes/, templates/.
-#   - Los cursos viven FUERA, en ~/Documents/Academic_Class-*/course_NN_*/,
+#   - Los cursos viven en las áreas (submódulos) areas/Academic_Class-*/course_NN_*/,
 #     con estructura 00–09 y sesiones 03_SESIONES/SNN_slug/ (02_Clase/…).
 #   - Por eso los helpers de curso/sesión reciben la RUTA del curso.
 # ============================================================

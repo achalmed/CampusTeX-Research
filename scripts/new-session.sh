@@ -6,7 +6,7 @@
 #   ./scripts/new-session.sh COURSE_DIR NUM "TÍTULO" [--quarto]
 #
 # Ejemplos:
-#   ./scripts/new-session.sh ~/Documents/Academic_Class-Estadistica/course_00_descriptiva 07 "Marco Teórico"
+#   ./scripts/new-session.sh ~/Documents/Academic_Class_Framework/areas/Academic_Class-Estadistica/course_00_descriptiva 07 "Marco Teórico"
 #   ./scripts/new-session.sh "$C" 08 "Análisis de Datos" --quarto
 #
 # Copia scaffolds/session (anatomía 01_Antes…07_Notas)

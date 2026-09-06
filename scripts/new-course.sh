@@ -6,7 +6,7 @@
 #   ./scripts/new-course.sh ACADEMIC_CLASS_DIR NUM "TÍTULO"
 #
 # Ejemplo:
-#   ./scripts/new-course.sh ~/Documents/Academic_Class-Estadistica 00 "Estadística Descriptiva"
+#   ./scripts/new-course.sh ~/Documents/Academic_Class_Framework/areas/Academic_Class-Estadistica 00 "Estadística Descriptiva"
 #
 # Copia scaffolds/course (00–09) al Academic_Class
 # indicado como course_NN_<slug>/.

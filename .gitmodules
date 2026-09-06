@@ -1,0 +1,115 @@
+[submodule "areas/Academic_Class-00-curso-0"]
+	path = areas/Academic_Class-00-curso-0
+	url = ../Academic_Class-00-curso-0.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Bash"]
+	path = areas/Academic_Class-Bash
+	url = ../Academic_Class-Bash.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Estadistica"]
+	path = areas/Academic_Class-Estadistica
+	url = https://github.com/achalmed/econometric.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Eviews"]
+	path = areas/Academic_Class-Eviews
+	url = ../Academic_Class-Eviews.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Filosofia"]
+	path = areas/Academic_Class-Filosofia
+	url = ../Academic_Class-Filosofia.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Finanzas"]
+	path = areas/Academic_Class-Finanzas
+	url = ../Academic_Class-Finanzas.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Geogebra"]
+	path = areas/Academic_Class-Geogebra
+	url = ../Academic_Class-Geogebra.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Gestion-empresarial"]
+	path = areas/Academic_Class-Gestion-empresarial
+	url = https://github.com/achalmed/CampusTeX-Projects.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Gestion-publica"]
+	path = areas/Academic_Class-Gestion-publica
+	url = ../Academic_Class-Gestion-publica.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Git"]
+	path = areas/Academic_Class-Git
+	url = ../Academic_Class-Git.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Gretl"]
+	path = areas/Academic_Class-Gretl
+	url = ../Academic_Class-Gretl.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-LaTex"]
+	path = areas/Academic_Class-LaTex
+	url = https://github.com/achalmed/LaTex.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Languages"]
+	path = areas/Academic_Class-Languages
+	url = ../Academic_Class-Languages.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Macroeconomia"]
+	path = areas/Academic_Class-Macroeconomia
+	url = ../Academic_Class-Macroeconomia.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Math"]
+	path = areas/Academic_Class-Math
+	url = ../Academic_Class-Math.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Metodologia-investigacion"]
+	path = areas/Academic_Class-Metodologia-investigacion
+	url = ../Academic_Class-Metodologia-investigacion.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Microeconomia"]
+	path = areas/Academic_Class-Microeconomia
+	url = ../Academic_Class-Microeconomia.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Ofimatica"]
+	path = areas/Academic_Class-Ofimatica
+	url = ../Academic_Class-Ofimatica.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Programming-concepts"]
+	path = areas/Academic_Class-Programming-concepts
+	url = ../Academic_Class-Programming-concepts.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-R"]
+	path = areas/Academic_Class-R
+	url = https://github.com/achalmed/Machine-learning-con-R.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Spss"]
+	path = areas/Academic_Class-Spss
+	url = ../Academic_Class-Spss.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-Stata"]
+	path = areas/Academic_Class-Stata
+	url = ../Academic_Class-Stata.git
+	branch = main
+	shallow = true
+[submodule "areas/Academic_Class-python"]
+	path = areas/Academic_Class-python
+	url = https://github.com/achalmed/Python.git
+	branch = main
+	shallow = true

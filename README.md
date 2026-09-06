@@ -4,7 +4,8 @@
 > (todo en **español**):
 >
 > 1. **Define el estándar** de carpetas, archivos y nomenclatura de **todas** las
->    `~/Documents/Academic_Class-*` (cualquier asignatura).
+>    `areas/Academic_Class-*` (cualquier asignatura; son submódulos git de este repo
+>    desde 2026-09-06 — antes vivían sueltas en `~/Documents/`).
 > 2. Es la **plataforma editorial LaTeX (LuaLaTeX)** con **identidad visual única**
 >    que produce **todo el material docente**: diapositivas, exámenes, sílabos,
 >    notas de docente, calendarios, rúbricas, pósters…
@@ -62,7 +63,7 @@ Detalle completo del estándar: [`docs/09-estandar-00-09.md`](docs/09-estandar-0
 
 ```bash
 cd ~/Documents/Academic_Class_Framework
-AC=~/Documents/Academic_Class-<Área>
+AC=~/Documents/Academic_Class_Framework/areas/Academic_Class-<Área>
 
 # 1) Carpetas (estándar 00–09)
 ./scripts/new-course.sh  "$AC" NN "Título del curso"

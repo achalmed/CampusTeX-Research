@@ -17,10 +17,14 @@ mantener el contenido y las ediciones en español). Cumple tres funciones:
    `04_EVALUACIONES/`, vía la clase `academic-exam` + `templates/exam/` — ver
    `docs/00-arquitectura.md`).
 
-**Los cursos reales NO viven aquí.** Viven en `~/Documents/Academic_Class-<Area>/`
-(p. ej. `Academic_Class-Metodologia-investigacion`), donde cada `Academic_Class` es
-un contenedor de `course_NN_<slug>/`. Por eso el tooling de `scripts/` recibe la
-**ruta del curso** como argumento.
+**Los cursos reales NO viven en el núcleo del framework.** Viven en las 23 áreas
+`areas/Academic_Class-<Area>/` (p. ej. `areas/Academic_Class-Metodologia-investigacion`),
+que desde 2026-09-06 son **submódulos git** de este repositorio (`.gitmodules`; cada
+área conserva su propio repo e historial; las que aún no tienen remote usan la URL
+relativa `../Academic_Class-<Area>.git`). Cada `Academic_Class` es un contenedor de
+`course_NN_<slug>/`. El tooling de `scripts/` sigue recibiendo la **ruta del curso**
+como argumento. Flujo: commit dentro del área → `git add areas/<area>` + commit aquí
+(mueve el puntero). Clon nuevo: `git clone --recurse-submodules`.
 
 No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructura)
 + compilar a PDF y mirarlo.
@@ -117,7 +121,7 @@ si no existe, usa el motor detectado por `latex_engine()` (comentario `%!TEX`, c
 - Los decks Beamer son **autocontenidos** (preámbulo propio + copia local del logo).
   Al mover un deck, mover su carpeta **completa** (los assets son hermanos del `.tex`).
 - **Reversibilidad por git (todo)**: tanto este framework como los árboles
-  `Academic_Class-*` son repos Git (se hace `git init` donde falte). La reversibilidad
+  `areas/Academic_Class-*` son repos Git (submódulos; se hace `git init` donde falte). La reversibilidad
   de cualquier reorganización es por git: commit del estado previo → migrar → commit.
   Ya no se usan backups + `_ESTANDARIZACION/UNDO*.sh`.
 - `*.sdr/` = metadatos de KOReader; ignorar.
