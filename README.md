@@ -23,7 +23,7 @@ diapositivas y sílabos a la vez.
 ## Estructura (arquitectura por capas)
 
 ```
-Academic_Class_Framework/
+10 Class/
 ├── styles/       Identidad visual única (academic.sty + colores, fuentes fontspec
 │                 Libertinus+Inconsolata, math, iconos, cajas, código, tablas, idioma).
 │                 La cargan por igual las clases de documento y el tema Beamer.
@@ -62,8 +62,8 @@ Detalle completo del estándar: [`docs/09-estandar-00-09.md`](docs/09-estandar-0
 ## Inicio rápido
 
 ```bash
-cd ~/Documents/Academic_Class_Framework
-AC=~/Documents/Academic_Class_Framework/areas/Academic_Class-<Área>
+cd ~/Documents/10 Class
+AC=~/Documents/10 Class/areas/Academic_Class-<Área>
 
 # 1) Carpetas (estándar 00–09)
 ./scripts/new-course.sh  "$AC" NN "Título del curso"
@@ -125,4 +125,4 @@ y las demás piezas respetan. Las funciones hermanas — apuntes, fichas de
 investigación (`prompts_for_zotero`), vault (`meta/`), sync Calibre ⇄ KOReader ⇄
 Zotero (`scripts_for_calibre/`) — y el contrato completo (casos de uso, claves
 compartidas, enlaces recíprocos, checklist de propagación) viven en un solo
-lugar: `~/Documents/git-awesome-ai-prompts/ECOSISTEMA_APRENDIZAJE.md`.
+lugar: `~/Documents/prompts/ECOSISTEMA_APRENDIZAJE.md`.

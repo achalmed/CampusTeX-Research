@@ -6,7 +6,7 @@
 #   ./scripts/new-course.sh ACADEMIC_CLASS_DIR NUM "TÍTULO"
 #
 # Ejemplo:
-#   ./scripts/new-course.sh ~/Documents/Academic_Class_Framework/areas/Academic_Class-Estadistica 00 "Estadística Descriptiva"
+#   ./scripts/new-course.sh ~/Documents/10 Class/areas/Academic_Class-Estadistica 00 "Estadística Descriptiva"
 #
 # Copia scaffolds/course (00–09) al Academic_Class
 # indicado como course_NN_<slug>/.
@@ -35,7 +35,7 @@ cat > "$DEST/README.md" <<EOF
 # $TITLE
 
 Curso \`course_${NUM}_${SLUG}\`. Estructura estándar 00–09
-(ver \`~/Documents/Academic_Class_Framework/README.md\`).
+(ver \`~/Documents/10 Class/README.md\`).
 
 - \`00_ADMINISTRACION\` … \`08_INVESTIGACION\` — contenido canónico y atemporal del curso.
 - \`09_SEMESTRES/<periodo>\` — cada dictado: registro privado + publicación MOOC

@@ -6,7 +6,7 @@
 > donde aterriza el flujo del prompt de resolución de exámenes.
 >
 > **Guía de resolución (léela junto a este README):**
-> [`git-awesome-ai-prompts/learning-skill/prompt_resolucion_examenes_plantillas.md`](../../../../git-awesome-ai-prompts/learning-skill/prompt_resolucion_examenes_plantillas.md)
+> [`prompts/learning-skill/prompt_resolucion_examenes_plantillas.md`](../../../../git-awesome-ai-prompts/learning-skill/prompt_resolucion_examenes_plantillas.md)
 > — el prompt y este estándar **van de la mano**: el prompt dice *cómo se redacta y
 > resuelve* la evaluación; este README dice *dónde vive y cómo se nombra*.
 

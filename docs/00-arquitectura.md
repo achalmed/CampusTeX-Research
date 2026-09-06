@@ -10,7 +10,7 @@ plantillas: es un sistema editorial con separación estricta de responsabilidade
 identidad visual única y un solo motor tipográfico, pensado para mantenerse 10+
 años sin romper compatibilidad.
 
-Complementa —sin solaparse— al [`Academic_Writing_Framework`](../../Academic_Writing_Framework/README.md),
+Complementa —sin solaparse— al [`Academic_Writing_Framework`](<../../03 writing/README.md>),
 que ya es dueño de **tesis, monografías, ensayos y artículos**. Este framework es
 dueño de la **docencia**: presentaciones, evaluaciones, sílabos, calendarios,
 manuales, guías, notas de clase, laboratorios, rúbricas, bancos y pósters.
@@ -96,7 +96,7 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 ## 4. Árbol completo del framework
 
 ```
-Academic_Class_Framework/
+10 Class/
 │
 ├── classes/                     ← CLASES LaTeX (encapsulan el diseño; LuaLaTeX)
 │   ├── academic-base.cls        · núcleo sobre `article`: carga styles/ + config/, comandos comunes
@@ -326,11 +326,11 @@ Compatibilidad: mientras dure la migración, el tooling del estándar 00–09
 
 ## 9. Prompts que se actualizan con el rediseño
 
-- `git-awesome-ai-prompts/learning-skill/prompt_resolucion_examenes_plantillas.md`
+- `prompts/learning-skill/prompt_resolucion_examenes_plantillas.md`
   → referenciar `academic-exam.cls` (no `evaluacion.cls`), las nuevas rutas
-  (`Academic_Class_Framework/templates/exam/…`, `04_EVALUACIONES/`) y el flujo con
+  (`10 Class/templates/exam/…`, `04_EVALUACIONES/`) y el flujo con
   `scripts/new-evaluacion.sh` + `build.sh`.
-- `git-awesome-ai-prompts/archive/presentations/` (5 prompts: estructura, beamer,
+- `prompts/archive/presentations/` (5 prompts: estructura, beamer,
   guion, tesis, monografía) → alinear los de **clase** con el nuevo
   `academic-beamer` y `templates/presentation/*`; los de tesis/monografía siguen
   apuntando al `Academic_Writing_Framework`.

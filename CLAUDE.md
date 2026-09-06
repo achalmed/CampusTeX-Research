@@ -138,9 +138,9 @@ si no existe, usa el motor detectado por `latex_engine()` (comentario `%!TEX`, c
 
 Los `Academic_Class-*` no solo contienen docencia: en `course_NN/02_CONTENIDO/Unidad_NN/`
 viven también **apuntes de estudio** generados por el `learning-skill`
-(`git-awesome-ai-prompts/learning-skill/`, preset `apuntes_clase` — prefijos
+(`prompts/learning-skill/`, preset `apuntes_clase` — prefijos
 `clase/libro/informe/paper/conf NN`, markdown puro, frontmatter con
 `calibre_id`/`zotero_key`). No los muevas ni les cambies el formato desde este
 repo: su dueño es el skill. El contrato entre piezas está en
-`~/Documents/git-awesome-ai-prompts/ECOSISTEMA_APRENDIZAJE.md`; si un cambio del
+`~/Documents/prompts/ECOSISTEMA_APRENDIZAJE.md`; si un cambio del
 estándar 00–09 los afecta, pasa por su checklist de propagación.

@@ -23,7 +23,7 @@
 ## Relación con la bibliografía del framework
 
 Los `.bib` de `referencias/` pueden apuntar (o copiarse) desde
-`~/Documents/Academic_Class_Framework/bibliography/`. Mantén un solo origen de verdad
+`~/Documents/10 Class/bibliography/`. Mantén un solo origen de verdad
 por referencia.
 
 ## Ejemplo — carpeta
