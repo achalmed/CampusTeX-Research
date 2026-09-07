@@ -156,7 +156,7 @@ Regla: **edita el temario, no las vistas**; el doctor avisa si un README se desf
 `migrar` solo se usa para un curso heredado sin temario (lee su README o sus carpetas).
 **Bibliografía (F5.4):** el material bibliográfico externo de un curso NO vive en `06_RECURSOS`: vive en
 Calibre y el temario lo cita en `bibliografia: [{calibre_id, titulo, autor, origen}]` (lo escribe
-`scripts_for_calibre/script_ingesta_recursos/main.sh`). En `06_RECURSOS` quedan solo datasets, plantillas y
+`scripts_for_fuentes/ingesta_cursos/main.sh`). En `06_RECURSOS` quedan solo datasets, plantillas y
 material propio del docente. **Subir no es catalogar:** antes de añadir, la suite busca el libro en Calibre
 (muchos ya están: el temario debe citar el id existente, no una copia); lo nuevo entra sin metadatos inventados y
 se cataloga con el patrón de la biblioteca (`Nombre, Apellidos`, vocabulario cerrado de etiquetas, serie
