@@ -20,6 +20,13 @@ diapositivas y sílabos a la vez.
 
 ---
 
+## El currículo vive en `temario.yml`
+
+Desde F5.1 (2026-09-06) cada `course_NN/` tiene un `temario.yml` con unidades, temas y recursos; el `README.md`
+del curso, los esqueletos de `02_CONTENIDO`, la ficha web, el temario del learning-skill y la checklist de
+estudio se generan con `scripts/temario-generar.sh generar --aplicar` (simula sin `--aplicar`; `verificar`
+detecta README desfasados). Edita el temario, no las vistas.
+
 ## Estructura (arquitectura por capas)
 
 ```

@@ -86,6 +86,11 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 ./scripts/new-report.sh       <COURSE_DIR> <silabo|calendario|nota-docente|rubrica> "Título"  # academic-report
 ./scripts/build.sh <ARCHIVO.tex> [--modo examen|claves|soluciones|todos]  # compila cualquier .tex con LuaLaTeX
 
+# Currículo único (F5.1): temario.yml es la fuente; README/esqueletos/web/skill/checklist se generan
+./scripts/temario-generar.sh migrar   [--aplicar] [COURSE_DIR...]   # README + 02_CONTENIDO → temario.yml (solo cursos nuevos/heredados)
+./scripts/temario-generar.sh generar  [--aplicar] [--que readme,esqueleto,web,skill,resumen] [COURSE_DIR...]
+./scripts/temario-generar.sh verificar                              # exit!=0 si un README no coincide con su temario (lo corre el doctor)
+
 # Validación y resumen
 ./scripts/validate.sh <COURSE_DIR | ACADEMIC_CLASS_DIR>            # invariantes 00–09 (exit!=0 si error)
 ./scripts/stats.sh    <COURSE_DIR>                                # resumen por sesión
@@ -134,13 +139,23 @@ si no existe, usa el motor detectado por `latex_engine()` (comentario `%!TEX`, c
 - Los decks del piloto `session_02`/`session_06` referencian imágenes no incluidas
   (rotura previa); se reconstruyen al usarlos, no se "arreglan" borrando contenido.
 
+## El currículo: `temario.yml` (F5.1, 2026-09-06)
+
+Cada `course_NN/` lleva un **`temario.yml`**: identidad del curso (`curso`, `titulo`,
+`emoji`, `descripcion`, `area`, `rol: docente`, `nivel`, `semestre`, `prerrequisitos`,
+`etiqueta`), enlaces (`web_slug` a `04 index/cursos/<slug>`, `dominio_fuat` al dominio
+del learning-skill) y **`unidades[].temas[]`** (id, título, `archivo` en `02_CONTENIDO`,
+`recursos[]` opcionales: apunte, simulador, libro por `calibre_id`, post, examen).
+**Es la única fuente**: el `README.md` del curso, los esqueletos de `02_CONTENIDO`, la
+sección «Contenidos / Sílabo» de la ficha web, `prompts/learning-skill/2 domains/_temarios/<dominio>.md`
+y `05 tasks/temarios cursos (generado).md` se generan con `scripts/temario-generar.sh`.
+Regla: **edita el temario, no las vistas**; el doctor avisa si un README se desfasó.
+`migrar` solo se usa para un curso heredado sin temario (lee su README o sus carpetas).
+
 ## Ecosistema de aprendizaje (contexto externo)
 
-Los `Academic_Class-*` no solo contienen docencia: en `course_NN/02_CONTENIDO/Unidad_NN/`
-viven también **apuntes de estudio** generados por el `learning-skill`
-(`prompts/learning-skill/`, preset `apuntes_clase` — prefijos
-`clase/libro/informe/paper/conf NN`, markdown puro, frontmatter con
-`calibre_id`/`zotero_key`). No los muevas ni les cambies el formato desde este
-repo: su dueño es el skill. El contrato entre piezas está en
-`~/Documents/prompts/ECOSISTEMA_APRENDIZAJE.md`; si un cambio del
-estándar 00–09 los afecta, pasa por su checklist de propagación.
+Las áreas contienen **solo docencia** (F5.0, 2026-09-06): los cursos que Edison toma y
+sus **apuntes de estudio** viven en `01 notes/40-cursos-y-formacion/<curso>/`
+(learning-skill, preset `apuntes_clase`) y enlazan al tema del curso docente en
+`02_CONTENIDO`. El contrato entre piezas está en `~/Documents/prompts/ECOSISTEMA_APRENDIZAJE.md`;
+si un cambio del estándar 00–09 afecta a los apuntes, pasa por su checklist de propagación.
