@@ -44,13 +44,13 @@ else
   mkdir -p "$MOD"/{slides,evaluation,practice,homework}
 fi
 
-# Copiar (instantánea congelable) los PDF finales de cada parte de la sesión
+# Copiar (instantánea congelable) los PDF finales y materiales (odt/ods/docx/xlsx…) de cada parte de la sesión
 copiar_pdfs() {  # $1 carpeta origen · $2 subcarpeta destino → imprime el conteo
   local src="$1" dst="$MOD/$2" n=0 f
   mkdir -p "$dst"
   if [[ -d "$src" ]]; then
     while IFS= read -r f; do cp "$f" "$dst/" && n=$((n+1)); done \
-      < <(find "$src" -maxdepth 1 -type f -name '*.pdf' 2>/dev/null)
+      < <(find "$src" -maxdepth 1 -type f \( -name '*.pdf' -o -name '*.odt' -o -name '*.ods' -o -name '*.odp' -o -name '*.docx' -o -name '*.xlsx' -o -name '*.pptx' -o -name '*.csv' -o -name '*.zip' \) 2>/dev/null)
   fi
   echo "$n"
 }
@@ -75,5 +75,5 @@ chmod -R a-w "$MOD"
 ok "Publicado y congelado: $MOD"
 echo "   slides=$s  evaluation=$e  practice=$p  homework=$h"
 [[ $((s+e+p+h)) -eq 0 ]] && warn "No se encontraron PDF finales en la sesión; compila primero (build-session.sh) y re-publica con --refrescar."
-echo "Enlaza al sitio:  ln \"$MOD\"/slides/*.pdf  ~/Documents/pub_<blog>/…   (hardlink)"
+echo "Enlaza al sitio (F5.2): ./scripts/publish-web.sh \"$COURSE\" $PERIODO --aplicar   (hardlinks segun dictado.yml)"
 echo "Registra en git:  git add -A && git commit -m \"publica $SNAME ($PERIODO)\""

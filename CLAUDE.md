@@ -99,8 +99,9 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 ./scripts/build-session.sh <COURSE_DIR> NN
 ./scripts/build-course.sh  <COURSE_DIR> [--solo-sesiones]
 
-# Publicación MOOC (publicar = congelar la sesión en el dictado)
-./scripts/publish-session.sh <COURSE_DIR> NN <AAAA-ciclo> [--refrescar]  # → 09_SEMESTRES/<periodo>/publicacion/SNN/
+# Publicación MOOC (publicar = congelar la sesión en el dictado) y web (F5.2)
+./scripts/publish-session.sh <COURSE_DIR> NN <AAAA-ciclo> [--refrescar]  # → 09_SEMESTRES/<periodo>/publicacion/SNN/ (PDF + odt/ods/docx/xlsx…)
+./scripts/publish-web.sh     <COURSE_DIR> <AAAA-ciclo> [--aplicar]       # dictado.yml → 04 index/cursos/<curso>/<edicion>/ por HARDLINK (simula sin --aplicar)
 
 # Evaluaciones (exámenes/prácticas en 04_EVALUACIONES/)
 ./scripts/new-evaluacion.sh  <COURSE_DIR> <tipo|01-12> "Título" [--fecha AAAAMMDD]
@@ -151,6 +152,16 @@ sección «Contenidos / Sílabo» de la ficha web, `prompts/learning-skill/2 dom
 y `05 tasks/temarios cursos (generado).md` se generan con `scripts/temario-generar.sh`.
 Regla: **edita el temario, no las vistas**; el doctor avisa si un README se desfasó.
 `migrar` solo se usa para un curso heredado sin temario (lee su README o sus carpetas).
+
+## El dictado y la web: `dictado.yml` + hardlinks (F5.2, 2026-09-06)
+
+Un dictado (`09_SEMESTRES/<periodo>/`) puede componerse de sesiones de **varios cursos** (Metodología
+2026-I = monografías + seminario + APA). Su manifiesto `dictado.yml` lista `sesiones: [{orden, curso, sesion, web}]`
+y el destino `web: {curso, edicion}`. Flujo: `publish-session.sh` congela cada sesión en `publicacion/SNN/`
+→ `publish-web.sh` enlaza esos archivos **por hardlink** en `04 index/cursos/<curso>/<edicion>/<sesion>/`
+(un solo inodo, dos canales; la web nunca tiene copias) y crea `index.qmd`/`_links.md` solo si faltan.
+Regla D5: **el framework es la fuente**; lo que aparece en la web sale de un módulo publicado. El doctor
+avisa si un dictado tiene copias o huérfanos en la web. Las fichas web sin curso ni ediciones llevan `draft: true`.
 
 ## Ecosistema de aprendizaje (contexto externo)
 
