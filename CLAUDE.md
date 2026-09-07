@@ -90,6 +90,8 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 ./scripts/temario-generar.sh migrar   [--aplicar] [COURSE_DIR...]   # README + 02_CONTENIDO → temario.yml (solo cursos nuevos/heredados)
 ./scripts/temario-generar.sh generar  [--aplicar] [--que readme,esqueleto,web,skill,resumen] [COURSE_DIR...]
 ./scripts/temario-generar.sh verificar                              # exit!=0 si un README no coincide con su temario (lo corre el doctor)
+python3 scripts/enlazar.py posts|simuladores|examenes [--aplicar]   # F5.3: posts→curso, modelos del laboratorio→tema, banco de exámenes→curso
+python3 scripts/enlazar.py verificar                                # rutas de recursos/bancos y cursos de los posts (lo corre el doctor)
 
 # Validación y resumen
 ./scripts/validate.sh <COURSE_DIR | ACADEMIC_CLASS_DIR>            # invariantes 00–09 (exit!=0 si error)

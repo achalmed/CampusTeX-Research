@@ -252,6 +252,17 @@ def render_readme(t: dict) -> str:
         for tema in u["temas"]:
             out.append(f"- `{tema['id']}` {tema['titulo']}")
         out.append("")
+    recs = [(u, tema, r) for u in t.get("unidades", []) for tema in u["temas"] for r in tema.get("recursos", [])]
+    if recs or t.get("banco_examenes"):
+        out += ["## Recursos enlazados", ""]
+        for u, tema, r in recs:
+            if r.get("tipo") == "simulador":
+                out.append(f"- `{tema['id']}` {tema['titulo']} → 🧪 simulador `{r['modelo']}` «{r.get('nombre', '')}» (`{r.get('archivo', '')}`)")
+            else:
+                out.append(f"- `{tema['id']}` {tema['titulo']} → {r.get('tipo')}: {r.get('ruta') or r.get('url') or r.get('calibre_id')}")
+        for b in t.get("banco_examenes", []) or []:
+            out.append(f"- Banco de exámenes rendidos: `{b['ruta']}` ({b.get('expedientes', 0)} expedientes)")
+        out.append("")
     out += ["## Metadata de cada archivo", "",
             f"Cada `.md` comienza con un frontmatter YAML con dos etiquetas: una común (`{t['etiqueta']}`) y otra específica del tema en `snake_case`.",
             "", "```yaml", "---", 'title: "..."', "tags:", f"  - {t['etiqueta']}", "  - <tema>", "---", "```", "",
@@ -286,14 +297,47 @@ def generar_esqueleto(curso: Path, t: dict, aplicar: bool) -> str:
     return f"esqueletos {'creados' if aplicar else 'por crear'}: {creados}"
 
 
+def sufijo_recursos(tema: dict) -> str:
+    sims = [r for r in tema.get("recursos", []) if r.get("tipo") == "simulador"]
+    return (" — 🧪 " + "; ".join(f"{r['modelo']} {r.get('nombre', '')}".strip() for r in sims)) if sims else ""
+
+
 def bloque_temario_md(t: dict, rutas_desde: Path | None, curso_dir: Path) -> list[str]:
     out = []
     for u in t.get("unidades", []):
         out.append(f"**{u['id']}. {u['titulo']}**")
         out.append("")
         for tema in u["temas"]:
-            out.append(f"- `{tema['id']}` {tema['titulo']}")
+            out.append(f"- `{tema['id']}` {tema['titulo']}{sufijo_recursos(tema)}")
         out.append("")
+    if t.get("banco_examenes"):
+        out.append("**Banco de exámenes rendidos:** " + " · ".join(f"`{b['ruta'].split('/')[-1]}` ({b.get('expedientes', 0)} exp.)" for b in t["banco_examenes"]))
+        out.append("")
+    return out
+
+
+def posts_por_curso() -> dict[str, list[tuple[str, str, str]]]:
+    """curso → [(url, título)] leyendo `curso:` del frontmatter de cada post y site-url del blog."""
+    pubs = DOCS / "04 index" / "_pubs"
+    out: dict[str, list] = {}
+    if not pubs.is_dir():
+        return out
+    for blog in sorted(pubs.glob("pub_*")):
+        q = blog / "_quarto.yml"
+        m = re.search(r"^\s*site-url:\s*(\S+)", q.read_text(encoding="utf-8"), re.M) if q.exists() else None
+        base = m.group(1).rstrip("/") if m else ""
+        for idx in blog.rglob("index.qmd"):
+            rel = idx.relative_to(blog)
+            if any(p in ("_site", "_freeze", "_extensions", ".quarto") for p in rel.parts) or len(rel.parts) < 3:
+                continue
+            fm = re.match(r"^---\n(.*?)\n---\n", idx.read_text(encoding="utf-8"), re.S)
+            if not fm:
+                continue
+            c = re.search(r"^curso:\s*(\S+)", fm.group(1), re.M)
+            if not c:
+                continue
+            ti = re.search(r"^title:\s*(.+)$", fm.group(1), re.M)
+            out.setdefault(c.group(1), []).append((f"{base}/{idx.parent.relative_to(blog).as_posix()}/", (ti.group(1).strip().strip('"') if ti else idx.parent.name)))
     return out
 
 
@@ -315,6 +359,12 @@ def generar_web(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> list[str]:
             bloque.append(f"### {t['titulo']}")
             bloque.append("")
             bloque += bloque_temario_md(t, None, c)
+            posts = posts_por_curso().get(t["curso"], [])
+            if posts:
+                bloque.append(f"**Publicaciones relacionadas ({len(posts)}):**")
+                bloque.append("")
+                bloque += [f"- [{ti}]({url})" for url, ti in sorted(posts, key=lambda x: x[0])]
+                bloque.append("")
             bloque.append(f"_Fuente: `{c.relative_to(DOCS)}/temario.yml`._")
             bloque.append("")
         bloque.append(MARCA_FIN)

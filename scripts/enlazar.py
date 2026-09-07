@@ -1,0 +1,295 @@
+#!/usr/bin/env python3
+"""
+enlazar.py — Enlaza el currículo (temario.yml) con lo que ya existe fuera del framework (F5.3, 2026-09-06).
+
+  enlazar.py posts       [--aplicar]   cada post de 04 index/_pubs declara `curso: <id>` (por su carpeta temática)
+  enlazar.py simuladores [--aplicar]   modelos de 02 analysis/simuladores → recursos {tipo: simulador} del tema (por similitud de título)
+  enlazar.py examenes    [--aplicar]   carpetas de 01 notes/50-examenes-y-practicas → `banco_examenes` del curso
+  enlazar.py verificar                 recursos y bancos con rutas existentes; posts con curso desconocido; posts sin curso
+
+Sin --aplicar todo es simulación (imprime qué haría). Las correspondencias que no se deducen se declaran en las
+tablas MAPA_POSTS y MAPA_BANCO de este archivo; la de simuladores se calcula (y se lista para revisión).
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import re
+import sys
+import unicodedata
+from pathlib import Path
+
+import yaml
+
+FW = Path(__file__).resolve().parents[1]
+DOCS = FW.parent
+AREAS = FW / "areas"
+PUBS = DOCS / "04 index" / "_pubs"
+LAB = DOCS / "02 analysis" / "simuladores"
+BANCO = DOCS / "01 notes" / "50-examenes-y-practicas"
+
+# blog → {carpeta temática (o 'posts'): curso}. None = sin curso equivalente (se deja sin enlazar).
+MAPA_POSTS: dict[str, dict[str, str | None]] = {
+    "pub_numerus-scriptum": {"python": "python_curso_base", "r": "r_curso_base", "stata": "stata_curso_base", "eviews": "eviews_curso_base",
+                             "latex": "latex_curso_base", "ofimatica": "ofimatica_curso_base", "power-bi": "ofimatica_curso_base",
+                             "fundamentos-programacion": "programming_concepts_curso_base", "matlab": None, "cpp": None, "bloomberg": None, "posts": None},
+    "pub_epsilon-y-beta": {"00-econometria-general": "econometria_i", "01-fundamentos-econometria": "econometria_i", "02-macroeconometria": "econometria_ii",
+                           "03-microeconometria": "microeconometria_aplicada", "04-econometria-financiera": "econometria_ii", "05-econometria-bayesiana": "econometria_ii",
+                           "06-evaluacion-de-impacto": "microeconometria_aplicada", "07-topicos-de-econometria": "econometria_ii",
+                           "estadistica-para-economistas": "estadistica_para_economistas", "estadistica": "estadistica", "posts": "econometria_i"},
+    "pub_axiomata": {"economia-matematica": "matematicas_i", "posts": "matematicas_i"},
+    "pub_aequilibria": {"posts": "macroeconomia_i"},
+    "pub_optimums": {"organizacion-industrial": "organizacion_industrial", "posts": "microeconomia_i"},
+    "pub_pecunia-fluxus": {"finanzas-internacionales": "finanzas_iii", "posts": "finanzas_i"},
+    "pub_methodica": {"posts": "monografias"},
+    "pub_res-publica": {"posts": "economia_publica"},
+    "pub_actus-mercator": {"inteligencia-comercial": "investigacion_de_mercados", "posts": "formulacion_de_proyectos"},
+    "pub_dialectica-y-mercado": {"posts": "economia_politica"},
+    "pub_chaska": {"ciberseguridad-cybersoc-ccs": None, "ciberseguridad-ethical-hacking-ceh": None, "i3wm": None, "operating-system": None, "posts": None},
+}
+
+# carpeta del banco de exámenes → curso (None = sin curso docente equivalente)
+MAPA_BANCO: dict[str, str | None] = {
+    "econometria-i": "econometria_i", "econometria-ii": "econometria_ii", "econometria": "econometria_i", "topicos-de-econometria": "econometria_ii",
+    "macroeconomia-i": "macroeconomia_i", "macroeconomia-ii": "macroeconomia_ii", "macroeconomia": "macroeconomia_i", "macroeconomia-avanzada": "macroeconomia_dinamica",
+    "macroeconomia-internacional-ii": "comercio_internacional", "economia-internacional": "comercio_internacional", "economia-internacional-i": "comercio_internacional",
+    "economia-internacional-ii": "comercio_internacional", "microeconomia": "microeconomia_i", "microeconomia-avanzada": "microeconomia_ii",
+    "teoria-de-la-regulacion": "organizacion_industrial", "finanzas": "finanzas_i", "gestion-publica": "economia_publica", "economia-politica": "economia_politica",
+    "politica-economica": "economia_monetaria", "estadistica-para-economistas": "estadistica_para_economistas", "estadistica-para-economistas-i": "estadistica_para_economistas",
+    "estadistica-para-economistas-ii": "estadistica", "matematica-para-economistas": "matematicas_i", "matematica-para-economistas-i": "matematicas_i",
+    "matematica-para-economistas-ii": "matematicas_ii", "matematica": "matematicas_i", "matematica-basica": "matematicas_i",
+    "economia-de-rrnn-y-ambientales": "economia_rrnn_ambientales", "proyectos-de-inversion": "evaluacion_privada_de_proyectos", "ofimatica": "ofimatica_curso_base",
+    "ingles-icpna": "languages_curso_base", "investigacion-operativa": None, "gerencia-social": None, "glave": None, "otras-universidades": None,
+    "sin-clasificar": None, "macroeconomia udep": None,
+}
+
+# a qué cursos puede enlazarse cada disciplina del laboratorio (evita falsos positivos: «rango» de matrices, «median» de R…)
+DISCIPLINA_CURSOS = {
+    "macro": {"macroeconomia_i", "macroeconomia_ii", "macroeconomia_dinamica", "economia_monetaria", "crecimiento_economico", "economia_del_desarrollo",
+              "comercio_internacional", "economia_computacional", "economia_publica"},
+    "estadistica": {"estadistica", "estadistica_para_economistas", "econometria_i", "econometria_ii", "microeconometria_aplicada"},
+}
+
+STOP = {"de", "del", "la", "el", "los", "las", "y", "e", "o", "en", "a", "al", "con", "por", "para", "un", "una", "modelo", "curva", "teoria"}
+
+
+def norm(s: str) -> set[str]:
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower()
+    toks = {t for t in re.split(r"[^a-z0-9]+", s) if len(t) > 2 and t not in STOP}
+    return {t[:6] for t in toks}   # raíz aproximada
+
+
+def leer_yaml(p: Path) -> dict:
+    return yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+
+
+def dump_temario(p: Path, t: dict) -> None:
+    cab = p.read_text(encoding="utf-8").split("\n")
+    comentarios = [l for l in cab[:3] if l.startswith("#")]
+    p.write_text("\n".join(comentarios) + "\n" + yaml.safe_dump(t, allow_unicode=True, sort_keys=False, width=1000), encoding="utf-8")
+
+
+def cursos() -> dict[str, tuple[Path, dict]]:
+    out = {}
+    for ty in AREAS.glob("Academic_Class-*/course_*/temario.yml"):
+        t = leer_yaml(ty)
+        out[t["curso"]] = (ty.parent, t)
+    return out
+
+
+# ---------------------------------------------------------------- posts
+def posts_iter():
+    for blog in sorted(PUBS.glob("pub_*")):
+        for idx in blog.rglob("index.qmd"):
+            rel = idx.relative_to(blog)
+            if any(part in ("_site", "_freeze", "_extensions", ".quarto") for part in rel.parts):
+                continue
+            if len(rel.parts) < 3:            # <tema>/<post>/index.qmd
+                continue
+            if not re.match(r"^\d{4}-\d{2}-\d{2}-", rel.parts[-2]):
+                continue
+            yield blog.name, rel.parts[0], idx
+
+
+def frontmatter_set(idx: Path, clave: str, valor: str) -> bool:
+    txt = idx.read_text(encoding="utf-8")
+    m = re.match(r"^---\n(.*?)\n---\n", txt, re.S)
+    if not m:
+        return False
+    fm = m.group(1)
+    if re.search(rf"^{clave}:", fm, re.M):
+        return False
+    nuevo = "---\n" + fm + f"\n{clave}: {valor}\n---\n" + txt[m.end():]
+    idx.write_text(nuevo, encoding="utf-8")
+    return True
+
+
+def cmd_posts(aplicar: bool, ids: set[str]) -> None:
+    n_ok = n_ya = n_sin = 0
+    sin: dict[str, int] = {}
+    for blog, carpeta, idx in posts_iter():
+        curso = MAPA_POSTS.get(blog, {}).get(carpeta, "?")
+        if curso == "?":
+            sin[f"{blog}/{carpeta}"] = sin.get(f"{blog}/{carpeta}", 0) + 1
+            continue
+        if curso is None:
+            n_sin += 1
+            continue
+        if curso not in ids:
+            print(f"  curso desconocido en MAPA_POSTS: {curso} ({blog}/{carpeta})"); continue
+        txt = idx.read_text(encoding="utf-8")
+        if re.search(r"^curso:", txt.split("\n---", 2)[1] if "\n---" in txt else "", re.M):
+            n_ya += 1; continue
+        if aplicar:
+            frontmatter_set(idx, "curso", curso)
+        n_ok += 1
+    for k, v in sorted(sin.items()):
+        print(f"  carpeta sin entrada en MAPA_POSTS: {k} ({v} posts)")
+    print(f"posts {'enlazados' if aplicar else 'por enlazar'}={n_ok} · ya tenían curso={n_ya} · sin curso equivalente (a propósito)={n_sin}")
+
+
+def posts_por_curso() -> dict[str, list[tuple[str, str, str]]]:
+    """curso → [(blog, ruta relativa, título)]."""
+    out: dict[str, list] = {}
+    for blog, carpeta, idx in posts_iter():
+        txt = idx.read_text(encoding="utf-8")
+        m = re.match(r"^---\n(.*?)\n---\n", txt, re.S)
+        if not m:
+            continue
+        fm = m.group(1)
+        c = re.search(r"^curso:\s*(\S+)", fm, re.M)
+        if not c:
+            continue
+        ti = re.search(r"^title:\s*(.+)$", fm, re.M)
+        titulo = ti.group(1).strip().strip('"') if ti else idx.parent.name
+        out.setdefault(c.group(1), []).append((blog, str(idx.parent.relative_to(PUBS / blog)), titulo))
+    return out
+
+
+# ---------------------------------------------------------------- simuladores
+def modelos_lab() -> list[dict]:
+    res = []
+    for disc in ("macro", "estadistica"):
+        for f in sorted((LAB / disc / "modelos").rglob("*.py")):
+            if f.name.startswith("_"):
+                continue
+            s = f.read_text(encoding="utf-8", errors="ignore")
+            mid = re.search(r'\bid\s*=\s*"([^"]+)"', s); nom = re.search(r'\bnombre\s*=\s*"([^"]+)"', s); niv = re.search(r"\bnivel\s*=\s*(\d+)", s)
+            if mid and nom:
+                res.append({"laboratorio": disc, "modelo": mid.group(1), "archivo": str(f.relative_to(DOCS)), "nombre": nom.group(1), "nivel": int(niv.group(1)) if niv else None})
+    return res
+
+
+def cmd_simuladores(aplicar: bool, cs: dict, umbral: float = 0.5) -> None:
+    modelos = modelos_lab()
+    # candidatos: temas de todos los cursos; se prefiere el mejor solape de tokens
+    temas = []
+    for cid, (cdir, t) in cs.items():
+        for u in t.get("unidades", []):
+            for tema in u["temas"]:
+                temas.append((cid, u, tema, norm(tema["titulo"])))
+    asignados = 0; sin = []
+    cambios: dict[str, dict] = {}
+    for m in modelos:
+        nm = norm(m["nombre"]) | norm(m["modelo"].split("_", 1)[-1].replace("_", " "))
+        mejor, best = None, 0.0
+        permitidos = DISCIPLINA_CURSOS.get(m["laboratorio"])
+        for cid, u, tema, nt in temas:
+            if not nt or (permitidos and cid not in permitidos):
+                continue
+            j = len(nm & nt) / len(nm | nt)
+            if j > best:
+                mejor, best = (cid, u, tema), j
+        if mejor and best >= umbral:
+            cid, u, tema = mejor
+            rec = {"tipo": "simulador", "laboratorio": m["laboratorio"], "modelo": m["modelo"], "nombre": m["nombre"], "archivo": m["archivo"]}
+            ya = any(r.get("modelo") == m["modelo"] for r in tema.get("recursos", []))
+            print(f"  {m['modelo']:<32} → {cid}:{tema['id']} «{tema['titulo']}»  (j={best:.2f}){'  [ya]' if ya else ''}")
+            if not ya:
+                tema.setdefault("recursos", []).append(rec); cambios[cid] = cs[cid][1]; asignados += 1
+        else:
+            sin.append(f"{m['modelo']} «{m['nombre']}»" + (f" (mejor {best:.2f})" if mejor else ""))
+    if aplicar:
+        for cid, t in cambios.items():
+            dump_temario(cs[cid][0] / "temario.yml", t)
+    print(f"modelos={len(modelos)} · {'asignados' if aplicar else 'asignables'}={asignados} · sin tema con similitud ≥{umbral}: {len(sin)}")
+    for s in sin:
+        print(f"    sin asignar: {s}")
+
+
+# ---------------------------------------------------------------- exámenes
+def cmd_examenes(aplicar: bool, cs: dict) -> None:
+    conteo: dict[str, int] = {}
+    cat = BANCO / "catalogo.csv"
+    if cat.exists():
+        for row in csv.DictReader(cat.open(encoding="utf-8")):
+            carpeta = row["ruta"].split("/")[1] if row["ruta"].startswith("cursos/") else row["ruta"].split("/")[0]
+            conteo[carpeta] = conteo.get(carpeta, 0) + 1
+    carpetas = sorted(p.name for p in BANCO.iterdir() if p.is_dir() and not p.name.startswith(("_", ".")))
+    por_curso: dict[str, list[str]] = {}
+    for c in carpetas:
+        if c not in MAPA_BANCO:
+            print(f"  carpeta del banco sin entrada en MAPA_BANCO: {c}"); continue
+        cid = MAPA_BANCO[c]
+        if cid is None:
+            continue
+        if cid not in cs:
+            print(f"  curso desconocido en MAPA_BANCO: {cid} ({c})"); continue
+        por_curso.setdefault(cid, []).append(c)
+    n = 0
+    for cid, lst in sorted(por_curso.items()):
+        cdir, t = cs[cid]
+        nuevo = [{"ruta": f"01 notes/50-examenes-y-practicas/{c}", "expedientes": conteo.get(c, 0)} for c in lst]
+        if t.get("banco_examenes") != nuevo:
+            t["banco_examenes"] = nuevo; n += 1
+            print(f"  {cid:<34} ← {', '.join(f'{c} ({conteo.get(c, 0)} exp.)' for c in lst)}")
+            if aplicar:
+                dump_temario(cdir / "temario.yml", t)
+    print(f"cursos con banco {'escrito' if aplicar else 'por escribir'}={n} · carpetas del banco={len(carpetas)}")
+
+
+# ---------------------------------------------------------------- verificar
+def cmd_verificar(cs: dict) -> int:
+    fallos = 0
+    ids = set(cs)
+    for cid, (cdir, t) in cs.items():
+        for u in t.get("unidades", []):
+            for tema in u["temas"]:
+                for r in tema.get("recursos", []):
+                    if "archivo" in r and not (DOCS / r["archivo"]).exists() and not (cdir / r["archivo"]).exists():
+                        fallos += 1; print(f"  recurso roto: {cid}:{tema['id']} → {r['archivo']}")
+        for b in t.get("banco_examenes", []) or []:
+            if not (DOCS / b["ruta"]).is_dir():
+                fallos += 1; print(f"  banco roto: {cid} → {b['ruta']}")
+    sin = 0; desconocidos = 0
+    for blog, carpeta, idx in posts_iter():
+        fm = re.match(r"^---\n(.*?)\n---\n", idx.read_text(encoding="utf-8"), re.S)
+        c = re.search(r"^curso:\s*(\S+)", fm.group(1), re.M) if fm else None
+        if not c:
+            sin += 1
+        elif c.group(1) not in ids:
+            desconocidos += 1; fallos += 1; print(f"  post con curso desconocido «{c.group(1)}»: {blog}/{carpeta}/{idx.parent.name}")
+    print(f"{'OK' if fallos == 0 else 'FALLOS=' + str(fallos)} · posts sin curso={sin} · posts con curso desconocido={desconocidos}")
+    return 1 if fallos else 0
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("accion", choices=["posts", "simuladores", "examenes", "verificar"])
+    ap.add_argument("--aplicar", action="store_true")
+    a = ap.parse_args()
+    cs = cursos()
+    if a.accion == "posts":
+        cmd_posts(a.aplicar, set(cs))
+    elif a.accion == "simuladores":
+        cmd_simuladores(a.aplicar, cs)
+    elif a.accion == "examenes":
+        cmd_examenes(a.aplicar, cs)
+    else:
+        return cmd_verificar(cs)
+    print("APLICADO" if a.aplicar else "SIMULACIÓN (usa --aplicar)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
