@@ -263,6 +263,10 @@ def render_readme(t: dict) -> str:
         for b in t.get("banco_examenes", []) or []:
             out.append(f"- Banco de exámenes rendidos: `{b['ruta']}` ({b.get('expedientes', 0)} expedientes)")
         out.append("")
+    if t.get("bibliografia"):
+        out += ["## Bibliografía en Calibre", "", "Material externo del curso catalogado en la biblioteca (F5.4); se cita por `calibre_id`:", ""]
+        out += [f"- `{b['calibre_id']}` {b.get('titulo', '')} — {b.get('autor', 'Desconocido')}" for b in t["bibliografia"]]
+        out.append("")
     out += ["## Metadata de cada archivo", "",
             f"Cada `.md` comienza con un frontmatter YAML con dos etiquetas: una común (`{t['etiqueta']}`) y otra específica del tema en `snake_case`.",
             "", "```yaml", "---", 'title: "..."', "tags:", f"  - {t['etiqueta']}", "  - <tema>", "---", "```", "",
@@ -312,6 +316,11 @@ def bloque_temario_md(t: dict, rutas_desde: Path | None, curso_dir: Path) -> lis
         out.append("")
     if t.get("banco_examenes"):
         out.append("**Banco de exámenes rendidos:** " + " · ".join(f"`{b['ruta'].split('/')[-1]}` ({b.get('expedientes', 0)} exp.)" for b in t["banco_examenes"]))
+        out.append("")
+    if t.get("bibliografia"):
+        out.append(f"**Bibliografía en Calibre ({len(t['bibliografia'])}):**")
+        out.append("")
+        out += [f"- {b.get('titulo', '')} — {b.get('autor', 'Desconocido')} (calibre `{b['calibre_id']}`)" for b in t["bibliografia"]]
         out.append("")
     return out
 

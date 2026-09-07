@@ -154,6 +154,10 @@ sección «Contenidos / Sílabo» de la ficha web, `prompts/learning-skill/2 dom
 y `05 tasks/temarios cursos (generado).md` se generan con `scripts/temario-generar.sh`.
 Regla: **edita el temario, no las vistas**; el doctor avisa si un README se desfasó.
 `migrar` solo se usa para un curso heredado sin temario (lee su README o sus carpetas).
+**Bibliografía (F5.4):** el material bibliográfico externo de un curso NO vive en `06_RECURSOS`: vive en
+Calibre y el temario lo cita en `bibliografia: [{calibre_id, titulo, autor, origen}]` (lo escribe
+`scripts_for_calibre/script_ingesta_recursos/main.sh`). En `06_RECURSOS` quedan solo datasets, plantillas y
+material propio del docente.
 
 ## El dictado y la web: `dictado.yml` + hardlinks (F5.2, 2026-09-06)
 
