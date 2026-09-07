@@ -326,11 +326,11 @@ Compatibilidad: mientras dure la migración, el tooling del estándar 00–09
 
 ## 9. Prompts que se actualizan con el rediseño
 
-- `prompts/learning-skill/prompt_resolucion_examenes_plantillas.md`
+- `prompts/05 docencia/learning-skill/prompt_resolucion_examenes_plantillas.md`
   → referenciar `academic-exam.cls` (no `evaluacion.cls`), las nuevas rutas
   (`10 Class/templates/exam/…`, `04_EVALUACIONES/`) y el flujo con
   `scripts/new-evaluacion.sh` + `build.sh`.
-- `prompts/archive/presentations/` (5 prompts: estructura, beamer,
+- `prompts/04 presentaciones/` (5 prompts: estructura, beamer,
   guion, tesis, monografía) → alinear los de **clase** con el nuevo
   `academic-beamer` y `templates/presentation/*`; los de tesis/monografía siguen
   apuntando al `Academic_Writing_Framework`.

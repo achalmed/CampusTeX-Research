@@ -12,7 +12,7 @@ Vistas generadas (`generar`):
   readme     README.md del curso (formato canónico del estándar 00–09)
   esqueleto  02_CONTENIDO/Unidad_NN/<n m tema>.md que falten (nunca sobrescribe)
   web        04 index/cursos/<web_slug>/index.qmd: sección «Contenidos / Sílabo» entre marcadores
-  skill      prompts/learning-skill/2 domains/_temarios/<dominio>.md + puntero en el dominio
+  skill      prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md + puntero en el dominio
   resumen    05 tasks/temarios cursos (generado).md — checklist por curso/unidad/tema
 
 Sin --aplicar todo es simulación: se imprime qué cambiaría y no se escribe nada.
@@ -32,7 +32,7 @@ FW = Path(__file__).resolve().parents[1]           # …/10 Class
 DOCS = FW.parent                                    # …/Documents
 AREAS = FW / "areas"
 WEB_CURSOS = DOCS / "04 index" / "cursos"
-DOMINIOS = DOCS / "prompts" / "learning-skill" / "2 domains"
+DOMINIOS = DOCS / "prompts" / "05 docencia" / "learning-skill" / "2 domains"
 TAREAS = DOCS / "05 tasks"
 
 EMOJI_DEFAULT = "📘"

@@ -150,7 +150,7 @@ Cada `course_NN/` lleva un **`temario.yml`**: identidad del curso (`curso`, `tit
 del learning-skill) y **`unidades[].temas[]`** (id, título, `archivo` en `02_CONTENIDO`,
 `recursos[]` opcionales: apunte, simulador, libro por `calibre_id`, post, examen).
 **Es la única fuente**: el `README.md` del curso, los esqueletos de `02_CONTENIDO`, la
-sección «Contenidos / Sílabo» de la ficha web, `prompts/learning-skill/2 domains/_temarios/<dominio>.md`
+sección «Contenidos / Sílabo» de la ficha web, `prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md`
 y `05 tasks/temarios cursos (generado).md` se generan con `scripts/temario-generar.sh`.
 Regla: **edita el temario, no las vistas**; el doctor avisa si un README se desfasó.
 `migrar` solo se usa para un curso heredado sin temario (lee su README o sus carpetas).
