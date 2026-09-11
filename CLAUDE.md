@@ -2,6 +2,13 @@
 
 Guía para Claude Code (claude.ai/code) al trabajar en este repositorio.
 
+## El ciclo de trabajo, en este sistema
+
+Una clase o un curso siguen `~/Documents/prompts/00 metodo/CICLO.md` en **nivel estándar**:
+conocimiento pedagógico y disciplinar consultado en la biblioteca (paso 4), diseño con
+alineamiento constructivo (`05 docencia/`), y la lección del aula —qué no entendió la cohorte—
+vuelve al `temario.yml` del curso y, si es general, al prompt de `05 docencia/`.
+
 ## Qué es este repositorio
 
 El **framework canónico del estándar `Academic_Class`** (todo en **español** —
