@@ -9,6 +9,18 @@ conocimiento pedagógico y disciplinar consultado en la biblioteca (paso 4), dis
 alineamiento constructivo (`05 docencia/`), y la lección del aula —qué no entendió la cohorte—
 vuelve al `temario.yml` del curso y, si es general, al prompt de `05 docencia/`.
 
+## La arquitectura documental, en este sistema
+
+`~/Documents/prompts/00 metodo/ARQUITECTURA_DOCUMENTAL.md` (2026-09-11) registra los
+documentos de docencia —sílabo, sesión de clase, evaluación (12 tipos), rúbrica, nota
+docente, calendario— como tipo 22 de la taxonomía del ecosistema, y **su esquema es el
+estándar 00–09 de este repo** (anatomía de sesión, `templates/exam/` y `templates/report/`,
+`scripts/validate.sh`). No se re-especifica allí: se apunta aquí. La presentación de clase
+sí tiene esquema propio en `03 writing/esquemas/presentacion-clase.tex` (objetivos de
+aprendizaje → activación → desarrollo → síntesis → evaluación → próxima sesión, por
+alineamiento constructivo), para cuando una clase se produce con la clase `presentacion`
+del AWF en vez de con `academic-beamer`.
+
 ## Qué es este repositorio
 
 El **framework canónico del estándar `Academic_Class`** (todo en **español** —
