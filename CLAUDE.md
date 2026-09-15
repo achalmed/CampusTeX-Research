@@ -5,11 +5,13 @@ Guía para Claude Code (claude.ai/code) y para Codex (`AGENTS.md` es un enlace s
 ## Migración en curso (R1/R2, 2026-09-15) — leer antes que el resto
 
 `docs/DIAGNOSTICO_AREAS_2026-09.md` reorganiza los cursos en fases M0–M8 (§6; ejecución en §8).
-Estado: **M3 hecha**. Los 23 submódulos `areas/Academic_Class-*` ya no existen: sus repos se
+Estado: **M4 hecha**. Los 23 submódulos `areas/Academic_Class-*` ya no existen: sus repos se
 consolidaron, con historial, en el **único submódulo `docencia/`** (repo `Academic_Class`), y desde M3 los
 cursos viven en `docencia/cursos/<slug>/` con `01-diseno · 02-contenido · 03-sesiones/sNN-<slug> ·
-04-evaluaciones · 05-recursos` (mapa: `docencia/migracion/mapa-m3.csv`). Aún con forma antigua hasta M4:
-`temario.yml`, la anatomía interna de sesión y `dictados/…/_migracion/`.
+04-evaluaciones · 05-recursos` (mapas: `docencia/migracion/mapa-m3.csv`, `mapa-m4.csv`). Registros: `curso.yml` (sucesor de
+`temario.yml`), `03-sesiones/sNN-<slug>/{sesion.yml, guion.md, <artefacto>}` sin subcarpetas de anatomía, y
+`dictados/<AAAA-ciclo>-<institucion>-<materia>/dictado.yml`. Los scripts `validate.sh`, `new-*.sh`, `publish-*.sh`
+y `stats.sh` siguen escritos para el 00–09 hasta M5; `temario-generar.sh` y `enlazar.py` ya leen `curso.yml`.
 Los 23 repos originales, intactos, están en `meta/reparaciones/R2_consolidacion_2026-09-15_090152/areas_originales/` hasta el push de M0 y la verificación de M3. Los datos de
 estudiantes viven en `registro/` (repo privado hermano, ignorado). Todo lo que sigue en este archivo
 que diga `areas/Academic_Class-<Área>/course_NN_<slug>/0N_…` se lee, mientras tanto, como

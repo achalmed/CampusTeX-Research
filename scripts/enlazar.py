@@ -91,9 +91,11 @@ def dump_temario(p: Path, t: dict) -> None:
 
 def cursos() -> dict[str, tuple[Path, dict]]:
     out = {}
-    for ty in list(AREAS.glob("Academic_Class-*/course_*/temario.yml")) + sorted((FW / "docencia" / "cursos").glob("*/temario.yml")):   # M3
+    for ty in list(AREAS.glob("Academic_Class-*/course_*/temario.yml")) + sorted((FW / "docencia" / "cursos").glob("*/curso.yml")):   # M3/M4: curso.yml
         t = leer_yaml(ty)
         out[t.get("id") or t["curso"]] = (ty.parent, t)      # `curso` → `id` (NORMATIVA §7, M7)
+        for al in t.get("alias", []) or []:                 # M4: los posts aún citan el id antiguo (M6 los reescribe)
+            out.setdefault(al, (ty.parent, t))
     return out
 
 
@@ -211,7 +213,7 @@ def cmd_simuladores(aplicar: bool, cs: dict, umbral: float = 0.5) -> None:
             sin.append(f"{m['modelo']} «{m['nombre']}»" + (f" (mejor {best:.2f})" if mejor else ""))
     if aplicar:
         for cid, t in cambios.items():
-            dump_temario(cs[cid][0] / "temario.yml", t)
+            dump_temario(cs[cid][0] / ("curso.yml" if (cs[cid][0] / "curso.yml").exists() else "temario.yml"), t)   # M4
     print(f"modelos={len(modelos)} · {'asignados' if aplicar else 'asignables'}={asignados} · sin tema con similitud ≥{umbral}: {len(sin)}")
     for s in sin:
         print(f"    sin asignar: {s}")
@@ -244,7 +246,7 @@ def cmd_examenes(aplicar: bool, cs: dict) -> None:
             t["banco_examenes"] = nuevo; n += 1
             print(f"  {cid:<34} ← {', '.join(f'{c} ({conteo.get(c, 0)} exp.)' for c in lst)}")
             if aplicar:
-                dump_temario(cdir / "temario.yml", t)
+                dump_temario(cdir / ("curso.yml" if (cdir / "curso.yml").exists() else "temario.yml"), t)   # M4
     print(f"cursos con banco {'escrito' if aplicar else 'por escribir'}={n} · carpetas del banco={len(carpetas)}")
 
 

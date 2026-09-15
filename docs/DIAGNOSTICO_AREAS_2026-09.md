@@ -591,3 +591,19 @@ Pendiente que hereda M4: `09_SEMESTRES/2026-I` está en `dictados/2026-i-cau-uns
 la anatomía interna de sesión (`01_Antes…07_Notas`) sigue igual; `_inbox/` recibe además los dos cursos base
 no repartidos (Estadística, Gestión empresarial). `validate.sh` (reglas 00–09) ya no aplica: M5 escribe las nuevas.
 Decisiones de nombre y detalle en `meta/reparaciones/R3_renombrado_2026-09-15_094921/README.md`.
+
+### M4 · Registros (2026-09-15, hecho)
+
+| Paso | Resultado |
+|---|---|
+| `temario.yml` → `curso.yml` (`docencia/migracion/aplicar-m4.py`, mapa `mapa-m4.csv`) | 50: `tipo` (30 asignatura · 12 herramienta · 7 taller · 1 nivelación), `area[]`, `malla.orden` en los 25 cursos de la malla, `materia_web`, `prerrequisitos[]`, `datasets[]` (4 cursos, por catalogar), `alias` con el id antiguo |
+| `metadata.yml` → `sesion.yml` | 67 con `tipo` inferido del artefacto (27 laboratorio · 20 taller · 20 clase) y `artefacto` declarado; 3 marcadas `revisar` |
+| Anatomía de sesión aplanada | `02_Clase`, `03_Actividad` → raíz; `01_Antes`, `07_Notas`, `README.md` → `guion.md` (12 con contenido, 55 esqueleto `borrador`); 587 archivos con blob idéntico |
+| Dictados | `dictados/2026-i-cau-unsch-metodologia/{dictado.yml, publicacion/<web>/}` (6 sesiones de 2 cursos; mismo inodo que la web, 11/11); `2025-i-cau-unsch-metodologia` como dictado legado y `legado: true` en la web |
+| Herramientas | `temario.py`/`enlazar.py`/`normalizar-notas.py` leen `curso.yml` y resuelven `alias`; README regenerados: `verificar` OK 50 cursos |
+
+Desviaciones respecto a §4.3: los artefactos conservan su nombre (`sesion.yml: artefacto`) en vez de `deck.tex`/`cuaderno.ipynb`,
+y los subdirectorios de contenido de la sesión no se renombran (los leen `.do`, `.ipynb`, `index_files/`). Pendiente que hereda M5:
+`validate.sh` con las reglas nuevas (lista cerrada de carpetas de curso, artefacto por tipo, `guion.md`, `_inbox` vacío),
+`new-*.sh`, `publish-*.sh` y `stats.sh` sobre `curso.yml`/`sesion.yml`/`dictado.yml`. Detalle y decisiones en
+`meta/reparaciones/R4_registros_2026-09-15_100908/README.md`.

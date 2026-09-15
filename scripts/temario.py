@@ -76,7 +76,7 @@ def cursos_objetivo(args_cursos: list[str]) -> list[Path]:
     if args_cursos:
         return [Path(c).resolve() for c in args_cursos]
     # M3 (2026-09-15): los cursos viven en docencia/cursos/<slug>/; el glob de áreas queda por compatibilidad hasta M5
-    return sorted(p for p in AREAS.glob("Academic_Class-*/course_*") if p.is_dir()) + sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "temario.yml").exists() or (p / "curso.yml").exists())
+    return sorted(p for p in AREAS.glob("Academic_Class-*/course_*") if p.is_dir()) + sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "curso.yml").exists() or (p / "temario.yml").exists())
 
 
 def leer_yaml(p: Path) -> dict:
@@ -247,8 +247,10 @@ def render_readme(t: dict) -> str:
         out += [t["descripcion"], ""]
     if t.get("semestre") not in (None, ""):
         out.append(f"- **Semestre:** {t['semestre']}")
+    if t.get("malla"):
+        out.append(f"- **Malla:** {t['malla'].get('plan')} · orden {t['malla'].get('orden')}" + (f" · ciclo {t['malla']['ciclo']}" if t['malla'].get('ciclo') else ""))   # M4
     if t.get("prerrequisitos"):
-        out.append(f"- **Prerrequisitos:** {t['prerrequisitos']}")
+        pre = t["prerrequisitos"]; out.append(f"- **Prerrequisitos:** {', '.join(pre) if isinstance(pre, list) else pre}")   # M4: lista
     out.append(f"- **Etiqueta común:** `{t['etiqueta']}`")
     out.append(f"- **Total de temas:** {total}")
     out += ["", "## Estructura", ""]
@@ -281,7 +283,7 @@ def render_readme(t: dict) -> str:
     out += ["## Metadata de cada archivo", "",
             f"Cada `.md` es un apunte del régimen del vault (NORMATIVA_ARCHIVOS §6.2, §10.4): nombre en kebab-case (`1-2-tema.md`) y frontmatter con `tipo: apunte`, `titulo`, `estado` y dos etiquetas: una común (`{t['etiqueta']}`) y otra específica del tema en `snake_case`.",
             "", "```yaml", "---", "tipo: apunte", 'titulo: "..."', "estado: activo", "tags:", f"  - {t['etiqueta']}", "  - <tema>", "---", "```", "",
-            "> Este README se genera desde `temario.yml` (`10 Class/scripts/temario-generar.sh`). Edita el temario, no este archivo.", ""]
+            "> Este README se genera desde `curso.yml` (`10 Class/scripts/temario-generar.sh`). Edita el registro del curso, no este archivo.", ""]
     return "\n".join(out)
 
 
@@ -509,7 +511,8 @@ def main() -> int:
         log(f"\n{'ESCRITOS' if a.aplicar else 'SIMULACIÓN'}: {len(cursos)} temario.yml")
         return 0
 
-    cursos_t = [(c, leer_yaml(c / "temario.yml")) for c in cursos if (c / "temario.yml").exists()]
+    # M4 (2026-09-15): el registro del curso es curso.yml (sucesor de temario.yml); temario.yml solo por compatibilidad
+    cursos_t = [(c, leer_yaml(c / "curso.yml" if (c / "curso.yml").exists() else c / "temario.yml")) for c in cursos if (c / "curso.yml").exists() or (c / "temario.yml").exists()]
     if a.accion == "verificar":
         drift = 0
         for c, t in cursos_t:

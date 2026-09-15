@@ -161,7 +161,7 @@ def main() -> int:
     por_nombre = {p.name: renombres[p].name for p in renombres}
     tocados = 0
     objetivos = [q for aa in sorted(AREAS.glob("Academic_Class-*")) for q in recorrer_md(aa)] + [q for cc in sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "temario.yml").exists() or (p / "curso.yml").exists()) for q in recorrer_md(cc)]   # M3
-    objetivos += [t for aa in sorted(AREAS.glob("Academic_Class-*")) for t in aa.glob("course_*/temario.yml")] + sorted((FW / "docencia" / "cursos").glob("*/temario.yml"))
+    objetivos += [t for aa in sorted(AREAS.glob("Academic_Class-*")) for t in aa.glob("course_*/temario.yml")] + sorted((FW / "docencia" / "cursos").glob("*/curso.yml"))
     seds = []
     for q in objetivos:
         t = contenido.get(q) or q.read_text(encoding="utf-8", errors="replace")
