@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # temario-generar.sh — fachada Bash del generador de vistas del currículo (F5.1).
 # El currículo de cada curso vive en docencia/cursos/<slug>/curso.yml; de ahí se generan README,
-# esqueletos de 02_CONTENIDO, ficha web, temario del learning-skill y checklist de estudio.
+# ficha web, temario del learning-skill y checklist de estudio.
 #   ./scripts/temario-generar.sh migrar   [--aplicar] [CURSO_DIR...]
 #   ./scripts/temario-generar.sh generar  [--aplicar] [--que readme,esqueleto,web,skill,resumen] [CURSO_DIR...]
 #   ./scripts/temario-generar.sh verificar [CURSO_DIR...]

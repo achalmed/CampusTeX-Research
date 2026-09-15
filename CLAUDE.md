@@ -2,101 +2,104 @@
 
 Guía para Claude Code (claude.ai/code) y para Codex (`AGENTS.md` es un enlace simbólico a este archivo) al trabajar en este repositorio.
 
-## Migración en curso (R1/R2, 2026-09-15) — leer antes que el resto
+## Reorganización 2026-09-15 (hecha) — contexto antes que el resto
 
-`docs/DIAGNOSTICO_AREAS_2026-09.md` reorganiza los cursos en fases M0–M8 (§6; ejecución en §8).
-Estado: **M7 hecha** (tag `reorg-2026-09-done`). Los 23 submódulos `areas/Academic_Class-*` ya no existen: sus repos se
-consolidaron, con historial, en el **único submódulo `docencia/`** (repo `Academic_Class`), y desde M3 los
-cursos viven en `docencia/cursos/<slug>/` con `01-diseno · 02-contenido · 03-sesiones/sNN-<slug> ·
-04-evaluaciones · 05-recursos` (mapas: `docencia/migracion/mapa-m3.csv`, `mapa-m4.csv`). Registros: `curso.yml` (sucesor de
-`temario.yml`), `03-sesiones/sNN-<slug>/{sesion.yml, guion.md, <artefacto>}` sin subcarpetas de anatomía, y
-`dictados/<AAAA-ciclo>-<institucion>-<materia>/dictado.yml`. Desde M5 **todo `scripts/` opera sobre este modelo** (bloque «Comandos»); el 00–09 ya no
-existe en el tooling ni en los scaffolds. Las referencias externas y las vistas generadas ya apuntan a `docencia/cursos` (M6). La verificación M7 (no pérdida, compilación, historial, doctor) está en §8. Queda M8: reescribir `README.md`, `docs/09-estandar-00-09.md` y el cuerpo de este archivo, que aún describen el 00–09.
-Los 23 repos originales, intactos, están en `meta/reparaciones/R2_consolidacion_2026-09-15_090152/areas_originales/` hasta el push de M0 y la verificación de M3. Los datos de
-estudiantes viven en `registro/` (repo privado hermano, ignorado). Todo lo que sigue en este archivo
-que diga `areas/Academic_Class-<Área>/course_NN_<slug>/0N_…` se lee, mientras tanto, como
-`docencia/cursos/<slug>/0N-…`; los scripts Python ya enumeran `docencia/cursos/*`.
+`docs/DIAGNOSTICO_AREAS_2026-09.md` (fases M0–M8, ejecución en §8; tag `reorg-2026-09-done`) sustituyó el
+estándar 00–09 por el que describe este archivo. Los 23 submódulos `areas/Academic_Class-*` ya no existen:
+sus repos se fusionaron, con historial, en el **único submódulo `docencia/`** (repo `Academic_Class`; tags
+`<area>/pre-reorg-2026-09`). Los 23 repos originales, intactos, están en
+`meta/reparaciones/R2_consolidacion_2026-09-15_090152/areas_originales/` hasta que el usuario haga el push de M0.
+Si un documento, prompt o script habla de `areas/Academic_Class-<Área>/course_NN_<slug>/0N_…`, es histórico:
+léelo como `docencia/cursos/<slug>/0N-…` (mapas archivo a archivo: `docencia/migracion/mapa-m3.csv`, `mapa-m4.csv`).
 
 ## El ciclo de trabajo, en este sistema
 
 Una clase o un curso siguen `~/Documents/prompts/00 metodo/CICLO.md` en **nivel estándar**:
 conocimiento pedagógico y disciplinar consultado en la biblioteca (paso 4), diseño con
 alineamiento constructivo (`05 docencia/`), y la lección del aula —qué no entendió la cohorte—
-vuelve al `temario.yml` del curso y, si es general, al prompt de `05 docencia/`.
+vuelve al `curso.yml` del curso (o al `guion.md` de la sesión) y, si es general, al prompt de `05 docencia/`.
 
 ## La arquitectura documental, en este sistema
 
 `~/Documents/prompts/00 metodo/ARQUITECTURA_DOCUMENTAL.md` (2026-09-11) registra los
 documentos de docencia —sílabo, sesión de clase, evaluación (12 tipos), rúbrica, nota
 docente, calendario— como tipo 22 de la taxonomía del ecosistema, y **su esquema es el
-estándar 00–09 de este repo** (anatomía de sesión, `templates/exam/` y `templates/report/`,
-`scripts/validate.sh`). No se re-especifica allí: se apunta aquí. La presentación de clase
-sí tiene esquema propio en `03 writing/esquemas/presentacion-clase.tex` (objetivos de
-aprendizaje → activación → desarrollo → síntesis → evaluación → próxima sesión, por
-alineamiento constructivo), para cuando una clase se produce con la clase `presentacion`
-del AWF en vez de con `academic-beamer`.
+estándar de docencia de este repo** (`docs/09-estandar-docencia.md`: curso, sesión tipada
+por artefacto, dictado; `templates/exam/` y `templates/report/`; `scripts/validate.sh`).
+No se re-especifica allí: se apunta aquí. La presentación de clase tiene esquema propio en
+`03 writing/esquemas/presentacion-clase.tex` (objetivos de aprendizaje → activación →
+desarrollo → síntesis → evaluación → próxima sesión, por alineamiento constructivo), que
+es también el arco que sigue `guion.md`.
 
 ## Qué es este repositorio
 
-El **framework canónico del estándar `Academic_Class`** (todo en **español** —
-mantener el contenido y las ediciones en español). Cumple tres funciones:
+El **framework canónico `Academic_Class`** (todo en **español** — mantener el contenido y
+las ediciones en español). Cumple tres funciones:
 
-1. **Define el estándar** de organización de cursos universitarios (estructura,
-   nomenclatura, anatomía de sesión). El spec completo está en `README.md`.
-2. **Aloja lo compartido** que sirve a **todos** los `Academic_Class-*` del
-   workspace: `scaffolds/` (esqueletos de carpetas) y `templates/` (documentos
-   vacíos) para copiar, y `libraries/` + `bibliography/` (bancos y `.bib`).
-3. **Produce los entregables LaTeX** de cada curso: **diapositivas** de clase
-   (Beamer, en `03_SESIONES/`) y **evaluaciones** (exámenes/prácticas, en
-   `04_EVALUACIONES/`, vía la clase `academic-exam` + `templates/exam/` — ver
-   `docs/00-arquitectura.md`).
+1. **Define el estándar** de organización del contenido docente (curso, sesión, dictado,
+   registro, nomenclatura). El spec completo está en `docs/09-estandar-docencia.md`; el
+   resumen, en `README.md`.
+2. **Aloja lo compartido**: `scaffolds/` (registros mínimos), `templates/` (documentos
+   vacíos), `bibliography/` (`.bib`) y `assets/branding/` (logo).
+3. **Produce los entregables LaTeX** de cada curso: diapositivas (Beamer o Quarto, en la
+   sesión), evaluaciones (`04-evaluaciones/`, clase `academic-exam` + `templates/exam/`) y
+   documentos de diseño (`01-diseno/`, clase `academic-report`) — ver `docs/00-arquitectura.md`.
 
-**Los cursos reales NO viven en el núcleo del framework.** Viven en las 23 áreas
-`areas/Academic_Class-<Area>/` (p. ej. `areas/Academic_Class-Metodologia-investigacion`),
-que desde 2026-09-06 son **submódulos git** de este repositorio (`.gitmodules`; cada
-área conserva su propio repo e historial; las que aún no tienen remote usan la URL
-relativa `../Academic_Class-<Area>.git`). Cada `Academic_Class` es un contenedor de
-`course_NN_<slug>/`. El tooling de `scripts/` sigue recibiendo la **ruta del curso**
-como argumento. Flujo: commit dentro del área → `git add areas/<area>` + commit aquí
-(mueve el puntero). Clon nuevo: `git clone --recurse-submodules`.
+**Los cursos reales NO viven en el núcleo del framework.** Viven en `docencia/` (submódulo,
+repo `Academic_Class`): `cursos/<slug>/` (50), `dictados/<clave>/` y `_inbox/` (legado por
+clasificar). Lo privado (estudiantes, calificaciones, evidencias) vive en `registro/`, repo
+hermano git-ignorado que **nunca** tiene remote público (el doctor lo comprueba). Flujo:
+commit dentro de `docencia/` → `git add docencia` + commit aquí (mueve el puntero). Clon
+nuevo: `git clone --recurse-submodules`. Los scripts de `scripts/` reciben `CURSO` y
+`DICTADO` como **slug o ruta**.
 
-No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructura)
-+ compilar a PDF y mirarlo + `./scripts/doctor.sh` (entorno **y** la normativa de
-archivos: llama a `core/archivos.py validar "10 Class"`, M7 2026-09-15).
+No hay suite de tests. Verificación = `./scripts/validate.sh CURSO|--todos` (estructura y
+registros) + compilar a PDF y mirarlo + `./scripts/doctor.sh` (entorno, `validate --todos`,
+verificadores de vistas y enlaces, `_inbox`, binarios, remote de `registro/` **y** la
+normativa de archivos vía `core/archivos.py validar "10 Class"`).
 
-## El estándar (resumen; detalle en README.md)
+## El estándar (resumen; detalle en `docs/09-estandar-docencia.md`)
 
-- Un `Academic_Class-<Area>/` contiene `course_NN_<slug>/` directamente.
-- Cada curso tiene **10 carpetas 00–09** + `README.md`:
-  `00_ADMINISTRACION 01_PLANIFICACION 02_CONTENIDO 03_SESIONES 04_EVALUACIONES
-  05_ESTUDIANTES 06_RECURSOS 07_MULTIMEDIA 08_INVESTIGACION 09_SEMESTRES`.
-- Cada sesión (`03_SESIONES/SNN_<slug>/`) tiene la anatomía
-  `01_Antes 02_Clase 03_Actividad 04_Evaluacion 05_Despues 06_Recursos 07_Notas`
-  + `metadata.yml` + `README.md`. **El deck (`.tex`/`.qmd`) va en `02_Clase/`.**
-- `metadata.yml` es el **registro de la sesión** (`meta/NORMATIVA_ARCHIVOS.md` §7):
-  línea 1 `# <ruta en el repo del área> — registro de la sesión NN de <id del curso>`,
-  núcleo `id · titulo · estado` (`estado` del ciclo §2.1: `borrador | activo | hecho`).
-  El número NO se declara: lo da la carpeta `SNN` (`stats.sh` lo deriva de ahí).
-  `slug→id` y `numero` retirado en M7 (2026-09-15); `validate.sh` exige `id/titulo/estado`.
-- Las **notas de estudio** de `02_CONTENIDO/**/*.md` son régimen del vault (§10.4):
+- **Curso** = `docencia/cursos/<slug>/` con `curso.yml` (registro; sucesor de `temario.yml`)
+  y `README.md` (generado). Slug kebab-case **sin número**: el orden de malla es
+  `malla.orden`. Carpetas de **lista cerrada** `01-diseno · 02-contenido · 03-sesiones ·
+  04-evaluaciones · 05-recursos`, que existen solo con contenido; carpeta desconocida o
+  vacía = error de `validate.sh`; **sin `.gitkeep`**.
+- **`curso.yml`** (normativa §7): línea 1 de identidad; núcleo `id` (= carpeta) · `titulo` ·
+  `estado` (`borrador | activo | archivado`) · `tipo` (`asignatura | herramienta |
+  nivelacion | taller`); más `alias[]` (ids antiguos), `area[]`, `malla`, `materia_web`,
+  `prerrequisitos`, `etiqueta`, `dominio_fuat`, `unidades[]`, `bibliografia[]`,
+  `banco_examenes[]`, `datasets[]`, `ajeno[]`. `validate.sh` exige el núcleo.
+- **Sesión** = `03-sesiones/sNN-<slug>/` con `sesion.yml` (`id` = carpeta, `titulo`, `tipo`,
+  `estado`, `artefacto`…), `guion.md` (plan + notas + retrospectiva) y **el artefacto que
+  exige el tipo**: `clase` → `deck.tex|qmd`; `laboratorio` → `cuaderno.ipynb` /
+  `script.do|.R|.py|.rmd`; `taller` → `libro.ods|xlsx`; `evaluacion` → `evaluacion.tex`.
+  Nada más es obligatorio; no hay subcarpetas de anatomía. El número lo da la carpeta.
+  `revisar: <motivo>` rebaja a aviso una incoherencia tipo/artefacto.
+- **Dictado** = `docencia/dictados/<AAAA-ciclo>-<institucion>-<materia>/dictado.yml`
+  (`sesiones: [{orden, curso, sesion, web}]`, `web: {materia, edicion}`; puede cruzar varios
+  cursos). Congelar = `tag dictado/<clave>/<sesion>`; `publicacion/<web>/` es producto
+  git-ignorado; la web lo enlaza por hardlink. `legado: true` = dictado anterior al
+  estándar, no se republica.
+- Las **notas de estudio** de `02-contenido/**/*.md` son régimen del vault (§10.4):
   nombre kebab (`1-2-tema.md`) y frontmatter `tipo: apunte · titulo · estado · tags`.
-  Las normaliza `scripts/normalizar-notas.py --aplicar` (reescribe wikilinks, enlaces y
-  los `archivo:` de `temario.yml`); `temario.py generar --que esqueleto` ya crea así.
-- Lo **ajeno** (plantillas LaTeX de terceros, fuentes, clases descargadas) vive en un
-  `vendor/` (`06_RECURSOS/vendor/`, `syllabus/vendor/`): sin cabecera propia, fuera del
-  validador, anotado en `ajeno:` del `temario.yml` (sale en el README del curso).
-- `09_SEMESTRES/<AAAA-ciclo>/` = cada dictado: registro privado (estudiantes,
-  calificaciones, evidencias) **+ publicación** (MOOC por sesión, se congela poco a
-  poco). Fusiona las antiguas `09_PUBLICACION`/`10_ARCHIVO`/`11_SEMESTRES`.
+  `normalizar-notas.py --aplicar` las normaliza; `archivo:` en `curso.yml` es `null`
+  hasta que la nota existe (**sin esqueletos**).
+- Lo **ajeno** (plantillas de terceros, fuentes, clases descargadas) vive en `vendor/`
+  (`05-recursos/vendor/`): sin cabecera propia, fuera del validador, anotado en `ajeno:`.
+- **Nomenclatura**: kebab-case ASCII minúsculas en carpetas y archivos; claves `snake_case`;
+  períodos `AAAA-i`/`AAAA-ii`. Fuera de norma solo `vendor/` y `_inbox/`.
 
 ## Arquitectura del repo
 
 - `config/course.yml` — valores por defecto del docente (identidad, logo, tema,
   compilador). YAML **plano**; los scripts lo parsean con grep/sed (no anidar).
 - `scripts/` — automatización. La lógica compartida está en `scripts/lib/common.sh`
-  (colores, `config_get`, `slugify`, `latex_engine`, `compile_tex`, y los helpers
-  `is_course`/`session_dir`/`list_sessions`/`list_courses` que reciben rutas). Los
-  scripts de entrada solo orquestan. Nuevos parámetros → `config/course.yml`.
+  (rutas `DOCENCIA_DIR/CURSOS_DIR/DICTADOS_DIR/INBOX_DIR/REGISTRO_DIR`, `yaml_get`,
+  `config_get`, `slugify`, `latex_engine`, `compile_tex`, y los helpers `is_course`/
+  `course_dir`/`dictado_dir`/`session_dir`/`list_sessions`/`list_courses`/`list_dictados`/
+  `session_artifact`, que aceptan slug o ruta). Los scripts de entrada solo orquestan.
+  Nuevos parámetros → `config/course.yml`.
 **Plataforma editorial (rediseño 2026-07-23, ver `docs/00-arquitectura.md` — fuente de verdad arquitectónica). Motor LuaLaTeX exclusivo (migración 2026). Capas, cada una con responsabilidad única:**
 
 - `styles/` — **identidad visual única** (`academic.sty` carga colores, fuentes
@@ -110,16 +113,19 @@ archivos: llama a `core/archivos.py validar "10 Class"`, M7 2026-09-15).
 - `themes/` — tema Beamer propio `beamer{,color,font,inner,outer}themeacademic` (minimalista; consume `styles/`).
   Se llama `academic` en minúsculas (`\usetheme{academic}`) desde M7 (2026-09-15): nombres de archivo
   en minúsculas como el resto del framework.
-- `templates/` — documentos vacíos, **sin diseño** (`presentation/`, `exam/` 12 tipos, `report/`); solo `\documentclass{academic-*}` + contenido.
-- `scaffolds/` — esqueletos de **carpetas** (no compilables): `course` (00–09), `session` (01_Antes…07_Notas), `period` (dictado: registro privado + publicación MOOC).
-- `libraries/` — bancos compartidos (`Banco_*`); `bibliography/` — `.bib`.
-- `assets/branding/` — logo canónico. `examples/` — ejemplos compilados. `config/` — `course.yml` (datos) + `palette.tex` (color); las tipografías viven en `styles/academic-fonts.sty`.
-- `docs/` — documentación técnica (`00-arquitectura.md` es la canónica).
+- `templates/` — documentos vacíos, **sin diseño** (`presentation/` 8 tipos, `exam/` 12 tipos, `report/` 4); solo `\documentclass{academic-*}` + contenido.
+- `scaffolds/` — **registros mínimos**, no árboles de carpetas (M5): `curso/` (`curso.yml`, `README.md`),
+  `sesion/` (`sesion.yml`, `guion.md`, `deck.tex`, `deck.qmd`), `dictado/` (`dictado.yml`).
+- `bibliography/` — `.bib`. `assets/branding/` — logo canónico. `examples/` — ejemplos compilados.
+  `config/` — `course.yml` (datos) + `palette.tex` (color).
+- `docs/` — documentación técnica (`00-arquitectura.md` para la plataforma; `09-estandar-docencia.md` para el contenido).
+- `docencia/` — submódulo de contenido; `registro/` — repo privado hermano (ignorado).
 
 > Nota histórica: se retiraron `evaluaciones/` (→ `academic-exam` + `templates/exam/`),
-> `_PLANTILLAS/` (→ `templates/` + `scaffolds/`) y `_BIBLIOTECA/` (→ `libraries/` +
-> `bibliography/`) en el cutover del rediseño; el motor pasó de pdfLaTeX a XeLaTeX
-> y, en la migración de 2026, a **LuaLaTeX** (único motor soportado).
+> `_PLANTILLAS/` (→ `templates/` + `scaffolds/`) y `_BIBLIOTECA/` (→ `bibliography/`) en el
+> cutover del rediseño; `libraries/Banco_*` (vacíos) y `scaffolds/{course,session,period}`
+> (árboles 00–09) se retiraron en la reorganización de 2026-09-15; el motor pasó de pdfLaTeX
+> a XeLaTeX y, en la migración de 2026, a **LuaLaTeX** (único motor soportado).
 
 ## Comandos
 
@@ -167,64 +173,78 @@ bash -n scripts/<archivo>.sh            # uno por invocación: con varios archiv
 si no existe, usa el motor detectado por `latex_engine()` (comentario `%!TEX`, clase
 `yaac-*`, `fontspec`) dos veces.
 
+`compile_tex` prefiere el compilador universal del workspace
+(`~/Documents/scripts_for_latex/script_compilar_latex/main.sh`, autodetecta motor);
+si no existe, usa el motor detectado por `latex_engine()` (comentario `%!TEX`, clase
+`yaac-*`, `fontspec`) dos veces. Ojo: el compilador universal **borra el PDF** cuando la
+compilación falla; si es un PDF versionado, se recupera con `git checkout`.
+
 ## Convenciones
 
-- **Español** en todo. **Nombres de carpeta ASCII** (sin tildes) por portabilidad y
-  scripts. **`.gitkeep`** en carpetas vacías.
-- **Homogeneidad total**: al estandarizar se convierte todo al estándar (incluida la
-  anatomía interna de sesiones); si un deck deja de compilar, se reconstruye.
+- **Español** en todo. **kebab-case ASCII** (sin tildes ni espacios) en carpetas y archivos
+  nuevos. **Sin carpetas vacías** (error del validador; ya no se usan `.gitkeep`).
+- **Homogeneidad total**: al estandarizar se convierte todo al estándar; si un deck deja
+  de compilar, se reconstruye.
 - Los decks Beamer son **autocontenidos** (preámbulo propio + copia local del logo).
-  Al mover un deck, mover su carpeta **completa** (los assets son hermanos del `.tex`).
-- **Reversibilidad por git (todo)**: tanto este framework como los árboles
-  `areas/Academic_Class-*` son repos Git (submódulos; se hace `git init` donde falte). La reversibilidad
-  de cualquier reorganización es por git: commit del estado previo → migrar → commit.
-  Ya no se usan backups + `_ESTANDARIZACION/UNDO*.sh`.
+  Al mover una sesión, mover su carpeta **completa** (los assets son hermanos del `.tex`).
+- **Reversibilidad por git (todo)**: el framework, `docencia/` y `registro/` son repos.
+  Cualquier reorganización sigue el ciclo (auditoría → propuesta → aprobación → tag → cambio
+  con dry-run → validate → doctor → commit) y deja su mapa de rutas en `docencia/migracion/`
+  y su bitácora con `UNDO.sh` en `meta/reparaciones/`.
+- En zsh y con rutas que llevan espacios (`10 Class`): iterar con `while read`, nunca con
+  `for x in $(…)`; `bash -n` comprueba **un** archivo por invocación.
 - `*.sdr/` = metadatos de KOReader; ignorar.
 
 ## Estado
 
-- **Estándar replicado a las 23 áreas**: los **61/61** `course_*` de los
-  `Academic_Class-*` cumplen el 00–09 (`00_ADMINISTRACION`…`09_SEMESTRES`). La
-  réplica ya no está pendiente; para un curso nuevo, usar `new-course.sh`.
-- Los decks del piloto `session_02`/`session_06` referencian imágenes no incluidas
-  (rotura previa); se reconstruyen al usarlos, no se "arreglan" borrando contenido.
+- **50 cursos** en `docencia/cursos/` cumplen el estándar (`validate.sh --todos`: 0 errores;
+  67 sesiones tipadas; 2 dictados de Metodología, 2025-I marcado `legado`).
+- **Pendiente del docente** (heredado, no de la migración): 5 de los 6 decks Beamer
+  heredados probados no compilan (logo `cau-logo.png` ausente o `%!TEX program = xelatex`);
+  se reconstruyen al usarlos, no se "arreglan" borrando contenido. 9 binarios > 5 MB
+  (avisa el doctor). `_inbox/` (401 archivos) por clasificar. 20 datasets aterrizados en
+  `02 analysis/data/raw/_docencia_por_catalogar/` por catalogar.
+- **Pendiente del usuario**: push de M0 desde `areas_originales/`, crear el remote
+  `achalmed/Academic_Class` y hacer push de `docencia/` y del framework; después, borrar
+  `areas_originales/`.
 
-## El currículo: `temario.yml` (F5.1, 2026-09-06)
+## El currículo: `curso.yml` (F5.1, 2026-09-06; sucesor de `temario.yml` desde M4, 2026-09-15)
 
-Cada `course_NN_<slug_snake>/` (los 9 que estaban fuera de patrón se renombraron en M7,
-2026-09-15) lleva un **`temario.yml`**, que es el **registro del curso** (normativa §7): línea 1
-de identidad, núcleo `id` (antes `curso`), `titulo`, `estado` (`activo` si tiene dictados o
-sesiones hechas; si no, `borrador`), más `emoji`, `descripcion`, `area`, `rol: docente`, `nivel`,
-`semestre`, `prerrequisitos`, `etiqueta`, enlaces (`web_slug` a `04 index/cursos/<slug>`, `dominio_fuat` al dominio
-del learning-skill) y **`unidades[].temas[]`** (id, título, `archivo` en `02_CONTENIDO`,
-`recursos[]` opcionales: apunte, simulador, libro por `calibre_id`, post, examen).
-**Es la única fuente**: el `README.md` del curso, los esqueletos de `02_CONTENIDO`, la
-sección «Contenidos / Sílabo» de la ficha web, `prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md`
-y `05 tasks/temarios-cursos.md` (nota `tipo: checklist` con marca `GENERADO`) se generan con `scripts/temario-generar.sh`.
-Regla: **edita el temario, no las vistas**; el doctor avisa si un README se desfasó.
-`migrar` solo se usa para un curso heredado sin temario (lee su README o sus carpetas).
-**Bibliografía (F5.4):** el material bibliográfico externo de un curso NO vive en `06_RECURSOS`: vive en
-Calibre y el temario lo cita en `bibliografia: [{calibre_id, titulo, autor, origen}]` (lo escribe
-`scripts_for_fuentes/ingesta_cursos/main.sh`). En `06_RECURSOS` quedan solo datasets, plantillas y
-material propio del docente. **Subir no es catalogar:** antes de añadir, la suite busca el libro en Calibre
-(muchos ya están: el temario debe citar el id existente, no una copia); lo nuevo entra sin metadatos inventados y
-se cataloga con el patrón de la biblioteca (`Nombre, Apellidos`, vocabulario cerrado de etiquetas, serie
-`<Autor> - <Curso>`, clasificador, item type) mediante `scripts_for_calibre/script_catalogacion_biblioteca/`.
+Cada `docencia/cursos/<slug>/` lleva un **`curso.yml`**, registro del curso (normativa §7):
+línea 1 de identidad, núcleo `id · titulo · estado · tipo`, más `alias`, `emoji`,
+`descripcion`, `area[]`, `rol: docente`, `nivel`, `malla`, `prerrequisitos`, `etiqueta`,
+enlaces (`materia_web` a `04 index/cursos/<materia>`, `dominio_fuat` al dominio del
+learning-skill) y **`unidades[].temas[]`** (id, título, `archivo` en `02-contenido` o
+`null`, `recursos[]` opcionales: apunte, simulador, libro por `calibre_id`, post, examen).
+**Es la única fuente**: el `README.md` del curso, la sección «Contenidos / Sílabo» de la
+ficha web, `prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md` y
+`05 tasks/temarios-cursos.md` (nota `tipo: checklist` con marca `GENERADO`) se generan con
+`scripts/temario-generar.sh`. Regla: **edita el registro, no las vistas**; el doctor avisa
+si un README se desfasó. `migrar` solo se usa para un curso heredado sin `curso.yml`.
+**Bibliografía (F5.4):** el material bibliográfico externo NO vive en `05-recursos`: vive en
+Calibre y el registro lo cita en `bibliografia: [{calibre_id, titulo, autor, origen}]` (lo
+escribe `scripts_for_fuentes/ingesta_cursos/main.sh`). En `05-recursos` quedan datasets
+pequeños, talleres, plantillas y material propio. **Subir no es catalogar:** antes de añadir,
+la suite busca el libro en Calibre; lo nuevo se cataloga con el patrón de la biblioteca
+mediante `scripts_for_calibre/script_catalogacion_biblioteca/`.
 
-## El dictado y la web: `dictado.yml` + hardlinks (F5.2, 2026-09-06)
+## El dictado y la web: `dictado.yml` + hardlinks (F5.2, 2026-09-06; `dictados/` desde M4)
 
-Un dictado (`09_SEMESTRES/<periodo>/`) puede componerse de sesiones de **varios cursos** (Metodología
-2026-I = monografías + seminario + APA). Su manifiesto `dictado.yml` lista `sesiones: [{orden, curso, sesion, web}]`
-y el destino `web: {curso, edicion}`. Flujo: `publish-session.sh` congela cada sesión en `publicacion/SNN/`
-→ `publish-web.sh` enlaza esos archivos **por hardlink** en `04 index/cursos/<curso>/<edicion>/<sesion>/`
-(un solo inodo, dos canales; la web nunca tiene copias) y crea `index.qmd`/`_links.md` solo si faltan.
-Regla D5: **el framework es la fuente**; lo que aparece en la web sale de un módulo publicado. El doctor
-avisa si un dictado tiene copias o huérfanos en la web. Las fichas web sin curso ni ediciones llevan `draft: true`.
+Un dictado (`docencia/dictados/<AAAA-ciclo>-<institucion>-<materia>/`) puede componerse de
+sesiones de **varios cursos** (Metodología 2026-I = monografías + seminario + APA + LaTeX).
+Su manifiesto `dictado.yml` lista `sesiones: [{orden, curso, sesion, web}]` y el destino
+`web: {materia, edicion}`. Flujo: `publish-session.sh` congela cada sesión (tag
+`dictado/<clave>/<sesion>` + producto en `publicacion/<web>/`, git-ignorado) →
+`publish-web.sh` enlaza esos archivos **por hardlink** en
+`04 index/cursos/<materia>/<edicion>/<web>/` (un solo inodo, dos canales; la web nunca
+tiene copias) y crea `index.qmd`/`_links.md` solo si faltan. Regla D5: **el framework es la
+fuente**; lo que aparece en la web sale de un módulo publicado. El doctor avisa si un dictado
+tiene copias o huérfanos en la web. Las fichas web sin curso ni ediciones llevan `draft: true`.
 
 ## Ecosistema de aprendizaje (contexto externo)
 
-Las áreas contienen **solo docencia** (F5.0, 2026-09-06): los cursos que Edison toma y
+`docencia/` contiene **solo docencia** (F5.0, 2026-09-06): los cursos que Edison toma y
 sus **apuntes de estudio** viven en `01 notes/40-cursos-y-formacion/<curso>/`
 (learning-skill, preset `apuntes_clase`) y enlazan al tema del curso docente en
-`02_CONTENIDO`. El contrato entre piezas está en `~/Documents/prompts/ECOSISTEMA_APRENDIZAJE.md`;
-si un cambio del estándar 00–09 afecta a los apuntes, pasa por su checklist de propagación.
+`02-contenido`. El contrato entre piezas está en `~/Documents/prompts/ECOSISTEMA_APRENDIZAJE.md`;
+si un cambio del estándar afecta a los apuntes, pasa por su checklist de propagación.

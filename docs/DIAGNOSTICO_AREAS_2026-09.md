@@ -1,15 +1,15 @@
 ---
 tipo: doc
 titulo: "Diagnóstico de `areas/` y propuesta de reorganización (2026-09-15)"
-estado: borrador
+estado: hecho
 fecha: 2026-09-15
 ---
 # Diagnóstico de `areas/` y propuesta de reorganización
 
 > Ciclo de trabajo (`prompts/00 metodo/CICLO.md`), nivel **profundo**: el cambio toca 23
 > repositorios, la web, el learning-skill, la biblioteca y `02 analysis`. Este documento
-> cubre diagnóstico → diseño (pasos 2–8). La ejecución (fases M0–M8 de §6) espera
-> aprobación. Todas las cifras se midieron sobre el árbol real el 2026-09-15 (`estructura.txt`
+> cubre diagnóstico → diseño (pasos 2–8). Las fases M0–M8 de §6 se ejecutaron el 2026-09-15
+> (§8; bitácoras `meta/reparaciones/R1_areas_…` a `R8_leccion_…`; tag `reorg-2026-09-done`). Todas las cifras se midieron sobre el árbol real el 2026-09-15 (`estructura.txt`
 > generado a las 08:08 más un censo por script sobre `areas/`, excluyendo `.git`).
 
 ## 0. Resumen ejecutivo
@@ -660,3 +660,22 @@ Bitácora: `meta/reparaciones/R6_referencias_2026-09-15/`.
 Hallazgo que hereda el docente: de los 20 decks Beamer heredados, 5 de los 6 probados no compilan (logo `cau-logo.png`
 ausente o `%!TEX program = xelatex`), rotura anterior a la reorganización ya anotada en `CLAUDE.md`; el compilador universal
 borra el PDF al fallar, así que se restauraron de git. La verificación completa está en `meta/reparaciones/R7_verificacion_2026-09-15/`.
+
+### M8 · Lección escrita (2026-09-15, hecho)
+
+| Pieza (§6 M8) | Qué se hizo |
+|---|---|
+| `docs/09-estandar-00-09.md` | `git mv` → `docs/09-estandar-docencia.md` (historial conservado) y reescrito con §4 y §7: dónde vive cada cosa, curso, sesión tipada, dictado y registro, nomenclatura, relación con el ecosistema, 14 reglas, herramientas |
+| `README.md` del framework | reescrito: estructura por capas con `docencia/` y `registro/`, resumen del estándar, inicio rápido con la CLI de M5 (slug o ruta), tooling, convenciones, documentación |
+| `CLAUDE.md` del framework | cuerpo reescrito (la nota «Migración en curso» pasa a «Reorganización 2026-09-15 (hecha)»; el bloque «Comandos» de M5 se conserva íntegro); estado real: 50 cursos, 67 sesiones, pendientes del docente y del usuario |
+| `docs/00-arquitectura.md` | capa de contenido, árbol (`scaffolds/` como registros, `docencia/`, `registro/`, scripts actuales), tabla de responsabilidades, flujo de un documento y D5 actualizados; §1, §8 y §9 marcados como históricos (rediseño de julio) |
+| `ARQUITECTURA_DOCUMENTAL.md` | fila del tipo 22 y tabla «Sistema que lo implementa»: el esquema es el estándar de docencia (`curso.yml`, `sesion.yml` + `guion.md` + artefacto, `dictado.yml`) |
+| `05 docencia/` | `prompt_02_diseno_de_sesion` llena `sesion.yml` y `guion.md` (no la anatomía); `prompt_01` (comando y normativo); preset `apuntes_clase` (rutas); `README.md` regenerado |
+| `meta/` | `DIAGNOSTICO_INTEGRAL_2026-09.md`: F5 cerrada con la nueva forma y F5a superada; `NORMATIVA_ARCHIVOS.md` (`05-recursos/vendor/`, `02-contenido`), `ARQUITECTURA.md`, `MODELO_METADATOS.md`, `consultar/README.md` |
+| Restos vivos | `CLAUDE.md` del workspace, `ECOSISTEMA_APRENDIZAJE.md` (6 pasajes), `01 notes/40-cursos-y-formacion/README.md`, `core/archivos.py` (A14 reconoce `02-contenido`), `temario.py`, `temario-generar.sh`, `ingesta_cursos/config.sh`, `02 analysis/docs/INTEGRACION_ECOSISTEMA.md` |
+| Este documento | `estado: hecho`; cabecera con el enlace a las bitácoras |
+
+Se dejan a propósito, por históricos: `MIGRACION_LUALATEX.md`, `new-period.sh` (aviso de retiro), §1/§8/§9 de
+`00-arquitectura.md`, los diagnósticos y planes anteriores de `meta/`, `PROGRESO.md`, los reportes TSV y fichas de
+Calibre (registros) y `prompt_09` (sus «pasos 00–09» son los del Método Documental, no este estándar).
+Bitácora: `meta/reparaciones/R8_leccion_2026-09-15_121422/` (copias previas en `antes/`, parches por repo, `UNDO.sh`).

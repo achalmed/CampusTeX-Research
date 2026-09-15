@@ -9,7 +9,7 @@ Uso (desde cualquier sitio; opera sobre todas las áreas o sobre los cursos indi
   temario.py verificar [CURSO_DIR ...]              exit 1 si el README de algún curso no coincide con su temario
 
 Vistas generadas (`generar`):
-  readme     README.md del curso (formato canónico del estándar 00–09)
+  readme     README.md del curso (formato canónico del estándar de docencia)
   esqueleto  RETIRADO en M5: la nota se escribe cuando existe (archivo: null hasta entonces, §7)
   web        04 index/cursos/<materia_web>/index.qmd: sección «Contenidos / Sílabo» entre marcadores
   skill      prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md + puntero en el dominio

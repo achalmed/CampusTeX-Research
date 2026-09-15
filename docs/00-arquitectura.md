@@ -5,9 +5,13 @@ estado: activo
 ---
 # 00 · Arquitectura del Academic_Class_Framework
 
-> **Estado:** blueprint del rediseño integral (2026-07-23). Define la
-> arquitectura objetivo; la implementación es por fases (§10). Este documento es
-> la fuente de verdad arquitectónica: toda decisión estructural se justifica aquí.
+> **Estado:** blueprint del rediseño integral (2026-07-23), implementado. Este documento es
+> la fuente de verdad arquitectónica de la **plataforma editorial**: toda decisión estructural
+> se justifica aquí. **Actualización 2026-09-15:** el contenido docente ya no vive en 23
+> `Academic_Class-*` con el estándar 00–09 sino en el submódulo `docencia/` con el estándar de
+> [`09-estandar-docencia.md`](09-estandar-docencia.md) (`DIAGNOSTICO_AREAS_2026-09.md`); `libraries/`
+> y los scaffolds de árbol se retiraron. Las capas LaTeX (§3–§6) no cambiaron; el roadmap (§8)
+> y §9 son históricos.
 
 El `Academic_Class_Framework` es la **plataforma editorial universitaria** con la
 que Edison Achalma produce **todo** su material docente. No es un conjunto de
@@ -67,8 +71,8 @@ Ninguno es fatal hoy, pero todos escalan mal. El rediseño los elimina de raíz.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
-│  CONTENIDO / PROYECTOS   (fuera del framework: los 23 Academic_Class)  │  ← solo selecciona y rellena
-│  course_NN/03_SESIONES/…/clase.tex   ·   course_NN/04_EVALUACIONES/…   │
+│  CONTENIDO   (submódulo docencia/: cursos/<slug>/)                    │  ← solo selecciona y rellena
+│  03-sesiones/sNN-<slug>/deck.tex  ·  04-evaluaciones/*.tex  ·  01-diseno/  │
 └───────────────────────────────▲──────────────────────────────────────┘
                                 │ \documentclass{academic-beamer|exam|report|poster}
 ┌───────────────────────────────┴──────────────────────────────────────┐
@@ -86,7 +90,7 @@ Ninguno es fatal hoy, pero todos escalan mal. El rediseño los elimina de raíz.
                                 │ leen valores de
 ┌───────────────────────────────┴──────────────────────────────────────┐
 │  INFRAESTRUCTURA   config/ (paleta, fuentes, espaciados)  ·  assets/   │  ← el punto de cambio
-│  bibliography/  ·  libraries/  ·  scripts/                             │
+│  bibliography/  ·  scaffolds/  ·  scripts/                             │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -147,14 +151,13 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 │   │   ├── silabo/  calendario/  manual/  guia/  nota-docente/  guia-lectura/  rubrica/
 │   └── poster/                 · \documentclass{academic-poster}
 │
-├── scaffolds/                   ← ESQUELETOS DE CARPETAS (filesystem, NO compilables)
-│   ├── course/                  · árbol 00–09 (estándar del Academic_Class)
-│   ├── session/                 · anatomía 01_Antes…07_Notas
-│   └── period/                  · 09_SEMESTRES/<periodo> (registro privado + publicación MOOC)
+├── scaffolds/                   ← REGISTROS MÍNIMOS (no árboles; M5 2026-09-15)
+│   ├── curso/                   · curso.yml + README.md
+│   ├── sesion/                  · sesion.yml + guion.md + deck.tex | deck.qmd
+│   └── dictado/                 · dictado.yml
 │
-├── libraries/                   ← BANCOS reutilizables (contenido compartido entre cursos)
-│   ├── Banco_Preguntas/  Banco_Ejercicios/  Banco_Diapositivas/
-│   ├── Banco_Casos/  Banco_Datasets/  Banco_Imagenes/  Banco_Lecturas/
+├── docencia/                    ← SUBMÓDULO de contenido (repo Academic_Class): cursos/ · dictados/ · _inbox/ · migracion/
+├── registro/                    ← repo privado hermano, git-ignorado (estudiantes, calificaciones, evidencias)
 │
 ├── bibliography/                ← todos los .bib (uno por área o uno maestro)
 │   └── academic.bib
@@ -164,9 +167,11 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 │
 ├── scripts/                     ← AUTOMATIZACIÓN (LuaLaTeX)
 │   ├── lib/                     · common.sh · compile.sh · args.sh · clean.sh · env.sh · logging.sh
-│   ├── new-course.sh  new-session.sh  new-period.sh        · scaffolds de carpetas
-│   ├── new-presentation.sh  new-evaluacion.sh  new-report.sh  new-poster.sh · nuevos documentos desde templates/
-│   ├── build.sh                · compila cualquier .tex con LuaLaTeX (reemplaza build-session/course/evaluacion)
+│   ├── new-course.sh  new-session.sh  new-dictado.sh      · registros desde scaffolds/ (new-period.sh: retirado)
+│   ├── new-presentation.sh  new-evaluacion.sh  new-report.sh · nuevos documentos desde templates/
+│   ├── build.sh  build-session.sh  build-course.sh          · LuaLaTeX (o Quarto) sobre un .tex, el artefacto de una sesión o un curso
+│   ├── temario.py / temario-generar.sh  enlazar.py  normalizar-*.py · vistas desde curso.yml, enlaces, normativa
+│   ├── publish-session.sh  publish-web.sh (publicar-web.py) · congelar por tag + producto; hardlinks a la web
 │   ├── validate.sh  stats.sh  doctor.sh  clean.sh
 │
 ├── examples/                    ← EJEMPLOS compilados (un .tex + .pdf por clase/tipo; los "tests")
@@ -175,7 +180,7 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 ├── docs/                        ← DOCUMENTACIÓN técnica (numerada)
 │   ├── 00-arquitectura.md (este) · 01-flujo-compilacion.md · 02-identidad-visual.md
 │   ├── 03-clases.md · 04-tema-beamer.md · 05-evaluaciones.md · 06-plantillas.md
-│   ├── 07-tipografia.md · 08-crear-tipo-documento.md · 09-scaffolds-y-estandar.md
+│   ├── 07-tipografia.md · 08-crear-tipo-documento.md · 09-estandar-docencia.md · DIAGNOSTICO_AREAS_2026-09.md
 │
 ├── config/ (arriba)  ·  Makefile  ·  README.md  ·  CLAUDE.md  ·  .claude/
 ```
@@ -189,8 +194,8 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 | `themes/` | el tema Beamer (5 archivos) | identidad propia — la toma de `styles/` |
 | `config/` | valores tunables (paleta, fuentes, espaciados) + datos del docente | lógica |
 | `templates/` | documentos vacíos que solo llaman a una clase | diseño, estilos |
-| `scaffolds/` | esqueletos de carpetas del estándar 00–09 | documentos compilables |
-| `libraries/` | bancos de contenido reutilizable | plantillas, clases |
+| `scaffolds/` | registros mínimos (`curso.yml`, `sesion.yml`, `guion.md`, `dictado.yml`) del estándar de docencia | documentos compilables, árboles de carpetas |
+| `docencia/` | el contenido docente (submódulo) | tooling, clases, estilos |
 | `bibliography/` | archivos `.bib` | otra cosa |
 | `assets/` | logos, iconos, fuentes | código |
 | `scripts/` | automatización (crear/compilar/validar) | contenido, estilos |
@@ -204,7 +209,8 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 **Flujo de un documento (p. ej. una clase):**
 
 1. El docente copia `templates/presentation/clase/` a
-   `course_NN/03_SESIONES/SNN/02_Clase/` (o usa `scripts/new-presentation.sh`).
+   `docencia/cursos/<slug>/03-sesiones/sNN-<slug>/deck.tex` (o usa `scripts/new-presentation.sh`,
+   que además declara `artefacto: deck.tex` en `sesion.yml`).
 2. El maestro `.tex` hace `\documentclass{academic-beamer}` y rellena contenido.
    **No define ni un color.**
 3. `academic-beamer.cls` carga `themes/beamerthemeacademic.sty`.
@@ -220,7 +226,7 @@ en un archivo re-tinta diapositivas, exámenes, manuales y pósters a la vez.**
 
 **Regla de dependencias (acíclica):**
 `config/` ← `styles/` ← {`classes/`, `themes/`} ← `templates/` ← documento.
-Ninguna flecha apunta hacia arriba. `scripts/`, `assets/`, `libraries/`,
+Ninguna flecha apunta hacia arriba. `scripts/`, `assets/`, `scaffolds/`,
 `bibliography/` son transversales (los usa quien los necesite; no dependen de
 nadie del árbol de estilo).
 
@@ -258,10 +264,11 @@ saca el diseño.
 
 **D5 · `templates/` único; `scaffolds/` aparte.**
 Se elimina la duplicidad `evaluaciones/plantillas/` vs `_PLANTILLAS/`: **todas** las
-plantillas de documento viven en `templates/`. Los esqueletos de **carpetas** (el
-árbol 00–09, la anatomía de sesión) son otra responsabilidad y viven en
-`scaffolds/`. "Plantilla de documento" (algo que compilas) ≠ "esqueleto de
-carpetas" (algo que copias para organizar).
+plantillas de documento viven en `templates/`. Los **registros** con los que nace un curso,
+una sesión o un dictado (`curso.yml`, `sesion.yml` + `guion.md`, `dictado.yml`) son otra
+responsabilidad y viven en `scaffolds/`. "Plantilla de documento" (algo que compilas) ≠
+"scaffold" (algo que copias para organizar). Desde 2026-09-15 el scaffold ya no es un árbol
+de carpetas: las carpetas del curso se crean al primer uso.
 
 **D6 · No duplicar `Academic_Writing_Framework`.**
 Tesis, monografías, ensayos y artículos son documentos de **redacción larga** con
@@ -293,13 +300,13 @@ aspecto sea editable por separado.
 | Dos motores (pdfLaTeX + multi-motor Beamer) | Un solo motor: LuaLaTeX |
 | Plantillas duplicadas (`_PLANTILLAS` vs `evaluaciones`) | Un único `templates/` |
 | Diseño mezclado en plantillas | Diseño solo en `classes/` + `styles/`; plantillas vacías |
-| `_PLANTILLAS/` hace dos trabajos | `templates/` (documentos) y `scaffolds/` (carpetas) separados |
+| `_PLANTILLAS/` hace dos trabajos | `templates/` (documentos) y `scaffolds/` (registros) separados |
 | Sin capa de identidad | `styles/` como origen único de verdad visual |
 | Cobertura: clases + exámenes | Cobertura: presentaciones (8 tipos), exámenes (12), reports (7), pósters |
 
 ---
 
-## 8. Roadmap de implementación por fases
+## 8. Roadmap de implementación por fases (histórico, 2026-07; cumplido)
 
 Cada fase compila y se verifica antes de la siguiente (no hay test suite: se
 compila y se mira el PDF; los `examples/` son los "tests").
@@ -329,7 +336,7 @@ Compatibilidad: mientras dure la migración, el tooling del estándar 00–09
 
 ---
 
-## 9. Prompts que se actualizan con el rediseño
+## 9. Prompts que se actualizan con el rediseño (histórico; las rutas 00–09 citadas ya no existen)
 
 - `prompts/05 docencia/learning-skill/prompt_resolucion_examenes_plantillas.md`
   → referenciar `academic-exam.cls` (no `evaluacion.cls`), las nuevas rutas
