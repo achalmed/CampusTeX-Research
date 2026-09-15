@@ -39,17 +39,17 @@ if [[ -e "$MOD" ]]; then
   [[ "$REFRESCAR" == 1 ]] || die "Ya publicado: $MOD (añade --refrescar para re-publicar)"
   rm -rf "$MOD"
 fi
-mkdir -p "$MOD"/{slides,evaluation,practice,homework}
+mkdir -p "$MOD"     # las subcarpetas se crean solo si reciben archivos (ninguna carpeta vacía en docencia/, §4.2)
 
 OFICINA='\( -name "*.pdf" -o -name "*.odt" -o -name "*.ods" -o -name "*.odp" -o -name "*.docx" -o -name "*.xlsx" -o -name "*.pptx" -o -name "*.csv" -o -name "*.zip" \)'
 s=0; e=0; p=0; h=0
 while IFS= read -r f; do
   b="$(basename "$f")"; bl="${b,,}"
   case "$bl" in
-    *.pdf)                                     cp "$f" "$MOD/slides/" && s=$((s+1)) ;;
-    evaluacion*|quiz*|rubrica*|examen*)        cp "$f" "$MOD/evaluation/" && e=$((e+1)) ;;
-    tarea*|homework*)                          cp "$f" "$MOD/homework/" && h=$((h+1)) ;;
-    *)                                         cp "$f" "$MOD/practice/" && p=$((p+1)) ;;
+    *.pdf)                                     mkdir -p "$MOD/slides";     cp "$f" "$MOD/slides/"     && s=$((s+1)) ;;
+    evaluacion*|quiz*|rubrica*|examen*)        mkdir -p "$MOD/evaluation"; cp "$f" "$MOD/evaluation/" && e=$((e+1)) ;;
+    tarea*|homework*)                          mkdir -p "$MOD/homework";   cp "$f" "$MOD/homework/"   && h=$((h+1)) ;;
+    *)                                         mkdir -p "$MOD/practice";   cp "$f" "$MOD/practice/"   && p=$((p+1)) ;;
   esac
 done < <(eval find "\"$SES\"" -maxdepth 1 -type f "$OFICINA" 2>/dev/null | sort)
 

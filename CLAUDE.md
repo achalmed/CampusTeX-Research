@@ -5,13 +5,13 @@ Guía para Claude Code (claude.ai/code) y para Codex (`AGENTS.md` es un enlace s
 ## Migración en curso (R1/R2, 2026-09-15) — leer antes que el resto
 
 `docs/DIAGNOSTICO_AREAS_2026-09.md` reorganiza los cursos en fases M0–M8 (§6; ejecución en §8).
-Estado: **M6 hecha**. Los 23 submódulos `areas/Academic_Class-*` ya no existen: sus repos se
+Estado: **M7 hecha** (tag `reorg-2026-09-done`). Los 23 submódulos `areas/Academic_Class-*` ya no existen: sus repos se
 consolidaron, con historial, en el **único submódulo `docencia/`** (repo `Academic_Class`), y desde M3 los
 cursos viven en `docencia/cursos/<slug>/` con `01-diseno · 02-contenido · 03-sesiones/sNN-<slug> ·
 04-evaluaciones · 05-recursos` (mapas: `docencia/migracion/mapa-m3.csv`, `mapa-m4.csv`). Registros: `curso.yml` (sucesor de
 `temario.yml`), `03-sesiones/sNN-<slug>/{sesion.yml, guion.md, <artefacto>}` sin subcarpetas de anatomía, y
 `dictados/<AAAA-ciclo>-<institucion>-<materia>/dictado.yml`. Desde M5 **todo `scripts/` opera sobre este modelo** (bloque «Comandos»); el 00–09 ya no
-existe en el tooling ni en los scaffolds. Las referencias externas y las vistas generadas ya apuntan a `docencia/cursos` (M6). Quedan M7 (verificación) y M8 (documentación: `README.md`, `docs/09-estandar-00-09.md` y el cuerpo de este archivo).
+existe en el tooling ni en los scaffolds. Las referencias externas y las vistas generadas ya apuntan a `docencia/cursos` (M6). La verificación M7 (no pérdida, compilación, historial, doctor) está en §8. Queda M8: reescribir `README.md`, `docs/09-estandar-00-09.md` y el cuerpo de este archivo, que aún describen el 00–09.
 Los 23 repos originales, intactos, están en `meta/reparaciones/R2_consolidacion_2026-09-15_090152/areas_originales/` hasta el push de M0 y la verificación de M3. Los datos de
 estudiantes viven en `registro/` (repo privado hermano, ignorado). Todo lo que sigue en este archivo
 que diga `areas/Academic_Class-<Área>/course_NN_<slug>/0N_…` se lee, mientras tanto, como

@@ -644,3 +644,19 @@ framework), los ids antiguos en los reportes de ingesta (registros; `curso.yml: 
 `README.md`, `docs/09-estandar-00-09.md`, `docs/00-arquitectura.md` y el cuerpo de `CLAUDE.md` del framework describen aún el 00–09: M8.
 Los posts de `04 index/_pubs` conservan `curso: <id antiguo>`; `alias` en `curso.yml` los resuelve (`enlazar.py verificar`: 0 desconocidos).
 Bitácora: `meta/reparaciones/R6_referencias_2026-09-15/`.
+
+### M7 · Verificación (2026-09-15, hecho)
+
+| Comprobación (§6 M7) | Resultado |
+|---|---|
+| (1) No pérdida: cada hash del manifiesto de M0 (4 231 distintos, 6 098 rutas) existe hoy en `docencia/`, `registro/`, `01 notes/…/ingles`, `02 analysis/…/_docencia_por_catalogar` o el tarball de `_ESTANDARIZACION`, o su ruta tiene justificación en las bitácoras | 2 475 rutas sin su hash de M0, **0 sin justificar**: 1 934 notas esqueleto · 174 plantillas de scaffold · 46 archivos de área · 5 Languages/fusión (M3); 67 `sesion.yml`, 50 `curso.yml`, 1 `dictado.yml` transformados y 14 fusionados en `guion.md` (M4); 50 README regenerados; 122 archivos movidos y modificados después (identidad M6, registros); 11 artefactos de construcción ignorados por git que no viajaron en M2 y siguen en `areas_originales/` |
+| (2) `validate.sh --todos` y `doctor.sh` | 0 errores (avisos: `_inbox/` 401 archivos, 9 binarios > 5 MB, 414 de normativa) |
+| (3) Compilar tres decks y la web | Beamer `latex/s03` ✓ · Quarto RevealJS `seminario-de-investigacion/s02` ✓ · examen `econometria-i/…/2012_ea.tex` en modos examen, claves y soluciones ✓ · `quarto render` de la edición 2026-1 de Metodología 9/9 ✓ (tras entrecomillar 15 `titulo:` con dos puntos en `_links.md`, defecto previo) |
+| (4) `git log --follow` en 5 archivos al azar | historial hasta 2026-07-23 (anterior a M2) en los cinco |
+| (5) Carpetas vacías en `docencia/` | 0 (dos subcarpetas vacías de `publicacion/` que creaba `publish-session.sh`; ahora las crea bajo demanda) |
+| (5) Nombres con espacios fuera de `vendor/` e `_inbox/` | 10 directorios y 317 archivos, todos justificados: adjuntos que la normativa admite (§4) y carpetas que leen `.do`, `.rmd` e `.ipynb` (`687 modulo 34`, `curso_r/sesion NN`, `curso_python/sesion NN`); no se renombran |
+| Tag `reorg-2026-09-done` | `docencia/`, framework y `registro/` |
+
+Hallazgo que hereda el docente: de los 20 decks Beamer heredados, 5 de los 6 probados no compilan (logo `cau-logo.png`
+ausente o `%!TEX program = xelatex`), rotura anterior a la reorganización ya anotada en `CLAUDE.md`; el compilador universal
+borra el PDF al fallar, así que se restauraron de git. La verificación completa está en `meta/reparaciones/R7_verificacion_2026-09-15/`.
