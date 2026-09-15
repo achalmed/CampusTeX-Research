@@ -1,17 +1,18 @@
-# m74_crisis_cambiaria.py — crisis cambiaria: las tres generaciones (nivel 10).
-#
-# El reloj del trilema (m50) con EXPECTATIVAS: el ataque especulativo no
-# espera a que se agoten las reservas — llega antes.
-# Primera generación (Krugman 1979): con fuga constante f, las reservas
-# durarían T = RIN/f; pero los especuladores atacan cuando el tipo sombra
-# (el que habría con flotación) alcanza la paridad — en  T_ataque = T − h,
-# donde h = ganancia_esperada. El colapso es ANTICIPADO y sin previo aviso.
-# Segunda generación (Obstfeld): equilibrios MÚLTIPLES — si el mercado cree
-# que el gobierno abandonará la paridad (por su costo), ataca y lo fuerza;
-# si cree que resistirá, no ataca — profecía autocumplida (como m73).
-#
-# Procedencia: Krugman (1979, primera generación) y Obstfeld (1994, segunda
-# generación) — menciones; conocimiento general. Calibración didáctica.
+"""simuladores/macro/modelos/nivel_10/m74_crisis_cambiaria.py — crisis cambiaria: las tres generaciones (nivel 10).
+
+El reloj del trilema (m50) con EXPECTATIVAS: el ataque especulativo no
+espera a que se agoten las reservas — llega antes.
+Primera generación (Krugman 1979): con fuga constante f, las reservas
+durarían T = RIN/f; pero los especuladores atacan cuando el tipo sombra
+(el que habría con flotación) alcanza la paridad — en  T_ataque = T − h,
+donde h = ganancia_esperada. El colapso es ANTICIPADO y sin previo aviso.
+Segunda generación (Obstfeld): equilibrios MÚLTIPLES — si el mercado cree
+que el gobierno abandonará la paridad (por su costo), ataca y lo fuerza;
+si cree que resistirá, no ataca — profecía autocumplida (como m73).
+
+Procedencia: Krugman (1979, primera generación) y Obstfeld (1994, segunda
+generación) — menciones; conocimiento general. Calibración didáctica.
+"""
 
 import numpy as np
 

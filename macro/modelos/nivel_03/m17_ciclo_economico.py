@@ -1,13 +1,14 @@
-# m17_ciclo_economico.py — ciclo económico como impulso-propagación (nivel 3).
-#
-# La brecha sigue un AR(1) con shocks aleatorios:
-#   brecha_t = ρ·brecha_{t−1} + ε_t ,   ε_t ~ N(0, σ²)
-# Propiedades teóricas verificables: sd(brecha) = σ/√(1−ρ²), autocorr(1) = ρ.
-# La semilla es un PARÁMETRO: misma semilla → misma historia (reproducible).
-#
-# Procedencia: visión impulso-propagación de Slutsky (1927) y Frisch (1933) —
-# menciones históricas de conocimiento general; AR(1) y sus momentos:
-# resultados estándar de series de tiempo.
+"""simuladores/macro/modelos/nivel_03/m17_ciclo_economico.py — ciclo económico como impulso-propagación (nivel 3).
+
+La brecha sigue un AR(1) con shocks aleatorios:
+  brecha_t = ρ·brecha_{t−1} + ε_t ,   ε_t ~ N(0, σ²)
+Propiedades teóricas verificables: sd(brecha) = σ/√(1−ρ²), autocorr(1) = ρ.
+La semilla es un PARÁMETRO: misma semilla → misma historia (reproducible).
+
+Procedencia: visión impulso-propagación de Slutsky (1927) y Frisch (1933) —
+menciones históricas de conocimiento general; AR(1) y sus momentos:
+resultados estándar de series de tiempo.
+"""
 
 import numpy as np
 

@@ -1,15 +1,16 @@
-# m08_mercado_dinero.py — mercado monetario: preferencia por la liquidez (nivel 2).
-#
-# Demanda de saldos reales:  L(Y, r) = k·Y − h·r   (Y dado aquí)
-# Oferta real de dinero:     M/P  (exógena, la fija el banco central)
-# Equilibrio:  M/P = k·Y − h·r   →   r* = (k·Y − M/P) / h
-#
-# Gráfico en el plano (saldos reales, r): demanda decreciente en r, oferta
-# vertical. Es el modelo gemelo de m06: allí r era exógena y salía Y*; aquí Y
-# es exógeno y sale r*.
-#
-# Procedencia: teoría de la preferencia por la liquidez (Keynes 1936) en su
-# versión lineal de manual — conocimiento general, no verificado contra edición.
+"""simuladores/macro/modelos/nivel_02/m08_mercado_dinero.py — mercado monetario: preferencia por la liquidez (nivel 2).
+
+Demanda de saldos reales:  L(Y, r) = k·Y − h·r   (Y dado aquí)
+Oferta real de dinero:     M/P  (exógena, la fija el banco central)
+Equilibrio:  M/P = k·Y − h·r   →   r* = (k·Y − M/P) / h
+
+Gráfico en el plano (saldos reales, r): demanda decreciente en r, oferta
+vertical. Es el modelo gemelo de m06: allí r era exógena y salía Y*; aquí Y
+es exógeno y sale r*.
+
+Procedencia: teoría de la preferencia por la liquidez (Keynes 1936) en su
+versión lineal de manual — conocimiento general, no verificado contra edición.
+"""
 
 import numpy as np
 

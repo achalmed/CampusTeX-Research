@@ -1,19 +1,20 @@
-# m80_crisis_sistemica.py — crisis sistémica: contagio en red (nivel 10, cierre).
-#
-# La quiebra de un banco no se queda en él: sus deudas impagas son activos de
-# OTROS bancos (exposición interbancaria). Un shock a un nodo se propaga por
-# la red — el contagio de m79 entre instituciones, no entre rondas.
-# Red circular de N bancos, cada uno con capital E y exposición cruzada w:
-#   si el banco i quiebra, transmite (1−recup)·deuda al siguiente;
-#   el siguiente quiebra si esa pérdida supera su capital E.
-# Emergen dos regímenes (Gai-Kapadia; Acemoglu et al. — menciones):
-#   red MÁS conectada = más robusta a shocks pequeños (reparte)…
-#   …pero más FRÁGIL a shocks grandes (propaga todo): robust-yet-fragile.
-# El "too connected to fail" y el riesgo sistémico nacen aquí.
-#
-# Procedencia: modelos de contagio en redes financieras (Gai-Kapadia 2010;
-# Acemoglu-Ozdaglar-Tahbaz-Salehi 2015 — menciones) — conocimiento general.
-# Calibración didáctica.
+"""simuladores/macro/modelos/nivel_10/m80_crisis_sistemica.py — crisis sistémica: contagio en red (nivel 10, cierre).
+
+La quiebra de un banco no se queda en él: sus deudas impagas son activos de
+OTROS bancos (exposición interbancaria). Un shock a un nodo se propaga por
+la red — el contagio de m79 entre instituciones, no entre rondas.
+Red circular de N bancos, cada uno con capital E y exposición cruzada w:
+  si el banco i quiebra, transmite (1−recup)·deuda al siguiente;
+  el siguiente quiebra si esa pérdida supera su capital E.
+Emergen dos regímenes (Gai-Kapadia; Acemoglu et al. — menciones):
+  red MÁS conectada = más robusta a shocks pequeños (reparte)…
+  …pero más FRÁGIL a shocks grandes (propaga todo): robust-yet-fragile.
+El "too connected to fail" y el riesgo sistémico nacen aquí.
+
+Procedencia: modelos de contagio en redes financieras (Gai-Kapadia 2010;
+Acemoglu-Ozdaglar-Tahbaz-Salehi 2015 — menciones) — conocimiento general.
+Calibración didáctica.
+"""
 
 import numpy as np
 

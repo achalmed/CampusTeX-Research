@@ -1,12 +1,13 @@
-# e18_mediana.py — la mediana (sección II, tema 18).
-#
-# La contraparte robusta de la media. Si la media (e17) minimiza el error
-# CUADRÁTICO (Σ(xᵢ−a)²) y es su talón de Aquiles ante outliers, la mediana
-# minimiza el error ABSOLUTO (Σ|xᵢ−a|) y es inmune a ellos: parte los datos en
-# dos mitades y no le importa CUÁNTO de lejos está el valor extremo, solo de qué
-# lado. Punto de ruptura 50% (hay que corromper la mitad de los datos para
-# moverla). El modelo deja mover un candidato `a` y ver que el error absoluto es
-# mínimo en la mediana — la "V" que contrasta con la parábola de la media.
+"""simuladores/estadistica/modelos/nivel_02/e18_mediana.py — la mediana (sección II, tema 18).
+
+La contraparte robusta de la media. Si la media (e17) minimiza el error
+CUADRÁTICO (Σ(xᵢ−a)²) y es su talón de Aquiles ante outliers, la mediana
+minimiza el error ABSOLUTO (Σ|xᵢ−a|) y es inmune a ellos: parte los datos en
+dos mitades y no le importa CUÁNTO de lejos está el valor extremo, solo de qué
+lado. Punto de ruptura 50% (hay que corromper la mitad de los datos para
+moverla). El modelo deja mover un candidato `a` y ver que el error absoluto es
+mínimo en la mediana — la "V" que contrasta con la parábola de la media.
+"""
 
 import numpy as np
 

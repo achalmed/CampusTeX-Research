@@ -1,14 +1,15 @@
-# m34_teoria_cuantitativa.py — teoría cuantitativa del dinero (nivel 6).
-#
-#   M·V = P·Y   (ecuación de cambio, Fisher)
-# Con V estable e Y de pleno empleo: P = (V/Y)·M — los precios son
-# proporcionales al dinero. En tasas de crecimiento (exacto):
-#   1+π = (1+g_M)(1+g_V)/(1+g_Y)   ≈   π ≈ g_M + g_V − g_Y
-#
-# Procedencia: Fisher (1911, The Purchasing Power of Money — mención);
-# antecedentes: Bodin, Hume (menciones); lectura moderna: Friedman
-# ("la inflación es siempre y en todas partes un fenómeno monetario",
-# mención) — conocimiento general.
+"""simuladores/macro/modelos/nivel_06/m34_teoria_cuantitativa.py — teoría cuantitativa del dinero (nivel 6).
+
+  M·V = P·Y   (ecuación de cambio, Fisher)
+Con V estable e Y de pleno empleo: P = (V/Y)·M — los precios son
+proporcionales al dinero. En tasas de crecimiento (exacto):
+  1+π = (1+g_M)(1+g_V)/(1+g_Y)   ≈   π ≈ g_M + g_V − g_Y
+
+Procedencia: Fisher (1911, The Purchasing Power of Money — mención);
+antecedentes: Bodin, Hume (menciones); lectura moderna: Friedman
+("la inflación es siempre y en todas partes un fenómeno monetario",
+mención) — conocimiento general.
+"""
 
 import numpy as np
 

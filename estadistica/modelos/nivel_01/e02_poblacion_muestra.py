@@ -1,15 +1,16 @@
-# e02_poblacion_muestra.py — población y muestra (sección I, tema 2).
-#
-# EL modelo fundacional del laboratorio de estadística: toda la inferencia
-# descansa en una idea — que una MUESTRA bien extraída lleva información sobre la
-# POBLACIÓN entera. El modelo genera una población artificial (bimodal, NO
-# normal, con μ y σ conocidos), extrae miles de muestras aleatorias de tamaño n,
-# y muestra que la media muestral x̄ (1) se centra en μ (insesgada) y (2) se
-# acerca a μ al crecer n (precisión ∝ σ/√n). Es la semilla del muestreo (sec. VI),
-# del TCL (sec. V, e67) y de toda la inferencia (sec. VII).
-#
-# Aleatoriedad reproducible (semilla fija, convención del lab): las
-# verificaciones dan el mismo número cada corrida.
+"""simuladores/estadistica/modelos/nivel_01/e02_poblacion_muestra.py — población y muestra (sección I, tema 2).
+
+EL modelo fundacional del laboratorio de estadística: toda la inferencia
+descansa en una idea — que una MUESTRA bien extraída lleva información sobre la
+POBLACIÓN entera. El modelo genera una población artificial (bimodal, NO
+normal, con μ y σ conocidos), extrae miles de muestras aleatorias de tamaño n,
+y muestra que la media muestral x̄ (1) se centra en μ (insesgada) y (2) se
+acerca a μ al crecer n (precisión ∝ σ/√n). Es la semilla del muestreo (sec. VI),
+del TCL (sec. V, e67) y de toda la inferencia (sec. VII).
+
+Aleatoriedad reproducible (semilla fija, convención del lab): las
+verificaciones dan el mismo número cada corrida.
+"""
 
 import numpy as np
 

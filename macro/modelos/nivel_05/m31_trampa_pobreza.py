@@ -1,15 +1,16 @@
-# m31_trampa_pobreza.py — trampa de pobreza: equilibrios múltiples (nivel 5).
-#
-# Solow con una NO-convexidad: la productividad depende del nivel de capital
-# (umbral de infraestructura/escala/instituciones):
-#   A(k) = A_baja si k < k_umbral ;  A_alta si k ≥ k_umbral
-# Resultado: DOS estados estacionarios estables (trampa y prosperidad)
-# separados por el umbral. La historia (k0) decide el destino — histéresis —
-# y la ayuda solo sirve si cruza el umbral ("big push").
-#
-# Procedencia: familia de modelos de trampas con no-convexidades (Rosenstein-
-# Rodan "big push" 1943; Murphy-Shleifer-Vishny 1989; Azariadis-Drazen 1990 —
-# menciones). Formulación con A(k) escalonada: decisión de diseño didáctica.
+"""simuladores/macro/modelos/nivel_05/m31_trampa_pobreza.py — trampa de pobreza: equilibrios múltiples (nivel 5).
+
+Solow con una NO-convexidad: la productividad depende del nivel de capital
+(umbral de infraestructura/escala/instituciones):
+  A(k) = A_baja si k < k_umbral ;  A_alta si k ≥ k_umbral
+Resultado: DOS estados estacionarios estables (trampa y prosperidad)
+separados por el umbral. La historia (k0) decide el destino — histéresis —
+y la ayuda solo sirve si cruza el umbral ("big push").
+
+Procedencia: familia de modelos de trampas con no-convexidades (Rosenstein-
+Rodan "big push" 1943; Murphy-Shleifer-Vishny 1989; Azariadis-Drazen 1990 —
+menciones). Formulación con A(k) escalonada: decisión de diseño didáctica.
+"""
 
 import numpy as np
 

@@ -1,13 +1,14 @@
-# m26_solow.py — modelo de Solow: el diagrama fundamental (nivel 5).
-#
-#   y = A·k^α ;  inversión = s·A·k^α ;  reposición = (n+δ)·k
-#   k* donde s·f(k) = (n+δ)·k  →  k* = (sA/(n+δ))^{1/(1−α)}
-# El diagrama de dos curvas responde la pregunta que el nivel 1 dejó abierta:
-# a largo plazo, ahorrar más SÍ eleva el ingreso (contra la paradoja m05)…
-# pero solo su NIVEL, no su crecimiento (rendimientos decrecientes).
-#
-# Procedencia: Solow (1956, "A Contribution to the Theory of Economic
-# Growth", mención) en la versión de manual — conocimiento general.
+"""simuladores/macro/modelos/nivel_05/m26_solow.py — modelo de Solow: el diagrama fundamental (nivel 5).
+
+  y = A·k^α ;  inversión = s·A·k^α ;  reposición = (n+δ)·k
+  k* donde s·f(k) = (n+δ)·k  →  k* = (sA/(n+δ))^{1/(1−α)}
+El diagrama de dos curvas responde la pregunta que el nivel 1 dejó abierta:
+a largo plazo, ahorrar más SÍ eleva el ingreso (contra la paradoja m05)…
+pero solo su NIVEL, no su crecimiento (rendimientos decrecientes).
+
+Procedencia: Solow (1956, "A Contribution to the Theory of Economic
+Growth", mención) en la versión de manual — conocimiento general.
+"""
 
 import numpy as np
 

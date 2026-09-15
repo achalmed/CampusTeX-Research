@@ -1,22 +1,23 @@
-# m110_shock_externo.py — el shock externo sobre el Perú (síntesis, nivel 12).
-#
-# Integra el bloque externo (m103-m105, m109) en un solo termómetro: un ÍNDICE DE
-# CONDICIONES EXTERNAS que promedia las variaciones estandarizadas del precio del
-# cobre (m103), los términos de intercambio (m105) y las exportaciones (m109). La
-# tesis de m86-m89 —el ciclo peruano lo marca el mundo— se vuelve medible: el
-# índice correlaciona +0.58 con el crecimiento. Los años de mejores condiciones
-# externas (2006, 2010, 2021) fueron los de mayor crecimiento; los de peores
-# (2009 la crisis global, 2015 el fin del superciclo del cobre) los de freno. Es
-# el canal REAL/comercial del exterior (el financiero —FED, capitales— es m111).
-# Pero el modelo es honesto sobre su límite: explica MUCHO, no todo. 2020 es la
-# excepción reveladora —el peor año de crecimiento (−10.9%) NO fue un shock
-# externo comercial (el cobre y los términos de intercambio hasta subieron) sino
-# un shock DOMÉSTICO de oferta (el confinamiento)—: no todo lo malo viene de afuera.
-#
-# Procedencia: datos BCRP PN01652XM (cobre), PN38923BM (términos de intercambio),
-# PM04933AA (exportaciones) y PN01728AM (PBI), muestra 2004-2024. El índice es
-# una síntesis del laboratorio (promedio de variaciones estandarizadas), no un
-# indicador oficial del BCRP. Los canales: m86-m89 (conocimiento general).
+"""simuladores/macro/modelos/nivel_12/m110_shock_externo.py — el shock externo sobre el Perú (síntesis, nivel 12).
+
+Integra el bloque externo (m103-m105, m109) en un solo termómetro: un ÍNDICE DE
+CONDICIONES EXTERNAS que promedia las variaciones estandarizadas del precio del
+cobre (m103), los términos de intercambio (m105) y las exportaciones (m109). La
+tesis de m86-m89 —el ciclo peruano lo marca el mundo— se vuelve medible: el
+índice correlaciona +0.58 con el crecimiento. Los años de mejores condiciones
+externas (2006, 2010, 2021) fueron los de mayor crecimiento; los de peores
+(2009 la crisis global, 2015 el fin del superciclo del cobre) los de freno. Es
+el canal REAL/comercial del exterior (el financiero —FED, capitales— es m111).
+Pero el modelo es honesto sobre su límite: explica MUCHO, no todo. 2020 es la
+excepción reveladora —el peor año de crecimiento (−10.9%) NO fue un shock
+externo comercial (el cobre y los términos de intercambio hasta subieron) sino
+un shock DOMÉSTICO de oferta (el confinamiento)—: no todo lo malo viene de afuera.
+
+Procedencia: datos BCRP PN01652XM (cobre), PN38923BM (términos de intercambio),
+PM04933AA (exportaciones) y PN01728AM (PBI), muestra 2004-2024. El índice es
+una síntesis del laboratorio (promedio de variaciones estandarizadas), no un
+indicador oficial del BCRP. Los canales: m86-m89 (conocimiento general).
+"""
 
 import numpy as np
 

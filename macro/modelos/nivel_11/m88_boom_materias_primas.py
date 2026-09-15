@@ -1,19 +1,20 @@
-# m88_boom_materias_primas.py — boom de materias primas (nivel 11).
-#
-# La cara amable de un shock externo — y sus trampas. Un alza de los términos
-# de intercambio (precio de exportación / precio de importación) para un
-# exportador de commodities es un shock de INGRESO positivo: más divisas, más
-# fiscal, más crecimiento. Pero trae dos peligros:
-#   (1) ENFERMEDAD HOLANDESA (m46): la apreciación real encarece los transables
-#       NO mineros → desindustrialización;
-#   (2) PROCICLICIDAD FISCAL: gastar el boom como permanente → crisis cuando
-#       revierte (la falla de m68). La regla: ahorrar el transitorio (fondo de
-#       estabilización). Combina m43-m46 (externo), m105 (términos de
-#       intercambio) y m68 (fiscal contracíclica).
-#
-# Procedencia: enfermedad holandesa (Corden-Neary — mención); términos de
-# intercambio y ciclo (m105); fondos de estabilización (Chile, Noruega —
-# menciones) — conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_11/m88_boom_materias_primas.py — boom de materias primas (nivel 11).
+
+La cara amable de un shock externo — y sus trampas. Un alza de los términos
+de intercambio (precio de exportación / precio de importación) para un
+exportador de commodities es un shock de INGRESO positivo: más divisas, más
+fiscal, más crecimiento. Pero trae dos peligros:
+  (1) ENFERMEDAD HOLANDESA (m46): la apreciación real encarece los transables
+      NO mineros → desindustrialización;
+  (2) PROCICLICIDAD FISCAL: gastar el boom como permanente → crisis cuando
+      revierte (la falla de m68). La regla: ahorrar el transitorio (fondo de
+      estabilización). Combina m43-m46 (externo), m105 (términos de
+      intercambio) y m68 (fiscal contracíclica).
+
+Procedencia: enfermedad holandesa (Corden-Neary — mención); términos de
+intercambio y ciclo (m105); fondos de estabilización (Chile, Noruega —
+menciones) — conocimiento general; calibración didáctica.
+"""
 
 import numpy as np
 

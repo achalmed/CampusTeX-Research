@@ -1,16 +1,17 @@
-# m12_trampa_liquidez.py — trampa de liquidez / límite inferior cero (nivel 2).
-#
-# IS-LM con un piso en la tasa: r no puede bajar de 0 (nadie presta a tasa
-# negativa pudiendo guardar efectivo). LM efectiva = max(0, (kY − M/P)/h).
-# Si la demanda es tan débil que la IS corta en el tramo plano:
-#   - la política monetaria pierde tracción: ↑M/P no mueve Y (el dinero se atesora);
-#   - la política fiscal recupera el multiplicador PLENO del nivel 1 (Δr = 0).
-# Calibración base: demanda deliberadamente débil (c0=60, I0=80) para nacer
-# dentro de la trampa.
-#
-# Procedencia: Keynes (1936, mención) y Hicks (1937, tramo plano de LM);
-# relectura moderna: Krugman (1998, Japón) y la literatura del ZLB post-2008 —
-# conocimiento macroeconómico general, no verificado contra edición.
+"""simuladores/macro/modelos/nivel_02/m12_trampa_liquidez.py — trampa de liquidez / límite inferior cero (nivel 2).
+
+IS-LM con un piso en la tasa: r no puede bajar de 0 (nadie presta a tasa
+negativa pudiendo guardar efectivo). LM efectiva = max(0, (kY − M/P)/h).
+Si la demanda es tan débil que la IS corta en el tramo plano:
+  - la política monetaria pierde tracción: ↑M/P no mueve Y (el dinero se atesora);
+  - la política fiscal recupera el multiplicador PLENO del nivel 1 (Δr = 0).
+Calibración base: demanda deliberadamente débil (c0=60, I0=80) para nacer
+dentro de la trampa.
+
+Procedencia: Keynes (1936, mención) y Hicks (1937, tramo plano de LM);
+relectura moderna: Krugman (1998, Japón) y la literatura del ZLB post-2008 —
+conocimiento macroeconómico general, no verificado contra edición.
+"""
 
 import numpy as np
 

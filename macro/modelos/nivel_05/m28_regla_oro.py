@@ -1,13 +1,14 @@
-# m28_regla_oro.py — la regla de oro del capital (nivel 5).
-#
-# ¿Cuánto ahorro es DEMASIADO? El consumo de estado estacionario
-#   c*(s) = (1−s)·A·k*(s)^α = A·k*^α − (n+δ)·k*
-# se maximiza donde f'(k) = n+δ  →  en Cobb-Douglas:  s_oro = α.
-# Ahorrar MÁS que α es ineficiencia dinámica: toda la senda de consumo puede
-# mejorarse ahorrando menos (comer capital gratis).
-#
-# Procedencia: Phelps (1961, "The Golden Rule of Accumulation", mención) —
-# conocimiento general; s_oro=α en Cobb-Douglas: resultado estándar.
+"""simuladores/macro/modelos/nivel_05/m28_regla_oro.py — la regla de oro del capital (nivel 5).
+
+¿Cuánto ahorro es DEMASIADO? El consumo de estado estacionario
+  c*(s) = (1−s)·A·k*(s)^α = A·k*^α − (n+δ)·k*
+se maximiza donde f'(k) = n+δ  →  en Cobb-Douglas:  s_oro = α.
+Ahorrar MÁS que α es ineficiencia dinámica: toda la senda de consumo puede
+mejorarse ahorrando menos (comer capital gratis).
+
+Procedencia: Phelps (1961, "The Golden Rule of Accumulation", mención) —
+conocimiento general; s_oro=α en Cobb-Douglas: resultado estándar.
+"""
 
 import numpy as np
 

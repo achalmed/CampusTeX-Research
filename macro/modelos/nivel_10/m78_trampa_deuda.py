@@ -1,18 +1,19 @@
-# m78_trampa_deuda.py — la trampa de deuda (nivel 10).
-#
-# El caso extremo de m64 con r > g: cuando la aritmética es cruel Y el
-# esfuerzo primario no alcanza, la deuda diverge sin límite. Peor: en la
-# trampa, el ajuste es CONTRAPRODUCENTE por partida doble —
-#   (a) austeridad contrae g (m69): r−g se agranda;
-#   (b) la deuda alta sube la prima r (m76): r−g se agranda de nuevo.
-# El modelo muestra las TRES salidas históricas cuando el ajuste fiscal no
-# basta:  crecer (subir g), licuar (inflación/señoreaje, m36) o reestructurar
-# (default/quita, m76). La trampa es donde el nivel 9 (aritmética) se
-# encuentra con el nivel 10 (los lazos endógenos que la vuelven explosiva).
-#
-# Procedencia: dinámica de m64 en régimen r>g con retroalimentaciones de
-# m69 y m76 — decisión de diseño sobre conocimiento general. Calibración
-# didáctica.
+"""simuladores/macro/modelos/nivel_10/m78_trampa_deuda.py — la trampa de deuda (nivel 10).
+
+El caso extremo de m64 con r > g: cuando la aritmética es cruel Y el
+esfuerzo primario no alcanza, la deuda diverge sin límite. Peor: en la
+trampa, el ajuste es CONTRAPRODUCENTE por partida doble —
+  (a) austeridad contrae g (m69): r−g se agranda;
+  (b) la deuda alta sube la prima r (m76): r−g se agranda de nuevo.
+El modelo muestra las TRES salidas históricas cuando el ajuste fiscal no
+basta:  crecer (subir g), licuar (inflación/señoreaje, m36) o reestructurar
+(default/quita, m76). La trampa es donde el nivel 9 (aritmética) se
+encuentra con el nivel 10 (los lazos endógenos que la vuelven explosiva).
+
+Procedencia: dinámica de m64 en régimen r>g con retroalimentaciones de
+m69 y m76 — decisión de diseño sobre conocimiento general. Calibración
+didáctica.
+"""
 
 import numpy as np
 

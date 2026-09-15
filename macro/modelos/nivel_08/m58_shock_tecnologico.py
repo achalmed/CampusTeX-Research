@@ -1,14 +1,15 @@
-# m58_shock_tecnologico.py — el shock tecnológico: la IRF del RBC (nivel 8).
-#
-# El experimento limpio del m57: UN shock de productividad a_0 y su
-# propagación determinista a_t = ρ^t·a_0 por el motor RBC (_rbc.py):
-#   n = η·a ;  y = (1+α_n·η)·a ;  c = γ·y ;  i = (y − sc·c)/si
-# La función impulso-respuesta (IRF) es el idioma en que los macroeconomistas
-# comparan modelos desde Sims (mención): m56 (NK) y m58 (RBC) responden a
-# sus shocks con IRFs — y el nivel 12 las estimará con datos.
-#
-# Procedencia: IRF estándar del RBC didáctico (m57) — decisión de diseño
-# sobre conocimiento general.
+"""simuladores/macro/modelos/nivel_08/m58_shock_tecnologico.py — el shock tecnológico: la IRF del RBC (nivel 8).
+
+El experimento limpio del m57: UN shock de productividad a_0 y su
+propagación determinista a_t = ρ^t·a_0 por el motor RBC (_rbc.py):
+  n = η·a ;  y = (1+α_n·η)·a ;  c = γ·y ;  i = (y − sc·c)/si
+La función impulso-respuesta (IRF) es el idioma en que los macroeconomistas
+comparan modelos desde Sims (mención): m56 (NK) y m58 (RBC) responden a
+sus shocks con IRFs — y el nivel 12 las estimará con datos.
+
+Procedencia: IRF estándar del RBC didáctico (m57) — decisión de diseño
+sobre conocimiento general.
+"""
 
 import numpy as np
 

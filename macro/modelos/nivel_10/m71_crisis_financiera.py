@@ -1,19 +1,19 @@
-# m71_crisis_financiera.py — crisis financiera: apalancamiento y desapalancamiento
-# (nivel 10).
-#
-# El balance apalancado y su fragilidad. Un intermediario con activos A,
-# deuda D y capital E = A − D opera con apalancamiento  λ = A/E.
-# Una caída del valor de activos de fracción `shock` golpea TODO al capital
-# (la deuda es fija):  E' = E − shock·A = A(1/λ − shock).
-#   apalancamiento nuevo:  λ' = A' / E' = (1−shock)/(1/λ − shock)
-#   pérdida de capital amplificada:  ΔE/E = −shock·λ   (¡×λ!)
-# Para restaurar λ objetivo con capital caído hay que VENDER activos:
-# ventas = A − λ_obj·E' — y si todos venden, el precio cae más (fire sale):
-# el desapalancamiento es contractivo (adelanta m79).
-#
-# Procedencia: mecánica de balance apalancado estándar (Adrian-Shin sobre
-# leverage procíclico; Minsky sobre fragilidad — menciones) — conocimiento
-# general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_10/m71_crisis_financiera.py — crisis financiera: apalancamiento y desapalancamiento (nivel 10).
+
+El balance apalancado y su fragilidad. Un intermediario con activos A,
+deuda D y capital E = A − D opera con apalancamiento  λ = A/E.
+Una caída del valor de activos de fracción `shock` golpea TODO al capital
+(la deuda es fija):  E' = E − shock·A = A(1/λ − shock).
+  apalancamiento nuevo:  λ' = A' / E' = (1−shock)/(1/λ − shock)
+  pérdida de capital amplificada:  ΔE/E = −shock·λ   (¡×λ!)
+Para restaurar λ objetivo con capital caído hay que VENDER activos:
+ventas = A − λ_obj·E' — y si todos venden, el precio cae más (fire sale):
+el desapalancamiento es contractivo (adelanta m79).
+
+Procedencia: mecánica de balance apalancado estándar (Adrian-Shin sobre
+leverage procíclico; Minsky sobre fragilidad — menciones) — conocimiento
+general; calibración didáctica.
+"""
 
 import numpy as np
 

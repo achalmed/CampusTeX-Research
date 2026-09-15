@@ -1,17 +1,18 @@
-# m50_trilema.py — el trilema macroeconómico (nivel 7, cierre).
-#
-# De los tres deseos — tipo de cambio FIJO, libre MOVILIDAD de capitales y
-# política monetaria AUTÓNOMA (i propia) — solo se pueden tener DOS. El
-# tercero se cobra en reservas: si el país fija E, abre la cuenta de
-# capitales Y mantiene i ≠ i*, el arbitraje de m48 drena las RIN a razón
-#   fuga por período = κ · movilidad · (i − i*)     [si i > i*: salida]
-#   T* = RIN0 / fuga    — la paridad tiene fecha de caducidad exacta.
-# Los tres vértices históricos: patrón oro (fijo+movilidad, sin autonomía),
-# Bretton Woods (fijo+autonomía, con controles), flotación con metas
-# (autonomía+movilidad — la esquina peruana moderna). Menciones.
-#
-# Procedencia: trilema de Mundell-Fleming; formulación histórica moderna:
-# Obstfeld-Taylor (mención) — conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_07/m50_trilema.py — el trilema macroeconómico (nivel 7, cierre).
+
+De los tres deseos — tipo de cambio FIJO, libre MOVILIDAD de capitales y
+política monetaria AUTÓNOMA (i propia) — solo se pueden tener DOS. El
+tercero se cobra en reservas: si el país fija E, abre la cuenta de
+capitales Y mantiene i ≠ i*, el arbitraje de m48 drena las RIN a razón
+  fuga por período = κ · movilidad · (i − i*)     [si i > i*: salida]
+  T* = RIN0 / fuga    — la paridad tiene fecha de caducidad exacta.
+Los tres vértices históricos: patrón oro (fijo+movilidad, sin autonomía),
+Bretton Woods (fijo+autonomía, con controles), flotación con metas
+(autonomía+movilidad — la esquina peruana moderna). Menciones.
+
+Procedencia: trilema de Mundell-Fleming; formulación histórica moderna:
+Obstfeld-Taylor (mención) — conocimiento general; calibración didáctica.
+"""
 
 import numpy as np
 

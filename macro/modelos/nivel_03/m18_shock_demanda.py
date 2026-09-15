@@ -1,14 +1,15 @@
-# m18_shock_demanda.py — shock de demanda agregada en AD-SRAS (nivel 3).
-#
-# Versión mínima (lineal) del aparato precio-producto, como ANTICIPO del nivel 4:
-#   AD:    Y = A + dA − b·P          (la deriva desde IS-LM llega en m20)
-#   SRAS:  P = Pe + λ·(Y − Y*)
-# Equilibrio:  Y_eq = [A + dA − b·Pe + b·λ·Y*] / (1 + b·λ)
-# Firma del shock de DEMANDA: P e Y se mueven en la MISMA dirección.
-# Empleo: lectura vía Okun (m15), Δu ≈ −β_okun · %ΔY.
-#
-# Procedencia: AD-AS de manual (conocimiento general); calibración: decisión
-# de diseño didáctica.
+"""simuladores/macro/modelos/nivel_03/m18_shock_demanda.py — shock de demanda agregada en AD-SRAS (nivel 3).
+
+Versión mínima (lineal) del aparato precio-producto, como ANTICIPO del nivel 4:
+  AD:    Y = A + dA − b·P          (la deriva desde IS-LM llega en m20)
+  SRAS:  P = Pe + λ·(Y − Y*)
+Equilibrio:  Y_eq = [A + dA − b·Pe + b·λ·Y*] / (1 + b·λ)
+Firma del shock de DEMANDA: P e Y se mueven en la MISMA dirección.
+Empleo: lectura vía Okun (m15), Δu ≈ −β_okun · %ΔY.
+
+Procedencia: AD-AS de manual (conocimiento general); calibración: decisión
+de diseño didáctica.
+"""
 
 import numpy as np
 

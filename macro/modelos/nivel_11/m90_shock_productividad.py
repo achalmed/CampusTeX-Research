@@ -1,17 +1,18 @@
-# m90_shock_productividad.py — shock de productividad (nivel 11).
-#
-# El shock del lado de la OFERTA que NO es una crisis: un cambio en la
-# productividad (tecnología, reformas, o su reversa: un desastre, una mala
-# política) mueve el producto potencial (m22, m29) y, a diferencia de un shock
-# de demanda, es en gran parte PERMANENTE. La clave de política: distinguir un
-# shock de productividad de uno de demanda, porque la respuesta correcta es
-# OPUESTA — ante ↓productividad no hay que estimular (el potencial cayó, m22),
-# ante ↓demanda sí. Confundirlos es el error de m24 (estanflación). Combina
-# m29 (Solow), m57-m58 (RBC) y m22 (LRAS) — el lado real del ciclo.
-#
-# Procedencia: shock tecnológico del RBC (m57-m58); la distinción demanda/
-# oferta para la política (m18/m19, m24) — conocimiento general; calibración
-# didáctica.
+"""simuladores/macro/modelos/nivel_11/m90_shock_productividad.py — shock de productividad (nivel 11).
+
+El shock del lado de la OFERTA que NO es una crisis: un cambio en la
+productividad (tecnología, reformas, o su reversa: un desastre, una mala
+política) mueve el producto potencial (m22, m29) y, a diferencia de un shock
+de demanda, es en gran parte PERMANENTE. La clave de política: distinguir un
+shock de productividad de uno de demanda, porque la respuesta correcta es
+OPUESTA — ante ↓productividad no hay que estimular (el potencial cayó, m22),
+ante ↓demanda sí. Confundirlos es el error de m24 (estanflación). Combina
+m29 (Solow), m57-m58 (RBC) y m22 (LRAS) — el lado real del ciclo.
+
+Procedencia: shock tecnológico del RBC (m57-m58); la distinción demanda/
+oferta para la política (m18/m19, m24) — conocimiento general; calibración
+didáctica.
+"""
 
 import numpy as np
 

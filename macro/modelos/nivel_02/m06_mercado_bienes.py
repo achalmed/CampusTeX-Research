@@ -1,13 +1,14 @@
-# m06_mercado_bienes.py — mercado de bienes con inversión sensible a r (nivel 2).
-#
-# Cruz keynesiana del nivel 1 + la novedad decisiva: I = I0 − b·r.
-#   DA = c0 + c1(Y−T) + I0 − b·r + G  ;  equilibrio DA = Y
-#   → Y*(r) = [c0 − c1·T + I0 − b·r + G] / (1−c1)
-# La tasa de interés r es aquí un PARÁMETRO (exógeno): mover el slider r y ver
-# moverse Y* es, literalmente, recorrer la futura curva IS (m07).
-#
-# Procedencia: síntesis keynesiana de manuales (Hicks-Hansen) — conocimiento
-# macroeconómico general, no verificado contra edición.
+"""simuladores/macro/modelos/nivel_02/m06_mercado_bienes.py — mercado de bienes con inversión sensible a r (nivel 2).
+
+Cruz keynesiana del nivel 1 + la novedad decisiva: I = I0 − b·r.
+  DA = c0 + c1(Y−T) + I0 − b·r + G  ;  equilibrio DA = Y
+  → Y*(r) = [c0 − c1·T + I0 − b·r + G] / (1−c1)
+La tasa de interés r es aquí un PARÁMETRO (exógeno): mover el slider r y ver
+moverse Y* es, literalmente, recorrer la futura curva IS (m07).
+
+Procedencia: síntesis keynesiana de manuales (Hicks-Hansen) — conocimiento
+macroeconómico general, no verificado contra edición.
+"""
 
 import numpy as np
 

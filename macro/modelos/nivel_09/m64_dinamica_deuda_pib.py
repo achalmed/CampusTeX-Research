@@ -1,18 +1,19 @@
-# m64_dinamica_deuda_pib.py — dinámica deuda/PIB (nivel 9, ANCLA).
-#
-# La ecuación central de la macroeconomía fiscal: dividir m63 por el PIB
-# (que crece a g) introduce el término que decide todo:
-#   b_{t+1} = b_t·(1+r)/(1+g) − sp     [b: deuda/PIB; sp: primario/PIB]
-#   Δb ≈ b·(r−g) − sp
-# Si r > g: la bola de nieve sobrevive en ratios — estabilizar exige superávit
-#   sp* = b·(r−g)/(1+g)   (exacto, verificado)
-# Si g > r: la aritmética AMABLE — el crecimiento licúa; se puede sostener
-# déficit primario moderado con deuda estable. La carrera (r vs g) es el
-# corazón de todo debate fiscal — incluido el peruano (m108, con datos MEF).
-#
-# Procedencia: ecuación estándar de dinámica de deuda (análisis de
-# sostenibilidad del FMI, mención) — conocimiento general; calibración
-# didáctica.
+"""simuladores/macro/modelos/nivel_09/m64_dinamica_deuda_pib.py — dinámica deuda/PIB (nivel 9, ANCLA).
+
+La ecuación central de la macroeconomía fiscal: dividir m63 por el PIB
+(que crece a g) introduce el término que decide todo:
+  b_{t+1} = b_t·(1+r)/(1+g) − sp     [b: deuda/PIB; sp: primario/PIB]
+  Δb ≈ b·(r−g) − sp
+Si r > g: la bola de nieve sobrevive en ratios — estabilizar exige superávit
+  sp* = b·(r−g)/(1+g)   (exacto, verificado)
+Si g > r: la aritmética AMABLE — el crecimiento licúa; se puede sostener
+déficit primario moderado con deuda estable. La carrera (r vs g) es el
+corazón de todo debate fiscal — incluido el peruano (m108, con datos MEF).
+
+Procedencia: ecuación estándar de dinámica de deuda (análisis de
+sostenibilidad del FMI, mención) — conocimiento general; calibración
+didáctica.
+"""
 
 import numpy as np
 

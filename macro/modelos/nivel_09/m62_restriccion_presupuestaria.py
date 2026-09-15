@@ -1,17 +1,17 @@
-# m62_restriccion_presupuestaria.py — la restricción presupuestaria del
-# gobierno (nivel 9).
-#
-# La contabilidad que gobierna todo el nivel: cada sol de USO se financia:
-#   G + r·B  =  T + ΔB + SM
-#   (gasto + intereses = impuestos + deuda nueva + señoreaje)
-# Distinción operativa clave:
-#   déficit PRIMARIO  = G − T            (lo que controla la política HOY)
-#   déficit TOTAL     = G + r·B − T      (lo que hay que financiar)
-# La diferencia — los intereses r·B — es la herencia del pasado: el gasto que
-# ningún ministro decide y todos pagan.
-#
-# Procedencia: contabilidad fiscal estándar (conocimiento general);
-# calibración didáctica.
+"""simuladores/macro/modelos/nivel_09/m62_restriccion_presupuestaria.py — la restricción presupuestaria del gobierno (nivel 9).
+
+La contabilidad que gobierna todo el nivel: cada sol de USO se financia:
+  G + r·B  =  T + ΔB + SM
+  (gasto + intereses = impuestos + deuda nueva + señoreaje)
+Distinción operativa clave:
+  déficit PRIMARIO  = G − T            (lo que controla la política HOY)
+  déficit TOTAL     = G + r·B − T      (lo que hay que financiar)
+La diferencia — los intereses r·B — es la herencia del pasado: el gasto que
+ningún ministro decide y todos pagan.
+
+Procedencia: contabilidad fiscal estándar (conocimiento general);
+calibración didáctica.
+"""
 
 from base import Ecuacion, Escenario, Ficha, Modelo, Parametro, Verificacion
 import config

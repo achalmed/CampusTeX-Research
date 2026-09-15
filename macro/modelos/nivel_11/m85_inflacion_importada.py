@@ -1,17 +1,18 @@
-# m85_inflacion_importada.py — inflación importada y passthrough (nivel 11).
-#
-# El canal cambiario de la inflación: cuando el sol se deprecia (E↑, m45), los
-# bienes importados suben de precio en soles y arrastran el IPC. El coeficiente
-# de PASSTHROUGH (traspaso) mide cuánto de una devaluación llega a los precios:
-#   Δπ = passthrough · %devaluación · peso_importado
-# El passthrough NO es constante: cae con la credibilidad del banco central
-# (m40-m41). Economías con inflación anclada tienen passthrough bajo (~0.1),
-# las de alta inflación tienen passthrough alto (~0.8) — la inflación se
-# perpetúa. Combina m45/m46 (cambio) con m40 (ancla) — el mecanismo de m113.
-#
-# Procedencia: literatura de exchange-rate passthrough (Taylor 2000 sobre
-# passthrough y régimen de baja inflación — mención) — conocimiento general;
-# calibración didáctica (passthrough peruano bajo, ~0.1-0.2, por metas).
+"""simuladores/macro/modelos/nivel_11/m85_inflacion_importada.py — inflación importada y passthrough (nivel 11).
+
+El canal cambiario de la inflación: cuando el sol se deprecia (E↑, m45), los
+bienes importados suben de precio en soles y arrastran el IPC. El coeficiente
+de PASSTHROUGH (traspaso) mide cuánto de una devaluación llega a los precios:
+  Δπ = passthrough · %devaluación · peso_importado
+El passthrough NO es constante: cae con la credibilidad del banco central
+(m40-m41). Economías con inflación anclada tienen passthrough bajo (~0.1),
+las de alta inflación tienen passthrough alto (~0.8) — la inflación se
+perpetúa. Combina m45/m46 (cambio) con m40 (ancla) — el mecanismo de m113.
+
+Procedencia: literatura de exchange-rate passthrough (Taylor 2000 sobre
+passthrough y régimen de baja inflación — mención) — conocimiento general;
+calibración didáctica (passthrough peruano bajo, ~0.1-0.2, por metas).
+"""
 
 import numpy as np
 

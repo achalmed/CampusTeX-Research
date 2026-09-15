@@ -1,14 +1,15 @@
-# m63_deuda_publica.py — la deuda pública: la bola de nieve (nivel 9).
-#
-# La identidad de m62 iterada en el tiempo:
-#   B_{t+1} = (1+r)·B_t − SP_t        (SP: superávit primario; déficit si <0)
-# Sin crecimiento del PIB todavía (m64 lo trae), la aritmética es cruel:
-#   con SP = 0, la deuda crece EXACTAMENTE a tasa r (interés compuesto);
-#   el único SP que congela la deuda es  SP* = r·B_0  (servirla completa);
-#   con déficit primario, la bola acelera: intereses sobre intereses.
-#
-# Procedencia: dinámica de deuda estándar (conocimiento general);
-# calibración didáctica.
+"""simuladores/macro/modelos/nivel_09/m63_deuda_publica.py — la deuda pública: la bola de nieve (nivel 9).
+
+La identidad de m62 iterada en el tiempo:
+  B_{t+1} = (1+r)·B_t − SP_t        (SP: superávit primario; déficit si <0)
+Sin crecimiento del PIB todavía (m64 lo trae), la aritmética es cruel:
+  con SP = 0, la deuda crece EXACTAMENTE a tasa r (interés compuesto);
+  el único SP que congela la deuda es  SP* = r·B_0  (servirla completa);
+  con déficit primario, la bola acelera: intereses sobre intereses.
+
+Procedencia: dinámica de deuda estándar (conocimiento general);
+calibración didáctica.
+"""
 
 import numpy as np
 

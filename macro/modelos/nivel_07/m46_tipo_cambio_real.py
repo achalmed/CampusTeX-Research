@@ -1,15 +1,16 @@
-# m46_tipo_cambio_real.py — tipo de cambio real: la competitividad (nivel 7).
-#
-#   RER = E·P*/P     (índices; base 100)
-# Cuántas canastas locales cuesta una canasta extranjera: el precio relativo
-# que decide exportaciones e importaciones. En variaciones (exacto):
-#   RER'/RER = (1+dE)(1+dP*)/(1+dP)   ≈   dRER ≈ dE + dP* − dP
-# La lección amarga de las inflaciones altas: depreciar el E nominal NO
-# devalúa en términos reales si la inflación local se lo come (dE = dP ⇒
-# RER intacto) — el hámster cambiario de los años 80.
-#
-# Procedencia: definición estándar (conocimiento general); calibración
-# didáctica en índices.
+"""simuladores/macro/modelos/nivel_07/m46_tipo_cambio_real.py — tipo de cambio real: la competitividad (nivel 7).
+
+  RER = E·P*/P     (índices; base 100)
+Cuántas canastas locales cuesta una canasta extranjera: el precio relativo
+que decide exportaciones e importaciones. En variaciones (exacto):
+  RER'/RER = (1+dE)(1+dP*)/(1+dP)   ≈   dRER ≈ dE + dP* − dP
+La lección amarga de las inflaciones altas: depreciar el E nominal NO
+devalúa en términos reales si la inflación local se lo come (dE = dP ⇒
+RER intacto) — el hámster cambiario de los años 80.
+
+Procedencia: definición estándar (conocimiento general); calibración
+didáctica en índices.
+"""
 
 import numpy as np
 

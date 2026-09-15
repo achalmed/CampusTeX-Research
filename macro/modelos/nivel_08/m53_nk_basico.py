@@ -1,18 +1,19 @@
-# m53_nk_basico.py — el nuevo keynesianismo básico: rigidez de Calvo (nivel 8).
-#
-# La reconciliación: expectativas RACIONALES (m42) + rigideces NOMINALES.
-# Con la lotería de Calvo, cada período solo (1−θ) de las firmas puede
-# reajustar su precio; una fracción θ queda anclada:
-#   duración esperada del precio = 1/(1−θ)
-#   tras un shock monetario dM, el nivel de precios ajusta gradualmente
-#   p_t = (1 − θ^{t+1})·dM   ⇒   y_t = dM − p_t = θ^{t+1}·dM
-# El dinero mueve al producto EXACTAMENTE mientras queden precios viejos —
-# aunque todos sean racionales y el shock sea conocido: la respuesta a m42.
-#
-# Procedencia: Calvo (1983, "Staggered prices in a utility-maximizing
-# framework" — EN LA BIBLIOTECA de Edison, no verificado aún contra el PDF);
-# competencia monopolística: Dixit-Stiglitz (mención); costos de menú:
-# Mankiw (mención) — conocimiento general.
+"""simuladores/macro/modelos/nivel_08/m53_nk_basico.py — el nuevo keynesianismo básico: rigidez de Calvo (nivel 8).
+
+La reconciliación: expectativas RACIONALES (m42) + rigideces NOMINALES.
+Con la lotería de Calvo, cada período solo (1−θ) de las firmas puede
+reajustar su precio; una fracción θ queda anclada:
+  duración esperada del precio = 1/(1−θ)
+  tras un shock monetario dM, el nivel de precios ajusta gradualmente
+  p_t = (1 − θ^{t+1})·dM   ⇒   y_t = dM − p_t = θ^{t+1}·dM
+El dinero mueve al producto EXACTAMENTE mientras queden precios viejos —
+aunque todos sean racionales y el shock sea conocido: la respuesta a m42.
+
+Procedencia: Calvo (1983, "Staggered prices in a utility-maximizing
+framework" — EN LA BIBLIOTECA de Edison, no verificado aún contra el PDF);
+competencia monopolística: Dixit-Stiglitz (mención); costos de menú:
+Mankiw (mención) — conocimiento general.
+"""
 
 import numpy as np
 

@@ -1,23 +1,24 @@
-# m107_gasto_multiplicador.py — gasto público y el multiplicador fiscal (nivel 12).
-#
-# El multiplicador fiscal (m37: ¿cuánto PBI genera un sol de gasto público?) con
-# datos peruanos, y la lección de por qué es tan difícil de medir. El gasto no
-# financiero del gobierno general pasó de 17% del PBI (2006) a 24% en 2020 (el
-# estímulo COVID) y ~21% después. Si uno REGRESA ingenuamente el crecimiento del
-# PBI sobre el crecimiento del gasto, obtiene un "multiplicador" de ~0.1 —
-# absurdamente bajo. No es el multiplicador: está sesgado por la endogeneidad de
-# m106 (el gasto es contracíclico, sube cuando el PBI cae: en 2020 el gasto real
-# creció +10% mientras el PBI caía −11%). El multiplicador IDENTIFICADO para el
-# Perú, en la literatura que usa variación exógena del gasto (m70), es ~0.5-1:
-# positivo pero modesto, porque una economía pequeña y abierta FILTRA vía
-# importaciones (m43); y es CONDICIONAL (m70): mayor en recesión/ZLB (m91) que en
-# auge. No hay un número único.
-#
-# Procedencia: datos BCRP PN02207FM (gasto no financiero del gobierno general,
-# mensual→anual) y PM04946AA (PBI nominal); crecimiento real deflactando por el
-# deflactor implícito (PBI nominal/PBI real 2007). El concepto de multiplicador:
-# m37; su medición y condicionalidad: m70 (conocimiento general). El rango
-# 0.5-1 es de la literatura (m70), NO estimado aquí; el ~0.1 naive SÍ es del dato.
+"""simuladores/macro/modelos/nivel_12/m107_gasto_multiplicador.py — gasto público y el multiplicador fiscal (nivel 12).
+
+El multiplicador fiscal (m37: ¿cuánto PBI genera un sol de gasto público?) con
+datos peruanos, y la lección de por qué es tan difícil de medir. El gasto no
+financiero del gobierno general pasó de 17% del PBI (2006) a 24% en 2020 (el
+estímulo COVID) y ~21% después. Si uno REGRESA ingenuamente el crecimiento del
+PBI sobre el crecimiento del gasto, obtiene un "multiplicador" de ~0.1 —
+absurdamente bajo. No es el multiplicador: está sesgado por la endogeneidad de
+m106 (el gasto es contracíclico, sube cuando el PBI cae: en 2020 el gasto real
+creció +10% mientras el PBI caía −11%). El multiplicador IDENTIFICADO para el
+Perú, en la literatura que usa variación exógena del gasto (m70), es ~0.5-1:
+positivo pero modesto, porque una economía pequeña y abierta FILTRA vía
+importaciones (m43); y es CONDICIONAL (m70): mayor en recesión/ZLB (m91) que en
+auge. No hay un número único.
+
+Procedencia: datos BCRP PN02207FM (gasto no financiero del gobierno general,
+mensual→anual) y PM04946AA (PBI nominal); crecimiento real deflactando por el
+deflactor implícito (PBI nominal/PBI real 2007). El concepto de multiplicador:
+m37; su medición y condicionalidad: m70 (conocimiento general). El rango
+0.5-1 es de la literatura (m70), NO estimado aquí; el ~0.1 naive SÍ es del dato.
+"""
 
 import numpy as np
 

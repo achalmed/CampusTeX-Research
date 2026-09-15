@@ -1,13 +1,14 @@
-# m24_estanflacion.py — estanflación en el aparato completo (nivel 4).
-#
-# El episodio de los 70 reconstruido con el AD-AS de m23 y leído en el tablero
-# completo del policymaker: producto, precios (π), tasa implícita y desempleo
-# (vía Okun). Compara las tres respuestas históricas al shock de costos:
-#   nada / acomodar (dM>0, la Fed de Burns) / resistir (dM<0, Volcker).
-#
-# Procedencia: aparato AD-AS de manual; episodios OPEP 1973/1979, Fed de
-# Burns y desinflación de Volcker: menciones históricas de conocimiento
-# general. Okun con β didáctico (m15).
+"""simuladores/macro/modelos/nivel_04/m24_estanflacion.py — estanflación en el aparato completo (nivel 4).
+
+El episodio de los 70 reconstruido con el AD-AS de m23 y leído en el tablero
+completo del policymaker: producto, precios (π), tasa implícita y desempleo
+(vía Okun). Compara las tres respuestas históricas al shock de costos:
+  nada / acomodar (dM>0, la Fed de Burns) / resistir (dM<0, Volcker).
+
+Procedencia: aparato AD-AS de manual; episodios OPEP 1973/1979, Fed de
+Burns y desinflación de Volcker: menciones históricas de conocimiento
+general. Okun con β didáctico (m15).
+"""
 
 import numpy as np
 

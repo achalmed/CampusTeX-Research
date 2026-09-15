@@ -1,18 +1,20 @@
-# _episodio.py — motor compartido de los escenarios aplicados (nivel 11).
-# No es un modelo: es la máquina que reproduce EPISODIOS combinando los
-# mecanismos de los niveles previos. AD-AS dinámico (m52) de economía abierta,
-# con secuencias de shocks de demanda y de oferta y una regla de política.
-#
-#   AD:  Y_t = Y* − α·(π_t − π*) + d_t          (demanda; α = dureza de la regla, m52/m56)
-#   AS:  π_t = π_{t−1} + λ·(Y_t − Y*) + s_t      (Phillips con inercia, m14/m21)
-#   reducida:  π_t = [π_{t−1} + λα·π* + λ·d_t + s_t] / (1 + λα)
-#
-# d_t: shock de demanda por período (COVID, fiscal, salida de capitales…).
-# s_t: shock de oferta/costos por período (petróleo, alimentos, passthrough…).
-# Cada modelo del nivel construye sus secuencias d[] y s[] = SU episodio.
-#
-# Procedencia: AD-AS dinámico de m52 (conocimiento general de manuales
-# modernos); las calibraciones de cada episodio son didácticas.
+"""simuladores/macro/modelos/nivel_11/_episodio.py — motor compartido de los escenarios aplicados (nivel 11).
+
+No es un modelo: es la máquina que reproduce EPISODIOS combinando los
+mecanismos de los niveles previos. AD-AS dinámico (m52) de economía abierta,
+con secuencias de shocks de demanda y de oferta y una regla de política.
+
+  AD:  Y_t = Y* − α·(π_t − π*) + d_t          (demanda; α = dureza de la regla, m52/m56)
+  AS:  π_t = π_{t−1} + λ·(Y_t − Y*) + s_t      (Phillips con inercia, m14/m21)
+  reducida:  π_t = [π_{t−1} + λα·π* + λ·d_t + s_t] / (1 + λα)
+
+d_t: shock de demanda por período (COVID, fiscal, salida de capitales…).
+s_t: shock de oferta/costos por período (petróleo, alimentos, passthrough…).
+Cada modelo del nivel construye sus secuencias d[] y s[] = SU episodio.
+
+Procedencia: AD-AS dinámico de m52 (conocimiento general de manuales
+modernos); las calibraciones de cada episodio son didácticas.
+"""
 
 import numpy as np
 

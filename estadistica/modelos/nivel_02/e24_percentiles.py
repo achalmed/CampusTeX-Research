@@ -1,13 +1,14 @@
-# e24_percentiles.py — los percentiles (sección II, tema 24).
-#
-# La generalización de los cuartiles a CUALQUIER corte: el percentil p es el
-# valor por debajo del cual cae el p% de los datos. El percentil 50 es la
-# mediana, el 25 y el 75 son Q1 y Q3 (e23). Su lectura inversa —el "rango
-# percentil" de un valor: qué % lo supera— es la que usan las tablas de
-# crecimiento infantil ("tu hijo está en el percentil 90 de estatura"), los
-# exámenes estandarizados y el Valor-en-Riesgo financiero (el percentil 5 de
-# pérdidas). El modelo muestra la función de distribución empírica y deja mover p
-# para leer cualquier percentil, y su recíproco.
+"""simuladores/estadistica/modelos/nivel_02/e24_percentiles.py — los percentiles (sección II, tema 24).
+
+La generalización de los cuartiles a CUALQUIER corte: el percentil p es el
+valor por debajo del cual cae el p% de los datos. El percentil 50 es la
+mediana, el 25 y el 75 son Q1 y Q3 (e23). Su lectura inversa —el "rango
+percentil" de un valor: qué % lo supera— es la que usan las tablas de
+crecimiento infantil ("tu hijo está en el percentil 90 de estatura"), los
+exámenes estandarizados y el Valor-en-Riesgo financiero (el percentil 5 de
+pérdidas). El modelo muestra la función de distribución empírica y deja mover p
+para leer cualquier percentil, y su recíproco.
+"""
 
 import numpy as np
 

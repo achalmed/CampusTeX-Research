@@ -1,15 +1,16 @@
-# m52_adas_expectativas.py — AD-AS dinámico con expectativas (nivel 8).
-#
-# El aparato moderno en INFLACIÓN (ya no en niveles de precios, m23):
-#   AD (vía regla):  Y_t = Y* − α·(π_t − π*) + d_t     (m51 hecho curva)
-#   AS (Phillips):   π_t = π^e_t + λ·(Y_t − Y*) + s_t
-#   expectativas adaptativas: π^e_t = π_{t−1}
-# Forma reducida por período:  π_t·(1+λα) = π_{t−1} + λα·π* + λ·d_t + s_t
-# Converge SOLO porque la regla (α>0) inclina la AD: el ancla institucional
-# de m38-m40 es lo que hace estable a la economía de este nivel.
-#
-# Procedencia: AD-AS dinámico de manuales modernos (Mankiw, mención) —
-# conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_08/m52_adas_expectativas.py — AD-AS dinámico con expectativas (nivel 8).
+
+El aparato moderno en INFLACIÓN (ya no en niveles de precios, m23):
+  AD (vía regla):  Y_t = Y* − α·(π_t − π*) + d_t     (m51 hecho curva)
+  AS (Phillips):   π_t = π^e_t + λ·(Y_t − Y*) + s_t
+  expectativas adaptativas: π^e_t = π_{t−1}
+Forma reducida por período:  π_t·(1+λα) = π_{t−1} + λα·π* + λ·d_t + s_t
+Converge SOLO porque la regla (α>0) inclina la AD: el ancla institucional
+de m38-m40 es lo que hace estable a la economía de este nivel.
+
+Procedencia: AD-AS dinámico de manuales modernos (Mankiw, mención) —
+conocimiento general; calibración didáctica.
+"""
 
 import numpy as np
 

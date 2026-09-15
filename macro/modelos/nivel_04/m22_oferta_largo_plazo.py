@@ -1,13 +1,14 @@
-# m22_oferta_largo_plazo.py — oferta agregada de largo plazo (LRAS) — nivel 4.
-#
-# El producto potencial sale de la TECNOLOGÍA y los FACTORES, no de la demanda:
-#   Y* = A · K^α · L^(1−α)     (Cobb-Douglas; con K=L la base didáctica da Y*=A·K)
-# La LRAS es vertical en Y*. Frente a ella, la AD (m20) solo elige el nivel de
-# precios: P_LR = (b/h)·M / (Ac·Y* − F). De ahí la NEUTRALIDAD del dinero:
-# duplicar M duplica P y no toca Y* (verificable exacto).
-#
-# Procedencia: dicotomía clásica y función Cobb-Douglas — conocimiento general;
-# calibración: decisión de diseño didáctica.
+"""simuladores/macro/modelos/nivel_04/m22_oferta_largo_plazo.py — oferta agregada de largo plazo (LRAS) — nivel 4.
+
+El producto potencial sale de la TECNOLOGÍA y los FACTORES, no de la demanda:
+  Y* = A · K^α · L^(1−α)     (Cobb-Douglas; con K=L la base didáctica da Y*=A·K)
+La LRAS es vertical en Y*. Frente a ella, la AD (m20) solo elige el nivel de
+precios: P_LR = (b/h)·M / (Ac·Y* − F). De ahí la NEUTRALIDAD del dinero:
+duplicar M duplica P y no toca Y* (verificable exacto).
+
+Procedencia: dicotomía clásica y función Cobb-Douglas — conocimiento general;
+calibración: decisión de diseño didáctica.
+"""
 
 import numpy as np
 

@@ -1,13 +1,14 @@
-# e28_desviacion_estandar.py — la desviación estándar en uso (sección II, tema 28).
-#
-# Si e27 construyó la varianza y la desviación, este modelo muestra para QUÉ
-# sirve la desviación en la práctica: es la "unidad de medida" natural de la
-# dispersión. Dos usos centrales. (1) La REGLA EMPÍRICA: en una distribución
-# aproximadamente normal, ~68% de los datos caen a ±1σ de la media, ~95% a ±2σ y
-# ~99.7% a ±3σ —la regla 68-95-99.7—. (2) El PUNTAJE Z (estandarización): z =
-# (x−μ)/σ expresa cada dato en "número de desviaciones respecto a la media",
-# haciendo comparables variables de escalas distintas. El modelo deja mover k y
-# ver qué proporción cae dentro de ±kσ, contra la cota universal de Chebyshev.
+"""simuladores/estadistica/modelos/nivel_02/e28_desviacion_estandar.py — la desviación estándar en uso (sección II, tema 28).
+
+Si e27 construyó la varianza y la desviación, este modelo muestra para QUÉ
+sirve la desviación en la práctica: es la "unidad de medida" natural de la
+dispersión. Dos usos centrales. (1) La REGLA EMPÍRICA: en una distribución
+aproximadamente normal, ~68% de los datos caen a ±1σ de la media, ~95% a ±2σ y
+~99.7% a ±3σ —la regla 68-95-99.7—. (2) El PUNTAJE Z (estandarización): z =
+(x−μ)/σ expresa cada dato en "número de desviaciones respecto a la media",
+haciendo comparables variables de escalas distintas. El modelo deja mover k y
+ver qué proporción cae dentro de ±kσ, contra la cota universal de Chebyshev.
+"""
 
 import numpy as np
 

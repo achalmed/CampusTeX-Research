@@ -1,20 +1,21 @@
-# app.py — LA APLICACIÓN ÚNICA del laboratorio (MOTOR COMPARTIDO, raíz).
-#
-# Genérica y agnóstica a la disciplina: la usan macro/ y estadistica/ (y futuras)
-# vía `import app`; las etiquetas propias (secciones, títulos, "equilibrio") salen
-# de config.SECCIONES/APP_* de la disciplina activa. Un solo punto de entrada
-# (python3 main.py) y una sola ventana. El usuario elige un modelo del currículo
-# y lo recorre de forma PROGRESIVA y pedagógica:
-#
-#   pregunta → contexto → supuestos y variables → construcción de cada
-#   ecuación → derivación → construcción gráfica CURVA A CURVA → equilibrio →
-#   experimentos (shock, E1→E2, mecanismo, ¿por qué?) → experimentación libre
-#   (parámetros → ecuaciones → curvas → equilibrio → resultados, en vivo) →
-#   comparación de políticas → limitaciones y conexión con el siguiente modelo.
-#
-# Navegación mínima: tres botones (⌂ / ◀ / ▶) y el teclado (←/→, ↑/↓, Enter,
-# M para volver al menú). Cálculo, comparación, sensibilidad y láminas ocurren
-# por dentro — el usuario nunca ve un comando.
+"""simuladores/app.py — LA APLICACIÓN ÚNICA del laboratorio (MOTOR COMPARTIDO, raíz).
+
+Genérica y agnóstica a la disciplina: la usan macro/ y estadistica/ (y futuras)
+vía `import app`; las etiquetas propias (secciones, títulos, "equilibrio") salen
+de config.SECCIONES/APP_* de la disciplina activa. Un solo punto de entrada
+(python3 main.py) y una sola ventana. El usuario elige un modelo del currículo
+y lo recorre de forma PROGRESIVA y pedagógica:
+
+  pregunta → contexto → supuestos y variables → construcción de cada
+  ecuación → derivación → construcción gráfica CURVA A CURVA → equilibrio →
+  experimentos (shock, E1→E2, mecanismo, ¿por qué?) → experimentación libre
+  (parámetros → ecuaciones → curvas → equilibrio → resultados, en vivo) →
+  comparación de políticas → limitaciones y conexión con el siguiente modelo.
+
+Navegación mínima: tres botones (⌂ / ◀ / ▶) y el teclado (←/→, ↑/↓, Enter,
+M para volver al menú). Cálculo, comparación, sensibilidad y láminas ocurren
+por dentro — el usuario nunca ve un comando.
+"""
 
 import textwrap
 
@@ -93,7 +94,7 @@ class Laboratorio:
         self._libre = None              # refs del paso de experimentación libre
         self._dyn = []                  # widgets dinámicos (mantener referencias)
 
-    # ── ciclo de vida ────────────────────────────────────────────────────
+    # --- ciclo de vida -----------------------------------------------------
     def mostrar(self):
         self.fig = plt.figure(figsize=(13.6, 8.9))
         try:
@@ -116,7 +117,7 @@ class Laboratorio:
         self._render()
         plt.show()
 
-    # ── acciones ─────────────────────────────────────────────────────────
+    # --- acciones ----------------------------------------------------------
     def _accion_a(self, _=None):        # menú: ▲ · recorrido: ⌂ modelos
         if self.en_menu:
             self.cursor = max(0, self.cursor - 1)
@@ -170,7 +171,7 @@ class Laboratorio:
         elif ev.key in ("m", "escape") and not self.en_menu:
             self._accion_a()
 
-    # ── infraestructura de render ────────────────────────────────────────
+    # --- infraestructura de render -----------------------------------------
     def _limpiar(self):
         fijos = {self.ax_a, self.ax_b, self.ax_c}
         for ax in list(self.fig.axes):
@@ -202,7 +203,7 @@ class Laboratorio:
         for boton, etq in ((self.b_a, a), (self.b_b, b), (self.b_c, c)):
             boton.label.set_text(etq)
 
-    # ── render principal ─────────────────────────────────────────────────
+    # --- render principal --------------------------------------------------
     def _render(self):
         self._limpiar()
         if self.en_menu:
@@ -246,7 +247,7 @@ class Laboratorio:
         self._botones("⌂ Modelos", "◀ Anterior",
                       "Siguiente modelo ▶" if ultimo else "Siguiente ▶")
 
-    # ── pasos ────────────────────────────────────────────────────────────
+    # --- pasos -------------------------------------------------------------
     def _paso_portada(self, _):
         m, F = self.m, self.m.ficha
         if F and F.pregunta:

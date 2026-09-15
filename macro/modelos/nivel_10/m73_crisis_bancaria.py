@@ -1,18 +1,19 @@
-# m73_crisis_bancaria.py — corrida bancaria: Diamond-Dybvig (nivel 10).
-#
-# El banco transforma plazos: pasivos LÍQUIDOS (depósitos a la vista) contra
-# activos ILÍQUIDOS (préstamos a largo). Con reserva fraccionaria r_res,
-# solo atiende retiros hasta  R = r_res·D  a valor pleno; más allá, liquida
-# préstamos a valor de remate (fracción ρ<1 por dólar).
-# DOS equilibrios (Diamond-Dybvig 1983):
-#   (1) confianza: solo los que necesitan liquidez retiran (fracción t) → todos cobran;
-#   (2) pánico: TODOS retiran → el banco liquida a pérdida y no alcanza.
-#   valor recuperado por dólar en el pánico:  v = (R + ρ(D−R)) / D < 1
-# El seguro de depósitos (mención) elimina el equilibrio (2) haciendo
-# innecesario correr — sin gastar un centavo si nadie corre.
-#
-# Procedencia: Diamond y Dybvig (1983 — Nobel 2022) — mención; es el
-# multiplicador de m37 en reversa. Calibración didáctica.
+"""simuladores/macro/modelos/nivel_10/m73_crisis_bancaria.py — corrida bancaria: Diamond-Dybvig (nivel 10).
+
+El banco transforma plazos: pasivos LÍQUIDOS (depósitos a la vista) contra
+activos ILÍQUIDOS (préstamos a largo). Con reserva fraccionaria r_res,
+solo atiende retiros hasta  R = r_res·D  a valor pleno; más allá, liquida
+préstamos a valor de remate (fracción ρ<1 por dólar).
+DOS equilibrios (Diamond-Dybvig 1983):
+  (1) confianza: solo los que necesitan liquidez retiran (fracción t) → todos cobran;
+  (2) pánico: TODOS retiran → el banco liquida a pérdida y no alcanza.
+  valor recuperado por dólar en el pánico:  v = (R + ρ(D−R)) / D < 1
+El seguro de depósitos (mención) elimina el equilibrio (2) haciendo
+innecesario correr — sin gastar un centavo si nadie corre.
+
+Procedencia: Diamond y Dybvig (1983 — Nobel 2022) — mención; es el
+multiplicador de m37 en reversa. Calibración didáctica.
+"""
 
 import numpy as np
 

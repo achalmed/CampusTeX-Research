@@ -1,20 +1,21 @@
-# laboratorio.py — capa de EXPERIENCIA del laboratorio.
-#
-# Convierte "sliders + gráfico" en experimentación económica (observación de
-# Edison, 2026-08-19). Dos entregas:
-#
-#   lamina(modelo, escenario, ruta)  — hoja de experimento de 5 zonas, headless:
-#       ┌ CONTEXTO: modelo · nivel · pregunta económica · experimento
-#       ├ GRÁFICO con E1 → E2 (flecha de transición)   ├ RESULTADOS (tabla Δ)
-#       ├ MECANISMO de transmisión (cadena causal)     ├ ECUACIONES calibradas
-#       └ LECTURA económica ("¿por qué ocurrió esto?")
-#     Se incrusta en el reporte MD de cada escenario: cada experimento queda
-#     documentado como página de laboratorio, no como gráfico suelto.
-#
-#   laboratorio(modelo)  — modo interactivo: selector de escenarios (radio),
-#     el gráfico, la tabla y el mecanismo se actualizan al elegir experimento.
-#     El modo de sliders clásico sigue disponible (interactivo()) como
-#     "modo avanzado" para tocar parámetros libres.
+"""simuladores/laboratorio.py — capa de EXPERIENCIA del laboratorio.
+
+Convierte "sliders + gráfico" en experimentación económica (observación de
+Edison, 2026-08-19). Dos entregas:
+
+  lamina(modelo, escenario, ruta)  — hoja de experimento de 5 zonas, headless:
+      ┌ CONTEXTO: modelo · nivel · pregunta económica · experimento
+      ├ GRÁFICO con E1 → E2 (flecha de transición)   ├ RESULTADOS (tabla Δ)
+      ├ MECANISMO de transmisión (cadena causal)     ├ ECUACIONES calibradas
+      └ LECTURA económica ("¿por qué ocurrió esto?")
+    Se incrusta en el reporte MD de cada escenario: cada experimento queda
+    documentado como página de laboratorio, no como gráfico suelto.
+
+  laboratorio(modelo)  — modo interactivo: selector de escenarios (radio),
+    el gráfico, la tabla y el mecanismo se actualizan al elegir experimento.
+    El modo de sliders clásico sigue disponible (interactivo()) como
+    "modo avanzado" para tocar parámetros libres.
+"""
 
 import re
 import textwrap
@@ -125,7 +126,7 @@ def _componer(fig, modelo, esc):
     params0 = modelo.dict_params()
     params1 = dict(params0, **esc.cambios) if esc else dict(params0)
 
-    # ── zona A: contexto ────────────────────────────────────────────────────
+    # --- zona A: contexto --------------------------------------------------
     F = modelo.ficha
     fig.text(0.035, 0.978, "LABORATORIO MACROECONÓMICO",
              fontsize=9.5, color=config.GRIS, fontweight="bold")
@@ -148,14 +149,14 @@ def _componer(fig, modelo, esc):
                           width_ratios=[3.1, 2.0], height_ratios=[3.2, 1.35],
                           hspace=0.42, wspace=0.16)
 
-    # ── zona B: gráfico con E1 → E2 ─────────────────────────────────────────
+    # --- zona B: gráfico con E1 → E2 ---------------------------------------
     ax_g = fig.add_subplot(gs[0, 0])
     graficos._dibujar(ax_g, modelo, params1)
     if esc:
         graficos.marcar_transicion(ax_g, modelo, params0, params1)
     ax_g.set_title("")            # la cabecera ya nombra al modelo (evita choque)
 
-    # ── zona C: resultados (tabla Δ) ────────────────────────────────────────
+    # --- zona C: resultados (tabla Δ) --------------------------------------
     ax_r = fig.add_subplot(gs[0, 1])
     if esc:
         _tabla_resultados(ax_r, _filas_delta(modelo, esc))
@@ -165,17 +166,17 @@ def _componer(fig, modelo, esc):
                  if isinstance(v, (int, float))][:9]
         _tabla_resultados(ax_r, filas)
 
-    # ── zona D: mecanismo de transmisión ────────────────────────────────────
+    # --- zona D: mecanismo de transmisión ----------------------------------
     ax_m = fig.add_subplot(gs[1, 0])
     _panel_texto(ax_m, "MECANISMO DE TRANSMISIÓN",
                  _texto_mecanismo(esc) if esc else "(elige un experimento)", tam=10)
 
-    # ── zona E: ecuaciones vigentes ─────────────────────────────────────────
+    # --- zona E: ecuaciones vigentes ---------------------------------------
     ax_e = fig.add_subplot(gs[1, 1])
     _panel_texto(ax_e, "ECUACIONES (valores vigentes)",
                  _texto_ecuaciones(modelo, params1), tam=10)
 
-    # ── pie: lectura económica ("¿por qué?") ────────────────────────────────
+    # --- pie: lectura económica ("¿por qué?") ------------------------------
     if esc and esc.lectura:
         fig.text(0.035, 0.020, _wrap(f"¿Por qué?  {esc.lectura}", 130),
                  fontsize=9.5, color="#333333")

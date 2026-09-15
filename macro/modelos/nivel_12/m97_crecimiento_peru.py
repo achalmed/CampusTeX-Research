@@ -1,16 +1,17 @@
-# m97_crecimiento_peru.py — crecimiento del Perú, con datos del BCRP (nivel 12).
-#
-# PRIMER modelo del currículo con DATOS REALES. La serie del PBI (variación %
-# interanual, BCRP PN01728AM) 2004-2024 cuenta la historia macro peruana del
-# siglo: el superciclo de commodities (2004-2013, ~6-9%), la desaceleración
-# post-boom (2014-2019), el desplome COVID (2020, −10.9%, el peor año de la
-# serie) y la recuperación. El laboratorio LEE el dato, calcula el crecimiento
-# promedio y la volatilidad, e identifica los episodios — conectando la teoría
-# (Solow m26, ciclo m17, cobre m89) con la evidencia peruana.
-#
-# Procedencia: dato BCRP PN01728AM (PBI, var% interanual), muestra 2004-2024,
-# descargada por connectors/bcrp el 2026-08-19. Las lecturas (episodios,
-# promedios) son descriptivas; NO son pronósticos ni atribución causal.
+"""simuladores/macro/modelos/nivel_12/m97_crecimiento_peru.py — crecimiento del Perú, con datos del BCRP (nivel 12).
+
+PRIMER modelo del currículo con DATOS REALES. La serie del PBI (variación %
+interanual, BCRP PN01728AM) 2004-2024 cuenta la historia macro peruana del
+siglo: el superciclo de commodities (2004-2013, ~6-9%), la desaceleración
+post-boom (2014-2019), el desplome COVID (2020, −10.9%, el peor año de la
+serie) y la recuperación. El laboratorio LEE el dato, calcula el crecimiento
+promedio y la volatilidad, e identifica los episodios — conectando la teoría
+(Solow m26, ciclo m17, cobre m89) con la evidencia peruana.
+
+Procedencia: dato BCRP PN01728AM (PBI, var% interanual), muestra 2004-2024,
+descargada por connectors/bcrp el 2026-08-19. Las lecturas (episodios,
+promedios) son descriptivas; NO son pronósticos ni atribución causal.
+"""
 
 import numpy as np
 

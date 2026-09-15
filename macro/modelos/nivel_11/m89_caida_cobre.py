@@ -1,18 +1,19 @@
-# m89_caida_cobre.py — caída del precio del cobre (nivel 11).
-#
-# El reverso de m88 y el PRELUDIO PERUANO de m103. Una caída del precio del
-# cobre golpea a un exportador por TRES canales simultáneos:
-#   (1) EXTERNO: ↓exportaciones → ↓CC → presión cambiaria (m43, m75)
-#   (2) FISCAL: ↓recaudación minera → ↓ingresos → ajuste o déficit (m62)
-#   (3) REAL: ↓inversión minera → ↓demanda agregada → recesión (m10)
-# El daño depende de si el país AHORRÓ en el boom (m88): con fondo de
-# estabilización, el golpe fiscal se amortigua; sin él, hay que recortar en
-# recesión (prociclicidad). Es el shock que el Perú enfrenta recurrentemente
-# — 2014-2016, 2020 — y el caso que m103 estimará con datos del BCRP.
-#
-# Procedencia: transmisión de términos de intercambio a un exportador (m105);
-# los tres canales son m43/m62/m10 — conocimiento general; calibración
-# didáctica que EVOCA la estructura peruana (NO datos oficiales).
+"""simuladores/macro/modelos/nivel_11/m89_caida_cobre.py — caída del precio del cobre (nivel 11).
+
+El reverso de m88 y el PRELUDIO PERUANO de m103. Una caída del precio del
+cobre golpea a un exportador por TRES canales simultáneos:
+  (1) EXTERNO: ↓exportaciones → ↓CC → presión cambiaria (m43, m75)
+  (2) FISCAL: ↓recaudación minera → ↓ingresos → ajuste o déficit (m62)
+  (3) REAL: ↓inversión minera → ↓demanda agregada → recesión (m10)
+El daño depende de si el país AHORRÓ en el boom (m88): con fondo de
+estabilización, el golpe fiscal se amortigua; sin él, hay que recortar en
+recesión (prociclicidad). Es el shock que el Perú enfrenta recurrentemente
+— 2014-2016, 2020 — y el caso que m103 estimará con datos del BCRP.
+
+Procedencia: transmisión de términos de intercambio a un exportador (m105);
+los tres canales son m43/m62/m10 — conocimiento general; calibración
+didáctica que EVOCA la estructura peruana (NO datos oficiales).
+"""
 
 import numpy as np
 

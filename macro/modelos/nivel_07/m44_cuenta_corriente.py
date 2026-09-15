@@ -1,14 +1,15 @@
-# m44_cuenta_corriente.py — cuenta corriente: ahorro menos inversión (nivel 7).
-#
-# La identidad que cambia la conversación:
-#   CC = S − I = (S_p − I) + (T − G)
-# El "déficit externo" deja de ser un problema comercial y se vuelve un hecho
-# de AHORRO: quien invierte más de lo que ahorra, importa ahorro del resto del
-# mundo. Corolario célebre: los DÉFICITS GEMELOS (más déficit fiscal ⇒ más
-# déficit externo, ceteris paribus).
-#
-# Procedencia: identidad de cuentas nacionales abiertas (conocimiento
-# general); enfoque intertemporal de la CC: Obstfeld-Rogoff (mención).
+"""simuladores/macro/modelos/nivel_07/m44_cuenta_corriente.py — cuenta corriente: ahorro menos inversión (nivel 7).
+
+La identidad que cambia la conversación:
+  CC = S − I = (S_p − I) + (T − G)
+El "déficit externo" deja de ser un problema comercial y se vuelve un hecho
+de AHORRO: quien invierte más de lo que ahorra, importa ahorro del resto del
+mundo. Corolario célebre: los DÉFICITS GEMELOS (más déficit fiscal ⇒ más
+déficit externo, ceteris paribus).
+
+Procedencia: identidad de cuentas nacionales abiertas (conocimiento
+general); enfoque intertemporal de la CC: Obstfeld-Rogoff (mención).
+"""
 
 from base import Ecuacion, Escenario, Ficha, Modelo, Parametro, Verificacion
 import config

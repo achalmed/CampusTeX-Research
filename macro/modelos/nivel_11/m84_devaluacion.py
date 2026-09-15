@@ -1,19 +1,20 @@
-# m84_devaluacion.py — devaluación: expansiva o contractiva (nivel 11).
-#
-# El debate clásico de los emergentes. Una devaluación tiene DOS efectos
-# opuestos que combinan m46 (competitividad) y m71 (balances):
-#   (+) COMPETITIVIDAD: E↑ abarata exportaciones → ↑XN → expansiva (Mundell, m49)
-#   (−) HOJA DE BALANCE: si la deuda es en DÓLARES, E↑ infla el pasivo en soles
-#       → quiebras → contractiva (efecto Krugman de tercera generación, m74)
-# El efecto NETO depende de la dolarización de la deuda:
-#   devaluación_neta = competitividad·(1−dolar) − balance·dolar
-# Alta dolarización invierte el signo: la devaluación que debería estimular,
-# quiebra. Es la razón del "miedo a flotar" (fear of floating, Calvo-Reinhart)
-# y de por qué la desdolarización peruana (mención) fue política de Estado.
-#
-# Procedencia: devaluación contractiva (Krugman-Taylor; balance sheet effects,
-# Krugman 1999; fear of floating, Calvo-Reinhart — menciones) — conocimiento
-# general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_11/m84_devaluacion.py — devaluación: expansiva o contractiva (nivel 11).
+
+El debate clásico de los emergentes. Una devaluación tiene DOS efectos
+opuestos que combinan m46 (competitividad) y m71 (balances):
+  (+) COMPETITIVIDAD: E↑ abarata exportaciones → ↑XN → expansiva (Mundell, m49)
+  (−) HOJA DE BALANCE: si la deuda es en DÓLARES, E↑ infla el pasivo en soles
+      → quiebras → contractiva (efecto Krugman de tercera generación, m74)
+El efecto NETO depende de la dolarización de la deuda:
+  devaluación_neta = competitividad·(1−dolar) − balance·dolar
+Alta dolarización invierte el signo: la devaluación que debería estimular,
+quiebra. Es la razón del "miedo a flotar" (fear of floating, Calvo-Reinhart)
+y de por qué la desdolarización peruana (mención) fue política de Estado.
+
+Procedencia: devaluación contractiva (Krugman-Taylor; balance sheet effects,
+Krugman 1999; fear of floating, Calvo-Reinhart — menciones) — conocimiento
+general; calibración didáctica.
+"""
 
 import numpy as np
 

@@ -1,16 +1,17 @@
-# m99_inflacion_peru.py — inflación peruana, con datos del BCRP (nivel 12).
-#
-# El ancla de m40 FUNCIONANDO, con datos. La serie de inflación (IPC var% 12
-# meses, BCRP PN01273PM) 2004-2024 muestra que la inflación peruana ha estado
-# la MAYOR PARTE del tiempo dentro del rango meta del BCRP (2% ± 1pp desde
-# 2002) — un logro histórico para un país que vivió hiperinflación en los 80
-# (m36). Los desvíos (2008 alimentos+petróleo, 2022 post-COVID) fueron
-# transitorios: el ancla los devolvió a la meta (m40, m85). El laboratorio
-# calcula el % de tiempo dentro del rango y la persistencia — la credibilidad
-# hecha evidencia.
-#
-# Procedencia: dato BCRP PN01273PM (IPC Lima, var% 12 meses), muestra
-# 2004-2024. La meta del BCRP (2% ± 1pp) es política oficial declarada.
+"""simuladores/macro/modelos/nivel_12/m99_inflacion_peru.py — inflación peruana, con datos del BCRP (nivel 12).
+
+El ancla de m40 FUNCIONANDO, con datos. La serie de inflación (IPC var% 12
+meses, BCRP PN01273PM) 2004-2024 muestra que la inflación peruana ha estado
+la MAYOR PARTE del tiempo dentro del rango meta del BCRP (2% ± 1pp desde
+2002) — un logro histórico para un país que vivió hiperinflación en los 80
+(m36). Los desvíos (2008 alimentos+petróleo, 2022 post-COVID) fueron
+transitorios: el ancla los devolvió a la meta (m40, m85). El laboratorio
+calcula el % de tiempo dentro del rango y la persistencia — la credibilidad
+hecha evidencia.
+
+Procedencia: dato BCRP PN01273PM (IPC Lima, var% 12 meses), muestra
+2004-2024. La meta del BCRP (2% ± 1pp) es política oficial declarada.
+"""
 
 import numpy as np
 

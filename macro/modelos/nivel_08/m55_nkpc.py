@@ -1,16 +1,17 @@
-# m55_nkpc.py — la curva de Phillips nuevo keynesiana (nivel 8).
-#
-# La Phillips que mira al FUTURO (la de m14 miraba al pasado):
-#   π_t = β·π_{t+1} + κ·x_t
-# Iterando hacia adelante (π terminal = 0):
-#   π_t = κ · Σ_{j≥t} β^{j−t} · x_j
-# La inflación de HOY es el valor presente de TODAS las brechas futuras. La
-# pendiente κ nace de la rigidez de Calvo (m53): κ = (1−θ)(1−βθ)/θ (mención).
-# Consecuencia célebre y polémica: una desinflación PERFECTAMENTE creíble no
-# cuesta nada — sin inercia intrínseca, π salta donde digan las brechas.
-#
-# Procedencia: NKPC estándar (derivación de Calvo: Galí, Woodford — menciones;
-# el paper de Calvo 1983 está en la biblioteca) — conocimiento general.
+"""simuladores/macro/modelos/nivel_08/m55_nkpc.py — la curva de Phillips nuevo keynesiana (nivel 8).
+
+La Phillips que mira al FUTURO (la de m14 miraba al pasado):
+  π_t = β·π_{t+1} + κ·x_t
+Iterando hacia adelante (π terminal = 0):
+  π_t = κ · Σ_{j≥t} β^{j−t} · x_j
+La inflación de HOY es el valor presente de TODAS las brechas futuras. La
+pendiente κ nace de la rigidez de Calvo (m53): κ = (1−θ)(1−βθ)/θ (mención).
+Consecuencia célebre y polémica: una desinflación PERFECTAMENTE creíble no
+cuesta nada — sin inercia intrínseca, π salta donde digan las brechas.
+
+Procedencia: NKPC estándar (derivación de Calvo: Galí, Woodford — menciones;
+el paper de Calvo 1983 está en la biblioteca) — conocimiento general.
+"""
 
 import numpy as np
 

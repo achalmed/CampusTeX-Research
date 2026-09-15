@@ -1,17 +1,18 @@
-# m45_tipo_cambio_nominal.py — el mercado cambiario (nivel 7).
-#
-# El precio de la divisa como cualquier precio: oferta y demanda de dólares.
-#   oferta  O(E) = a + b·E   (exportadores y capitales que entran: con E alto
-#                             — sol depreciado — exportar rinde más soles)
-#   demanda D(E) = c − d·E + dBC  (importadores, salidas… y el banco central)
-#   E* = (c + dBC − a)/(b + d)      [E = soles por dólar]
-# Convención crucial: E↑ = DEPRECIACIÓN del sol; E↓ = apreciación.
-# dBC>0: el banco central COMPRA dólares (acumula RIN y frena la apreciación
-# — la intervención típica del BCRP en bonanzas, mención).
-#
-# Procedencia: mercado de flujos didáctico (manuales) — conocimiento general;
-# la visión moderna de activos llega en m48 (UIP). Calibración didáctica
-# alrededor de E≈3.5 PEN/USD.
+"""simuladores/macro/modelos/nivel_07/m45_tipo_cambio_nominal.py — el mercado cambiario (nivel 7).
+
+El precio de la divisa como cualquier precio: oferta y demanda de dólares.
+  oferta  O(E) = a + b·E   (exportadores y capitales que entran: con E alto
+                            — sol depreciado — exportar rinde más soles)
+  demanda D(E) = c − d·E + dBC  (importadores, salidas… y el banco central)
+  E* = (c + dBC − a)/(b + d)      [E = soles por dólar]
+Convención crucial: E↑ = DEPRECIACIÓN del sol; E↓ = apreciación.
+dBC>0: el banco central COMPRA dólares (acumula RIN y frena la apreciación
+— la intervención típica del BCRP en bonanzas, mención).
+
+Procedencia: mercado de flujos didáctico (manuales) — conocimiento general;
+la visión moderna de activos llega en m48 (UIP). Calibración didáctica
+alrededor de E≈3.5 PEN/USD.
+"""
 
 import numpy as np
 

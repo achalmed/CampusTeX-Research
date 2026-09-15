@@ -1,22 +1,23 @@
-# m104_cobre_tipo_cambio.py — el cobre y el tipo de cambio (nivel 12).
-#
-# La teoría (m43, m89) predice un canal claro: si sube el cobre, el Perú recibe
-# más dólares, el sol se aprecia y el tipo de cambio (PEN/USD) BAJA — una
-# correlación NEGATIVA. Pero los datos crudos del BCRP la desmienten: en niveles
-# la correlación cobre-tipo de cambio es +0.12 (¡positiva!). ¿Falla la teoría?
-# No: falla la lectura ingenua. El modelo muestra tres capas:
-#   (1) en NIVELES la correlación es ~0 (engañosa: hay tendencias y confusores);
-#   (2) en CAMBIOS (Δ) aparece el signo teórico, −0.19, pero débil;
-#   (3) al EXCLUIR 2020-2021 (COVID + crisis política, años de fuga de capitales)
-#       el canal se fortalece a −0.45 — en años normales el terms-of-trade manda.
-# El año 2021 es el dato más informativo: cobre en RÉCORD (+51%) y sol DÉBIL
-# (+11%). El tipo de cambio es un precio de ACTIVO: la cuenta de capitales (m111,
-# fuga por riesgo político m74) puede vencer al canal comercial.
-#
-# Procedencia: datos BCRP PN01652XM (cobre) y PN01207PM (tipo de cambio), muestra
-# 2004-2024. El canal comercial: m43/m89; el enfoque de activos (la cuenta de
-# capitales domina en el corto plazo): m111 (conocimiento general). Correlación
-# descriptiva, no causal (regla del pipeline).
+"""simuladores/macro/modelos/nivel_12/m104_cobre_tipo_cambio.py — el cobre y el tipo de cambio (nivel 12).
+
+La teoría (m43, m89) predice un canal claro: si sube el cobre, el Perú recibe
+más dólares, el sol se aprecia y el tipo de cambio (PEN/USD) BAJA — una
+correlación NEGATIVA. Pero los datos crudos del BCRP la desmienten: en niveles
+la correlación cobre-tipo de cambio es +0.12 (¡positiva!). ¿Falla la teoría?
+No: falla la lectura ingenua. El modelo muestra tres capas:
+  (1) en NIVELES la correlación es ~0 (engañosa: hay tendencias y confusores);
+  (2) en CAMBIOS (Δ) aparece el signo teórico, −0.19, pero débil;
+  (3) al EXCLUIR 2020-2021 (COVID + crisis política, años de fuga de capitales)
+      el canal se fortalece a −0.45 — en años normales el terms-of-trade manda.
+El año 2021 es el dato más informativo: cobre en RÉCORD (+51%) y sol DÉBIL
+(+11%). El tipo de cambio es un precio de ACTIVO: la cuenta de capitales (m111,
+fuga por riesgo político m74) puede vencer al canal comercial.
+
+Procedencia: datos BCRP PN01652XM (cobre) y PN01207PM (tipo de cambio), muestra
+2004-2024. El canal comercial: m43/m89; el enfoque de activos (la cuenta de
+capitales domina en el corto plazo): m111 (conocimiento general). Correlación
+descriptiva, no causal (regla del pipeline).
+"""
 
 import numpy as np
 

@@ -1,15 +1,16 @@
-# m35_neutralidad_dinero.py — neutralidad del dinero: la síntesis dinámica (nivel 6).
-#
-# El experimento monetario definitivo sobre el aparato AD-AS dinámico (m25):
-# una emisión permanente dM y DOS relojes en el mismo gráfico (índices base=100):
-#   Y_t  sube de impacto (no-neutralidad de corto plazo, m23)…
-#        …y regresa exactamente a Y* (neutralidad de largo plazo, m22)
-#   P_t  sube y se queda: al final, TODO el dinero se hizo precios.
-# La duración del tránsito (que gobierna λ) es el espacio vital de la política
-# monetaria: neutral al final, potente mientras tanto.
-#
-# Procedencia: experimento mental de Hume (1752, Of Money — mención) sobre la
-# maquinaria de la síntesis (m20-m25) — conocimiento general.
+"""simuladores/macro/modelos/nivel_06/m35_neutralidad_dinero.py — neutralidad del dinero: la síntesis dinámica (nivel 6).
+
+El experimento monetario definitivo sobre el aparato AD-AS dinámico (m25):
+una emisión permanente dM y DOS relojes en el mismo gráfico (índices base=100):
+  Y_t  sube de impacto (no-neutralidad de corto plazo, m23)…
+       …y regresa exactamente a Y* (neutralidad de largo plazo, m22)
+  P_t  sube y se queda: al final, TODO el dinero se hizo precios.
+La duración del tránsito (que gobierna λ) es el espacio vital de la política
+monetaria: neutral al final, potente mientras tanto.
+
+Procedencia: experimento mental de Hume (1752, Of Money — mención) sobre la
+maquinaria de la síntesis (m20-m25) — conocimiento general.
+"""
 
 import numpy as np
 

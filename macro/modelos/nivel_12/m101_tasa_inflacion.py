@@ -1,18 +1,19 @@
-# m101_tasa_inflacion.py — transmisión tasa de referencia → inflación (nivel 12).
-#
-# El OTRO lado de la política monetaria (m100 era la regla; esto es su efecto).
-# El mecanismo de transmisión (m10/m56) predice que subir la tasa hoy enfría
-# la inflación con REZAGO (varios trimestres). El laboratorio muestra por qué
-# la correlación CONTEMPORÁNEA tasa-inflación es engañosa: el BCRP SUBE la
-# tasa CUANDO la inflación sube (causalidad inversa, m100), así que en el
-# mismo período se ven correlacionadas positivamente — pero el EFECTO de la
-# tasa sobre la inflación es negativo y REZAGADO. Ilustra la diferencia entre
-# correlación y efecto causal, con el episodio 2021-2023 (el BCRP subió la
-# tasa agresivamente y la inflación cedió después).
-#
-# Procedencia: datos BCRP PD04722MM (tasa) y PN01273PM (IPC 12m), muestra
-# 2004-2024. La transmisión con rezago: m10/m56 (conocimiento general). El
-# análisis de rezagos es ilustrativo, NO una estimación de VAR estructural.
+"""simuladores/macro/modelos/nivel_12/m101_tasa_inflacion.py — transmisión tasa de referencia → inflación (nivel 12).
+
+El OTRO lado de la política monetaria (m100 era la regla; esto es su efecto).
+El mecanismo de transmisión (m10/m56) predice que subir la tasa hoy enfría
+la inflación con REZAGO (varios trimestres). El laboratorio muestra por qué
+la correlación CONTEMPORÁNEA tasa-inflación es engañosa: el BCRP SUBE la
+tasa CUANDO la inflación sube (causalidad inversa, m100), así que en el
+mismo período se ven correlacionadas positivamente — pero el EFECTO de la
+tasa sobre la inflación es negativo y REZAGADO. Ilustra la diferencia entre
+correlación y efecto causal, con el episodio 2021-2023 (el BCRP subió la
+tasa agresivamente y la inflación cedió después).
+
+Procedencia: datos BCRP PD04722MM (tasa) y PN01273PM (IPC 12m), muestra
+2004-2024. La transmisión con rezago: m10/m56 (conocimiento general). El
+análisis de rezagos es ilustrativo, NO una estimación de VAR estructural.
+"""
 
 import numpy as np
 

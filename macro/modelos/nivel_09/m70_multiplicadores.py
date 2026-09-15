@@ -1,19 +1,19 @@
-# m70_multiplicadores.py — multiplicadores fiscales: el juicio empírico
-# (nivel 9, cierre).
-#
-# La síntesis del arco m04→m60→m69: el multiplicador es un objeto
-# CONDICIONAL al estado. Predictor didáctico con factores multiplicativos
-# (calibrados a los RANGOS de la literatura — decisión de diseño declarada):
-#   mult = base × (1+0.8·zlb) × (1−0.4·apertura) × (1−0.4·bc_activo·(1−zlb))
-#               × (1−0.3·deuda_alta)
-# Lecturas de la evidencia (menciones): Ramey (2019): rangos 0.6-1 en tiempos
-# normales; Blanchard-Leigh (2013): >1 en consolidaciones post-2008;
-# Ilzetzki-Mendoza-Végh (2013): menores en economías abiertas y endeudadas;
-# Auerbach-Gorodnichenko (2012): mayores en recesión. El caso "Perú normal"
-# (abierto, BCRP activo, deuda baja) cae en 0.4-0.6 — m107 lo estimará.
-#
-# Procedencia: factores didácticos = decisión de diseño calibrada a rangos
-# de literatura empírica (menciones arriba); NO son estimaciones.
+"""simuladores/macro/modelos/nivel_09/m70_multiplicadores.py — multiplicadores fiscales: el juicio empírico (nivel 9, cierre).
+
+La síntesis del arco m04→m60→m69: el multiplicador es un objeto
+CONDICIONAL al estado. Predictor didáctico con factores multiplicativos
+(calibrados a los RANGOS de la literatura — decisión de diseño declarada):
+  mult = base × (1+0.8·zlb) × (1−0.4·apertura) × (1−0.4·bc_activo·(1−zlb))
+              × (1−0.3·deuda_alta)
+Lecturas de la evidencia (menciones): Ramey (2019): rangos 0.6-1 en tiempos
+normales; Blanchard-Leigh (2013): >1 en consolidaciones post-2008;
+Ilzetzki-Mendoza-Végh (2013): menores en economías abiertas y endeudadas;
+Auerbach-Gorodnichenko (2012): mayores en recesión. El caso "Perú normal"
+(abierto, BCRP activo, deuda baja) cae en 0.4-0.6 — m107 lo estimará.
+
+Procedencia: factores didácticos = decisión de diseño calibrada a rangos
+de literatura empírica (menciones arriba); NO son estimaciones.
+"""
 
 from base import Ecuacion, Escenario, Ficha, Modelo, Parametro, Verificacion
 import config

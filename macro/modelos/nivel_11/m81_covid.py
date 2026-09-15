@@ -1,16 +1,17 @@
-# m81_covid.py — COVID-19 como shock macroeconómico (nivel 11).
-#
-# El experimento natural más limpio de la macro moderna: un shock SIMULTÁNEO
-# de oferta (confinamiento cierra fábricas: s>0) y de demanda (miedo + cierre
-# hunde el gasto: d<0), seguido de una respuesta fiscal-monetaria masiva
-# (d>0 tardío). La lección: el efecto sobre la INFLACIÓN depende de qué shock
-# domina — 2020 fue desinflacionario (dominó la demanda), 2021-22
-# inflacionario (dominó la oferta + estímulo). Combina m19 (oferta), m18
-# (demanda), m52 (dinámica) y m60/m70 (respuesta fiscal).
-#
-# Procedencia: lectura estándar del episodio COVID (Guerrieri et al. sobre
-# "Keynesian supply shocks" — mención) sobre el motor AD-AS de m52 —
-# conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_11/m81_covid.py — COVID-19 como shock macroeconómico (nivel 11).
+
+El experimento natural más limpio de la macro moderna: un shock SIMULTÁNEO
+de oferta (confinamiento cierra fábricas: s>0) y de demanda (miedo + cierre
+hunde el gasto: d<0), seguido de una respuesta fiscal-monetaria masiva
+(d>0 tardío). La lección: el efecto sobre la INFLACIÓN depende de qué shock
+domina — 2020 fue desinflacionario (dominó la demanda), 2021-22
+inflacionario (dominó la oferta + estímulo). Combina m19 (oferta), m18
+(demanda), m52 (dinámica) y m60/m70 (respuesta fiscal).
+
+Procedencia: lectura estándar del episodio COVID (Guerrieri et al. sobre
+"Keynesian supply shocks" — mención) sobre el motor AD-AS de m52 —
+conocimiento general; calibración didáctica.
+"""
 
 import numpy as np
 

@@ -1,20 +1,21 @@
-# robustez_interactiva.py — DEMO de la capa INTERACTIVA EN VIVO (matplotlib).
-#
-# Responde a la pregunta de Edison: "¿puedo ver las animaciones EN EL PROYECTO
-# sin reproducir un video?". SÍ — esto es matplotlib, no Manim: se ejecuta y
-# abre una VENTANA INTERACTIVA. Mueve el slider (o arrastra) y observa EN VIVO
-# cómo un solo dato extremo ARRASTRA la media pero casi no mueve la mediana
-# (robustez; sección II, temas 32-33). No hay ningún archivo de video: la
-# animación ocurre en la app, en tiempo real, respondiendo a ti.
-#
-#   Manim  → genera un VIDEO pulido (para redes / incrustar).
-#   ESTO   → interactividad EN VIVO dentro del proyecto (para explorar/aprender).
-#
-# Ejecutar (en un entorno con ventana):
-#   python3 robustez_interactiva.py
-#
-# (Este archivo es una DEMOSTRACIÓN del concepto; la versión final vivirá como la
-#  vista interactiva del modelo de descriptiva del lab, alimentada por base.py.)
+"""simuladores/estadistica/demos/robustez_interactiva.py — DEMO de la capa INTERACTIVA EN VIVO (matplotlib).
+
+Responde a la pregunta de Edison: "¿puedo ver las animaciones EN EL PROYECTO
+sin reproducir un video?". SÍ — esto es matplotlib, no Manim: se ejecuta y
+abre una VENTANA INTERACTIVA. Mueve el slider (o arrastra) y observa EN VIVO
+cómo un solo dato extremo ARRASTRA la media pero casi no mueve la mediana
+(robustez; sección II, temas 32-33). No hay ningún archivo de video: la
+animación ocurre en la app, en tiempo real, respondiendo a ti.
+
+  Manim  → genera un VIDEO pulido (para redes / incrustar).
+  ESTO   → interactividad EN VIVO dentro del proyecto (para explorar/aprender).
+
+Ejecutar (en un entorno con ventana):
+  python3 robustez_interactiva.py
+
+(Este archivo es una DEMOSTRACIÓN del concepto; la versión final vivirá como la
+ vista interactiva del modelo de descriptiva del lab, alimentada por base.py.)
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt

@@ -1,13 +1,14 @@
-# e25_deciles.py — los deciles (sección II, tema 25).
-#
-# Los deciles parten los datos ordenados en DIEZ grupos iguales: D1..D9 (los
-# percentiles 10, 20, …, 90), con D5 = la mediana. Son la herramienta estándar
-# para estudiar la DESIGUALDAD: al ordenar a la población por ingreso y partirla
-# en diez décimos, la razón entre el decil más alto y el más bajo —el índice
-# D9/D1— mide cuántas veces gana el 10% más rico respecto al 10% más pobre. El
-# modelo genera una distribución de ingresos (sesgada, como las reales) y deja
-# subir la desigualdad para ver el perfil de deciles empinarse y el índice D9/D1
-# dispararse.
+"""simuladores/estadistica/modelos/nivel_02/e25_deciles.py — los deciles (sección II, tema 25).
+
+Los deciles parten los datos ordenados en DIEZ grupos iguales: D1..D9 (los
+percentiles 10, 20, …, 90), con D5 = la mediana. Son la herramienta estándar
+para estudiar la DESIGUALDAD: al ordenar a la población por ingreso y partirla
+en diez décimos, la razón entre el decil más alto y el más bajo —el índice
+D9/D1— mide cuántas veces gana el 10% más rico respecto al 10% más pobre. El
+modelo genera una distribución de ingresos (sesgada, como las reales) y deja
+subir la desigualdad para ver el perfil de deciles empinarse y el índice D9/D1
+dispararse.
+"""
 
 import numpy as np
 

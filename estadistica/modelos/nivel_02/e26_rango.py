@@ -1,13 +1,14 @@
-# e26_rango.py — el rango (sección II, tema 26).
-#
-# La medida de dispersión más simple: rango = máximo − mínimo. Se calcula de un
-# vistazo, pero tiene dos defectos graves que este modelo hace visibles. Primero,
-# NO es robusto: depende SOLO de los dos valores extremos, así que un único
-# atípico lo cambia por completo (punto de ruptura 0%). Segundo, y menos obvio,
-# CRECE con el tamaño de la muestra: cuantos más datos observas, más chances hay
-# de ver un valor muy alto o muy bajo, así que el rango se estira sin parar —a
-# diferencia del IQR (e23) o la desviación (e27), que se estabilizan—. Por eso el
-# rango describe el peor caso observado, no la dispersión típica.
+"""simuladores/estadistica/modelos/nivel_02/e26_rango.py — el rango (sección II, tema 26).
+
+La medida de dispersión más simple: rango = máximo − mínimo. Se calcula de un
+vistazo, pero tiene dos defectos graves que este modelo hace visibles. Primero,
+NO es robusto: depende SOLO de los dos valores extremos, así que un único
+atípico lo cambia por completo (punto de ruptura 0%). Segundo, y menos obvio,
+CRECE con el tamaño de la muestra: cuantos más datos observas, más chances hay
+de ver un valor muy alto o muy bajo, así que el rango se estira sin parar —a
+diferencia del IQR (e23) o la desviación (e27), que se estabilizan—. Por eso el
+rango describe el peor caso observado, no la dispersión típica.
+"""
 
 import numpy as np
 

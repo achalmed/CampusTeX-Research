@@ -1,14 +1,15 @@
-# m25_ajuste_largo_plazo.py — ajuste dinámico hacia el largo plazo (nivel 4).
-#
-# La película que m23 no mostraba. Tras un shock PERMANENTE de demanda (dG, dM),
-# las expectativas se revisan período a período (adaptativas, como m14):
-#   Pe_{t+1} = P_t  →  la SRAS sube  →  el equilibrio de corto plazo se desliza
-#   por la AD hasta aterrizar en la LRAS:  Y → Y*  y  P → P_LR (cerrado).
-# Teorema verificable: a largo plazo la política de DEMANDA no deja producto,
-# solo precios (ΔY_LP = 0 exacto; ΔP_LP > 0).
-#
-# Procedencia: mecanismo de ajuste estándar de la síntesis (manuales) —
-# conocimiento general; dinámica Pe_{t+1}=P_t: expectativas adaptativas (m14).
+"""simuladores/macro/modelos/nivel_04/m25_ajuste_largo_plazo.py — ajuste dinámico hacia el largo plazo (nivel 4).
+
+La película que m23 no mostraba. Tras un shock PERMANENTE de demanda (dG, dM),
+las expectativas se revisan período a período (adaptativas, como m14):
+  Pe_{t+1} = P_t  →  la SRAS sube  →  el equilibrio de corto plazo se desliza
+  por la AD hasta aterrizar en la LRAS:  Y → Y*  y  P → P_LR (cerrado).
+Teorema verificable: a largo plazo la política de DEMANDA no deja producto,
+solo precios (ΔY_LP = 0 exacto; ΔP_LP > 0).
+
+Procedencia: mecanismo de ajuste estándar de la síntesis (manuales) —
+conocimiento general; dinámica Pe_{t+1}=P_t: expectativas adaptativas (m14).
+"""
 
 import numpy as np
 

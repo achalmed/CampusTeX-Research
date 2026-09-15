@@ -1,20 +1,20 @@
-# m96_crisis_deuda_soberana.py — crisis de deuda soberana: el episodio
-# (Grecia, Argentina) — nivel 11, cierre del nivel de escenarios.
-#
-# El caso histórico que integra todo el arco fiscal (m63-m65) con la zona de
-# crisis (m76). Reconstruye la ANATOMÍA de una crisis soberana en fases:
-#   (1) acumulación: déficits crónicos elevan la deuda hacia la zona (m64)
-#   (2) detonante: un shock (recesión, revelación estadística, contagio) empuja
-#       a la zona de crisis (m76) — la prima salta
-#   (3) espiral: la prima alta sube el servicio, que sube la deuda, que sube la
-#       prima (m78) — la trampa se cierra
-#   (4) resolución: rescate con condicionalidad (Grecia/Troika), reestructuración
-#       (Argentina), o backstop que coordina (Draghi/euro, m76)
-# El desenlace depende de: ¿hay backstop? ¿la deuda es en moneda propia?
-# ¿el ajuste es viable políticamente (m69)? Combina m64, m76, m78, m69.
-#
-# Procedencia: crisis del euro (Grecia 2010-2015) y Argentina (2001, 2018 —
-# menciones) sobre m64/m76/m78 — conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_11/m96_crisis_deuda_soberana.py — crisis de deuda soberana: el episodio (Grecia, Argentina) — nivel 11, cierre del nivel de escenarios.
+
+El caso histórico que integra todo el arco fiscal (m63-m65) con la zona de
+crisis (m76). Reconstruye la ANATOMÍA de una crisis soberana en fases:
+  (1) acumulación: déficits crónicos elevan la deuda hacia la zona (m64)
+  (2) detonante: un shock (recesión, revelación estadística, contagio) empuja
+      a la zona de crisis (m76) — la prima salta
+  (3) espiral: la prima alta sube el servicio, que sube la deuda, que sube la
+      prima (m78) — la trampa se cierra
+  (4) resolución: rescate con condicionalidad (Grecia/Troika), reestructuración
+      (Argentina), o backstop que coordina (Draghi/euro, m76)
+El desenlace depende de: ¿hay backstop? ¿la deuda es en moneda propia?
+¿el ajuste es viable políticamente (m69)? Combina m64, m76, m78, m69.
+
+Procedencia: crisis del euro (Grecia 2010-2015) y Argentina (2001, 2018 —
+menciones) sobre m64/m76/m78 — conocimiento general; calibración didáctica.
+"""
 
 import numpy as np
 

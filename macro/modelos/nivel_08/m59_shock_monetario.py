@@ -1,15 +1,16 @@
-# m59_shock_monetario.py — el shock monetario: RBC vs NK (nivel 8).
-#
-# EL experimento que separa a las dos escuelas modernas. Mismo shock dM en
-# dos mundos:
-#   RBC (precios flexibles):  p_t = dM desde t=0  ⇒  y_t = 0 SIEMPRE
-#   NK  (Calvo, m53):         p_t = (1−θ^{t+1})·dM  ⇒  y_t = θ^{t+1}·dM
-# Ambos coinciden en el largo plazo (neutralidad, m35); difieren en TODO el
-# tránsito. La evidencia VAR (Christiano-Eichenbaum-Evans, mención) encuentra
-# efectos reales significativos y persistentes del dinero: punto para el NK.
-#
-# Procedencia: contraste didáctico estándar entre paradigmas — conocimiento
-# general; evidencia: CEE (1999, mención).
+"""simuladores/macro/modelos/nivel_08/m59_shock_monetario.py — el shock monetario: RBC vs NK (nivel 8).
+
+EL experimento que separa a las dos escuelas modernas. Mismo shock dM en
+dos mundos:
+  RBC (precios flexibles):  p_t = dM desde t=0  ⇒  y_t = 0 SIEMPRE
+  NK  (Calvo, m53):         p_t = (1−θ^{t+1})·dM  ⇒  y_t = θ^{t+1}·dM
+Ambos coinciden en el largo plazo (neutralidad, m35); difieren en TODO el
+tránsito. La evidencia VAR (Christiano-Eichenbaum-Evans, mención) encuentra
+efectos reales significativos y persistentes del dinero: punto para el NK.
+
+Procedencia: contraste didáctico estándar entre paradigmas — conocimiento
+general; evidencia: CEE (1999, mención).
+"""
 
 import numpy as np
 

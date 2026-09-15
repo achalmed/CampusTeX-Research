@@ -1,16 +1,17 @@
-# m48_uip.py — paridad descubierta de intereses (UIP) — nivel 7.
-#
-# Arbitraje entre depósitos en soles y en dólares SIN cobertura:
-#   (1+i) = (1+i* + ρ) · E^e/E      (ρ: prima de riesgo país)
-#   →  E = E^e · (1+i* + ρ)/(1+i)
-# El tipo de cambio DE HOY lo fijan la tasa local, la externa, el riesgo y la
-# expectativa de mañana. De aquí salen los reflejos cambiarios modernos:
-# subir la tasa aprecia HOY; si la FED sube, el sol se deprecia HOY (m111);
-# si sube el riesgo país, se deprecia con TODO lo demás constante.
-#
-# Procedencia: condición de arbitraje estándar (manuales de economía
-# internacional) — conocimiento general; falla empírica (forward premium
-# puzzle, Fama 1984): mención.
+"""simuladores/macro/modelos/nivel_07/m48_uip.py — paridad descubierta de intereses (UIP) — nivel 7.
+
+Arbitraje entre depósitos en soles y en dólares SIN cobertura:
+  (1+i) = (1+i* + ρ) · E^e/E      (ρ: prima de riesgo país)
+  →  E = E^e · (1+i* + ρ)/(1+i)
+El tipo de cambio DE HOY lo fijan la tasa local, la externa, el riesgo y la
+expectativa de mañana. De aquí salen los reflejos cambiarios modernos:
+subir la tasa aprecia HOY; si la FED sube, el sol se deprecia HOY (m111);
+si sube el riesgo país, se deprecia con TODO lo demás constante.
+
+Procedencia: condición de arbitraje estándar (manuales de economía
+internacional) — conocimiento general; falla empírica (forward premium
+puzzle, Fama 1984): mención.
+"""
 
 import numpy as np
 

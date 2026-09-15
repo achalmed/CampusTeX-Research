@@ -1,15 +1,16 @@
-# m82_shock_petrolero.py — shock petrolero (nivel 11).
-#
-# El shock de oferta arquetípico: un salto del precio del petróleo encarece
-# producir TODO (energía es insumo universal). Aplica m19/m24 con el dilema
-# de política en su forma más pura. Distingue países IMPORTADORES (el shock
-# es puro costo: estanflación) de EXPORTADORES (el shock es ingreso: booms —
-# el ángulo peruano NO es petrolero pero sí cobre/gas, m88-m89).
-# Compara las tres respuestas históricas (acomodar/resistir/nada) sobre el
-# motor de m52.
-#
-# Procedencia: OPEP 1973/1979 (mención) sobre AD-AS dinámico (m52); Hamilton
-# sobre petróleo y recesiones (mención) — conocimiento general.
+"""simuladores/macro/modelos/nivel_11/m82_shock_petrolero.py — shock petrolero (nivel 11).
+
+El shock de oferta arquetípico: un salto del precio del petróleo encarece
+producir TODO (energía es insumo universal). Aplica m19/m24 con el dilema
+de política en su forma más pura. Distingue países IMPORTADORES (el shock
+es puro costo: estanflación) de EXPORTADORES (el shock es ingreso: booms —
+el ángulo peruano NO es petrolero pero sí cobre/gas, m88-m89).
+Compara las tres respuestas históricas (acomodar/resistir/nada) sobre el
+motor de m52.
+
+Procedencia: OPEP 1973/1979 (mención) sobre AD-AS dinámico (m52); Hamilton
+sobre petróleo y recesiones (mención) — conocimiento general.
+"""
 
 import numpy as np
 

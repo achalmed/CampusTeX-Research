@@ -1,19 +1,20 @@
-# m103_cobre_crecimiento.py — el precio del cobre y el crecimiento (nivel 12).
-#
-# El canal de TÉRMINOS DE INTERCAMBIO (m88/m89) con datos peruanos: el cobre es
-# el principal producto de exportación del Perú, y su precio (BCRP PN01652XM,
-# ¢US$/lb) es el pulso del superciclo de commodities. El laboratorio cuantifica
-# cuánto del crecimiento peruano se mueve con el cobre — y enseña una sutileza
-# econométrica: es el CAMBIO del precio (no su nivel) lo que impulsa el
-# crecimiento. Post-2014 el cobre estuvo ALTO (321¢ de media, más que en el
-# superciclo) pero el crecimiento fue BAJO (2.7%), porque el precio había dejado
-# de SUBIR — la ganancia de términos de intercambio (m89) es un flujo, no un
-# nivel. Y el R² ~0.20 recuerda que el cobre explica ~1/5 del crecimiento: real,
-# pero no destino (diversificar es m112).
-#
-# Procedencia: datos BCRP PN01652XM (cobre LME) y PN01728AM (PBI var%), muestra
-# 2004-2024. La correlación es descriptiva; NO es una estimación causal (regla
-# del pipeline: nunca causalidad automática). El canal terms-of-trade: m89.
+"""simuladores/macro/modelos/nivel_12/m103_cobre_crecimiento.py — el precio del cobre y el crecimiento (nivel 12).
+
+El canal de TÉRMINOS DE INTERCAMBIO (m88/m89) con datos peruanos: el cobre es
+el principal producto de exportación del Perú, y su precio (BCRP PN01652XM,
+¢US$/lb) es el pulso del superciclo de commodities. El laboratorio cuantifica
+cuánto del crecimiento peruano se mueve con el cobre — y enseña una sutileza
+econométrica: es el CAMBIO del precio (no su nivel) lo que impulsa el
+crecimiento. Post-2014 el cobre estuvo ALTO (321¢ de media, más que en el
+superciclo) pero el crecimiento fue BAJO (2.7%), porque el precio había dejado
+de SUBIR — la ganancia de términos de intercambio (m89) es un flujo, no un
+nivel. Y el R² ~0.20 recuerda que el cobre explica ~1/5 del crecimiento: real,
+pero no destino (diversificar es m112).
+
+Procedencia: datos BCRP PN01652XM (cobre LME) y PN01728AM (PBI var%), muestra
+2004-2024. La correlación es descriptiva; NO es una estimación causal (regla
+del pipeline: nunca causalidad automática). El canal terms-of-trade: m89.
+"""
 
 import numpy as np
 

@@ -1,13 +1,14 @@
-# e30_asimetria.py — la asimetría (sesgo / skewness) (sección II, tema 30).
-#
-# La FORMA de la distribución más allá del centro y la dispersión: ¿es simétrica
-# o tiene una cola larga hacia un lado? La asimetría es el tercer momento
-# estandarizado, γ₁ = E[(X−μ)³]/σ³. Positiva = cola a la DERECHA (pocos valores
-# muy altos: ingresos, precios, tiempos de espera); negativa = cola a la
-# izquierda; cero = simétrica. Su huella práctica, ya vista en e18, es el orden
-# de las medidas de centro: con sesgo a la derecha, moda < mediana < media (la
-# media, arrastrada por la cola, es la mayor). El modelo genera datos con sesgo
-# controlable y muestra las tres medidas separándose al crecer la asimetría.
+"""simuladores/estadistica/modelos/nivel_02/e30_asimetria.py — la asimetría (sesgo / skewness) (sección II, tema 30).
+
+La FORMA de la distribución más allá del centro y la dispersión: ¿es simétrica
+o tiene una cola larga hacia un lado? La asimetría es el tercer momento
+estandarizado, γ₁ = E[(X−μ)³]/σ³. Positiva = cola a la DERECHA (pocos valores
+muy altos: ingresos, precios, tiempos de espera); negativa = cola a la
+izquierda; cero = simétrica. Su huella práctica, ya vista en e18, es el orden
+de las medidas de centro: con sesgo a la derecha, moda < mediana < media (la
+media, arrastrada por la cola, es la mayor). El modelo genera datos con sesgo
+controlable y muestra las tres medidas separándose al crecer la asimetría.
+"""
 
 import numpy as np
 

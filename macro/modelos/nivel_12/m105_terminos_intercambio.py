@@ -1,27 +1,28 @@
-# m105_terminos_intercambio.py — términos de intercambio: PIB vs ingreso (nivel 12).
-#
-# Cierra el bloque del canal externo generalizando el cobre (m103) a los
-# TÉRMINOS DE INTERCAMBIO completos (BCRP PN38923BM, el precio de todo lo que el
-# Perú exporta sobre el precio de todo lo que importa). Dos hallazgos:
-#   (1) el cobre MUEVE los términos de intercambio del Perú (corr +0.85): la TdI
-#       es, sobre todo, el precio del cobre (m103) más el oro;
-#   (2) y sin embargo la TdI casi no correlaciona con el crecimiento del PBI
-#       (corr ~0). ¿Contradice a m103? No: lo AGUDIZA. La clave es que el PBI
-#       mide VOLUMEN (cuánto se produce), mientras que una mejora de términos de
-#       intercambio es un efecto de PRECIO que eleva el INGRESO nacional (cuánto
-#       compra lo producido), no el volumen. El BCRP lo mide aparte (el "Efecto
-#       Términos de Intercambio", PM04904AA): pasó de −27 mil M S/ en 2004 (TdI
-#       bajo el año base) a +56 mil M S/ en 2024 (TdI en récord). En el
-#       superciclo el INGRESO creció 8.1% vs PBI 6.6% (+1.5pp de windfall); y en
-#       2024 la TdI récord dejó un PBI modesto (+3.5%) pero un ingreso de +7.5%.
-# Lección: los términos de intercambio son una historia de INGRESO (poder
-# adquisitivo), no de producción — por eso mueven poco el PBI y mucho el bienestar.
-#
-# Procedencia: datos BCRP PN38923BM (términos de intercambio, índice 2007=100),
-# PM04901AA (PBI, millones S/2007) y PM04904AA (efecto términos de intercambio
-# sobre el ingreso nacional, millones S/2007), muestra 2004-2024. La distinción
-# PBI-volumen vs ingreso-real es contabilidad nacional estándar (SNA 2008,
-# ganancias del intercambio); el BCRP publica la descomposición.
+"""simuladores/macro/modelos/nivel_12/m105_terminos_intercambio.py — términos de intercambio: PIB vs ingreso (nivel 12).
+
+Cierra el bloque del canal externo generalizando el cobre (m103) a los
+TÉRMINOS DE INTERCAMBIO completos (BCRP PN38923BM, el precio de todo lo que el
+Perú exporta sobre el precio de todo lo que importa). Dos hallazgos:
+  (1) el cobre MUEVE los términos de intercambio del Perú (corr +0.85): la TdI
+      es, sobre todo, el precio del cobre (m103) más el oro;
+  (2) y sin embargo la TdI casi no correlaciona con el crecimiento del PBI
+      (corr ~0). ¿Contradice a m103? No: lo AGUDIZA. La clave es que el PBI
+      mide VOLUMEN (cuánto se produce), mientras que una mejora de términos de
+      intercambio es un efecto de PRECIO que eleva el INGRESO nacional (cuánto
+      compra lo producido), no el volumen. El BCRP lo mide aparte (el "Efecto
+      Términos de Intercambio", PM04904AA): pasó de −27 mil M S/ en 2004 (TdI
+      bajo el año base) a +56 mil M S/ en 2024 (TdI en récord). En el
+      superciclo el INGRESO creció 8.1% vs PBI 6.6% (+1.5pp de windfall); y en
+      2024 la TdI récord dejó un PBI modesto (+3.5%) pero un ingreso de +7.5%.
+Lección: los términos de intercambio son una historia de INGRESO (poder
+adquisitivo), no de producción — por eso mueven poco el PBI y mucho el bienestar.
+
+Procedencia: datos BCRP PN38923BM (términos de intercambio, índice 2007=100),
+PM04901AA (PBI, millones S/2007) y PM04904AA (efecto términos de intercambio
+sobre el ingreso nacional, millones S/2007), muestra 2004-2024. La distinción
+PBI-volumen vs ingreso-real es contabilidad nacional estándar (SNA 2008,
+ganancias del intercambio); el BCRP publica la descomposición.
+"""
 
 import numpy as np
 

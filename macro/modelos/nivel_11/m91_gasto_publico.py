@@ -1,16 +1,17 @@
-# m91_gasto_publico.py — aumento masivo del gasto público (nivel 11).
-#
-# El episodio de estímulo fiscal, integrando el multiplicador (m60) con la
-# restricción intertemporal (m63). Un impulso de gasto ΔG tiene un efecto de
-# corto plazo (multiplicador, depende del régimen m60) y un costo de largo
-# plazo (deuda que hay que servir, m63-m64). El efecto NETO sobre el bienestar
-# depende de: (1) el régimen (ZLB amplifica, m60), (2) si el gasto es
-# productivo (inversión que crece el potencial, m22/m106) o consumo, y (3) la
-# posición fiscal inicial (espacio, m65). Combina m60, m63-m65, m106.
-#
-# Procedencia: multiplicador por régimen (m60), aritmética de la deuda
-# (m63-m64), inversión pública y crecimiento (m106) — conocimiento general;
-# calibración didáctica.
+"""simuladores/macro/modelos/nivel_11/m91_gasto_publico.py — aumento masivo del gasto público (nivel 11).
+
+El episodio de estímulo fiscal, integrando el multiplicador (m60) con la
+restricción intertemporal (m63). Un impulso de gasto ΔG tiene un efecto de
+corto plazo (multiplicador, depende del régimen m60) y un costo de largo
+plazo (deuda que hay que servir, m63-m64). El efecto NETO sobre el bienestar
+depende de: (1) el régimen (ZLB amplifica, m60), (2) si el gasto es
+productivo (inversión que crece el potencial, m22/m106) o consumo, y (3) la
+posición fiscal inicial (espacio, m65). Combina m60, m63-m65, m106.
+
+Procedencia: multiplicador por régimen (m60), aritmética de la deuda
+(m63-m64), inversión pública y crecimiento (m106) — conocimiento general;
+calibración didáctica.
+"""
 
 import numpy as np
 

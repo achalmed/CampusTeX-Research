@@ -1,18 +1,19 @@
-# m60_shock_fiscal.py — el shock fiscal: un multiplicador POR RÉGIMEN (nivel 8).
-#
-# La misma pregunta (¿cuánto producto por sol de gasto?) respondida por CINCO
-# modelos del currículo, con parámetros compartidos — cada barra se recalcula
-# con la fórmula de su modelo fuente:
-#   m04 simple:      k = 1/(1−c1)
-#   m49 fijo:        1/(1−c1+m1)
-#   m10 IS-LM:       1/[(1−c1)+b·k_d/h]
-#   m56 NK+Taylor:   b_g = 1/[(1−ρ_g+σφ_x)+σ(φ_π−ρ_g)κ/(1−βρ_g)]  (impacto)
-#   m49 flexible:    0   (expulsión total vía apreciación)
-# La gran lección para m70 (evidencia empírica): "EL multiplicador" no existe
-# — existe uno por régimen monetario-cambiario, y el régimen se elige.
-#
-# Procedencia: comparador construido con los modelos del propio laboratorio
-# (m04, m10, m49, m56) — decisión de diseño; fórmulas: las de cada fuente.
+"""simuladores/macro/modelos/nivel_08/m60_shock_fiscal.py — el shock fiscal: un multiplicador POR RÉGIMEN (nivel 8).
+
+La misma pregunta (¿cuánto producto por sol de gasto?) respondida por CINCO
+modelos del currículo, con parámetros compartidos — cada barra se recalcula
+con la fórmula de su modelo fuente:
+  m04 simple:      k = 1/(1−c1)
+  m49 fijo:        1/(1−c1+m1)
+  m10 IS-LM:       1/[(1−c1)+b·k_d/h]
+  m56 NK+Taylor:   b_g = 1/[(1−ρ_g+σφ_x)+σ(φ_π−ρ_g)κ/(1−βρ_g)]  (impacto)
+  m49 flexible:    0   (expulsión total vía apreciación)
+La gran lección para m70 (evidencia empírica): "EL multiplicador" no existe
+— existe uno por régimen monetario-cambiario, y el régimen se elige.
+
+Procedencia: comparador construido con los modelos del propio laboratorio
+(m04, m10, m49, m56) — decisión de diseño; fórmulas: las de cada fuente.
+"""
 
 from base import Ecuacion, Escenario, Ficha, Modelo, Parametro, Verificacion
 import config

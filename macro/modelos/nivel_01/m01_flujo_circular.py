@@ -1,13 +1,14 @@
-# m01_flujo_circular.py — flujo circular de la renta (nivel 1).
-#
-# Hogares ↔ empresas ↔ gobierno ↔ sector externo. Filtraciones (S, T, M) e
-# inyecciones (I, G, X) sobre proporciones fijas del ingreso:
-#   T = t·Y ;  Yd = (1−t)·Y ;  C = c·Yd ;  S = (1−c)·Yd ;  M = m·Y
-# Equilibrio del circuito:  S + T + M = I + G + X
-#   → Y* = (I + G + X) / [(1−c)(1−t) + t + m]
-#
-# Procedencia: conocimiento macroeconómico general (esquema de manuales
-# introductorios); antecedente histórico del circuito: Quesnay (1758).
+"""simuladores/macro/modelos/nivel_01/m01_flujo_circular.py — flujo circular de la renta (nivel 1).
+
+Hogares ↔ empresas ↔ gobierno ↔ sector externo. Filtraciones (S, T, M) e
+inyecciones (I, G, X) sobre proporciones fijas del ingreso:
+  T = t·Y ;  Yd = (1−t)·Y ;  C = c·Yd ;  S = (1−c)·Yd ;  M = m·Y
+Equilibrio del circuito:  S + T + M = I + G + X
+  → Y* = (I + G + X) / [(1−c)(1−t) + t + m]
+
+Procedencia: conocimiento macroeconómico general (esquema de manuales
+introductorios); antecedente histórico del circuito: Quesnay (1758).
+"""
 
 from base import Ecuacion, Escenario, Ficha, Modelo, Parametro, Verificacion
 import config

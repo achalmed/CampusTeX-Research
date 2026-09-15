@@ -1,17 +1,18 @@
-# m75_sudden_stop.py — sudden stop: el freno súbito de capitales (nivel 10).
-#
-# Calvo (1998): cuando el financiamiento externo se corta de golpe, la cuenta
-# corriente debe cerrarse por la fuerza. Si un país recibía flujos CF y
-# absorbía  A = Y + CF  (gasto > producto, déficit corriente = CF), un corte
-# a CF' obliga a  A' = Y + CF':
-#   ajuste forzado del gasto:  ΔA = CF' − CF < 0
-#   como los transables no bajan (hay que pagar deuda), el golpe cae sobre
-#   los NO transables → colapso de su precio real → recesión y depreciación.
-# El ajuste de la cuenta corriente = −ΔCF: brutal, involuntario, inmediato.
-#
-# Procedencia: Calvo (1998, "Capital Flows and Capital-Market Crises" — EN LA
-# BIBLIOTECA de Edison, sin verificar; también su "Globalización financiera"
-# 2002 está en biblioteca) — mención; conocimiento general.
+"""simuladores/macro/modelos/nivel_10/m75_sudden_stop.py — sudden stop: el freno súbito de capitales (nivel 10).
+
+Calvo (1998): cuando el financiamiento externo se corta de golpe, la cuenta
+corriente debe cerrarse por la fuerza. Si un país recibía flujos CF y
+absorbía  A = Y + CF  (gasto > producto, déficit corriente = CF), un corte
+a CF' obliga a  A' = Y + CF':
+  ajuste forzado del gasto:  ΔA = CF' − CF < 0
+  como los transables no bajan (hay que pagar deuda), el golpe cae sobre
+  los NO transables → colapso de su precio real → recesión y depreciación.
+El ajuste de la cuenta corriente = −ΔCF: brutal, involuntario, inmediato.
+
+Procedencia: Calvo (1998, "Capital Flows and Capital-Market Crises" — EN LA
+BIBLIOTECA de Edison, sin verificar; también su "Globalización financiera"
+2002 está en biblioteca) — mención; conocimiento general.
+"""
 
 import numpy as np
 

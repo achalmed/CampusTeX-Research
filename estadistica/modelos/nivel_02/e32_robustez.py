@@ -1,13 +1,14 @@
-# e32_robustez.py — medidas robustas y detección de atípicos (sección II, temas 32-33).
-#
-# La síntesis de la descriptiva: qué estadísticos resisten a un valor extremo y
-# cuáles no. Al mover un dato atípico, la MEDIA y la DESVIACIÓN ESTÁNDAR lo
-# persiguen sin límite (punto de ruptura 0%), mientras que la MEDIANA (e18) y la
-# MAD (desviación absoluta mediana) ni se inmutan (punto de ruptura 50%). El
-# modelo grafica cómo responde cada medida a la posición del outlier —las no
-# robustas trepan, las robustas quedan planas— y usa la regla robusta (z
-# modificado con MAD) para DETECTAR el atípico. La versión interactiva con slider
-# es demos/robustez_interactiva.py.
+"""simuladores/estadistica/modelos/nivel_02/e32_robustez.py — medidas robustas y detección de atípicos (sección II, temas 32-33).
+
+La síntesis de la descriptiva: qué estadísticos resisten a un valor extremo y
+cuáles no. Al mover un dato atípico, la MEDIA y la DESVIACIÓN ESTÁNDAR lo
+persiguen sin límite (punto de ruptura 0%), mientras que la MEDIANA (e18) y la
+MAD (desviación absoluta mediana) ni se inmutan (punto de ruptura 50%). El
+modelo grafica cómo responde cada medida a la posición del outlier —las no
+robustas trepan, las robustas quedan planas— y usa la regla robusta (z
+modificado con MAD) para DETECTAR el atípico. La versión interactiva con slider
+es demos/robustez_interactiva.py.
+"""
 
 import numpy as np
 

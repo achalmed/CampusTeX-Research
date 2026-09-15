@@ -1,17 +1,18 @@
-# e67_tcl.py — animación Manim del Teorema Central del Límite (sección V, tema 67).
-#
-# La "estrella" del currículo de estadística (destacada por Edison): cómo la
-# distribución de la media muestral X̄ se aproxima a una normal al crecer n,
-# PARTIENDO de una población claramente NO normal (exponencial). Primera escena
-# de la capa de animación del laboratorio; valida el patrón Manim.
-#
-# Convenciones del lab: aleatoriedad reproducible (semilla fija, como m17),
-# paleta del laboratorio (_comun) y matemática en LaTeX real (MathTex). La
-# lógica de simulación (dist_muestral) es la MISMA que alimentaría un modelo
-# base.py; esta capa solo la VISUALIZA (el modelo nunca se mezcla con la interfaz).
-#
-# Render (env conda manim-datafw):
-#   ~/anaconda3/envs/manim-datafw/bin/manim -qm e67_tcl.py TeoremaCentralLimite
+"""simuladores/estadistica/animaciones/e67_tcl.py — animación Manim del Teorema Central del Límite (sección V, tema 67).
+
+La "estrella" del currículo de estadística (destacada por Edison): cómo la
+distribución de la media muestral X̄ se aproxima a una normal al crecer n,
+PARTIENDO de una población claramente NO normal (exponencial). Primera escena
+de la capa de animación del laboratorio; valida el patrón Manim.
+
+Convenciones del lab: aleatoriedad reproducible (semilla fija, como m17),
+paleta del laboratorio (_comun) y matemática en LaTeX real (MathTex). La
+lógica de simulación (dist_muestral) es la MISMA que alimentaría un modelo
+base.py; esta capa solo la VISUALIZA (el modelo nunca se mezcla con la interfaz).
+
+Render (env conda manim-datafw):
+  ~/anaconda3/envs/manim-datafw/bin/manim -qm e67_tcl.py TeoremaCentralLimite
+"""
 
 from manim import *
 import numpy as np

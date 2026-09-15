@@ -1,14 +1,15 @@
-# e37_probabilidad_clasica.py — la probabilidad clásica (sección III, tema 37).
-#
-# La primera definición de probabilidad (Laplace): cuando todos los resultados
-# del espacio muestral (e35) son IGUALMENTE probables, la probabilidad de un
-# evento es el cociente casos favorables / casos totales. Simple, pero exige dos
-# condiciones fuertes: Ω finito y equiprobabilidad. Su aplicación estrella —y una
-# de las más contraintuitivas de toda la estadística— es la PARADOJA DEL
-# CUMPLEAÑOS: basta con 23 personas para que la probabilidad de que dos compartan
-# cumpleaños supere el 50%. El modelo la calcula (contando, vía complemento) y la
-# contrasta con simulación, mostrando que la intuición humana es pésima para la
-# probabilidad de coincidencias.
+"""simuladores/estadistica/modelos/nivel_03/e37_probabilidad_clasica.py — la probabilidad clásica (sección III, tema 37).
+
+La primera definición de probabilidad (Laplace): cuando todos los resultados
+del espacio muestral (e35) son IGUALMENTE probables, la probabilidad de un
+evento es el cociente casos favorables / casos totales. Simple, pero exige dos
+condiciones fuertes: Ω finito y equiprobabilidad. Su aplicación estrella —y una
+de las más contraintuitivas de toda la estadística— es la PARADOJA DEL
+CUMPLEAÑOS: basta con 23 personas para que la probabilidad de que dos compartan
+cumpleaños supere el 50%. El modelo la calcula (contando, vía complemento) y la
+contrasta con simulación, mostrando que la intuición humana es pésima para la
+probabilidad de coincidencias.
+"""
 
 import numpy as np
 

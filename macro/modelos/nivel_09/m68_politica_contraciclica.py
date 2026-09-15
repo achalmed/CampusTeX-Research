@@ -1,18 +1,19 @@
-# m68_politica_contraciclica.py — política fiscal contracíclica (nivel 9).
-#
-# Un ciclo determinista (brecha = A·sen(2πt/per)) y una regla fiscal
-#   f_t = φ·(−brecha_t)      [gastar en recesión, ahorrar en el boom]
-# con posible ASIMETRÍA (el vicio universal): en los booms solo se ahorra la
-# fracción (1−asim) de lo que la regla manda.
-#   brecha estabilizada = brecha·(1−mult·φ)      [exacto]
-#   deuda acumulada = Σ f_t: CERO si la regla es simétrica; ESCALERA si no
-# La prociclicidad histórica latinoamericana (φ<0 en la práctica: gastar el
-# boom, ajustar la recesión — Gavin-Perotti, Talvi-Végh, menciones) es el
-# contraejemplo que las reglas fiscales y los fondos de estabilización
-# (Perú incluido, mención) intentan corregir.
-#
-# Procedencia: mecánica didáctica sobre m16/m60 (decisión de diseño);
-# evidencia de prociclicidad: menciones.
+"""simuladores/macro/modelos/nivel_09/m68_politica_contraciclica.py — política fiscal contracíclica (nivel 9).
+
+Un ciclo determinista (brecha = A·sen(2πt/per)) y una regla fiscal
+  f_t = φ·(−brecha_t)      [gastar en recesión, ahorrar en el boom]
+con posible ASIMETRÍA (el vicio universal): en los booms solo se ahorra la
+fracción (1−asim) de lo que la regla manda.
+  brecha estabilizada = brecha·(1−mult·φ)      [exacto]
+  deuda acumulada = Σ f_t: CERO si la regla es simétrica; ESCALERA si no
+La prociclicidad histórica latinoamericana (φ<0 en la práctica: gastar el
+boom, ajustar la recesión — Gavin-Perotti, Talvi-Végh, menciones) es el
+contraejemplo que las reglas fiscales y los fondos de estabilización
+(Perú incluido, mención) intentan corregir.
+
+Procedencia: mecánica didáctica sobre m16/m60 (decisión de diseño);
+evidencia de prociclicidad: menciones.
+"""
 
 import numpy as np
 

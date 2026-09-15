@@ -1,14 +1,15 @@
-# _comun.py — utilidades compartidas de la capa de animación (Manim).
-#
-# La capa de animación del laboratorio de estadística corre en un entorno conda
-# APARTE (manim-datafw) porque Manim trae dependencias pesadas (pango, cairo,
-# ffmpeg) que no deben contaminar el runtime del lab interactivo (matplotlib).
-# Por eso este módulo NO importa simuladores/config.py (que depende de
-# matplotlib, ausente en el env de Manim): reproduce solo las CONSTANTES de
-# paleta (no lógica) para mantener la identidad visual. El guion bajo lo excluye
-# de cualquier descubrimiento de escenas.
-#
-# Prohibido copiar estas utilidades en cada escena: importarlas desde aquí.
+"""simuladores/estadistica/animaciones/_comun.py — utilidades compartidas de la capa de animación (Manim).
+
+La capa de animación del laboratorio de estadística corre en un entorno conda
+APARTE (manim-datafw) porque Manim trae dependencias pesadas (pango, cairo,
+ffmpeg) que no deben contaminar el runtime del lab interactivo (matplotlib).
+Por eso este módulo NO importa simuladores/config.py (que depende de
+matplotlib, ausente en el env de Manim): reproduce solo las CONSTANTES de
+paleta (no lógica) para mantener la identidad visual. El guion bajo lo excluye
+de cualquier descubrimiento de escenas.
+
+Prohibido copiar estas utilidades en cada escena: importarlas desde aquí.
+"""
 
 from manim import *
 import numpy as np

@@ -1,13 +1,14 @@
-# m15_ley_okun.py — ley de Okun: crecimiento y desempleo (nivel 3).
-#
-#   Δu = −β (g − g*)     β: coeficiente de Okun; g*: crecimiento "de equilibrio"
-# Regla EMPÍRICA (no ley estructural): traduce crecimiento en empleo. Cierra el
-# triángulo del nivel 3: demanda → producto (niveles 1-2), producto → desempleo
-# (Okun), desempleo → inflación (Phillips).
-#
-# Procedencia: Okun (1962, "Potential GNP", mención histórica); coeficiente y
-# g* de la calibración: decisión de diseño didáctica — el β peruano se estimará
-# con datos reales (ENAHO/BCRP) en el nivel 12.
+"""simuladores/macro/modelos/nivel_03/m15_ley_okun.py — ley de Okun: crecimiento y desempleo (nivel 3).
+
+  Δu = −β (g − g*)     β: coeficiente de Okun; g*: crecimiento "de equilibrio"
+Regla EMPÍRICA (no ley estructural): traduce crecimiento en empleo. Cierra el
+triángulo del nivel 3: demanda → producto (niveles 1-2), producto → desempleo
+(Okun), desempleo → inflación (Phillips).
+
+Procedencia: Okun (1962, "Potential GNP", mención histórica); coeficiente y
+g* de la calibración: decisión de diseño didáctica — el β peruano se estimará
+con datos reales (ENAHO/BCRP) en el nivel 12.
+"""
 
 import numpy as np
 

@@ -1,20 +1,21 @@
-# m108_deuda_sostenibilidad.py — deuda pública y sostenibilidad (nivel 12).
-#
-# La aritmética de la deuda (m64: Δb ≈ b·(r−g) − sp) aplicada a la trayectoria
-# REAL del Perú, con datos del BCRP. La deuda pública peruana cuenta una historia
-# ejemplar: cayó de 44.7% del PBI en 2004 a un MÍNIMO de 19.2% en 2013 —el Perú
-# usó el superciclo para pagar deuda (disciplina fiscal, el fondo de
-# estabilización m66/m69)— y luego subió a 34% en 2020 con el COVID (déficit +
-# caída del PBI, la dinámica de crisis de m64), estabilizándose cerca de 32%. Es
-# el CONTRAEJEMPLO de m96 (Grecia 175%, Argentina en default): el Perú ahorró en
-# la bonanza, así que tenía ESPACIO fiscal para responder a la pandemia sin
-# entrar en crisis. La sostenibilidad no es tener deuda cero, es que g supere a
-# r y ahorrar en los buenos años (m64).
-#
-# Procedencia: datos BCRP PN03371FQ (saldo de deuda pública del SPNF, millones
-# S/, fin de año) y PM04946AA (PBI nominal, millones S/), muestra 2004-2023; la
-# razón deuda/PBI se calcula como deuda/PBI nominal (transparente). La aritmética
-# de la deuda: m64 (conocimiento general). Análisis descriptivo, no pronóstico.
+"""simuladores/macro/modelos/nivel_12/m108_deuda_sostenibilidad.py — deuda pública y sostenibilidad (nivel 12).
+
+La aritmética de la deuda (m64: Δb ≈ b·(r−g) − sp) aplicada a la trayectoria
+REAL del Perú, con datos del BCRP. La deuda pública peruana cuenta una historia
+ejemplar: cayó de 44.7% del PBI en 2004 a un MÍNIMO de 19.2% en 2013 —el Perú
+usó el superciclo para pagar deuda (disciplina fiscal, el fondo de
+estabilización m66/m69)— y luego subió a 34% en 2020 con el COVID (déficit +
+caída del PBI, la dinámica de crisis de m64), estabilizándose cerca de 32%. Es
+el CONTRAEJEMPLO de m96 (Grecia 175%, Argentina en default): el Perú ahorró en
+la bonanza, así que tenía ESPACIO fiscal para responder a la pandemia sin
+entrar en crisis. La sostenibilidad no es tener deuda cero, es que g supere a
+r y ahorrar en los buenos años (m64).
+
+Procedencia: datos BCRP PN03371FQ (saldo de deuda pública del SPNF, millones
+S/, fin de año) y PM04946AA (PBI nominal, millones S/), muestra 2004-2023; la
+razón deuda/PBI se calcula como deuda/PBI nominal (transparente). La aritmética
+de la deuda: m64 (conocimiento general). Análisis descriptivo, no pronóstico.
+"""
 
 import numpy as np
 

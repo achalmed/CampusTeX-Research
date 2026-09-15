@@ -1,13 +1,14 @@
-# m27_estado_estacionario.py — la transición hacia el estado estacionario (nivel 5).
-#
-# El diagrama de m26 dice A DÓNDE va la economía; este modelo dice CÓMO y
-# CUÁN RÁPIDO: trayectorias k_t desde distintos puntos de partida y la
-# velocidad de convergencia λ ≈ (1−α)(n+δ) — verificable contra la semivida
-# simulada. Es la física del "largo plazo": ¿cuántos AÑOS son?
-#
-# Procedencia: dinámica de transición estándar del modelo de Solow (manuales
-# de crecimiento) — conocimiento general; λ por linealización: resultado
-# estándar (matemática elemental).
+"""simuladores/macro/modelos/nivel_05/m27_estado_estacionario.py — la transición hacia el estado estacionario (nivel 5).
+
+El diagrama de m26 dice A DÓNDE va la economía; este modelo dice CÓMO y
+CUÁN RÁPIDO: trayectorias k_t desde distintos puntos de partida y la
+velocidad de convergencia λ ≈ (1−α)(n+δ) — verificable contra la semivida
+simulada. Es la física del "largo plazo": ¿cuántos AÑOS son?
+
+Procedencia: dinámica de transición estándar del modelo de Solow (manuales
+de crecimiento) — conocimiento general; λ por linealización: resultado
+estándar (matemática elemental).
+"""
 
 import numpy as np
 

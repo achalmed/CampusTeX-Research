@@ -1,15 +1,16 @@
-# e33_deteccion_atipicos.py — detección de valores atípicos (sección II, tema 33).
-#
-# El cierre de la descriptiva: cómo DECIDIR, con una regla, si un dato es
-# atípico. La regla estándar es la de Tukey, basada en cuartiles (e23): un dato
-# es atípico si cae por debajo de Q1 − 1.5·IQR o por encima de Q3 + 1.5·IQR
-# (moderado), o de 3·IQR (extremo). Su virtud, frente a la regla ingenua de
-# "más de 3 desviaciones de la media", es la ROBUSTEZ: las vallas se calculan con
-# cuartiles, que el propio atípico no puede mover —así que no se ENMASCARA a sí
-# mismo, como sí pasa con μ±3σ (el outlier infla σ y se esconde)—. El modelo
-# aleja un atípico y muestra que la valla de Tukey lo sigue detectando mientras
-# la valla basada en la media se expande y lo pierde. Y la regla de oro: detectar
-# NO es borrar.
+"""simuladores/estadistica/modelos/nivel_02/e33_deteccion_atipicos.py — detección de valores atípicos (sección II, tema 33).
+
+El cierre de la descriptiva: cómo DECIDIR, con una regla, si un dato es
+atípico. La regla estándar es la de Tukey, basada en cuartiles (e23): un dato
+es atípico si cae por debajo de Q1 − 1.5·IQR o por encima de Q3 + 1.5·IQR
+(moderado), o de 3·IQR (extremo). Su virtud, frente a la regla ingenua de
+"más de 3 desviaciones de la media", es la ROBUSTEZ: las vallas se calculan con
+cuartiles, que el propio atípico no puede mover —así que no se ENMASCARA a sí
+mismo, como sí pasa con μ±3σ (el outlier infla σ y se esconde)—. El modelo
+aleja un atípico y muestra que la valla de Tukey lo sigue detectando mientras
+la valla basada en la media se expande y lo pierde. Y la regla de oro: detectar
+NO es borrar.
+"""
 
 import numpy as np
 

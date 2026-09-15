@@ -1,16 +1,17 @@
-# m02_demanda_agregada.py — PIB y componentes de la demanda agregada (nivel 1).
-#
-# Identidad del gasto:  Y = C + I + G + X − M
-# Es CONTABILIDAD (ex post), no comportamiento: un cambio de un componente
-# "mueve" Y uno a uno por definición, sin multiplicador ni expulsión — esa es
-# exactamente la lección que separa este modelo de m04 y m10.
-#
-# Calibración base: proporciones que EVOCAN la estructura del gasto peruano
-# (C≈65%, I≈22%, G≈13%, X≈25%, M≈25% del PIB). Aproximación didáctica, NO dato
-# oficial — las series reales entran por el conector BCRP en el nivel 12.
-#
-# Procedencia: identidad de cuentas nacionales, conocimiento general
-# (Kuznets 1934; SCN de Naciones Unidas). Calibración: decisión de diseño.
+"""simuladores/macro/modelos/nivel_01/m02_demanda_agregada.py — PIB y componentes de la demanda agregada (nivel 1).
+
+Identidad del gasto:  Y = C + I + G + X − M
+Es CONTABILIDAD (ex post), no comportamiento: un cambio de un componente
+"mueve" Y uno a uno por definición, sin multiplicador ni expulsión — esa es
+exactamente la lección que separa este modelo de m04 y m10.
+
+Calibración base: proporciones que EVOCAN la estructura del gasto peruano
+(C≈65%, I≈22%, G≈13%, X≈25%, M≈25% del PIB). Aproximación didáctica, NO dato
+oficial — las series reales entran por el conector BCRP en el nivel 12.
+
+Procedencia: identidad de cuentas nacionales, conocimiento general
+(Kuznets 1934; SCN de Naciones Unidas). Calibración: decisión de diseño.
+"""
 
 from base import Ecuacion, Escenario, Ficha, Modelo, Parametro, Verificacion
 import config

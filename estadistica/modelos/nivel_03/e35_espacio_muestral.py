@@ -1,13 +1,14 @@
-# e35_espacio_muestral.py — el espacio muestral (sección III, tema 35).
-#
-# El espacio muestral Ω es el conjunto de TODOS los resultados posibles de un
-# experimento aleatorio: {cara, sello} para una moneda, {1,…,6} para un dado,
-# los 36 pares para dos dados. Es el 'universo' sobre el que se define toda la
-# probabilidad —un evento (e36) es un subconjunto de Ω, y la probabilidad
-# reparte una masa total de 1 entre sus resultados—. El modelo muestra el espacio
-# muestral de la SUMA de k dados: enumera cuántas formas hay de obtener cada
-# suma, revela que |Ω| = 6^k crece exponencialmente, y —de regalo— anticipa que
-# al sumar más dados la distribución se vuelve acampanada (el TCL, e67).
+"""simuladores/estadistica/modelos/nivel_03/e35_espacio_muestral.py — el espacio muestral (sección III, tema 35).
+
+El espacio muestral Ω es el conjunto de TODOS los resultados posibles de un
+experimento aleatorio: {cara, sello} para una moneda, {1,…,6} para un dado,
+los 36 pares para dos dados. Es el 'universo' sobre el que se define toda la
+probabilidad —un evento (e36) es un subconjunto de Ω, y la probabilidad
+reparte una masa total de 1 entre sus resultados—. El modelo muestra el espacio
+muestral de la SUMA de k dados: enumera cuántas formas hay de obtener cada
+suma, revela que |Ω| = 6^k crece exponencialmente, y —de regalo— anticipa que
+al sumar más dados la distribución se vuelve acampanada (el TCL, e67).
+"""
 
 import numpy as np
 

@@ -1,24 +1,25 @@
-# m112_mineria_empleo.py — minería, crecimiento y empleo (nivel 12).
-#
-# La paradoja del ENCLAVE, el corazón del debate sobre el modelo de desarrollo
-# peruano. La minería co-mueve fuerte con el crecimiento (corr +0.53 entre el PBI
-# minero y el PBI total) y lo amplifica (es más volátil: 5.8 vs 4.9 pp): cuando
-# entran nuevas minas de cobre —2015-2016, con Las Bambas, Cerro Verde y
-# Toromocho— el PBI minero salta (+9.5%, +16.3%) y empuja el total. La minería es
-# ~13% del PBI, ~60% de las exportaciones (m109) y un pilar fiscal (el canon que
-# financia m106). Y sin embargo emplea DIRECTAMENTE a solo ~1.5% de la fuerza
-# laboral: es un enclave de capital intensivo. De ahí la paradoja: genera enorme
-# valor, divisas e impuestos, pero pocos empleos directos, así que sus beneficios
-# llegan de forma INDIRECTA (vía el fisco, el canon, el gasto regional) y difusa
-# —lo que los vuelve disputados (conflictos sociales) y desiguales—. Es el
-# argumento central para DIVERSIFICAR (m112→m115): un país no genera empleo
-# masivo con un enclave, por rico que sea.
-#
-# Procedencia: PBI minero (variación %, BCRP PM04972AA) y PBI (PN01728AM) son
-# datos BCRP reales. Las participaciones estructurales (~13% del PBI, ~60% de
-# exportaciones, ~1.5% del empleo) son cifras PÚBLICAS de BCRP/INEI, DECLARADAS
-# (conocimiento general del país; el empleo minero requeriría ENAHO-INEI, aún no
-# conectada). El enclave y la diversificación: m112/m115 (conocimiento general).
+"""simuladores/macro/modelos/nivel_12/m112_mineria_empleo.py — minería, crecimiento y empleo (nivel 12).
+
+La paradoja del ENCLAVE, el corazón del debate sobre el modelo de desarrollo
+peruano. La minería co-mueve fuerte con el crecimiento (corr +0.53 entre el PBI
+minero y el PBI total) y lo amplifica (es más volátil: 5.8 vs 4.9 pp): cuando
+entran nuevas minas de cobre —2015-2016, con Las Bambas, Cerro Verde y
+Toromocho— el PBI minero salta (+9.5%, +16.3%) y empuja el total. La minería es
+~13% del PBI, ~60% de las exportaciones (m109) y un pilar fiscal (el canon que
+financia m106). Y sin embargo emplea DIRECTAMENTE a solo ~1.5% de la fuerza
+laboral: es un enclave de capital intensivo. De ahí la paradoja: genera enorme
+valor, divisas e impuestos, pero pocos empleos directos, así que sus beneficios
+llegan de forma INDIRECTA (vía el fisco, el canon, el gasto regional) y difusa
+—lo que los vuelve disputados (conflictos sociales) y desiguales—. Es el
+argumento central para DIVERSIFICAR (m112→m115): un país no genera empleo
+masivo con un enclave, por rico que sea.
+
+Procedencia: PBI minero (variación %, BCRP PM04972AA) y PBI (PN01728AM) son
+datos BCRP reales. Las participaciones estructurales (~13% del PBI, ~60% de
+exportaciones, ~1.5% del empleo) son cifras PÚBLICAS de BCRP/INEI, DECLARADAS
+(conocimiento general del país; el empleo minero requeriría ENAHO-INEI, aún no
+conectada). El enclave y la diversificación: m112/m115 (conocimiento general).
+"""
 
 import numpy as np
 

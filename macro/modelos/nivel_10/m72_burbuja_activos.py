@@ -1,17 +1,18 @@
-# m72_burbuja_activos.py — burbuja de activos: precio vs fundamento (nivel 10).
-#
-# El precio fundamental de un activo es el valor presente de sus dividendos:
-#   P* = d / (r − g_d)      (Gordon; d dividendo, g_d su crecimiento)
-# Una burbuja es un componente B_t que se aparta del fundamental creciendo
-# a la tasa que exige el arbitraje (a nadie le conviene tenerla si no):
-#   B_{t+1} = (1+r)·B_t / prob_supervivencia
-# Con probabilidad (1−q) de estallar cada período, la burbuja SOBREVIVIENTE
-# crece a (1+r)/(1−q) — más rápido, para compensar el riesgo de colapso.
-# Al estallar, el precio vuelve al fundamental: caída = B_t / P_t.
-#
-# Procedencia: modelo de Gordon (mención); burbujas racionales (Blanchard-
-# Watson 1982 — mención); exuberancia irracional (Shiller — mención) —
-# conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_10/m72_burbuja_activos.py — burbuja de activos: precio vs fundamento (nivel 10).
+
+El precio fundamental de un activo es el valor presente de sus dividendos:
+  P* = d / (r − g_d)      (Gordon; d dividendo, g_d su crecimiento)
+Una burbuja es un componente B_t que se aparta del fundamental creciendo
+a la tasa que exige el arbitraje (a nadie le conviene tenerla si no):
+  B_{t+1} = (1+r)·B_t / prob_supervivencia
+Con probabilidad (1−q) de estallar cada período, la burbuja SOBREVIVIENTE
+crece a (1+r)/(1−q) — más rápido, para compensar el riesgo de colapso.
+Al estallar, el precio vuelve al fundamental: caída = B_t / P_t.
+
+Procedencia: modelo de Gordon (mención); burbujas racionales (Blanchard-
+Watson 1982 — mención); exuberancia irracional (Shiller — mención) —
+conocimiento general; calibración didáctica.
+"""
 
 import numpy as np
 

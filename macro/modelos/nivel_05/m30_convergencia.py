@@ -1,14 +1,17 @@
-# m30_convergencia.py — convergencia: ¿los pobres alcanzan a los ricos? (nivel 5).
-#
-# Dos economías con la MISMA estructura (s, α, n, δ, A) y distinto k0: Solow
-# predice que la pobre crece más rápido y la brecha se cierra (β-convergencia).
-# Pero si difieren en s (o A), convergen a ESTADOS ESTACIONARIOS DISTINTOS:
-# convergencia CONDICIONAL, no absoluta — la clave que reconcilia el modelo
-# con los datos (los países pobres NO alcanzan en general; los parecidos, sí).
-#
-# Procedencia: dinámica de Solow aplicada a comparación de países; literatura
-# empírica de convergencia (Barro, Sala-i-Martin; Baumol — menciones) —
-# conocimiento general.
+"""simuladores/macro/modelos/nivel_05/m30_convergencia.py — convergencia: ¿los pobres alcanzan a los ricos?
+
+(nivel 5).
+
+Dos economías con la MISMA estructura (s, α, n, δ, A) y distinto k0: Solow
+predice que la pobre crece más rápido y la brecha se cierra (β-convergencia).
+Pero si difieren en s (o A), convergen a ESTADOS ESTACIONARIOS DISTINTOS:
+convergencia CONDICIONAL, no absoluta — la clave que reconcilia el modelo
+con los datos (los países pobres NO alcanzan en general; los parecidos, sí).
+
+Procedencia: dinámica de Solow aplicada a comparación de países; literatura
+empírica de convergencia (Barro, Sala-i-Martin; Baumol — menciones) —
+conocimiento general.
+"""
 
 import numpy as np
 

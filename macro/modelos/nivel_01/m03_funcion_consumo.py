@@ -1,11 +1,12 @@
-# m03_funcion_consumo.py — función de consumo keynesiana (nivel 1).
-#
-#   C = C0 + c·Yd     con 0 < c < 1  ("ley psicológica fundamental")
-#   S = Yd − C = −C0 + (1−c)·Yd
-# Punto de nivelación (C = Yd, S = 0):  Yd_niv = C0 / (1−c)
-#
-# Procedencia: Keynes, Teoría General (1936), cap. sobre la propensión a
-# consumir — conocimiento macroeconómico general, no verificado contra edición.
+"""simuladores/macro/modelos/nivel_01/m03_funcion_consumo.py — función de consumo keynesiana (nivel 1).
+
+  C = C0 + c·Yd     con 0 < c < 1  ("ley psicológica fundamental")
+  S = Yd − C = −C0 + (1−c)·Yd
+Punto de nivelación (C = Yd, S = 0):  Yd_niv = C0 / (1−c)
+
+Procedencia: Keynes, Teoría General (1936), cap. sobre la propensión a
+consumir — conocimiento macroeconómico general, no verificado contra edición.
+"""
 
 import numpy as np
 

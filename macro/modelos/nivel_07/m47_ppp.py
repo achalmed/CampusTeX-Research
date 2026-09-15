@@ -1,15 +1,16 @@
-# m47_ppp.py — paridad del poder adquisitivo (nivel 7).
-#
-# PPP relativa: el tipo de cambio de equilibrio sigue a los diferenciales de
-# inflación, dejando el RER constante:
-#   E^{ppp}_{t+1}/E^{ppp}_t = (1+π)/(1+π*)
-# La evidencia: el E observado se DESVÍA del PPP por años; el desvío decae
-# con una vida media de 3-5 años (el "PPP puzzle" de Rogoff, mención):
-#   E_t = E^{ppp}_t · (1 + d_t),   d_t = d_0 · (1/2)^{t/vida}
-# PPP es brújula de largo plazo, no GPS de corto.
-#
-# Procedencia: Cassel (1918, mención); evidencia de vidas medias: Rogoff
-# (1996, "The PPP Puzzle", mención) — conocimiento general.
+"""simuladores/macro/modelos/nivel_07/m47_ppp.py — paridad del poder adquisitivo (nivel 7).
+
+PPP relativa: el tipo de cambio de equilibrio sigue a los diferenciales de
+inflación, dejando el RER constante:
+  E^{ppp}_{t+1}/E^{ppp}_t = (1+π)/(1+π*)
+La evidencia: el E observado se DESVÍA del PPP por años; el desvío decae
+con una vida media de 3-5 años (el "PPP puzzle" de Rogoff, mención):
+  E_t = E^{ppp}_t · (1 + d_t),   d_t = d_0 · (1/2)^{t/vida}
+PPP es brújula de largo plazo, no GPS de corto.
+
+Procedencia: Cassel (1918, mención); evidencia de vidas medias: Rogoff
+(1996, "The PPP Puzzle", mención) — conocimiento general.
+"""
 
 import numpy as np
 

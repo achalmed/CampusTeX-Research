@@ -1,18 +1,19 @@
-# m69_austeridad.py — austeridad: la aritmética del denominador (nivel 9).
-#
-# Un ajuste primario dA (% del PIB) busca bajar la deuda/PIB… pero el ajuste
-# CONTRAE el denominador vía el multiplicador (m60/m70):
-#   b₁ = (b₀ − dA) / (1 − mult·dA/100)
-# El numerador baja dA; el denominador baja mult·dA%. ¿Quién gana?
-#   multiplicador crítico:  mult* = 100/b₀   (exacto, independiente de dA)
-#   mult < mult*: la austeridad FUNCIONA (b cae)
-#   mult > mult*: la PARADOJA — ajustar SUBE el ratio (autodestructiva)
-# Con b₀=120% basta mult>0.83 (el de una recesión, m70) para la paradoja;
-# con b₀=40% haría falta mult>2.5 (casi imposible). El debate post-2010
-# (Alesina vs Blanchard-Leigh, menciones) fue exactamente esta ecuación.
-#
-# Procedencia: aritmética del ratio (decisión de diseño sobre m64/m60);
-# debate: Alesina-Ardagna vs Blanchard y Leigh (2013) — menciones.
+"""simuladores/macro/modelos/nivel_09/m69_austeridad.py — austeridad: la aritmética del denominador (nivel 9).
+
+Un ajuste primario dA (% del PIB) busca bajar la deuda/PIB… pero el ajuste
+CONTRAE el denominador vía el multiplicador (m60/m70):
+  b₁ = (b₀ − dA) / (1 − mult·dA/100)
+El numerador baja dA; el denominador baja mult·dA%. ¿Quién gana?
+  multiplicador crítico:  mult* = 100/b₀   (exacto, independiente de dA)
+  mult < mult*: la austeridad FUNCIONA (b cae)
+  mult > mult*: la PARADOJA — ajustar SUBE el ratio (autodestructiva)
+Con b₀=120% basta mult>0.83 (el de una recesión, m70) para la paradoja;
+con b₀=40% haría falta mult>2.5 (casi imposible). El debate post-2010
+(Alesina vs Blanchard-Leigh, menciones) fue exactamente esta ecuación.
+
+Procedencia: aritmética del ratio (decisión de diseño sobre m64/m60);
+debate: Alesina-Ardagna vs Blanchard y Leigh (2013) — menciones.
+"""
 
 import numpy as np
 

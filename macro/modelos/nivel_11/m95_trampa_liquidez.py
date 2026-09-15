@@ -1,21 +1,21 @@
-# m95_trampa_liquidez.py — trampa de liquidez: el episodio (Japón, 2008-2015)
-# (nivel 11).
-#
-# La aplicación histórica de m12: cuando la tasa de política llega a cero y la
-# economía sigue deprimida, la política monetaria convencional se agota. El
-# episodio muestra el MENÚ de respuestas no convencionales y su eficacia:
-#   (0) convencional: bajar la tasa — YA en cero, sin efecto
-#   (1) QE (expansión cuantitativa): comprar activos largos → baja tasas largas
-#   (2) forward guidance: prometer tasas bajas por más tiempo (m54)
-#   (3) estímulo fiscal: multiplicador ALTO en el ZLB (m91)
-#   (4) subir la meta de inflación: bajar la tasa real esperada (m94)
-# La lección de Japón (décadas), EE.UU./Europa (2008-2015): la fiscal y las no
-# convencionales SÍ funcionan, pero son más difíciles y controvertidas.
-# Combina m12 (trampa), m54 (guidance), m91 (fiscal), m94 (deflación).
-#
-# Procedencia: trampa de liquidez (Keynes, Krugman 1998), ZLB post-2008
-# (Woodford, Eggertsson — menciones) — conocimiento general; calibración
-# didáctica.
+"""simuladores/macro/modelos/nivel_11/m95_trampa_liquidez.py — trampa de liquidez: el episodio (Japón, 2008-2015) (nivel 11).
+
+La aplicación histórica de m12: cuando la tasa de política llega a cero y la
+economía sigue deprimida, la política monetaria convencional se agota. El
+episodio muestra el MENÚ de respuestas no convencionales y su eficacia:
+  (0) convencional: bajar la tasa — YA en cero, sin efecto
+  (1) QE (expansión cuantitativa): comprar activos largos → baja tasas largas
+  (2) forward guidance: prometer tasas bajas por más tiempo (m54)
+  (3) estímulo fiscal: multiplicador ALTO en el ZLB (m91)
+  (4) subir la meta de inflación: bajar la tasa real esperada (m94)
+La lección de Japón (décadas), EE.UU./Europa (2008-2015): la fiscal y las no
+convencionales SÍ funcionan, pero son más difíciles y controvertidas.
+Combina m12 (trampa), m54 (guidance), m91 (fiscal), m94 (deflación).
+
+Procedencia: trampa de liquidez (Keynes, Krugman 1998), ZLB post-2008
+(Woodford, Eggertsson — menciones) — conocimiento general; calibración
+didáctica.
+"""
 
 import numpy as np
 

@@ -1,18 +1,20 @@
-# _datos_bcrp.py — lector de datos del BCRP para el laboratorio del Perú
-# (nivel 12). No es un modelo.
-#
-# Dos fuentes, en orden de preferencia:
-#   (1) DATOS MENSUALES de data/raw/peru/bcrp/<código>/ (los descarga el
-#       conector connectors/bcrp; el archivo original es SAGRADO — solo se
-#       lee, nunca se modifica). Mayor resolución.
-#   (2) SNAPSHOT ANUAL embebido en _series_bcrp.py (fallback autocontenido:
-#       data/ está en .gitignore, así el laboratorio funciona en un clon
-#       limpio y sus verificaciones son reproducibles).
-#
-# Todas las series son AGREGADOS macro PÚBLICOS del BCRP (no microdatos
-# restringidos). Procedencia declarada en cada modelo: "dato BCRP <código>,
-# muestra 2004-2024". Las calibraciones DERIVADAS de estos datos son para
-# ilustración pedagógica del laboratorio, no pronósticos oficiales.
+"""simuladores/macro/modelos/nivel_12/_datos_bcrp.py — lector de datos del BCRP para el laboratorio del Perú (nivel 12).
+
+No es un modelo.
+
+Dos fuentes, en orden de preferencia:
+  (1) DATOS MENSUALES de data/raw/peru/bcrp/<código>/ (los descarga el
+      conector connectors/bcrp; el archivo original es SAGRADO — solo se
+      lee, nunca se modifica). Mayor resolución.
+  (2) SNAPSHOT ANUAL embebido en _series_bcrp.py (fallback autocontenido:
+      data/ está en .gitignore, así el laboratorio funciona en un clon
+      limpio y sus verificaciones son reproducibles).
+
+Todas las series son AGREGADOS macro PÚBLICOS del BCRP (no microdatos
+restringidos). Procedencia declarada en cada modelo: "dato BCRP <código>,
+muestra 2004-2024". Las calibraciones DERIVADAS de estos datos son para
+ilustración pedagógica del laboratorio, no pronósticos oficiales.
+"""
 
 import glob
 import json

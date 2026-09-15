@@ -1,17 +1,18 @@
-# m42_expectativas_racionales.py — expectativas racionales (nivel 6, cierre).
-#
-# Oferta de Lucas: solo las SORPRESAS mueven el producto:
-#   y_t = ȳ + β(π_t − πe_t)
-# Experimento: una expansión monetaria eleva π de 0 a gM desde t_a. Se
-# comparan DOS públicos ante la MISMA política:
-#   adaptativos (πe = π_{t−1}): un período de boom — luego nada.
-#   racionales: si la política fue ANUNCIADA, πe salta con ella → NINGÚN boom
-#               (proposición de inefectividad); si fue sorpresa, un período.
-# Al final, en ambos mundos queda solo la inflación: m35 otra vez, ahora con
-# el reloj de las expectativas como protagonista.
-#
-# Procedencia: Muth (1961), Lucas (1972, 1976 — crítica), Sargent-Wallace
-# (1975, inefectividad) — menciones; conocimiento general.
+"""simuladores/macro/modelos/nivel_06/m42_expectativas_racionales.py — expectativas racionales (nivel 6, cierre).
+
+Oferta de Lucas: solo las SORPRESAS mueven el producto:
+  y_t = ȳ + β(π_t − πe_t)
+Experimento: una expansión monetaria eleva π de 0 a gM desde t_a. Se
+comparan DOS públicos ante la MISMA política:
+  adaptativos (πe = π_{t−1}): un período de boom — luego nada.
+  racionales: si la política fue ANUNCIADA, πe salta con ella → NINGÚN boom
+              (proposición de inefectividad); si fue sorpresa, un período.
+Al final, en ambos mundos queda solo la inflación: m35 otra vez, ahora con
+el reloj de las expectativas como protagonista.
+
+Procedencia: Muth (1961), Lucas (1972, 1976 — crítica), Sargent-Wallace
+(1975, inefectividad) — menciones; conocimiento general.
+"""
 
 import numpy as np
 

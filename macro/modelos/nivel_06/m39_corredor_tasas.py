@@ -1,15 +1,16 @@
-# m39_corredor_tasas.py — el banco central y la tasa: corredor operativo (nivel 6).
-#
-# Cómo se IMPLEMENTA la tasa de política (la que Taylor recomienda en m38):
-# el mercado interbancario de reservas con un corredor de facilidades:
-#   demanda de reservas:  R(i) = a − b·i   (decreciente: la tasa es su costo)
-#   oferta: S (operaciones del banco central) ;  corredor: [i_dep, i_vent]
-#   i_eq = min(max((a−S)/b, i_dep), i_vent)   — el corredor ACOTA siempre.
-# Los bancos centrales modernos (BCRP incluido: tasa de referencia +
-# ventanillas — mención) fijan el PRECIO del dinero, no su cantidad.
-#
-# Procedencia: operativa estándar de bancos centrales con corredor —
-# conocimiento general (doc. institucional); calibración didáctica.
+"""simuladores/macro/modelos/nivel_06/m39_corredor_tasas.py — el banco central y la tasa: corredor operativo (nivel 6).
+
+Cómo se IMPLEMENTA la tasa de política (la que Taylor recomienda en m38):
+el mercado interbancario de reservas con un corredor de facilidades:
+  demanda de reservas:  R(i) = a − b·i   (decreciente: la tasa es su costo)
+  oferta: S (operaciones del banco central) ;  corredor: [i_dep, i_vent]
+  i_eq = min(max((a−S)/b, i_dep), i_vent)   — el corredor ACOTA siempre.
+Los bancos centrales modernos (BCRP incluido: tasa de referencia +
+ventanillas — mención) fijan el PRECIO del dinero, no su cantidad.
+
+Procedencia: operativa estándar de bancos centrales con corredor —
+conocimiento general (doc. institucional); calibración didáctica.
+"""
 
 import numpy as np
 

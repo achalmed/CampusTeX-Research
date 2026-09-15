@@ -1,18 +1,19 @@
-# m92_recesion_inflacion.py — recesión con inflación (nivel 11).
-#
-# El diagnóstico diferencial: una recesión CON inflación alta puede venir de
-# dos fuentes muy distintas, y la respuesta correcta es opuesta:
-#   (A) shock de OFERTA (m19): π↑ y Y↓ a la vez → dilema (m24), respuesta ambigua
-#   (B) DEMANDA que se enfría tarde: inflación heredada (inercia, m14) mientras
-#       la brecha ya se abrió → la desinflación llega con rezago
-# El caso (A) es estanflación genuina (m93); el (B) es el final de un ciclo
-# inflacionario. Distinguirlos exige mirar la BRECHA vs la inflación: si la
-# inflación sube CON la brecha negativa, es oferta; si la inflación cae "tarde"
-# tras la brecha, es demanda con inercia. Combina m14 (inercia), m19 (oferta)
-# y m16 (brecha) sobre el motor de m52.
-#
-# Procedencia: diagnóstico oferta/demanda (m18/m19/m24), inercia inflacionaria
-# (m14) — conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_11/m92_recesion_inflacion.py — recesión con inflación (nivel 11).
+
+El diagnóstico diferencial: una recesión CON inflación alta puede venir de
+dos fuentes muy distintas, y la respuesta correcta es opuesta:
+  (A) shock de OFERTA (m19): π↑ y Y↓ a la vez → dilema (m24), respuesta ambigua
+  (B) DEMANDA que se enfría tarde: inflación heredada (inercia, m14) mientras
+      la brecha ya se abrió → la desinflación llega con rezago
+El caso (A) es estanflación genuina (m93); el (B) es el final de un ciclo
+inflacionario. Distinguirlos exige mirar la BRECHA vs la inflación: si la
+inflación sube CON la brecha negativa, es oferta; si la inflación cae "tarde"
+tras la brecha, es demanda con inercia. Combina m14 (inercia), m19 (oferta)
+y m16 (brecha) sobre el motor de m52.
+
+Procedencia: diagnóstico oferta/demanda (m18/m19/m24), inercia inflacionaria
+(m14) — conocimiento general; calibración didáctica.
+"""
 
 import numpy as np
 

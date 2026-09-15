@@ -1,15 +1,16 @@
-# m33_capital_humano.py — capital humano y crecimiento (Solow aumentado) — nivel 5.
-#
-# Mankiw-Romer-Weil (1992, mención): dos capitales que se acumulan,
-#   y = k^α·h^β ;  Δk = s_k·y − (n+g+δ)k ;  Δh = s_h·y − (n+g+δ)h
-# Estados estacionarios (por trabajador efectivo):
-#   k* = (s_k^{1−β} s_h^{β} / (n+g+δ))^{1/(1−α−β)} ;  h* análogo.
-# Con α+β ≈ 2/3 el capital "amplio" pesa mucho pero AÚN decrece: hay
-# convergencia, pero lenta (λ = (1−α−β)(n+g+δ) ≈ 2-3%) — la que se observa.
-#
-# Procedencia: Mankiw, Romer y Weil (1992, "A Contribution to the Empirics
-# of Economic Growth", mención) — conocimiento general; educación →
-# productividad como canal (Lucas 1988, mención).
+"""simuladores/macro/modelos/nivel_05/m33_capital_humano.py — capital humano y crecimiento (Solow aumentado) — nivel 5.
+
+Mankiw-Romer-Weil (1992, mención): dos capitales que se acumulan,
+  y = k^α·h^β ;  Δk = s_k·y − (n+g+δ)k ;  Δh = s_h·y − (n+g+δ)h
+Estados estacionarios (por trabajador efectivo):
+  k* = (s_k^{1−β} s_h^{β} / (n+g+δ))^{1/(1−α−β)} ;  h* análogo.
+Con α+β ≈ 2/3 el capital "amplio" pesa mucho pero AÚN decrece: hay
+convergencia, pero lenta (λ = (1−α−β)(n+g+δ) ≈ 2-3%) — la que se observa.
+
+Procedencia: Mankiw, Romer y Weil (1992, "A Contribution to the Empirics
+of Economic Growth", mención) — conocimiento general; educación →
+productividad como canal (Lucas 1988, mención).
+"""
 
 import numpy as np
 

@@ -1,21 +1,21 @@
-# m56_tres_ecuaciones.py — el modelo nuevo keynesiano de 3 ecuaciones (nivel 8,
-# ANCLA MAYOR: aquí converge todo el currículo).
-#
-#   IS (m54):     x_t = x_{t+1} − σ·(i_t − π_{t+1} − r_n)
-#   NKPC (m55):   π_t = β·π_{t+1} + κ·x_t + u_t         (u: shock de costos)
-#   Taylor (m38): i_t = r_n + φ_π·π_t + φ_x·x_t         (en desviaciones)
-#
-# Con el shock AR(1)  u_t = ρ^t·u_0, el sistema racional se resuelve por
-# COEFICIENTES INDETERMINADOS: conjeturar π_t = a·u_t, x_t = b·u_t y despejar:
-#   b = σ(ρ − φ_π)·a / (1 − ρ + σφ_x)
-#   a = 1 / [ (1−βρ) + κσ(φ_π − ρ)/(1 − ρ + σφ_x) ]
-# Con φ_π > 1 (principio de Taylor, m38): a acotado y b < 0 — ante un shock
-# de costos el banco central INDUCE recesión para domar la inflación. La
-# solución se verifica sustituyéndola en las 3 ecuaciones, período a período.
-#
-# Procedencia: Clarida-Galí-Gertler (1999, "The Science of Monetary Policy"),
-# Woodford (2003), Galí (2008) — menciones; método de coeficientes
-# indeterminados: estándar (conocimiento general). Calibración didáctica usual.
+"""simuladores/macro/modelos/nivel_08/m56_tres_ecuaciones.py — el modelo nuevo keynesiano de 3 ecuaciones (nivel 8, ANCLA MAYOR: aquí converge todo el currículo).
+
+  IS (m54):     x_t = x_{t+1} − σ·(i_t − π_{t+1} − r_n)
+  NKPC (m55):   π_t = β·π_{t+1} + κ·x_t + u_t         (u: shock de costos)
+  Taylor (m38): i_t = r_n + φ_π·π_t + φ_x·x_t         (en desviaciones)
+
+Con el shock AR(1)  u_t = ρ^t·u_0, el sistema racional se resuelve por
+COEFICIENTES INDETERMINADOS: conjeturar π_t = a·u_t, x_t = b·u_t y despejar:
+  b = σ(ρ − φ_π)·a / (1 − ρ + σφ_x)
+  a = 1 / [ (1−βρ) + κσ(φ_π − ρ)/(1 − ρ + σφ_x) ]
+Con φ_π > 1 (principio de Taylor, m38): a acotado y b < 0 — ante un shock
+de costos el banco central INDUCE recesión para domar la inflación. La
+solución se verifica sustituyéndola en las 3 ecuaciones, período a período.
+
+Procedencia: Clarida-Galí-Gertler (1999, "The Science of Monetary Policy"),
+Woodford (2003), Galí (2008) — menciones; método de coeficientes
+indeterminados: estándar (conocimiento general). Calibración didáctica usual.
+"""
 
 import numpy as np
 

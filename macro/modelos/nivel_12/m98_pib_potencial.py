@@ -1,18 +1,19 @@
-# m98_pib_potencial.py — PIB potencial vs observado del Perú (nivel 12).
-#
-# m16 (brecha del producto) con DATOS. Toma el índice del PBI real del BCRP
-# (PN01770AM, 2007=100) y separa TENDENCIA (potencial) de CICLO (brecha)
-# con un filtro simple: una media móvil centrada o una tendencia suavizada.
-#   brecha_t = (PBI_t − PBI*_t) / PBI*_t
-# El resultado muestra los mismos episodios que m97 pero como DESVIACIONES
-# del potencial: el sobrecalentamiento del boom, la brecha negativa del
-# COVID. Ilustra por qué el potencial NO es observable (depende del filtro) —
-# la limitación de m16 hecha evidencia.
-#
-# Procedencia: dato BCRP PN01770AM (PBI índice 2007=100), muestra 2004-2024.
-# El filtro de tendencia es un suavizado didáctico (media móvil / tendencia
-# exponencial), NO el filtro Hodrick-Prescott oficial — la brecha resultante
-# es ilustrativa.
+"""simuladores/macro/modelos/nivel_12/m98_pib_potencial.py — PIB potencial vs observado del Perú (nivel 12).
+
+m16 (brecha del producto) con DATOS. Toma el índice del PBI real del BCRP
+(PN01770AM, 2007=100) y separa TENDENCIA (potencial) de CICLO (brecha)
+con un filtro simple: una media móvil centrada o una tendencia suavizada.
+  brecha_t = (PBI_t − PBI*_t) / PBI*_t
+El resultado muestra los mismos episodios que m97 pero como DESVIACIONES
+del potencial: el sobrecalentamiento del boom, la brecha negativa del
+COVID. Ilustra por qué el potencial NO es observable (depende del filtro) —
+la limitación de m16 hecha evidencia.
+
+Procedencia: dato BCRP PN01770AM (PBI índice 2007=100), muestra 2004-2024.
+El filtro de tendencia es un suavizado didáctico (media móvil / tendencia
+exponencial), NO el filtro Hodrick-Prescott oficial — la brecha resultante
+es ilustrativa.
+"""
 
 import numpy as np
 

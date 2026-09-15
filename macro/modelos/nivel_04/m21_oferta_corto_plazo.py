@@ -1,14 +1,15 @@
-# m21_oferta_corto_plazo.py — oferta agregada de corto plazo (SRAS) — nivel 4.
-#
-#   P = Pe + λ·(Y − Y*)
-# La posición de la curva la fija Pe (el precio esperado al negociar contratos);
-# su pendiente λ, el grado de rigidez nominal. dPe desplaza la SRAS: ese
-# desplazamiento ES el mecanismo del ajuste al largo plazo (m25).
-#
-# Procedencia: forma reducida estándar de manuales; microfundamentos citados
-# como mención (contratos: Fischer/Taylor; percepciones erróneas: Friedman;
-# información imperfecta: Lucas — hay material de Lucas en la biblioteca, no
-# verificado). Calibración: decisión de diseño didáctica.
+"""simuladores/macro/modelos/nivel_04/m21_oferta_corto_plazo.py — oferta agregada de corto plazo (SRAS) — nivel 4.
+
+  P = Pe + λ·(Y − Y*)
+La posición de la curva la fija Pe (el precio esperado al negociar contratos);
+su pendiente λ, el grado de rigidez nominal. dPe desplaza la SRAS: ese
+desplazamiento ES el mecanismo del ajuste al largo plazo (m25).
+
+Procedencia: forma reducida estándar de manuales; microfundamentos citados
+como mención (contratos: Fischer/Taylor; percepciones erróneas: Friedman;
+información imperfecta: Lucas — hay material de Lucas en la biblioteca, no
+verificado). Calibración: decisión de diseño didáctica.
+"""
 
 import numpy as np
 

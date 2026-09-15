@@ -1,12 +1,13 @@
-# e19_moda.py — la moda (sección II, tema 19).
-#
-# El valor más FRECUENTE. Es la tercera medida de tendencia central (con media
-# e17 y mediana e18), y la única que sirve para datos CUALITATIVOS/nominales
-# —donde "promediar" u "ordenar" no tienen sentido (¿el color promedio? ¿la
-# religión mediana?)—. Puede no existir (todos distintos), no ser única
-# (bimodal, multimodal), y en datos sesgados difiere de media y mediana. El
-# modelo muestra una distribución de frecuencias como barras y deja añadir copias
-# de un valor retador para ver cómo la moda cambia o empata.
+"""simuladores/estadistica/modelos/nivel_02/e19_moda.py — la moda (sección II, tema 19).
+
+El valor más FRECUENTE. Es la tercera medida de tendencia central (con media
+e17 y mediana e18), y la única que sirve para datos CUALITATIVOS/nominales
+—donde "promediar" u "ordenar" no tienen sentido (¿el color promedio? ¿la
+religión mediana?)—. Puede no existir (todos distintos), no ser única
+(bimodal, multimodal), y en datos sesgados difiere de media y mediana. El
+modelo muestra una distribución de frecuencias como barras y deja añadir copias
+de un valor retador para ver cómo la moda cambia o empata.
+"""
 
 import numpy as np
 

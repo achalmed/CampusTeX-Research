@@ -1,15 +1,16 @@
-# m54_is_dinamica.py — la curva IS dinámica (ecuación de Euler) — nivel 8.
-#
-# La demanda con hogares racionales que miran al futuro:
-#   x_t = x_{t+1} − σ·(r_t − r_n)      (brecha hoy = brecha mañana − tasa real)
-# Iterando hacia adelante (con x_{T+1}=0):
-#   x_t = −σ · Σ_{j≥t} (r_j − r_n)
-# La brecha de HOY es la suma de TODAS las tasas reales futuras: la demanda
-# se vuelve un precio de activo. Corolario que cambió a los bancos centrales:
-# ANUNCIAR tasas futuras mueve el presente — forward guidance.
-#
-# Procedencia: ecuación de Euler del consumo log-linealizada (tradición
-# Ramsey; formulación NK: Woodford, Galí — menciones) — conocimiento general.
+"""simuladores/macro/modelos/nivel_08/m54_is_dinamica.py — la curva IS dinámica (ecuación de Euler) — nivel 8.
+
+La demanda con hogares racionales que miran al futuro:
+  x_t = x_{t+1} − σ·(r_t − r_n)      (brecha hoy = brecha mañana − tasa real)
+Iterando hacia adelante (con x_{T+1}=0):
+  x_t = −σ · Σ_{j≥t} (r_j − r_n)
+La brecha de HOY es la suma de TODAS las tasas reales futuras: la demanda
+se vuelve un precio de activo. Corolario que cambió a los bancos centrales:
+ANUNCIAR tasas futuras mueve el presente — forward guidance.
+
+Procedencia: ecuación de Euler del consumo log-linealizada (tradición
+Ramsey; formulación NK: Woodford, Galí — menciones) — conocimiento general.
+"""
 
 import numpy as np
 

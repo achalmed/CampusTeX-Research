@@ -1,11 +1,12 @@
-# graficos.py — capa de RENDER del laboratorio (matplotlib).
-#
-# Todo el dibujo vive aquí: primitivas (_dibujar), colocación AUTOMÁTICA de
-# etiquetas (anti-solape: las anotaciones buscan la esquina/offset con menos
-# tinta debajo), dibujo progresivo (hasta_lineas: revela las curvas una a una,
-# para el recorrido pedagógico de app.py), figura suelta, demo de sensibilidad
-# y overlay de experimento (E1 → E2). El núcleo (base.py) no importa
-# matplotlib; la experiencia vive en laboratorio.py y app.py.
+"""simuladores/graficos.py — capa de RENDER del laboratorio (matplotlib).
+
+Todo el dibujo vive aquí: primitivas (_dibujar), colocación AUTOMÁTICA de
+etiquetas (anti-solape: las anotaciones buscan la esquina/offset con menos
+tinta debajo), dibujo progresivo (hasta_lineas: revela las curvas una a una,
+para el recorrido pedagógico de app.py), figura suelta, demo de sensibilidad
+y overlay de experimento (E1 → E2). El núcleo (base.py) no importa
+matplotlib; la experiencia vive en laboratorio.py y app.py.
+"""
 
 import numpy as np
 import matplotlib
@@ -29,7 +30,7 @@ def _simbolo(etiqueta):
     return ""
 
 
-# ─── colocación automática de etiquetas (anti-solape) ────────────────────────
+# --- colocación automática de etiquetas (anti-solape) ----------------------
 
 def _muestras(ax, datos):
     """Puntos de las curvas/barras en coordenadas de PANTALLA, para medir
@@ -110,7 +111,7 @@ def _mejor_esquina(ax, muestras):
     return fx, fy, ha, va
 
 
-# ─── primitiva principal ─────────────────────────────────────────────────────
+# --- primitiva principal ---------------------------------------------------
 
 def _dibujar(ax, modelo, params, hasta_lineas=None, con_equilibrio=True,
              con_puntos=True, con_anotacion=True, con_leyenda=True):

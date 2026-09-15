@@ -1,21 +1,22 @@
-# m49_mundell_fleming.py — modelo Mundell-Fleming (nivel 7, ANCLA).
-#
-# El IS-LM de la economía abierta pequeña con movilidad perfecta (r = r*):
-#   IS abierta:  Y = c0 + c1(Y−T) + I0 − b·r + G + XN,  XN = x0 + v·E − m1·Y
-#   LM:          M/P = k·Y − h·r
-#   movilidad:   r = r*   (la UIP de m48 sin prima y sin expectativas)
-#
-# RÉGIMEN FLEXIBLE (E ajusta, M manda):   Y = (M/P + h·r*)/k
-#   → la política FISCAL no mueve Y (¡expulsión TOTAL vía apreciación!)
-#   → la política MONETARIA es superpotente (dY/dM = 1/k)
-# RÉGIMEN FIJO (E dado, M endógena):      Y = A(G, Ē)/(1−c1+m1)
-#   → la política FISCAL es potente (sin freno de r NI de E)
-#   → la política MONETARIA es IMPOSIBLE (la M vuelve sola defendiendo Ē)
-# La calibración hace coincidir la base de ambos regímenes (Y=660, E=100,
-# M=300): los experimentos parten del MISMO mundo.
-#
-# Procedencia: Mundell (1963) y Fleming (1962) — menciones; Nobel a Mundell
-# 1999. Formulación de manual (conocimiento general); calibración didáctica.
+"""simuladores/macro/modelos/nivel_07/m49_mundell_fleming.py — modelo Mundell-Fleming (nivel 7, ANCLA).
+
+El IS-LM de la economía abierta pequeña con movilidad perfecta (r = r*):
+  IS abierta:  Y = c0 + c1(Y−T) + I0 − b·r + G + XN,  XN = x0 + v·E − m1·Y
+  LM:          M/P = k·Y − h·r
+  movilidad:   r = r*   (la UIP de m48 sin prima y sin expectativas)
+
+RÉGIMEN FLEXIBLE (E ajusta, M manda):   Y = (M/P + h·r*)/k
+  → la política FISCAL no mueve Y (¡expulsión TOTAL vía apreciación!)
+  → la política MONETARIA es superpotente (dY/dM = 1/k)
+RÉGIMEN FIJO (E dado, M endógena):      Y = A(G, Ē)/(1−c1+m1)
+  → la política FISCAL es potente (sin freno de r NI de E)
+  → la política MONETARIA es IMPOSIBLE (la M vuelve sola defendiendo Ē)
+La calibración hace coincidir la base de ambos regímenes (Y=660, E=100,
+M=300): los experimentos parten del MISMO mundo.
+
+Procedencia: Mundell (1963) y Fleming (1962) — menciones; Nobel a Mundell
+1999. Formulación de manual (conocimiento general); calibración didáctica.
+"""
 
 import numpy as np
 

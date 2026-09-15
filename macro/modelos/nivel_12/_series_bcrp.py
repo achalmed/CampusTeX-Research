@@ -1,24 +1,25 @@
-# _series_bcrp.py — SNAPSHOT ANUAL de series públicas del BCRP (nivel 12).
-#
-# Promedios anuales 2004-2024 de seis series macro del BCRP (BCRPData),
-# descargadas por el conector connectors/bcrp el 2026-08-19 (autorización
-# explícita de Edison para el nivel 12). Datos AGREGADOS PÚBLICOS, no
-# microdatos restringidos: se embeben para que el laboratorio sea
-# autocontenido y REPRODUCIBLE (data/ está en .gitignore). El detalle
-# mensual vive en data/raw/peru/bcrp/ y lo lee _datos_bcrp.py cuando está.
-#
-# Códigos BCRP: PN01728AM (PBI var% interanual), PN01770AM (PBI índice
-# 2007=100), PN01273PM (IPC var% 12m), PN01207PM (tipo de cambio S//US$),
-# PD04722MM (tasa de referencia), PN01652XM (cobre LME ¢US$/lb),
-# PN38923BM (términos de intercambio, índice 2007=100), PM04901AA (PBI en
-# millones S/2007) y PM04904AA (efecto términos de intercambio sobre el
-# ingreso nacional, millones S/2007) — estas dos ANUALES (m105); PM10081FA
-# (inversión pública, % del PBI, anual, m106) y PM04933AA (exportaciones
-# reales, millones S/2007, anual, m109); PN03371FQ (saldo de deuda pública del
-# SPNF, millones S/, fin de año/T4, m108), PM04946AA (PBI nominal, millones S/,
-# anual, m108) y PN02207FM (gasto no financiero del gobierno general, millones
-# S/, mensual→anual, m107). La deuda llega a 2023 (T4.23 en la fuente).
-# PM04972AA (PBI de minería e hidrocarburos, variación % anual, m112).
+"""simuladores/macro/modelos/nivel_12/_series_bcrp.py — SNAPSHOT ANUAL de series públicas del BCRP (nivel 12).
+
+Promedios anuales 2004-2024 de seis series macro del BCRP (BCRPData),
+descargadas por el conector connectors/bcrp el 2026-08-19 (autorización
+explícita de Edison para el nivel 12). Datos AGREGADOS PÚBLICOS, no
+microdatos restringidos: se embeben para que el laboratorio sea
+autocontenido y REPRODUCIBLE (data/ está en .gitignore). El detalle
+mensual vive en data/raw/peru/bcrp/ y lo lee _datos_bcrp.py cuando está.
+
+Códigos BCRP: PN01728AM (PBI var% interanual), PN01770AM (PBI índice
+2007=100), PN01273PM (IPC var% 12m), PN01207PM (tipo de cambio S//US$),
+PD04722MM (tasa de referencia), PN01652XM (cobre LME ¢US$/lb),
+PN38923BM (términos de intercambio, índice 2007=100), PM04901AA (PBI en
+millones S/2007) y PM04904AA (efecto términos de intercambio sobre el
+ingreso nacional, millones S/2007) — estas dos ANUALES (m105); PM10081FA
+(inversión pública, % del PBI, anual, m106) y PM04933AA (exportaciones
+reales, millones S/2007, anual, m109); PN03371FQ (saldo de deuda pública del
+SPNF, millones S/, fin de año/T4, m108), PM04946AA (PBI nominal, millones S/,
+anual, m108) y PN02207FM (gasto no financiero del gobierno general, millones
+S/, mensual→anual, m107). La deuda llega a 2023 (T4.23 en la fuente).
+PM04972AA (PBI de minería e hidrocarburos, variación % anual, m112).
+"""
 
 ANUAL = {
     "pbi_var": {2004: 4.973, 2005: 6.288, 2006: 7.566, 2007: 8.465, 2008: 9.239, 2009: 1.12, 2010: 8.287, 2011: 6.381, 2012: 6.165, 2013: 5.849, 2014: 2.453, 2015: 3.207, 2016: 3.981, 2017: 2.534, 2018: 3.958, 2019: 2.257, 2020: -10.851, 2021: 16.074, 2022: 2.869, 2023: -0.338, 2024: 3.482},

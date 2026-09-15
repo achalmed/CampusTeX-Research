@@ -1,23 +1,24 @@
-# m106_inversion_publica.py — inversión pública y crecimiento (nivel 12).
-#
-# Abre el bloque FISCAL del laboratorio del Perú. La teoría da dos canales para
-# la inversión pública: demanda (es gasto, activa el multiplicador m37/m04) y
-# oferta (construye infraestructura, eleva la capacidad m26). El Perú expandió
-# su inversión pública de ~2.9% del PBI (2004) a ~5.2% (2024) — casi el doble.
-# Y sin embargo su correlación con el crecimiento es ~0 (incluso negativa,
-# −0.07). ¿La inversión pública no sirve? No: el modelo enseña que la
-# correlación cruda ENGAÑA porque la inversión pública es CONTRACÍCLICA. El caso
-# de manual es 2009: ante la crisis financiera global, el Perú SUBIÓ la
-# inversión pública de 4.5% a 5.7% del PBI justo cuando el crecimiento se
-# desplomaba de 9.2% a 1.1% — el plan de estímulo (m69, m37). El gobierno
-# invierte MÁS cuando el ciclo cae, así que en los datos inversión alta coincide
-# con crecimiento bajo. Es la endogeneidad exacta que hace difícil medir el
-# multiplicador (m70) — el tema de m107.
-#
-# Procedencia: datos BCRP PM10081FA (inversión pública, % del PBI) y PN01728AM
-# (PBI var%), muestra 2004-2024. Los canales (demanda m37, oferta m26,
-# contracíclico m69): conocimiento general. Correlación descriptiva, NO causal
-# (regla del pipeline): el signo ~0 es endogeneidad, no efecto.
+"""simuladores/macro/modelos/nivel_12/m106_inversion_publica.py — inversión pública y crecimiento (nivel 12).
+
+Abre el bloque FISCAL del laboratorio del Perú. La teoría da dos canales para
+la inversión pública: demanda (es gasto, activa el multiplicador m37/m04) y
+oferta (construye infraestructura, eleva la capacidad m26). El Perú expandió
+su inversión pública de ~2.9% del PBI (2004) a ~5.2% (2024) — casi el doble.
+Y sin embargo su correlación con el crecimiento es ~0 (incluso negativa,
+−0.07). ¿La inversión pública no sirve? No: el modelo enseña que la
+correlación cruda ENGAÑA porque la inversión pública es CONTRACÍCLICA. El caso
+de manual es 2009: ante la crisis financiera global, el Perú SUBIÓ la
+inversión pública de 4.5% a 5.7% del PBI justo cuando el crecimiento se
+desplomaba de 9.2% a 1.1% — el plan de estímulo (m69, m37). El gobierno
+invierte MÁS cuando el ciclo cae, así que en los datos inversión alta coincide
+con crecimiento bajo. Es la endogeneidad exacta que hace difícil medir el
+multiplicador (m70) — el tema de m107.
+
+Procedencia: datos BCRP PM10081FA (inversión pública, % del PBI) y PN01728AM
+(PBI var%), muestra 2004-2024. Los canales (demanda m37, oferta m26,
+contracíclico m69): conocimiento general. Correlación descriptiva, NO causal
+(regla del pipeline): el signo ~0 es endogeneidad, no efecto.
+"""
 
 import numpy as np
 

@@ -1,13 +1,14 @@
-# e34_experimentos_aleatorios.py — experimentos aleatorios (sección III, tema 34).
-#
-# La puerta de entrada a la probabilidad. Un experimento aleatorio es aquel cuyo
-# resultado individual NO se puede predecir (lanzar una moneda, un dado), pero
-# cuyo comportamiento COLECTIVO, al repetirlo muchas veces, es sorprendentemente
-# estable y predecible. Esa es la paradoja fundadora de la probabilidad: del
-# desorden de cada tirada emerge un orden en el agregado. El modelo lanza una
-# moneda (posiblemente sesgada) miles de veces y muestra cómo la frecuencia
-# relativa —caótica al principio— se estabiliza en la probabilidad verdadera. Es
-# la intuición que la sección V (ley de los grandes números, e64) formalizará.
+"""simuladores/estadistica/modelos/nivel_03/e34_experimentos_aleatorios.py — experimentos aleatorios (sección III, tema 34).
+
+La puerta de entrada a la probabilidad. Un experimento aleatorio es aquel cuyo
+resultado individual NO se puede predecir (lanzar una moneda, un dado), pero
+cuyo comportamiento COLECTIVO, al repetirlo muchas veces, es sorprendentemente
+estable y predecible. Esa es la paradoja fundadora de la probabilidad: del
+desorden de cada tirada emerge un orden en el agregado. El modelo lanza una
+moneda (posiblemente sesgada) miles de veces y muestra cómo la frecuencia
+relativa —caótica al principio— se estabiliza en la probabilidad verdadera. Es
+la intuición que la sección V (ley de los grandes números, e64) formalizará.
+"""
 
 import numpy as np
 

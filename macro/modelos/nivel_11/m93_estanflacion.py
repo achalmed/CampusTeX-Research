@@ -1,17 +1,18 @@
-# m93_estanflacion.py — estanflación: el episodio de los 70 (nivel 11).
-#
-# El caso histórico completo que unió el currículo: la estanflación de los 70
-# no fue solo un shock petrolero (m82), sino un shock petrolero SOBRE una
-# Phillips ya desanclada (m14) con un banco central que acomodaba (m41 sin
-# credibilidad). El resultado: una espiral donde cada shock se convalidaba y
-# las expectativas subían, hasta que hizo falta la recesión de Volcker (m14)
-# para re-anclar. El modelo muestra la diferencia entre un shock petrolero
-# CON ancla (transitorio, m40) y SIN ancla (espiral, m14): el mismo shock,
-# dos décadas distintas. Combina m14, m19, m24, m40, m41.
-#
-# Procedencia: la estanflación de los 70 (menciones históricas: OPEP, Burns,
-# Volcker) sobre m14 (Phillips con expectativas) y m52 — conocimiento general;
-# calibración didáctica.
+"""simuladores/macro/modelos/nivel_11/m93_estanflacion.py — estanflación: el episodio de los 70 (nivel 11).
+
+El caso histórico completo que unió el currículo: la estanflación de los 70
+no fue solo un shock petrolero (m82), sino un shock petrolero SOBRE una
+Phillips ya desanclada (m14) con un banco central que acomodaba (m41 sin
+credibilidad). El resultado: una espiral donde cada shock se convalidaba y
+las expectativas subían, hasta que hizo falta la recesión de Volcker (m14)
+para re-anclar. El modelo muestra la diferencia entre un shock petrolero
+CON ancla (transitorio, m40) y SIN ancla (espiral, m14): el mismo shock,
+dos décadas distintas. Combina m14, m19, m24, m40, m41.
+
+Procedencia: la estanflación de los 70 (menciones históricas: OPEP, Burns,
+Volcker) sobre m14 (Phillips con expectativas) y m52 — conocimiento general;
+calibración didáctica.
+"""
 
 import numpy as np
 

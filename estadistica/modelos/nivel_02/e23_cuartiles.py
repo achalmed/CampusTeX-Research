@@ -1,13 +1,14 @@
-# e23_cuartiles.py — los cuartiles y el rango intercuartílico (sección II, tema 23).
-#
-# Los cuartiles parten los datos ordenados en CUATRO partes iguales: Q1 (25% por
-# debajo), Q2 (= la mediana, 50%) y Q3 (75%). Su diferencia, el rango
-# intercuartílico IQR = Q3 − Q1, mide la dispersión del 50% CENTRAL de los datos
-# —ignorando las colas—, y por eso es una medida de dispersión ROBUSTA (la prima
-# de la mediana, e18), inmune a los atípicos. Son la base del diagrama de caja
-# (e15) y de la regla 1.5·IQR para detectar atípicos (e33). El modelo muestra la
-# función de distribución empírica con Q1/Q2/Q3 marcados y deja mover un atípico
-# para ver que el IQR no se inmuta (mientras el rango explota).
+"""simuladores/estadistica/modelos/nivel_02/e23_cuartiles.py — los cuartiles y el rango intercuartílico (sección II, tema 23).
+
+Los cuartiles parten los datos ordenados en CUATRO partes iguales: Q1 (25% por
+debajo), Q2 (= la mediana, 50%) y Q3 (75%). Su diferencia, el rango
+intercuartílico IQR = Q3 − Q1, mide la dispersión del 50% CENTRAL de los datos
+—ignorando las colas—, y por eso es una medida de dispersión ROBUSTA (la prima
+de la mediana, e18), inmune a los atípicos. Son la base del diagrama de caja
+(e15) y de la regla 1.5·IQR para detectar atípicos (e33). El modelo muestra la
+función de distribución empírica con Q1/Q2/Q3 marcados y deja mover un atípico
+para ver que el IQR no se inmuta (mientras el rango explota).
+"""
 
 import numpy as np
 

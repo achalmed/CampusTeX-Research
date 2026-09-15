@@ -1,9 +1,10 @@
-# config.py — laboratorio de estadística computacional (simuladores/estadistica/).
-#
-# El "config" de esta disciplina (patrón config-por-proyecto): rutas propias +
-# paleta y estilo del laboratorio. El motor compartido de la raíz (graficos.py,
-# reporte.py) hace `import config` y resuelve a ESTE cuando la disciplina está
-# primera en el sys.path — así comparte el motor sin hardcodear nada.
+"""simuladores/estadistica/config.py — laboratorio de estadística computacional (simuladores/estadistica/).
+
+El "config" de esta disciplina (patrón config-por-proyecto): rutas propias +
+paleta y estilo del laboratorio. El motor compartido de la raíz (graficos.py,
+reporte.py) hace `import config` y resuelve a ESTE cuando la disciplina está
+primera en el sys.path — así comparte el motor sin hardcodear nada.
+"""
 
 import os
 from pathlib import Path

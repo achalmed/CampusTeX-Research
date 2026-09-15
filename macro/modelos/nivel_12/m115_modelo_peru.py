@@ -1,27 +1,28 @@
-# m115_modelo_peru.py — modelo macroeconómico simplificado del Perú (nivel 12).
-#
-# EL CIERRE del currículo macro: un modelo estilizado que integra TODO el nivel
-# 12 —y buena parte del currículo— en un solo retrato de la economía peruana.
-# Toma las relaciones calibradas de los modelos anteriores y las conecta para que
-# un shock se propague por TODOS los canales a la vez:
-#   • canal externo real (m103/m105/m109/m110): el precio del cobre mueve el
-#     crecimiento y, más aún, el INGRESO (efecto términos de intercambio, m105);
-#   • canal externo financiero (m104/m111): la FED y el riesgo mueven el sol;
-#   • canal monetario (m99/m100/m113): el ancla del BCRP mantiene la inflación
-#     estable — el passthrough del sol es casi nulo;
-#   • canal fiscal (m106/m107/m108): el impulso fiscal empuja el crecimiento con
-#     un multiplicador modesto (~0.7) y mueve la deuda (aritmética de m64);
-#   • estructura (m112): el peso del cobre hace al Perú dependiente de commodities.
-# El usuario aplica un shock (cobre, FED, fiscal) y ve responder al Perú entero:
-# crecimiento, ingreso, inflación, sol y deuda. La lección que emerge: el Perú es
-# una economía ABIERTA y dependiente de commodities, con un ANCLA monetaria sólida
-# y DISCIPLINA fiscal que le dan resiliencia — pero cuya prosperidad sigue atada
-# al mundo, y cuyo reto pendiente es DIVERSIFICAR (m112).
-#
-# Procedencia: DECISIÓN DE DISEÑO — modelo de síntesis. Las elasticidades son
-# calibración DIDÁCTICA que resume los hallazgos de m97-m114 (p.ej. cobre→
-# crecimiento de m103, multiplicador de m107, passthrough de m113): reproducen
-# los HECHOS ESTILIZADOS cualitativos, no son una estimación estructural conjunta.
+"""simuladores/macro/modelos/nivel_12/m115_modelo_peru.py — modelo macroeconómico simplificado del Perú (nivel 12).
+
+EL CIERRE del currículo macro: un modelo estilizado que integra TODO el nivel
+12 —y buena parte del currículo— en un solo retrato de la economía peruana.
+Toma las relaciones calibradas de los modelos anteriores y las conecta para que
+un shock se propague por TODOS los canales a la vez:
+  • canal externo real (m103/m105/m109/m110): el precio del cobre mueve el
+    crecimiento y, más aún, el INGRESO (efecto términos de intercambio, m105);
+  • canal externo financiero (m104/m111): la FED y el riesgo mueven el sol;
+  • canal monetario (m99/m100/m113): el ancla del BCRP mantiene la inflación
+    estable — el passthrough del sol es casi nulo;
+  • canal fiscal (m106/m107/m108): el impulso fiscal empuja el crecimiento con
+    un multiplicador modesto (~0.7) y mueve la deuda (aritmética de m64);
+  • estructura (m112): el peso del cobre hace al Perú dependiente de commodities.
+El usuario aplica un shock (cobre, FED, fiscal) y ve responder al Perú entero:
+crecimiento, ingreso, inflación, sol y deuda. La lección que emerge: el Perú es
+una economía ABIERTA y dependiente de commodities, con un ANCLA monetaria sólida
+y DISCIPLINA fiscal que le dan resiliencia — pero cuya prosperidad sigue atada
+al mundo, y cuyo reto pendiente es DIVERSIFICAR (m112).
+
+Procedencia: DECISIÓN DE DISEÑO — modelo de síntesis. Las elasticidades son
+calibración DIDÁCTICA que resume los hallazgos de m97-m114 (p.ej. cobre→
+crecimiento de m103, multiplicador de m107, passthrough de m113): reproducen
+los HECHOS ESTILIZADOS cualitativos, no son una estimación estructural conjunta.
+"""
 
 import numpy as np
 

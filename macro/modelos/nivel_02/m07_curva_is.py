@@ -1,13 +1,14 @@
-# m07_curva_is.py — curva IS: todos los equilibrios del mercado de bienes (nivel 2).
-#
-# Recoge los pares (Y, r) donde el mercado de bienes (m06) está en equilibrio:
-#   r_IS(Y) = [c0 − c1·T + I0 + G − (1−c1)·Y] / b        (pendiente −(1−c1)/b)
-# Se grafican DOS curvas IS: la base (G, T, I0) y una alternativa desplazada por
-# (dG, dT, dI0) — así se VE cuánto y hacia dónde mueve la IS cada shock:
-#   ΔY|_r = k·dG ,  −c1·k·dT ,  k·dI0   con  k = 1/(1−c1)
-#
-# Procedencia: Hicks (1937) y manuales de macro intermedia — conocimiento
-# macroeconómico general, no verificado contra edición.
+"""simuladores/macro/modelos/nivel_02/m07_curva_is.py — curva IS: todos los equilibrios del mercado de bienes (nivel 2).
+
+Recoge los pares (Y, r) donde el mercado de bienes (m06) está en equilibrio:
+  r_IS(Y) = [c0 − c1·T + I0 + G − (1−c1)·Y] / b        (pendiente −(1−c1)/b)
+Se grafican DOS curvas IS: la base (G, T, I0) y una alternativa desplazada por
+(dG, dT, dI0) — así se VE cuánto y hacia dónde mueve la IS cada shock:
+  ΔY|_r = k·dG ,  −c1·k·dT ,  k·dI0   con  k = 1/(1−c1)
+
+Procedencia: Hicks (1937) y manuales de macro intermedia — conocimiento
+macroeconómico general, no verificado contra edición.
+"""
 
 import numpy as np
 

@@ -1,13 +1,14 @@
-# m20_demanda_agregada_ad.py — curva AD derivada del IS-LM (nivel 4).
-#
-# La promesa pendiente de m18: la AD no se postula, se DERIVA. Con M nominal
-# fija, un P mayor reduce los saldos reales M/P, desplaza la LM a la izquierda,
-# sube r y deprime la inversión y el producto (efecto Keynes):
-#   Y(P) = [F + (b/h)·(M/P)] / Ac ,  F = c0−c1·T+I0+G ,  Ac = (1−c1)+b·k/h
-# Cada punto de la AD es un equilibrio IS-LM completo (verificable contra m10).
-#
-# Procedencia: derivación estándar de manuales de macro intermedia —
-# conocimiento macroeconómico general, no verificado contra edición.
+"""simuladores/macro/modelos/nivel_04/m20_demanda_agregada_ad.py — curva AD derivada del IS-LM (nivel 4).
+
+La promesa pendiente de m18: la AD no se postula, se DERIVA. Con M nominal
+fija, un P mayor reduce los saldos reales M/P, desplaza la LM a la izquierda,
+sube r y deprime la inversión y el producto (efecto Keynes):
+  Y(P) = [F + (b/h)·(M/P)] / Ac ,  F = c0−c1·T+I0+G ,  Ac = (1−c1)+b·k/h
+Cada punto de la AD es un equilibrio IS-LM completo (verificable contra m10).
+
+Procedencia: derivación estándar de manuales de macro intermedia —
+conocimiento macroeconómico general, no verificado contra edición.
+"""
 
 import numpy as np
 

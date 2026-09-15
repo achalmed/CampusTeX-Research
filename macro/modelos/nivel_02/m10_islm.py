@@ -1,13 +1,14 @@
-# m10_islm.py — modelo IS-LM (Hicks) — nivel 2 del currículo.
-#
-# Mercado de bienes (IS):  Y = C + I + G,  C = c0 + c1(Y−T),  I = I0 − b·r
-#   → r_IS(Y) = [c0 − c1·T + I0 + G − (1−c1)·Y] / b
-# Mercado de dinero (LM):  M/P = k·Y − h·r
-#   → r_LM(Y) = (k·Y − M/P) / h
-# Equilibrio: intersección. Política fiscal mueve G/T (IS); monetaria mueve M/P (LM).
-#
-# Referencia teórica: modelo IS-LM estándar (Hicks 1937; cualquier manual de
-# macro intermedia). Procedencia: conocimiento macroeconómico general.
+"""simuladores/macro/modelos/nivel_02/m10_islm.py — modelo IS-LM (Hicks) — nivel 2 del currículo.
+
+Mercado de bienes (IS):  Y = C + I + G,  C = c0 + c1(Y−T),  I = I0 − b·r
+  → r_IS(Y) = [c0 − c1·T + I0 + G − (1−c1)·Y] / b
+Mercado de dinero (LM):  M/P = k·Y − h·r
+  → r_LM(Y) = (k·Y − M/P) / h
+Equilibrio: intersección. Política fiscal mueve G/T (IS); monetaria mueve M/P (LM).
+
+Referencia teórica: modelo IS-LM estándar (Hicks 1937; cualquier manual de
+macro intermedia). Procedencia: conocimiento macroeconómico general.
+"""
 
 import numpy as np
 

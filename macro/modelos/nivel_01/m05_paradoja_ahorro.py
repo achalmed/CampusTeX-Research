@@ -1,13 +1,14 @@
-# m05_paradoja_ahorro.py — paradoja del ahorro en la cruz keynesiana (nivel 1).
-#
-# Cruz keynesiana:  DA = C0 + c(Y−T) + I + G ;  equilibrio DA = Y
-#   → Y* = (C0 − cT + I + G) / (1−c)
-# Experimento: los hogares desean ahorrar más (C0 baja en dC0).
-# Resultado (con I, G, T fijos): Y* cae en k·dC0 y el ahorro agregado de
-# equilibrio NO cambia — S* = I + (G−T) siempre. Esa es la paradoja.
-#
-# Procedencia: Keynes (1936) y manuales keynesianos — conocimiento general;
-# antecedente retórico: Mandeville, La fábula de las abejas (1714).
+"""simuladores/macro/modelos/nivel_01/m05_paradoja_ahorro.py — paradoja del ahorro en la cruz keynesiana (nivel 1).
+
+Cruz keynesiana:  DA = C0 + c(Y−T) + I + G ;  equilibrio DA = Y
+  → Y* = (C0 − cT + I + G) / (1−c)
+Experimento: los hogares desean ahorrar más (C0 baja en dC0).
+Resultado (con I, G, T fijos): Y* cae en k·dC0 y el ahorro agregado de
+equilibrio NO cambia — S* = I + (G−T) siempre. Esa es la paradoja.
+
+Procedencia: Keynes (1936) y manuales keynesianos — conocimiento general;
+antecedente retórico: Mandeville, La fábula de las abejas (1714).
+"""
 
 import numpy as np
 

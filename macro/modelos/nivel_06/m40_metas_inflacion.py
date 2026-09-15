@@ -1,16 +1,17 @@
-# m40_metas_inflacion.py — inflación objetivo: el ancla nominal moderna (nivel 6).
-#
-# Un régimen de metas ancla las expectativas: cada período, la inflación es
-# jalada hacia la meta con fuerza θ (el ANCLAJE, resultado de credibilidad):
-#   π_{t+1} = π* + (1−θ)(π_t − π*)
-# Con θ alto los desvíos mueren rápido (semivida = ln2/−ln(1−θ)); con θ≈0 la
-# inflación es (casi) una caminata: los 70. El gráfico compara AMBOS regímenes
-# con el mismo punto de partida. El BCRP adoptó metas explícitas en 2002
-# (meta actual 2% ±1pp — mención; series exactas vía BCRP en el nivel 12).
-#
-# Procedencia: esquema de metas (Nueva Zelanda 1990 como pionero — mención);
-# formulación del anclaje: decisión de diseño didáctica sobre conocimiento
-# general del régimen.
+"""simuladores/macro/modelos/nivel_06/m40_metas_inflacion.py — inflación objetivo: el ancla nominal moderna (nivel 6).
+
+Un régimen de metas ancla las expectativas: cada período, la inflación es
+jalada hacia la meta con fuerza θ (el ANCLAJE, resultado de credibilidad):
+  π_{t+1} = π* + (1−θ)(π_t − π*)
+Con θ alto los desvíos mueren rápido (semivida = ln2/−ln(1−θ)); con θ≈0 la
+inflación es (casi) una caminata: los 70. El gráfico compara AMBOS regímenes
+con el mismo punto de partida. El BCRP adoptó metas explícitas en 2002
+(meta actual 2% ±1pp — mención; series exactas vía BCRP en el nivel 12).
+
+Procedencia: esquema de metas (Nueva Zelanda 1990 como pionero — mención);
+formulación del anclaje: decisión de diseño didáctica sobre conocimiento
+general del régimen.
+"""
 
 import numpy as np
 

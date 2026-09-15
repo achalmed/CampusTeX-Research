@@ -1,12 +1,13 @@
-# e20_media_ponderada.py — la media ponderada (sección II, tema 20).
-#
-# La media cuando las observaciones NO pesan igual. La media simple (e17) da a
-# cada dato el mismo peso 1/n; la ponderada le da a cada uno un peso wᵢ y calcula
-# Σwᵢxᵢ/Σwᵢ. Es el promedio correcto cuando los datos representan cantidades
-# distintas: el promedio ponderado de notas por créditos (el "promedio
-# ponderado" académico), el rendimiento de una cartera por monto invertido, un
-# índice de precios por participación. El modelo deja subir el peso de un valor
-# y ver la media desplazarse hacia él, siempre entre el mínimo y el máximo.
+"""simuladores/estadistica/modelos/nivel_02/e20_media_ponderada.py — la media ponderada (sección II, tema 20).
+
+La media cuando las observaciones NO pesan igual. La media simple (e17) da a
+cada dato el mismo peso 1/n; la ponderada le da a cada uno un peso wᵢ y calcula
+Σwᵢxᵢ/Σwᵢ. Es el promedio correcto cuando los datos representan cantidades
+distintas: el promedio ponderado de notas por créditos (el "promedio
+ponderado" académico), el rendimiento de una cartera por monto invertido, un
+índice de precios por participación. El modelo deja subir el peso de un valor
+y ver la media desplazarse hacia él, siempre entre el mínimo y el máximo.
+"""
 
 import numpy as np
 

@@ -1,24 +1,25 @@
 #!/usr/bin/env python3
-# main.py — Laboratorio de Economía Computacional (datafw/simuladores).
-#
-# USO NORMAL (la aplicación única):
-#
-#   python3 main.py            ← abre el Laboratorio Interactivo de Economía
-#
-#   Todo vive dentro: elegir modelo, recorrido pedagógico progresivo
-#   (pregunta → construcción → equilibrio → experimentos → interpretación),
-#   experimentación libre con actualización en vivo, comparaciones y láminas.
-#
-# HERRAMIENTAS TÉCNICAS (automatización/desarrollo; el usuario final no las
-# necesita):
-#   verificar [<modelo>]     control de calidad: chequeos numéricos (100% exigido)
-#   reporte [<modelo>|--todos]  regenera informes MD + láminas en salidas/
-#   listar · ficha · simular · experimento · comparar · sensibilidad · demo ·
-#   laboratorio · interactivo   equivalentes por terminal de lo que la app
-#                               hace por dentro (útiles para scripts y CI)
-#
-# <modelo> acepta id curricular (m03), slug (funcion_consumo) o archivo
-# (m03_funcion_consumo). Currículo completo: docs/LABORATORIO_MACRO.md.
+"""simuladores/macro/main.py — Laboratorio de Economía Computacional (datafw/simuladores).
+
+USO NORMAL (la aplicación única):
+
+  python3 main.py            ← abre el Laboratorio Interactivo de Economía
+
+  Todo vive dentro: elegir modelo, recorrido pedagógico progresivo
+  (pregunta → construcción → equilibrio → experimentos → interpretación),
+  experimentación libre con actualización en vivo, comparaciones y láminas.
+
+HERRAMIENTAS TÉCNICAS (automatización/desarrollo; el usuario final no las
+necesita):
+  verificar [<modelo>]     control de calidad: chequeos numéricos (100% exigido)
+  reporte [<modelo>|--todos]  regenera informes MD + láminas en salidas/
+  listar · ficha · simular · experimento · comparar · sensibilidad · demo ·
+  laboratorio · interactivo   equivalentes por terminal de lo que la app
+                              hace por dentro (útiles para scripts y CI)
+
+<modelo> acepta id curricular (m03), slug (funcion_consumo) o archivo
+(m03_funcion_consumo). Currículo completo: docs/LABORATORIO_MACRO.md.
+"""
 
 import argparse
 import importlib

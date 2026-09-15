@@ -1,22 +1,23 @@
-# m114_shock_climatico.py — shock climático: El Niño (nivel 12).
-#
-# El Perú es de los países más expuestos del mundo a El Niño: el calentamiento
-# del mar frente a su costa desorganiza las lluvias (inundaciones en el norte,
-# sequías en el sur), golpea la AGRICULTURA y la PESCA (la anchoveta huye del
-# agua caliente) y daña la infraestructura. En macro, es un SHOCK DE OFERTA
-# ADVERSO de manual (m11, m52): sube los precios de los alimentos (m83) Y baja la
-# producción a la vez —estanflacionario— y, si el ancla del banco central aguanta
-# (m40), es TRANSITORIO: cuando el clima se normaliza, la producción se recupera
-# y la inflación revierte. El laboratorio simula ese pulso, calibrado a los dos
-# episodios recientes: El Niño costero de 2017 (inundaciones en el norte, ~1pp de
-# crecimiento perdido en el primer trimestre) y El Niño de 2023 (que junto con la
-# crisis política contribuyó a la recesión de ese año, −0.3%).
-#
-# Procedencia: DECISIÓN DE DISEÑO — no hay conector SENAMHI todavía, así que el
-# shock climático se MODELA como un shock de oferta transitorio (m11/m52) con
-# calibración DIDÁCTICA inspirada en la magnitud de El Niño 2017/2023 (no son
-# datos oficiales de un índice climático). La estructura del shock de oferta:
-# m11/m52; alimentos: m83; anclaje: m40 (conocimiento general).
+"""simuladores/macro/modelos/nivel_12/m114_shock_climatico.py — shock climático: El Niño (nivel 12).
+
+El Perú es de los países más expuestos del mundo a El Niño: el calentamiento
+del mar frente a su costa desorganiza las lluvias (inundaciones en el norte,
+sequías en el sur), golpea la AGRICULTURA y la PESCA (la anchoveta huye del
+agua caliente) y daña la infraestructura. En macro, es un SHOCK DE OFERTA
+ADVERSO de manual (m11, m52): sube los precios de los alimentos (m83) Y baja la
+producción a la vez —estanflacionario— y, si el ancla del banco central aguanta
+(m40), es TRANSITORIO: cuando el clima se normaliza, la producción se recupera
+y la inflación revierte. El laboratorio simula ese pulso, calibrado a los dos
+episodios recientes: El Niño costero de 2017 (inundaciones en el norte, ~1pp de
+crecimiento perdido en el primer trimestre) y El Niño de 2023 (que junto con la
+crisis política contribuyó a la recesión de ese año, −0.3%).
+
+Procedencia: DECISIÓN DE DISEÑO — no hay conector SENAMHI todavía, así que el
+shock climático se MODELA como un shock de oferta transitorio (m11/m52) con
+calibración DIDÁCTICA inspirada en la magnitud de El Niño 2017/2023 (no son
+datos oficiales de un índice climático). La estructura del shock de oferta:
+m11/m52; alimentos: m83; anclaje: m40 (conocimiento general).
+"""
 
 import numpy as np
 

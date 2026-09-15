@@ -1,17 +1,18 @@
-# m86_fed.py — alza de tasas de la FED (nivel 11).
-#
-# El shock externo que define el ciclo financiero de los emergentes. Cuando la
-# FED sube i*, el trilema (m50) y la UIP (m48) obligan a elegir:
-#   opción A (defender el sol): subir i localmente → recesión interna, pero
-#            evita la depreciación y la inflación importada (m85)
-#   opción B (dejar flotar): E se deprecia (m48) → inflación importada (m85)
-#            + posible salida de capitales (m87), pero preserva la tasa interna
-# El "dilema de Rey" (mención): con ciclo financiero global, ni flotar da
-# autonomía plena. Combina m48 (UIP), m50 (trilema), m85 (passthrough) y m87.
-# El "taper tantrum" de 2013 y el ciclo 2022 son los episodios.
-#
-# Procedencia: UIP (m48), trilema (m50), dilema vs trilema (Rey 2013 —
-# mención) — conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_11/m86_fed.py — alza de tasas de la FED (nivel 11).
+
+El shock externo que define el ciclo financiero de los emergentes. Cuando la
+FED sube i*, el trilema (m50) y la UIP (m48) obligan a elegir:
+  opción A (defender el sol): subir i localmente → recesión interna, pero
+           evita la depreciación y la inflación importada (m85)
+  opción B (dejar flotar): E se deprecia (m48) → inflación importada (m85)
+           + posible salida de capitales (m87), pero preserva la tasa interna
+El "dilema de Rey" (mención): con ciclo financiero global, ni flotar da
+autonomía plena. Combina m48 (UIP), m50 (trilema), m85 (passthrough) y m87.
+El "taper tantrum" de 2013 y el ciclo 2022 son los episodios.
+
+Procedencia: UIP (m48), trilema (m50), dilema vs trilema (Rey 2013 —
+mención) — conocimiento general; calibración didáctica.
+"""
 
 import numpy as np
 

@@ -1,23 +1,24 @@
-# m109_exportaciones_crecimiento.py — exportaciones y crecimiento (nivel 12).
-#
-# El motor externo del crecimiento peruano, y un contraste metodológico con
-# m106. Las exportaciones reales del Perú casi se DUPLICARON entre 2004 y 2024
-# (×1.9) y su variación correlaciona FUERTE con el crecimiento del PBI: +0.74,
-# R²=0.55 — las exportaciones explican más de la mitad de la varianza del
-# crecimiento. En los años en que las exportaciones cayeron (2009, 2020) el
-# crecimiento promedió +1.2%, contra +5.5% el resto: el crecimiento con motor
-# externo (m43, economía abierta). La lección fina, junto a m106: ¿por qué las
-# exportaciones SÍ correlacionan con el crecimiento (+0.74) y la inversión
-# pública NO (~0)? Porque las exportaciones son en gran medida EXÓGENAS al ciclo
-# peruano (las mueve la demanda mundial y el precio de los commodities, m88/m89),
-# así que su correlación revela un canal causal; la inversión pública es una
-# POLÍTICA endógena (contracíclica, m69), y su correlación engaña. La correlación
-# informa cuando el impulsor es exógeno; engaña cuando es política que reacciona.
-#
-# Procedencia: datos BCRP PM04933AA (exportaciones reales, millones S/2007) y
-# PN01728AM (PBI var%), muestra 2004-2024. El crecimiento liderado por
-# exportaciones: m43 (conocimiento general). Exógeno vs endógeno: la razón por
-# la que la correlación aquí informa y en m106 no (regla del pipeline con matiz).
+"""simuladores/macro/modelos/nivel_12/m109_exportaciones_crecimiento.py — exportaciones y crecimiento (nivel 12).
+
+El motor externo del crecimiento peruano, y un contraste metodológico con
+m106. Las exportaciones reales del Perú casi se DUPLICARON entre 2004 y 2024
+(×1.9) y su variación correlaciona FUERTE con el crecimiento del PBI: +0.74,
+R²=0.55 — las exportaciones explican más de la mitad de la varianza del
+crecimiento. En los años en que las exportaciones cayeron (2009, 2020) el
+crecimiento promedió +1.2%, contra +5.5% el resto: el crecimiento con motor
+externo (m43, economía abierta). La lección fina, junto a m106: ¿por qué las
+exportaciones SÍ correlacionan con el crecimiento (+0.74) y la inversión
+pública NO (~0)? Porque las exportaciones son en gran medida EXÓGENAS al ciclo
+peruano (las mueve la demanda mundial y el precio de los commodities, m88/m89),
+así que su correlación revela un canal causal; la inversión pública es una
+POLÍTICA endógena (contracíclica, m69), y su correlación engaña. La correlación
+informa cuando el impulsor es exógeno; engaña cuando es política que reacciona.
+
+Procedencia: datos BCRP PM04933AA (exportaciones reales, millones S/2007) y
+PN01728AM (PBI var%), muestra 2004-2024. El crecimiento liderado por
+exportaciones: m43 (conocimiento general). Exógeno vs endógeno: la razón por
+la que la correlación aquí informa y en m106 no (regla del pipeline con matiz).
+"""
 
 import numpy as np
 

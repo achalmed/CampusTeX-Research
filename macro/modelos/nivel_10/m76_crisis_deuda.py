@@ -1,22 +1,23 @@
-# m76_crisis_deuda.py — crisis de deuda soberana: la zona de crisis (nivel 10).
-#
-# La prima de riesgo NO es exógena (contra m64-m65): el mercado cobra r según
-# el default que ESPERA, y el default depende de si el servicio cabe en la
-# capacidad de pago κ (% del PIB). Eso crea equilibrios AUTOCUMPLIDOS
-# (Calvo 1988; Cole-Kehoe):
-#   servicio a tasa segura:  s_safe(b)  = rf·b/100
-#   servicio a tasa de pánico: s_panic(b) = (rf+spread)·b/100
-#   equilibrio BUENO existe  ⟺ s_safe(b) ≤ κ  (se puede pagar si nadie entra en pánico)
-#   equilibrio MALO existe   ⟺ s_panic(b) > κ  (NO se puede pagar si todos entran en pánico)
-# Tres zonas por umbrales de deuda:
-#   b < b_panic:            SOLO bueno (hasta el pánico es pagable) — deuda segura
-#   b_panic < b < b_safe:   AMBOS — la ZONA DE CRISIS (la creencia decide)
-#   b > b_safe:             SOLO malo — insolvencia (ni la tasa segura cabe)
-# El "lo que sea necesario" de Draghi (mención) coordinó al euro fuera del
-# equilibrio malo sin gastar apenas — como el seguro de m73.
-#
-# Procedencia: Calvo (1988), Cole-Kehoe (crisis de confianza / zona de
-# crisis) — menciones; conocimiento general. Calibración didáctica.
+"""simuladores/macro/modelos/nivel_10/m76_crisis_deuda.py — crisis de deuda soberana: la zona de crisis (nivel 10).
+
+La prima de riesgo NO es exógena (contra m64-m65): el mercado cobra r según
+el default que ESPERA, y el default depende de si el servicio cabe en la
+capacidad de pago κ (% del PIB). Eso crea equilibrios AUTOCUMPLIDOS
+(Calvo 1988; Cole-Kehoe):
+  servicio a tasa segura:  s_safe(b)  = rf·b/100
+  servicio a tasa de pánico: s_panic(b) = (rf+spread)·b/100
+  equilibrio BUENO existe  ⟺ s_safe(b) ≤ κ  (se puede pagar si nadie entra en pánico)
+  equilibrio MALO existe   ⟺ s_panic(b) > κ  (NO se puede pagar si todos entran en pánico)
+Tres zonas por umbrales de deuda:
+  b < b_panic:            SOLO bueno (hasta el pánico es pagable) — deuda segura
+  b_panic < b < b_safe:   AMBOS — la ZONA DE CRISIS (la creencia decide)
+  b > b_safe:             SOLO malo — insolvencia (ni la tasa segura cabe)
+El "lo que sea necesario" de Draghi (mención) coordinó al euro fuera del
+equilibrio malo sin gastar apenas — como el seguro de m73.
+
+Procedencia: Calvo (1988), Cole-Kehoe (crisis de confianza / zona de
+crisis) — menciones; conocimiento general. Calibración didáctica.
+"""
 
 import numpy as np
 

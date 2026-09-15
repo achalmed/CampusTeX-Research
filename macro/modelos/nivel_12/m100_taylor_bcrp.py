@@ -1,20 +1,21 @@
-# m100_taylor_bcrp.py — regla de Taylor del BCRP, estimada con datos (nivel 12).
-#
-# m38 (regla de Taylor) CONTRASTADA con la conducta real del BCRP. Se regresa
-# la tasa de referencia (PD04722MM) sobre la inflación (PN01273PM) — una
-# regla de Taylor CRUDA. El resultado es honesto y pedagógicamente rico: el
-# coeficiente sobre la inflación es MENOR que 1 (~0.5), que parece VIOLAR el
-# principio de Taylor (m38: 1+φ_π>1). Pero NO es que el BCRP sea
-# acomodaticio — es que una regresión cruda tasa~inflación OMITE variables
-# clave: la brecha del producto (m16/m98), la inflación ESPERADA (el BCRP mira
-# adelante, no atrás), y el tipo de cambio. El modelo muestra por qué la
-# estimación ingenua engaña, y cómo la teoría (m38, m56) lo explica — la
-# econometría honesta del pipeline aplicada a la política monetaria.
-#
-# Procedencia: datos BCRP PD04722MM (tasa referencia) y PN01273PM (IPC 12m),
-# muestra 2004-2024. La regla de Taylor: m38 (conocimiento general). La
-# regresión es OLS descriptivo, NO una estimación estructural — con todas las
-# advertencias de la regla del pipeline (nunca causalidad automática).
+"""simuladores/macro/modelos/nivel_12/m100_taylor_bcrp.py — regla de Taylor del BCRP, estimada con datos (nivel 12).
+
+m38 (regla de Taylor) CONTRASTADA con la conducta real del BCRP. Se regresa
+la tasa de referencia (PD04722MM) sobre la inflación (PN01273PM) — una
+regla de Taylor CRUDA. El resultado es honesto y pedagógicamente rico: el
+coeficiente sobre la inflación es MENOR que 1 (~0.5), que parece VIOLAR el
+principio de Taylor (m38: 1+φ_π>1). Pero NO es que el BCRP sea
+acomodaticio — es que una regresión cruda tasa~inflación OMITE variables
+clave: la brecha del producto (m16/m98), la inflación ESPERADA (el BCRP mira
+adelante, no atrás), y el tipo de cambio. El modelo muestra por qué la
+estimación ingenua engaña, y cómo la teoría (m38, m56) lo explica — la
+econometría honesta del pipeline aplicada a la política monetaria.
+
+Procedencia: datos BCRP PD04722MM (tasa referencia) y PN01273PM (IPC 12m),
+muestra 2004-2024. La regla de Taylor: m38 (conocimiento general). La
+regresión es OLS descriptivo, NO una estimación estructural — con todas las
+advertencias de la regla del pipeline (nunca causalidad automática).
+"""
 
 import numpy as np
 

@@ -1,12 +1,13 @@
-# m09_curva_lm.py — curva LM: todos los equilibrios del mercado de dinero (nivel 2).
-#
-# Recoge los pares (Y, r) donde el mercado monetario (m08) está en equilibrio:
-#   r_LM(Y) = (k·Y − M/P) / h        (pendiente k/h > 0)
-# Se grafican DOS curvas LM: la base (M/P) y una alternativa con M/P + dMP:
-#   desplazamiento horizontal = dMP / k   (a r constante)
-#
-# Procedencia: Hicks (1937) y manuales de macro intermedia — conocimiento
-# macroeconómico general, no verificado contra edición.
+"""simuladores/macro/modelos/nivel_02/m09_curva_lm.py — curva LM: todos los equilibrios del mercado de dinero (nivel 2).
+
+Recoge los pares (Y, r) donde el mercado monetario (m08) está en equilibrio:
+  r_LM(Y) = (k·Y − M/P) / h        (pendiente k/h > 0)
+Se grafican DOS curvas LM: la base (M/P) y una alternativa con M/P + dMP:
+  desplazamiento horizontal = dMP / k   (a r constante)
+
+Procedencia: Hicks (1937) y manuales de macro intermedia — conocimiento
+macroeconómico general, no verificado contra edición.
+"""
 
 import numpy as np
 

@@ -1,14 +1,15 @@
-# m38_regla_taylor.py — la regla de Taylor (nivel 6, ancla).
-#
-#   i = r* + π + φ_π(π − π*) + φ_y·brecha
-# La política monetaria como FUNCIÓN DE REACCIÓN: ante inflación alta o
-# sobrecalentamiento, la tasa nominal sube MÁS que uno a uno con π (principio
-# de Taylor: 1+φ_π > 1), de modo que la tasa REAL se endurece y estabiliza.
-# El nivel 12 (m100) estimará esta regla con la tasa de referencia del BCRP.
-#
-# Procedencia: Taylor (1993, "Discretion versus policy rules in practice" —
-# mención): describía a la Fed 1987-92 con φ_π=φ_y=0.5 y se volvió normativa.
-# Conocimiento general; calibración: la original de Taylor.
+"""simuladores/macro/modelos/nivel_06/m38_regla_taylor.py — la regla de Taylor (nivel 6, ancla).
+
+  i = r* + π + φ_π(π − π*) + φ_y·brecha
+La política monetaria como FUNCIÓN DE REACCIÓN: ante inflación alta o
+sobrecalentamiento, la tasa nominal sube MÁS que uno a uno con π (principio
+de Taylor: 1+φ_π > 1), de modo que la tasa REAL se endurece y estabiliza.
+El nivel 12 (m100) estimará esta regla con la tasa de referencia del BCRP.
+
+Procedencia: Taylor (1993, "Discretion versus policy rules in practice" —
+mención): describía a la Fed 1987-92 con φ_π=φ_y=0.5 y se volvió normativa.
+Conocimiento general; calibración: la original de Taylor.
+"""
 
 import numpy as np
 

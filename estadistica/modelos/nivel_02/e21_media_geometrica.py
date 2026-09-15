@@ -1,13 +1,14 @@
-# e21_media_geometrica.py — la media geométrica (sección II, tema 21).
-#
-# El promedio correcto para tasas de crecimiento, factores y razones. La media
-# aritmética (e17) suma; la geométrica MULTIPLICA: GM = (∏xᵢ)^{1/n} = exp(media
-# de los logaritmos). Su caso estrella es el crecimiento compuesto: +50% seguido
-# de −50% NO deja igual (la media aritmética diría 0% de cambio), deja una
-# PÉRDIDA del 13.4% —y la media geométrica lo acierta—. El modelo muestra la
-# "drag" de la volatilidad: subir y bajar lo mismo cada período deja siempre por
-# debajo (GM ≤ AM, la desigualdad de las medias), y el hueco crece con la
-# volatilidad.
+"""simuladores/estadistica/modelos/nivel_02/e21_media_geometrica.py — la media geométrica (sección II, tema 21).
+
+El promedio correcto para tasas de crecimiento, factores y razones. La media
+aritmética (e17) suma; la geométrica MULTIPLICA: GM = (∏xᵢ)^{1/n} = exp(media
+de los logaritmos). Su caso estrella es el crecimiento compuesto: +50% seguido
+de −50% NO deja igual (la media aritmética diría 0% de cambio), deja una
+PÉRDIDA del 13.4% —y la media geométrica lo acierta—. El modelo muestra la
+"drag" de la volatilidad: subir y bajar lo mismo cada período deja siempre por
+debajo (GM ≤ AM, la desigualdad de las medias), y el hueco crece con la
+volatilidad.
+"""
 
 import numpy as np
 

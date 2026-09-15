@@ -1,13 +1,14 @@
-# e27_varianza.py — varianza y desviación estándar (sección II, temas 27-28).
-#
-# Cuánto se DISPERSAN los datos alrededor de su media. La varianza es el promedio
-# de las desviaciones al CUADRADO (elevar al cuadrado porque las desviaciones sin
-# cuadrar suman cero, e17); la desviación estándar es su raíz, que devuelve las
-# unidades originales. El modelo muestra dos cosas: la fórmula computacional
-# Var = E[X²]−μ², y —la joya— la CORRECCIÓN DE BESSEL: la varianza muestral con
-# n subestima σ² (sesgada baja), y solo dividir entre n−1 la corrige. Se ve por
-# simulación (como e02): miles de muestras, y s²ₙ₋₁ se centra en σ² mientras s²ₙ
-# se queda corta.
+"""simuladores/estadistica/modelos/nivel_02/e27_varianza.py — varianza y desviación estándar (sección II, temas 27-28).
+
+Cuánto se DISPERSAN los datos alrededor de su media. La varianza es el promedio
+de las desviaciones al CUADRADO (elevar al cuadrado porque las desviaciones sin
+cuadrar suman cero, e17); la desviación estándar es su raíz, que devuelve las
+unidades originales. El modelo muestra dos cosas: la fórmula computacional
+Var = E[X²]−μ², y —la joya— la CORRECCIÓN DE BESSEL: la varianza muestral con
+n subestima σ² (sesgada baja), y solo dividir entre n−1 la corrige. Se ve por
+simulación (como e02): miles de muestras, y s²ₙ₋₁ se centra en σ² mientras s²ₙ
+se queda corta.
+"""
 
 import numpy as np
 

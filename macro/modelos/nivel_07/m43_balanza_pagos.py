@@ -1,16 +1,17 @@
-# m43_balanza_pagos.py — balanza de pagos: la contabilidad externa (nivel 7).
-#
-# Doble partida con el resto del mundo:
-#   CC = X − M + RN + TR        (bienes/servicios + rentas + transferencias)
-#   CC + CF = ΔRIN              (lo que no financia el capital, lo ponen —
-#                                o lo pierden — las reservas del banco central)
-# Con flotación pura ΔRIN = 0 y la cuenta financiera es el espejo exacto de
-# la corriente: TODO déficit se financia. La estructura recuerda a la peruana:
-# rentas negativas (utilidades mineras) compensadas por remesas (menciones;
-# los datos reales entran vía BCRP en m110).
-#
-# Procedencia: contabilidad de balanza de pagos (manual del FMI, mención) —
-# conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_07/m43_balanza_pagos.py — balanza de pagos: la contabilidad externa (nivel 7).
+
+Doble partida con el resto del mundo:
+  CC = X − M + RN + TR        (bienes/servicios + rentas + transferencias)
+  CC + CF = ΔRIN              (lo que no financia el capital, lo ponen —
+                               o lo pierden — las reservas del banco central)
+Con flotación pura ΔRIN = 0 y la cuenta financiera es el espejo exacto de
+la corriente: TODO déficit se financia. La estructura recuerda a la peruana:
+rentas negativas (utilidades mineras) compensadas por remesas (menciones;
+los datos reales entran vía BCRP en m110).
+
+Procedencia: contabilidad de balanza de pagos (manual del FMI, mención) —
+conocimiento general; calibración didáctica.
+"""
 
 from base import Ecuacion, Escenario, Ficha, Modelo, Parametro, Verificacion
 import config

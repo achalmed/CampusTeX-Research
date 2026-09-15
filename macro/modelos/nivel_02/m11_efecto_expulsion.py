@@ -1,16 +1,17 @@
-# m11_efecto_expulsion.py — efecto expulsión (crowding out) — nivel 2.
-#
-# Descompone qué pasa con un impulso fiscal ΔG dentro del IS-LM (m10):
-#   ΔY_simple = k·ΔG                 (nivel 1: sin respuesta de r)
-#   ΔY_ISLM   = ΔG / A,  A = (1−c1) + b·k/h
-#   Δr = k·ΔY/h  →  ΔI = −b·Δr      (inversión expulsada)
-# Identidad de cierre (verificable):  ΔY_ISLM = k_simple · (ΔG + ΔI)
-# Grado de expulsión = −ΔI/ΔG ∈ [0,1]; sus límites son teoría pura:
-#   h→∞ (LM plana):  Δr=0, expulsión nula, ΔY→k·ΔG (mundo keynesiano extremo)
-#   h→0 (LM vertical): ΔY→0, ΔI→−ΔG (expulsión total: mundo "clásico")
-#
-# Procedencia: análisis estándar del IS-LM (manuales) y debate
-# keynesianos-monetaristas — conocimiento general, no verificado contra edición.
+"""simuladores/macro/modelos/nivel_02/m11_efecto_expulsion.py — efecto expulsión (crowding out) — nivel 2.
+
+Descompone qué pasa con un impulso fiscal ΔG dentro del IS-LM (m10):
+  ΔY_simple = k·ΔG                 (nivel 1: sin respuesta de r)
+  ΔY_ISLM   = ΔG / A,  A = (1−c1) + b·k/h
+  Δr = k·ΔY/h  →  ΔI = −b·Δr      (inversión expulsada)
+Identidad de cierre (verificable):  ΔY_ISLM = k_simple · (ΔG + ΔI)
+Grado de expulsión = −ΔI/ΔG ∈ [0,1]; sus límites son teoría pura:
+  h→∞ (LM plana):  Δr=0, expulsión nula, ΔY→k·ΔG (mundo keynesiano extremo)
+  h→0 (LM vertical): ΔY→0, ΔI→−ΔG (expulsión total: mundo "clásico")
+
+Procedencia: análisis estándar del IS-LM (manuales) y debate
+keynesianos-monetaristas — conocimiento general, no verificado contra edición.
+"""
 
 from base import Ecuacion, Escenario, Ficha, Modelo, Parametro, Verificacion
 import config

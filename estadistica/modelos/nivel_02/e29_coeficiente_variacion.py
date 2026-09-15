@@ -1,13 +1,14 @@
-# e29_coeficiente_variacion.py — el coeficiente de variación (sección II, tema 29).
-#
-# La dispersión RELATIVA. La desviación estándar (e27-e28) mide la dispersión en
-# las unidades de los datos, así que NO permite comparar variables de escalas
-# distintas: ¿qué varía más, el peso de los elefantes (σ enorme) o el de los
-# ratones (σ minúsculo)? Comparar sus desviaciones no tiene sentido. El
-# coeficiente de variación CV = σ/μ (a menudo ×100 como %) resuelve esto:
-# expresa la desviación como FRACCIÓN de la media, sin unidades, y es INVARIANTE
-# A LA ESCALA. El modelo escala los datos y muestra que σ crece pero el CV no se
-# mueve — por eso el CV, no la desviación, compara dispersión entre variables.
+"""simuladores/estadistica/modelos/nivel_02/e29_coeficiente_variacion.py — el coeficiente de variación (sección II, tema 29).
+
+La dispersión RELATIVA. La desviación estándar (e27-e28) mide la dispersión en
+las unidades de los datos, así que NO permite comparar variables de escalas
+distintas: ¿qué varía más, el peso de los elefantes (σ enorme) o el de los
+ratones (σ minúsculo)? Comparar sus desviaciones no tiene sentido. El
+coeficiente de variación CV = σ/μ (a menudo ×100 como %) resuelve esto:
+expresa la desviación como FRACCIÓN de la media, sin unidades, y es INVARIANTE
+A LA ESCALA. El modelo escala los datos y muestra que σ crece pero el CV no se
+mueve — por eso el CV, no la desviación, compara dispersión entre variables.
+"""
 
 import numpy as np
 

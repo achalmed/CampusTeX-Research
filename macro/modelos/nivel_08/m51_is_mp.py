@@ -1,14 +1,15 @@
-# m51_is_mp.py — el modelo IS-MP: keynesianismo sin curva LM (nivel 8).
-#
-# La actualización operativa del m10: el banco central ya no fija M (la LM
-# murió con la demanda de dinero inestable, m34/m37) — fija la TASA con una
-# regla (m38-m39). El aparato queda:
-#   IS:  Y = k·(A0 − b·r),  k = 1/(1−c1)
-#   MP:  r = r̄ + φ_π·π      (la regla de política, dado π)
-# La M desaparece del modelo: es un residuo que el corredor (m39) acomoda.
-#
-# Procedencia: Romer (2000, "Keynesian Macroeconomics without the LM Curve",
-# mención) — conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_08/m51_is_mp.py — el modelo IS-MP: keynesianismo sin curva LM (nivel 8).
+
+La actualización operativa del m10: el banco central ya no fija M (la LM
+murió con la demanda de dinero inestable, m34/m37) — fija la TASA con una
+regla (m38-m39). El aparato queda:
+  IS:  Y = k·(A0 − b·r),  k = 1/(1−c1)
+  MP:  r = r̄ + φ_π·π      (la regla de política, dado π)
+La M desaparece del modelo: es un residuo que el corredor (m39) acomoda.
+
+Procedencia: Romer (2000, "Keynesian Macroeconomics without the LM Curve",
+mención) — conocimiento general; calibración didáctica.
+"""
 
 import numpy as np
 

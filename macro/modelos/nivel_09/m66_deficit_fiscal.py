@@ -1,17 +1,18 @@
-# m66_deficit_fiscal.py — déficit estructural vs cíclico (nivel 9).
-#
-# El déficit OBSERVADO mezcla dos cosas que exigen respuestas opuestas:
-#   déficit observado = déficit ESTRUCTURAL − ε·brecha
-# El término cíclico (−ε·brecha) son los estabilizadores automáticos (m04:
-# los impuestos caen y el gasto social sube solos en recesión). Los errores
-# clásicos de lectura:
-#   en RECESIÓN el observado exagera el desequilibrio (ajustar sería m69);
-#   en BOOM el observado lo esconde (el "superávit" ilusorio pre-crisis).
-# Las reglas fiscales modernas (Chile pionera; Perú con la suya — menciones)
-# se escriben sobre el ESTRUCTURAL por esta exacta razón.
-#
-# Procedencia: descomposición estándar de balances fiscales (OCDE/FMI,
-# mención) — conocimiento general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_09/m66_deficit_fiscal.py — déficit estructural vs cíclico (nivel 9).
+
+El déficit OBSERVADO mezcla dos cosas que exigen respuestas opuestas:
+  déficit observado = déficit ESTRUCTURAL − ε·brecha
+El término cíclico (−ε·brecha) son los estabilizadores automáticos (m04:
+los impuestos caen y el gasto social sube solos en recesión). Los errores
+clásicos de lectura:
+  en RECESIÓN el observado exagera el desequilibrio (ajustar sería m69);
+  en BOOM el observado lo esconde (el "superávit" ilusorio pre-crisis).
+Las reglas fiscales modernas (Chile pionera; Perú con la suya — menciones)
+se escriben sobre el ESTRUCTURAL por esta exacta razón.
+
+Procedencia: descomposición estándar de balances fiscales (OCDE/FMI,
+mención) — conocimiento general; calibración didáctica.
+"""
 
 from base import Ecuacion, Escenario, Ficha, Modelo, Parametro, Verificacion
 import config

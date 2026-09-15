@@ -1,20 +1,21 @@
-# m94_deflacion.py — deflación y la espiral de Fisher (nivel 11).
-#
-# El peligro opuesto a la inflación, y más difícil de combatir. La deflación
-# (π<0) es peligrosa por la deuda-deflación de Fisher (1933): con precios
-# cayendo, la tasa de interés REAL sube aunque la nominal esté en cero (r =
-# i − π, con π<0 ⇒ r>i), lo que:
-#   (1) encarece la deuda real (los deudores deben MÁS en términos reales)
-#   (2) incentiva posponer el consumo (esperar precios más bajos)
-#   → menos demanda → más deflación → ESPIRAL.
-# Y en el ZLB (m12) la política monetaria no puede bajar más la nominal. La
-# única salida: subir las EXPECTATIVAS de inflación (prometer inflación
-# futura, m54) — lo que el banco central creíble por lo bajo NO puede hacer.
-# Combina m12 (ZLB), m54 (expectativas), m34 (Fisher).
-#
-# Procedencia: deuda-deflación de Fisher (1933 — mención); trampa deflacionaria
-# (Krugman 1998 sobre Japón — mención) — conocimiento general; calibración
-# didáctica.
+"""simuladores/macro/modelos/nivel_11/m94_deflacion.py — deflación y la espiral de Fisher (nivel 11).
+
+El peligro opuesto a la inflación, y más difícil de combatir. La deflación
+(π<0) es peligrosa por la deuda-deflación de Fisher (1933): con precios
+cayendo, la tasa de interés REAL sube aunque la nominal esté en cero (r =
+i − π, con π<0 ⇒ r>i), lo que:
+  (1) encarece la deuda real (los deudores deben MÁS en términos reales)
+  (2) incentiva posponer el consumo (esperar precios más bajos)
+  → menos demanda → más deflación → ESPIRAL.
+Y en el ZLB (m12) la política monetaria no puede bajar más la nominal. La
+única salida: subir las EXPECTATIVAS de inflación (prometer inflación
+futura, m54) — lo que el banco central creíble por lo bajo NO puede hacer.
+Combina m12 (ZLB), m54 (expectativas), m34 (Fisher).
+
+Procedencia: deuda-deflación de Fisher (1933 — mención); trampa deflacionaria
+(Krugman 1998 sobre Japón — mención) — conocimiento general; calibración
+didáctica.
+"""
 
 import numpy as np
 

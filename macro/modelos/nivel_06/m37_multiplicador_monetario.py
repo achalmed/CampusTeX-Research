@@ -1,14 +1,15 @@
-# m37_multiplicador_monetario.py — creación de dinero y multiplicador (nivel 6).
-#
-# La base B (efectivo + reservas) se multiplica en dinero M vía el circuito
-# depósito → préstamo → redepósito (el m04 del sistema bancario):
-#   redepósito por unidad depositada: κ = (1−r)/(1+c)
-#   m = M/B = (1+c)/(c+r)   con  c = efectivo/depósitos,  r = reservas/depósitos
-# Identidad de cierre: B = C + R exacta en el límite.
-#
-# Procedencia: mecánica estándar de manuales de dinero y banca — conocimiento
-# general. La crítica moderna (dinero endógeno: los bancos crean depósitos al
-# prestar y el banco central acomoda reservas) se documenta en limitaciones.
+"""simuladores/macro/modelos/nivel_06/m37_multiplicador_monetario.py — creación de dinero y multiplicador (nivel 6).
+
+La base B (efectivo + reservas) se multiplica en dinero M vía el circuito
+depósito → préstamo → redepósito (el m04 del sistema bancario):
+  redepósito por unidad depositada: κ = (1−r)/(1+c)
+  m = M/B = (1+c)/(c+r)   con  c = efectivo/depósitos,  r = reservas/depósitos
+Identidad de cierre: B = C + R exacta en el límite.
+
+Procedencia: mecánica estándar de manuales de dinero y banca — conocimiento
+general. La crítica moderna (dinero endógeno: los bancos crean depósitos al
+prestar y el banco central acomoda reservas) se documenta en limitaciones.
+"""
 
 import numpy as np
 

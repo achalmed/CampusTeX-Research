@@ -1,12 +1,13 @@
-# e17_media_aritmetica.py — la media aritmética (sección II, tema 17).
-#
-# El primer estadístico descriptivo, y más profundo de lo que parece. La media
-# no es "la fórmula de sumar y dividir": es el CENTRO DE MASA de los datos (las
-# desviaciones a un lado y otro se cancelan exactamente, Σ(xᵢ−x̄)=0) y el punto
-# que MINIMIZA la suma de errores al cuadrado (x̄ = argmin_a Σ(xᵢ−a)²). Esta
-# segunda propiedad es la semilla de los mínimos cuadrados y de toda la regresión
-# (sec. XI): la media es la "regresión sin predictores". El modelo deja mover un
-# candidato de centro `a` y ver que el error cuadrático es mínimo justo en x̄.
+"""simuladores/estadistica/modelos/nivel_02/e17_media_aritmetica.py — la media aritmética (sección II, tema 17).
+
+El primer estadístico descriptivo, y más profundo de lo que parece. La media
+no es "la fórmula de sumar y dividir": es el CENTRO DE MASA de los datos (las
+desviaciones a un lado y otro se cancelan exactamente, Σ(xᵢ−x̄)=0) y el punto
+que MINIMIZA la suma de errores al cuadrado (x̄ = argmin_a Σ(xᵢ−a)²). Esta
+segunda propiedad es la semilla de los mínimos cuadrados y de toda la regresión
+(sec. XI): la media es la "regresión sin predictores". El modelo deja mover un
+candidato de centro `a` y ver que el error cuadrático es mínimo justo en x̄.
+"""
 
 import numpy as np
 

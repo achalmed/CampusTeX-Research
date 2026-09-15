@@ -1,16 +1,17 @@
-# m83_shock_alimentos.py — shock de alimentos (nivel 11).
-#
-# El shock de oferta de los emergentes: los alimentos pesan MUCHO más en la
-# canasta del IPC de un país pobre (~40%) que de uno rico (~10%). El mismo
-# salto de precios internacionales golpea la inflación general mucho más
-# fuerte donde la gente gasta más en comer — y es regresivo (los pobres
-# gastan mayor fracción en comida). Combina m19 (oferta) con el peso en el
-# IPC como amplificador, y toca el riesgo político (los shocks de alimentos
-# preceden revueltas — Primavera Árabe, mención).
-#
-# Procedencia: mecánica de shock de oferta (m19) con peso diferencial en el
-# IPC — conocimiento general; calibración didáctica (peso de alimentos en el
-# IPC del Perú ~como emergente).
+"""simuladores/macro/modelos/nivel_11/m83_shock_alimentos.py — shock de alimentos (nivel 11).
+
+El shock de oferta de los emergentes: los alimentos pesan MUCHO más en la
+canasta del IPC de un país pobre (~40%) que de uno rico (~10%). El mismo
+salto de precios internacionales golpea la inflación general mucho más
+fuerte donde la gente gasta más en comer — y es regresivo (los pobres
+gastan mayor fracción en comida). Combina m19 (oferta) con el peso en el
+IPC como amplificador, y toca el riesgo político (los shocks de alimentos
+preceden revueltas — Primavera Árabe, mención).
+
+Procedencia: mecánica de shock de oferta (m19) con peso diferencial en el
+IPC — conocimiento general; calibración didáctica (peso de alimentos en el
+IPC del Perú ~como emergente).
+"""
 
 import numpy as np
 

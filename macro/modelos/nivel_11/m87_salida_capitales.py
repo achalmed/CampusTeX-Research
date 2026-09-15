@@ -1,17 +1,18 @@
-# m87_salida_capitales.py — salida de capitales de un emergente (nivel 11).
-#
-# El sudden stop (m75) con el gatillo del apetito global de riesgo. La entrada
-# de capital de un emergente se descompone en:
-#   CF = pull (fundamentos locales: crecimiento, tasa) + push (apetito global)
-# Cuando el push se revierte (risk-off: FED m86, guerra, pánico), el capital
-# huye AUNQUE los fundamentos locales no cambien — el "sudden stop" de Calvo
-# (m75) por contagio. La defensa: reservas (m50) que permiten un ajuste
-# ordenado en vez de un colapso. Combina m75 (sudden stop), m86 (FED), m43
-# (reservas) y m84 (la devaluación resultante).
-#
-# Procedencia: descomposición push/pull de flujos (Calvo-Leiderman-Reinhart
-# 1993 — mención); sudden stop (m75, Calvo en biblioteca) — conocimiento
-# general; calibración didáctica.
+"""simuladores/macro/modelos/nivel_11/m87_salida_capitales.py — salida de capitales de un emergente (nivel 11).
+
+El sudden stop (m75) con el gatillo del apetito global de riesgo. La entrada
+de capital de un emergente se descompone en:
+  CF = pull (fundamentos locales: crecimiento, tasa) + push (apetito global)
+Cuando el push se revierte (risk-off: FED m86, guerra, pánico), el capital
+huye AUNQUE los fundamentos locales no cambien — el "sudden stop" de Calvo
+(m75) por contagio. La defensa: reservas (m50) que permiten un ajuste
+ordenado en vez de un colapso. Combina m75 (sudden stop), m86 (FED), m43
+(reservas) y m84 (la devaluación resultante).
+
+Procedencia: descomposición push/pull de flujos (Calvo-Leiderman-Reinhart
+1993 — mención); sudden stop (m75, Calvo en biblioteca) — conocimiento
+general; calibración didáctica.
+"""
 
 import numpy as np
 

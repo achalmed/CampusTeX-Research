@@ -1,21 +1,21 @@
-# m79_recesion_financiera.py — recesión por shock financiero: el acelerador
-# (nivel 10).
-#
-# Cierra el lazo que m71 dejó abierto: el desapalancamiento que baja precios
-# que fuerzan más desapalancamiento. Cada ronda:
-#   ventas_n = λ·(pérdida de capital de la ronda)
-#   caída de precio = impacto_precio·ventas_n
-#   nueva pérdida de capital = λ·caída de precio  → alimenta la ronda n+1
-# El factor de amplificación de la espiral es geométrico:
-#   κ = λ·impacto_precio·λ = λ²·impacto_precio   (por ronda)
-#   pérdida total = shock_inicial / (1 − κ)   si κ < 1 (converge)
-#   si κ ≥ 1: espiral sin fondo (colapso) — el acelerador financiero de
-#   Bernanke-Gertler / Kiyotaki-Moore (menciones; Kiyotaki-Moore está en la
-#   biblioteca de Edison).
-#
-# Procedencia: acelerador financiero (Bernanke-Gertler-Gilchrist; Kiyotaki-
-# Moore "Credit Cycles" 1997 — EN BIBLIOTECA, sin verificar) — menciones;
-# conocimiento general. Calibración didáctica.
+"""simuladores/macro/modelos/nivel_10/m79_recesion_financiera.py — recesión por shock financiero: el acelerador (nivel 10).
+
+Cierra el lazo que m71 dejó abierto: el desapalancamiento que baja precios
+que fuerzan más desapalancamiento. Cada ronda:
+  ventas_n = λ·(pérdida de capital de la ronda)
+  caída de precio = impacto_precio·ventas_n
+  nueva pérdida de capital = λ·caída de precio  → alimenta la ronda n+1
+El factor de amplificación de la espiral es geométrico:
+  κ = λ·impacto_precio·λ = λ²·impacto_precio   (por ronda)
+  pérdida total = shock_inicial / (1 − κ)   si κ < 1 (converge)
+  si κ ≥ 1: espiral sin fondo (colapso) — el acelerador financiero de
+  Bernanke-Gertler / Kiyotaki-Moore (menciones; Kiyotaki-Moore está en la
+  biblioteca de Edison).
+
+Procedencia: acelerador financiero (Bernanke-Gertler-Gilchrist; Kiyotaki-
+Moore "Credit Cycles" 1997 — EN BIBLIOTECA, sin verificar) — menciones;
+conocimiento general. Calibración didáctica.
+"""
 
 import numpy as np
 

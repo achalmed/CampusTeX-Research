@@ -1,17 +1,18 @@
-# m102_tipo_cambio.py — tipo de cambio PEN/USD, con datos del BCRP (nivel 12).
-#
-# El sol frente al dólar (BCRP PN01207PM), 2004-2024. La serie muestra la
-# FLOTACIÓN ADMINISTRADA peruana: el sol se mueve (de ~3.3 a ~3.8 en la
-# muestra) pero con volatilidad MODERADA comparada con otros emergentes —
-# resultado de la intervención del BCRP (m45) y las reservas altas (m50). El
-# laboratorio calcula la depreciación acumulada y la volatilidad, y las
-# conecta con m47 (PPP: la tendencia sigue al diferencial de inflación) y m85
-# (passthrough bajo: por eso el sol se mueve sin desatar inflación). Es la
-# esquina flexible+autonomía del trilema (m50) con datos.
-#
-# Procedencia: dato BCRP PN01207PM (tipo de cambio interbancario, S//US$),
-# muestra 2004-2024. La flotación administrada es política del BCRP; las
-# lecturas (volatilidad, tendencia) son descriptivas.
+"""simuladores/macro/modelos/nivel_12/m102_tipo_cambio.py — tipo de cambio PEN/USD, con datos del BCRP (nivel 12).
+
+El sol frente al dólar (BCRP PN01207PM), 2004-2024. La serie muestra la
+FLOTACIÓN ADMINISTRADA peruana: el sol se mueve (de ~3.3 a ~3.8 en la
+muestra) pero con volatilidad MODERADA comparada con otros emergentes —
+resultado de la intervención del BCRP (m45) y las reservas altas (m50). El
+laboratorio calcula la depreciación acumulada y la volatilidad, y las
+conecta con m47 (PPP: la tendencia sigue al diferencial de inflación) y m85
+(passthrough bajo: por eso el sol se mueve sin desatar inflación). Es la
+esquina flexible+autonomía del trilema (m50) con datos.
+
+Procedencia: dato BCRP PN01207PM (tipo de cambio interbancario, S//US$),
+muestra 2004-2024. La flotación administrada es política del BCRP; las
+lecturas (volatilidad, tendencia) son descriptivas.
+"""
 
 import numpy as np
 

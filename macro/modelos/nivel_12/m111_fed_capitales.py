@@ -1,24 +1,25 @@
-# m111_fed_capitales.py — la FED y los flujos de capital hacia el Perú (nivel 12).
-#
-# El canal FINANCIERO del exterior, complemento del real (m110). La política
-# monetaria de Estados Unidos —la tasa de la Reserva Federal (FED)— gobierna el
-# apetito global por riesgo y, con él, los flujos de capital hacia economías
-# emergentes como la peruana. Cuando la FED baja su tasa a casi cero (2009-2015,
-# 2020-2021), el capital busca rendimiento y fluye al Perú: el sol se aprecia
-# (el tipo de cambio bajó de 3.01 en 2009 a 2.64 en 2012). Cuando la FED sube
-# agresivamente (2022-2023, de 0 a 5%), el capital vuelve a EE.UU., el dólar se
-# fortalece y el sol se presiona. Y el Perú NO puede ignorarla: con cuenta de
-# capitales abierta, la tasa del BCRP sigue en gran medida a la FED (corr +0.54)
-# — el TRILEMA de m50: no se puede tener a la vez tipo de cambio estable,
-# libre movilidad de capital y política monetaria autónoma. 2021 recuerda el
-# matiz de m104: a veces el riesgo idiosincrático (la crisis política) pesa más
-# que la FED — el sol se debilitó con la FED aún en cero.
-#
-# Procedencia: tasa del BCRP (PD04722MM) y tipo de cambio (PN01207PM) son datos
-# BCRP reales; la tasa de la FED (funds rate efectiva, promedio anual) es dato
-# PÚBLICO de la Reserva Federal/FRED — FRED tiene salida bloqueada desde este
-# entorno, así que se embeben valores de conocimiento público, DECLARADOS
-# ILUSTRATIVOS (no descargados). El trilema: m50 (conocimiento general).
+"""simuladores/macro/modelos/nivel_12/m111_fed_capitales.py — la FED y los flujos de capital hacia el Perú (nivel 12).
+
+El canal FINANCIERO del exterior, complemento del real (m110). La política
+monetaria de Estados Unidos —la tasa de la Reserva Federal (FED)— gobierna el
+apetito global por riesgo y, con él, los flujos de capital hacia economías
+emergentes como la peruana. Cuando la FED baja su tasa a casi cero (2009-2015,
+2020-2021), el capital busca rendimiento y fluye al Perú: el sol se aprecia
+(el tipo de cambio bajó de 3.01 en 2009 a 2.64 en 2012). Cuando la FED sube
+agresivamente (2022-2023, de 0 a 5%), el capital vuelve a EE.UU., el dólar se
+fortalece y el sol se presiona. Y el Perú NO puede ignorarla: con cuenta de
+capitales abierta, la tasa del BCRP sigue en gran medida a la FED (corr +0.54)
+— el TRILEMA de m50: no se puede tener a la vez tipo de cambio estable,
+libre movilidad de capital y política monetaria autónoma. 2021 recuerda el
+matiz de m104: a veces el riesgo idiosincrático (la crisis política) pesa más
+que la FED — el sol se debilitó con la FED aún en cero.
+
+Procedencia: tasa del BCRP (PD04722MM) y tipo de cambio (PN01207PM) son datos
+BCRP reales; la tasa de la FED (funds rate efectiva, promedio anual) es dato
+PÚBLICO de la Reserva Federal/FRED — FRED tiene salida bloqueada desde este
+entorno, así que se embeben valores de conocimiento público, DECLARADOS
+ILUSTRATIVOS (no descargados). El trilema: m50 (conocimiento general).
+"""
 
 import numpy as np
 

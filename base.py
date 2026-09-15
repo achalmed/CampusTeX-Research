@@ -1,29 +1,30 @@
-# base.py — NÚCLEO del laboratorio (capa de modelo, sin matplotlib).
-#
-# Separación de capas (observación de Edison, 2026-08-19):
-#   base.py        → el MODELO: dataclasses, cálculo, verificación, sensibilidad
-#   graficos.py    → el RENDER: dibujo matplotlib, figuras, demo de sensibilidad
-#   laboratorio.py → la EXPERIENCIA: lámina de experimento, modos interactivos
-#   reporte.py     → informe MD por modelo
-# Así el mismo modelo alimenta CLI, láminas, reportes y (futuro) web/notebook
-# sin duplicar ecuaciones.
-#
-# Un modelo une tres capas (diseño: docs/LABORATORIO_MACRO.md):
-#   1. FICHA PEDAGÓGICA (Ficha): pregunta económica, contexto histórico,
-#      autores, supuestos, variables, ecuaciones explicadas, derivación,
-#      intuición, limitaciones y evolución.
-#   2. MOTOR NUMÉRICO: curvas(params) -> dict graficable, y
-#      resultados(params) -> dict de magnitudes de equilibrio.
-#   3. CONTRATOS DE CALIDAD: escenarios (experimentos con mecanismo de
-#      transmisión y lectura económica) y verificaciones (identidades exactas,
-#      convergencias con tolerancia).
-#
-# curvas(params) devuelve un dict con claves opcionales:
-#   "lineas":     {etiqueta: (x, y, color)}
-#   "barras":     (categorias, valores, colores)
-#   "puntos":     [(x, y, etiqueta)]
-#   "equilibrio": (x, y)
-#   "anotacion":  str
+"""simuladores/base.py — NÚCLEO del laboratorio (capa de modelo, sin matplotlib).
+
+Separación de capas (observación de Edison, 2026-08-19):
+  base.py        → el MODELO: dataclasses, cálculo, verificación, sensibilidad
+  graficos.py    → el RENDER: dibujo matplotlib, figuras, demo de sensibilidad
+  laboratorio.py → la EXPERIENCIA: lámina de experimento, modos interactivos
+  reporte.py     → informe MD por modelo
+Así el mismo modelo alimenta CLI, láminas, reportes y (futuro) web/notebook
+sin duplicar ecuaciones.
+
+Un modelo une tres capas (diseño: docs/LABORATORIO_MACRO.md):
+  1. FICHA PEDAGÓGICA (Ficha): pregunta económica, contexto histórico,
+     autores, supuestos, variables, ecuaciones explicadas, derivación,
+     intuición, limitaciones y evolución.
+  2. MOTOR NUMÉRICO: curvas(params) -> dict graficable, y
+     resultados(params) -> dict de magnitudes de equilibrio.
+  3. CONTRATOS DE CALIDAD: escenarios (experimentos con mecanismo de
+     transmisión y lectura económica) y verificaciones (identidades exactas,
+     convergencias con tolerancia).
+
+curvas(params) devuelve un dict con claves opcionales:
+  "lineas":     {etiqueta: (x, y, color)}
+  "barras":     (categorias, valores, colores)
+  "puntos":     [(x, y, etiqueta)]
+  "equilibrio": (x, y)
+  "anotacion":  str
+"""
 
 from dataclasses import dataclass, field
 

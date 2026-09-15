@@ -1,13 +1,14 @@
-# m32_crecimiento_ak.py — crecimiento endógeno: el modelo AK (nivel 5).
-#
-#   y = A·k  (α = 1: SIN rendimientos decrecientes)
-#   Δk/k = s·A − (n+δ) = γ  →  crecimiento CONSTANTE para siempre, sin k*.
-# El anti-Solow: aquí el ahorro SÍ compra crecimiento permanente y no hay
-# convergencia alguna. El precio: α=1 es un filo de navaja, y la evidencia
-# de convergencia condicional (m30) lo castiga.
-#
-# Procedencia: Rebelo (1991, mención); la lectura del capital "amplio" con
-# externalidades viene de Romer (1986, mención) — conocimiento general.
+"""simuladores/macro/modelos/nivel_05/m32_crecimiento_ak.py — crecimiento endógeno: el modelo AK (nivel 5).
+
+  y = A·k  (α = 1: SIN rendimientos decrecientes)
+  Δk/k = s·A − (n+δ) = γ  →  crecimiento CONSTANTE para siempre, sin k*.
+El anti-Solow: aquí el ahorro SÍ compra crecimiento permanente y no hay
+convergencia alguna. El precio: α=1 es un filo de navaja, y la evidencia
+de convergencia condicional (m30) lo castiga.
+
+Procedencia: Rebelo (1991, mención); la lectura del capital "amplio" con
+externalidades viene de Romer (1986, mención) — conocimiento general.
+"""
 
 import numpy as np
 

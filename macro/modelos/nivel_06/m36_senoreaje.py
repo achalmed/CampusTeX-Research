@@ -1,16 +1,17 @@
-# m36_senoreaje.py — señoreaje: la curva de Laffer de la inflación (nivel 6).
-#
-# El gobierno que emite recauda un "impuesto inflación" sobre los saldos reales:
-#   s(π) = (π/100) · L(π),   con demanda de dinero tipo Cagan  L(π) = a·e^{−bπ}
-# La base del impuesto HUYE cuando la tasa sube (la gente escapa del dinero):
-# s(π) tiene forma de Laffer con máximo en π* = 1/b. Más allá del pico, MÁS
-# inflación recauda MENOS — la aritmética de toda hiperinflación, incluida la
-# peruana de 1988-1990 (episodio histórico; los datos exactos, vía BCRP en el
-# nivel 12).
-#
-# Procedencia: demanda de Cagan (1956, mención); análisis del impuesto
-# inflación: Bailey/Friedman (menciones) — conocimiento general. Calibración
-# didáctica (decisión de diseño).
+"""simuladores/macro/modelos/nivel_06/m36_senoreaje.py — señoreaje: la curva de Laffer de la inflación (nivel 6).
+
+El gobierno que emite recauda un "impuesto inflación" sobre los saldos reales:
+  s(π) = (π/100) · L(π),   con demanda de dinero tipo Cagan  L(π) = a·e^{−bπ}
+La base del impuesto HUYE cuando la tasa sube (la gente escapa del dinero):
+s(π) tiene forma de Laffer con máximo en π* = 1/b. Más allá del pico, MÁS
+inflación recauda MENOS — la aritmética de toda hiperinflación, incluida la
+peruana de 1988-1990 (episodio histórico; los datos exactos, vía BCRP en el
+nivel 12).
+
+Procedencia: demanda de Cagan (1956, mención); análisis del impuesto
+inflación: Bailey/Friedman (menciones) — conocimiento general. Calibración
+didáctica (decisión de diseño).
+"""
 
 import numpy as np
 

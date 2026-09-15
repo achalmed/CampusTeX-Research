@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
-# main.py — Laboratorio de Estadística Computacional (datafw/simuladores/estadistica).
-#
-# Disciplina hermana de macro/ bajo el paraguas simuladores/: reusa el MOTOR de
-# la raíz (base/graficos/reporte/laboratorio) y aporta su propio config + modelos.
-#
-# USO:
-#   python3 main.py            ← abre el laboratorio interactivo (o `listar` mientras
-#                                el app se construye)
-#   verificar [<modelo>]       control de calidad: los TEOREMAS como chequeos numéricos
-#   reporte [<modelo>|--todos] informes MD + figuras en salidas/
-#   listar · ficha · simular · experimento · comparar · sensibilidad · demo
-#
-# <modelo> acepta id (e02), slug (poblacion_muestra) o archivo (e02_poblacion_muestra).
-# Currículo: docs/LABORATORIO_ESTADISTICA.md (239 temas, 20 secciones).
+"""simuladores/estadistica/main.py — Laboratorio de Estadística Computacional (datafw/simuladores/estadistica).
+
+Disciplina hermana de macro/ bajo el paraguas simuladores/: reusa el MOTOR de
+la raíz (base/graficos/reporte/laboratorio) y aporta su propio config + modelos.
+
+USO:
+  python3 main.py            ← abre el laboratorio interactivo (o `listar` mientras
+                               el app se construye)
+  verificar [<modelo>]       control de calidad: los TEOREMAS como chequeos numéricos
+  reporte [<modelo>|--todos] informes MD + figuras en salidas/
+  listar · ficha · simular · experimento · comparar · sensibilidad · demo
+
+<modelo> acepta id (e02), slug (poblacion_muestra) o archivo (e02_poblacion_muestra).
+Currículo: docs/LABORATORIO_ESTADISTICA.md (239 temas, 20 secciones).
+"""
 
 import argparse
 import importlib

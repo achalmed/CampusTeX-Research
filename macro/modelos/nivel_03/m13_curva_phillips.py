@@ -1,12 +1,13 @@
-# m13_curva_phillips.py — curva de Phillips original (nivel 3).
-#
-#   π = πe − α(u − un)      (πe fijo; en la versión de 1958-1960, πe ≈ 0)
-# El "menú" entre inflación y desempleo tal como se leyó en los años 60 —
-# incluida la historia de su colapso en los 70, que motiva m14.
-#
-# Procedencia: Phillips (1958, salarios del Reino Unido 1861-1957) y
-# Samuelson-Solow (1960) — menciones históricas de conocimiento general,
-# no verificadas contra las fuentes.
+"""simuladores/macro/modelos/nivel_03/m13_curva_phillips.py — curva de Phillips original (nivel 3).
+
+  π = πe − α(u − un)      (πe fijo; en la versión de 1958-1960, πe ≈ 0)
+El "menú" entre inflación y desempleo tal como se leyó en los años 60 —
+incluida la historia de su colapso en los 70, que motiva m14.
+
+Procedencia: Phillips (1958, salarios del Reino Unido 1861-1957) y
+Samuelson-Solow (1960) — menciones históricas de conocimiento general,
+no verificadas contra las fuentes.
+"""
 
 import numpy as np
 

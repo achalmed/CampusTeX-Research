@@ -1,3 +1,8 @@
+---
+tipo: doc
+titulo: "Laboratorio histórico y computacional de Estadística (`estadistica/`)"
+estado: activo
+---
 # Laboratorio histórico y computacional de Estadística (`estadistica/`)
 
 Segunda disciplina del laboratorio (tras el currículo macro de 115 modelos; §9

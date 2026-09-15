@@ -1,15 +1,16 @@
-# m23_adas_completo.py — modelo AD-AS completo (nivel 4).
-#
-# Las tres piezas juntas por primera vez:
-#   AD   (m20): Y = [F + dG + (b/h)(M+dM)/P] / Ac      (derivada de IS-LM)
-#   SRAS (m21): P = Pe + ds + λ(Y − Y*)
-#   LRAS (m22): Y = Y*  (referencia del ajuste)
-# Equilibrio de corto plazo: AD ∩ SRAS (cuadrática, _adas.py). El sistema
-# entrega además la r implícita del LM: el IS-LM sigue vivo debajo.
-# Calibración: la base ARRANCA en el largo plazo (Y=Y*=700, P=Pe=2).
-#
-# Procedencia: aparato AD-AS de la síntesis, manuales de macro intermedia —
-# conocimiento general; calibración: decisión de diseño didáctica.
+"""simuladores/macro/modelos/nivel_04/m23_adas_completo.py — modelo AD-AS completo (nivel 4).
+
+Las tres piezas juntas por primera vez:
+  AD   (m20): Y = [F + dG + (b/h)(M+dM)/P] / Ac      (derivada de IS-LM)
+  SRAS (m21): P = Pe + ds + λ(Y − Y*)
+  LRAS (m22): Y = Y*  (referencia del ajuste)
+Equilibrio de corto plazo: AD ∩ SRAS (cuadrática, _adas.py). El sistema
+entrega además la r implícita del LM: el IS-LM sigue vivo debajo.
+Calibración: la base ARRANCA en el largo plazo (Y=Y*=700, P=Pe=2).
+
+Procedencia: aparato AD-AS de la síntesis, manuales de macro intermedia —
+conocimiento general; calibración: decisión de diseño didáctica.
+"""
 
 import numpy as np
 

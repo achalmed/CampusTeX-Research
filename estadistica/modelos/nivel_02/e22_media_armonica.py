@@ -1,11 +1,12 @@
-# e22_media_armonica.py — la media armónica (sección II, tema 22).
-#
-# El promedio correcto para RAZONES y TASAS sobre un numerador común: velocidades
-# sobre distancias iguales, precios por unidad, densidades. HM = n/Σ(1/xᵢ) =
-# recíproco de la media de los recíprocos. El caso clásico: ir 60 km a 30 km/h y
-# volver 60 km a 60 km/h NO promedia 45 km/h (aritmética), sino 40 —porque se
-# pasa MÁS TIEMPO a la velocidad lenta—, y eso es la media armónica. Cierra la
-# familia de promedios y la desigualdad completa: HM ≤ GM ≤ AM.
+"""simuladores/estadistica/modelos/nivel_02/e22_media_armonica.py — la media armónica (sección II, tema 22).
+
+El promedio correcto para RAZONES y TASAS sobre un numerador común: velocidades
+sobre distancias iguales, precios por unidad, densidades. HM = n/Σ(1/xᵢ) =
+recíproco de la media de los recíprocos. El caso clásico: ir 60 km a 30 km/h y
+volver 60 km a 60 km/h NO promedia 45 km/h (aritmética), sino 40 —porque se
+pasa MÁS TIEMPO a la velocidad lenta—, y eso es la media armónica. Cierra la
+familia de promedios y la desigualdad completa: HM ≤ GM ≤ AM.
+"""
 
 import numpy as np
 

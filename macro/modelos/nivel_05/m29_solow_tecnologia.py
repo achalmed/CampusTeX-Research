@@ -1,14 +1,15 @@
-# m29_solow_tecnologia.py — Solow con progreso tecnológico (nivel 5).
-#
-# A_t = A0·(1+g)^t  y variables por trabajador EFECTIVO:  k̃ = K/(A·L).
-#   Δk̃ = s·k̃^α − (n+g+δ)·k̃   →   k̃* = (s/(n+g+δ))^{1/(1−α)}
-# En la senda de crecimiento balanceado (BGP): k̃ constante, y el ingreso POR
-# TRABAJADOR crece a la tasa g PARA SIEMPRE — el crecimiento sostenido que la
-# acumulación sola (m26) no podía dar. El precio teórico: g es EXÓGENA (maná).
-#
-# Procedencia: Solow con progreso técnico "labor-augmenting" (formulación
-# estándar de manuales; Uzawa sobre la forma requerida — mención) —
-# conocimiento general.
+"""simuladores/macro/modelos/nivel_05/m29_solow_tecnologia.py — Solow con progreso tecnológico (nivel 5).
+
+A_t = A0·(1+g)^t  y variables por trabajador EFECTIVO:  k̃ = K/(A·L).
+  Δk̃ = s·k̃^α − (n+g+δ)·k̃   →   k̃* = (s/(n+g+δ))^{1/(1−α)}
+En la senda de crecimiento balanceado (BGP): k̃ constante, y el ingreso POR
+TRABAJADOR crece a la tasa g PARA SIEMPRE — el crecimiento sostenido que la
+acumulación sola (m26) no podía dar. El precio teórico: g es EXÓGENA (maná).
+
+Procedencia: Solow con progreso técnico "labor-augmenting" (formulación
+estándar de manuales; Uzawa sobre la forma requerida — mención) —
+conocimiento general.
+"""
 
 import numpy as np
 

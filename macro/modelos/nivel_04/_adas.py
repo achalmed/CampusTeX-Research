@@ -1,13 +1,14 @@
-# _adas.py — solver compartido del aparato AD-AS del nivel 4 (no es un modelo).
-#
-# AD derivada de IS-LM (m20):   Y = [F + (b/h)·M/P] / Ac
-#   con F = c0 − c1·T + I0 + G  (gasto autónomo, incluye shocks fiscales)
-#       Ac = (1−c1) + b·k/h    (el denominador del IS-LM, m10)
-# SRAS (m21):                   P = Pe_ef + λ·(Y − Y*)
-#   con Pe_ef = Pe + ds        (expectativas + shock de costos)
-#
-# Sustituyendo P(Y) en la AD queda una cuadrática en Y (el término M/P la
-# vuelve no lineal). Se toma la raíz positiva.
+"""simuladores/macro/modelos/nivel_04/_adas.py — solver compartido del aparato AD-AS del nivel 4 (no es un modelo).
+
+AD derivada de IS-LM (m20):   Y = [F + (b/h)·M/P] / Ac
+  con F = c0 − c1·T + I0 + G  (gasto autónomo, incluye shocks fiscales)
+      Ac = (1−c1) + b·k/h    (el denominador del IS-LM, m10)
+SRAS (m21):                   P = Pe_ef + λ·(Y − Y*)
+  con Pe_ef = Pe + ds        (expectativas + shock de costos)
+
+Sustituyendo P(Y) en la AD queda una cuadrática en Y (el término M/P la
+vuelve no lineal). Se toma la raíz positiva.
+"""
 
 def equilibrio_corto(F, bh, Ac, M, Pe_ef, lam, Ystar):
     """Equilibrio AD ∩ SRAS: devuelve (Y, P). Exacto (raíz de la cuadrática)."""

@@ -1,7 +1,8 @@
-# config.py — laboratorio de macroeconomía computacional (simuladores/).
-#
-# Todo lo ajustable vive aquí: rutas de salida, paleta, formato de figuras y
-# tipografía académica. Las libs (base.py, reporte.py) no hardcodean nada de esto.
+"""simuladores/macro/config.py — laboratorio de macroeconomía computacional (simuladores/).
+
+Todo lo ajustable vive aquí: rutas de salida, paleta, formato de figuras y
+tipografía académica. Las libs (base.py, reporte.py) no hardcodean nada de esto.
+"""
 
 import os
 from pathlib import Path

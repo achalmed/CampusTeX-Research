@@ -1,14 +1,15 @@
-# e31_curtosis.py — la curtosis (sección II, tema 31).
-#
-# La segunda medida de forma: cuán PESADAS son las colas de la distribución —es
-# decir, cuán frecuentes son los valores extremos—. Es el cuarto momento
-# estandarizado, γ₂ = E[(X−μ)⁴]/σ⁴; se resta 3 (la curtosis de la normal) para
-# obtener el EXCESO de curtosis. Exceso > 0 = colas PESADAS (leptocúrtica: más
-# eventos extremos que la normal, los 'cisnes negros' de las finanzas); exceso
-# < 0 = colas ligeras (platicúrtica). La lección cara: los retornos financieros
-# tienen colas pesadas, así que los modelos que suponen normalidad SUBESTIMAN el
-# riesgo de catástrofe. El modelo compara una t de Student (colas ajustables)
-# contra la normal y cuenta cuántos eventos a >3σ aparecen.
+"""simuladores/estadistica/modelos/nivel_02/e31_curtosis.py — la curtosis (sección II, tema 31).
+
+La segunda medida de forma: cuán PESADAS son las colas de la distribución —es
+decir, cuán frecuentes son los valores extremos—. Es el cuarto momento
+estandarizado, γ₂ = E[(X−μ)⁴]/σ⁴; se resta 3 (la curtosis de la normal) para
+obtener el EXCESO de curtosis. Exceso > 0 = colas PESADAS (leptocúrtica: más
+eventos extremos que la normal, los 'cisnes negros' de las finanzas); exceso
+< 0 = colas ligeras (platicúrtica). La lección cara: los retornos financieros
+tienen colas pesadas, así que los modelos que suponen normalidad SUBESTIMAN el
+riesgo de catástrofe. El modelo compara una t de Student (colas ajustables)
+contra la normal y cuenta cuántos eventos a >3σ aparecen.
+"""
 
 import numpy as np
 

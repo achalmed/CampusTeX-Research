@@ -1,15 +1,18 @@
-# m65_sostenibilidad.py — sostenibilidad fiscal: ¿cuánta deuda cabe? (nivel 9).
-#
-# La ecuación de m64 convertida en DIAGNÓSTICO. Tres números:
-#   sp*  = b·(r−g)/(1+g)     el primario REQUERIDO para estabilizar
-#   sp_max                    el primario FACTIBLE (techo político-económico)
-#   b_max = sp_max·(1+g)/(r−g)   la deuda máxima sostenible (donde se cruzan)
-# Diagnóstico: sostenible si sp* ≤ sp_max (equivale a b ≤ b_max). La prueba
-# de ESTRÉS repite el cálculo con r+Δr y g−Δg: las crisis no avisan con los
-# parámetros de tiempos de paz (así trabajan los DSA del FMI, mención).
-#
-# Procedencia: análisis de sostenibilidad estándar (DSA; condición de
-# no-Ponzi como fundamento — menciones) — conocimiento general.
+"""simuladores/macro/modelos/nivel_09/m65_sostenibilidad.py — sostenibilidad fiscal: ¿cuánta deuda cabe?
+
+(nivel 9).
+
+La ecuación de m64 convertida en DIAGNÓSTICO. Tres números:
+  sp*  = b·(r−g)/(1+g)     el primario REQUERIDO para estabilizar
+  sp_max                    el primario FACTIBLE (techo político-económico)
+  b_max = sp_max·(1+g)/(r−g)   la deuda máxima sostenible (donde se cruzan)
+Diagnóstico: sostenible si sp* ≤ sp_max (equivale a b ≤ b_max). La prueba
+de ESTRÉS repite el cálculo con r+Δr y g−Δg: las crisis no avisan con los
+parámetros de tiempos de paz (así trabajan los DSA del FMI, mención).
+
+Procedencia: análisis de sostenibilidad estándar (DSA; condición de
+no-Ponzi como fundamento — menciones) — conocimiento general.
+"""
 
 import numpy as np
 

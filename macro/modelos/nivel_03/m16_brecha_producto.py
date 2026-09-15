@@ -1,13 +1,14 @@
-# m16_brecha_producto.py — brecha del producto (output gap) — nivel 3.
-#
-#   brecha_t = (Y_t − Y*_t)/Y*_t ,  con Y*_t creciendo a g* constante.
-# Simulación: una recesión abre una brecha de tamaño `shock` en t_shock y se
-# cierra geométricamente a velocidad λ:  brecha_{t+1} = (1−λ)·brecha_t.
-# Métricas: semivida de la brecha y PIB-años perdidos (el costo acumulado).
-#
-# Procedencia: concepto operativo estándar de bancos centrales y reglas
-# fiscales — conocimiento general; dinámica de cierre geométrico: decisión de
-# diseño didáctica (la medición real usa filtros/función de producción).
+"""simuladores/macro/modelos/nivel_03/m16_brecha_producto.py — brecha del producto (output gap) — nivel 3.
+
+  brecha_t = (Y_t − Y*_t)/Y*_t ,  con Y*_t creciendo a g* constante.
+Simulación: una recesión abre una brecha de tamaño `shock` en t_shock y se
+cierra geométricamente a velocidad λ:  brecha_{t+1} = (1−λ)·brecha_t.
+Métricas: semivida de la brecha y PIB-años perdidos (el costo acumulado).
+
+Procedencia: concepto operativo estándar de bancos centrales y reglas
+fiscales — conocimiento general; dinámica de cierre geométrico: decisión de
+diseño didáctica (la medición real usa filtros/función de producción).
+"""
 
 import numpy as np
 

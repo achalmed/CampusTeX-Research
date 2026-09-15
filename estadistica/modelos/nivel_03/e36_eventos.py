@@ -1,13 +1,14 @@
-# e36_eventos.py — los eventos y sus operaciones (sección III, tema 36).
-#
-# Un EVENTO es un subconjunto del espacio muestral (e35): 'sacar par', 'suma ≥ 8',
-# 'al menos un 6'. Sobre los eventos operan la teoría de conjuntos —unión (A o B),
-# intersección (A y B), complemento (no A)— y sus probabilidades siguen reglas
-# exactas. La central es la de INCLUSIÓN-EXCLUSIÓN: P(A∪B) = P(A)+P(B)−P(A∩B); si
-# uno suma P(A)+P(B) a secas, cuenta DOS VECES la parte común y sobrestima. El
-# modelo usa dos dados (Ω de 36 pares), fija B='al menos un 6' y deja mover el
-# umbral de A='suma ≥ t' para ver la unión correcta contra la suma ingenua: la
-# brecha entre ambas es exactamente P(A∩B).
+"""simuladores/estadistica/modelos/nivel_03/e36_eventos.py — los eventos y sus operaciones (sección III, tema 36).
+
+Un EVENTO es un subconjunto del espacio muestral (e35): 'sacar par', 'suma ≥ 8',
+'al menos un 6'. Sobre los eventos operan la teoría de conjuntos —unión (A o B),
+intersección (A y B), complemento (no A)— y sus probabilidades siguen reglas
+exactas. La central es la de INCLUSIÓN-EXCLUSIÓN: P(A∪B) = P(A)+P(B)−P(A∩B); si
+uno suma P(A)+P(B) a secas, cuenta DOS VECES la parte común y sobrestima. El
+modelo usa dos dados (Ω de 36 pares), fija B='al menos un 6' y deja mover el
+umbral de A='suma ≥ t' para ver la unión correcta contra la suma ingenua: la
+brecha entre ambas es exactamente P(A∩B).
+"""
 
 import numpy as np
 from itertools import product

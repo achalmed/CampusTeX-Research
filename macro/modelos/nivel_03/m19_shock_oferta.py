@@ -1,14 +1,15 @@
-# m19_shock_oferta.py — shock de oferta y estanflación (nivel 3).
-#
-# El mismo aparato AD-SRAS de m18, pero el shock golpea la OFERTA (costos):
-#   AD:    Y = A + dA − b·P            (dA: posible respuesta de política)
-#   SRAS:  P = Pe + ds + λ·(Y − Y*)    (ds: shock de costos — petróleo, clima)
-# Firma del shock de OFERTA: P sube e Y cae — direcciones OPUESTAS.
-# Dilema del banco central: acomodar (dA>0, recupera Y pagando más inflación)
-# o resistir (dA<0, contiene P profundizando la recesión).
-#
-# Procedencia: AD-AS de manual (conocimiento general); episodios OPEP 1973/79:
-# mención histórica; calibración: decisión de diseño didáctica.
+"""simuladores/macro/modelos/nivel_03/m19_shock_oferta.py — shock de oferta y estanflación (nivel 3).
+
+El mismo aparato AD-SRAS de m18, pero el shock golpea la OFERTA (costos):
+  AD:    Y = A + dA − b·P            (dA: posible respuesta de política)
+  SRAS:  P = Pe + ds + λ·(Y − Y*)    (ds: shock de costos — petróleo, clima)
+Firma del shock de OFERTA: P sube e Y cae — direcciones OPUESTAS.
+Dilema del banco central: acomodar (dA>0, recupera Y pagando más inflación)
+o resistir (dA<0, contiene P profundizando la recesión).
+
+Procedencia: AD-AS de manual (conocimiento general); episodios OPEP 1973/79:
+mención histórica; calibración: decisión de diseño didáctica.
+"""
 
 import numpy as np
 

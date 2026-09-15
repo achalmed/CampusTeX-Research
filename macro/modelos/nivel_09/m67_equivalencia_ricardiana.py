@@ -1,17 +1,18 @@
-# m67_equivalencia_ricardiana.py — equivalencia ricardiana (nivel 9).
-#
-# ¿La deuda pública es riqueza? Barro (1974): NO — es impuestos DIFERIDOS.
-# Una rebaja dT financiada con bonos que se repagan mañana con intereses:
-#   VP de los impuestos futuros = dT·(1+r)/(1+r) = dT   (exacto)
-# El hogar RICARDIANO lo ve y ahorra la rebaja completa: consumo intacto,
-# ahorro privado +dT compensa el desahorro público −dT: NADA real cambia.
-# La equivalencia se rompe con hogares "mano a boca" (fracción λ, sin acceso
-# al crédito): ellos gastan mpc de la rebaja — y solo ellos.
-#   dC = λ·mpc·dT ;  dS_nacional = −dC
-#
-# Procedencia: Barro (1974, "Are Government Bonds Net Wealth?" — mención);
-# el antecedente escéptico es el propio Ricardo (mención) — conocimiento
-# general.
+"""simuladores/macro/modelos/nivel_09/m67_equivalencia_ricardiana.py — equivalencia ricardiana (nivel 9).
+
+¿La deuda pública es riqueza? Barro (1974): NO — es impuestos DIFERIDOS.
+Una rebaja dT financiada con bonos que se repagan mañana con intereses:
+  VP de los impuestos futuros = dT·(1+r)/(1+r) = dT   (exacto)
+El hogar RICARDIANO lo ve y ahorra la rebaja completa: consumo intacto,
+ahorro privado +dT compensa el desahorro público −dT: NADA real cambia.
+La equivalencia se rompe con hogares "mano a boca" (fracción λ, sin acceso
+al crédito): ellos gastan mpc de la rebaja — y solo ellos.
+  dC = λ·mpc·dT ;  dS_nacional = −dC
+
+Procedencia: Barro (1974, "Are Government Bonds Net Wealth?" — mención);
+el antecedente escéptico es el propio Ricardo (mención) — conocimiento
+general.
+"""
 
 from base import Ecuacion, Escenario, Ficha, Modelo, Parametro, Verificacion
 import config

@@ -1,13 +1,14 @@
-# m14_phillips_expectativas.py — Phillips aumentada por expectativas (nivel 3).
-#
-# Expectativas ADAPTATIVAS: πe_t = π_{t−1}. La curva se vuelve dinámica:
-#   π_t = π_{t−1} − α(u − un)   →   Δπ = α(un − u)  por período
-# Mantener u < un no compra un punto del menú: compra ACELERACIÓN permanente
-# de la inflación (hipótesis aceleracionista). En u = un, π se queda donde
-# esté — la curva de largo plazo es vertical.
-#
-# Procedencia: Friedman (1968, discurso presidencial AEA) y Phelps (1967) —
-# menciones históricas de conocimiento general, no verificadas contra fuente.
+"""simuladores/macro/modelos/nivel_03/m14_phillips_expectativas.py — Phillips aumentada por expectativas (nivel 3).
+
+Expectativas ADAPTATIVAS: πe_t = π_{t−1}. La curva se vuelve dinámica:
+  π_t = π_{t−1} − α(u − un)   →   Δπ = α(un − u)  por período
+Mantener u < un no compra un punto del menú: compra ACELERACIÓN permanente
+de la inflación (hipótesis aceleracionista). En u = un, π se queda donde
+esté — la curva de largo plazo es vertical.
+
+Procedencia: Friedman (1968, discurso presidencial AEA) y Phelps (1967) —
+menciones históricas de conocimiento general, no verificadas contra fuente.
+"""
 
 import numpy as np
 

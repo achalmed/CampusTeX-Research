@@ -1,17 +1,18 @@
-# m77_crisis_balanza_pagos.py — crisis de balanza de pagos (nivel 10).
-#
-# La versión "cuentas nacionales" de la crisis: un déficit corriente crónico
-# financiado por reservas menguantes (paridad fija) tiene fecha de caducidad.
-# Cada período:  RIN_{t+1} = RIN_t + CC_t + CF_t
-# Con CC < 0 crónico (sobrevaluación real, m46) y CF que se seca, las reservas
-# caen hasta un piso crítico RIN_min (típicamente ~3 meses de importaciones).
-# Al tocarlo, la paridad se abandona: devaluación → la CC se corrige (m75) y
-# se detiene la sangría. El modelo integra m43 (identidad), m46 (RER
-# sobrevaluado como CAUSA) y m75 (el ajuste) en una sola línea temporal.
-#
-# Procedencia: enfoque monetario de la balanza de pagos (mención); modelo
-# canónico de reservas (relacionado con Krugman 1979, m74) — conocimiento
-# general. Calibración didáctica.
+"""simuladores/macro/modelos/nivel_10/m77_crisis_balanza_pagos.py — crisis de balanza de pagos (nivel 10).
+
+La versión "cuentas nacionales" de la crisis: un déficit corriente crónico
+financiado por reservas menguantes (paridad fija) tiene fecha de caducidad.
+Cada período:  RIN_{t+1} = RIN_t + CC_t + CF_t
+Con CC < 0 crónico (sobrevaluación real, m46) y CF que se seca, las reservas
+caen hasta un piso crítico RIN_min (típicamente ~3 meses de importaciones).
+Al tocarlo, la paridad se abandona: devaluación → la CC se corrige (m75) y
+se detiene la sangría. El modelo integra m43 (identidad), m46 (RER
+sobrevaluado como CAUSA) y m75 (el ajuste) en una sola línea temporal.
+
+Procedencia: enfoque monetario de la balanza de pagos (mención); modelo
+canónico de reservas (relacionado con Krugman 1979, m74) — conocimiento
+general. Calibración didáctica.
+"""
 
 import numpy as np
 

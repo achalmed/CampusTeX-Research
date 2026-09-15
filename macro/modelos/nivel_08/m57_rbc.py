@@ -1,16 +1,17 @@
-# m57_rbc.py — el modelo de ciclos reales (RBC) — nivel 8.
-#
-# El ciclo SIN dinero, SIN rigideces y SIN fallas: productividad AR(1) +
-# respuestas ÓPTIMAS de hogares y firmas (motor en _rbc.py):
-#   a_t = ρ·a_{t−1} + ε_t ;  n = η·a ;  y = (1+α_n·η)·a ;  c = γ·y ;
-#   i = (y − sc·c)/si
-# Reproduce los hechos estilizados del ciclo con tres números exactos:
-# amplificación y/a, y la jerarquía σ_i > σ_y > σ_c. Provocación fundacional:
-# si esto basta, el ciclo no es una falla que corregir sino la respuesta
-# eficiente a la tecnología — y la política estabilizadora sobra.
-#
-# Procedencia: Kydland y Prescott (1982, Nobel 2004), Long y Plosser (1983)
-# — menciones; esqueleto log-lineal: decisión de diseño didáctica.
+"""simuladores/macro/modelos/nivel_08/m57_rbc.py — el modelo de ciclos reales (RBC) — nivel 8.
+
+El ciclo SIN dinero, SIN rigideces y SIN fallas: productividad AR(1) +
+respuestas ÓPTIMAS de hogares y firmas (motor en _rbc.py):
+  a_t = ρ·a_{t−1} + ε_t ;  n = η·a ;  y = (1+α_n·η)·a ;  c = γ·y ;
+  i = (y − sc·c)/si
+Reproduce los hechos estilizados del ciclo con tres números exactos:
+amplificación y/a, y la jerarquía σ_i > σ_y > σ_c. Provocación fundacional:
+si esto basta, el ciclo no es una falla que corregir sino la respuesta
+eficiente a la tecnología — y la política estabilizadora sobra.
+
+Procedencia: Kydland y Prescott (1982, Nobel 2004), Long y Plosser (1983)
+— menciones; esqueleto log-lineal: decisión de diseño didáctica.
+"""
 
 import numpy as np
 

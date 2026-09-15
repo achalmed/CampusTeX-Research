@@ -1,14 +1,15 @@
-# e38_probabilidad_frecuentista.py — la probabilidad frecuentista (sección III, tema 38).
-#
-# La segunda definición de probabilidad, la que rescata los casos que la clásica
-# (e37) no puede: cuando los resultados NO son equiprobables o no se pueden
-# contar, se ESTIMA la probabilidad repitiendo el experimento muchas veces y
-# tomando la frecuencia relativa —P(A) = límite de #éxitos/n cuando n→∞ (e34)—.
-# Su poder práctico es la SIMULACIÓN DE MONTE CARLO: estimar cualquier
-# probabilidad (o área, o integral) tirando 'dardos' al azar. El modelo estima π
-# lanzando dardos a un cuadrado y contando los que caen en el cuarto de círculo,
-# y muestra la ley clave de la estimación por simulación: el error decrece como
-# 1/√n —para reducirlo a la mitad hay que CUADRUPLICAR los ensayos—.
+"""simuladores/estadistica/modelos/nivel_03/e38_probabilidad_frecuentista.py — la probabilidad frecuentista (sección III, tema 38).
+
+La segunda definición de probabilidad, la que rescata los casos que la clásica
+(e37) no puede: cuando los resultados NO son equiprobables o no se pueden
+contar, se ESTIMA la probabilidad repitiendo el experimento muchas veces y
+tomando la frecuencia relativa —P(A) = límite de #éxitos/n cuando n→∞ (e34)—.
+Su poder práctico es la SIMULACIÓN DE MONTE CARLO: estimar cualquier
+probabilidad (o área, o integral) tirando 'dardos' al azar. El modelo estima π
+lanzando dardos a un cuadrado y contando los que caen en el cuarto de círculo,
+y muestra la ley clave de la estimación por simulación: el error decrece como
+1/√n —para reducirlo a la mitad hay que CUADRUPLICAR los ensayos—.
+"""
 
 import numpy as np
 

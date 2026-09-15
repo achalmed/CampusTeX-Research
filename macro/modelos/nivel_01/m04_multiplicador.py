@@ -1,11 +1,12 @@
-# m04_multiplicador.py — multiplicador keynesiano por rondas de gasto (nivel 1).
-#
-# Un impulso ΔG se re-gasta ronda tras ronda con PMC efectiva ĉ = c(1−t):
-#   ronda n aporta  ΔG·ĉⁿ  →  acumulado  ΔY_N = ΔG·(1−ĉ^{N+1})/(1−ĉ)
-#   límite N→∞:     ΔY = k·ΔG   con   k = 1/(1−ĉ) = 1/(1−c(1−t))
-#
-# Procedencia: Kahn (1931, multiplicador de empleo) y Keynes (1936) —
-# conocimiento macroeconómico general; suma geométrica: matemática elemental.
+"""simuladores/macro/modelos/nivel_01/m04_multiplicador.py — multiplicador keynesiano por rondas de gasto (nivel 1).
+
+Un impulso ΔG se re-gasta ronda tras ronda con PMC efectiva ĉ = c(1−t):
+  ronda n aporta  ΔG·ĉⁿ  →  acumulado  ΔY_N = ΔG·(1−ĉ^{N+1})/(1−ĉ)
+  límite N→∞:     ΔY = k·ΔG   con   k = 1/(1−ĉ) = 1/(1−c(1−t))
+
+Procedencia: Kahn (1931, multiplicador de empleo) y Keynes (1936) —
+conocimiento macroeconómico general; suma geométrica: matemática elemental.
+"""
 
 import numpy as np
 

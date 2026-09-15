@@ -1,25 +1,26 @@
-# m113_inflacion_importada.py — inflación importada y passthrough (nivel 12).
-#
-# El miedo clásico de una economía abierta: si el sol se devalúa, ¿se dispara la
-# inflación (los importados —combustible, alimentos, máquinas— cuestan más)? El
-# passthrough del tipo de cambio a los precios. Y la respuesta peruana es una de
-# las lecciones más bonitas del laboratorio: el passthrough es MUY BAJO, casi
-# cero. El sol se depreció +12% en 2015 y +11% en 2021, y la inflación apenas se
-# movió (3.5% y 4.0%, dentro o cerca de la banda meta). Una devaluación NO se
-# convierte en espiral inflacionaria. ¿Por qué? Por la CREDIBILIDAD del BCRP
-# (m40, m99): con expectativas ancladas, las empresas no trasladan cada
-# devaluación a precios porque saben que el banco central mantendrá la meta —el
-# dividendo de la credibilidad que rompe el círculo devaluación→inflación→
-# devaluación de m14—. El contrapunto honesto es 2022: la inflación SÍ saltó a
-# 7.9%, pero con el sol ESTABLE: fue inflación importada por los PRECIOS GLOBALES
-# (alimentos y energía, guerra de Ucrania, m83/m85), no por el tipo de cambio.
-# Hay dos "inflaciones importadas": la del tipo de cambio (baja en el Perú) y la
-# de los precios mundiales (real) — no confundirlas.
-#
-# Procedencia: datos BCRP PN01207PM (tipo de cambio) y PN01273PM (IPC 12m),
-# muestra 2004-2024. El passthrough y su relación con la credibilidad: m40/m85
-# (conocimiento general). El passthrough bajo es del DATO; su explicación
-# (anclaje) es teórica (m40).
+"""simuladores/macro/modelos/nivel_12/m113_inflacion_importada.py — inflación importada y passthrough (nivel 12).
+
+El miedo clásico de una economía abierta: si el sol se devalúa, ¿se dispara la
+inflación (los importados —combustible, alimentos, máquinas— cuestan más)? El
+passthrough del tipo de cambio a los precios. Y la respuesta peruana es una de
+las lecciones más bonitas del laboratorio: el passthrough es MUY BAJO, casi
+cero. El sol se depreció +12% en 2015 y +11% en 2021, y la inflación apenas se
+movió (3.5% y 4.0%, dentro o cerca de la banda meta). Una devaluación NO se
+convierte en espiral inflacionaria. ¿Por qué? Por la CREDIBILIDAD del BCRP
+(m40, m99): con expectativas ancladas, las empresas no trasladan cada
+devaluación a precios porque saben que el banco central mantendrá la meta —el
+dividendo de la credibilidad que rompe el círculo devaluación→inflación→
+devaluación de m14—. El contrapunto honesto es 2022: la inflación SÍ saltó a
+7.9%, pero con el sol ESTABLE: fue inflación importada por los PRECIOS GLOBALES
+(alimentos y energía, guerra de Ucrania, m83/m85), no por el tipo de cambio.
+Hay dos "inflaciones importadas": la del tipo de cambio (baja en el Perú) y la
+de los precios mundiales (real) — no confundirlas.
+
+Procedencia: datos BCRP PN01207PM (tipo de cambio) y PN01273PM (IPC 12m),
+muestra 2004-2024. El passthrough y su relación con la credibilidad: m40/m85
+(conocimiento general). El passthrough bajo es del DATO; su explicación
+(anclaje) es teórica (m40).
+"""
 
 import numpy as np
 

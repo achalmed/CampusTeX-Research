@@ -1,16 +1,17 @@
-# m61_shocks_productividad.py — persistencia y propagación (nivel 8, cierre).
-#
-# La asignatura pendiente de m57-m58: ¿el modelo AÑADE memoria al shock, o
-# solo la hereda? Se añade el capital de Solow (m26) al esqueleto RBC:
-#   y_t = a_t + α·k_t ;   k_{t+1} = (1−δ)·k_t + s·y_t ;   a_t = ρ_a^t
-# Sin capital (α=0): y ≡ a — cola idéntica al impulso (m58). Con capital: la
-# inversión de hoy es capacidad de mañana → y sobrevive al shock (semivida
-# mayor) y k tiene JOROBA (pico después del impacto): propagación INTERNA.
-# El "propagation puzzle" (Cogley-Nason, mención): el RBC básico propaga poco
-# — la agenda que llevó a los DSGE medianos (Smets-Wouters, mención).
-#
-# Procedencia: mecánica Solow-RBC didáctica (decisión de diseño sobre m26/m57);
-# crítica de propagación: Cogley y Nason (1995, mención).
+"""simuladores/macro/modelos/nivel_08/m61_shocks_productividad.py — persistencia y propagación (nivel 8, cierre).
+
+La asignatura pendiente de m57-m58: ¿el modelo AÑADE memoria al shock, o
+solo la hereda? Se añade el capital de Solow (m26) al esqueleto RBC:
+  y_t = a_t + α·k_t ;   k_{t+1} = (1−δ)·k_t + s·y_t ;   a_t = ρ_a^t
+Sin capital (α=0): y ≡ a — cola idéntica al impulso (m58). Con capital: la
+inversión de hoy es capacidad de mañana → y sobrevive al shock (semivida
+mayor) y k tiene JOROBA (pico después del impacto): propagación INTERNA.
+El "propagation puzzle" (Cogley-Nason, mención): el RBC básico propaga poco
+— la agenda que llevó a los DSGE medianos (Smets-Wouters, mención).
+
+Procedencia: mecánica Solow-RBC didáctica (decisión de diseño sobre m26/m57);
+crítica de propagación: Cogley y Nason (1995, mención).
+"""
 
 import numpy as np
 

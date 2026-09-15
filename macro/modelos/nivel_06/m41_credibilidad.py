@@ -1,15 +1,16 @@
-# m41_credibilidad.py — credibilidad e inconsistencia temporal (nivel 6, ancla).
-#
-# El juego de Barro-Gordon: un banco central que quiere empleo sobre el
-# natural (ambición ū) y odia la inflación minimiza
-#   L = ½π² + ½λ(ū − α(π − πe))²
-# Mejor respuesta:  π(πe) = λα(ū + α·πe)/(1+λα²)   (pendiente < 1)
-# Con expectativas racionales (πe = π):  π_disc = λαū  — el SESGO
-# INFLACIONARIO: inflación positiva SIN ganar empleo (la sorpresa es cero).
-# Una regla creíble logra π=0 con el MISMO empleo: atarse gana al arbitrio.
-#
-# Procedencia: Kydland-Prescott (1977) y Barro-Gordon (1983) — menciones;
-# banquero conservador: Rogoff (1985, mención). Nobel 2004 (K-P).
+"""simuladores/macro/modelos/nivel_06/m41_credibilidad.py — credibilidad e inconsistencia temporal (nivel 6, ancla).
+
+El juego de Barro-Gordon: un banco central que quiere empleo sobre el
+natural (ambición ū) y odia la inflación minimiza
+  L = ½π² + ½λ(ū − α(π − πe))²
+Mejor respuesta:  π(πe) = λα(ū + α·πe)/(1+λα²)   (pendiente < 1)
+Con expectativas racionales (πe = π):  π_disc = λαū  — el SESGO
+INFLACIONARIO: inflación positiva SIN ganar empleo (la sorpresa es cero).
+Una regla creíble logra π=0 con el MISMO empleo: atarse gana al arbitrio.
+
+Procedencia: Kydland-Prescott (1977) y Barro-Gordon (1983) — menciones;
+banquero conservador: Rogoff (1985, mención). Nobel 2004 (K-P).
+"""
 
 import numpy as np
 

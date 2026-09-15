@@ -1,10 +1,11 @@
-# reporte.py — informe Markdown por modelo del laboratorio.
-#
-# Renderiza la ficha pedagógica completa + resultados base + una tabla y una
-# LÁMINA DE EXPERIMENTO por escenario (5 zonas: contexto, gráfico E1→E2,
-# resultados, mecanismo, ecuaciones) + verificaciones. La salida va a
-# salidas/nivel_NN/<id>_<slug>/reporte.md (regenerable; no se versiona).
-# El MD usa bloques $$...$$ para las ecuaciones: se lee bien en Obsidian.
+"""simuladores/reporte.py — informe Markdown por modelo del laboratorio.
+
+Renderiza la ficha pedagógica completa + resultados base + una tabla y una
+LÁMINA DE EXPERIMENTO por escenario (5 zonas: contexto, gráfico E1→E2,
+resultados, mecanismo, ecuaciones) + verificaciones. La salida va a
+salidas/nivel_NN/<id>_<slug>/reporte.md (regenerable; no se versiona).
+El MD usa bloques $$...$$ para las ecuaciones: se lee bien en Obsidian.
+"""
 
 import matplotlib.pyplot as plt
 
@@ -44,7 +45,10 @@ def render(modelo, dir_salidas=None):
     carpeta.mkdir(parents=True, exist_ok=True)
 
     F = modelo.ficha
-    md = [f"# {modelo.nombre}", ""]
+    # frontmatter y marca de derivado (meta/NORMATIVA_ARCHIVOS.md §5-§6; M4, 2026-09-15)
+    md = ["---", "tipo: doc", f"titulo: \"{modelo.nombre.replace(chr(34), chr(39))}\"", "estado: hecho", "---",
+          f"<!-- GENERADO por simuladores/reporte.py desde el modelo {modelo.id or modelo.nombre}; no editar -->",
+          "", f"# {modelo.nombre}", ""]
     if modelo.id:
         md += [f"**Posición curricular:** {modelo.id} (nivel {modelo.nivel}) — "
                f"ver `docs/LABORATORIO_MACRO.md`", ""]
