@@ -15,5 +15,5 @@
 \ProcessOptions\relax
 \LoadClass[aspectratio=169,11pt]{beamer}
 
-\usetheme{Academic}
+\usetheme{academic}
 \endinput

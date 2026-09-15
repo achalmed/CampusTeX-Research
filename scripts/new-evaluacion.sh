@@ -10,7 +10,7 @@
 #   control-de-lectura, examen-oral, caso-estudio, tarea, banco-de-preguntas,
 #   solucionario.
 #
-# Copia templates/exam/<tipo>/ a <curso>/04_EVALUACIONES/<subcarpeta>/AAAAMMDD_SIGLA.tex,
+# Copia templates/exam/<tipo>/ a <curso>/04_EVALUACIONES/<subcarpeta>/AAAAMMDD_sigla.tex,
 # rellena metadatos desde config/course.yml. Compilar con build.sh --modo todos.
 # ============================================================
 
@@ -44,7 +44,7 @@ esac
 TPL="$FW_DIR/templates/exam/$NAME/$NAME.tex"
 [[ -f "$TPL" ]] || die "Falta la plantilla $TPL"
 DESTDIR="$COURSE/04_EVALUACIONES/$SUB"; mkdir -p "$DESTDIR"
-DEST="$DESTDIR/${FECHA}_${SIG}.tex"
+DEST="$DESTDIR/${FECHA}_${SIG,,}.tex"      # sigla en minúsculas: nombres snake_case (NORMATIVA_ARCHIVOS §4)
 [[ -e "$DEST" ]] && die "Ya existe: $DEST (use otra --fecha)"
 
 CURSO_LABEL="$(basename "$COURSE" | sed -E 's/^course_[0-9]+_//; s/[_-]+/ /g')"
@@ -61,5 +61,6 @@ sed -i -E \
   -e "s|\\\\fechaevaluacion\{[^}]*\}|\\\\fechaevaluacion{${FECHA_LARGA}}|" \
   "$DEST"
 
+set_identidad "$DEST" "${NAME//-/ }: ${TITULO}"
 ok "Evaluación creada: ${DEST}"
 echo "Compila:  ./scripts/build.sh \"$DEST\" --modo todos   (examen · claves · soluciones)"

@@ -1,3 +1,8 @@
+---
+tipo: doc
+titulo: "Retrospectiva — Sesión {{NUMBER}}: {{TITLE}}"
+estado: borrador
+---
 # Retrospectiva — Sesión {{NUMBER}}: {{TITLE}}
 
 > Completar DESPUÉS de impartir la clase. Este documento es la

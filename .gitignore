@@ -6,3 +6,4 @@
 *.nav
 *.snm
 *.synctex.gz
+__pycache__/

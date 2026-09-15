@@ -61,6 +61,12 @@ h=$(copiar_pdfs "$SES/05_Despues"    homework)
 
 # Marcador de publicación
 cat > "$MOD/_PUBLICADO.md" <<EOF
+---
+tipo: doc
+titulo: "Publicado — $SNAME ($PERIODO)"
+estado: hecho
+---
+<!-- GENERADO por 10 Class/scripts/publish-session.sh al publicar la sesión; no editar -->
 # Publicado — $SNAME  ($PERIODO)
 
 - **Fecha:** $(date +%F)
@@ -76,4 +82,4 @@ ok "Publicado y congelado: $MOD"
 echo "   slides=$s  evaluation=$e  practice=$p  homework=$h"
 [[ $((s+e+p+h)) -eq 0 ]] && warn "No se encontraron PDF finales en la sesión; compila primero (build-session.sh) y re-publica con --refrescar."
 echo "Enlaza al sitio (F5.2): ./scripts/publish-web.sh \"$COURSE\" $PERIODO --aplicar   (hardlinks segun dictado.yml)"
-echo "Registra en git:  git add -A && git commit -m \"publica $SNAME ($PERIODO)\""
+echo "Registra en git:  git add \"$MOD\" && git commit -m \"publica $SNAME ($PERIODO)\""

@@ -1,3 +1,8 @@
+---
+tipo: doc
+titulo: "09 · El estándar 00–09 (organización de los Academic_Class)"
+estado: activo
+---
 # 09 · El estándar 00–09 (organización de los Academic_Class)
 
 > Referencia del contrato de carpetas que respetan **todos** los
@@ -48,7 +53,7 @@ Cada sesión sigue **7 subcarpetas** con el arco de una clase:
 07_Notas       Notas del docente sobre el dictado.
 ```
 
-Cada sesión trae además `metadata.yml` + `README.md`. **El deck va en
+Cada sesión trae además `metadata.yml` (registro de la sesión: línea 1 de identidad y núcleo `id` · `titulo` · `estado`; el número lo da la carpeta `SNN`) + `README.md`. **El deck va en
 `02_Clase/`** y es autocontenido (preámbulo propio + copia local del logo): al
 mover una sesión, se mueve su carpeta **completa**.
 

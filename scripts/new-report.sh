@@ -60,5 +60,6 @@ sed -i -E \
   -e "s|\\\\titulodocumento\{[^}]*\}|\\\\titulodocumento{${TITULO}}|" \
   "$DEST"
 
+set_identidad "$DEST" "${TIPO//-/ }: ${TITULO}"
 ok "Documento creado: ${DEST}"
 echo "Compila:  ./scripts/build.sh \"$DEST\""

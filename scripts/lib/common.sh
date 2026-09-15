@@ -75,6 +75,36 @@ slugify() {
     | sed -E 's/[^a-z0-9]+/_/g; s/^_+|_+$//g'
 }
 
+# --- Identidad de archivo (NORMATIVA_ARCHIVOS §6) ------------
+# ruta_repo ARCHIVO → ruta relativa a la raíz del repo git que lo contiene
+# (el área Academic_Class-* es un repo; el framework, otro). Sin git: relativa
+# al framework.
+ruta_repo() {
+  local f raiz
+  f="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+  raiz="$(git -C "$(dirname "$f")" rev-parse --show-toplevel 2>/dev/null || echo "$FW_DIR")"
+  echo "${f#"$raiz"/}"
+}
+
+# set_identidad ARCHIVO "qué es" — escribe la línea 1 `%% <ruta> — <qué es>` de un
+# .tex copiado desde una plantilla (la plantilla declara su propia ruta; el
+# documento nuevo debe declarar la suya). Sustituye la primera identidad que
+# encuentre en las 4 primeras líneas; si no hay, la inserta tras `%!TEX`.
+set_identidad() {
+  local f="$1" que="$2" rel linea
+  rel="$(ruta_repo "$f")"
+  linea="%% ${rel} — ${que}"
+  if head -4 "$f" | grep -qE '^%%? [^ ]+ — '; then
+    awk -v L="$linea" 'NR<=4 && !done && /^%%? [^ ]+ — / {print L; done=1; next} {print}' "$f" > "$f.tmp" && mv "$f.tmp" "$f"
+  elif head -1 "$f" | grep -q '^%!TEX'; then
+    sed -i "1a\\
+${linea}" "$f"
+  else
+    sed -i "1i\\
+${linea}" "$f"
+  fi
+}
+
 # --- Compilación LaTeX --------------------------------------
 # latex_engine ARCHIVO.tex → motor a usar.
 #   El framework es LuaLaTeX-only (migración 2026). Se honra un override

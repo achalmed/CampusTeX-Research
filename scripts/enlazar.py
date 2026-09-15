@@ -93,7 +93,7 @@ def cursos() -> dict[str, tuple[Path, dict]]:
     out = {}
     for ty in AREAS.glob("Academic_Class-*/course_*/temario.yml"):
         t = leer_yaml(ty)
-        out[t["curso"]] = (ty.parent, t)
+        out[t.get("id") or t["curso"]] = (ty.parent, t)      # `curso` → `id` (NORMATIVA §7, M7)
     return out
 
 

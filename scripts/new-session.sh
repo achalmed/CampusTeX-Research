@@ -11,7 +11,8 @@
 #
 # Copia scaffolds/session (anatomía 01_Antes…07_Notas)
 # al curso como 03_SESIONES/SNN_slug/ y rellena las plantillas
-# con los datos de config/course.yml. Por defecto el deck es
+# con los datos de config/course.yml; metadata.yml nace con su
+# identidad (ruta real) y el núcleo id · titulo · estado (§7). Por defecto el deck es
 # LaTeX Beamer (02_Clase/slides.tex); con --quarto, Quarto RevealJS.
 # ============================================================
 
@@ -38,6 +39,10 @@ DEST="$COURSE/03_SESIONES/S${NUM}_${SLUG}"
 
 # Etiqueta del curso desde el nombre de carpeta (course_NN_a_b -> "a b")
 COURSE_LABEL="$(basename "$COURSE" | sed -E 's/^course_[0-9]+_//; s/[_-]+/ /g')"
+# Identidad del registro (NORMATIVA_ARCHIVOS §6-§7): id del curso (temario.yml) y ruta de la sesión en su repo
+COURSE_ID="$(grep -E '^id:' "$COURSE/temario.yml" 2>/dev/null | head -1 | sed -E 's/^id:[[:space:]]*//; s/[[:space:]]+#.*$//')"
+[[ -n "$COURSE_ID" ]] || COURSE_ID="$(slugify "$COURSE_LABEL")"
+RUTA_SESION="$(ruta_repo "$COURSE")/03_SESIONES/S${NUM}_${SLUG}"
 
 info "Creando sesión $NUM: '$TITLE' (formato: $FORMAT)"
 cp -a "$SCAFFOLDS_DIR/session" "$DEST"
@@ -66,6 +71,8 @@ while IFS= read -r -d '' f; do
     -e "s|{{MODALITY}}|$(config_get modalidad presencial)|g" \
     -e "s|{{LEVEL}}|$(config_get nivel pregrado)|g" \
     -e "s|{{FORMAT}}|$FORMAT|g" \
+    -e "s|{{RUTA_SESION}}|$RUTA_SESION|g" \
+    -e "s|{{COURSE_ID}}|$COURSE_ID|g" \
     "$f"
 done < <(find "$DEST" -type f \( -name '*.md' -o -name '*.yml' -o -name '*.tex' -o -name '*.qmd' \) -print0)
 

@@ -1,4 +1,6 @@
 ---
+tipo: doc
+estado: activo
 title: "<Título del curso> — <AAAA-ciclo>"
 subtitle: "MOOC · <Área> — Edison Achalma B.Sc. Econ."
 description: "<Descripción breve del curso para la portada del MOOC de este dictado>"

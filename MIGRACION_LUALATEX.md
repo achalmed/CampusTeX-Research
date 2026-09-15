@@ -1,3 +1,8 @@
+---
+tipo: doc
+titulo: "Migración XeLaTeX → LuaLaTeX — Academic Class Framework"
+estado: activo
+---
 # Migración XeLaTeX → LuaLaTeX — Academic Class Framework
 
 **Fecha:** 2026-07-23 · **Motor único soportado a partir de ahora:** LuaLaTeX.

@@ -1,4 +1,6 @@
 ---
+tipo: doc
+estado: activo
 title: "Sesión <NN> · <Título de la sesión>"
 subtitle: "<Área> — Edison Achalma B.Sc. Econ."
 lang: es

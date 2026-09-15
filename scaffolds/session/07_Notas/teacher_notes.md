@@ -1,3 +1,8 @@
+---
+tipo: doc
+titulo: "Guion del Docente — Sesión {{NUMBER}}: {{TITLE}}"
+estado: activo
+---
 # Guion del Docente — Sesión {{NUMBER}}: {{TITLE}}
 
 > Guion hablado diapositiva por diapositiva. Escribe aquí lo que

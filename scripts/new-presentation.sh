@@ -37,5 +37,6 @@ sed -i -E \
   -e "s|\\\\date\{[^}]*\}|\\\\date{Semestre $(config_get ciclo)}|" \
   "$DEST"
 
+set_identidad "$DEST" "deck de la sesión ${NN}: ${TITULO}"
 ok "Diapositivas creadas: ${DEST}"
 echo "Compila:  ./scripts/build.sh \"$DEST\""

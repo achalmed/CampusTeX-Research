@@ -40,3 +40,21 @@ fi
 
 [[ -f "$CONFIG_FILE" ]] && ok "Configuración: config/course.yml" \
                         || error "Falta config/course.yml"
+
+# --- Normativa de archivos (meta/NORMATIVA_ARCHIVOS.md §11): un módulo, tres doctores: fase M9 de §12
+CORE_ENV="$FW_DIR/../core/env.sh"
+if [[ -f "$CORE_ENV" ]]; then
+  # shellcheck source=/dev/null
+  source "$CORE_ENV"
+  echo
+  echo "Normativa de archivos — core/archivos.py validar \"10 Class\""
+  rc=0
+  python3 "$DOCS_ROOT/core/archivos.py" validar "$DOCS_ROOT/10 Class" --max 5 || rc=$?   # set -e: capturar sin abortar
+  case $rc in
+    0) ok "Normativa de archivos: sano" ;;
+    1) warn "Normativa de archivos: avisos (ver arriba)" ;;
+    *) error "Normativa de archivos: fallos (ver arriba)" ;;
+  esac
+else
+  warn "core/env.sh no encontrado: no se valida la normativa de archivos"
+fi

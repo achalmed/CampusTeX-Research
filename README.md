@@ -24,8 +24,10 @@ diapositivas y sílabos a la vez.
 
 Desde F5.1 (2026-09-06) cada `course_NN/` tiene un `temario.yml` con unidades, temas y recursos; el `README.md`
 del curso, los esqueletos de `02_CONTENIDO`, la ficha web, el temario del learning-skill y la checklist de
-estudio se generan con `scripts/temario-generar.sh generar --aplicar` (simula sin `--aplicar`; `verificar`
-detecta README desfasados). Edita el temario, no las vistas.
+estudio (`05 tasks/temarios-cursos.md`) se generan con `scripts/temario-generar.sh generar --aplicar` (simula sin
+`--aplicar`; `verificar` detecta README desfasados). Edita el temario, no las vistas. `temario.yml` y el
+`metadata.yml` de cada sesión son los **registros** de la normativa de archivos (`meta/NORMATIVA_ARCHIVOS.md`
+§7): núcleo `id · titulo · estado` e identidad en la línea 1 (M7, 2026-09-15).
 
 ## Estructura (arquitectura por capas)
 
@@ -36,7 +38,7 @@ detecta README desfasados). Edita el temario, no las vistas.
 │                 La cargan por igual las clases de documento y el tema Beamer.
 ├── classes/      Clases delgadas que encapsulan el diseño:
 │                 academic-base · academic-exam · academic-report · academic-beamer
-├── themes/       Tema Beamer propio: beamer{,color,font,inner,outer}themeAcademic (minimalista)
+├── themes/       Tema Beamer propio: beamer{,color,font,inner,outer}themeacademic (minimalista)
 ├── config/       palette.tex (ÚNICO punto de cambio de color) · course.yml (datos del docente)
 ├── templates/    Documentos vacíos, sin diseño: presentation/ (8 tipos) · exam/ (12) · report/ (4)
 ├── scaffolds/    Esqueletos de CARPETAS (no compilables): course (00–09) · session · period
@@ -100,7 +102,8 @@ C="$AC/course_NN_<slug>"
 | `publish-session.sh` | publica y **congela** una sesión → `09_SEMESTRES/<periodo>/publicacion/SNN/` (instantánea solo-lectura) |
 | `build.sh` | compila cualquier `.tex` con LuaLaTeX (2 pasadas, TEXINPUTS de todas las capas) |
 | `validate.sh` · `stats.sh` | valida la estructura 00–09 · resumen del curso |
-| `doctor.sh` · `clean.sh` | chequeo de entorno · limpiar auxiliares |
+| `doctor.sh` · `clean.sh` | chequeo de entorno + normativa de archivos (`core/archivos.py`) · limpiar auxiliares |
+| `normalizar-archivos.py` · `normalizar-notas.py` | migración a la normativa de archivos (registros, nombres, cabeceras, notas de estudio); simulan sin `--aplicar` |
 
 ---
 

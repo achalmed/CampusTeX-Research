@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Guía para Claude Code (claude.ai/code) al trabajar en este repositorio.
+Guía para Claude Code (claude.ai/code) y para Codex (`AGENTS.md` es un enlace simbólico a este archivo) al trabajar en este repositorio.
 
 ## El ciclo de trabajo, en este sistema
 
@@ -46,7 +46,8 @@ como argumento. Flujo: commit dentro del área → `git add areas/<area>` + comm
 (mueve el puntero). Clon nuevo: `git clone --recurse-submodules`.
 
 No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructura)
-+ compilar a PDF y mirarlo.
++ compilar a PDF y mirarlo + `./scripts/doctor.sh` (entorno **y** la normativa de
+archivos: llama a `core/archivos.py validar "10 Class"`, M7 2026-09-15).
 
 ## El estándar (resumen; detalle en README.md)
 
@@ -57,6 +58,18 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 - Cada sesión (`03_SESIONES/SNN_<slug>/`) tiene la anatomía
   `01_Antes 02_Clase 03_Actividad 04_Evaluacion 05_Despues 06_Recursos 07_Notas`
   + `metadata.yml` + `README.md`. **El deck (`.tex`/`.qmd`) va en `02_Clase/`.**
+- `metadata.yml` es el **registro de la sesión** (`meta/NORMATIVA_ARCHIVOS.md` §7):
+  línea 1 `# <ruta en el repo del área> — registro de la sesión NN de <id del curso>`,
+  núcleo `id · titulo · estado` (`estado` del ciclo §2.1: `borrador | activo | hecho`).
+  El número NO se declara: lo da la carpeta `SNN` (`stats.sh` lo deriva de ahí).
+  `slug→id` y `numero` retirado en M7 (2026-09-15); `validate.sh` exige `id/titulo/estado`.
+- Las **notas de estudio** de `02_CONTENIDO/**/*.md` son régimen del vault (§10.4):
+  nombre kebab (`1-2-tema.md`) y frontmatter `tipo: apunte · titulo · estado · tags`.
+  Las normaliza `scripts/normalizar-notas.py --aplicar` (reescribe wikilinks, enlaces y
+  los `archivo:` de `temario.yml`); `temario.py generar --que esqueleto` ya crea así.
+- Lo **ajeno** (plantillas LaTeX de terceros, fuentes, clases descargadas) vive en un
+  `vendor/` (`06_RECURSOS/vendor/`, `syllabus/vendor/`): sin cabecera propia, fuera del
+  validador, anotado en `ajeno:` del `temario.yml` (sale en el README del curso).
 - `09_SEMESTRES/<AAAA-ciclo>/` = cada dictado: registro privado (estudiantes,
   calificaciones, evidencias) **+ publicación** (MOOC por sesión, se congela poco a
   poco). Fusiona las antiguas `09_PUBLICACION`/`10_ARCHIVO`/`11_SEMESTRES`.
@@ -79,7 +92,9 @@ No hay suite de tests. Verificación = `./scripts/validate.sh <curso>` (estructu
 - `classes/` — clases delgadas que encapsulan el diseño: `academic-base` (núcleo
   `article`), `academic-exam` (evaluaciones, 3 modos, hereda base), `academic-report`
   (sílabo/calendario/nota-docente/rúbrica, hereda base), `academic-beamer` (beamer + tema).
-- `themes/` — tema Beamer propio `beamer{,color,font,inner,outer}themeAcademic` (minimalista; consume `styles/`).
+- `themes/` — tema Beamer propio `beamer{,color,font,inner,outer}themeacademic` (minimalista; consume `styles/`).
+  Se llama `academic` en minúsculas (`\usetheme{academic}`) desde M7 (2026-09-15): nombres de archivo
+  en minúsculas como el resto del framework.
 - `templates/` — documentos vacíos, **sin diseño** (`presentation/`, `exam/` 12 tipos, `report/`); solo `\documentclass{academic-*}` + contenido.
 - `scaffolds/` — esqueletos de **carpetas** (no compilables): `course` (00–09), `session` (01_Antes…07_Notas), `period` (dictado: registro privado + publicación MOOC).
 - `libraries/` — bancos compartidos (`Banco_*`); `bibliography/` — `.bib`.
@@ -115,6 +130,11 @@ python3 scripts/enlazar.py verificar                                # rutas de r
 # Validación y resumen
 ./scripts/validate.sh <COURSE_DIR | ACADEMIC_CLASS_DIR>            # invariantes 00–09 (exit!=0 si error)
 ./scripts/stats.sh    <COURSE_DIR>                                # resumen por sesión
+
+# Normativa de archivos (meta/NORMATIVA_ARCHIVOS.md; M7, 2026-09-15). Simulan sin --aplicar.
+python3 scripts/normalizar-archivos.py todo|registros|cursos|nombres|cabeceras|frontmatter|artefactos|vendor [--aplicar] [--bitacora DIR]
+python3 scripts/normalizar-notas.py [--aplicar] [--bitacora DIR] [COURSE_DIR...]   # notas de 02_CONTENIDO a kebab + frontmatter
+python3 ~/Documents/core/archivos.py validar "$HOME/Documents/10 Class"           # 0 fallos es la línea base (lo corre el doctor)
 
 # Compilación de diapositivas (decks en 02_Clase/)
 ./scripts/build-session.sh <COURSE_DIR> NN
@@ -163,14 +183,16 @@ si no existe, usa el motor detectado por `latex_engine()` (comentario `%!TEX`, c
 
 ## El currículo: `temario.yml` (F5.1, 2026-09-06)
 
-Cada `course_NN/` lleva un **`temario.yml`**: identidad del curso (`curso`, `titulo`,
-`emoji`, `descripcion`, `area`, `rol: docente`, `nivel`, `semestre`, `prerrequisitos`,
-`etiqueta`), enlaces (`web_slug` a `04 index/cursos/<slug>`, `dominio_fuat` al dominio
+Cada `course_NN_<slug_snake>/` (los 9 que estaban fuera de patrón se renombraron en M7,
+2026-09-15) lleva un **`temario.yml`**, que es el **registro del curso** (normativa §7): línea 1
+de identidad, núcleo `id` (antes `curso`), `titulo`, `estado` (`activo` si tiene dictados o
+sesiones hechas; si no, `borrador`), más `emoji`, `descripcion`, `area`, `rol: docente`, `nivel`,
+`semestre`, `prerrequisitos`, `etiqueta`, enlaces (`web_slug` a `04 index/cursos/<slug>`, `dominio_fuat` al dominio
 del learning-skill) y **`unidades[].temas[]`** (id, título, `archivo` en `02_CONTENIDO`,
 `recursos[]` opcionales: apunte, simulador, libro por `calibre_id`, post, examen).
 **Es la única fuente**: el `README.md` del curso, los esqueletos de `02_CONTENIDO`, la
 sección «Contenidos / Sílabo» de la ficha web, `prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md`
-y `05 tasks/temarios cursos (generado).md` se generan con `scripts/temario-generar.sh`.
+y `05 tasks/temarios-cursos.md` (nota `tipo: checklist` con marca `GENERADO`) se generan con `scripts/temario-generar.sh`.
 Regla: **edita el temario, no las vistas**; el doctor avisa si un README se desfasó.
 `migrar` solo se usa para un curso heredado sin temario (lee su README o sus carpetas).
 **Bibliografía (F5.4):** el material bibliográfico externo de un curso NO vive en `06_RECURSOS`: vive en

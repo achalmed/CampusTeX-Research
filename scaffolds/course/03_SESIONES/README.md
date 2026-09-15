@@ -54,13 +54,13 @@ datos de `config/course.yml`. Con `--quarto`, el deck es RevealJS en vez de Beam
 ## Ejemplo — `metadata.yml` de una sesión (extracto)
 
 ```yaml
-numero: 01
+# course_00_sistema_apa/03_SESIONES/S01_introduccion/metadata.yml — registro de la sesión 01 de sistema_apa
+id: introduccion
 titulo: "Introducción a APA"
-slug: introduccion
 unidad: 1
 semana: 01
 duracion_minutos: 180
 modalidad: presencial
 formato_slides: latex-beamer
-estado: impartida        # en_preparacion | lista | impartida
+estado: hecho            # borrador | activo | hecho (NORMATIVA_ARCHIVOS §2.1)
 ```

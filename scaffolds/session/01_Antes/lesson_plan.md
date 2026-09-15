@@ -1,3 +1,8 @@
+---
+tipo: doc
+titulo: "Plan de Clase — Sesión {{NUMBER}}: {{TITLE}}"
+estado: activo
+---
 # Plan de Clase — Sesión {{NUMBER}}: {{TITLE}}
 
 **Curso:** {{COURSE}} ({{CYCLE}})

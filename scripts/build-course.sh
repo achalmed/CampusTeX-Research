@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# build-course.sh — Compila TODO un curso
+# build-course.sh — Compila un curso completo
 # ============================================================
 # Uso:
 #   ./scripts/build-course.sh COURSE_DIR [--solo-sesiones]

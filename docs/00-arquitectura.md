@@ -1,3 +1,8 @@
+---
+tipo: doc
+titulo: "00 · Arquitectura del Academic_Class_Framework"
+estado: activo
+---
 # 00 · Arquitectura del Academic_Class_Framework
 
 > **Estado:** blueprint del rediseño integral (2026-07-23). Define la
@@ -87,7 +92,7 @@ Ninguno es fatal hoy, pero todos escalan mal. El rediseño los elimina de raíz.
 
 **La clave del rediseño:** la identidad visual **no** vive en las clases ni en el
 tema Beamer, sino en `styles/` (paquetes `.sty` **agnósticos al motor**) que
-`academic-base.cls` (documentos) **y** `beamerthemeAcademic.sty` (diapositivas)
+`academic-base.cls` (documentos) **y** `beamerthemeacademic.sty` (diapositivas)
 cargan por igual. Así diapositivas y exámenes comparten literalmente los mismos
 colores, fuentes y cajas: un único «Academic Theme» para todo.
 
@@ -117,11 +122,11 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 │   └── academic-icons.sty       · iconografía (fontawesome5)
 │
 ├── themes/                      ← TEMA BEAMER propio (consume styles/; sin temas comerciales)
-│   ├── beamerthemeAcademic.sty      · orquesta los 4 sub-temas + carga styles/academic.sty
-│   ├── beamercolorthemeAcademic.sty · mapea la paleta de styles/ a los colores de Beamer
-│   ├── beamerfontthemeAcademic.sty  · usa las fuentes de styles/
-│   ├── beamerinnerthemeAcademic.sty · listas, bloques, títulos de frame, figuras
-│   └── beamerouterthemeAcademic.sty · cabecera/pie minimalistas, sin barras ni sombras
+│   ├── beamerthemeacademic.sty      · orquesta los 4 sub-temas + carga styles/academic.sty
+│   ├── beamercolorthemeacademic.sty · mapea la paleta de styles/ a los colores de Beamer
+│   ├── beamerfontthemeacademic.sty  · usa las fuentes de styles/
+│   ├── beamerinnerthemeacademic.sty · listas, bloques, títulos de frame, figuras
+│   └── beamerouterthemeacademic.sty · cabecera/pie minimalistas, sin barras ni sombras
 │
 ├── config/                      ← INFRAESTRUCTURA: 1 archivo = 1 responsabilidad (el punto de cambio)
 │   ├── identity.yml             · datos del docente/institución (defaults de metadatos)
@@ -202,8 +207,8 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
    `course_NN/03_SESIONES/SNN/02_Clase/` (o usa `scripts/new-presentation.sh`).
 2. El maestro `.tex` hace `\documentclass{academic-beamer}` y rellena contenido.
    **No define ni un color.**
-3. `academic-beamer.cls` carga `themes/beamerthemeAcademic.sty`.
-4. `beamerthemeAcademic.sty` carga `styles/academic.sty` (la identidad) y mapea sus
+3. `academic-beamer.cls` carga `themes/beamerthemeacademic.sty`.
+4. `beamerthemeacademic.sty` carga `styles/academic.sty` (la identidad) y mapea sus
    colores/fuentes al mundo Beamer.
 5. `styles/academic-colors.sty` lee los valores de `config/palette.tex`;
    `academic-fonts.sty` define las familias tipográficas en el propio paquete.

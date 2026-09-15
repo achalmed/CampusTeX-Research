@@ -9,7 +9,7 @@
 # Comprueba por curso:
 #   - Las 10 carpetas 00–09 + README.md.
 #   - Cada sesión (03_SESIONES/SNN_*): anatomía 01_Antes…07_Notas,
-#     metadata.yml (campos numero/titulo), README.md y deck en 02_Clase/.
+#     metadata.yml (núcleo id/titulo/estado, §7), README.md y deck en 02_Clase/.
 #
 # Código de salida != 0 si hay errores (los [!!] no hacen fallar).
 # ============================================================
@@ -39,7 +39,7 @@ validate_course() {
   for s in $(list_sessions "$course"); do
     local sname; sname="$(basename "$s")"
     [[ -f "$s/metadata.yml" ]] || err "$name/$sname: falta metadata.yml"
-    for k in numero titulo; do
+    for k in id titulo estado; do
       grep -qE "^${k}:" "$s/metadata.yml" 2>/dev/null || err "$name/$sname: metadata sin '$k'"
     done
     for d in "${SESSION_DIRS[@]}"; do

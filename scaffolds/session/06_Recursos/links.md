@@ -1,3 +1,8 @@
+---
+tipo: doc
+titulo: "Recursos en línea — Sesión {{NUMBER}}: {{TITLE}}"
+estado: activo
+---
 # Recursos en línea — Sesión {{NUMBER}}: {{TITLE}}
 
 ## Videos
