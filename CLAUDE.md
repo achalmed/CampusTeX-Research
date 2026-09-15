@@ -204,9 +204,12 @@ compilación falla; si es un PDF versionado, se recupera con `git checkout`.
   se reconstruyen al usarlos, no se "arreglan" borrando contenido. 9 binarios > 5 MB
   (avisa el doctor). `_inbox/` (401 archivos) por clasificar. 20 datasets aterrizados en
   `02 analysis/data/raw/_docencia_por_catalogar/` por catalogar.
-- **Pendiente del usuario**: push de M0 desde `areas_originales/`, crear el remote
-  `achalmed/Academic_Class` y hacer push de `docencia/` y del framework; después, borrar
-  `areas_originales/`.
+- **Remotes**: `docencia/` → `achalmed/Academic_Class` (privado; repo `MyTestProyect` reutilizado y
+  renombrado el 2026-09-15, sin crear uno nuevo); framework → `achalmed/CampusTeX-Research`.
+  **Pendiente del usuario** (el clasificador no deja a Claude hacer `git push`): ejecutar
+  `meta/reparaciones/R8_leccion_2026-09-15_121422/subir-remotos.sh [--archivar]` (M0 a las 5
+  áreas con remote, `docencia/` con sus 25 tags, framework, archivo de los 5 repos heredados) y,
+  verificado, borrar `areas_originales/`.
 
 ## El currículo: `curso.yml` (F5.1, 2026-09-06; sucesor de `temario.yml` desde M4, 2026-09-15)
 

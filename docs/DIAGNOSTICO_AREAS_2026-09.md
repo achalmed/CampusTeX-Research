@@ -679,3 +679,9 @@ Se dejan a propósito, por históricos: `MIGRACION_LUALATEX.md`, `new-period.sh`
 `00-arquitectura.md`, los diagnósticos y planes anteriores de `meta/`, `PROGRESO.md`, los reportes TSV y fichas de
 Calibre (registros) y `prompt_09` (sus «pasos 00–09» son los del Método Documental, no este estándar).
 Bitácora: `meta/reparaciones/R8_leccion_2026-09-15_121422/` (copias previas en `antes/`, parches por repo, `UNDO.sh`).
+
+**Remote de `docencia/`.** Se revisaron los 56 repos de `achalmed` para no crear uno nuevo: `MyTestProyect` (ensayo de
+tutorial de 2025, un README y un logo, sin referencias locales) se renombró a `achalmed/Academic_Class` y se puso privado;
+`docencia/` ya lo tiene como `origin`. Los pasos de red (M0 a las 5 áreas con remote, push de `docencia/` con sus 25 tags,
+push del framework, archivo de los 5 repos heredados) quedan en `R8_…/subir-remotos.sh` porque el clasificador del modo
+automático no permite `git push`; `areas_originales/` se borra después de verificar el push.
