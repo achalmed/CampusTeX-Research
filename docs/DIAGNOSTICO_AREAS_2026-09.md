@@ -574,3 +574,20 @@ remote de `Academic_Class`: ambos esperan el push de M0, que sigue bloqueado par
 migración al inicio (M6/M8 reescriben la documentación).
 
 Bitácora, `UNDO.sh`, árboles y verificaciones: `meta/reparaciones/R2_consolidacion_2026-09-15_090152/`.
+
+### M3 · Mapa de rutas y renombrado (2026-09-15, hecho)
+
+| Paso | Resultado |
+|---|---|
+| `docencia/migracion/generar-mapa-m3.py` → `mapa-m3.csv` (versionado; es también el UNDO) | 5 135 filas: 1 338 `mover`, 3 797 `baja` con motivo; 0 conflictos de destino |
+| `aplicar-mapa-m3.py --aplicar` (renombra con `rename`, mismo inodo) | 1 310 renombres detectados por git; hardlinks de la web 11/11 intactos |
+| Cursos | 54 → 50 en `cursos/<slug>/` (`01-diseno`, `02-contenido` aplanado, `03-sesiones/sNN-<slug>`, `04-evaluaciones`, `05-recursos` con `media/` e `investigacion/`) |
+| Bajas | 1 934 notas esqueleto · 1 601 `.gitkeep` · 174 plantillas de scaffold (cuerpo normalizado idéntico) · 46 archivos de área · 40 Languages · 2 fusión |
+| `temario.yml` | rutas reescritas; `archivo: null` en los temas sin nota (M4 lo convierte en `curso.yml`) |
+| Verificación | 1 273 movidos con blob idéntico (+2 `.mht` no versionados); 0 `.gitkeep`; 0 carpetas vacías; 16 carpetas con espacios, todas justificadas (vendor, geodatabase, rutas leídas por código) |
+| Herramientas | `temario.py`, `enlazar.py`, `normalizar-*.py` ven `docencia/cursos/*`; `verificar` OK 50 cursos |
+
+Pendiente que hereda M4: `09_SEMESTRES/2026-I` está en `dictados/2026-i-cau-unsch-metodologia/_migracion/<curso>/`;
+la anatomía interna de sesión (`01_Antes…07_Notas`) sigue igual; `_inbox/` recibe además los dos cursos base
+no repartidos (Estadística, Gestión empresarial). `validate.sh` (reglas 00–09) ya no aplica: M5 escribe las nuevas.
+Decisiones de nombre y detalle en `meta/reparaciones/R3_renombrado_2026-09-15_094921/README.md`.

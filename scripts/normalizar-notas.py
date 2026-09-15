@@ -137,7 +137,7 @@ def main() -> int:
     BIT["aplicar"], BIT["dir"] = a.aplicar, a.bitacora
     if a.bitacora:
         Path(a.bitacora).mkdir(parents=True, exist_ok=True)
-    cursos = [Path(c).resolve() for c in a.cursos] or sorted(c for c in AREAS.glob("Academic_Class-*/course_*") if c.is_dir())
+    cursos = [Path(c).resolve() for c in a.cursos] or sorted(c for c in AREAS.glob("Academic_Class-*/course_*") if c.is_dir()) + sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "temario.yml").exists() or (p / "curso.yml").exists())   # M3
 
     # 1) plan de renombres y frontmatter
     renombres: dict[Path, Path] = {}
@@ -160,8 +160,8 @@ def main() -> int:
     por_base = {p.name[:-3]: renombres[p].name[:-3] for p in renombres}
     por_nombre = {p.name: renombres[p].name for p in renombres}
     tocados = 0
-    objetivos = [q for aa in sorted(AREAS.glob("Academic_Class-*")) for q in recorrer_md(aa)]
-    objetivos += [t for aa in sorted(AREAS.glob("Academic_Class-*")) for t in aa.glob("course_*/temario.yml")]
+    objetivos = [q for aa in sorted(AREAS.glob("Academic_Class-*")) for q in recorrer_md(aa)] + [q for cc in sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "temario.yml").exists() or (p / "curso.yml").exists()) for q in recorrer_md(cc)]   # M3
+    objetivos += [t for aa in sorted(AREAS.glob("Academic_Class-*")) for t in aa.glob("course_*/temario.yml")] + sorted((FW / "docencia" / "cursos").glob("*/temario.yml"))
     seds = []
     for q in objetivos:
         t = contenido.get(q) or q.read_text(encoding="utf-8", errors="replace")

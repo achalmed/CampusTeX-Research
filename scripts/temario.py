@@ -75,7 +75,8 @@ def slug_web(s: str) -> str:
 def cursos_objetivo(args_cursos: list[str]) -> list[Path]:
     if args_cursos:
         return [Path(c).resolve() for c in args_cursos]
-    return sorted(p for p in AREAS.glob("Academic_Class-*/course_*") if p.is_dir())
+    # M3 (2026-09-15): los cursos viven en docencia/cursos/<slug>/; el glob de áreas queda por compatibilidad hasta M5
+    return sorted(p for p in AREAS.glob("Academic_Class-*/course_*") if p.is_dir()) + sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "temario.yml").exists() or (p / "curso.yml").exists())
 
 
 def leer_yaml(p: Path) -> dict:
@@ -301,6 +302,8 @@ def generar_esqueleto(curso: Path, t: dict, aplicar: bool) -> str:
     creados = 0
     for u in t.get("unidades", []):
         for tema in u["temas"]:
+            if not tema.get("archivo"):
+                continue   # M3: archivo null = sin nota; ya no se crean esqueletos
             f = curso / tema["archivo"]
             if f.exists():
                 continue
@@ -517,7 +520,7 @@ def main() -> int:
             if not rd.exists() or rd.read_text(encoding="utf-8") != render_readme(t):
                 drift += 1
                 log(f"  README desfasado: {c.relative_to(DOCS)}")
-            faltan = [x["archivo"] for u in t.get("unidades", []) for x in u["temas"] if not (c / x["archivo"]).exists()]
+            faltan = [x["archivo"] for u in t.get("unidades", []) for x in u["temas"] if x.get("archivo") and not (c / x["archivo"]).exists()]   # archivo: null = nota aún no escrita (M3)
             if faltan:
                 log(f"  {len(faltan)} archivo(s) de tema sin crear en {c.name} (ejecuta generar --que esqueleto)")
         log(f"{'OK' if drift == 0 else 'DRIFT'}: {len(cursos_t)} cursos, {drift} README desfasados")

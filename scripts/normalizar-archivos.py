@@ -164,7 +164,8 @@ def areas():
 
 
 def cursos():
-    return sorted(c for a in areas() for c in a.glob("course_*") if c.is_dir())
+    # M3 (2026-09-15): los cursos viven en docencia/cursos/<slug>/; el glob de áreas queda por compatibilidad hasta M5
+    return sorted(c for a in areas() for c in a.glob("course_*") if c.is_dir()) + sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "temario.yml").exists() or (p / "curso.yml").exists())
 
 
 def ascii_min(s: str) -> str:

@@ -91,7 +91,7 @@ def dump_temario(p: Path, t: dict) -> None:
 
 def cursos() -> dict[str, tuple[Path, dict]]:
     out = {}
-    for ty in AREAS.glob("Academic_Class-*/course_*/temario.yml"):
+    for ty in list(AREAS.glob("Academic_Class-*/course_*/temario.yml")) + sorted((FW / "docencia" / "cursos").glob("*/temario.yml")):   # M3
         t = leer_yaml(ty)
         out[t.get("id") or t["curso"]] = (ty.parent, t)      # `curso` → `id` (NORMATIVA §7, M7)
     return out
