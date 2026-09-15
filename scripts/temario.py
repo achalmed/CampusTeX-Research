@@ -38,7 +38,7 @@ RESUMEN = TAREAS / "temarios-cursos.md"                    # vista checklist (NO
 
 EMOJI_DEFAULT = "📘"
 MARCA_INI, MARCA_FIN = "<!-- temario:inicio (generado por 10 Class/scripts/temario.py; no editar a mano) -->", "<!-- temario:fin -->"
-PUNTERO_SKILL = "<!-- temario.yml -->"
+PUNTERO_SKILL = "<!-- curso.yml -->"   # marca de idempotencia del puntero en cada dominio (antes <!-- temario.yml -->, M6)
 PLACEHOLDER_DESC = re.compile(r"^(Estructura 00–09\.?|Curso( completo)? \(estructura 00–09\)\.?)$")
 
 # Correspondencias que no se deducen del nombre (curso → dominio FUAT)

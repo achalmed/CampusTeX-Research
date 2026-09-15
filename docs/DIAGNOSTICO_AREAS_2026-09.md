@@ -627,3 +627,20 @@ el artefacto ausente), sílabo `academic-report` compilado con `build.sh`, ciclo
 generadores en simulación, `doctor.sh` completo. Lección: `bash -n` solo comprueba el primer archivo que recibe.
 Pendiente que hereda M7: los decks heredados con `%!TEX program = xelatex` y logo ausente (`cau-logo.png`) no
 compilan; el compilador universal elige pdflatex para ellos. Bitácora en `meta/reparaciones/R5_herramientas_2026-09-15/`.
+
+### M6 · Referencias externas (2026-09-15, hecho)
+
+| Bloque | Qué se hizo |
+|---|---|
+| Rutas literales (`docencia/migracion/reescribir-referencias-m6.py`, mapa `mapa-m6.csv`) | resolutor que encadena las bitácoras M1 → M3 → M4 (con retroceso por carpeta y rutas con espacios): 364 referencias reescritas en las fichas de Calibre (11), los reportes e historial de `ingesta_cursos` (11), los apuntes de `01 notes/40-cursos` (enlaces al tema; 3 notas esqueleto retiradas → enlace al curso), una ficha de `03 writing`, `INTEGRACION_ECOSISTEMA.md`, el README del compilador; 44 líneas de identidad dentro de `docencia/cursos` pasan a su ruta actual |
+| Código vivo | `meta/doctor/lib/chequeos.sh` y `temarios_calibre.py`, `meta/consultar/config.sh`, `scripts_for_fuentes/ingesta_cursos` (config, clasificar, ingestar, temario_bib, suite), `scripts_git_studio/repos-config.yml` (dos áreas → `10 Class/docencia`) leen `docencia/cursos/*/curso.yml`, `05-recursos` y `dictados/` |
+| Prosa normativa | `CLAUDE.md` del workspace, `prompts/ECOSISTEMA_APRENDIZAJE.md`, `MEJORA_CONTINUA.md`, `METODO_DOCUMENTAL.md`, `prompt_09`, los cuatro prompts de `05 docencia`, `learning-skill` (SKILL, preset, acciones, 21 punteros de dominio; marca `<!-- curso.yml -->`), `meta/ARQUITECTURA.md`, `NORMATIVA_ARCHIVOS.md` (§ cursos y tabla de registros: curso · sesión · dictado), `MODELO_METADATOS.md`, `04 index/cursos/README.md` |
+| Vistas regeneradas desde `curso.yml` | 27 fichas web («Contenidos / Sílabo»), 23 temarios del skill, `05 tasks/temarios-cursos.md`, README de los 50 cursos (15 títulos heredados del nombre de carpeta corregidos: `Stata — Curso Base` → `Stata`, etc.) |
+
+Residuos que se dejan a propósito: bitácoras y diagnósticos históricos de `meta/`, `prompts/archive`, `meta/grafo` (instantánea),
+los cursos tomados de `01 notes/40-cursos-y-formacion/inei_*` y `uni_*` (conservan su propio 00–09 interno: régimen del vault, no del
+framework), los ids antiguos en los reportes de ingesta (registros; `curso.yml: alias` los resuelve), `datasets[].clave` de `curso.yml`
+(reflejan la ruta real del aterrizaje en `02 analysis`), `docencia/_inbox` y `guion.md` (texto heredado), y los comentarios «Sucesor de».
+`README.md`, `docs/09-estandar-00-09.md`, `docs/00-arquitectura.md` y el cuerpo de `CLAUDE.md` del framework describen aún el 00–09: M8.
+Los posts de `04 index/_pubs` conservan `curso: <id antiguo>`; `alias` en `curso.yml` los resuelve (`enlazar.py verificar`: 0 desconocidos).
+Bitácora: `meta/reparaciones/R6_referencias_2026-09-15/`.
