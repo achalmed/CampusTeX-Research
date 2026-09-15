@@ -5,13 +5,13 @@ Guía para Claude Code (claude.ai/code) y para Codex (`AGENTS.md` es un enlace s
 ## Migración en curso (R1/R2, 2026-09-15) — leer antes que el resto
 
 `docs/DIAGNOSTICO_AREAS_2026-09.md` reorganiza los cursos en fases M0–M8 (§6; ejecución en §8).
-Estado: **M4 hecha**. Los 23 submódulos `areas/Academic_Class-*` ya no existen: sus repos se
+Estado: **M5 hecha**. Los 23 submódulos `areas/Academic_Class-*` ya no existen: sus repos se
 consolidaron, con historial, en el **único submódulo `docencia/`** (repo `Academic_Class`), y desde M3 los
 cursos viven en `docencia/cursos/<slug>/` con `01-diseno · 02-contenido · 03-sesiones/sNN-<slug> ·
 04-evaluaciones · 05-recursos` (mapas: `docencia/migracion/mapa-m3.csv`, `mapa-m4.csv`). Registros: `curso.yml` (sucesor de
 `temario.yml`), `03-sesiones/sNN-<slug>/{sesion.yml, guion.md, <artefacto>}` sin subcarpetas de anatomía, y
-`dictados/<AAAA-ciclo>-<institucion>-<materia>/dictado.yml`. Los scripts `validate.sh`, `new-*.sh`, `publish-*.sh`
-y `stats.sh` siguen escritos para el 00–09 hasta M5; `temario-generar.sh` y `enlazar.py` ya leen `curso.yml`.
+`dictados/<AAAA-ciclo>-<institucion>-<materia>/dictado.yml`. Desde M5 **todo `scripts/` opera sobre este modelo** (bloque «Comandos»); el 00–09 ya no
+existe en el tooling ni en los scaffolds. Quedan M6 (referencias externas), M7 (verificación) y M8 (documentación).
 Los 23 repos originales, intactos, están en `meta/reparaciones/R2_consolidacion_2026-09-15_090152/areas_originales/` hasta el push de M0 y la verificación de M3. Los datos de
 estudiantes viven en `registro/` (repo privado hermano, ignorado). Todo lo que sigue en este archivo
 que diga `areas/Academic_Class-<Área>/course_NN_<slug>/0N_…` se lee, mientras tanto, como
@@ -124,49 +124,42 @@ archivos: llama a `core/archivos.py validar "10 Class"`, M7 2026-09-15).
 ## Comandos
 
 ```bash
-# Scaffolds de carpetas (copian desde scaffolds/ hacia un curso/Academic_Class)
-./scripts/new-course.sh  <ACADEMIC_CLASS_DIR> NN "Título"          # curso 00–09
-./scripts/new-session.sh <COURSE_DIR> NN "Título" [--quarto]        # sesión SNN_slug
-./scripts/new-period.sh  <COURSE_DIR> <AAAA-ciclo>                  # dictado en 09_SEMESTRES
+# Los argumentos CURSO y DICTADO aceptan ruta o slug (docencia/cursos/<slug>, docencia/dictados/<clave>). M5, 2026-09-15.
 
-# Documentos LaTeX (copian desde templates/ y compilan con LuaLaTeX)
-./scripts/new-presentation.sh <COURSE_DIR> NN "Título" [--tipo clase]   # diapositivas → SNN/02_Clase (academic-beamer)
-./scripts/new-evaluacion.sh   <COURSE_DIR> <tipo|01-12> "Título"        # examen → 04_EVALUACIONES (academic-exam)
-./scripts/new-report.sh       <COURSE_DIR> <silabo|calendario|nota-docente|rubrica> "Título"  # academic-report
-./scripts/build.sh <ARCHIVO.tex> [--modo examen|claves|soluciones|todos]  # compila cualquier .tex con LuaLaTeX
+# Crear (solo el registro y el artefacto del tipo; sin árboles de carpetas)
+./scripts/new-course.sh  SLUG "Título" [--tipo asignatura|herramienta|nivelacion|taller] [--area a,b] [--materia-web m]
+./scripts/new-session.sh CURSO NN "Título" [--tipo clase|laboratorio|taller|evaluacion] [--quarto] [--artefacto NOMBRE]
+./scripts/new-dictado.sh AAAA-ciclo INSTITUCION MATERIA "Título"   # docencia/dictados/<clave>/dictado.yml + registro/<clave>/
 
-# Currículo único (F5.1): temario.yml es la fuente; README/esqueletos/web/skill/checklist se generan
-./scripts/temario-generar.sh migrar   [--aplicar] [COURSE_DIR...]   # README + 02_CONTENIDO → temario.yml (solo cursos nuevos/heredados)
-./scripts/temario-generar.sh generar  [--aplicar] [--que readme,esqueleto,web,skill,resumen] [COURSE_DIR...]
-./scripts/temario-generar.sh verificar                              # exit!=0 si un README no coincide con su temario (lo corre el doctor)
-python3 scripts/enlazar.py posts|simuladores|examenes [--aplicar]   # F5.3: posts→curso, modelos del laboratorio→tema, banco de exámenes→curso
-python3 scripts/enlazar.py verificar                                # rutas de recursos/bancos y cursos de los posts (lo corre el doctor)
+# Documentos LaTeX (plantillas de templates/, identidad única, LuaLaTeX)
+./scripts/new-presentation.sh CURSO NN "Título" [--tipo clase]        # deck academic-beamer en la sesión (declara artefacto)
+./scripts/new-evaluacion.sh   CURSO <tipo|01-12> "Título" [--fecha AAAAMMDD]   # → 04-evaluaciones/<sub>/AAAAMMDD_sig.tex
+./scripts/new-report.sh       CURSO <silabo|calendario|nota-docente|rubrica> "Título"   # → 01-diseno/
+./scripts/build.sh ARCHIVO.tex [--modo examen|claves|soluciones|todos]   # compila cualquier .tex con LuaLaTeX
+./scripts/build-session.sh CURSO NN        # compila el artefacto declarado en sesion.yml (.tex/.qmd)
+./scripts/build-course.sh  CURSO [--solo-sesiones]
+
+# Currículo único: curso.yml es la fuente; README/web/skill/checklist se generan
+./scripts/temario-generar.sh generar  [--aplicar] [--que readme,web,skill,resumen] [CURSO...]
+./scripts/temario-generar.sh verificar                              # exit!=0 si un README no coincide con su curso.yml (lo corre el doctor)
+./scripts/temario-generar.sh migrar   [--aplicar] [CURSO...]        # solo cursos heredados sin curso.yml
+python3 scripts/enlazar.py posts|simuladores|examenes [--aplicar]   # F5.3; verificar lo corre el doctor
 
 # Validación y resumen
-./scripts/validate.sh <COURSE_DIR | ACADEMIC_CLASS_DIR>            # invariantes 00–09 (exit!=0 si error)
-./scripts/stats.sh    <COURSE_DIR>                                # resumen por sesión
+./scripts/validate.sh CURSO|DICTADO|--todos    # reglas §4 (lista cerrada, sin vacías, artefacto por tipo, guion.md)
+./scripts/stats.sh CURSO                       # sesiones: tipo · estado · artefacto · PDF · guion
+./scripts/doctor.sh                            # entorno + validate --todos + verificadores + _inbox + binarios + normativa
 
-# Normativa de archivos (meta/NORMATIVA_ARCHIVOS.md; M7, 2026-09-15). Simulan sin --aplicar.
+# Normativa de archivos (meta/NORMATIVA_ARCHIVOS.md). Simulan sin --aplicar.
 python3 scripts/normalizar-archivos.py todo|registros|cursos|nombres|cabeceras|frontmatter|artefactos|vendor [--aplicar] [--bitacora DIR]
-python3 scripts/normalizar-notas.py [--aplicar] [--bitacora DIR] [COURSE_DIR...]   # notas de 02_CONTENIDO a kebab + frontmatter
-python3 ~/Documents/core/archivos.py validar "$HOME/Documents/10 Class"           # 0 fallos es la línea base (lo corre el doctor)
+python3 scripts/normalizar-notas.py [--aplicar] [--bitacora DIR] [CURSO...]
 
-# Compilación de diapositivas (decks en 02_Clase/)
-./scripts/build-session.sh <COURSE_DIR> NN
-./scripts/build-course.sh  <COURSE_DIR> [--solo-sesiones]
+# Publicación: publicar = etiquetar (tag dictado/<clave>/<sesion>) + producto git-ignorado; la web enlaza por hardlink
+./scripts/publish-session.sh DICTADO CURSO NN [--refrescar]   # → docencia/dictados/<clave>/publicacion/<web>/
+./scripts/publish-web.sh     DICTADO [--aplicar]              # dictado.yml → 04 index/cursos/<materia>/<edicion>/ (simula sin --aplicar)
 
-# Publicación MOOC (publicar = congelar la sesión en el dictado) y web (F5.2)
-./scripts/publish-session.sh <COURSE_DIR> NN <AAAA-ciclo> [--refrescar]  # → 09_SEMESTRES/<periodo>/publicacion/SNN/ (PDF + odt/ods/docx/xlsx…)
-./scripts/publish-web.sh     <COURSE_DIR> <AAAA-ciclo> [--aplicar]       # dictado.yml → 04 index/cursos/<curso>/<edicion>/ por HARDLINK (simula sin --aplicar)
-
-# Evaluaciones (exámenes/prácticas en 04_EVALUACIONES/)
-./scripts/new-evaluacion.sh  <COURSE_DIR> <tipo|01-12> "Título" [--fecha AAAAMMDD]
-./scripts/build.sh <ARCHIVO.tex> --modo examen|claves|soluciones|todos  # compila la evaluación
-
-./scripts/clean.sh [--pdf] [DIR]                                  # DIR por defecto = framework
-./scripts/doctor.sh                                              # chequeo de entorno
-
-bash -n scripts/*.sh scripts/lib/*.sh                            # chequeo de sintaxis
+./scripts/clean.sh [--pdf] [DIR]
+bash -n scripts/<archivo>.sh            # uno por invocación: con varios archivos bash -n solo comprueba el primero
 ```
 
 `compile_tex` prefiere el compilador universal del workspace

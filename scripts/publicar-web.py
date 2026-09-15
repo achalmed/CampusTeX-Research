@@ -1,26 +1,22 @@
 #!/usr/bin/env python3
 """
-publicar-web.py — Publica un DICTADO (periodo) en la web del hub por HARDLINK (F5.2, 2026-09-06).
+publicar-web.py — Publica un DICTADO en la web del hub por HARDLINK (F5.2, 2026-09-06; modelo §4.4 desde M5, 2026-09-15).
 
-  publicar-web.py COURSE_DIR PERIODO [--aplicar]
+  publicar-web.py DICTADO [--aplicar]         DICTADO: clave o ruta de docencia/dictados/<clave>
 
-Lee COURSE_DIR/09_SEMESTRES/PERIODO/dictado.yml (el manifiesto del dictado):
+Lee docencia/dictados/<clave>/dictado.yml:
 
-  periodo: 2026-I
-  institucion: CAU-UNSCH
-  web: {curso: metodologia-de-la-investigacion, edicion: 2026-1-cau-unsch}
+  web: {materia: metodologia-de-la-investigacion, edicion: 2026-1-cau-unsch}
   sesiones:
-    - {orden: 1, curso: course_01_monografias, sesion: 1, web: session_01_la_monografia}
-    - {orden: 3, curso: course_03_seminario-de-investigacion, sesion: 1, web: session_03_busqueda_de_informacion}
+    - {orden: 1, curso: monografias, sesion: s01-la-monografia, web: session_01_la_monografia}
 
-Para cada sesión toma su módulo congelado `<curso>/09_SEMESTRES/PERIODO/publicacion/SNN_slug/`
-(creado por publish-session.sh) y en `04 index/cursos/<web.curso>/<web.edicion>/<web>/`:
+Para cada sesión toma su módulo `publicacion/<web>/` (creado por publish-session.sh) y en
+`04 index/cursos/<web.materia>/<web.edicion>/<web>/`:
   · slides/ evaluation/ practice/ homework/ → cada archivo pasa a ser un HARDLINK del módulo
     (si la web tenía una copia, se sustituye por el enlace: un solo inodo, dos canales);
-  · index.qmd y resources/_links.md se CREAN si faltan (desde metadata.yml de la sesión) y nunca se sobrescriben;
+  · index.qmd y resources/_links.md se CREAN si faltan (desde sesion.yml de la sesión) y nunca se sobrescriben;
   · la portada de la edición (index.qmd) se crea si falta.
-Un `curso` en `sesiones` es relativo al área del curso principal (o una ruta absoluta).
-Sin --aplicar es simulación. Requiere python3 + pyyaml.
+Un dictado `legado: true` no se publica (sus fuentes no están en el framework). Sin --aplicar es simulación.
 """
 from __future__ import annotations
 
@@ -51,19 +47,24 @@ def frontmatter_title(qmd: Path) -> str | None:
     return m.group(1) if m else None
 
 
-def modulo_de(curso: Path, periodo: str, nn: int) -> Path | None:
-    pub = curso / "09_SEMESTRES" / periodo / "publicacion"
-    for p in sorted(pub.glob(f"S{nn:02d}_*")):
-        if p.is_dir():
-            return p
+DOCENCIA = FW / "docencia"
+
+
+def dictado_dir(arg: str) -> Path | None:
+    for cand in (Path(arg), DOCENCIA / "dictados" / arg):
+        if (cand / "dictado.yml").exists():
+            return cand.resolve()
     return None
 
 
-def sesion_de(curso: Path, nn: int) -> Path | None:
-    for p in sorted((curso / "03_SESIONES").glob(f"S{nn:02d}_*")):
-        if p.is_dir():
-            return p
-    return None
+def modulo_de(dictado: Path, web: str) -> Path | None:
+    p = dictado / "publicacion" / web
+    return p if p.is_dir() else None
+
+
+def sesion_de(curso: str, sesion: str) -> Path | None:
+    p = DOCENCIA / "cursos" / curso / "03-sesiones" / sesion
+    return p if p.is_dir() else None
 
 
 def index_qmd_sesion(meta: dict, orden: int, web_curso_titulo: str, edicion: str, institucion: str, slides_pdf: str | None) -> str:
@@ -111,30 +112,29 @@ def index_qmd_edicion(web_curso_titulo: str, periodo_web: str, institucion: str,
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("curso"); ap.add_argument("periodo"); ap.add_argument("--aplicar", action="store_true")
+    ap.add_argument("dictado"); ap.add_argument("--aplicar", action="store_true")
     a = ap.parse_args()
     aplicar = a.aplicar
-    curso = Path(a.curso).resolve()
-    dictado_f = curso / "09_SEMESTRES" / a.periodo / "dictado.yml"
-    if not dictado_f.exists():
-        print(f"No existe {dictado_f}"); return 3
-    d = leer_yaml(dictado_f)
+    dictado = dictado_dir(a.dictado)
+    if dictado is None:
+        print(f"No es un dictado (falta dictado.yml): {a.dictado}"); return 3
+    d = leer_yaml(dictado / "dictado.yml")
+    if d.get("legado"):
+        print(f"{dictado.name}: dictado legado (sin fuentes en el framework); la web conserva su copia. Nada que publicar."); return 0
     web = d["web"]; institucion = d.get("institucion", "")
-    web_curso_dir = WEB_CURSOS / web["curso"]
+    web_curso_dir = WEB_CURSOS / (web.get("materia") or web.get("curso"))
     if not web_curso_dir.is_dir():
         print(f"No existe la ficha web {web_curso_dir} (créala con temario-generar o desde _plantillas/curso.qmd)"); return 3
     titulo_web = frontmatter_title(web_curso_dir / "index.qmd") or web["curso"]
     edicion_dir = web_curso_dir / web["edicion"]
-    periodo_web = web["edicion"].split("-cau")[0].replace("-", "-") if "-" in web["edicion"] else a.periodo
+    periodo_web = web["edicion"].split("-cau")[0] if "-cau" in web["edicion"] else d.get("periodo", web["edicion"])
     enlaces = sustituidos = creados = huerfanos = 0
     faltan = []
     for s in sorted(d["sesiones"], key=lambda x: x["orden"]):
-        cdir = Path(s["curso"]) if Path(s["curso"]).is_absolute() else curso.parent / s["curso"]
-        nn = int(s["sesion"])
-        mod = modulo_de(cdir, a.periodo, nn)
+        mod = modulo_de(dictado, s["web"])
         if mod is None:
-            faltan.append(f"{cdir.name} S{nn:02d}")
-            print(f"  {s['web']:<40} SIN MÓDULO → ./scripts/publish-session.sh \"{cdir}\" {nn:02d} {a.periodo}")
+            faltan.append(f"{s['curso']} {s['sesion']}")
+            print(f"  {s['web']:<40} SIN MÓDULO → ./scripts/publish-session.sh {dictado.name} {s['curso']} {s['sesion'][1:3]}")
             continue
         webdir = edicion_dir / s["web"]
         slides_pdf = None
@@ -168,8 +168,8 @@ def main() -> int:
                         huerfanos += 1
                         print(f"  {s['web']:<40} huérfano en la web (no está en el módulo): {sub}/{f.name}")
         # páginas: solo si faltan
-        ses = sesion_de(cdir, nn)
-        meta = leer_yaml(ses / "metadata.yml") if ses and (ses / "metadata.yml").exists() else {}
+        ses = sesion_de(s["curso"], s["sesion"])
+        meta = leer_yaml(ses / "sesion.yml") if ses and (ses / "sesion.yml").exists() else {}
         idx = webdir / "index.qmd"
         if not idx.exists():
             if aplicar:
@@ -183,7 +183,7 @@ def main() -> int:
                 (links.parent / "readings").mkdir(exist_ok=True)
                 links.write_text(links_md(webdir), encoding="utf-8")
             print(f"  {s['web']:<40} resources/_links.md {'creado' if aplicar else 'se crearía'}")
-        print(f"  {s['web']:<40} ← {cdir.name}/…/publicacion/{mod.name}")
+        print(f"  {s['web']:<40} ← {s['curso']}/03-sesiones/{s['sesion']}  (módulo publicacion/{mod.name})")
     if not (edicion_dir / "index.qmd").exists():
         if aplicar:
             edicion_dir.mkdir(parents=True, exist_ok=True)

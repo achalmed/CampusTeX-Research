@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""scripts/normalizar-notas.py — las notas de estudio de `02_CONTENIDO/**/*.md` al régimen del vault.
+"""scripts/normalizar-notas.py — las notas de estudio de `02-contenido/*.md` al régimen del vault.
 
 Objetivo: que cada apunte de un curso se llame en kebab-case (`1 1 curso 0.md` →
   `1-1-curso-0.md`) y lleve el frontmatter único (`tipo: apunte`, `titulo`, `estado`,
   `tags`), sin perder ningún enlace: los wikilinks, los enlaces Markdown relativos y
-  los `archivo:` de cada `temario.yml` se reescriben con el nombre nuevo.
-Método: recorre `areas/*/course_*/02_CONTENIDO/**/*.md` (salvo README.md), calcula el
+  los `archivo:` de cada `curso.yml` se reescriben con el nombre nuevo.
+Método: recorre `docencia/cursos/*/02-contenido/*.md` (salvo README.md), calcula el
   nombre kebab y el frontmatter nuevo conservando todas las claves que ya hubiera,
   renombra con `git mv` cuando el archivo está versionado y sustituye las referencias
-  en todos los `.md` y `temario.yml` de las áreas. Simula por defecto.
+  en todos los `.md` y `curso.yml` de las áreas. Simula por defecto.
 Fundamento: meta/NORMATIVA_ARCHIVOS.md §4 (nombres), §6.2 (Markdown), §10.4 (las notas
   de estudio de 10 Class son régimen del vault); encargo M7 (2026-09-15) punto 4.
 Alternativa: renombrar con `rename` y arreglar enlaces a mano. Se descarta: 2 000
   archivos y 63 wikilinks + 9 enlaces relativos + 1 700 `archivo:` que se romperían.
-Límite: no toca notas fuera de `02_CONTENIDO` ni referencias en otros repos
+Límite: no toca notas fuera de `02-contenido` ni referencias en otros repos
   (`01 notes`, `prompts`): las imprime como `sed` para el informe.
 
 Uso:
@@ -31,7 +31,7 @@ import urllib.parse
 from pathlib import Path
 
 FW = Path(__file__).resolve().parents[1]
-AREAS = FW / "areas" if (FW / "areas").is_dir() else FW / "docencia" / "_migracion"  # M2 (2026-09-15): las áreas viven en docencia/_migracion hasta M3; M5 rehace esto
+CURSOS = FW / "docencia" / "cursos"     # M5 (2026-09-15)
 SALTAR = {".git", "_ESTANDARIZACION", "vendor", "_POR_REVISAR", "build", "data", "code", "legacy", "archive", "archivo", "registro", "logs", "originales", "respaldos", "backup", "backups"}
 ESTADO_MAP = {"completada": "hecho", "impartida": "hecho", "migrada": "borrador", "en_preparacion": "borrador",
               "en curso": "activo", "en-curso": "activo", "planeada": "borrador"}
@@ -81,7 +81,7 @@ def recorrer_md(raiz: Path):
 
 def notas(cursos: list[Path]):
     for c in cursos:
-        cont = c / "02_CONTENIDO"
+        cont = c / "02-contenido"
         if cont.is_dir():
             for p in recorrer_md(cont):
                 if p.name != "README.md":
@@ -137,7 +137,7 @@ def main() -> int:
     BIT["aplicar"], BIT["dir"] = a.aplicar, a.bitacora
     if a.bitacora:
         Path(a.bitacora).mkdir(parents=True, exist_ok=True)
-    cursos = [Path(c).resolve() for c in a.cursos] or sorted(c for c in AREAS.glob("Academic_Class-*/course_*") if c.is_dir()) + sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "temario.yml").exists() or (p / "curso.yml").exists())   # M3
+    cursos = [Path(c).resolve() for c in a.cursos] or sorted(p for p in CURSOS.glob("*") if (p / "curso.yml").exists())
 
     # 1) plan de renombres y frontmatter
     renombres: dict[Path, Path] = {}
@@ -156,12 +156,12 @@ def main() -> int:
             renombres[p] = dst
     print(f"notas: {sum(1 for _ in notas(cursos))} · con frontmatter nuevo: {len(contenido)} · a renombrar: {len(renombres)}")
 
-    # 2) referencias: wikilinks por nombre base, enlaces Markdown relativos y `archivo:` de temario.yml
+    # 2) referencias: wikilinks por nombre base, enlaces Markdown relativos y `archivo:` de curso.yml
     por_base = {p.name[:-3]: renombres[p].name[:-3] for p in renombres}
     por_nombre = {p.name: renombres[p].name for p in renombres}
     tocados = 0
-    objetivos = [q for aa in sorted(AREAS.glob("Academic_Class-*")) for q in recorrer_md(aa)] + [q for cc in sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "temario.yml").exists() or (p / "curso.yml").exists()) for q in recorrer_md(cc)]   # M3
-    objetivos += [t for aa in sorted(AREAS.glob("Academic_Class-*")) for t in aa.glob("course_*/temario.yml")] + sorted((FW / "docencia" / "cursos").glob("*/curso.yml"))
+    objetivos = [q for cc in cursos for q in recorrer_md(cc)]
+    objetivos += [cc / "curso.yml" for cc in cursos if (cc / "curso.yml").exists()]
     seds = []
     for q in objetivos:
         t = contenido.get(q) or q.read_text(encoding="utf-8", errors="replace")

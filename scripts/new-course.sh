@@ -1,46 +1,45 @@
 #!/usr/bin/env bash
 # ============================================================
-# new-course.sh — Crea un curso nuevo (estructura 00–09)
+# new-course.sh — Crea un curso nuevo en docencia/cursos/<slug>/ (§4.2, M5)
 # ============================================================
 # Uso:
-#   ./scripts/new-course.sh ACADEMIC_CLASS_DIR NUM "TÍTULO"
+#   ./scripts/new-course.sh SLUG "TÍTULO" [--tipo asignatura|herramienta|nivelacion|taller] [--area a,b] [--materia-web m]
 #
 # Ejemplo:
-#   ./scripts/new-course.sh ~/Documents/10 Class/areas/Academic_Class-Estadistica 00 "Estadística Descriptiva"
+#   ./scripts/new-course.sh econometria-iii "Econometría III" --tipo asignatura --area estadistica,econometria --materia-web econometria
 #
-# Copia scaffolds/course (00–09) al Academic_Class
-# indicado como course_NN_<slug>/.
+# Crea SOLO el registro (curso.yml) y el README.md generado. Las carpetas 01-diseno … 05-recursos
+# se crean al primer uso (new-session.sh, new-evaluacion.sh, new-report.sh); una carpeta vacía es error del validador.
 # ============================================================
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
 
-usage() { sed -n '2,14p' "${BASH_SOURCE[0]}"; exit 1; }
-[[ $# -ge 3 ]] || usage
-
-AC="$1"
-NUM="$(printf '%02d' "$((10#$2))")"
-TITLE="$3"
-SLUG="$(slugify "$TITLE")"
-
-[[ -d "$AC" ]] || die "No existe el Academic_Class: $AC"
-[[ -d "$SCAFFOLDS_DIR/course" ]] || die "Falta $SCAFFOLDS_DIR/course"
-
-DEST="$AC/course_${NUM}_${SLUG}"
+usage() { sed -n '2,13p' "${BASH_SOURCE[0]}"; exit 1; }
+[[ $# -ge 2 ]] || usage
+SLUG="$1"; TITLE="$2"; shift 2
+TIPO="asignatura"; AREAS=""; MATERIA="null"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --tipo) TIPO="$2"; shift 2 ;;
+    --area) AREAS="$2"; shift 2 ;;
+    --materia-web) MATERIA="$2"; shift 2 ;;
+    *) usage ;;
+  esac
+done
+is_kebab "$SLUG" || die "El slug debe ser kebab-case ASCII: $SLUG"
+case "$TIPO" in asignatura|herramienta|nivelacion|taller) : ;; *) die "tipo no admitido: $TIPO" ;; esac
+DEST="$CURSOS_DIR/$SLUG"
 [[ -e "$DEST" ]] && die "Ya existe: $DEST"
+[[ -d "$CURSOS_DIR" ]] || die "No existe $CURSOS_DIR (¿submódulo docencia/ sin inicializar?)"
 
-info "Creando curso $NUM: '$TITLE'"
-cp -a "$SCAFFOLDS_DIR/course" "$DEST"
-
-cat > "$DEST/README.md" <<EOF
-# $TITLE
-
-Curso \`course_${NUM}_${SLUG}\`. Estructura estándar 00–09
-(ver \`~/Documents/10 Class/README.md\`).
-
-- \`00_ADMINISTRACION\` … \`08_INVESTIGACION\` — contenido canónico y atemporal del curso.
-- \`09_SEMESTRES/<periodo>\` — cada dictado: registro privado + publicación MOOC
-  (crear con \`new-period.sh\`; se congela por sesión).
-EOF
-
+ETIQUETA="${SLUG//-/_}"
+AREAS_YML="$(echo "$AREAS" | sed -E 's/[[:space:]]//g; s/,/, /g')"
+mkdir -p "$DEST"
+for f in curso.yml README.md; do
+  sed -e "s|{{COURSE_SLUG}}|$SLUG|g" -e "s|{{TITLE}}|$TITLE|g" -e "s|{{COURSE_TYPE}}|$TIPO|g" \
+      -e "s|{{AREAS}}|$AREAS_YML|g" -e "s|{{ETIQUETA}}|$ETIQUETA|g" -e "s|{{MATERIA_WEB}}|$MATERIA|g" \
+      "$SCAFFOLDS_DIR/curso/$f" > "$DEST/$f"
+done
 ok "Curso creado: $DEST"
-echo "Siguiente: ./scripts/new-session.sh \"$DEST\" 01 \"Título de la sesión\""
+"$FW_DIR/scripts/validate.sh" "$DEST" >/dev/null && ok "validate.sh: sin errores"
+echo "Siguiente: ./scripts/new-session.sh $SLUG 01 \"Título de la sesión\" [--tipo clase|laboratorio|taller|evaluacion]"

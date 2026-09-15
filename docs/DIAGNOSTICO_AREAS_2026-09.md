@@ -607,3 +607,23 @@ y los subdirectorios de contenido de la sesión no se renombran (los leen `.do`,
 `validate.sh` con las reglas nuevas (lista cerrada de carpetas de curso, artefacto por tipo, `guion.md`, `_inbox` vacío),
 `new-*.sh`, `publish-*.sh` y `stats.sh` sobre `curso.yml`/`sesion.yml`/`dictado.yml`. Detalle y decisiones en
 `meta/reparaciones/R4_registros_2026-09-15_100908/README.md`.
+
+### M5 · Herramientas (2026-09-15, hecho)
+
+| Pieza | Cambio |
+|---|---|
+| `scripts/lib/common.sh` | `is_course` = existe `curso.yml`; `course_dir`/`dictado_dir` aceptan ruta o slug; `list_sessions` = `03-sesiones/s[0-9][0-9]-*`; `session_artifact`, `yaml_get`, `slugify` en kebab; sin `libraries/` |
+| `validate.sh` | reglas §4: lista cerrada de carpetas de curso, sin vacías ni `.gitkeep`, `curso.yml`/`sesion.yml` con núcleo y `tipo`, `guion.md`, artefacto declarado y coherente con el tipo, dictados con sesiones existentes; `--todos` |
+| `new-course.sh` · `new-session.sh` · `new-dictado.sh` | crean solo el registro y el artefacto del tipo (deck, cuaderno, evaluación); `new-period.sh` retirado; scaffolds 00–09 (89 archivos) sustituidos por `scaffolds/{curso,sesion,dictado}/` (8) |
+| `new-presentation.sh` · `new-evaluacion.sh` · `new-report.sh` · `build-*.sh` | destinos `01-diseno/`, `04-evaluaciones/`, raíz de sesión; compilan el artefacto declarado |
+| `publish-session.sh` · `publicar-web.py` | módulo `dictados/<clave>/publicacion/<web>/` (producto ignorado); congelar = tag `dictado/<clave>/<sesion>`; la web agrupa por `web.materia`; dictado `legado` no se publica |
+| `temario.py` · `enlazar.py` · `normalizar-*.py` | leen `docencia/cursos/*/curso.yml`; sin esqueletos (`archivo: null` hasta que la nota exista); `migrar` escribe `curso.yml` |
+| `doctor.sh` | además del entorno y la normativa: `validate --todos`, `temario verificar`, `enlazar verificar`, `_inbox/` no vacío, binarios > 5 MB, `registro/` con remote |
+| `.gitignore` de docencia | `*.mht` (el de 15 MB deja de versionarse; sigue en disco) |
+
+Pruebas: curso y dictado desechables con las cinco variantes de sesión (validate 0 errores; el validador detecta
+el artefacto ausente), sílabo `academic-report` compilado con `build.sh`, ciclo `publish-session --refrescar` →
+`publish-web --aplicar` sobre Metodología 2026-I con hashes idénticos y 11/11 hardlinks, normalizadores y
+generadores en simulación, `doctor.sh` completo. Lección: `bash -n` solo comprueba el primer archivo que recibe.
+Pendiente que hereda M7: los decks heredados con `%!TEX program = xelatex` y logo ausente (`cau-logo.png`) no
+compilan; el compilador universal elige pdflatex para ellos. Bitácora en `meta/reparaciones/R5_herramientas_2026-09-15/`.

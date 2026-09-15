@@ -1,0 +1,24 @@
+# {{RUTA_SESION}}/sesion.yml — registro de la sesión {{SESSION_SLUG}} de {{COURSE_SLUG}}
+# Registro de la sesión (§4.3; NORMATIVA_ARCHIVOS §7): id = carpeta; el número lo da sNN. Lo leen validate.sh, stats.sh,
+# build-session.sh (artefacto) y publish-session.sh. Tipos: clase | laboratorio | taller | evaluacion.
+id: {{SESSION_SLUG}}
+titulo: "{{TITLE}}"
+tipo: {{SESSION_TYPE}}
+estado: borrador             # borrador | activo | hecho (ciclo de vida §2.1)
+artefacto: {{ARTIFACT}}      # el archivo que exige el tipo (deck.tex/.qmd · cuaderno.ipynb · libro.ods · evaluacion.tex)
+unidad: 1
+semana: {{NUMBER}}
+fecha: null                  # YYYY-MM-DD cuando se programe
+duracion_min: {{DURATION}}
+modalidad: {{MODALITY}}
+nivel: {{LEVEL}}
+# --- diseño instruccional (rellenar; el guion desarrolla el arco) ---
+competencias: []
+resultados_aprendizaje: []
+conocimientos_previos: []
+material_requerido:
+  - "Proyector"
+  - "Pizarra y plumones"
+software: []
+evaluacion: ""               # instrumento principal (quiz, rúbrica, etc.)
+bibliografia: []             # claves de curso.bib o calibre_id

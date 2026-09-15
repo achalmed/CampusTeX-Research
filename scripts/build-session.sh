@@ -1,44 +1,40 @@
 #!/usr/bin/env bash
 # ============================================================
-# build-session.sh — Compila el/los deck(s) de una sesión
+# build-session.sh — Compila el artefacto de una sesión (M5)
 # ============================================================
 # Uso:
-#   ./scripts/build-session.sh COURSE_DIR NUM
+#   ./scripts/build-session.sh CURSO NN        # CURSO: ruta o slug
 #
-# Ejemplo:
-#   ./scripts/build-session.sh "$C" 02
-#
-# Compila lo que haya en 02_Clase/:
-#   - *.qmd → quarto render
-#   - *.tex → LaTeX con motor autodetectado (todos los .tex,
-#             útil cuando 02_Clase/ tiene varios decks)
+# Compila el artefacto declarado en sesion.yml (*.qmd → quarto render; *.tex → LuaLaTeX).
+# Si no hay artefacto declarado, compila todos los .tex/.qmd de la raíz de la sesión.
+# Un artefacto que no sea deck (cuaderno, script, libro) no se compila: se informa.
 # ============================================================
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
 
-[[ $# -ge 2 ]] || { sed -n '2,15p' "${BASH_SOURCE[0]}"; exit 1; }
-COURSE="$1"
-DIR="$(session_dir "$COURSE" "$2")" || die "No existe la sesión $2 en $COURSE/03_SESIONES/"
-CLASE="$DIR/02_Clase"
-[[ -d "$CLASE" ]] || die "Falta 02_Clase/ en $(basename "$DIR")"
+[[ $# -ge 2 ]] || { sed -n '2,11p' "${BASH_SOURCE[0]}"; exit 1; }
+COURSE="$(course_dir "$1")" || die "No es un curso: $1"
+DIR="$(session_dir "$COURSE" "$2")" || die "No existe la sesión $2 en $COURSE/03-sesiones/"
 info "Sesión: $(basename "$DIR")"
 
-# --- Quarto ---------------------------------------------------
-qmd="$(find "$CLASE" -maxdepth 1 -name '*.qmd' | head -1)"
-if [[ -n "$qmd" ]]; then
-  require_cmd quarto
-  info "Proyecto Quarto: $(basename "$qmd")"
-  ( cd "$CLASE" && quarto render "$(basename "$qmd")" )
-  ok "Render Quarto completado."; exit 0
+ART="$(session_artifact "$DIR")"
+declare -a objetivos=()
+if [[ -n "$ART" ]]; then
+  [[ -f "$DIR/$ART" ]] || die "El artefacto declarado no existe: $ART"
+  case "${ART##*.}" in
+    tex|qmd) objetivos=("$DIR/$ART") ;;
+    *) ok "Artefacto '$ART' ($(yaml_get "$DIR/sesion.yml" tipo)): no se compila."; exit 0 ;;
+  esac
+else
+  mapfile -t objetivos < <(find "$DIR" -maxdepth 1 \( -name '*.tex' -o -name '*.qmd' \) -not -path '*index_files*' | sort)
+  [[ ${#objetivos[@]} -gt 0 ]] || die "Sin artefacto declarado ni .tex/.qmd en $DIR"
 fi
 
-# --- LaTeX (todos los .tex, hasta 2 niveles) -----------------
-mapfile -t texfiles < <(find "$CLASE" -maxdepth 2 -name '*.tex' -not -path '*index_files*' | sort)
-[[ ${#texfiles[@]} -gt 0 ]] || die "No hay .tex ni .qmd en $CLASE"
-
 fail=0
-for tex in "${texfiles[@]}"; do
-  if compile_tex "$tex"; then ok "PDF: ${tex%.tex}.pdf"
-  else error "Falló: $tex"; fail=1; fi
+for f in "${objetivos[@]}"; do
+  case "$f" in
+    *.qmd) require_cmd quarto; info "Quarto: $(basename "$f")"; ( cd "$DIR" && quarto render "$(basename "$f")" ) && ok "Render: $f" || { error "Falló: $f"; fail=1; } ;;
+    *.tex) compile_tex "$f" && ok "PDF: ${f%.tex}.pdf" || { error "Falló: $f"; fail=1; } ;;
+  esac
 done
 exit "$fail"

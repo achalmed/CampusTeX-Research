@@ -17,7 +17,7 @@ Alternativa: editar a mano (2 700 archivos) o un `sed` por regla. Se descarta: s
   bitácora no hay UNDO, y sin la lógica del validador se actúa sobre lo que no toca.
 Límite: no toca `04 index`, `prompts` ni `01 notes` (repos de otros agentes): imprime
   el `sed` que les corresponde. No recorre `_ESTANDARIZACION`, `vendor/` ni `.git`.
-  Las notas de estudio de `02_CONTENIDO` las normaliza `normalizar-notas.py`.
+  Las notas de estudio de `02-contenido` las normaliza `normalizar-notas.py`.
 
 Uso:
   python3 scripts/normalizar-archivos.py <subcomando> [--aplicar] [--bitacora DIR]
@@ -34,7 +34,7 @@ import unicodedata
 from pathlib import Path
 
 FW = Path(__file__).resolve().parents[1]
-AREAS = FW / "areas" if (FW / "areas").is_dir() else FW / "docencia" / "_migracion"  # M2 (2026-09-15): las áreas viven en docencia/_migracion hasta M3; M5 rehace esto
+CURSOS = FW / "docencia" / "cursos"     # M5 (2026-09-15): docencia/cursos/<slug>/
 _d = FW
 while _d != _d.parent and not (_d / "core" / "env.py").exists():
     _d = _d.parent
@@ -160,12 +160,11 @@ def recorrer(raiz: Path, saltar: set[str] | None = None):
 
 
 def areas():
-    return sorted(a for a in AREAS.glob("Academic_Class-*") if a.is_dir())
+    return [CURSOS] if CURSOS.is_dir() else []          # M5: una sola raíz de cursos
 
 
 def cursos():
-    # M3 (2026-09-15): los cursos viven en docencia/cursos/<slug>/; el glob de áreas queda por compatibilidad hasta M5
-    return sorted(c for a in areas() for c in a.glob("course_*") if c.is_dir()) + sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "temario.yml").exists() or (p / "curso.yml").exists())
+    return sorted(p for p in CURSOS.glob("*") if (p / "curso.yml").exists())
 
 
 def ascii_min(s: str) -> str:
@@ -198,12 +197,12 @@ def yaml_escalar(texto: str, clave: str):
 
 
 def id_curso(curso: Path) -> str:
-    t = curso / "temario.yml"
+    t = curso / "curso.yml"
     if t.exists():
-        v = yaml_escalar(leer(t), "id") or yaml_escalar(leer(t), "curso")
+        v = yaml_escalar(leer(t), "id")
         if v:
             return v
-    return re.sub(r"^course_(\d+[-_])?", "", curso.name)
+    return curso.name
 
 
 def reemplazar_en_textos(raiz: Path, viejo: str, nuevo: str, excluir: set[Path] = frozenset()) -> int:
@@ -228,10 +227,10 @@ def cmd_vendor():
     """Plantillas LaTeX de terceros, fuentes y clases ajenas → vendor/ (el validador no lo recorre)."""
     log("== vendor")
     for c in cursos():
-        pl = c / "06_RECURSOS" / "plantillas"
+        pl = c / "05-recursos" / "plantillas"
         if not pl.is_dir():
             continue
-        vend = c / "06_RECURSOS" / "vendor"
+        vend = c / "05-recursos" / "vendor"
         nombres = []
         for hijo in sorted(pl.iterdir()):
             dst = vend / hijo.name if hijo.is_dir() else vend / "plantillas" / hijo.name
@@ -239,14 +238,14 @@ def cmd_vendor():
             nombres.append(hijo.name)
         if BIT["aplicar"] and pl.exists() and not any(pl.iterdir()):
             pl.rmdir()
-        # se anota en el registro del curso (temario.yml → README generado): el material ajeno y por qué está ahí
-        ty = c / "temario.yml"
+        # se anota en el registro del curso (curso.yml → README generado): el material ajeno y por qué está ahí
+        ty = c / "curso.yml"
         if ty.exists() and "\najeno:" not in leer(ty):
             desc = "material de terceros conservado tal cual, sin cabecera propia (NORMATIVA_ARCHIVOS §5): " + ", ".join(nombres)
-            escribir(ty, leer(ty).rstrip("\n") + "\najeno:\n- ruta: 06_RECURSOS/vendor/\n  descripcion: " + yaml_comillas(desc) + "\n")
-            log(f"  temario.yml de {c.name}: clave `ajeno` añadida")
+            escribir(ty, leer(ty).rstrip("\n") + "\najeno:\n- ruta: 05-recursos/vendor/\n  descripcion: " + yaml_comillas(desc) + "\n")
+            log(f"  curso.yml de {c.name}: clave `ajeno` añadida")
     # sílabo del seminario: clase yaac (Christophe Roger, LPPL) y sus fuentes Source Sans Pro
-    syl = AREAS / "Academic_Class-Metodologia-investigacion" / "course_03_seminario-de-investigacion" / "00_ADMINISTRACION" / "syllabus"
+    syl = CURSOS / "seminario-de-investigacion" / "01-diseno" / "syllabus"
     if (syl / "yaac-luatex.cls").exists():
         for n in ("yaac-luatex.cls", "yaac-xelatex.cls"):
             mover(syl / n, syl / "vendor" / n)
@@ -260,7 +259,7 @@ def cmd_vendor():
             escribir(p, leer(p).replace("Path = fonts/", "Path = vendor/fonts/"))
         log("  yaac-*.cls: Path = vendor/fonts/")
     # tema beamer «wue» huérfano (la presentación que lo usaba ya no existe; quedan sus auxiliares)
-    wue = AREAS / "Academic_Class-Gestion-empresarial" / "03_temas" / "sesiones" / "presentacion" / "wue.sty"
+    wue = FW / "docencia" / "_inbox" / "gestion-empresarial" / "03_temas" / "sesiones" / "presentacion" / "wue.sty"
     if wue.exists():
         mover(wue, wue.parent / "vendor" / "wue.sty")
 
@@ -399,14 +398,14 @@ def nuevo_nombre(p: Path) -> str | None:
 
 
 def cmd_nombres():
-    log("== nombres de archivo fuera de norma (sin las notas de 02_CONTENIDO)")
+    log("== nombres de archivo fuera de norma (sin las notas de 02-contenido)")
     raices = [*areas(), FW]
     hechos = 0
     for raiz in raices:
         for p in recorrer(raiz):
-            if raiz == FW and p.relative_to(FW).parts[0] == "areas":
+            if raiz == FW and p.relative_to(FW).parts[0] in ("areas", "docencia", "registro"):
                 continue
-            if "02_CONTENIDO" in p.parts and p.suffix.lower() == ".md":
+            if "02-contenido" in p.parts and p.suffix.lower() == ".md":
                 continue
             nn = nuevo_nombre(p)
             if not nn:
@@ -426,15 +425,15 @@ def cmd_nombres():
     log(f"  renombrados: {hechos}")
 
 
-# --- registros: metadata.yml y temario.yml -----------------------------------
+# --- registros: sesion.yml y curso.yml (antes metadata.yml y temario.yml) ------
 def sesiones(curso: Path):
-    return sorted(s for s in (curso / "03_SESIONES").glob("S[0-9]*") if s.is_dir()) if (curso / "03_SESIONES").is_dir() else []
+    return sorted(s for s in (curso / "03-sesiones").glob("s[0-9]*") if s.is_dir()) if (curso / "03-sesiones").is_dir() else []
 
 
 def migrar_metadata(meta: Path, curso: Path) -> str:
     t = leer(meta)
     lineas = t.split("\n")
-    m = re.match(r"^S(\d\d)", meta.parent.name)
+    m = re.match(r"^s(\d\d)", meta.parent.name)
     nn = m.group(1) if m else "??"
     ident = f"# {rel_repo(meta)} — registro de la sesión {nn} de {id_curso(curso)}"
     # cabecera: la caja del scaffold (3 líneas) o nada
@@ -486,7 +485,7 @@ def estado_curso(curso: Path, temario_txt: str) -> str:
     if re.search(r"^dictados:\s*$\n(?:- .+\n)+", temario_txt, re.M):
         return "activo"
     for s in sesiones(curso):
-        mt = s / "metadata.yml"
+        mt = s / "sesion.yml"
         if mt.exists():
             v = yaml_escalar(leer(mt), "estado")
             if ESTADO_SESION.get(v, v) == "hecho":
@@ -499,7 +498,7 @@ def migrar_temario(ty: Path, curso: Path) -> str:
     cid = yaml_escalar(t, "id") or yaml_escalar(t, "curso") or curso.name
     lineas = t.split("\n")
     cab = [f"# {rel_repo(ty)} — registro del curso {cid}: fuente única del currículo (unidades, temas, recursos)",
-           "# Se editan aquí unidades, temas y recursos; README, esqueletos de 02_CONTENIDO, ficha web,",
+           "# Se editan aquí unidades, temas y recursos; README, ficha web,",
            "# temario del learning-skill y checklist de estudio se GENERAN con: 10 Class/scripts/temario-generar.sh"]
     i = 0
     while i < len(lineas) and lineas[i].startswith("#"):
@@ -523,21 +522,21 @@ def migrar_temario(ty: Path, curso: Path) -> str:
 
 
 def cmd_registros():
-    log("== registros: metadata.yml (sesión) y temario.yml (curso)")
+    log("== registros: sesion.yml (sesión) y curso.yml (curso)")
     nm = nt = 0
     for c in cursos():
-        ty = c / "temario.yml"
+        ty = c / "curso.yml"
         if ty.exists():
             nuevo = migrar_temario(ty, c)
             if nuevo != leer(ty):
                 escribir(ty, nuevo); nt += 1
         for s in sesiones(c):
-            mt = s / "metadata.yml"
+            mt = s / "sesion.yml"
             if mt.exists():
                 nuevo = migrar_metadata(mt, c)
                 if nuevo != leer(mt):
                     escribir(mt, nuevo); nm += 1
-    log(f"  temario.yml: {nt} · metadata.yml: {nm}")
+    log(f"  curso.yml: {nt} · sesion.yml: {nm}")
 
 
 # --- cabeceras (identidad en la línea 1) --------------------------------------
@@ -552,10 +551,10 @@ def que_es_tex(p: Path, texto: str) -> str:
     partes = p.parts
     m = re.search(r"\\title(?:\[[^]]*\])?\{((?:[^{}]|\{[^{}]*\})*)\}", texto)
     titulo = limpiar_tex(m.group(1)) if m else ""
-    if "02_Clase" in partes:
-        ses = p.parents[1] if p.parent.name == "02_Clase" else p.parents[2]
-        mt = ses / "metadata.yml"
-        nn = re.match(r"^S(\d\d)", ses.name)
+    ses = next((q for q in [p.parent, *p.parents[1:3]] if (q / "sesion.yml").exists()), None)   # M5: la sesión es la carpeta con sesion.yml
+    if ses is not None:
+        mt = ses / "sesion.yml"
+        nn = re.match(r"^s(\d\d)", ses.name)
         tit = (yaml_escalar(leer(mt), "titulo") if mt.exists() else None) or titulo or ses.name
         clase = "deck" if p.stem in ("slides", "index", "clase", "diapositivas", "main") else "material de clase"
         return f"{clase} de la sesión {nn.group(1) if nn else '??'}: {tit}"
@@ -568,8 +567,7 @@ def que_es_tex(p: Path, texto: str) -> str:
             return re.sub(r"^%+\s*", "", c).replace(" — ", ": ").rstrip(".")
     if p.stem in ("syllabus", "silabo"):
         return "sílabo del curso"
-    ctx = {"04_EVALUACIONES": "evaluación", "06_RECURSOS": "recurso LaTeX", "00_ADMINISTRACION": "documento administrativo",
-           "01_PLANIFICACION": "documento de planificación", "08_INVESTIGACION": "documento de investigación"}
+    ctx = {"04-evaluaciones": "evaluación", "05-recursos": "recurso LaTeX", "01-diseno": "documento de diseño del curso", "investigacion": "documento de investigación"}
     for k, v in ctx.items():
         if k in partes:
             return f"{v}: {p.stem.replace('_', ' ').replace('-', ' ')}"
@@ -615,7 +613,7 @@ def cabecera_plantilla(p: Path, texto: str) -> str | None:
 
 def cabecera_scaffold_slides(p: Path, texto: str) -> str:
     lineas = texto.split("\n")
-    ident = "% {{RUTA_SESION}}/02_Clase/slides.tex — deck Beamer de la sesión {{NUMBER}}: {{TITLE}}"
+    ident = "% {{RUTA_SESION}}/deck.tex — deck Beamer de la sesión {{NUMBER}}: {{TITLE}}"
     ini = 1 if lineas[0].startswith("%!TEX") else 0
     lineas.insert(ini, ident)
     for i, l in enumerate(lineas[:12]):
@@ -631,12 +629,12 @@ def cmd_cabeceras():
     raices = [*areas(), FW]
     for raiz in raices:
         for p in recorrer(raiz):
-            if raiz == FW and p.relative_to(FW).parts[0] == "areas":
+            if raiz == FW and p.relative_to(FW).parts[0] in ("areas", "docencia", "registro"):
                 continue
             fam = val.familia(p)
             if fam not in ("latex", "python", "bash", "yaml", "bib", "quarto"):
                 continue
-            if p.name in ("metadata.yml", "temario.yml", "dictado.yml"):
+            if p.name in ("sesion.yml", "curso.yml", "dictado.yml", "metadata.yml", "temario.yml"):
                 continue
             lineas = val.leer(p)
             texto = leer(p)
@@ -648,7 +646,7 @@ def cmd_cabeceras():
             if fam == "latex":
                 if raiz == FW and p.relative_to(FW).parts[0] == "templates":
                     nuevo = cabecera_plantilla(p, texto)
-                elif raiz == FW and rel == "scaffolds/session/02_Clase/slides.tex":
+                elif raiz == FW and rel == "scaffolds/sesion/deck.tex":
                     nuevo = cabecera_scaffold_slides(p, texto)
                 if nuevo is None:
                     que = que_es_tex(p, texto)
@@ -716,15 +714,15 @@ def con_frontmatter(p: Path, texto: str) -> str | None:
 
 
 def cmd_frontmatter():
-    log("== frontmatter con `tipo` en Markdown suelto (fuera de 02_CONTENIDO)")
+    log("== frontmatter con `tipo` en Markdown suelto (fuera de 02-contenido)")
     n = 0
     for raiz in [*areas(), FW]:
         for p in recorrer(raiz):
-            if raiz == FW and p.relative_to(FW).parts[0] == "areas":
+            if raiz == FW and p.relative_to(FW).parts[0] in ("areas", "docencia", "registro"):
                 continue
             if p.suffix.lower() != ".md" or p.name in EXENTOS_MD or p.name.endswith(".html.md"):
                 continue
-            if "02_CONTENIDO" in p.parts:
+            if "02-contenido" in p.parts:
                 continue
             nuevo = con_frontmatter(p, leer(p))
             if nuevo is not None:

@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""scripts/temario.py — el currículo de cada curso vive UNA sola vez en `temario.yml` (F5.1); desde ahí se generan todas las vistas.
+"""scripts/temario.py — el currículo de cada curso vive UNA sola vez en `curso.yml` (F5.1; M5 2026-09-15); desde ahí se generan todas las vistas.
 
-Registro del curso (NORMATIVA_ARCHIVOS §7): `temario.yml` con núcleo `id · titulo · estado` (antes `curso`, M7).
+Registro del curso (NORMATIVA_ARCHIVOS §7): `docencia/cursos/<slug>/curso.yml` con núcleo `id · titulo · estado · tipo` (sucesor de temario.yml, M4).
 
 Uso (desde cualquier sitio; opera sobre todas las áreas o sobre los cursos indicados):
-  temario.py migrar   [--aplicar] [CURSO_DIR ...]   README/02_CONTENIDO → temario.yml (unidades y temas)
+  temario.py migrar   [--aplicar] [CURSO_DIR ...]   README/02-contenido → curso.yml (unidades y temas) en cursos heredados sin registro
   temario.py generar  [--aplicar] [--que readme,esqueleto,web,skill,resumen] [CURSO_DIR ...]
   temario.py verificar [CURSO_DIR ...]              exit 1 si el README de algún curso no coincide con su temario
 
 Vistas generadas (`generar`):
   readme     README.md del curso (formato canónico del estándar 00–09)
-  esqueleto  02_CONTENIDO/Unidad_NN/<n m tema>.md que falten (nunca sobrescribe)
-  web        04 index/cursos/<web_slug>/index.qmd: sección «Contenidos / Sílabo» entre marcadores
+  esqueleto  RETIRADO en M5: la nota se escribe cuando existe (archivo: null hasta entonces, §7)
+  web        04 index/cursos/<materia_web>/index.qmd: sección «Contenidos / Sílabo» entre marcadores
   skill      prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md + puntero en el dominio
   resumen    05 tasks/temarios-cursos.md — checklist por curso/unidad/tema (tipo: checklist; lleva marca GENERADO)
 
@@ -30,7 +30,7 @@ import yaml
 
 FW = Path(__file__).resolve().parents[1]           # …/10 Class
 DOCS = FW.parent                                    # …/Documents
-AREAS = FW / "areas" if (FW / "areas").is_dir() else FW / "docencia" / "_migracion"  # M2 (2026-09-15): las áreas viven en docencia/_migracion hasta M3; M5 rehace esto
+CURSOS = FW / "docencia" / "cursos"                       # M5 (2026-09-15): los cursos viven en docencia/cursos/<slug>/ (curso.yml)
 WEB_CURSOS = DOCS / "04 index" / "cursos"
 DOMINIOS = DOCS / "prompts" / "05 docencia" / "learning-skill" / "2 domains"
 TAREAS = DOCS / "05 tasks"
@@ -75,8 +75,7 @@ def slug_web(s: str) -> str:
 def cursos_objetivo(args_cursos: list[str]) -> list[Path]:
     if args_cursos:
         return [Path(c).resolve() for c in args_cursos]
-    # M3 (2026-09-15): los cursos viven en docencia/cursos/<slug>/; el glob de áreas queda por compatibilidad hasta M5
-    return sorted(p for p in AREAS.glob("Academic_Class-*/course_*") if p.is_dir()) + sorted(p for p in (FW / "docencia" / "cursos").glob("*") if (p / "curso.yml").exists() or (p / "temario.yml").exists())
+    return sorted(p for p in CURSOS.glob("*") if (p / "curso.yml").exists())
 
 
 def leer_yaml(p: Path) -> dict:
@@ -138,14 +137,16 @@ def parse_readme(txt: str) -> dict:
 
 
 def unidades_desde_carpetas(curso: Path) -> list[dict]:
-    """Cursos sin README estructurado: el currículo está en 02_CONTENIDO/Unidad_NN/<n m tema>.md."""
+    """Cursos sin README estructurado: el currículo está en 02-contenido/<n>-<m>-<tema>.md (plano desde M3)."""
     unidades = []
-    for ud in sorted((curso / "02_CONTENIDO").glob("Unidad_*")):
-        if not ud.is_dir():
-            continue
-        n = int(re.sub(r"\D", "", ud.name) or 0)
+    por_unidad: dict[int, list[Path]] = {}
+    for f in sorted((curso / "02-contenido").glob("*.md")) if (curso / "02-contenido").is_dir() else []:
+        mu = re.match(r"^(\d+)", f.name)
+        if mu and f.name != "README.md":
+            por_unidad.setdefault(int(mu.group(1)), []).append(f)
+    for n, fs in sorted(por_unidad.items()):
         temas, k = [], 0
-        for f in sorted(ud.glob("*.md"), key=lambda p: [int(x) if x.isdigit() else x for x in re.split(r"(\d+)", p.name)]):
+        for f in sorted(fs, key=lambda p: [int(x) if x.isdigit() else x for x in re.split(r"(\d+)", p.name)]):
             m = RE_ARCH.match(f.name)
             if not m:
                 continue
@@ -162,49 +163,41 @@ def unidades_desde_carpetas(curso: Path) -> list[dict]:
 
 
 def ruta_tema(curso: Path, uid: int, tid: str, titulo: str) -> str:
-    """Archivo canónico de un tema: 02_CONTENIDO/Unidad_NN/<n-m-titulo-en-kebab>.md (si ya existe uno con ese prefijo, se respeta)."""
+    """Archivo del tema si YA existe en 02-contenido/ (<n>-<m>-*.md); si no, None (§7: la nota se escribe cuando existe)."""
     n, m = tid.split(".")
-    carpeta = curso / "02_CONTENIDO" / f"Unidad_{uid:02d}"
+    carpeta = curso / "02-contenido"
     if carpeta.is_dir():
-        for f in list(carpeta.glob(f"{int(n)}-{int(m)}-*.md")) + list(carpeta.glob(f"{int(n)} {int(m)} *.md")):
+        for f in list(carpeta.glob(f"{int(n)}-{int(m)}-*.md")):
             return str(f.relative_to(curso))
-    return f"02_CONTENIDO/Unidad_{uid:02d}/{int(n)}-{int(m)}-{slug_web(titulo)}.md"
+    return None
 
 
 # ---------------------------------------------------------------- migrar
 def migrar(curso: Path, aplicar: bool, webs: set[str], doms: dict[str, Path]) -> str:
-    ty = curso / "temario.yml"
+    ty = curso / "curso.yml"
     base = leer_yaml(ty) if ty.exists() else {}
     rd = curso / "README.md"
     parsed = parse_readme(rd.read_text(encoding="utf-8")) if rd.exists() else {}
     t: dict = {}
-    base_id = slug(re.sub(r"^course_(\d+[-_])?", "", curso.name))
-    area_slug = slug(curso.parent.name.replace("Academic_Class-", ""))
-    if base_id == "curso_base":
-        base_id = f"{area_slug}_curso_base"          # un id único por área (python_curso_base, r_curso_base…)
-    prev = base.get("id") or base.get("curso")          # `curso` → `id` (NORMATIVA_ARCHIVOS §7, M7)
-    if prev in (None, "curso_base") or str(prev).startswith("course_"):
-        prev = None                                   # ids inválidos de la semilla F5.0
-    t["id"] = prev or parsed.get("etiqueta") or base_id
+    t["id"] = curso.name                                # §4.5: id = slug de la carpeta (kebab)
     t["titulo"] = base.get("titulo") or parsed.get("titulo") or curso.name
-    t["estado"] = base.get("estado") or ""              # se fija al final, cuando se conocen los dictados (§2.1)
+    t["estado"] = base.get("estado") or "borrador"
+    t["tipo"] = base.get("tipo") or "asignatura"        # asignatura | herramienta | nivelacion | taller
     t["emoji"] = parsed.get("emoji") or base.get("emoji") or EMOJI_DEFAULT
     t["descripcion"] = base.get("descripcion") if base.get("descripcion") is not None else parsed.get("descripcion", "")
-    t["area"] = base.get("area") or curso.parent.name.replace("Academic_Class-", "")
+    t["area"] = base.get("area") or []
     t["rol"] = base.get("rol", "docente")
     t["nivel"] = base.get("nivel", "pregrado")
     t["semestre"] = base.get("semestre") if base.get("semestre") not in (None, "null") else parsed.get("semestre")
     pr = base.get("prerrequisitos")
     t["prerrequisitos"] = pr if pr not in (None, [], "[]") else parsed.get("prerrequisitos", "")
     t["etiqueta"] = base.get("etiqueta") or parsed.get("etiqueta") or t["id"]
-    # web_slug: por nombre (Macro I/II → macroeconomia; niveles → ediciones en la web)
-    if base.get("web_slug"):
-        t["web_slug"] = base["web_slug"]
+    # materia_web: por nombre (Macro I/II → macroeconomia; varios cursos → una ficha)
+    if base.get("materia_web") or base.get("web_slug"):
+        t["materia_web"] = base.get("materia_web") or base.get("web_slug")
     else:
         cand = slug_web(re.sub(r"\s+(i{1,3}|iv)$", "", t["titulo"].strip(), flags=re.I))
-        if cand not in webs and t["id"].endswith("_curso_base") and slug_web(t["area"]) in webs:
-            cand = slug_web(t["area"])                   # python — Curso Base → web python
-        t["web_slug"] = cand if cand in webs else None
+        t["materia_web"] = cand if cand in webs else None
     # dominio FUAT
     if base.get("dominio_fuat"):
         t["dominio_fuat"] = base["dominio_fuat"]
@@ -212,7 +205,7 @@ def migrar(curso: Path, aplicar: bool, webs: set[str], doms: dict[str, Path]) ->
         cid = t["id"]
         cand = DOMINIO_OVERRIDE.get(cid) or re.sub(r"_(i{1,3}|iv)$", "", cid)
         if cand not in doms:
-            cand2 = slug(t["area"])
+            cand2 = slug(area_txt(t))
             cand = cand2 if cand2 in doms else None
         t["dominio_fuat"] = cand
     # unidades
@@ -221,25 +214,27 @@ def migrar(curso: Path, aplicar: bool, webs: set[str], doms: dict[str, Path]) ->
         for tema in u["temas"]:
             tema.setdefault("archivo", ruta_tema(curso, int(u["id"]), str(tema["id"]), tema["titulo"]))
     t["unidades"] = unidades
-    t["dictados"] = base.get("dictados") or [p.name for p in sorted((curso / "09_SEMESTRES").glob("*")) if p.is_dir()]
-    if not t["estado"]:                                 # ciclo de vida §2.1: activo si se ha dictado; si no, borrador
-        t["estado"] = "activo" if t["dictados"] else "borrador"
     texto = cabecera_temario(curso, t["id"]) + dump_yaml(t)
     ntemas = sum(len(u["temas"]) for u in unidades)
-    estado = f"{t['id']:<40} unidades={len(unidades):<2} temas={ntemas:<3} web={t['web_slug'] or '-':<32} dominio={t['dominio_fuat'] or '-'}"
+    estado = f"{t['id']:<40} unidades={len(unidades):<2} temas={ntemas:<3} web={t['materia_web'] or '-':<32} dominio={t['dominio_fuat'] or '-'}"
     if aplicar:
         ty.write_text(texto, encoding="utf-8")
     return estado
 
 
-def cabecera_temario(curso: Path, cid: str) -> str:
+def cabecera_temario(curso: Path, cid: str) -> str:  # cabecera de curso.yml (nombre histórico)
     """Las tres líneas de comentario del registro del curso (identidad §6.2; el resto, cómo se usa)."""
-    return (f"# {curso.name}/temario.yml — registro del curso {cid}: fuente única del currículo (unidades, temas, recursos)\n"
-            "# Se editan aquí unidades, temas y recursos; README, esqueletos de 02_CONTENIDO, ficha web,\n"
+    return (f"# cursos/{curso.name}/curso.yml — registro del curso {cid}: fuente única del currículo (unidades, temas, recursos, datos)\n"
+            "# Se editan aquí unidades, temas y recursos; README, ficha web,\n"
             "# temario del learning-skill y checklist de estudio se GENERAN con: 10 Class/scripts/temario-generar.sh\n")
 
 
 # ---------------------------------------------------------------- generadores
+def area_txt(t: dict) -> str:
+    a = t.get("area")
+    return ", ".join(a) if isinstance(a, list) else str(a or "")
+
+
 def render_readme(t: dict) -> str:
     total = sum(len(u["temas"]) for u in t.get("unidades", []))
     out = [f"# {t.get('emoji', EMOJI_DEFAULT)} {t['titulo']}", ""]
@@ -301,19 +296,7 @@ def generar_readme(curso: Path, t: dict, aplicar: bool) -> str:
 
 
 def generar_esqueleto(curso: Path, t: dict, aplicar: bool) -> str:
-    creados = 0
-    for u in t.get("unidades", []):
-        for tema in u["temas"]:
-            if not tema.get("archivo"):
-                continue   # M3: archivo null = sin nota; ya no se crean esqueletos
-            f = curso / tema["archivo"]
-            if f.exists():
-                continue
-            creados += 1
-            if aplicar:
-                f.parent.mkdir(parents=True, exist_ok=True)
-                f.write_text(f'---\ntipo: apunte\ntitulo: "{tema["titulo"]}"\nestado: borrador\ntags:\n  - {t["etiqueta"]}\n  - {slug(tema["titulo"])}\n---\n\n# {tema["titulo"]}\n\n> Tema `{tema["id"]}` de {t["titulo"]} (esqueleto generado desde temario.yml).\n', encoding="utf-8")
-    return f"esqueletos {'creados' if aplicar else 'por crear'}: {creados}"
+    return "esqueleto: retirado en M5 (§7: la nota se escribe cuando existe; archivo: null hasta entonces)"
 
 
 def sufijo_recursos(tema: dict) -> str:
@@ -369,8 +352,9 @@ def generar_web(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> list[str]:
     """Una ficha web puede agrupar varios cursos (macroeconomia ← Macro I y II)."""
     por_slug: dict[str, list[tuple[Path, dict]]] = {}
     for c, t in cursos_t:
-        if t.get("web_slug"):
-            por_slug.setdefault(t["web_slug"], []).append((c, t))
+        mw = t.get("materia_web") or t.get("web_slug")
+        if mw:
+            por_slug.setdefault(mw, []).append((c, t))
     salida = []
     for s, lst in sorted(por_slug.items()):
         idx = WEB_CURSOS / s / "index.qmd"
@@ -389,7 +373,7 @@ def generar_web(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> list[str]:
                 bloque.append("")
                 bloque += [f"- [{ti}]({url})" for url, ti in sorted(posts, key=lambda x: x[0])]
                 bloque.append("")
-            bloque.append(f"_Fuente: `{c.relative_to(DOCS)}/temario.yml`._")
+            bloque.append(f"_Fuente: `{c.relative_to(DOCS)}/curso.yml`._")
             bloque.append("")
         bloque.append(MARCA_FIN)
         nuevo_bloque = "\n".join(bloque)
@@ -423,12 +407,12 @@ def generar_skill(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> list[str]
         # frontmatter de documento (NORMATIVA_ARCHIVOS §6.2; la forma que M8 dejó en prompts/) y la marca de derivado (§5)
         out = ["---", "tipo: doc", f"titulo: 'Temario oficial — dominio `{d}`'", "estado: activo", "---",
                f"# Temario oficial — dominio `{d}`", "",
-               "> Generado por `10 Class/scripts/temario.py` desde el `temario.yml` de cada curso (F5.1). No editar: edita el temario del curso.", ""]
+               "> Generado por `10 Class/scripts/temario.py` desde el `curso.yml` de cada curso (F5.1). No editar: edita el registro del curso.", ""]
         for c, t in lst:
-            out.append(f"## {t['titulo']} (`{t['id']}`, área {t['area']})")
+            out.append(f"## {t['titulo']} (`{t['id']}`, área {area_txt(t)})")
             out.append("")
             out += bloque_temario_md(t, None, c)
-            out.append(f"Archivos de tema: `{c.relative_to(DOCS)}/02_CONTENIDO/`")
+            out.append(f"Archivos de tema: `{c.relative_to(DOCS)}/02-contenido/`")
             out.append("")
         gen = gen_dir / f"{d}.md"
         nuevo = "\n".join(out)
@@ -440,7 +424,7 @@ def generar_skill(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> list[str]
         dom = doms[d]
         txt = dom.read_text(encoding="utf-8")
         if PUNTERO_SKILL not in txt and "## Temario" in txt:
-            puntero = (f"## Temario\n\n{PUNTERO_SKILL}\n> **Temario oficial (fuente única):** [`_temarios/{d}.md`](../_temarios/{d}.md), generado desde el `temario.yml` "
+            puntero = (f"## Temario\n\n{PUNTERO_SKILL}\n> **Temario oficial (fuente única):** [`_temarios/{d}.md`](../_temarios/{d}.md), generado desde el `curso.yml` "
                        f"de: {', '.join(t['titulo'] for _, t in lst)}. Lo que sigue es la guía didáctica por bloques del dominio; si un tema no está en el temario oficial, no forma parte del curso.\n")
             txt2 = txt.replace("## Temario\n", puntero, 1)
             if aplicar:
@@ -458,16 +442,16 @@ def generar_resumen(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> str:
     """La checklist de estudio: nota del vault (`tipo: checklist`) marcada como derivado (NORMATIVA_ARCHIVOS §5)."""
     hoy = __import__("datetime").date.today().isoformat()
     out = ["---", "tipo: checklist", "titulo: Temarios de los cursos", "estado: activo", "tags: [checklist, temarios]", "---",
-           f"<!-- GENERADO por 10 Class/scripts/temario.py desde areas/*/course_*/temario.yml ({hoy}); no editar -->", "",
+           f"<!-- GENERADO por 10 Class/scripts/temario.py desde docencia/cursos/*/curso.yml ({hoy}); no editar -->", "",
            "# Temarios de los cursos", "",
-           "> Vista completa por curso/unidad/tema generada desde cada `temario.yml` (edita el temario, no esta nota). El tablero vivo de estudio sigue en `kanban cursos.md`.", ""]
+           "> Vista completa por curso/unidad/tema generada desde cada `curso.yml` (edita el registro del curso, no esta nota). El tablero vivo de estudio sigue en `kanban cursos.md`.", ""]
     for c, t in cursos_t:
-        out.append(f"## {t.get('emoji', EMOJI_DEFAULT)} {t['titulo']} — `{t['id']}` ({t['area']})")
+        out.append(f"## {t.get('emoji', EMOJI_DEFAULT)} {t['titulo']} — `{t['id']}` ({area_txt(t)})")
         out.append("")
         for u in t.get("unidades", []):
             out.append(f"- **{u['id']}. {u['titulo']}**")
             for tema in u["temas"]:
-                out.append(f"  - [ ] `{tema['id']}` [{tema['titulo']}](<../10 Class/areas/{c.parent.name}/{c.name}/{tema['archivo']}>)")
+                out.append(f"  - [ ] `{tema['id']}` [{tema['titulo']}](<../10 Class/docencia/cursos/{c.name}/{tema['archivo']}>)" if tema.get("archivo") else f"  - [ ] `{tema['id']}` {tema['titulo']}")
         out.append("")
     f = RESUMEN
     nuevo = "\n".join(out)
@@ -499,20 +483,19 @@ def main() -> int:
         if a.aplicar:
             ids: dict[str, list[Path]] = {}
             for c in cursos:
-                ty = c / "temario.yml"
+                ty = c / "curso.yml"
                 if ty.exists():
                     ids.setdefault(leer_yaml(ty)["id"], []).append(c)
             for cid, lst in ids.items():
                 if len(lst) > 1:
                     for c in lst:
-                        t = leer_yaml(c / "temario.yml"); t["id"] = f"{cid}_{slug(t['area'])}"; t["etiqueta"] = t["id"]
-                        (c / "temario.yml").write_text(cabecera_temario(c, t["id"]) + dump_yaml(t), encoding="utf-8")
+                        t = leer_yaml(c / "curso.yml"); t["id"] = f"{cid}-{slug(area_txt(t))}"; t["etiqueta"] = t["id"]
+                        (c / "curso.yml").write_text(cabecera_temario(c, t["id"]) + dump_yaml(t), encoding="utf-8")
                         log(f"  id duplicado «{cid}» → {t['id']} ({c.name})")
-        log(f"\n{'ESCRITOS' if a.aplicar else 'SIMULACIÓN'}: {len(cursos)} temario.yml")
+        log(f"\n{'ESCRITOS' if a.aplicar else 'SIMULACIÓN'}: {len(cursos)} curso.yml")
         return 0
 
-    # M4 (2026-09-15): el registro del curso es curso.yml (sucesor de temario.yml); temario.yml solo por compatibilidad
-    cursos_t = [(c, leer_yaml(c / "curso.yml" if (c / "curso.yml").exists() else c / "temario.yml")) for c in cursos if (c / "curso.yml").exists() or (c / "temario.yml").exists()]
+    cursos_t = [(c, leer_yaml(c / "curso.yml")) for c in cursos if (c / "curso.yml").exists()]
     if a.accion == "verificar":
         drift = 0
         for c, t in cursos_t:
@@ -525,7 +508,7 @@ def main() -> int:
                 log(f"  README desfasado: {c.relative_to(DOCS)}")
             faltan = [x["archivo"] for u in t.get("unidades", []) for x in u["temas"] if x.get("archivo") and not (c / x["archivo"]).exists()]   # archivo: null = nota aún no escrita (M3)
             if faltan:
-                log(f"  {len(faltan)} archivo(s) de tema sin crear en {c.name} (ejecuta generar --que esqueleto)")
+                log(f"  {len(faltan)} archivo(s) de tema declarados y ausentes en {c.name} (pon archivo: null o escribe la nota)")
         log(f"{'OK' if drift == 0 else 'DRIFT'}: {len(cursos_t)} cursos, {drift} README desfasados")
         return 1 if drift else 0
 

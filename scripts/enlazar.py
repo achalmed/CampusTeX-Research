@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-enlazar.py — Enlaza el currículo (temario.yml) con lo que ya existe fuera del framework (F5.3, 2026-09-06).
+enlazar.py — Enlaza el currículo (curso.yml) con lo que ya existe fuera del framework (F5.3, 2026-09-06; M5 2026-09-15).
 
   enlazar.py posts       [--aplicar]   cada post de 04 index/_pubs declara `curso: <id>` (por su carpeta temática)
   enlazar.py simuladores [--aplicar]   modelos de 02 analysis/simuladores → recursos {tipo: simulador} del tema (por similitud de título)
@@ -23,7 +23,7 @@ import yaml
 
 FW = Path(__file__).resolve().parents[1]
 DOCS = FW.parent
-AREAS = FW / "areas" if (FW / "areas").is_dir() else FW / "docencia" / "_migracion"  # M2 (2026-09-15): las áreas viven en docencia/_migracion hasta M3; M5 rehace esto
+CURSOS = FW / "docencia" / "cursos"     # M5 (2026-09-15): docencia/cursos/<slug>/curso.yml
 PUBS = DOCS / "04 index" / "_pubs"
 LAB = DOCS / "02 analysis" / "simuladores"
 BANCO = DOCS / "01 notes" / "50-examenes-y-practicas"
@@ -91,7 +91,7 @@ def dump_temario(p: Path, t: dict) -> None:
 
 def cursos() -> dict[str, tuple[Path, dict]]:
     out = {}
-    for ty in list(AREAS.glob("Academic_Class-*/course_*/temario.yml")) + sorted((FW / "docencia" / "cursos").glob("*/curso.yml")):   # M3/M4: curso.yml
+    for ty in sorted(CURSOS.glob("*/curso.yml")):
         t = leer_yaml(ty)
         out[t.get("id") or t["curso"]] = (ty.parent, t)      # `curso` → `id` (NORMATIVA §7, M7)
         for al in t.get("alias", []) or []:                 # M4: los posts aún citan el id antiguo (M6 los reescribe)
@@ -213,7 +213,7 @@ def cmd_simuladores(aplicar: bool, cs: dict, umbral: float = 0.5) -> None:
             sin.append(f"{m['modelo']} «{m['nombre']}»" + (f" (mejor {best:.2f})" if mejor else ""))
     if aplicar:
         for cid, t in cambios.items():
-            dump_temario(cs[cid][0] / ("curso.yml" if (cs[cid][0] / "curso.yml").exists() else "temario.yml"), t)   # M4
+            dump_temario(cs[cid][0] / "curso.yml", t)
     print(f"modelos={len(modelos)} · {'asignados' if aplicar else 'asignables'}={asignados} · sin tema con similitud ≥{umbral}: {len(sin)}")
     for s in sin:
         print(f"    sin asignar: {s}")
@@ -246,7 +246,7 @@ def cmd_examenes(aplicar: bool, cs: dict) -> None:
             t["banco_examenes"] = nuevo; n += 1
             print(f"  {cid:<34} ← {', '.join(f'{c} ({conteo.get(c, 0)} exp.)' for c in lst)}")
             if aplicar:
-                dump_temario(cdir / ("curso.yml" if (cdir / "curso.yml").exists() else "temario.yml"), t)   # M4
+                dump_temario(cdir / "curso.yml", t)
     print(f"cursos con banco {'escrito' if aplicar else 'por escribir'}={n} · carpetas del banco={len(carpetas)}")
 
 

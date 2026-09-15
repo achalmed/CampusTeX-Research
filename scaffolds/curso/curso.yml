@@ -1,0 +1,20 @@
+# cursos/{{COURSE_SLUG}}/curso.yml — registro del curso {{COURSE_SLUG}}: fuente única del currículo (unidades, temas, recursos, datos)
+# Registro del curso (§4.2; NORMATIVA_ARCHIVOS §7). README.md y la ficha web se GENERAN desde aquí (temario-generar.sh).
+id: {{COURSE_SLUG}}
+titulo: "{{TITLE}}"
+estado: borrador                  # borrador | activo | archivado
+tipo: {{COURSE_TYPE}}             # asignatura | herramienta | nivelacion | taller
+emoji: 📘
+descripcion: ""
+area: [{{AREAS}}]
+rol: docente
+nivel: pregrado
+# malla: {plan: economia-unsch, ciclo: null, orden: null}   # solo asignaturas de la malla
+prerrequisitos: []
+etiqueta: {{ETIQUETA}}
+materia_web: {{MATERIA_WEB}}      # ficha de 04 index/cursos/<materia> (varios cursos → una materia); null si no hay
+dominio_fuat: null                # dominio del learning-skill
+unidades: []                      # [{id, titulo, temas: [{id, titulo, archivo: 02-contenido/1-1-tema.md | null, recursos: []}]}]
+bibliografia: []                  # [{calibre_id, titulo, autor, origen}]
+datasets: []                      # [{clave, uso}] → catálogo de 02 analysis
+ajeno: []                         # [{ruta: 05-recursos/vendor/…, descripcion}]

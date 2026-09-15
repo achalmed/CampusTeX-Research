@@ -1,0 +1,15 @@
+# dictados/{{DICTADO}}/dictado.yml — registro del dictado {{DICTADO}}
+# Manifiesto del dictado (§4.4): qué sesiones de qué cursos, en qué orden, y cómo se publican en la web.
+id: {{DICTADO}}
+periodo: {{PERIODO}}              # AAAA-i | AAAA-ii
+institucion: {{INSTITUCION}}
+titulo: "{{TITLE}}"
+estado: activo                    # activo | archivado
+descripcion: ""
+cursos: []                        # slugs de docencia/cursos/
+sesiones: []                      # [{orden, curso, sesion: sNN-<slug>, web: session_NN_<slug>}]
+web:
+  materia: {{MATERIA_WEB}}        # 04 index/cursos/<materia>
+  edicion: {{EDICION_WEB}}        # 04 index/cursos/<materia>/<edicion>
+registro: registro/{{DICTADO}}    # repo privado hermano (estudiantes, calificaciones, evidencias)
+publicacion: publicacion/<web>/ (producto de publish-session; git-ignorado; la web lo enlaza por hardlink)
