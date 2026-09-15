@@ -23,7 +23,7 @@ import yaml
 
 FW = Path(__file__).resolve().parents[1]
 DOCS = FW.parent
-AREAS = FW / "areas"
+AREAS = FW / "areas" if (FW / "areas").is_dir() else FW / "docencia" / "_migracion"  # M2 (2026-09-15): las áreas viven en docencia/_migracion hasta M3; M5 rehace esto
 PUBS = DOCS / "04 index" / "_pubs"
 LAB = DOCS / "02 analysis" / "simuladores"
 BANCO = DOCS / "01 notes" / "50-examenes-y-practicas"

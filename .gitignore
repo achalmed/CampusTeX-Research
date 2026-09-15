@@ -7,8 +7,7 @@
 *.snm
 *.synctex.gz
 __pycache__/
-# M1 (2026-09-15): repos hermanos dentro del framework hasta M2 (docencia será submódulo; registro es privado y nunca se versiona aquí)
-docencia/
+# registro/ es un repo privado hermano (datos de estudiantes): nunca se versiona aquí (M1, 2026-09-15)
 registro/
 # árbol generado por Filesystem Studio
 estructura.txt

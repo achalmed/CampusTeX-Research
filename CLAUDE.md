@@ -2,6 +2,17 @@
 
 Guía para Claude Code (claude.ai/code) y para Codex (`AGENTS.md` es un enlace simbólico a este archivo) al trabajar en este repositorio.
 
+## Migración en curso (R1/R2, 2026-09-15) — leer antes que el resto
+
+`docs/DIAGNOSTICO_AREAS_2026-09.md` reorganiza los cursos en fases M0–M8 (§6; ejecución en §8).
+Estado: **M2 hecha**. Los 23 submódulos `areas/Academic_Class-*` ya no existen: sus repos se
+consolidaron, con historial, en el **único submódulo `docencia/`** (repo `Academic_Class`), bajo
+`docencia/_migracion/Academic_Class-<Área>/course_*/` hasta que M3 renombre a `cursos/<slug>/`.
+Los 23 repos originales, intactos, están en `meta/reparaciones/R2_consolidacion_2026-09-15_090152/areas_originales/` hasta el push de M0 y la verificación de M3. Los datos de
+estudiantes viven en `registro/` (repo privado hermano, ignorado). Todo lo que sigue en este archivo
+que diga `areas/Academic_Class-<Área>/...` se lee, mientras tanto, como
+`docencia/_migracion/Academic_Class-<Área>/...`; los scripts Python ya resuelven esa ruta.
+
 ## El ciclo de trabajo, en este sistema
 
 Una clase o un curso siguen `~/Documents/prompts/00 metodo/CICLO.md` en **nivel estándar**:

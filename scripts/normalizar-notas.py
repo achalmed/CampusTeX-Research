@@ -31,7 +31,7 @@ import urllib.parse
 from pathlib import Path
 
 FW = Path(__file__).resolve().parents[1]
-AREAS = FW / "areas"
+AREAS = FW / "areas" if (FW / "areas").is_dir() else FW / "docencia" / "_migracion"  # M2 (2026-09-15): las áreas viven en docencia/_migracion hasta M3; M5 rehace esto
 SALTAR = {".git", "_ESTANDARIZACION", "vendor", "_POR_REVISAR", "build", "data", "code", "legacy", "archive", "archivo", "registro", "logs", "originales", "respaldos", "backup", "backups"}
 ESTADO_MAP = {"completada": "hecho", "impartida": "hecho", "migrada": "borrador", "en_preparacion": "borrador",
               "en curso": "activo", "en-curso": "activo", "planeada": "borrador"}

@@ -34,7 +34,7 @@ import unicodedata
 from pathlib import Path
 
 FW = Path(__file__).resolve().parents[1]
-AREAS = FW / "areas"
+AREAS = FW / "areas" if (FW / "areas").is_dir() else FW / "docencia" / "_migracion"  # M2 (2026-09-15): las áreas viven en docencia/_migracion hasta M3; M5 rehace esto
 _d = FW
 while _d != _d.parent and not (_d / "core" / "env.py").exists():
     _d = _d.parent

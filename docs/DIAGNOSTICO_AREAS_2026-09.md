@@ -544,3 +544,33 @@ M2 no puede aplicar `--strip-blobs-bigger-than 50M` sin decidir antes LFS, conve
 ellos; (d) se sacó Languages entero, no solo su inbox, porque todo su contenido es material de alumno.
 
 Bitácora completa, `UNDO.sh` y hashes de commits: `meta/reparaciones/R1_areas_2026-09-15_083347/`.
+
+### M2 · Consolidar los 23 repos en `docencia/` (2026-09-15, hecho)
+
+| Paso | Resultado |
+|---|---|
+| Clon + `git filter-repo --to-subdirectory-filter _migracion/<área> --tag-rename :<slug>/` por área | 23 clones; mismo número de commits que cada original |
+| Merge `--allow-unrelated-histories` en `docencia/` | 315 commits (3 propios + 289 de las áreas + 23 merges) |
+| Purga: blobs de `registro/_legado` por id + blobs > 50 MB | 0 blobs de estudiantes y 0 blobs > 50 MB en todo el historial; `.git` de 1,0 GB repartido → **601 MB** |
+| Verificación de árboles (`arboles_pre/` vs `HEAD`) | 4 858 de 4 860 rutas idénticas por blob; las 2 restantes son los `.mht` > 50 MB, en disco sin versionar con puntero |
+| Tags | 23 `<slug>/pre-reorg-2026-09` recreados sobre los commits reescritos vía `commit-map` |
+| Web | 11 hardlinks de `04 index/cursos/…/2026-1-cau-unsch/` reenlazados a `docencia/` tras cotejar hash |
+| Framework | 23 submódulos retirados; `docencia/` submódulo único (`../Academic_Class.git`); originales en `meta/reparaciones/R2_…/areas_originales/` |
+| `validate.sh` / `doctor.sh` | 23/23 sin errores; 2 599 archivos · 0 fallos · 412 avisos (línea base de M1) |
+
+Incidentes corregidos durante la fase, documentados en la bitácora: (1) la lista de blobs de
+estudiantes contenía el blob vacío (tres trabajos de tamaño cero), y `filter-repo` retiró del
+historial los 1 364 `.gitkeep`; se repusieron en HEAD (su historial previo se pierde, solo son
+marcadores). (2) Tres archivos del docente compartían blob con material de estudiantes (dos casos de
+ejercicios y un logo) y cayeron con la purga; repuestos en HEAD. (3) 274 carpetas del estándar
+00–09 y de la anatomía de sesión existían en las áreas **solo vacías en disco**, nunca versionadas:
+un clon limpio de los originales tampoco pasaba `validate.sh`; se crearon con `.gitkeep`.
+(4) Los `.log` de Stata y los `.directory` no viajan: estaban ignorados por git en los originales.
+
+Desviaciones respecto al plan de §6: no se archivan aún en GitHub los 5 repos públicos ni se crea el
+remote de `Academic_Class`: ambos esperan el push de M0, que sigue bloqueado para esta sesión.
+`.gitmodules` ya no tiene los 18 remotes inexistentes. Los scripts Python resuelven `AREAS` a
+`docencia/_migracion` mientras `areas/` no exista (M5 lo rehace); `CLAUDE.md` lleva una nota de
+migración al inicio (M6/M8 reescriben la documentación).
+
+Bitácora, `UNDO.sh`, árboles y verificaciones: `meta/reparaciones/R2_consolidacion_2026-09-15_090152/`.

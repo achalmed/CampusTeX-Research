@@ -30,7 +30,7 @@ import yaml
 
 FW = Path(__file__).resolve().parents[1]           # …/10 Class
 DOCS = FW.parent                                    # …/Documents
-AREAS = FW / "areas"
+AREAS = FW / "areas" if (FW / "areas").is_dir() else FW / "docencia" / "_migracion"  # M2 (2026-09-15): las áreas viven en docencia/_migracion hasta M3; M5 rehace esto
 WEB_CURSOS = DOCS / "04 index" / "cursos"
 DOMINIOS = DOCS / "prompts" / "05 docencia" / "learning-skill" / "2 domains"
 TAREAS = DOCS / "05 tasks"
