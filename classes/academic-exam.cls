@@ -109,7 +109,9 @@
     \ifdefempty{\ev@escuela}{}{{\small\scshape\color{gristexto}\ev@escuela\par}}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.24\textwidth}\raggedleft
-    \ifdefempty{\ev@logo}{{\small\scshape\color{gristexto}\ev@periodo}}{\includegraphics[height=1.5cm]{\ev@logo}}%
+    \ifdefempty{\ev@logo}{{\small\scshape\color{gristexto}\ev@periodo\par
+      \ifdefempty{\ev@fechaevaluacion}{}{\ifdefstrequal{\ev@fechaevaluacion}{\ev@periodo}{}{\ev@fechaevaluacion\par}}}}%
+      {\includegraphics[height=1.5cm]{\ev@logo}}%
   \end{minipage}\par\vspace{0.55em}
   {\small\setlength{\parskip}{0.18em}\setlength{\parindent}{0pt}%
    \ev@filauna{Curso}{\ev@curso\ifdefempty{\ev@codigocurso}{}{\ \ (\ev@codigocurso)}}%
@@ -117,8 +119,7 @@
    \makebox[2.4cm][l]{\ev@lbl{Estudiante}}%
      \ifev@soluciones\ev@estudiante\else\makebox[6cm][l]{\hrulefill}\fi\hfill
      \makebox[5cm][l]{\ev@lbl{Código:}\ \ifev@soluciones\ev@campocorto{\ev@codigoestudiante}\else\hrulefill\fi}\par
-   \makebox[2.4cm][l]{\ev@lbl{Fecha}}\ev@fechaevaluacion\hfill
-     \makebox[5cm][l]{\ifdefempty{\ev@duracion}{}{\ev@lbl{Duración:}\ \ev@duracion}}\par}%
+   \ifdefempty{\ev@duracion}{}{\makebox[2.4cm][l]{\ev@lbl{Duración}}\ev@duracion\par}}%
   \vspace{0.55em}{\color{colorprimario}\hrule height 0.6pt}\vspace{0.5em}
   \begin{center}
     {\large\bfseries\scshape\color{colorprimario}\ev@tipoevaluacion\par}%
@@ -262,7 +263,7 @@
   {\setlength{\fboxsep}{5pt}\setlength{\fboxrule}{0.4pt}\fcolorbox{grislinea}{white}{\small #1}}\par\nobreak\vspace{0.25em}\noindent\ignorespaces}
 % \interpreta{...}: interpretación breve intercalada (antes \nota; renombrado para
 % no chocar con la caja {nota} de la identidad compartida).
-\newcommand{\interpreta}[1]{\par\nobreak\vspace{0.05em}\noindent\hspace*{1.2em}{\footnotesize\itshape\color{colorsecundario}#1}\par\nobreak\vspace{0.12em}\noindent\ignorespaces}
+\newcommand{\interpreta}[1]{\par\nobreak\vspace{0.05em}\noindent{\footnotesize\itshape\color{colorsecundario}#1}\par\nobreak\vspace{0.12em}\noindent\ignorespaces}
 \newenvironment{ecua}{\par\addvspace{0.35em}\noindent\renewcommand{\arraystretch}{1.5}\setlength{\tabcolsep}{0pt}%
   \begin{tabular}{@{}>{\raggedleft\arraybackslash$\displaystyle}p{.17\hsize}<{$}@{\ }>{$\displaystyle{}}p{\dimexpr.83\hsize-1em\relax}<{$}@{}}}%
   {\end{tabular}\par\addvspace{0.35em}\noindent\ignorespaces}
