@@ -64,7 +64,8 @@
 \def\ev@logo{}\newcommand{\logoinstitucional}[1]{\def\ev@logo{#1}}
 \def\ev@estudiante{Achalma Mendoza, Elmer Edison}
 \newcommand{\estudiante}[1]{\def\ev@estudiante{#1}}
-\def\ev@codigoestudiante{}\newcommand{\codigoestudiante}[1]{\def\ev@codigoestudiante{#1}}
+\def\ev@codigoestudiante{09170105}   % código del estudiante por defecto (junto al nombre); solo se imprime en modo soluciones
+\newcommand{\codigoestudiante}[1]{\def\ev@codigoestudiante{#1}}
 \def\ev@seccion{}\newcommand{\seccion}[1]{\def\ev@seccion{#1}}
 \def\ev@subtitulo{}\newcommand{\subtitulo}[1]{\def\ev@subtitulo{#1}}
 
@@ -115,7 +116,7 @@
    \ev@filauna{Docente}{\ev@docente}%
    \makebox[2.4cm][l]{\ev@lbl{Estudiante}}%
      \ifev@soluciones\ev@estudiante\else\makebox[6cm][l]{\hrulefill}\fi\hfill
-     \makebox[5cm][l]{\ev@lbl{Código:}\ \ev@campocorto{\ev@codigoestudiante}}\par
+     \makebox[5cm][l]{\ev@lbl{Código:}\ \ifev@soluciones\ev@campocorto{\ev@codigoestudiante}\else\hrulefill\fi}\par
    \makebox[2.4cm][l]{\ev@lbl{Fecha}}\ev@fechaevaluacion\hfill
      \makebox[5cm][l]{\ifdefempty{\ev@duracion}{}{\ev@lbl{Duración:}\ \ev@duracion}}\par}%
   \vspace{0.55em}{\color{colorprimario}\hrule height 0.6pt}\vspace{0.5em}
@@ -225,7 +226,9 @@
 \newcommand{\recuadrorespuesta}[1]{}
 
 % ================================================================ SOLUCIÓN ==
-% Bloque de solución/desarrollo con el estilo de caja compartido (academicbox).
+% Bloque de solución/desarrollo: el estilo editorial compartido (academicbox: rótulo en
+% versalitas y cuerpo sangrados; sin caja ni líneas), que separa el desarrollo del
+% enunciado solo por tipografía y espacio (directriz visual de evaluaciones, R10).
 \ifev@soluciones
   \NewTColorBox{solucion}{}{academicbox, title={\textsc{Solución}}}
 \else

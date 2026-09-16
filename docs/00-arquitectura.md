@@ -119,7 +119,8 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 │   ├── academic-colors.sty      · paleta monocroma + 1 acento (lee config/palette.tex)
 │   ├── academic-fonts.sty       · fontspec: Libertinus Serif/Sans/Math + Inconsolata (define aquí las familias)
 │   ├── academic-math.sty        · unicode-math
-│   ├── academic-boxes.sty       · cajas tcolorbox (instrucciones, definición, teorema, nota, ejemplo…)
+│   ├── academic-boxes.sty       · bloques tcolorbox (instrucciones, datos, solución, definición, teorema, nota…):
+│   │                              en texto, lavado tenue sin líneas ni iconos (R10); en Beamer, caja con filete e icono
 │   ├── academic-tables.sty      · tablas booktabs + notas al pie de tabla
 │   ├── academic-code.sty        · código R · Python · Stata (resaltado uniforme)
 │   ├── academic-figures.sty     · figuras, captions, diagramas (tikz base)

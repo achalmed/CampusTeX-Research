@@ -5,7 +5,7 @@
 %% tema Beamer (beamerthemeacademic). Un solo origen de verdad visual para todo
 %% el material docente: diapositivas, exámenes, reports y pósters.
 %%
-%% Motor: LuaLaTeX exclusivamente.  Orden importante: amsmath antes de unicode-math
+%% Motor: LuaLaTeX exclusivamente.  Orden importante: mathtools (amsmath) antes de unicode-math
 %% (que carga academic-fonts vía libertinus).
 %% ============================================================================
 \NeedsTeXFormat{LaTeX2e}
@@ -16,7 +16,7 @@
 % \renewcommand si otro docente usa el framework.
 \providecommand{\academicauthor}{Elmer Edison Achalma Mendoza}
 
-\RequirePackage{amsmath}          % antes de unicode-math
+\RequirePackage{mathtools}        % carga amsmath; ANTES de unicode-math (R9, 2026-09-15: después rompe \underbrace/\overbrace)
 \RequirePackage{academic-colors}  % paleta (config/palette.tex)
 \RequirePackage{academic-fonts}   % tipografía fontspec (Libertinus→unicode-math + Inconsolata)
 \RequirePackage{academic-math}    % mathtools + operadores comunes

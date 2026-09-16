@@ -4,7 +4,7 @@ enlazar.py — Enlaza el currículo (curso.yml) con lo que ya existe fuera del f
 
   enlazar.py posts       [--aplicar]   cada post de 04 index/_pubs declara `curso: <id>` (por su carpeta temática)
   enlazar.py simuladores [--aplicar]   modelos de 02 analysis/simuladores → recursos {tipo: simulador} del tema (por similitud de título)
-  enlazar.py examenes    [--aplicar]   carpetas de 01 notes/50-examenes-y-practicas → `banco_examenes` del curso
+  enlazar.py examenes    [--aplicar]   subcarpetas de 04-evaluaciones/ del curso → `banco_examenes` (R10, 2026-09-15)
   enlazar.py verificar                 recursos y bancos con rutas existentes; posts con curso desconocido; posts sin curso
 
 Sin --aplicar todo es simulación (imprime qué haría). Las correspondencias que no se deducen se declaran en las
@@ -26,7 +26,6 @@ DOCS = FW.parent
 CURSOS = FW / "docencia" / "cursos"     # M5 (2026-09-15): docencia/cursos/<slug>/curso.yml
 PUBS = DOCS / "04 index" / "_pubs"
 LAB = DOCS / "02 analysis" / "simuladores"
-BANCO = DOCS / "01 notes" / "50-examenes-y-practicas"
 
 # blog → {carpeta temática (o 'posts'): curso}. None = sin curso equivalente (se deja sin enlazar).
 MAPA_POSTS: dict[str, dict[str, str | None]] = {
@@ -48,20 +47,11 @@ MAPA_POSTS: dict[str, dict[str, str | None]] = {
     "pub_chaska": {"ciberseguridad-cybersoc-ccs": None, "ciberseguridad-ethical-hacking-ceh": None, "i3wm": None, "operating-system": None, "posts": None},
 }
 
-# carpeta del banco de exámenes → curso (None = sin curso docente equivalente)
-MAPA_BANCO: dict[str, str | None] = {
-    "econometria-i": "econometria_i", "econometria-ii": "econometria_ii", "econometria": "econometria_i", "topicos-de-econometria": "econometria_ii",
-    "macroeconomia-i": "macroeconomia_i", "macroeconomia-ii": "macroeconomia_ii", "macroeconomia": "macroeconomia_i", "macroeconomia-avanzada": "macroeconomia_dinamica",
-    "macroeconomia-internacional-ii": "comercio_internacional", "economia-internacional": "comercio_internacional", "economia-internacional-i": "comercio_internacional",
-    "economia-internacional-ii": "comercio_internacional", "microeconomia": "microeconomia_i", "microeconomia-avanzada": "microeconomia_ii",
-    "teoria-de-la-regulacion": "organizacion_industrial", "finanzas": "finanzas_i", "gestion-publica": "economia_publica", "economia-politica": "economia_politica",
-    "politica-economica": "economia_monetaria", "estadistica-para-economistas": "estadistica_para_economistas", "estadistica-para-economistas-i": "estadistica_para_economistas",
-    "estadistica-para-economistas-ii": "estadistica", "matematica-para-economistas": "matematicas_i", "matematica-para-economistas-i": "matematicas_i",
-    "matematica-para-economistas-ii": "matematicas_ii", "matematica": "matematicas_i", "matematica-basica": "matematicas_i",
-    "economia-de-rrnn-y-ambientales": "economia_rrnn_ambientales", "proyectos-de-inversion": "evaluacion_privada_de_proyectos", "ofimatica": "ofimatica_curso_base",
-    "ingles-icpna": "languages_curso_base", "investigacion-operativa": None, "gerencia-social": None, "glave": None, "otras-universidades": None,
-    "sin-clasificar": None, "macroeconomia udep": None,
-}
+# El banco de exámenes vive dentro de cada curso desde R10 (2026-09-15): cursos/<slug>/04-evaluaciones/<sub>/
+# (antes, carpetas de 01 notes/50-examenes-y-practicas mapeadas aquí por curso; el mapa de la migración está en
+# docencia/migracion/migrar-examenes.py y mapa-examenes.csv). `banco/` cuenta archivos sueltos; las demás
+# subcarpetas cuentan expedientes (carpetas) y .tex sueltos.
+SUBS_EVALUACIONES = ("examen_parcial", "examen_final", "practicas", "laboratorios", "tareas", "proyectos", "banco", "soluciones")
 
 # a qué cursos puede enlazarse cada disciplina del laboratorio (evita falsos positivos: «rango» de matrices, «median» de R…)
 DISCIPLINA_CURSOS = {
@@ -221,33 +211,31 @@ def cmd_simuladores(aplicar: bool, cs: dict, umbral: float = 0.5) -> None:
 
 # ---------------------------------------------------------------- exámenes
 def cmd_examenes(aplicar: bool, cs: dict) -> None:
-    conteo: dict[str, int] = {}
-    cat = BANCO / "catalogo.csv"
-    if cat.exists():
-        for row in csv.DictReader(cat.open(encoding="utf-8")):
-            carpeta = row["ruta"].split("/")[1] if row["ruta"].startswith("cursos/") else row["ruta"].split("/")[0]
-            conteo[carpeta] = conteo.get(carpeta, 0) + 1
-    carpetas = sorted(p.name for p in BANCO.iterdir() if p.is_dir() and not p.name.startswith(("_", ".")))
-    por_curso: dict[str, list[str]] = {}
-    for c in carpetas:
-        if c not in MAPA_BANCO:
-            print(f"  carpeta del banco sin entrada en MAPA_BANCO: {c}"); continue
-        cid = MAPA_BANCO[c]
-        if cid is None:
-            continue
-        if cid not in cs:
-            print(f"  curso desconocido en MAPA_BANCO: {cid} ({c})"); continue
-        por_curso.setdefault(cid, []).append(c)
     n = 0
-    for cid, lst in sorted(por_curso.items()):
-        cdir, t = cs[cid]
-        nuevo = [{"ruta": f"01 notes/50-examenes-y-practicas/{c}", "expedientes": conteo.get(c, 0)} for c in lst]
-        if t.get("banco_examenes") != nuevo:
+    vistos = set()
+    for cid, (cdir, t) in sorted(cs.items()):
+        if cdir in vistos:           # los alias apuntan al mismo curso
+            continue
+        vistos.add(cdir)
+        ev = cdir / "04-evaluaciones"
+        nuevo = []
+        if ev.is_dir():
+            for sub in sorted(p for p in ev.iterdir() if p.is_dir()):
+                if sub.name not in SUBS_EVALUACIONES:
+                    print(f"  subcarpeta fuera de la lista de new-evaluacion.sh: {cid}/04-evaluaciones/{sub.name}")
+                if sub.name == "banco":
+                    n_exp = sum(1 for p in sub.iterdir() if p.is_file() and not p.name.startswith("."))
+                else:
+                    n_exp = sum(1 for p in sub.iterdir() if p.is_dir() or p.suffix == ".tex")
+                if n_exp:
+                    nuevo.append({"ruta": f"04-evaluaciones/{sub.name}", "expedientes": n_exp})
+        if (t.get("banco_examenes") or []) != nuevo:
             t["banco_examenes"] = nuevo; n += 1
-            print(f"  {cid:<34} ← {', '.join(f'{c} ({conteo.get(c, 0)} exp.)' for c in lst)}")
+            resumen = ", ".join(f"{b['ruta'].split('/')[-1]} ({b['expedientes']})" for b in nuevo) or "sin banco"
+            print(f"  {cid:<34} ← {resumen}")
             if aplicar:
                 dump_temario(cdir / "curso.yml", t)
-    print(f"cursos con banco {'escrito' if aplicar else 'por escribir'}={n} · carpetas del banco={len(carpetas)}")
+    print(f"cursos con banco {'escrito' if aplicar else 'por escribir'}={n}")
 
 
 # ---------------------------------------------------------------- verificar
@@ -261,7 +249,7 @@ def cmd_verificar(cs: dict) -> int:
                     if "archivo" in r and not (DOCS / r["archivo"]).exists() and not (cdir / r["archivo"]).exists():
                         fallos += 1; print(f"  recurso roto: {cid}:{tema['id']} → {r['archivo']}")
         for b in t.get("banco_examenes", []) or []:
-            if not (DOCS / b["ruta"]).is_dir():
+            if not (cdir / b["ruta"]).is_dir() and not (DOCS / b["ruta"]).is_dir():
                 fallos += 1; print(f"  banco roto: {cid} → {b['ruta']}")
     sin = 0; desconocidos = 0
     for blog, carpeta, idx in posts_iter():

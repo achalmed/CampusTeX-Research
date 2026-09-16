@@ -41,7 +41,7 @@ cursos/econometria-i/
 ├── 01-diseno/           ← sílabo, calendario, competencias, matriz de evaluación, rubricas/ (academic-report)
 ├── 02-contenido/        ← apuntes canónicos: 1-2-tema.md (solo los escritos), img/
 ├── 03-sesiones/         ← s01-<slug>/ … (§3)
-├── 04-evaluaciones/     ← *.tex academic-exam (12 tipos), banco/, ejemplos/
+├── 04-evaluaciones/     ← <sub>/AAAAMMDD_sig/ (.tex academic-exam + PDF + code/): estándar docs/10-estandar-evaluaciones.md
 └── 05-recursos/         ← datasets/ (≤ 5 MB), talleres/, plantillas/, investigacion/, vendor/, curso.bib
 ```
 

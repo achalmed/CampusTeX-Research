@@ -1,9 +1,15 @@
 %% ============================================================================
-%% academic-boxes.sty — Cajas informativas (tcolorbox), editorial minimalista
+%% academic-boxes.sty — Bloques informativos (tcolorbox), editorial minimalista
 %% ----------------------------------------------------------------------------
-%% Sin marcos completos, sin sombras, sin degradados: solo un filete de acento a
-%% la izquierda, fondo suave y rótulo en versalitas + icono. Idéntico en B/N.
-%% Un solo estilo base; cada caja semántica lo especializa con título propio.
+%% Documentos de texto (academic-exam, academic-report): SIN caja, líneas ni iconos.
+%% Un bloque editorial sobre un lavado gris casi imperceptible (fondobloque) a todo el
+%% ancho, con rótulo en versalitas y cuerpo alineados al mismo borde interior; el
+%% enunciado queda en blanco y el desarrollo se distingue solo por ese lavado y el
+%% espacio (directriz visual de evaluaciones y revisión del autor, R10 2026-09-15).
+%% Beamer conserva la caja con
+%% fondo suave, filete de acento a la izquierda e icono: la diapositiva necesita
+%% contenedor. Un solo estilo base «academicbox»; cada bloque semántico lo
+%% especializa con título propio. Idéntico en B/N.
 %% Uso: \begin{nota} ... \end{nota}   ·   \begin{nota}[Título propio] ...
 %% ============================================================================
 \NeedsTeXFormat{LaTeX2e}
@@ -12,28 +18,42 @@
 \RequirePackage{academic-colors}
 \RequirePackage{academic-icons}
 
-% Estilo base «academicbox»: filete de acento a la izquierda, fondo suave.
-\tcbset{academicbox/.style={
-  enhanced, breakable, frame hidden, sharp corners,
-  colback=cajafondo, colbacktitle=cajafondo, titlerule=0pt,
-  borderline west={1.6pt}{0pt}{acento},
-  boxrule=0pt, left=10pt, right=8pt, top=6pt, bottom=6pt,
-  before skip=8pt, after skip=8pt,
-  coltitle=acento, fonttitle=\bfseries\small}}
+% Estilo base «academicbox» y rótulo \academic@rotulo{icono}{texto}: dos variantes.
+\@ifclassloaded{beamer}{%
+  % Beamer: caja con fondo suave, filete de acento a la izquierda e icono.
+  \newcommand{\academic@rotulo}[2]{#1\ \textsc{#2}}
+  \tcbset{academicbox/.style={
+    enhanced, breakable, frame hidden, sharp corners,
+    colback=cajafondo, colbacktitle=cajafondo, titlerule=0pt,
+    borderline west={1.6pt}{0pt}{acento},
+    boxrule=0pt, left=10pt, right=8pt, top=6pt, bottom=6pt,
+    before skip=8pt, after skip=8pt,
+    coltitle=acento, fonttitle=\bfseries\small}}
+}{%
+  % Texto: bloque editorial sobre lavado tenue; rótulo y cuerpo al mismo borde interior.
+  \newcommand{\academic@rotulo}[2]{\textsc{#2}}
+  \tcbset{academicbox/.style={
+    enhanced, breakable, frame hidden, sharp corners,
+    colback=fondobloque, colbacktitle=fondobloque, titlerule=0pt, boxrule=0pt,
+    parbox=false, left=8pt, right=8pt, top=2pt, bottom=6pt,
+    lefttitle=8pt, toptitle=5pt, bottomtitle=1pt,
+    before skip=12pt plus 3pt minus 2pt, after skip=12pt plus 3pt minus 2pt,
+    coltitle=acento, fonttitle=\bfseries\small}}
+}
 
 % Cajas simples (título por defecto + override opcional) --------------------
-\newtcolorbox{nota}[1][Nota]{academicbox, title={\iconnota\ \textsc{#1}}}
-\newtcolorbox{ejemplo}[1][Ejemplo]{academicbox, title={\iconejemplo\ \textsc{#1}}}
-\newtcolorbox{observacion}[1][Observación]{academicbox, title={\iconobservacion\ \textsc{#1}}}
-\newtcolorbox{importante}[1][Importante]{academicbox, title={\iconimportante\ \textsc{#1}}}
-\newtcolorbox{instrucciones}[1][Instrucciones]{academicbox, title={\iconinstrucciones\ \textsc{#1}}}
-\newtcolorbox{formulario}[1][Formulario]{academicbox, title={\iconformulario\ \textsc{#1}}}
-\newtcolorbox{datos}[1][Datos]{academicbox, title={\icondatos\ \textsc{#1}}}
-\newtcolorbox{criterios}[1][Criterios]{academicbox, title={\iconcriterios\ \textsc{#1}}}
+\newtcolorbox{nota}[1][Nota]{academicbox, title={\academic@rotulo{\iconnota}{#1}}}
+\newtcolorbox{ejemplo}[1][Ejemplo]{academicbox, title={\academic@rotulo{\iconejemplo}{#1}}}
+\newtcolorbox{observacion}[1][Observación]{academicbox, title={\academic@rotulo{\iconobservacion}{#1}}}
+\newtcolorbox{importante}[1][Importante]{academicbox, title={\academic@rotulo{\iconimportante}{#1}}}
+\newtcolorbox{instrucciones}[1][Instrucciones]{academicbox, title={\academic@rotulo{\iconinstrucciones}{#1}}}
+\newtcolorbox{formulario}[1][Formulario]{academicbox, title={\academic@rotulo{\iconformulario}{#1}}}
+\newtcolorbox{datos}[1][Datos]{academicbox, title={\academic@rotulo{\icondatos}{#1}}}
+\newtcolorbox{criterios}[1][Criterios]{academicbox, title={\academic@rotulo{\iconcriterios}{#1}}}
 
 % Cajas numeradas con nombre opcional (definición / teorema) ----------------
 \NewTColorBox[auto counter,number within=section]{definicion}{o}{academicbox,
-  title={\icondefinicion\ \textsc{Definición}~\thetcbcounter\IfValueT{#1}{\ \normalfont\itshape(#1)}}}
+  title={\academic@rotulo{\icondefinicion}{Definición}~\thetcbcounter\IfValueT{#1}{\ \normalfont\itshape(#1)}}}
 \NewTColorBox[auto counter,number within=section]{teorema}{o}{academicbox,
-  title={\iconteorema\ \textsc{Teorema}~\thetcbcounter\IfValueT{#1}{\ \normalfont\itshape(#1)}}}
+  title={\academic@rotulo{\iconteorema}{Teorema}~\thetcbcounter\IfValueT{#1}{\ \normalfont\itshape(#1)}}}
 \endinput

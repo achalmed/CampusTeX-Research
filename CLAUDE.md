@@ -103,7 +103,14 @@ normativa de archivos vía `core/archivos.py validar "10 Class"`).
 **Plataforma editorial (rediseño 2026-07-23, ver `docs/00-arquitectura.md` — fuente de verdad arquitectónica). Motor LuaLaTeX exclusivo (migración 2026). Capas, cada una con responsabilidad única:**
 
 - `styles/` — **identidad visual única** (`academic.sty` carga colores, fuentes
-  fontspec Libertinus+Inconsolata, math, iconos, cajas, código, tablas, idioma).
+  fontspec Libertinus+Inconsolata, math, iconos, bloques, código, tablas, idioma). Orden
+  de carga obligatorio: `mathtools` (amsmath) **antes** de unicode-math, si no
+  `\underbrace`/`\overbrace` salen como bloques negros (R9, 2026-09-15). Los bloques
+  (`instrucciones`, `datos`, `solucion`, `nota`…) siguen la directriz visual de evaluaciones
+  (R10): en texto, lavado gris casi imperceptible (`fondobloque`), rótulo en versalitas y
+  cuerpo alineados, **sin caja, líneas ni iconos**; en Beamer conservan caja, filete e icono.
+  amssymb no existe bajo unicode-math (`\blacksquare` → `\mdlgblksquare`); `\nota{}` como
+  comando ya no existe: es `\interpreta{}`.
   La cargan por igual las clases de documento **y** el tema Beamer → un examen y
   una diapositiva comparten diseño al carácter. **El color se cambia en un solo
   sitio, `config/palette.tex`; las tipografías, en `styles/academic-fonts.sty`.**
@@ -199,10 +206,21 @@ compilación falla; si es un PDF versionado, se recupera con `git checkout`.
 
 - **50 cursos** en `docencia/cursos/` cumplen el estándar (`validate.sh --todos`: 0 errores;
   67 sesiones tipadas; 2 dictados de Metodología, 2025-I marcado `legado`).
+- **Banco de exámenes rendidos** (R9–R10, 2026-09-15) — **reorganizado, NO migrado**. El estándar de
+  evaluaciones (tipos, siglas, subcarpetas, expediente `AAAAMMDD_sig/` con `code/{data,figures,table}`, flujo de
+  transformación y registro) es `docs/10-estandar-evaluaciones.md` (2026-09-15); el prompt maestro remite a él. Migrar = transformar cada
+  examen al sistema `.tex` (`academic-exam`, solucionario, `code/`, nomenclatura del prompt
+  `prompts/05 docencia/prompt_resolucion_examenes_plantillas.md`) y eliminar el original una vez validado.
+  Estado real (`docencia/migracion/estado-examenes.csv`): 6 expedientes transformados, 5 parciales (`.tex` +
+  escaneo original), **122 expedientes y 118 PDF sueltos solo trasladados** desde `01 notes/50-examenes-y-practicas`
+  a `cursos/<slug>/04-evaluaciones/<sub>/` de 20 cursos; siguen siendo originales pendientes de transformación.
+  `curso.yml.banco_examenes` los declara (`enlazar.py examenes`); mapa y migrador en `docencia/migracion/`;
+  bitácoras `meta/reparaciones/R9_…` y `R10_…`. En el vault quedan 7 carpetas sin curso docente,
+  `material-de-apoyo/` y `_datasets/`.
 - **Pendiente del docente** (heredado, no de la migración): 5 de los 6 decks Beamer
   heredados probados no compilan (logo `cau-logo.png` ausente o `%!TEX program = xelatex`);
-  se reconstruyen al usarlos, no se "arreglan" borrando contenido. 9 binarios > 5 MB
-  (avisa el doctor). `_inbox/` (401 archivos) por clasificar. 20 datasets aterrizados en
+  se reconstruyen al usarlos, no se "arreglan" borrando contenido. 17 binarios > 5 MB
+  (avisa el doctor; 8 llegaron con el banco de exámenes en R10). `_inbox/` (401 archivos) por clasificar. 20 datasets aterrizados en
   `02 analysis/data/raw/_docencia_por_catalogar/` por catalogar.
 - **Remotes** (push hecho por el usuario el 2026-09-15 con `R8_…/subir-remotos.sh`): `docencia/` →
   `achalmed/Academic_Class` (privado; repo `MyTestProyect` reutilizado y renombrado, sin crear uno
