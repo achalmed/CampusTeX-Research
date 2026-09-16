@@ -211,9 +211,12 @@ compilación falla; si es un PDF versionado, se recupera con `git checkout`.
   transformación y registro) es `docs/10-estandar-evaluaciones.md` (2026-09-15); el prompt maestro remite a él. Migrar = transformar cada
   examen al sistema `.tex` (`academic-exam`, solucionario, `code/`, nomenclatura del prompt
   `prompts/05 docencia/prompt_resolucion_examenes_plantillas.md`) y eliminar el original una vez validado.
-  Estado real (`docencia/migracion/estado-examenes.csv`): 6 expedientes transformados, 5 parciales (`.tex` +
-  escaneo original), **122 expedientes y 118 PDF sueltos solo trasladados** desde `01 notes/50-examenes-y-practicas`
-  a `cursos/<slug>/04-evaluaciones/<sub>/` de 20 cursos; siguen siendo originales pendientes de transformación.
+  Estado real (`docencia/migracion/estado-examenes.csv`, regenerar con `estado-examenes.py --aplicar`): al 2026-09-16
+  (R11) hay **54 expedientes transformados** (Econometría I completo: 44 exámenes, prácticas y laboratorios con
+  `.tex`, solucionario, `code/<tallo>.py` y datos; 10 expedientes de ese curso quedan `manual` por carecer de
+  enunciado), 2 parciales y **202 pendientes** en 20 cursos (Econometría II 48, Estadística para Economistas 42,
+  Macroeconomía I 23…). Cada transformación se cierra con `docencia/migracion/cerrar-expediente.sh CURSO SUB TALLO
+  [ORIGEN…]` (compila, borra el original, regenera registro y README, valida y hace los dos commits).
   `curso.yml.banco_examenes` los declara (`enlazar.py examenes`); mapa y migrador en `docencia/migracion/`;
   bitácoras `meta/reparaciones/R9_…` y `R10_…`. En el vault quedan 7 carpetas sin curso docente,
   `material-de-apoyo/` y `_datasets/`.
