@@ -685,3 +685,11 @@ tutorial de 2025, un README y un logo, sin referencias locales) se renombró a `
 `docencia/` ya lo tiene como `origin`. Los pasos de red (M0 a las 5 áreas con remote, push de `docencia/` con sus 25 tags,
 push del framework, archivo de los 5 repos heredados) quedan en `R8_…/subir-remotos.sh` porque el clasificador del modo
 automático no permite `git push`; `areas_originales/` se borra después de verificar el push.
+
+**Push hecho (usuario, 2026-09-15).** El primer intento por HTTPS falló por falta de token (los 5 remotes se cambiaron a SSH) y el
+segundo se cortó por red a mitad de los 600 MB de `docencia/`; el script pasó a subir por tramos de 40 commits con reintentos y
+keepalive. Resultado verificado: `Academic_Class` `main` = `49589af` con los 25 tags y sin ramas de prueba; framework `main` =
+`origin/main`; las 5 áreas con remote reciben M0 (`main` + `pre-reorg-2026-09`) y quedan archivadas en GitHub con nota. Hallazgo:
+las refs `pre-reorg-2026-09` y `reorg-2026-09-done` del framework habían desaparecido (los objetos tag seguían colgantes) y se
+restauraron con `update-ref`; el remote no tiene tags, así que falta `git push origin --tags` en el framework. Las bitácoras R1–R8
+están versionadas en `meta` (`areas_originales/` git-ignorado). Queda al usuario borrar `areas_originales/` (1,6 GB).

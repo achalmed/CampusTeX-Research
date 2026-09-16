@@ -8,7 +8,8 @@ Guía para Claude Code (claude.ai/code) y para Codex (`AGENTS.md` es un enlace s
 estándar 00–09 por el que describe este archivo. Los 23 submódulos `areas/Academic_Class-*` ya no existen:
 sus repos se fusionaron, con historial, en el **único submódulo `docencia/`** (repo `Academic_Class`; tags
 `<area>/pre-reorg-2026-09`). Los 23 repos originales, intactos, están en
-`meta/reparaciones/R2_consolidacion_2026-09-15_090152/areas_originales/` hasta que el usuario haga el push de M0.
+`meta/reparaciones/R2_consolidacion_2026-09-15_090152/areas_originales/` (solo en disco, git-ignorado en `meta/`)
+hasta que el usuario los borre: su historial ya está en GitHub (M0 en los 5 repos con remote, archivados; el resto dentro de `Academic_Class`).
 Si un documento, prompt o script habla de `areas/Academic_Class-<Área>/course_NN_<slug>/0N_…`, es histórico:
 léelo como `docencia/cursos/<slug>/0N-…` (mapas archivo a archivo: `docencia/migracion/mapa-m3.csv`, `mapa-m4.csv`).
 
@@ -204,12 +205,14 @@ compilación falla; si es un PDF versionado, se recupera con `git checkout`.
   se reconstruyen al usarlos, no se "arreglan" borrando contenido. 9 binarios > 5 MB
   (avisa el doctor). `_inbox/` (401 archivos) por clasificar. 20 datasets aterrizados en
   `02 analysis/data/raw/_docencia_por_catalogar/` por catalogar.
-- **Remotes**: `docencia/` → `achalmed/Academic_Class` (privado; repo `MyTestProyect` reutilizado y
-  renombrado el 2026-09-15, sin crear uno nuevo); framework → `achalmed/CampusTeX-Research`.
-  **Pendiente del usuario** (el clasificador no deja a Claude hacer `git push`): ejecutar
-  `meta/reparaciones/R8_leccion_2026-09-15_121422/subir-remotos.sh [--archivar]` (M0 a las 5
-  áreas con remote, `docencia/` con sus 25 tags, framework, archivo de los 5 repos heredados) y,
-  verificado, borrar `areas_originales/`.
+- **Remotes** (push hecho por el usuario el 2026-09-15 con `R8_…/subir-remotos.sh`): `docencia/` →
+  `achalmed/Academic_Class` (privado; repo `MyTestProyect` reutilizado y renombrado, sin crear uno
+  nuevo; `main` = `49589af` y 25 tags); framework → `achalmed/CampusTeX-Research`. Las 5 áreas que
+  tenían remote (`econometric`, `CampusTeX-Projects`, `LaTex`, `Python`, `Machine-learning-con-R`)
+  recibieron su estado M0 y quedaron **archivadas** en GitHub. Los tags `pre-reorg-2026-09` y
+  `reorg-2026-09-done` del framework se restauraron desde sus objetos colgantes (alguien había
+  borrado las refs): hay que subirlos (`git push origin --tags`) para que un `fetch --prune-tags`
+  no los vuelva a borrar. **Pendiente del usuario**: borrar `areas_originales/` (1,6 GB).
 
 ## El currículo: `curso.yml` (F5.1, 2026-09-06; sucesor de `temario.yml` desde M4, 2026-09-15)
 
