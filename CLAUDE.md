@@ -7,9 +7,8 @@ Guía para Claude Code (claude.ai/code) y para Codex (`AGENTS.md` es un enlace s
 `docs/DIAGNOSTICO_AREAS_2026-09.md` (fases M0–M8, ejecución en §8; tag `reorg-2026-09-done`) sustituyó el
 estándar 00–09 por el que describe este archivo. Los 23 submódulos `areas/Academic_Class-*` ya no existen:
 sus repos se fusionaron, con historial, en el **único submódulo `docencia/`** (repo `Academic_Class`; tags
-`<area>/pre-reorg-2026-09`). Los 23 repos originales, intactos, están en
-`meta/reparaciones/R2_consolidacion_2026-09-15_090152/areas_originales/` (solo en disco, git-ignorado en `meta/`)
-hasta que el usuario los borre: su historial ya está en GitHub (M0 en los 5 repos con remote, archivados; el resto dentro de `Academic_Class`).
+`<area>/pre-reorg-2026-09`). Los 23 repos originales se borraron del disco el 2026-09-15 tras verificar el push: su estado previo vive en GitHub
+(M0 en los 5 repos heredados con remote, archivados; los 23 dentro de `Academic_Class` bajo `<area>/pre-reorg-2026-09`).
 Si un documento, prompt o script habla de `areas/Academic_Class-<Área>/course_NN_<slug>/0N_…`, es histórico:
 léelo como `docencia/cursos/<slug>/0N-…` (mapas archivo a archivo: `docencia/migracion/mapa-m3.csv`, `mapa-m4.csv`).
 
@@ -212,7 +211,8 @@ compilación falla; si es un PDF versionado, se recupera con `git checkout`.
   recibieron su estado M0 y quedaron **archivadas** en GitHub. Los tags `pre-reorg-2026-09` y
   `reorg-2026-09-done` del framework se restauraron desde sus objetos colgantes (alguien había
   borrado las refs): hay que subirlos (`git push origin --tags`) para que un `fetch --prune-tags`
-  no los vuelva a borrar. **Pendiente del usuario**: borrar `areas_originales/` (1,6 GB).
+  no los vuelva a borrar (subidos el mismo día). `areas_originales/` (1,6 GB) borrado el 2026-09-15: la migración no deja
+  nada pendiente del usuario.
 
 ## El currículo: `curso.yml` (F5.1, 2026-09-06; sucesor de `temario.yml` desde M4, 2026-09-15)
 

@@ -692,4 +692,5 @@ keepalive. Resultado verificado: `Academic_Class` `main` = `49589af` con los 25 
 `origin/main`; las 5 áreas con remote reciben M0 (`main` + `pre-reorg-2026-09`) y quedan archivadas en GitHub con nota. Hallazgo:
 las refs `pre-reorg-2026-09` y `reorg-2026-09-done` del framework habían desaparecido (los objetos tag seguían colgantes) y se
 restauraron con `update-ref`; el remote no tiene tags, así que falta `git push origin --tags` en el framework. Las bitácoras R1–R8
-están versionadas en `meta` (`areas_originales/` git-ignorado). Queda al usuario borrar `areas_originales/` (1,6 GB).
+están versionadas en `meta`. Los tags del framework se subieron y `areas_originales/` (1,6 GB) se borró el mismo día; las carpetas
+`publicacion/` congeladas eran de solo lectura y hubo que devolverles el permiso para borrarlas. **Nada queda pendiente de la migración.**
