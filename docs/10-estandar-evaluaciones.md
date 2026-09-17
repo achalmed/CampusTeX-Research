@@ -104,6 +104,18 @@ corrección: la solución es la versión oficial correcta. Valores por defecto: 
 Escuela de Economía, estudiante titular y su código (los pone la clase); lo que no se sabe se deja
 vacío, no se inventa. Símbolos: unicode-math (`\mdlgblksquare`, no `\blacksquare`).
 
+**Evaluaciones de otras universidades (R12, 2026-09-17).** Se transforman exactamente igual que las
+propias y se archivan en el curso del framework al que corresponde su contenido; solo cambian los
+metadatos del membrete (`\universidad`, `\facultad`, `\escuela`, `\docente` del autor original;
+por ejemplo PUCP = Pontificia Universidad Católica del Perú · Facultad de Ciencias Sociales ·
+Especialidad de Economía). La cabecera declara el origen ajeno, la fuente eliminada y, cuando la
+hay, la procedencia de la clave (solucionario oficial, corrección del docente sobre un examen
+rendido, reconstrucción del transformador) y toda corrección a la solución oficial, que se
+demuestra en el propio `.tex` o en `code/`. Los enunciados en otro idioma se conservan; las
+soluciones van en español. Puntajes: los del original; si no los trae, se asignan y se declara.
+Lo que no es evaluación (hojas de respuestas sin enunciado, bancos de problemas sin resolver,
+lecturas) no entra al framework: material al vault, lecturas publicadas a Calibre.
+
 ## 6. Compilar, validar, cerrar
 
 1. Si hay `code/`: `python3 code/<tallo>.py` corre con una orden y deja `figures/` y `table/`.
@@ -114,8 +126,10 @@ vacío, no se inventa. Símbolos: unicode-math (`\mdlgblksquare`, no `\blacksqua
    extensión de las bitácoras de Stata: el `--clean` del script solo borra `<tallo>*.log`).
 5. Registrar el estado en `docencia/migracion/estado-examenes.csv` y **eliminar las fuentes**
    del expediente. `validate.sh CURSO` debe seguir limpio (sin carpetas vacías).
-6. `python3 scripts/enlazar.py examenes --aplicar` y `temario-generar.sh generar --aplicar --que readme`
-   cuando cambie el conteo de una subcarpeta.
+6. `python3 scripts/enlazar.py examenes --aplicar` y `temario-generar.sh generar --aplicar --que readme
+   docencia/cursos/<slug>` (el generador recibe rutas, no slugs) cuando cambie el conteo de una subcarpeta.
+   Antes de cerrar, `grep -c "Overfull \\hbox ([2-9][0-9]" <tallo>-soluciones.log` debe dar 0: un
+   `\aplica{}` o una celda de `{ecua}` que desborda se acorta o se parte, no se deja.
 
 ## 7. Registro de la migración (`docencia/migracion/estado-examenes.csv`)
 
