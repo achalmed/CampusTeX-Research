@@ -212,9 +212,12 @@ compilación falla; si es un PDF versionado, se recupera con `git checkout`.
   examen al sistema `.tex` (`academic-exam`, solucionario, `code/`, nomenclatura del prompt
   `prompts/05 docencia/prompt_resolucion_examenes_plantillas.md`) y eliminar el original una vez validado.
   Estado real (`docencia/migracion/estado-examenes.csv`, regenerar con `estado-examenes.py --aplicar`): al 2026-09-16
-  (R11, noche) hay **92 expedientes transformados** (Econometría I y Econometría II completos, con `.tex`, solucionario,
-  `code/<tallo>.py` y datos), 13 `manual` documentados (sin enunciado o sin base de datos), 1 parcial y **155 pendientes**
-  en 18 cursos (Estadística para Economistas 42, Macroeconomía I 23, Estadística 13…). Cada transformación se cierra con
+  (R11, cierre del bloque de estadística) hay **126 expedientes transformados** (Econometría I, Econometría II y
+  Estadística para Economistas completos —35 en este último, banco vacío—, con `.tex`, solucionario, `code/<tallo>.py`
+  y datos; el curso `estadistica` quedó sin banco porque todo era EPE), 13 `manual` documentados (sin enunciado o sin
+  base de datos), 2 parciales y **100 pendientes** en 16 cursos (Macroeconomía I 23, Comercio Internacional 14,
+  Matemáticas I 13, Microeconomía I 9, Evaluación Privada de Proyectos 8, Finanzas I 7…). Los años de tallo se
+  fijan por la evidencia interna (fechas de salidas EViews, horizonte de los datos), no por la carpeta de origen. Cada transformación se cierra con
   `docencia/migracion/cerrar-expediente.sh CURSO SUB TALLO [ORIGEN…]` (compila, borra el original —también si está en
   otro curso—, regenera registro y README, valida y hace los dos commits). Los materiales que no son evaluaciones
   (guías de clase, tareas ajenas, datasets sueltos) no se transforman: vuelven al vault (`material-de-apoyo/`, `_datasets/`)
@@ -224,8 +227,8 @@ compilación falla; si es un PDF versionado, se recupera con `git checkout`.
   `material-de-apoyo/` y `_datasets/`.
 - **Pendiente del docente** (heredado, no de la migración): 5 de los 6 decks Beamer
   heredados probados no compilan (logo `cau-logo.png` ausente o `%!TEX program = xelatex`);
-  se reconstruyen al usarlos, no se "arreglan" borrando contenido. 17 binarios > 5 MB
-  (avisa el doctor; 8 llegaron con el banco de exámenes en R10). `_inbox/` (401 archivos) por clasificar. 20 datasets aterrizados en
+  se reconstruyen al usarlos, no se "arreglan" borrando contenido. 15 binarios > 5 MB
+  (avisa el doctor; los dos del banco de EPE volvieron al vault con las sesiones Stata 2021-II). `_inbox/` (401 archivos) por clasificar. 20 datasets aterrizados en
   `02 analysis/data/raw/_docencia_por_catalogar/` por catalogar.
 - **Remotes** (push hecho por el usuario el 2026-09-15 con `R8_…/subir-remotos.sh`): `docencia/` →
   `achalmed/Academic_Class` (privado; repo `MyTestProyect` reutilizado y renombrado, sin crear uno
