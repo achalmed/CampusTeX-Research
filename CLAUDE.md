@@ -206,26 +206,36 @@ compilación falla; si es un PDF versionado, se recupera con `git checkout`.
 
 - **50 cursos** en `docencia/cursos/` cumplen el estándar (`validate.sh --todos`: 0 errores;
   67 sesiones tipadas; 2 dictados de Metodología, 2025-I marcado `legado`).
-- **Banco de exámenes rendidos** (R9–R10, 2026-09-15) — **reorganizado, NO migrado**. El estándar de
+- **Banco de exámenes rendidos** (R9–R11, 2026-09-15/16) — **migración completa**. El estándar de
   evaluaciones (tipos, siglas, subcarpetas, expediente `AAAAMMDD_sig/` con `code/{data,figures,table}`, flujo de
   transformación y registro) es `docs/10-estandar-evaluaciones.md` (2026-09-15); el prompt maestro remite a él. Migrar = transformar cada
   examen al sistema `.tex` (`academic-exam`, solucionario, `code/`, nomenclatura del prompt
   `prompts/05 docencia/prompt_resolucion_examenes_plantillas.md`) y eliminar el original una vez validado.
   Estado real (`docencia/migracion/estado-examenes.csv`, regenerar con `estado-examenes.py --aplicar`): al 2026-09-16
-  (R11, cierre de los bloques de estadística y macro/comercio) hay **148 expedientes transformados** (Econometría I y II,
-  Estadística para Economistas, Macroeconomía I y II y Comercio Internacional completos, con `.tex`, solucionario,
-  `code/<tallo>.py` y datos; el curso `estadistica` quedó sin banco porque todo era EPE), 16 `manual` documentados
-  (sin enunciado, sin base de datos o manuscritos sin transcribir), 1 parcial y **57 pendientes** en 13 cursos
-  (Matemáticas I 13, Microeconomía I 9, Evaluación Privada de Proyectos 8, Finanzas I 7, Microeconomía II 6…).
-  Los exámenes teórico-gráficos se transforman con figuras matplotlib en `code/<tallo>.py` (sin datos). Los años de tallo se
-  fijan por la evidencia interna (fechas de salidas EViews, horizonte de los datos), no por la carpeta de origen. Cada transformación se cierra con
+  (R11, cierre) hay **172 expedientes transformados** en 18 cursos (Econometría I 58, Estadística para Economistas 35,
+  Econometría II 34, Macroeconomía II 8, Comercio Internacional 8, Finanzas I 7, Macroeconomía I 5, Evaluación Privada
+  de Proyectos 4, Recursos Naturales 3, Formulación de Proyectos 2 y uno en Organización Industrial, Micro I y II,
+  Matemáticas I y II, Excel, Economía Pública y Crecimiento Económico; el curso `estadistica` quedó sin banco porque
+  todo era EPE), **16 `manual`** documentados (sin enunciado, sin base de datos o manuscritos sin transcribir; uno de
+  ellos, `econometria-i/practicas/2020_pc`, espera la decisión sobre un PDF «no borrar») y **0 pendientes**. Los cursos
+  `macroeconomia-dinamica`, `economia-politica` y `economia-monetaria` quedaron sin `04-evaluaciones/` porque sus
+  bancos eran exámenes de otras universidades o de otros cursos (devueltos al vault).
+  Los exámenes teórico-gráficos se transforman con figuras matplotlib en `code/<tallo>.py` (sin datos); cuando el
+  enunciado pide datos que no trae, se ilustran con series públicas (BCRP, FMI, Banco Mundial) declaradas en la cabecera.
+  Los tests de Google Forms se reconstruyen con la clave del docente (respuesta correcta de las erradas y opción
+  marcada de las acertadas). Los años de tallo se fijan por la evidencia interna (fechas de salidas EViews, horizonte
+  de los datos, fechas de creación de los PDF de respuestas), no por la carpeta de origen; `sinfecha_sig` cuando no la hay.
+  Cada transformación se cierra con
   `docencia/migracion/cerrar-expediente.sh CURSO SUB TALLO [ORIGEN…]` (compila, borra el original —también si está en
   otro curso—, regenera registro y README, valida y hace los dos commits). Los materiales que no son evaluaciones
-  (guías de clase, tareas ajenas, datasets sueltos) no se transforman: vuelven al vault (`material-de-apoyo/`, `_datasets/`)
-  y se anotan en su `readme.md`.
+  (guías de clase, lecturas, exámenes de otras universidades o de cursos sin dictado, datasets sueltos, respuestas
+  manuscritas) no se transforman: vuelven al vault (`material-de-apoyo/`, `_datasets/`, `otras-universidades/`,
+  `sin-clasificar/` o una carpeta nueva del curso sin dictado) y se anotan en su `readme.md`.
   `curso.yml.banco_examenes` los declara (`enlazar.py examenes`); mapa y migrador en `docencia/migracion/`;
-  bitácoras `meta/reparaciones/R9_…` y `R10_…`. En el vault quedan 7 carpetas sin curso docente,
-  `material-de-apoyo/` y `_datasets/`.
+  bitácoras `meta/reparaciones/R9_…` y `R10_…`. En el vault quedan las carpetas sin curso docente (12: las 7
+  originales más `planeamiento-y-gestion-de-empresas`, `costos-y-presupuestos`, `finanzas-internacionales`,
+  `planificacion-y-presupuesto` y el `politica-economica-ec547` de `sin-clasificar`), `otras-universidades/`
+  (PUCP, UNMSM, MIT, ESPOL, Bacchetta), `material-de-apoyo/` por curso y `_datasets/`.
 - **Pendiente del docente** (heredado, no de la migración): 5 de los 6 decks Beamer
   heredados probados no compilan (logo `cau-logo.png` ausente o `%!TEX program = xelatex`);
   se reconstruyen al usarlos, no se "arreglan" borrando contenido. 15 binarios > 5 MB
