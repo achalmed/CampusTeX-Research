@@ -250,6 +250,22 @@ compilación falla; si es un PDF versionado, se recupera con `git checkout`.
   originales más `planeamiento-y-gestion-de-empresas`, `costos-y-presupuestos`, `finanzas-internacionales`,
   `planificacion-y-presupuesto` y el `politica-economica-ec547` de `sin-clasificar`), `material-de-apoyo/` por curso y
   `_datasets/`.
+- **R13 (2026-09-17): evaluaciones de Calibre migradas sin transformar.** Las 971 evaluaciones catalogadas en Calibre
+  (24 cursos CAF, PUCP, UNMSM, UNSCH, BCRP, Infox, IDDEA, MIT, UDEP, UP, UCR, UNNE…) salieron de la biblioteca: **947
+  ítems → 707 expedientes pendientes en 33 cursos** (nuevos `historia-economica` e `investigacion-operativa`; 24 ítems
+  quedaron en Calibre por no ser evaluaciones). Cada expediente `04-evaluaciones/<sub>/<tallo>/` tiene la ficha
+  `<tallo>.md` (`tipo: evaluacion`: registro íntegro de Calibre + `tags` `curso/ tipo/ serie/ autor/ institucion/ tema/`
+  para Obsidian; versionada) y las fuentes `<tallo>_fuente*.pdf` (**no versionadas**: `docencia/.gitignore`; respaldo
+  `meta/reparaciones/R13_calibre-evaluaciones_2026-09-17/calibre-evaluaciones.tar`, 552 MB). Reglas y ficha en
+  `docs/10-estandar-evaluaciones.md` §9; herramienta `docencia/migracion/migrar-calibre.py` (`inventario · mapa ·
+  aplicar`) con `mapa-calibre.csv` (curso, tallo, rol por ítem) e `inventario-calibre.json`. El curso de cada ítem PUCP se
+  fijó leyendo la primera página (pdftotext/OCR): Quispe y Castillo = Teoría Monetaria → `economia-monetaria`; Calderón,
+  Flores, Quiróz y Valdivieso = Estadística Inferencial → `estadistica-para-economistas`; Valderrama = Econometría 2;
+  Jordán y Lugon (MAT 291) → `matematicas-iii`; Chávez → `matematicas-ii`; Garavito = Micro 1 hasta 2012, Micro 2 después
+  y tres parciales de Historia del Pensamiento → `economia-politica`. `estado-examenes.csv`: 222 transformados, 698
+  pendientes, 25 manual (los 9 laboratorios de Romero son registros de Calibre sin archivo). La fase siguiente transforma
+  expediente por expediente (`cerrar-expediente.sh CURSO SUB TALLO <sub>/<tallo>/<tallo>_fuente*.pdf`; la ficha se
+  conserva con `estado: activo`). Pendiente del autor: los 934 ítems espejo de Zotero (`zotero-keys-migrados.txt`).
 - **Pendiente del docente** (heredado, no de la migración): 5 de los 6 decks Beamer
   heredados probados no compilan (logo `cau-logo.png` ausente o `%!TEX program = xelatex`);
   se reconstruyen al usarlos, no se "arreglan" borrando contenido. 15 binarios > 5 MB

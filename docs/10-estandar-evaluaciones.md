@@ -78,6 +78,8 @@ El nombre del expediente, del `.tex`, del script y de los PDF es **el mismo tall
   `enunciado*.pdf`, ni respuestas manuscritas, ni `.smcl/.log/.spv` de otro software: lo que
   aporte se incorpora al `.tex`/`code/`; lo demás se elimina al validar (decisión del autor,
   2026-09-15; sustituye al «`enunciado*.pdf ← original`» del prompt de julio).
+  Excepción desde R13 (§9): la ficha `<tallo>.md` **sí** forma parte del expediente, porque es su registro
+  de procedencia; y las fuentes pendientes se llaman `<tallo>_fuente*.pdf`.
 - El `.tex` **cita los archivos por su nombre real** (`\texttt{data.xlsx}`), no por el nombre
   que usaba el escaneo (`Importaciones_Examen`, `Data_Examen`…).
 - `code/` se llama `code` (no `codigo`); el script lleva el tallo del examen; las carpetas
@@ -147,3 +149,50 @@ según este estándar y el prompt maestro.
 `data.xlsx`; `.dta`/`.sav` los lee `pandas` directo; `.ods/.xls/.xlsx` con LibreOffice
 headless o `pandas`. La fuente original se conserva en `code/data/` con el tallo estándar
 (`data.wf1`) solo si el `.py` la necesita para reproducir; si no, basta `data.xlsx`.
+
+## 9. Fuentes migradas desde Calibre: el expediente pendiente y su ficha (R13, 2026-09-17)
+
+La biblioteca Calibre catalogaba 971 evaluaciones (exámenes, prácticas calificadas y dirigidas, controles de lectura,
+tests, hojas de ejercicios de sesión, casos, laboratorios, tareas) de 24 cursos CAF, PUCP, UNMSM, UNSCH, BCRP, Infox,
+IDDEA, MIT, UDEP, UP, UCR, UNNE… R13 las sacó de Calibre —**947 ítems → 707 expedientes en 33 cursos** (se crearon
+`historia-economica` e `investigacion-operativa`; 24 ítems se quedaron en Calibre por no ser evaluaciones: solucionarios
+de libros de texto, artículos de un taller, talleres publicados de la BNP, un manual de Excel)— sin transformar nada.
+Herramienta y registros: `docencia/migracion/migrar-calibre.py` (`inventario` · `mapa` · `aplicar`),
+`inventario-calibre.json`, `mapa-calibre.csv`, `calibre-ids-migrados.txt`, `zotero-keys-migrados.txt`; bitácora y
+respaldo en `meta/reparaciones/R13_calibre-evaluaciones_2026-09-17/`.
+
+**El expediente pendiente** (estado `pendiente` de §7) tiene esta forma, que la fase de transformación consume tal cual:
+
+```
+04-evaluaciones/<sub>/<tallo>/
+├── <tallo>.md                         ← FICHA: registro de procedencia (versionada)
+├── <tallo>_fuente.pdf                 ← fuente única, o
+├── <tallo>_fuente_enunciado.pdf       ← + <tallo>_fuente_solucion.pdf cuando Calibre traía el par (un expediente)
+└── (…_fuente_version_a/_b, _fuente_desarrollo_manuscrito, _fuente_grupo_01, _fuente_solucion_02…)
+```
+
+- **Las fuentes no se versionan** (decisión del autor, R13: 552 MB de PDF): `docencia/.gitignore` ignora
+  `cursos/*/04-evaluaciones/*/*/*_fuente*.pdf`; el respaldo es el tarball de la bitácora (y la papelera de Calibre
+  mientras dure). Se llaman en `snake_case` (`_fuente`, no `-fuente`) para que `core/archivos.py` no las marque y para
+  que nunca choquen con los productos `<tallo>.pdf` y `<tallo>-soluciones.pdf` de `build.sh`.
+- **El tallo** sigue §3 con la fecha que Calibre conocía: semestre PUCP → `AAAAMM` (`201905` = 2019-1, `201910` =
+  2019-2), CAF → `2022`, fecha completa solo si el PDF la trae (`20210512_cl`); `_nn` es el número natural (sesión,
+  tema, PC) y, cuando dos docentes chocan en el mismo grupo `(curso, sub, fecha, sigla)`, el de más expedientes conserva
+  los suyos. La transformación fija el tallo definitivo por la evidencia interna (§5, R12) y renombra la carpeta.
+- **La ficha `<tallo>.md`** es el registro de la unidad (normativa §7) y el «registro que cataloga» a los binarios
+  (normativa §4): frontmatter `tipo: evaluacion`, `id` = tallo, `estado: borrador` (pendiente) o `en_espera` (registro de
+  Calibre sin archivo: 9 laboratorios de Romero), `curso · sub · tallo · sigla · periodo · institucion`, `calibre_id`
+  (y `calibre_ids`), `zotero_key`, `serie` + `serie_indice`, `autores`, `fuentes[]` (archivo, rol, calibre_id, md5,
+  páginas, capa de texto, ruta de origen) y el registro **íntegro** de Calibre por ítem en `calibre[]` (título, autores,
+  serie, etiquetas, editorial, fechas, identificadores, uuid, comentarios, ruta, columnas Zotero/KOReader…). Nada del
+  catálogo se pierde. Las etiquetas la hacen navegable en Obsidian y son régimen del vault (normativa §10.4, ampliada en
+  R13): `evaluacion` (el tipo), `curso/<slug>`, `tipo/<sigla>`, `serie/<slug>`, `autor/<apellidos-nombre>`,
+  `institucion/<slug>`, `tema/<etiqueta de Calibre>`.
+- **Tras transformar**, la ficha se conserva (es el registro; sigue diciendo de qué serie, docente e institución vino
+  el examen): `estado: activo`, `fuentes: []` y `transformado: AAAA-MM-DD`; `cerrar-expediente.sh` recibe las fuentes
+  como ORIGEN (`<sub>/<tallo>/<tallo>_fuente*.pdf`) y todavía no actualiza la ficha: hacerlo en la primera transformación
+  de la fase siguiente. `estado-examenes.py` y `enlazar.py examenes` ya la ignoran como fuente y cuentan los
+  expedientes `bp` de `banco/` (carpetas, no solo PDF sueltos).
+- **Pendiente fuera del framework:** los 934 ítems espejo de Zotero (`archive: Calibre`) apuntan a adjuntos que ya no
+  existen; la lista está en `zotero-keys-migrados.txt` y cada ficha lleva su `zotero_key`. Decidir si se borran en
+  Zotero o se reenlazan.

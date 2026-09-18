@@ -223,8 +223,8 @@ def cmd_examenes(aplicar: bool, cs: dict) -> None:
             for sub in sorted(p for p in ev.iterdir() if p.is_dir()):
                 if sub.name not in SUBS_EVALUACIONES:
                     print(f"  subcarpeta fuera de la lista de new-evaluacion.sh: {cid}/04-evaluaciones/{sub.name}")
-                if sub.name == "banco":
-                    n_exp = sum(1 for p in sub.iterdir() if p.is_file() and not p.name.startswith("."))
+                if sub.name == "banco":               # PDF sueltos y, desde R13, expedientes `bp` en carpeta
+                    n_exp = sum(1 for p in sub.iterdir() if (p.is_file() or p.is_dir()) and not p.name.startswith("."))
                 else:
                     n_exp = sum(1 for p in sub.iterdir() if p.is_dir() or p.suffix == ".tex")
                 if n_exp:
