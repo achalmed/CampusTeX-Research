@@ -193,6 +193,6 @@ respaldo en `meta/reparaciones/R13_calibre-evaluaciones_2026-09-17/`.
   como ORIGEN (`<sub>/<tallo>/<tallo>_fuente*.pdf`) y todavía no actualiza la ficha: hacerlo en la primera transformación
   de la fase siguiente. `estado-examenes.py` y `enlazar.py examenes` ya la ignoran como fuente y cuentan los
   expedientes `bp` de `banco/` (carpetas, no solo PDF sueltos).
-- **Pendiente fuera del framework:** los 934 ítems espejo de Zotero (`archive: Calibre`) apuntan a adjuntos que ya no
-  existen; la lista está en `zotero-keys-migrados.txt` y cada ficha lleva su `zotero_key`. Decidir si se borran en
-  Zotero o se reenlazan.
+- **Zotero:** los 934 ítems espejo (`archive: Calibre`) y sus adjuntos fueron enviados a la papelera de Zotero el
+  mismo día (bitácora R13, `zotero-papelera.py`); cada ficha conserva su `zotero_key` y la lista está en
+  `zotero-keys-migrados.txt`.

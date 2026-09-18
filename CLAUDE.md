@@ -265,7 +265,7 @@ compilación falla; si es un PDF versionado, se recupera con `git checkout`.
   y tres parciales de Historia del Pensamiento → `economia-politica`. `estado-examenes.csv`: 222 transformados, 698
   pendientes, 25 manual (los 9 laboratorios de Romero son registros de Calibre sin archivo). La fase siguiente transforma
   expediente por expediente (`cerrar-expediente.sh CURSO SUB TALLO <sub>/<tallo>/<tallo>_fuente*.pdf`; la ficha se
-  conserva con `estado: activo`). Pendiente del autor: los 934 ítems espejo de Zotero (`zotero-keys-migrados.txt`).
+  conserva con `estado: activo`). Los 934 ítems espejo de Zotero y sus adjuntos están en la papelera de Zotero (`zotero-keys-migrados.txt`).
 - **Pendiente del docente** (heredado, no de la migración): 5 de los 6 decks Beamer
   heredados probados no compilan (logo `cau-logo.png` ausente o `%!TEX program = xelatex`);
   se reconstruyen al usarlos, no se "arreglan" borrando contenido. 15 binarios > 5 MB
