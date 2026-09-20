@@ -136,6 +136,14 @@ normativa de archivos vía `core/archivos.py validar "10 Class"`).
   `config/` — `course.yml` (datos) + `palette.tex` (color; GENERADO desde `sistema-editorial/temas/docencia.yml`, no se edita).
 - `docs/` — documentación técnica (`00-arquitectura.md` para la plataforma; `09-estandar-docencia.md` para el contenido).
 - `docencia/` — submódulo de contenido; `registro/` — repo privado hermano (ignorado).
+- `simuladores/` — **el laboratorio computacional** (desde `02 analysis`, con su historia,
+  2026-09-20): motor común (`base.py`, `graficos.py`, `app.py`, `reporte.py`) y disciplinas
+  `macro/` (115 modelos, 569 verificaciones) y `estadistica/` (23 de 239 temas; animaciones
+  Manim en el env conda `manim-datafw`). Doctrina en `simuladores/CLAUDE.md`. Los cursos lo
+  enlazan como recursos `{tipo: simulador, archivo: 10 Class/simuladores/…}`
+  (`scripts/enlazar.py simuladores`). Lee los datos reales del BCRP de `02 analysis` por
+  nombre (`core/env.py`); `salidas/` no se versionan. Correr: `cd simuladores/<disciplina>
+  && python3 main.py verificar`.
 
 > Nota histórica: se retiraron `evaluaciones/` (→ `academic-exam` + `templates/exam/`),
 > `_PLANTILLAS/` (→ `templates/` + `scaffolds/`) y `_BIBLIOTECA/` (→ `bibliography/`) en el

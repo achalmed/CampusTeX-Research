@@ -3,7 +3,7 @@
 enlazar.py — Enlaza el currículo (curso.yml) con lo que ya existe fuera del framework (F5.3, 2026-09-06; M5 2026-09-15).
 
   enlazar.py posts       [--aplicar]   cada post de 04 index/_pubs declara `curso: <id>` (por su carpeta temática)
-  enlazar.py simuladores [--aplicar]   modelos de 02 analysis/simuladores → recursos {tipo: simulador} del tema (por similitud de título)
+  enlazar.py simuladores [--aplicar]   modelos de simuladores/ (este repo) → recursos {tipo: simulador} del tema (por similitud de título)
   enlazar.py examenes    [--aplicar]   subcarpetas de 04-evaluaciones/ del curso → `banco_examenes` (R10, 2026-09-15)
   enlazar.py verificar                 recursos y bancos con rutas existentes; posts con curso desconocido; posts sin curso
 
@@ -25,7 +25,7 @@ FW = Path(__file__).resolve().parents[1]
 DOCS = FW.parent
 CURSOS = FW / "docencia" / "cursos"     # M5 (2026-09-15): docencia/cursos/<slug>/curso.yml
 PUBS = DOCS / "04 index" / "_pubs"
-LAB = DOCS / "02 analysis" / "simuladores"
+LAB = Path(__file__).resolve().parents[1] / "simuladores"   # el laboratorio vive en este repo desde el 2026-09-20
 
 # blog → {carpeta temática (o 'posts'): curso}. None = sin curso equivalente (se deja sin enlazar).
 MAPA_POSTS: dict[str, dict[str, str | None]] = {
