@@ -16,7 +16,8 @@
 
 Principio rector: **el documento depende del framework, nunca al revés.** El diseño
 vive una sola vez en `styles/` + `classes/`; cada documento solo *elige* su clase y
-*rellena* contenido. Cambiar un color en `config/palette.tex` re-tinta exámenes,
+*rellena* contenido. Cambiar un color en `sistema-editorial/temas/docencia.yml` (de donde
+se GENERA `config/palette.tex`, Fase 6, 2026-09-20) re-tinta exámenes,
 diapositivas y sílabos a la vez.
 
 ---
@@ -31,7 +32,7 @@ diapositivas y sílabos a la vez.
 ├── classes/      Clases delgadas que encapsulan el diseño:
 │                 academic-base · academic-exam · academic-report · academic-beamer
 ├── themes/       Tema Beamer propio: beamer{,color,font,inner,outer}themeacademic (minimalista)
-├── config/       palette.tex (ÚNICO punto de cambio de color) · course.yml (datos del docente)
+├── config/       palette.tex (GENERADO desde sistema-editorial/temas/docencia.yml) · course.yml (datos del docente)
 ├── templates/    Documentos vacíos, sin diseño: presentation/ (8 tipos) · exam/ (12) · report/ (4)
 ├── scaffolds/    Registros mínimos, no árboles: curso/ (curso.yml, README) · sesion/ (sesion.yml,
 │                 guion.md, deck.tex|qmd) · dictado/ (dictado.yml)
@@ -118,7 +119,7 @@ cd ~/Documents/10 Class          # CURSO y DICTADO aceptan slug o ruta
   microtype con **protrusion + expansion**).
 - **kebab-case ASCII** en carpetas y archivos; **sin carpetas vacías** (una carpeta vacía es
   error del validador); excepciones solo `vendor/` y `_inbox/`.
-- **Un solo punto de cambio visual:** `config/palette.tex` (color) y
+- **Un solo punto de cambio visual:** `config/palette.tex` (color; GENERADO desde `sistema-editorial/temas/docencia.yml`) y
   `styles/academic-fonts.sty` (tipografías).
 - **El diseño vive en `styles/`+`classes/`**, nunca en los documentos ni en las plantillas.
 - **Reversibilidad por git**: `docencia/` es un repo con un solo historial; cada

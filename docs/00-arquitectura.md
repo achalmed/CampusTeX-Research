@@ -135,7 +135,7 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 │
 ├── config/                      ← INFRAESTRUCTURA: 1 archivo = 1 responsabilidad (el punto de cambio)
 │   ├── identity.yml             · datos del docente/institución (defaults de metadatos)
-│   ├── palette.tex              · valores de color  ← editar aquí cambia TODO
+│   ├── palette.tex              · valores de color, GENERADO desde sistema-editorial/temas/docencia.yml (se edita el YAML)
 │   │                              (las familias tipográficas se eligen en styles/academic-fonts.sty)
 │   ├── spacing.tex · margins.tex · headers.tex · footers.tex · captions.tex · toc.tex
 │
@@ -296,7 +296,7 @@ aspecto sea editable por separado.
 
 | Antes | Después |
 |---|---|
-| Cambiar un color → tocar N plantillas | Cambiar `config/palette.tex` → afecta a todo |
+| Cambiar un color → tocar N plantillas | Cambiar `sistema-editorial/temas/docencia.yml` y regenerar `config/palette.tex` → afecta a todo |
 | Diapositivas y exámenes con estilos distintos | Una sola identidad «Academic» en todo |
 | Dos motores (pdfLaTeX + multi-motor Beamer) | Un solo motor: LuaLaTeX |
 | Plantillas duplicadas (`_PLANTILLAS` vs `evaluaciones`) | Un único `templates/` |

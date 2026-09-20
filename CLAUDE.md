@@ -113,7 +113,16 @@ normativa de archivos vía `core/archivos.py validar "10 Class"`).
   comando ya no existe: es `\interpreta{}`.
   La cargan por igual las clases de documento **y** el tema Beamer → un examen y
   una diapositiva comparten diseño al carácter. **El color se cambia en un solo
-  sitio, `config/palette.tex`; las tipografías, en `styles/academic-fonts.sty`.**
+  sitio, y desde la Fase 6 del sistema de diseño (2026-09-20) ese sitio es
+  `~/Documents/sistema-editorial/temas/docencia.yml`**: `config/palette.tex` es un
+  archivo GENERADO (cabecera «GENERADO … no editar») que la capa espeja aquí con
+  `python3 generador.py generar --aplicar --espejo` (`generador.py verificar` avisa si
+  diverge). Los once nombres `academic*` conservan sus valores y su modelo (`gray`
+  para Soft y Wash), así que ningún examen cambió: los tres de muestra recompilan
+  con texto y página idénticos. La paleta trae además `\academicbn`:
+  `\documentclass[bn]{academic-exam}` (o `salida=bn`) pasa los once nombres a gris
+  por luminancia y vuelve a derivar los siete roles. Las tipografías siguen en
+  `styles/academic-fonts.sty`.
 - `classes/` — clases delgadas que encapsulan el diseño: `academic-base` (núcleo
   `article`), `academic-exam` (evaluaciones, 3 modos, hereda base), `academic-report`
   (sílabo/calendario/nota-docente/rúbrica, hereda base), `academic-beamer` (beamer + tema).
@@ -124,7 +133,7 @@ normativa de archivos vía `core/archivos.py validar "10 Class"`).
 - `scaffolds/` — **registros mínimos**, no árboles de carpetas (M5): `curso/` (`curso.yml`, `README.md`),
   `sesion/` (`sesion.yml`, `guion.md`, `deck.tex`, `deck.qmd`), `dictado/` (`dictado.yml`).
 - `bibliography/` — `.bib`. `assets/branding/` — logo canónico. `examples/` — ejemplos compilados.
-  `config/` — `course.yml` (datos) + `palette.tex` (color).
+  `config/` — `course.yml` (datos) + `palette.tex` (color; GENERADO desde `sistema-editorial/temas/docencia.yml`, no se edita).
 - `docs/` — documentación técnica (`00-arquitectura.md` para la plataforma; `09-estandar-docencia.md` para el contenido).
 - `docencia/` — submódulo de contenido; `registro/` — repo privado hermano (ignorado).
 
