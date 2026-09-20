@@ -222,11 +222,7 @@ def cmd_verificar(a):
 
 
 def cmd_app(_a=None):
-    try:
-        import app
-    except ImportError:
-        print("La app interactiva aún no está construida para estadística.\n")
-        return cmd_listar(_a)
+    import app   # simuladores/app.py (motor compartido); config.APP_* y SECCIONES viven en esta disciplina
     app.ejecutar(_todos())
     return 0
 
