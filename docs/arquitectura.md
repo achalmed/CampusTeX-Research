@@ -1,15 +1,15 @@
 ---
 tipo: doc
-titulo: "00 · Arquitectura del Academic_Class_Framework"
+titulo: "Arquitectura de la plataforma editorial"
 estado: activo
 ---
-# 00 · Arquitectura del Academic_Class_Framework
+# Arquitectura de la plataforma editorial
 
 > **Estado:** blueprint del rediseño integral (2026-07-23), implementado. Este documento es
 > la fuente de verdad arquitectónica de la **plataforma editorial**: toda decisión estructural
 > se justifica aquí. **Actualización 2026-09-15:** el contenido docente ya no vive en 23
 > `Academic_Class-*` con el estándar 00–09 sino en el submódulo `docencia/` con el estándar de
-> [`09-estandar-docencia.md`](09-estandar-docencia.md) (`DIAGNOSTICO_AREAS_2026-09.md`); `libraries/`
+> [`estandar-docencia.md`](estandar-docencia.md) (`historial/DIAGNOSTICO_AREAS_2026-09.md`); `libraries/`
 > y los scaffolds de árbol se retiraron. Las capas LaTeX (§3–§6) no cambiaron; el roadmap (§8)
 > y §9 son históricos.
 
@@ -26,9 +26,11 @@ manuales, guías, notas de clase, laboratorios, rúbricas, bancos y pósters.
 
 ---
 
-## 1. Diagnóstico de la arquitectura actual
+## 1. Diagnóstico de la arquitectura de julio de 2026 (histórico)
 
-La estructura actual creció por acreción y mezcla responsabilidades:
+> **Cerrado el 2026-09-20.** Este apartado es el diagnóstico de julio de 2026 y no describe el repo de hoy: `_PLANTILLAS/`, `evaluaciones/plantillas/` y `evaluacion.cls` se retiraron en el cutover del rediseño. Se conserva porque justifica las decisiones de §2-§7; para el estado actual, ver `../README.md` §Estructura.
+
+La estructura de entonces había crecido por acreción y mezclaba responsabilidades:
 
 | Problema | Dónde | Consecuencia |
 |---|---|---|
@@ -178,10 +180,10 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 ├── examples/                    ← EJEMPLOS compilados (un .tex + .pdf por clase/tipo; los "tests")
 │   ├── presentation-clase/  exam-desarrollo/  report-silabo/  poster/
 │
-├── docs/                        ← DOCUMENTACIÓN técnica (numerada)
-│   ├── 00-arquitectura.md (este) · 01-flujo-compilacion.md · 02-identidad-visual.md
-│   ├── 03-clases.md · 04-tema-beamer.md · 05-evaluaciones.md · 06-plantillas.md
-│   ├── 07-tipografia.md · 08-crear-tipo-documento.md · 09-estandar-docencia.md · DIAGNOSTICO_AREAS_2026-09.md
+├── docs/                        ← DOCUMENTACIÓN permanente (kebab-case; índice generado)
+│   ├── README.md (índice generado) · arquitectura.md (este) · estandar-docencia.md
+│   ├── estandar-evaluaciones.md · como-se-mantiene.md
+│   └── historial/ (DIAGNOSTICO_AREAS_2026-09.md · 2026-07-23-migracion-lualatex.md · 2026-09-17-cierre-r9-r13.md)
 │
 ├── config/ (arriba)  ·  Makefile  ·  README.md  ·  CLAUDE.md  ·  .claude/
 ```

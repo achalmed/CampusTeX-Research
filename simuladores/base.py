@@ -8,7 +8,7 @@ Separación de capas (observación de Edison, 2026-08-19):
 Así el mismo modelo alimenta CLI, láminas, reportes y (futuro) web/notebook
 sin duplicar ecuaciones.
 
-Un modelo une tres capas (diseño: docs/LABORATORIO_MACRO.md):
+Un modelo une tres capas (diseño: docs/laboratorio-macro.md):
   1. FICHA PEDAGÓGICA (Ficha): pregunta económica, contexto histórico,
      autores, supuestos, variables, ecuaciones explicadas, derivación,
      intuición, limitaciones y evolución.

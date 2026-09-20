@@ -12,7 +12,7 @@ USO:
   listar · ficha · simular · experimento · comparar · sensibilidad · demo
 
 <modelo> acepta id (e02), slug (poblacion_muestra) o archivo (e02_poblacion_muestra).
-Currículo: docs/LABORATORIO_ESTADISTICA.md (239 temas, 20 secciones).
+Currículo: docs/laboratorio-estadistica.md (239 temas, 20 secciones).
 """
 
 import argparse
@@ -80,7 +80,7 @@ def cmd_listar(_a):
     modelos = _todos()
     if not modelos:
         print("No hay modelos en modelos/ todavía."); return 0
-    print("Temas implementados (currículo: docs/LABORATORIO_ESTADISTICA.md)\n")
+    print("Temas implementados (currículo: docs/laboratorio-estadistica.md)\n")
     seccion_actual = None
     for m in modelos:
         if m.nivel != seccion_actual:

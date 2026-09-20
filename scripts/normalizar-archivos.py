@@ -379,7 +379,7 @@ def cmd_cursos():
 
 # --- nombres -----------------------------------------------------------------
 ESPECIALES = {"metadata pdf.lua": "metadata.pdf.lua",      # KOReader espera metadata.pdf.lua (el espacio lo puso un renombre masivo)
-              "MIGRACION_LUALATEX.md": "MIGRACION_LUALATEX.md"}   # documento de raíz en mayúsculas (convención del ecosistema, §4)
+              }   # (DOC4, 2026-09-20): MIGRACION_LUALATEX.md pasó a docs/historial/2026-07-23-migracion-lualatex.md
 
 
 def nuevo_nombre(p: Path) -> str | None:

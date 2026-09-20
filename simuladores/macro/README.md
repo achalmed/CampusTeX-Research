@@ -4,7 +4,7 @@ Cada teoría macroeconómica como **modelo ejecutable**: ficha pedagógica
 (contexto histórico → autores → supuestos → ecuaciones explicadas → intuición →
 limitaciones → evolución), simulación de escenarios con lectura económica y
 verificación numérica de sus teoremas. Diseño y currículo completo (115
-modelos, 12 niveles): [docs/LABORATORIO_MACRO.md](../../docs/LABORATORIO_MACRO.md).
+modelos, 12 niveles): [docs/laboratorio-macro.md](docs/laboratorio-macro.md).
 
 **Estado**: **currículo macro COMPLETO — 115 modelos en 12 niveles (m01-m115),
 569 verificaciones numéricas** (454 de contenido + un guardia de coherencia por
@@ -92,7 +92,7 @@ Un modelo se nombra por id curricular (`m10`), slug (`islm`) o archivo
    comparativa con el signo correcto.
 4. `python3 main.py verificar mNN` al 100% y `reporte mNN` legible.
 5. Registrar la fila en `docs/biblio/matriz_trazabilidad.csv` y marcar ✔ en el
-   currículo de `docs/LABORATORIO_MACRO.md`.
+   currículo de `docs/laboratorio-macro.md`.
 
 ## Reglas (resumen; completas en el diseño §5)
 

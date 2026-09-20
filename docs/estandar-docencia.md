@@ -1,16 +1,16 @@
 ---
 tipo: doc
-titulo: "09 · El estándar de docencia: cursos, sesiones y dictados en docencia/"
+titulo: "El estándar de docencia: cursos, sesiones y dictados en docencia/"
 estado: activo
 fecha: 2026-09-15
 ---
-# 09 · El estándar de docencia: cursos, sesiones y dictados en `docencia/`
+# El estándar de docencia: cursos, sesiones y dictados en `docencia/`
 
 > Contrato de carpetas, archivos y registros del contenido docente. Es la forma que el
-> diagnóstico `DIAGNOSTICO_AREAS_2026-09.md` (§4 y §7) propuso y que las fases M0–M7 del
+> diagnóstico `historial/DIAGNOSTICO_AREAS_2026-09.md` (§4 y §7) propuso y que las fases M0–M7 del
 > 2026-09-15 dejaron en disco; sustituye al estándar 00–09 (2026-07 → 2026-09-15). El
 > resumen vive en el `README.md`; la arquitectura editorial (capas LaTeX, `styles/`,
-> clases, tema Beamer) en [`00-arquitectura.md`](00-arquitectura.md). Lo que aquí se
+> clases, tema Beamer) en [`arquitectura.md`](arquitectura.md). Lo que aquí se
 > declara lo exige `scripts/validate.sh` y lo vigila `scripts/doctor.sh`.
 
 ## 1. Dónde vive cada cosa
@@ -18,11 +18,11 @@ fecha: 2026-09-15
 ```
 10 Class/                       ← repo Academic_Class_Framework: tooling, clases, plantillas, scaffolds
 ├── docencia/                   ← UN submódulo: repo Academic_Class (todo el contenido docente)
-│   ├── cursos/<slug>/          ← qué se enseña (50 cursos)
+│   ├── cursos/<slug>/          ← qué se enseña (52 cursos)
 │   ├── dictados/<AAAA-ciclo>-<institucion>-<materia>/   ← cada vez que se dicta (manifiesto + producto)
-│   ├── _inbox/<origen>/        ← legado por clasificar; temporal; el doctor avisa mientras exista
-│   ├── migracion/              ← mapas de rutas y scripts de las fases M3–M6 (son el UNDO)
-│   └── README.md               ← índice generado por área, malla y estado
+│   ├── _inbox/<origen>/        ← legado por clasificar; temporal con plazo 2026-10-31 (D10)
+│   ├── migracion/              ← ledger vivo del banco de exámenes; historico/ = mapas y migradores de M3–M6 (son el UNDO)
+│   └── README.md               ← puerta del repo de contenido (a mano; no hay generador)
 └── registro/                   ← repo PRIVADO hermano, git-ignorado aquí; nunca con remote público
     └── <clave-del-dictado>/    ← estudiantes, asistencia, calificaciones, evidencias
 ```
@@ -41,7 +41,7 @@ cursos/econometria-i/
 ├── 01-diseno/           ← sílabo, calendario, competencias, matriz de evaluación, rubricas/ (academic-report)
 ├── 02-contenido/        ← apuntes canónicos: 1-2-tema.md (solo los escritos), img/
 ├── 03-sesiones/         ← s01-<slug>/ … (§3)
-├── 04-evaluaciones/     ← <sub>/AAAAMMDD_sig/ (.tex academic-exam + PDF + code/): estándar docs/10-estandar-evaluaciones.md
+├── 04-evaluaciones/     ← <sub>/AAAAMMDD_sig/ (.tex academic-exam + PDF + code/): estándar docs/estandar-evaluaciones.md
 └── 05-recursos/         ← datasets/ (≤ 5 MB), talleres/, plantillas/, investigacion/, vendor/, curso.bib
 ```
 

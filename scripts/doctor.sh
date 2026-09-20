@@ -7,7 +7,7 @@
 #
 # (1) Herramientas (git, lualatex, quarto, compilador universal, config).
 # (2) docencia/: submódulo presente; validate.sh --todos; temario-generar.sh verificar; enlazar.py verificar;
-#     _inbox/ vacío; binarios > 5 MB fuera de publicacion/; registro/ sin remote público.
+#     _inbox/ (temporal con plazo, D10); binarios > 5 MB fuera de publicacion/; registro/ sin remote público.
 # (3) Normativa de archivos: core/archivos.py validar "10 Class".
 # No modifica nada. Código de salida 1 si hay errores.
 # ============================================================
@@ -41,7 +41,11 @@ if [[ -d "$CURSOS_DIR" ]]; then
   if out="$(python3 "$FW_DIR/scripts/enlazar.py" verificar 2>&1 | tail -1)"; then ok "enlazar.py verificar: $out"
   else error "enlazar.py verificar: $out"; rc_total=1; fi
   n_inbox="$(find "$INBOX_DIR" -type f ! -name README.md 2>/dev/null | wc -l)"
-  [[ "$n_inbox" -eq 0 ]] && ok "_inbox/: vacío" || warn "_inbox/: $n_inbox archivos por clasificar (§7.11: nada se cita desde ahí)"
+  # (DOC4/D10, 2026-09-20): _inbox/ y registro/_legado/ son temporales con plazo acordado; hasta esa fecha no se avisa (ruido crónico que ya no informa).
+  PLAZO_TEMPORALES="2026-10-31"
+  if [[ "$n_inbox" -eq 0 ]]; then ok "_inbox/: vacío"
+  elif [[ "$(date +%F)" < "$PLAZO_TEMPORALES" ]]; then ok "_inbox/: $n_inbox archivos por clasificar — temporal con plazo $PLAZO_TEMPORALES (D10); nada se cita desde ahí"
+  else warn "_inbox/: $n_inbox archivos por clasificar y el plazo $PLAZO_TEMPORALES ya venció (§7.11: nada se cita desde ahí)"; fi
   n_big="$(find "$CURSOS_DIR" -type f -size +5M -not -path '*/publicacion/*' 2>/dev/null | wc -l)"
   [[ "$n_big" -eq 0 ]] && ok "Binarios > 5 MB en cursos/: ninguno" || warn "Binarios > 5 MB en cursos/: $n_big (§7.6: datos a 02 analysis; pesados fuera del repo o LFS)"
 else

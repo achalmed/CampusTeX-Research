@@ -46,8 +46,8 @@ muestra de tres formas complementarias:
 
 ## Diseño y currículos
 
-- Macro: [docs/LABORATORIO_MACRO.md](../docs/LABORATORIO_MACRO.md)
-- Estadística: [estadistica/docs/LABORATORIO_ESTADISTICA.md](estadistica/docs/LABORATORIO_ESTADISTICA.md)
+- Macro: [macro/docs/laboratorio-macro.md](macro/docs/laboratorio-macro.md)
+- Estadística: [estadistica/docs/laboratorio-estadistica.md](estadistica/docs/laboratorio-estadistica.md)
 
 ## Convención al añadir una disciplina
 

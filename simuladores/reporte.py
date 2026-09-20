@@ -51,7 +51,7 @@ def render(modelo, dir_salidas=None):
           "", f"# {modelo.nombre}", ""]
     if modelo.id:
         md += [f"**Posición curricular:** {modelo.id} (nivel {modelo.nivel}) — "
-               f"ver `docs/LABORATORIO_MACRO.md`", ""]
+               f"ver `docs/laboratorio-macro.md`", ""]
     if F and F.pregunta:
         md += [f"> **Pregunta económica:** {F.pregunta}", ""]
 

@@ -18,7 +18,7 @@ necesita):
                               hace por dentro (útiles para scripts y CI)
 
 <modelo> acepta id curricular (m03), slug (funcion_consumo) o archivo
-(m03_funcion_consumo). Currículo completo: docs/LABORATORIO_MACRO.md.
+(m03_funcion_consumo). Currículo completo: docs/laboratorio-macro.md.
 """
 
 import argparse
@@ -83,7 +83,7 @@ def cmd_listar(_a):
     modelos = _todos()
     if not modelos:
         print("No hay modelos en modelos/."); return 0
-    print("Modelos implementados (currículo completo: docs/LABORATORIO_MACRO.md)\n")
+    print("Modelos implementados (currículo completo: docs/laboratorio-macro.md)\n")
     for m in modelos:
         if m.nivel != nivel_actual:
             nivel_actual = m.nivel

@@ -58,7 +58,7 @@ El video queda en `estadistica/salidas/animaciones/videos/<archivo>/<calidad>/`.
 ## Convenciones
 
 - **Un archivo por tema**: `eNN_slug.py` (NN = tema del currículo; ver
-  `../docs/LABORATORIO_ESTADISTICA.md`). Una clase `Scene` con nombre descriptivo.
+  `../docs/laboratorio-estadistica.md`). Una clase `Scene` con nombre descriptivo.
 - **Aleatoriedad reproducible**: `rng(semilla)` de `_comun.py` con semilla fija
   (convención del lab, como `m17`) — la animación debe ser idéntica cada render.
 - **Paleta e identidad**: importar colores y helpers de `_comun.py`

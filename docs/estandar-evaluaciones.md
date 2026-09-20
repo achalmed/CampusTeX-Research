@@ -3,11 +3,11 @@ tipo: doc
 titulo: 'Estándar de evaluaciones: tipos, siglas, carpetas, expediente, código y migración'
 estado: activo
 ---
-# 10 — Estándar de evaluaciones (`04-evaluaciones/`)
+# Estándar de evaluaciones (`04-evaluaciones/`)
 
 Consolida en un solo lugar lo que ya estaba acordado en tres sitios —el prompt maestro
 `prompts/05 docencia/prompt_resolucion_examenes_plantillas.md` (2026-07-23), el estándar de
-docencia `docs/09-estandar-docencia.md` §2 y el script `scripts/new-evaluacion.sh`— y fija las
+docencia `docs/estandar-docencia.md` §2 y el script `scripts/new-evaluacion.sh`— y fija las
 decisiones que faltaban (2026-09-15, R10/R11). Donde el prompt y la normativa de archivos
 (`meta/NORMATIVA_ARCHIVOS.md`, 2026-09-13) discrepaban, manda la normativa y el prompt se
 actualizó. **Este documento es la fuente; el prompt maestro remite aquí.**

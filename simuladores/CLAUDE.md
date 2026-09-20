@@ -41,7 +41,7 @@ fórmula (regresión = derivar $\hat\beta=(X'X)^{-1}X'Y$, no llamar `lm()`).
 ## Macroeconomía (`macro/`, 2026-08-19)
 
 Currículo COMPLETO: 115 modelos en 12 niveles, 569 verificaciones; plan vigente en
-`macro/docs/LABORATORIO_MACRO.md`. El nivel 12 es el laboratorio del Perú con datos reales del
+`macro/docs/laboratorio-macro.md`. El nivel 12 es el laboratorio del Perú con datos reales del
 BCRP: m97-m115 usan series macro (PBI, IPC, tasa, tipo de cambio, cobre, términos de
 intercambio, bloque fiscal) que descarga `02 analysis/connectors/bcrp`; el detalle mensual se
 lee de `02 analysis/data/raw/peru/bcrp/` **por nombre** (`nivel_12/_datos_bcrp.py` localiza
@@ -57,7 +57,7 @@ diseño); la econometría pedagógica NO duplicará `02 analysis/pipeline/`.
 ## Estadística (`estadistica/`, 2026-08-20)
 
 Currículo de Edison: 239 temas en 20 secciones (I fundamentos → XX ML); diseño en
-`estadistica/docs/LABORATORIO_ESTADISTICA.md`. Estado 2026-09-05: 23 modelos (niveles 1-3),
+`estadistica/docs/laboratorio-estadistica.md`. Estado 2026-09-05: 23 modelos (niveles 1-3),
 115 verificaciones en verde; la app interactiva es la del motor (`app.py`) y ya sirve a esta
 disciplina. DOS renderizadores, un modelo: matplotlib (app + reportes) y **Manim**
 (`estadistica/animaciones/`, «ver el método en movimiento»), que corre en un env conda APARTE

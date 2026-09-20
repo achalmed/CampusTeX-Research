@@ -9,7 +9,7 @@ Uso (desde cualquier sitio; opera sobre todas las áreas o sobre los cursos indi
   temario.py verificar [CURSO_DIR ...]              exit 1 si el README de algún curso no coincide con su temario
 
 Vistas generadas (`generar`):
-  readme     README.md del curso (formato canónico del estándar de docencia)
+  readme     README.md del curso (formato canónico del estándar; lleva frontmatter y marca GENERADO, D06)
   esqueleto  RETIRADO en M5: la nota se escribe cuando existe (archivo: null hasta entonces, §7)
   web        04 index/cursos/<materia_web>/index.qmd: sección «Contenidos / Sílabo» entre marcadores
   skill      prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md + puntero en el dominio
@@ -39,6 +39,12 @@ RESUMEN = TAREAS / "temarios-cursos.md"                    # vista checklist (NO
 EMOJI_DEFAULT = "📘"
 MARCA_INI, MARCA_FIN = "<!-- temario:inicio (generado por 10 Class/scripts/temario.py; no editar a mano) -->", "<!-- temario:fin -->"
 PUNTERO_SKILL = "<!-- curso.yml -->"   # marca de idempotencia del puntero en cada dominio (antes <!-- temario.yml -->, M6)
+RE_MARCA_README = re.compile(r"^<!-- GENERADO por 10 Class/scripts/temario\\.py .*-->$", re.M)   # (DOC4, 2026-09-20)
+
+
+def sin_marca(texto: str) -> str:
+    """Compara READMEs ignorando la fecha de la marca de derivado (§5): cambia cada día y no es desfase."""
+    return RE_MARCA_README.sub("", texto)
 PLACEHOLDER_DESC = re.compile(r"^(Estructura 00–09\.?|Curso( completo)? \(estructura 00–09\)\.?)$")
 
 # Correspondencias que no se deducen del nombre (curso → dominio FUAT)
@@ -237,7 +243,10 @@ def area_txt(t: dict) -> str:
 
 def render_readme(t: dict) -> str:
     total = sum(len(u["temas"]) for u in t.get("unidades", []))
-    out = [f"# {t.get('emoji', EMOJI_DEFAULT)} {t['titulo']}", ""]
+    hoy = __import__("datetime").date.today().isoformat()
+    out = ["---", "tipo: readme", "estado: activo", "---",
+           f"<!-- GENERADO por 10 Class/scripts/temario.py desde curso.yml ({hoy}); no editar -->", "",
+           f"# {t['id']}/ — {t.get('emoji', EMOJI_DEFAULT)} {t['titulo']}", ""]
     if t.get("descripcion"):
         out += [t["descripcion"], ""]
     if t.get("semestre") not in (None, ""):
@@ -288,7 +297,7 @@ def generar_readme(curso: Path, t: dict, aplicar: bool) -> str:
     nuevo = render_readme(t)
     rd = curso / "README.md"
     actual = rd.read_text(encoding="utf-8") if rd.exists() else ""
-    if actual == nuevo:
+    if sin_marca(actual) == sin_marca(nuevo):
         return "= README al día"
     if aplicar:
         rd.write_text(nuevo, encoding="utf-8")
@@ -503,7 +512,7 @@ def main() -> int:
             if not t.get("unidades"):
                 log(f"  sin unidades (temario por completar): {c.relative_to(DOCS)}")
                 continue
-            if not rd.exists() or rd.read_text(encoding="utf-8") != render_readme(t):
+            if not rd.exists() or sin_marca(rd.read_text(encoding="utf-8")) != sin_marca(render_readme(t)):
                 drift += 1
                 log(f"  README desfasado: {c.relative_to(DOCS)}")
             faltan = [x["archivo"] for u in t.get("unidades", []) for x in u["temas"] if x.get("archivo") and not (c / x["archivo"]).exists()]   # archivo: null = nota aún no escrita (M3)

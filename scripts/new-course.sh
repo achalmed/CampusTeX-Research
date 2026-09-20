@@ -37,7 +37,7 @@ AREAS_YML="$(echo "$AREAS" | sed -E 's/[[:space:]]//g; s/,/, /g')"
 mkdir -p "$DEST"
 for f in curso.yml README.md; do
   sed -e "s|{{COURSE_SLUG}}|$SLUG|g" -e "s|{{TITLE}}|$TITLE|g" -e "s|{{COURSE_TYPE}}|$TIPO|g" \
-      -e "s|{{AREAS}}|$AREAS_YML|g" -e "s|{{ETIQUETA}}|$ETIQUETA|g" -e "s|{{MATERIA_WEB}}|$MATERIA|g" \
+      -e "s|{{AREAS}}|$AREAS_YML|g" -e "s|{{ETIQUETA}}|$ETIQUETA|g" -e "s|{{MATERIA_WEB}}|$MATERIA|g" -e "s|{{FECHA}}|$(date +%F)|g" \
       "$SCAFFOLDS_DIR/curso/$f" > "$DEST/$f"
 done
 ok "Curso creado: $DEST"

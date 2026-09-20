@@ -4,7 +4,7 @@
 # ============================================================
 # Se carga con `source` desde todos los scripts de scripts/. No ejecutar directamente.
 #
-# Modelo (docs/DIAGNOSTICO_AREAS_2026-09.md §4; M5, 2026-09-15):
+# Modelo (docs/estandar-docencia.md §1; M5, 2026-09-15):
 #   - El framework aloja classes/, styles/, themes/, templates/, scaffolds/, scripts/, config/.
 #   - El contenido docente vive en el submódulo docencia/ (repo Academic_Class):
 #       docencia/cursos/<slug>/            curso.yml · README.md · 01-diseno … 05-recursos
