@@ -6,7 +6,7 @@
 %% de evaluaciones. Preserva toda la funcionalidad y la API previa.
 %% (Motor: pdfLaTeX -> XeLaTeX -> LuaLaTeX en su historia; hoy LuaLaTeX.)
 %%
-%% Opciones:  soluciones · claves · compacto
+%% Opciones:  soluciones · claves · compacto · bn (= salida=bn)
 %% Motor: LuaLaTeX exclusivamente.
 %% ============================================================================
 \NeedsTeXFormat{LaTeX2e}
@@ -19,9 +19,19 @@
 \DeclareOption{soluciones}{\ev@solucionestrue\ev@clavestrue}
 \DeclareOption{claves}{\ev@clavestrue}
 \DeclareOption{compacto}{\ev@compactotrue}
+%% Fase 6 del sistema de diseno (2026-09-20): salida en blanco y negro. La paleta
+%% (config/palette.tex, GENERADA desde sistema-editorial/temas/docencia.yml) trae
+%% \academicbn, que pasa los once nombres academic* a gris por luminancia y vuelve
+%% a derivar los siete roles de academic-colors.sty. Se acepta `bn' y `salida=bn'.
+\newif\ifev@bn \ev@bnfalse
+\DeclareOption{bn}{\ev@bntrue}
+\DeclareOption{salida=bn}{\ev@bntrue}
+\DeclareOption{salida=pantalla}{}
+\DeclareOption{salida=impresion}{}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{academic-base}}
 \ProcessOptions\relax
 \LoadClass{academic-base}     % identidad + article + LuaLaTeX
+\ifev@bn\ifdefined\academicbn\academicbn\else\ClassWarning{academic-exam}{bn: config/palette.tex no define \string\academicbn (regenera la capa)}\fi\fi
 
 % Paquetes extra no provistos por la base/identidad
 \RequirePackage{fancyhdr}
