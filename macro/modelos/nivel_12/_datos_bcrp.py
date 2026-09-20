@@ -24,8 +24,19 @@ import numpy as np
 
 from modelos.nivel_12 import _series_bcrp
 
-# raíz de datos crudos (…/datafw/data/raw/peru/bcrp)
-_RAIZ_RAW = Path(__file__).resolve().parents[4] / "data" / "raw" / "peru" / "bcrp"
+# raíz de datos crudos: 02 analysis/data/raw/peru/bcrp, localizada por NOMBRE
+# (core/env.py: ANALYSIS_DIR) porque el laboratorio vive en 10 Class desde el
+# 2026-09-20; si core/ no está, se usa el snapshot embebido (_series_bcrp).
+def _raiz_bcrp():
+    import importlib.util
+    for carpeta in Path(__file__).resolve().parents:
+        env = carpeta / "core" / "env.py"
+        if env.is_file():
+            spec = importlib.util.spec_from_file_location("core_env", env)
+            mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+            return Path(mod.ANALYSIS_DIR) / "data" / "raw" / "peru" / "bcrp"
+    return Path("/nonexistent")   # sin ecosistema: solo snapshot
+_RAIZ_RAW = _raiz_bcrp()
 
 _MES = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6,
         "Jul": 7, "Ago": 8, "Set": 9, "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12}
