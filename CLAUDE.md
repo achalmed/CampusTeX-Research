@@ -121,7 +121,9 @@ normativa de archivos vía `core/archivos.py validar "10 Class"`).
   para Soft y Wash), así que ningún examen cambió: los tres de muestra recompilan
   con texto y página idénticos. La paleta trae además `\academicbn`:
   `\documentclass[bn]{academic-exam}` (o `salida=bn`) pasa los once nombres a gris
-  por luminancia y vuelve a derivar los siete roles. Las tipografías siguen en
+  por luminancia y vuelve a derivar los siete roles; desde el 2026-09-20 también en
+  `academic-beamer` (el tema Beamer resuelve los nombres de xcolor al usarlos, así que
+  basta redefinirlos tras `\usetheme`) y en `academic-report`. Las tipografías siguen en
   `styles/academic-fonts.sty`.
 - `classes/` — clases delgadas que encapsulan el diseño: `academic-base` (núcleo
   `article`), `academic-exam` (evaluaciones, 3 modos, hereda base), `academic-report`
