@@ -459,7 +459,7 @@ duplicados de `publicacion/`, backup). (2) `validate.sh` y `doctor.sh` en 0 erro
 **M8 · Lección escrita** (CICLO §5). Reemplazar `docs/09-estandar-00-09.md` por el
 estándar nuevo (este §4 y §7), actualizar `CLAUDE.md` y `README.md` del framework, la
 entrada tipo 22 de `ARQUITECTURA_DOCUMENTAL.md`, el prompt de `05 docencia/` que genera
-sesiones, y una nota en `meta/DIAGNOSTICO_INTEGRAL_2026-09.md` (F5 cerrado con la nueva
+sesiones, y una nota en `meta/diagnosticos/DIAGNOSTICO_INTEGRAL_2026-09.md` (F5 cerrado con la nueva
 forma). Este documento pasa a `estado: hecho` con enlace a la bitácora de reparaciones.
 
 Orden y reversibilidad: M0 y M1 son reversibles por `git mv` inverso y por el tarball; M2
