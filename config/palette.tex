@@ -1,25 +1,41 @@
-% ============================================================================
-% config/palette.tex — VALORES de color del framework (único punto de cambio)
-% ----------------------------------------------------------------------------
-% Editar aquí re-tinta todo el material: diapositivas, exámenes, reports y pósters.
-% Paleta monocroma (imprime idéntico en B/N) + un único acento «tinta pizarra».
-% Sin colores vivos, sin verde, sin degradados.
-% Cargado por styles/academic-colors.sty.
-% ============================================================================
-\definecolor{academicInk}{HTML}{1F2A37}    % acento único (tinta pizarra, casi negro)
-\definecolor{academicText}{HTML}{1A1A1A}   % texto principal
-\definecolor{academicMuted}{HTML}{5B5B5B}  % secundario / gris medio
-\definecolor{academicRule}{HTML}{B7B7B7}   % filetes y bordes
-\definecolor{academicSoft}{gray}{0.97}     % fondo suave (código, salidas de consola)
-\definecolor{academicWash}{gray}{0.983}    % lavado casi imperceptible de los bloques editoriales (instrucciones, datos, solución)
-\definecolor{academicLink}{HTML}{1F2A37}   % enlaces = acento
-
-% --- Colores de DATOS (series de gráficos) ---------------------------------
-% Muted y distinguibles en color Y en blanco y negro (distinta luminosidad);
-% sin colores vivos ni verde. Solo para series de datos: el texto, las cajas y
-% las tablas siguen monocromos. Se consumen vía serie1..serie4 (academic-figures);
-% la línea se distingue por color + patrón, sin describirla en la leyenda.
-\definecolor{academicData1}{HTML}{1F2A37}  % pizarra oscura (= acento)
-\definecolor{academicData2}{HTML}{9C4A3C}  % terracota apagada
-\definecolor{academicData3}{HTML}{3F6079}  % azul acero apagado
-\definecolor{academicData4}{HTML}{7A6A3D}  % ocre apagado
+%% GENERADO por sistema-editorial/generador.py desde temas/docencia.yml · sistema-editorial v0.1.0 · sha256 8104ddf5e80b · 2026-09-20; no editar
+%%
+%% config/palette.tex de 10 Class: la paleta Academic, GENERADA desde el tema `docencia' de la capa
+%% (sistema-editorial/temas/docencia.yml) y espejada aqui por generador.py generar --espejo. Los
+%% valores son los de la paleta heredada, en su modelo (los grises en `gray'): ningun examen cambia.
+%% styles/academic-colors.sty la incluye y deriva sus siete roles por \colorlet; con la opcion `bn'
+%% (salida=bn) academic-exam.cls llama \academicbn, que pasa los once nombres a gris por luminancia
+%% (nucleo.yml salidas.bn) y vuelve a derivar los siete roles.
+\definecolor{academicInk}{HTML}{1F2A37}
+\definecolor{academicText}{HTML}{1A1A1A}
+\definecolor{academicMuted}{HTML}{5B5B5B}
+\definecolor{academicRule}{HTML}{B7B7B7}
+\definecolor{academicSoft}{gray}{0.97}
+\definecolor{academicWash}{gray}{0.983}
+\definecolor{academicLink}{HTML}{1F2A37}
+\definecolor{academicData1}{HTML}{1F2A37}
+\definecolor{academicData2}{HTML}{9C4A3C}
+\definecolor{academicData3}{HTML}{3F6079}
+\definecolor{academicData4}{HTML}{7A6A3D}
+\providecommand{\academicbn}{}
+\renewcommand{\academicbn}{%
+  \definecolor{academicInk}{HTML}{292929}%
+  \definecolor{academicText}{HTML}{1A1A1A}%
+  \definecolor{academicMuted}{HTML}{5B5B5B}%
+  \definecolor{academicRule}{HTML}{B7B7B7}%
+  \definecolor{academicSoft}{HTML}{F7F7F7}%
+  \definecolor{academicWash}{HTML}{FBFBFB}%
+  \definecolor{academicLink}{HTML}{292929}%
+  \definecolor{academicData1}{HTML}{292929}%
+  \definecolor{academicData2}{HTML}{626262}%
+  \definecolor{academicData3}{HTML}{5C5C5C}%
+  \definecolor{academicData4}{HTML}{6B6B6B}%
+  \colorlet{acento}{academicInk}%
+  \colorlet{textoprincipal}{academicText}%
+  \colorlet{secundario}{academicMuted}%
+  \colorlet{filete}{academicRule}%
+  \colorlet{cajafondo}{academicSoft}%
+  \colorlet{fondobloque}{academicWash}%
+  \colorlet{enlace}{academicLink}%
+}
+\endinput
