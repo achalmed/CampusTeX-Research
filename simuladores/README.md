@@ -25,7 +25,9 @@ simuladores/
 └── …               econometría / micro / mate (futuras disciplinas hermanas)
 ```
 
-## Cómo correr una disciplina
+## Uso
+
+### Cómo correr una disciplina
 
 Cada disciplina tiene su propio punto de entrada; su `main.py` añade la raíz al
 `sys.path` para reusar el motor:
@@ -48,6 +50,11 @@ muestra de tres formas complementarias:
 | Interactiva / animada | matplotlib (`Slider`/`FuncAnimation`) | **sí, en la app** | explorar: mover parámetros y ver en tiempo real |
 | Video pulido | **Manim** (env conda aparte) | archivo | redes / clases / incrustar (ver `estadistica/animaciones/`) |
 
+## Estructura
+
+Una carpeta por disciplina (`macro/`, `estadistica/`, …), cada una con sus modelos por nivel, sus animaciones y su
+`README.md`; `CLAUDE.md` guarda las reglas del laboratorio. Detalle por disciplina en su propio README.
+
 ## Diseño y currículos
 
 - Macro: [macro/docs/laboratorio-macro.md](macro/docs/laboratorio-macro.md)
@@ -59,3 +66,10 @@ Crear `simuladores/<disciplina>/` con `config.py` (rutas + paleta), `main.py`
 (bootstrap que añade la raíz al path + CLI), `app.py` y `modelos/nivel_NN/`.
 **Prohibido copiar el motor** (`base/graficos/reporte/laboratorio`): se importa
 de la raíz. `salidas/` de cada disciplina es regenerable (en `.gitignore`).
+
+## Límite honesto
+
+- Es un laboratorio pedagógico: los modelos reproducen teoremas y escenarios de manual, no series reales ni pronósticos;
+  los datos vivos viven en `02 analysis`.
+- Vive dentro de `10 Class` desde 2026-09-20 (venía de `02 analysis`): las rutas de los currículos de cada disciplina
+  se citan desde su README, no desde aquí.
