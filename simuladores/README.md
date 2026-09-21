@@ -1,4 +1,8 @@
-# simuladores — El Laboratorio Computacional (multi-disciplina)
+---
+tipo: readme
+estado: activo
+---
+# simuladores/ — el laboratorio computacional (multi-disciplina)
 
 Laboratorio histórico y computacional de economía y sus herramientas: cada
 teoría o método reconstruido como **modelo ejecutable** con ficha pedagógica

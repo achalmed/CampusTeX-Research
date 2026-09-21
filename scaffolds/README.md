@@ -1,5 +1,5 @@
 ---
-tipo: doc
+tipo: readme
 titulo: "scaffolds — esqueletos mínimos de curso, sesión y dictado"
 estado: activo
 ---

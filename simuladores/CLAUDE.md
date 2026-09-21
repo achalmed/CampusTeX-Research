@@ -1,3 +1,7 @@
+---
+tipo: guia_ia
+estado: activo
+---
 # CLAUDE.md — simuladores (el laboratorio computacional)
 
 Laboratorio pedagógico multi-disciplina de `10 Class` (repo `Academic_Class_Framework`).

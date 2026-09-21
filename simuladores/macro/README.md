@@ -1,4 +1,8 @@
-# simuladores — Laboratorio de Macroeconomía Computacional
+---
+tipo: readme
+estado: activo
+---
+# macro/ — laboratorio de macroeconomía computacional
 
 Cada teoría macroeconómica como **modelo ejecutable**: ficha pedagógica
 (contexto histórico → autores → supuestos → ecuaciones explicadas → intuición →

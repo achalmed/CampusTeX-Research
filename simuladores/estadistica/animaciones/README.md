@@ -1,4 +1,8 @@
-# Capa de animación (Manim) — laboratorio de estadística
+---
+tipo: readme
+estado: activo
+---
+# animaciones/ — capa de animación (Manim) del laboratorio de estadística
 
 Animaciones matemáticas del currículo de estadística con
 [Manim Community](https://www.manim.community/). Es la capa que muestra

@@ -9,7 +9,8 @@ Uso (desde cualquier sitio; opera sobre todas las áreas o sobre los cursos indi
   temario.py verificar [CURSO_DIR ...]              exit 1 si el README de algún curso no coincide con su temario
 
 Vistas generadas (`generar`):
-  readme     README.md del curso (formato canónico del estándar; lleva frontmatter y marca GENERADO, D06)
+  readme     README.md del curso (formato canónico del estándar; lleva frontmatter y marca GENERADO, D06);
+             un curso en `borrador` sin `unidades` también lo recibe, con «Qué falta» (DOC4, 2026-09-20)
   esqueleto  RETIRADO en M5: la nota se escribe cuando existe (archivo: null hasta entonces, §7)
   web        04 index/cursos/<materia_web>/index.qmd: sección «Contenidos / Sílabo» entre marcadores
   skill      prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md + puntero en el dominio
@@ -39,7 +40,7 @@ RESUMEN = TAREAS / "temarios-cursos.md"                    # vista checklist (NO
 EMOJI_DEFAULT = "📘"
 MARCA_INI, MARCA_FIN = "<!-- temario:inicio (generado por 10 Class/scripts/temario.py; no editar a mano) -->", "<!-- temario:fin -->"
 PUNTERO_SKILL = "<!-- curso.yml -->"   # marca de idempotencia del puntero en cada dominio (antes <!-- temario.yml -->, M6)
-RE_MARCA_README = re.compile(r"^<!-- GENERADO por 10 Class/scripts/temario\\.py .*-->$", re.M)   # (DOC4, 2026-09-20)
+RE_MARCA_README = re.compile(r"^<!-- GENERADO por 10 Class/scripts/temario\.py .*-->$", re.M)   # (DOC4, 2026-09-20)
 
 
 def sin_marca(texto: str) -> str:
@@ -241,12 +242,95 @@ def area_txt(t: dict) -> str:
     return ", ".join(a) if isinstance(a, list) else str(a or "")
 
 
-def render_readme(t: dict) -> str:
-    total = sum(len(u["temas"]) for u in t.get("unidades", []))
+def cabecera_readme(t: dict, estado: str, sufijo: str = "") -> list[str]:
+    """Frontmatter (§15.1), marca de derivado (§5, D06) y H1 §9.6 del README de un curso."""
     hoy = __import__("datetime").date.today().isoformat()
-    out = ["---", "tipo: readme", "estado: activo", "---",
-           f"<!-- GENERADO por 10 Class/scripts/temario.py desde curso.yml ({hoy}); no editar -->", "",
-           f"# {t['id']}/ — {t.get('emoji', EMOJI_DEFAULT)} {t['titulo']}", ""]
+    return ["---", "tipo: readme", f"estado: {estado}", "---",
+            f"<!-- GENERADO por 10 Class/scripts/temario.py desde curso.yml ({hoy}); no editar -->", "",
+            f"# {t['id']}/ — {t.get('emoji', EMOJI_DEFAULT)} {t['titulo']}{sufijo}", ""]
+
+
+def seccion_recursos(t: dict) -> list[str]:
+    """«Recursos enlazados»: recursos de tema (post, simulador…) y bancos de exámenes rendidos."""
+    out = []
+    recs = [(u, tema, r) for u in t.get("unidades", []) for tema in u["temas"] for r in tema.get("recursos", [])]
+    if recs or t.get("banco_examenes"):
+        out += ["## Recursos enlazados", ""]
+        for u, tema, r in recs:
+            if r.get("tipo") == "simulador":
+                out.append(f"- `{tema['id']}` {tema['titulo']} → 🧪 simulador `{r['modelo']}` «{r.get('nombre', '')}» (`{r.get('archivo', '')}`)")
+            else:
+                out.append(f"- `{tema['id']}` {tema['titulo']} → {r.get('tipo')}: {r.get('ruta') or r.get('url') or r.get('calibre_id')}")
+        for b in t.get("banco_examenes", []) or []:
+            out.append(f"- Banco de exámenes rendidos: `{b['ruta']}` ({b.get('expedientes', 0)} expedientes)")
+        out.append("")
+    return out
+
+
+def seccion_bibliografia_y_ajeno(t: dict) -> list[str]:
+    out = []
+    if t.get("bibliografia"):
+        out += ["## Bibliografía en Calibre", "", "Material externo del curso catalogado en la biblioteca (F5.4); se cita por `calibre_id`:", ""]
+        out += [f"- `{b['calibre_id']}` {b.get('titulo', '')} — {b.get('autor', 'Desconocido')}" for b in t["bibliografia"]]
+        out.append("")
+    if t.get("ajeno"):
+        out += ["## Material ajeno (vendor)", "", "Lo escribió un tercero y se conserva tal cual, sin cabecera propia; el validador de la normativa no lo recorre (NORMATIVA_ARCHIVOS §5):", ""]
+        out += [f"- `{a['ruta']}` — {a.get('descripcion', '')}" for a in t["ajeno"]]
+        out.append("")
+    return out
+
+
+PIE_README = "> Este README se genera desde `curso.yml` (`10 Class/scripts/temario-generar.sh`). Edita el registro del curso, no este archivo."
+
+
+def render_readme_borrador(t: dict) -> str:
+    """README de un curso en `borrador` sin temario (`unidades: []`): lo que el registro ya tiene y qué falta (§15.9, DOC4)."""
+    out = cabecera_readme(t, t.get("estado") or "borrador", " (borrador, sin temario)")
+    if t.get("descripcion"):
+        out += [t["descripcion"], ""]
+    ficha = [f"**Tipo:** {t['tipo']}" if t.get("tipo") else None, f"**Rol:** {t['rol']}" if t.get("rol") else None,
+             f"**Nivel:** {t['nivel']}" if t.get("nivel") else None]
+    out.append("- " + " · ".join(x for x in ficha if x))
+    if area_txt(t):
+        out.append(f"- **Área:** {area_txt(t)}")
+    for clave, rotulo in (("docente", "Docente"), ("creditos", "Créditos"), ("horas", "Horas")):
+        if t.get(clave) not in (None, ""):
+            out.append(f"- **{rotulo}:** {t[clave]}")
+    if t.get("semestre") not in (None, ""):
+        out.append(f"- **Semestre:** {t['semestre']}")
+    if t.get("malla"):
+        out.append(f"- **Malla:** {t['malla'].get('plan')} · orden {t['malla'].get('orden')}" + (f" · ciclo {t['malla']['ciclo']}" if t['malla'].get('ciclo') else ""))
+    if t.get("prerrequisitos"):
+        pre = t["prerrequisitos"]; out.append(f"- **Prerrequisitos:** {', '.join(pre) if isinstance(pre, list) else pre}")
+    out.append(f"- **Etiqueta común:** `{t['etiqueta']}`")
+    if t.get("alias"):
+        out.append("- **Alias:** " + ", ".join(f"`{a}`" for a in t["alias"]))
+    out.append(f"- **Ficha web:** {('`' + t['materia_web'] + '`') if t.get('materia_web') else 'sin ficha'}"
+               + (f" · **Dominio FUAT:** `{t['dominio_fuat']}`" if t.get("dominio_fuat") else ""))
+    out.append("- **Total de temas:** 0")
+    out += ["", "## Qué falta", "",
+            "El temario no está escrito: `unidades: []` en `curso.yml`. Este README solo refleja lo que el registro ya tiene y se regenera solo. Para escribirlo:", "",
+            "1. Declara `unidades:` en `curso.yml` (cada unidad con `id`, `titulo` y `temas: [{id, titulo, archivo}]`; `archivo: null` mientras la nota no exista, NORMATIVA §7).",
+            f"2. Regenera las vistas desde `10 Class`: `./scripts/temario-generar.sh generar --que readme --aplicar docencia/cursos/{t['id']}` (sin `--aplicar` simula).",
+            "3. Cuando el curso se dicte, pasa el registro a `estado: activo`.", "",
+            "Mientras tanto `./scripts/temario-generar.sh verificar` lo lista como «sin unidades (temario por completar)».", ""]
+    out += seccion_recursos(t)
+    if t.get("datasets"):
+        out += ["## Datos", "", "Datasets que el registro declara (`datasets:`); los `catalogado` viven en `02 analysis` y su clave es un `dataset_id`, no una ruta de este curso:", ""]
+        for d in t["datasets"]:
+            clave = f"{d.get('clave', '')} (clave de 02 analysis)" if d.get("estado") == "catalogado" else f"`{d.get('clave', '')}`"
+            out.append(f"- {clave} — uso `{d.get('uso', '')}`" + (f", {d['mb']} MB" if d.get("mb") is not None else "") + (f", {d['estado']}" if d.get("estado") else ""))
+        out.append("")
+    out += seccion_bibliografia_y_ajeno(t)
+    out += [PIE_README, ""]
+    return "\n".join(out)
+
+
+def render_readme(t: dict) -> str:
+    if not t.get("unidades"):
+        return render_readme_borrador(t)
+    total = sum(len(u["temas"]) for u in t.get("unidades", []))
+    out = cabecera_readme(t, "activo")
     if t.get("descripcion"):
         out += [t["descripcion"], ""]
     if t.get("semestre") not in (None, ""):
@@ -265,36 +349,17 @@ def render_readme(t: dict) -> str:
         for tema in u["temas"]:
             out.append(f"- `{tema['id']}` {tema['titulo']}")
         out.append("")
-    recs = [(u, tema, r) for u in t.get("unidades", []) for tema in u["temas"] for r in tema.get("recursos", [])]
-    if recs or t.get("banco_examenes"):
-        out += ["## Recursos enlazados", ""]
-        for u, tema, r in recs:
-            if r.get("tipo") == "simulador":
-                out.append(f"- `{tema['id']}` {tema['titulo']} → 🧪 simulador `{r['modelo']}` «{r.get('nombre', '')}» (`{r.get('archivo', '')}`)")
-            else:
-                out.append(f"- `{tema['id']}` {tema['titulo']} → {r.get('tipo')}: {r.get('ruta') or r.get('url') or r.get('calibre_id')}")
-        for b in t.get("banco_examenes", []) or []:
-            out.append(f"- Banco de exámenes rendidos: `{b['ruta']}` ({b.get('expedientes', 0)} expedientes)")
-        out.append("")
-    if t.get("bibliografia"):
-        out += ["## Bibliografía en Calibre", "", "Material externo del curso catalogado en la biblioteca (F5.4); se cita por `calibre_id`:", ""]
-        out += [f"- `{b['calibre_id']}` {b.get('titulo', '')} — {b.get('autor', 'Desconocido')}" for b in t["bibliografia"]]
-        out.append("")
-    if t.get("ajeno"):
-        out += ["## Material ajeno (vendor)", "", "Lo escribió un tercero y se conserva tal cual, sin cabecera propia; el validador de la normativa no lo recorre (NORMATIVA_ARCHIVOS §5):", ""]
-        out += [f"- `{a['ruta']}` — {a.get('descripcion', '')}" for a in t["ajeno"]]
-        out.append("")
+    out += seccion_recursos(t)
+    out += seccion_bibliografia_y_ajeno(t)
     out += ["## Metadata de cada archivo", "",
             f"Cada `.md` es un apunte del régimen del vault (NORMATIVA_ARCHIVOS §6.2, §10.4): nombre en kebab-case (`1-2-tema.md`) y frontmatter con `tipo: apunte`, `titulo`, `estado` y dos etiquetas: una común (`{t['etiqueta']}`) y otra específica del tema en `snake_case`.",
             "", "```yaml", "---", "tipo: apunte", 'titulo: "..."', "estado: activo", "tags:", f"  - {t['etiqueta']}", "  - <tema>", "---", "```", "",
-            "> Este README se genera desde `curso.yml` (`10 Class/scripts/temario-generar.sh`). Edita el registro del curso, no este archivo.", ""]
+            PIE_README, ""]
     return "\n".join(out)
 
 
 def generar_readme(curso: Path, t: dict, aplicar: bool) -> str:
-    if not t.get("unidades"):
-        return "sin unidades: README intacto"
-    nuevo = render_readme(t)
+    nuevo = render_readme(t)                       # sin unidades: README de borrador con marca (§15.9)
     rd = curso / "README.md"
     actual = rd.read_text(encoding="utf-8") if rd.exists() else ""
     if sin_marca(actual) == sin_marca(nuevo):
@@ -511,7 +576,6 @@ def main() -> int:
             rd = c / "README.md"
             if not t.get("unidades"):
                 log(f"  sin unidades (temario por completar): {c.relative_to(DOCS)}")
-                continue
             if not rd.exists() or sin_marca(rd.read_text(encoding="utf-8")) != sin_marca(render_readme(t)):
                 drift += 1
                 log(f"  README desfasado: {c.relative_to(DOCS)}")
