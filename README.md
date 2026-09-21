@@ -66,7 +66,7 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
 | `templates/` | documentos vacíos, sin diseño: `exam/` (12 tipos) · `presentation/` (8) · `report/` (4) | este repo |
 | `scaffolds/` | registros mínimos de curso, sesión y dictado (no árboles de carpetas) | este repo |
 | `scripts/` | automatización: crear, compilar, validar, generar vistas, publicar | este repo |
-| `assets/` | `branding/cau-logo.png`, el logo canónico | este repo |
+| `assets/` | `assets/branding/cau-logo.png`, el logo canónico | este repo |
 | `bibliography/` | `course.bib` heredado; la bibliografía viva se cita por `calibre_id` (F5.4) | Calibre |
 | `docs/` | documentación permanente e `historial/` | autor; `docs/README.md` lo genera `core/docs.py` |
 | `simuladores/` | el laboratorio computacional (motor + `macro/` + `estadistica/`) | `simuladores/CLAUDE.md` |
