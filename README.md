@@ -93,7 +93,7 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
   que los pida se reconstruye, no se parchea.
 - **El framework no versiona datos de estudiantes**: eso es `registro/`, ignorado desde aquí y sin
   remoto. Tampoco versiona los productos de publicación ni las fuentes PDF de los expedientes.
-- **El legado sin clasificar se resolvió el 2026-09-20**: `docencia/_inbox/` (410 archivos) salió del repo al archivo del vault
+- **El legado sin clasificar se resolvió el 2026-09-20**: el inbox de docencia (410 archivos) salió del repo al archivo del vault
   (`06 archives/2026-09-20-docencia-inbox/`) y `registro/_legado/` (306 MB, trabajos de estudiantes) se conserva como archivo
   cerrado del registro privado, no como temporal.
 - **5 decks Beamer heredados no compilan** (falta la copia local de `cau-logo.png`, o piden XeLaTeX):
