@@ -341,7 +341,7 @@ Compatibilidad: mientras dure la migración, el tooling del estándar 00–09
 
 ## 9. Prompts que se actualizan con el rediseño (histórico; las rutas 00–09 citadas ya no existen)
 
-- `prompts/05 docencia/learning-skill/prompt_resolucion_examenes_plantillas.md`
+- `prompts/05 docencia/prompt_resolucion_examenes_plantillas.md`
   → referenciar `academic-exam.cls` (no `evaluacion.cls`), las nuevas rutas
   (`10 Class/templates/exam/…`, `04_EVALUACIONES/`) y el flujo con
   `scripts/new-evaluacion.sh` + `build.sh`.

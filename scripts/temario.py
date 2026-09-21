@@ -32,7 +32,7 @@ FW = Path(__file__).resolve().parents[1]           # …/10 Class
 DOCS = FW.parent                                    # …/Documents
 CURSOS = FW / "docencia" / "cursos"                       # M5 (2026-09-15): los cursos viven en docencia/cursos/<slug>/ (curso.yml)
 WEB_CURSOS = DOCS / "04 index" / "cursos"
-DOMINIOS = DOCS / "prompts" / "05 docencia" / "learning-skill" / "2 domains"
+DOMINIOS = DOCS / "prompts" / "skills" / "learning" / "2 domains"   # DOC9 (2026-09-20): el learning-skill vive en skills/learning
 TAREAS = DOCS / "05 tasks"
 RESUMEN = TAREAS / "temarios-cursos.md"                    # vista checklist (NORMATIVA_ARCHIVOS §5: derivado marcado)
 

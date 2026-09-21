@@ -29,7 +29,7 @@ llega aquí como `config/palette.tex` generado.
 |---|---|---|
 | `docencia/cursos/<slug>/README.md` (×52) | `curso.yml` | `./scripts/temario-generar.sh generar --que readme --aplicar` |
 | Sección «Contenidos / Sílabo» de `04 index/cursos/<materia>/index.qmd` | `curso.yml` | `temario-generar.sh generar --que web --aplicar` (entre marcadores) |
-| `prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md` | `curso.yml` | `temario-generar.sh generar --que skill --aplicar` |
+| `prompts/skills/learning/2 domains/_temarios/<dominio>.md` | `curso.yml` | `temario-generar.sh generar --que skill --aplicar` |
 | `05 tasks/temarios-cursos.md` | todos los `curso.yml` | `temario-generar.sh generar --que resumen --aplicar` |
 | `curso.yml.banco_examenes`, recursos de tipo post y simulador | disco y `04 index/_pubs` | `python3 scripts/enlazar.py examenes\|posts\|simuladores --aplicar` |
 | `config/palette.tex` | `sistema-editorial/temas/docencia.yml` | `python3 generador.py generar --aplicar --espejo` (en `sistema-editorial`) |

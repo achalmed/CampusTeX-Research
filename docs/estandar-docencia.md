@@ -154,7 +154,7 @@ dictados/2026-i-cau-unsch-metodologia/
 | Logo, fuentes, plantillas, clases | `assets/`, `styles/`, `templates/`, `classes/` del framework | `\documentclass{academic-*}`; el deck lleva **una** copia local del logo |
 | Apuntes de Edison como alumno | `01 notes/40-cursos-y-formacion/<curso>/` | enlazan al tema de `02-contenido/`; nunca escriben en `docencia/` |
 | Ficha web | `04 index/cursos/<materia>/` | `materia_web` (n cursos → 1 materia); ediciones por dictado |
-| Temario del learning-skill | `prompts/05 docencia/learning-skill/2 domains/_temarios/` | generado desde `curso.yml`; `dominio_fuat` |
+| Temario del learning-skill | `prompts/skills/learning/2 domains/_temarios/` | generado desde `curso.yml`; `dominio_fuat` |
 | Posts, simuladores, bancos de exámenes | `04 index/_pubs`, `04 index/simuladores`, `docencia/cursos/*/04-evaluaciones/banco` | `enlazar.py` (los ids antiguos se resuelven por `alias`) |
 
 ## 7. Reglas de mantenimiento
