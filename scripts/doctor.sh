@@ -40,7 +40,7 @@ if [[ -d "$CURSOS_DIR" ]]; then
   else error "temario-generar.sh verificar: README desfasados (generar --que readme --aplicar)"; rc_total=1; fi
   if out="$(python3 "$FW_DIR/scripts/enlazar.py" verificar 2>&1 | tail -1)"; then ok "enlazar.py verificar: $out"
   else error "enlazar.py verificar: $out"; rc_total=1; fi
-  n_inbox="$(find "$INBOX_DIR" -type f ! -name README.md 2>/dev/null | wc -l)"
+  n_inbox=0; [[ -d "$INBOX_DIR" ]] && n_inbox="$(find "$INBOX_DIR" -type f ! -name README.md 2>/dev/null | wc -l)"   # sin la carpeta, find fallaría bajo pipefail
   # (DOC4/D10, 2026-09-20): _inbox/ salió al archivo del vault y registro/_legado/ es archivo cerrado; si _inbox/ reaparece con archivos, plazo: ya no informa).
   PLAZO_TEMPORALES="2026-10-31"
   if [[ "$n_inbox" -eq 0 ]]; then ok "_inbox/: vacío"
