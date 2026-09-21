@@ -37,7 +37,7 @@ bash -n scripts/<archivo>.sh              # comprobación de sintaxis: UN archiv
 | `clean.sh` | borra auxiliares de LaTeX (y los PDF con `--pdf`) | `./scripts/clean.sh [--pdf] [DIR]` |
 | `validate.sh` | invariantes del estándar: lista cerrada de carpetas, sin vacías, artefacto por tipo, `guion.md`, núcleo del registro | `./scripts/validate.sh CURSO\|DICTADO\|--todos` |
 | `stats.sh` | resumen de un curso por sesión: tipo · estado · artefacto · PDF · guion | `./scripts/stats.sh CURSO` |
-| `doctor.sh` | entorno (git, lualatex, quarto, compilador universal) + `validate --todos` + los tres verificadores + `_inbox` + binarios > 5 MB + remoto de `registro/` + `core/archivos.py` | `./scripts/doctor.sh` |
+| `doctor.sh` | entorno (git, lualatex, quarto, compilador universal) + `validate --todos` + los tres verificadores + binarios > 5 MB + remoto de `registro/` + `core/archivos.py` | `./scripts/doctor.sh` |
 | `temario-generar.sh` | fachada Bash de `temario.py` | `./scripts/temario-generar.sh migrar\|generar\|verificar [--aplicar] [--que readme,web,skill,resumen] [CURSO…]` |
 | `temario.py` | el generador de vistas del currículo desde `curso.yml`: README del curso, ficha web, temario del learning-skill, checklist de `05 tasks` | ver `temario-generar.sh` |
 | `enlazar.py` | enlaza el currículo con lo que ya existe: posts de `04 index/_pubs`, modelos de `simuladores/`, bancos de `04-evaluaciones/` | `python3 scripts/enlazar.py posts\|simuladores\|examenes\|verificar [--aplicar]` |

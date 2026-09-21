@@ -159,7 +159,7 @@ colores, fuentes y cajas: un único «Academic Theme» para todo.
 │   ├── sesion/                  · sesion.yml + guion.md + deck.tex | deck.qmd
 │   └── dictado/                 · dictado.yml
 │
-├── docencia/                    ← SUBMÓDULO de contenido (repo Academic_Class): cursos/ · dictados/ · _inbox/ · migracion/
+├── docencia/                    ← SUBMÓDULO de contenido (repo Academic_Class): cursos/ · dictados/ · migracion/
 ├── registro/                    ← repo privado hermano, git-ignorado (estudiantes, calificaciones, evidencias)
 │
 ├── bibliography/                ← todos los .bib (uno por área o uno maestro)

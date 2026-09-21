@@ -41,7 +41,7 @@ if [[ -d "$CURSOS_DIR" ]]; then
   if out="$(python3 "$FW_DIR/scripts/enlazar.py" verificar 2>&1 | tail -1)"; then ok "enlazar.py verificar: $out"
   else error "enlazar.py verificar: $out"; rc_total=1; fi
   n_inbox="$(find "$INBOX_DIR" -type f ! -name README.md 2>/dev/null | wc -l)"
-  # (DOC4/D10, 2026-09-20): _inbox/ y registro/_legado/ son temporales con plazo acordado; hasta esa fecha no se avisa (ruido crónico que ya no informa).
+  # (DOC4/D10, 2026-09-20): _inbox/ salió al archivo del vault y registro/_legado/ es archivo cerrado; si _inbox/ reaparece con archivos, plazo: ya no informa).
   PLAZO_TEMPORALES="2026-10-31"
   if [[ "$n_inbox" -eq 0 ]]; then ok "_inbox/: vacío"
   elif [[ "$(date +%F)" < "$PLAZO_TEMPORALES" ]]; then ok "_inbox/: $n_inbox archivos por clasificar — temporal con plazo $PLAZO_TEMPORALES (D10); nada se cita desde ahí"

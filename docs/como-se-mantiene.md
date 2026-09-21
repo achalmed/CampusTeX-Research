@@ -85,7 +85,7 @@ Un parámetro nuevo del docente va a `config/course.yml` (YAML plano), nunca al 
 python3 scripts/enlazar.py verificar           # enlaces del currículo
 python3 core/docs.py verificar "10 Class"      # el índice de docs/ al día
 python3 core/archivos.py validar "10 Class"    # normativa de archivos (D01–D12 incluidas)
-./scripts/doctor.sh                            # todo lo anterior + entorno + binarios + _inbox
+./scripts/doctor.sh                            # todo lo anterior + entorno + binarios
 ```
 
 El doctor devuelve 1 con avisos (no es un fallo) y 2 con fallos.
@@ -95,5 +95,5 @@ El doctor devuelve 1 con avisos (no es un fallo) y 2 con fallos.
 - Este documento describe el mantenimiento **documental y del estándar**; el mantenimiento pedagógico
   (qué se enseña y cómo) es el `guion.md` de cada sesión y el ciclo de `prompts/00 metodo/CICLO.md`.
 - No fija una cadencia de revisión: la revisión la dispara un cambio, no el calendario. La única fecha
-  comprometida hoy es el plazo **2026-10-31** de `docencia/_inbox/` y `registro/_legado/` (D10).
+  comprometida de D10 se cerró el 2026-09-20: `_inbox/` salió al archivo del vault y `registro/_legado/` es archivo cerrado.
 - No cubre el laboratorio `simuladores/`, que tiene su propia doctrina en `simuladores/CLAUDE.md`.

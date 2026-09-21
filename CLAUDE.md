@@ -30,7 +30,7 @@ submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/` (repo
   política está en `registro/CLAUDE.md`.
 - **Lista cerrada de carpetas de curso** (`01-diseno · 02-contenido · 03-sesiones · 04-evaluaciones ·
   05-recursos`), que existen solo con contenido; **sin carpetas vacías y sin `.gitkeep`**: es error del
-  validador. Fuera de norma solo `vendor/` (ajeno) y `_inbox/` (legado).
+  validador. Fuera de norma solo `vendor/` (ajeno).
 - **kebab-case ASCII** en carpetas y archivos, claves `snake_case`, períodos `AAAA-i`/`AAAA-ii`,
   español con tildes en todo (código, comentarios, mensajes y docs).
 - **Homogeneidad total**: al estandarizar se convierte todo al estándar; si un deck deja de compilar,

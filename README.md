@@ -70,7 +70,7 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
 | `bibliography/` | `course.bib` heredado; la bibliografía viva se cita por `calibre_id` (F5.4) | Calibre |
 | `docs/` | documentación permanente e `historial/` | autor; `docs/README.md` lo genera `core/docs.py` |
 | `simuladores/` | el laboratorio computacional (motor + `macro/` + `estadistica/`) | `simuladores/CLAUDE.md` |
-| `docencia/` | **submódulo** (repo `Academic_Class`): `cursos/`, `dictados/`, `_inbox/`, `migracion/` | `docencia/README.md` |
+| `docencia/` | **submódulo** (repo `Academic_Class`): `cursos/`, `dictados/`, `migracion/` | `docencia/README.md` |
 | `registro/` | repo privado hermano, git-ignorado: estudiantes, calificaciones, evidencias | `registro/CLAUDE.md` |
 
 ## Documentación
@@ -93,8 +93,9 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
   que los pida se reconstruye, no se parchea.
 - **El framework no versiona datos de estudiantes**: eso es `registro/`, ignorado desde aquí y sin
   remoto. Tampoco versiona los productos de publicación ni las fuentes PDF de los expedientes.
-- **`_inbox/` (410 archivos) y `registro/_legado/` (306 MB) siguen sin clasificar.** Son temporales
-  declarados desde 2026-09-15 con plazo **2026-10-31** (D10); hasta entonces nada se cita desde ellos.
+- **El legado sin clasificar se resolvió el 2026-09-20**: `docencia/_inbox/` (410 archivos) salió del repo al archivo del vault
+  (`06 archives/2026-09-20-docencia-inbox/`) y `registro/_legado/` (306 MB, trabajos de estudiantes) se conserva como archivo
+  cerrado del registro privado, no como temporal.
 - **5 decks Beamer heredados no compilan** (falta la copia local de `cau-logo.png`, o piden XeLaTeX):
   es pendiente del docente y se reconstruyen al usarlos.
 - **El color no se decide aquí**: `config/palette.tex` es un espejo generado por `sistema-editorial`;

@@ -10,7 +10,6 @@
 #       docencia/cursos/<slug>/            curso.yml · README.md · 01-diseno … 05-recursos
 #       docencia/cursos/<slug>/03-sesiones/sNN-<slug>/   sesion.yml · guion.md · <artefacto>
 #       docencia/dictados/<AAAA-ciclo>-<institucion>-<materia>/   dictado.yml · publicacion/ (producto)
-#       docencia/_inbox/<origen>/          legado por clasificar (temporal)
 #   - registro/ (repo privado hermano, git-ignorado): datos de estudiantes por dictado.
 #   - Los helpers aceptan la RUTA del curso/dictado o su SLUG (se resuelve contra docencia/).
 # ============================================================
@@ -26,7 +25,7 @@ BIBLIOGRAPHY_DIR="$FW_DIR/bibliography"              # archivos .bib
 DOCENCIA_DIR="$FW_DIR/docencia"                      # submódulo de contenido (repo Academic_Class)
 CURSOS_DIR="$DOCENCIA_DIR/cursos"
 DICTADOS_DIR="$DOCENCIA_DIR/dictados"
-INBOX_DIR="$DOCENCIA_DIR/_inbox"
+INBOX_DIR="$DOCENCIA_DIR/_inbox"   # retirado el 2026-09-20 (06 archives/2026-09-20-docencia-inbox); el doctor lo trata como vacío
 REGISTRO_DIR="$FW_DIR/registro"                      # repo privado hermano (nunca con remote público)
 
 # --- Salida con color ---------------------------------------

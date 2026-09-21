@@ -20,7 +20,6 @@ fecha: 2026-09-15
 ├── docencia/                   ← UN submódulo: repo Academic_Class (todo el contenido docente)
 │   ├── cursos/<slug>/          ← qué se enseña (52 cursos)
 │   ├── dictados/<AAAA-ciclo>-<institucion>-<materia>/   ← cada vez que se dicta (manifiesto + producto)
-│   ├── _inbox/<origen>/        ← legado por clasificar; temporal con plazo 2026-10-31 (D10)
 │   ├── migracion/              ← ledger vivo del banco de exámenes; historico/ = mapas y migradores de M3–M6 (son el UNDO)
 │   └── README.md               ← puerta del repo de contenido (a mano; no hay generador)
 └── registro/                   ← repo PRIVADO hermano, git-ignorado aquí; nunca con remote público
@@ -141,7 +140,7 @@ dictados/2026-i-cau-unsch-metodologia/
 - Claves YAML `snake_case`; `id` = slug de la carpeta; `estado` del ciclo de vida
   (`meta/NORMATIVA_ARCHIVOS.md` §2.1); línea 1 de identidad en cada registro.
 - Períodos `AAAA-i` / `AAAA-ii`.
-- Fuera de norma solo `vendor/` (ajeno, declarado en `ajeno:`) y `_inbox/` (legado):
+- Fuera de norma solo `vendor/` (ajeno, declarado en `ajeno:`):
   el validador no entra en ellos. Los adjuntos heredados con espacios que lee código
   (`.do`, `.rmd`, `.ipynb`) se conservan; la normativa los admite (§4).
 
@@ -166,7 +165,7 @@ dictados/2026-i-cau-unsch-metodologia/
 3. **Sesión = `sNN-<slug>/sesion.yml` con `tipo`.** El tipo fija el artefacto obligatorio;
    `guion.md` siempre; sin subcarpetas fijas; el número lo da la carpeta.
 4. **Nombres**: kebab-case ASCII para carpetas y archivos; `snake_case` para claves;
-   `id` = carpeta; `estado` del ciclo. Excepciones solo `vendor/` y `_inbox/`.
+   `id` = carpeta; `estado` del ciclo. Excepción solo `vendor/`.
 5. **Edita la fuente, no la vista.** README, ficha web, temarios del skill y checklists se
    regeneran con `temario-generar.sh`; nunca a mano.
 6. **Nada externo se copia.** Libros por `calibre_id`; datasets por clave de `02 analysis`;
@@ -179,8 +178,8 @@ dictados/2026-i-cau-unsch-metodologia/
 9. **Datos de personas solo en `registro/`**, con la clave del dictado.
 10. **Un dictado = `dictados/<AAAA-ciclo>-<institucion>-<materia>/dictado.yml`**, aunque
     tome sesiones de varios cursos.
-11. **`_inbox/` es temporal.** Lo que entra lleva carpeta de origen; el doctor avisa
-    mientras no esté vacío; nada se cita desde un curso mientras siga allí.
+11. **Nada queda sin clasificar dentro del repo.** Lo que llegue fuera del estándar se clasifica en su curso o sale al
+   archivo del vault (`06 archives/`), como se hizo con `_inbox/` el 2026-09-20.
 12. **Cambios estructurales por el ciclo**: auditoría → propuesta → aprobación → tag →
     cambio con dry-run → `validate.sh --todos` → `doctor.sh` → commit; mapa de rutas
     versionado en `docencia/migracion/` como UNDO.
@@ -200,6 +199,6 @@ dictados/2026-i-cau-unsch-metodologia/
 | `validate.sh CURSO\|DICTADO\|--todos` · `stats.sh` | invariantes de §2–§4 (exit ≠ 0 si algo falla) · resumen por sesión |
 | `temario-generar.sh` · `enlazar.py` · `normalizar-*.py` | vistas desde `curso.yml` · enlaces posts/simuladores/exámenes · normativa de archivos |
 | `publish-session.sh` · `publish-web.sh` | congelar por tag + producto en `publicacion/` · hardlinks a la web |
-| `doctor.sh` | entorno + `validate --todos` + verificadores + `_inbox` + binarios + remote de `registro/` + normativa |
+| `doctor.sh` | entorno + `validate --todos` + verificadores + binarios + remote de `registro/` + normativa |
 
 `new-period.sh` queda como aviso de retiro (exit 2): el dictado ya no vive en el curso.
