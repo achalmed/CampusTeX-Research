@@ -3,9 +3,12 @@
 No es un modelo.
 
 Dos fuentes, en orden de preferencia:
-  (1) DATOS MENSUALES de data/raw/peru/bcrp/<código>/ (los descarga el
-      conector connectors/bcrp; el archivo original es SAGRADO — solo se
-      lee, nunca se modifica). Mayor resolución.
+  (1) DATOS MENSUALES de 02 analysis/data/raw/bcrp/<categoría>/<código>_v…json
+      (los descarga el conector connectors/bcrp; el archivo original es
+      SAGRADO — solo se lee, nunca se modifica). Mayor resolución. Si 02 analysis
+      está, se leen con su lector único (metodos/series/lectores.py: resuelve la
+      ruta por el catálogo y omite los periodos sin dato); si no, con el lector
+      propio de abajo.
   (2) SNAPSHOT ANUAL embebido en _series_bcrp.py (fallback autocontenido:
       data/ está en .gitignore, así el laboratorio funciona en un clon
       limpio y sus verificaciones son reproducibles).
@@ -24,27 +27,63 @@ import numpy as np
 
 from modelos.nivel_12 import _series_bcrp
 
-# raíz de datos crudos: 02 analysis/data/raw/peru/bcrp, localizada por NOMBRE
+# raíz de datos crudos: 02 analysis/data/raw/bcrp, localizada por NOMBRE
 # (core/env.py: ANALYSIS_DIR) porque el laboratorio vive en 10 Class desde el
 # 2026-09-20; si core/ no está, se usa el snapshot embebido (_series_bcrp).
-def _raiz_bcrp():
+# Hasta el 2026-09-28 apuntaba a data/raw/peru/bcrp/<código>/, que dejó de existir
+# el 2026-09-25 (el acervo se aplanó y se agrupó por categoría): el laboratorio cayó
+# en silencio al snapshot anual durante tres días sin que ninguna verificación lo dijera.
+def _analysis_dir():
     import importlib.util
     for carpeta in Path(__file__).resolve().parents:
         env = carpeta / "core" / "env.py"
         if env.is_file():
             spec = importlib.util.spec_from_file_location("core_env", env)
             mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
-            return Path(mod.ANALYSIS_DIR) / "data" / "raw" / "peru" / "bcrp"
-    return Path("/nonexistent")   # sin ecosistema: solo snapshot
-_RAIZ_RAW = _raiz_bcrp()
+            return Path(mod.ANALYSIS_DIR)
+    return None                   # sin ecosistema: solo snapshot
+_ANALYSIS = _analysis_dir()
+_RAIZ_RAW = (_ANALYSIS / "data" / "raw" / "bcrp") if _ANALYSIS else Path("/nonexistent")
+
+
+def _lector_unico():
+    """`metodos.series.lectores` de 02 analysis si está disponible; None si no."""
+    if _ANALYSIS is None or not (_ANALYSIS / "metodos" / "series" / "lectores.py").is_file():
+        return None
+    import sys
+    if str(_ANALYSIS) not in sys.path:
+        sys.path.append(str(_ANALYSIS))
+    try:
+        from metodos.series import lectores
+        return lectores
+    except Exception:             # un 02 analysis a medias no tumba el laboratorio
+        return None
+
+
+def _archivos(codigo):
+    """Versiones del JSON de una serie en el acervo (cualquier categoría), ordenadas."""
+    return sorted(glob.glob(str(_RAIZ_RAW / "*" / f"{codigo}_v*.json")))
 
 _MES = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6,
         "Jul": 7, "Ago": 8, "Set": 9, "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12}
 
 
 def _leer_mensual(codigo):
-    """Lee la última versión del JSON crudo de una serie; None si no existe."""
-    archivos = sorted(glob.glob(str(_RAIZ_RAW / codigo / "*.json")))
+    """Lee la última versión del JSON crudo de una serie MENSUAL; None si no existe o no es mensual."""
+    lectores = _lector_unico()
+    if lectores is not None:
+        try:
+            s = lectores.serie_bcrp(codigo, _ANALYSIS)
+        except Exception:
+            s = None
+        if s is not None and s.frecuencia == "mensual":
+            pares = [(p, v) for p, v, e in zip(s.periodos, s.valores, s.estados) if e == "dato"]
+            if pares:
+                return (np.array([p.anio + (p.sub - 1) / 12 for p, _ in pares]),
+                        np.array([v for _, v in pares]))
+        if s is not None:
+            return None           # existe pero no es mensual: el snapshot anual manda
+    archivos = _archivos(codigo)
     if not archivos:
         return None
     try:
@@ -115,4 +154,4 @@ def correlacion(x, y):
 
 def hay_datos_mensuales():
     """True si el detalle mensual de data/raw está disponible (vs snapshot)."""
-    return any((_RAIZ_RAW / c).exists() for c in _series_bcrp.CODIGOS.values())
+    return any(_archivos(c) for c in _series_bcrp.CODIGOS.values())

@@ -48,7 +48,8 @@ Currículo COMPLETO: 115 modelos en 12 niveles, 569 verificaciones; plan vigente
 `macro/docs/laboratorio-macro.md`. El nivel 12 es el laboratorio del Perú con datos reales del
 BCRP: m97-m115 usan series macro (PBI, IPC, tasa, tipo de cambio, cobre, términos de
 intercambio, bloque fiscal) que descarga `02 analysis/connectors/bcrp`; el detalle mensual se
-lee de `02 analysis/data/raw/peru/bcrp/` **por nombre** (`nivel_12/_datos_bcrp.py` localiza
+lee de `02 analysis/data/raw/bcrp/<categoría>/` **por nombre**, con el lector único de
+`02 analysis/metodos/series/lectores.py` cuando está (`nivel_12/_datos_bcrp.py` localiza
 `core/env.py: ANALYSIS_DIR`) y, si no está, cae al snapshot anual embebido en `_series_bcrp.py`
 (auto-contenido). Verifica contra el dato real, no contra calibración didáctica: coef. Taylor
 0,55 < 1 = sesgo de variable omitida (m100); correlación tasa-inflación = causalidad inversa
