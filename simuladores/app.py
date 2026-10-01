@@ -257,7 +257,7 @@ class Laboratorio:
         self._texto(0.10, 0.50,
                     f"Experimentos disponibles: {len(m.escenarios)}\n"
                     f"Verificaciones internas del modelo: {ok}/{tot} superadas\n"
-                    f"Procedencia: {_wrap(F.procedencia, 90) if F else '—'}", 10.5)
+                    f"Procedencia: {_wrap(base.procedencia(F, getattr(config, 'PROCEDENCIA_POR_DEFECTO', '')), 90) if F else '—'}", 10.5)
         self._texto(0.10, 0.24, "Usa los botones (o las flechas del teclado) para "
                                 "avanzar por el recorrido.", 10, config.GRIS)
 

@@ -35,7 +35,10 @@ numéricas (identidades exactas, convergencias con tolerancia; en estadística, 
 $E[\bar X]=\mu$, TCL…). Plantilla académica de 20 puntos en §2 del diseño de macro: modelos
 nuevos traen `pregunta`, `cadena` de transmisión por escenario y, cuando aplique,
 `derivacion`/`variables`/`ecuaciones_calibradas`/`grupo`. Reglas duras: procedencia declarada
-(sin citas de página no verificadas; regla 00a de datafw); calibraciones didácticas ≠ datos
+(sin citas de página no verificadas; regla 00a de datafw): en estadística, `Ficha.fuentes` con
+`base.Fuente(calibre_id, pagina, pagina_pdf, pasaje)` que `fuentes.py` comprueba contra la hoja del PDF
+(`main.py fuentes`); la procedencia por defecto es de cada disciplina (`config.PROCEDENCIA_POR_DEFECTO`),
+nunca del motor; calibraciones didácticas ≠ datos
 oficiales; `python3 main.py verificar` al 100 % y fila en la `matriz_trazabilidad.csv` de su
 disciplina antes de dar un modelo por bueno; aleatoriedad con `np.random.default_rng(semilla)`.
 Figuras con tipografía académica (mathtext STIX, notación `$…$` en ejes y leyendas; opción
@@ -62,12 +65,14 @@ diseño); la econometría pedagógica NO duplicará `02 analysis/pipeline/`.
 ## Estadística (`estadistica/`, 2026-08-20)
 
 Currículo de Edison: 239 temas en 20 secciones (I fundamentos → XX ML); diseño en
-`estadistica/docs/laboratorio-estadistica.md`. Estado 2026-09-05: 23 modelos (niveles 1-3),
-115 verificaciones en verde; la app interactiva es la del motor (`app.py`) y ya sirve a esta
+`estadistica/docs/laboratorio-estadistica.md`; mapa de temas (id, estado, temas de `curso.yml`) en
+`estadistica/temario.yml`, reconstruido el 2026-10-01: los números que ya citan los modelos son anclas,
+no se renumeran. Estado: 23 modelos (niveles 1-3), 115 verificaciones en verde; plan de cierre E0–E7 en
+`meta/diagnosticos/DIAGNOSTICO_SIMULADORES_2026-10.md`; la app interactiva es la del motor (`app.py`) y ya sirve a esta
 disciplina. DOS renderizadores, un modelo: matplotlib (app + reportes) y **Manim**
 (`estadistica/animaciones/`, «ver el método en movimiento»), que corre en un env conda APARTE
 (`manim-datafw`, Manim 0.20.1 sobre ffmpeg + TeX Live) porque `manimpango` no tiene wheel para
-py3.13; utilidades comunes en `_comun.py` (prohibido copiarlas). Siguiente: sección III.
+py3.13; utilidades comunes en `_comun.py` (prohibido copiarlas).
 
 ## Relación con el resto del ecosistema
 

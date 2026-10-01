@@ -19,9 +19,10 @@ simuladores/
 ├── graficos.py     Verificacion), cálculo y verificación (base); render
 ├── laboratorio.py  matplotlib con anti-solape y dibujo progresivo (graficos);
 ├── reporte.py      láminas de experimento (laboratorio); informe MD (reporte)
+├── fuentes.py      comprueba cada cita (calibre_id, hoja del PDF, pasaje) contra la edición
 │
 ├── macro/          ✅ Macroeconomía — 115 modelos, 12 niveles, 569 verificaciones
-├── estadistica/    🚧 Estadística — 239 temas en 20 secciones (+ animaciones Manim)
+├── estadistica/    🚧 Estadística — 23 de 244 temas (temario.yml) (+ animaciones Manim)
 └── …               econometría / micro / mate (futuras disciplinas hermanas)
 ```
 
@@ -36,7 +37,8 @@ Cada disciplina tiene su propio punto de entrada; su `main.py` añade la raíz a
 cd simuladores/macro   &&  python3 main.py            # abre el laboratorio macro
 cd simuladores/macro   &&  python3 main.py verificar  # control de calidad (100%)
 
-cd simuladores/estadistica  &&  python3 main.py       # (scaffolding en curso)
+cd simuladores/estadistica  &&  python3 main.py       # abre el laboratorio de estadística
+cd simuladores/estadistica  &&  python3 main.py fuentes  # citas comprobadas contra la edición
 ```
 
 ## Las capas de visualización (un modelo, tres vistas)
@@ -71,5 +73,8 @@ de la raíz. `salidas/` de cada disciplina es regenerable (en `.gitignore`).
 
 - Es un laboratorio pedagógico: los modelos reproducen teoremas y escenarios de manual, no series reales ni pronósticos;
   los datos vivos viven en `02 analysis`.
+- «Página verificada» significa que el pasaje citado está en esa hoja del PDF del `calibre_id`: lo comprueba
+  `fuentes.py` con el texto que da `core/py-common/biblioteca.py`. Sin la biblioteca en la máquina, la cita queda
+  «no comprobable», no verificada; y la página impresa solo se confirma si el PDF trae el folio en su texto.
 - Vive dentro de `10 Class` desde 2026-09-20 (venía de `02 analysis`): las rutas de los currículos de cada disciplina
   se citan desde su README, no desde aquí.

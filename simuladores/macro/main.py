@@ -136,7 +136,14 @@ def cmd_ficha(a):
         print("\nEXPERIMENTOS DISPONIBLES (experimento/simular --escenario <nombre>)")
         for e in m.escenarios:
             print(f"  {e.nombre:<22} {e.descripcion}")
-    print(f"\nPROCEDENCIA\n  {F.procedencia}")
+    print(f"\nPROCEDENCIA\n  {base.procedencia(F, getattr(config, 'PROCEDENCIA_POR_DEFECTO', ''))}")
+    if F.fuentes:
+        import fuentes
+        print("\nFUENTES")
+        for f in F.fuentes:
+            estado, detalle = fuentes.comprobar(f)
+            print(f"  - {fuentes.cita(f)}: {fuentes.referencia(f.calibre_id)}" + (f" — {f.afirma}" if f.afirma else ""))
+            print(f"      [{estado}] {detalle}")
     return 0
 
 

@@ -67,6 +67,12 @@ APP_PASO_COMPARACION = "Comparación de escenarios"
 
 USAR_TEX_COMPLETO = False
 
+# Procedencia: cada tema cita su fuente en Ficha.fuentes (base.Fuente: calibre_id, página impresa,
+# hoja del PDF y pasaje) y `main.py verificar` la comprueba contra la edición (fuentes.py).
+PROCEDENCIA_POR_DEFECTO = "sin procedencia declarada"
+# Con True, un tema sin fuentes verificadas hace fallar `verificar` (se activa al cerrar E2).
+EXIGIR_FUENTES = False
+
 
 def aplicar_estilo():
     """Identidad tipográfica del laboratorio (serif + mathtext STIX), global."""

@@ -16,6 +16,11 @@ if os.environ.get("WAYLAND_DISPLAY") and "QT_QPA_PLATFORM" not in os.environ:
     os.environ["QT_QPA_PLATFORM"] = "xcb"
 
 DIR_BASE = Path(__file__).resolve().parent
+
+# Procedencia de una ficha que no declara la suya (base.procedencia). Antes vivía en base.py y la
+# heredaban las demás disciplinas (DIAGNOSTICO_SIMULADORES_2026-10, S1).
+PROCEDENCIA_POR_DEFECTO = ("conocimiento macroeconómico general (manuales estándar de macro intermedia); "
+                           "NO verificado contra edición específica")
 DIR_MODELOS = DIR_BASE / "modelos"
 DIR_SALIDAS = DIR_BASE / "salidas"   # reportes MD + figuras generadas (regenerable, no se versiona)
 

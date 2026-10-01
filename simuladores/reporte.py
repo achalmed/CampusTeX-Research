@@ -130,7 +130,15 @@ def render(modelo, dir_salidas=None):
                       ("", "verificación", "detalle")), ""]
 
     if F:
-        md += ["---", "", f"**Procedencia:** {F.procedencia}", ""]
+        md += ["---", "", f"**Procedencia:** "
+               f"{base.procedencia(F, getattr(config, 'PROCEDENCIA_POR_DEFECTO', ''))}", ""]
+        if F.fuentes:
+            import fuentes
+            md += ["**Fuentes:**", ""]
+            for f in F.fuentes:
+                estado, _ = fuentes.comprobar(f)
+                md.append(f"- {fuentes.cita(f)}: {fuentes.referencia(f.calibre_id)}" + (f" — {f.afirma}" if f.afirma else "") + f" [{estado}]")
+            md.append("")
         if F.referencias:
             md += ["**Referencias:**", ""] + [f"- {r}" for r in F.referencias] + [""]
     if modelo.notas:

@@ -64,8 +64,23 @@ class Ficha:
     pregunta: str = ""               # la PREGUNTA ECONÓMICA que el modelo investiga
     variables: list = field(default_factory=list)      # [(símbolo, descripción endóg./exóg.)]
     derivacion: list = field(default_factory=list)     # pasos LaTeX de la derivación del equilibrio
-    procedencia: str = "conocimiento macroeconómico general (manuales estándar de macro intermedia); NO verificado contra edición específica"
-    referencias: list = field(default_factory=list)
+    procedencia: str = ""            # vacío = la de la disciplina (config.PROCEDENCIA_POR_DEFECTO)
+    referencias: list = field(default_factory=list)    # list[str] — menciones libres (heredado de macro)
+    fuentes: list = field(default_factory=list)        # list[Fuente] — citas verificables (fuentes.py)
+
+
+@dataclass
+class Fuente:
+    """Cita verificable: el libro por su calibre_id y la página donde lo dice.
+
+    `pagina` es la impresa (la que se cita en APA); `pagina_pdf` es la del archivo (1 = primera hoja
+    del PDF), y `pasaje` un fragmento literal breve de esa hoja. `fuentes.py` comprueba que el pasaje
+    esté en esa hoja: la cita deja de ser una afirmación y pasa a ser una aserción, como un teorema."""
+    calibre_id: int
+    pagina: str                      # página impresa: "214" o "214-216"
+    pagina_pdf: int                  # hoja del PDF donde está el pasaje
+    pasaje: str                      # fragmento literal (≤ 15 palabras) que prueba la cita
+    afirma: str = ""                 # qué respalda en el modelo ("definición de mediana", "Bessel")
 
 
 @dataclass
@@ -204,6 +219,11 @@ def _verificar_coherencia(modelo):
                        "como Parametro (dict_params no lo incluye)")
     except Exception as exc:
         return False, f"el cálculo base falla: {exc}"
+
+
+def procedencia(ficha, por_defecto=""):
+    """Procedencia declarada de la ficha o, si no la trae, la de su disciplina."""
+    return (ficha.procedencia if ficha else "") or por_defecto
 
 
 def verificar(modelo):

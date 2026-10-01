@@ -60,7 +60,7 @@ Cada disciplina reusa el motor de la raíz: su `main.py` añade la raíz al
 
 | Renderizador | Rol | Motor |
 |---|---|---|
-| **matplotlib** | app interactiva (sliders) + figuras de reporte | `simuladores/graficos.py` |
+| **matplotlib** | app interactiva (sliders) + figuras de reporte | `10 Class/simuladores/graficos.py` |
 | **Manim** | animaciones de "ver el método en movimiento" | `estadistica/animaciones/` (env conda aparte) |
 
 Un mismo tema puede tener figura estática (reporte), exploración interactiva
@@ -97,6 +97,16 @@ Reglas heredadas del macro-lab: procedencia declarada (sin citas de página no
 verificadas); `python3 main.py verificar` al 100% y fila en la matriz de
 trazabilidad antes de dar un modelo por bueno; `salidas/` regenerable.
 
+**La cita es una aserción (E0, 2026-10-01).** Cada tema declara en `Ficha.fuentes` una o
+más `base.Fuente(calibre_id, pagina, pagina_pdf, pasaje, afirma)`: el libro por su id de
+Calibre, la página impresa que se cita, la hoja del PDF y un pasaje literal breve (≤ 15
+palabras) de esa hoja. `10 Class/simuladores/fuentes.py` pide el texto de la hoja al resolutor
+(`core/py-common/biblioteca.py`) y comprueba que el pasaje esté ahí y que el folio impreso
+se vea en cabecera o pie (si no se ve, es aviso). `python3 main.py fuentes [<tema>]` lo
+detalla; `verificar` cuenta los temas con fuentes verificadas y, con
+`config.EXIGIR_FUENTES = True`, falla si alguno no las tiene. La referencia APA la da la ficha
+de Calibre: si está mal, se corrige en Calibre, no en el modelo.
+
 ## 3. Datos reales (política actualizada 2026-08-20)
 
 Edison **levantó la política solo-ejemplos** (regla 0): se descargan datos reales
@@ -109,7 +119,12 @@ repos públicos).
 
 ## 4. El currículo — 239 temas en 20 secciones
 
-(Lista completa en la conversación de diseño; mapa de secciones aquí.)
+La lista tema a tema vive en **`temario.yml`** (id, título, estado y temas de `curso.yml` que
+cubre). La original no se versionó; se reconstruyó el 2026-10-01 respetando como **anclas** los
+números que los modelos ya citan («la independencia (e41)», «la t de Student (e62)», «Monte
+Carlo (e176)»…): `estado: anclado`. Los temas e240–e244 (números índice, deflactación, tasas de
+crecimiento, Lorenz, Gini) cubren lo que pide `estadistica-para-economistas` y viven en la
+sección II.
 
 | # | Sección | Temas | Simulación insignia |
 |---|---|---|---|
@@ -188,5 +203,11 @@ duplicará `pipeline/` (hará fichas sobre los métodos ya implementados allí).
 - **Sección III iniciada (probabilidad):** e34 experimentos aleatorios (la
   frecuencia relativa converge a la probabilidad; azar individual → orden
   colectivo; falacia del jugador). **19 modelos, 95 verificaciones, 100%.**
-- **Siguiente:** completar la sección III (e35 espacio muestral … e48 función de
-  distribución) y animaciones Manim por tema. Sección por sección.
+- **Sección III, primera parte:** e35 espacio muestral, e36 eventos, e37 probabilidad
+  clásica, e38 probabilidad frecuentista (Monte Carlo). **23 modelos, 115 verificaciones, 100%.**
+- **E0–E1 (2026-10-01): rigor verificable.** `Ficha.fuentes` y `fuentes.py` (la cita se
+  comprueba contra la hoja del PDF); procedencia por defecto propia de la disciplina (antes
+  heredaba el texto de macro); `temario.yml` con 244 temas. Plan de cierre E2–E7 en
+  `meta/diagnosticos/DIAGNOSTICO_SIMULADORES_2026-10.md`.
+- **Siguiente (E2):** fuentes verificadas de los 23 temas, matriz de trazabilidad y enlaces de
+  `curso.yml`; luego secciones I y III a XI.

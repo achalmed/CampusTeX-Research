@@ -134,7 +134,14 @@ def cmd_ficha(a):
         print("\nEXPERIMENTOS (simular/experimento --escenario <nombre>)")
         for e in m.escenarios:
             print(f"  {e.nombre:<22} {e.descripcion}")
-    print(f"\nPROCEDENCIA\n  {F.procedencia}")
+    print(f"\nPROCEDENCIA\n  {base.procedencia(F, getattr(config, 'PROCEDENCIA_POR_DEFECTO', ''))}")
+    if F.fuentes:
+        import fuentes
+        print("\nFUENTES")
+        for f in F.fuentes:
+            estado, detalle = fuentes.comprobar(f)
+            print(f"  - {fuentes.cita(f)}: {fuentes.referencia(f.calibre_id)}" + (f" — {f.afirma}" if f.afirma else ""))
+            print(f"      [{estado}] {detalle}")
     return 0
 
 
@@ -218,7 +225,27 @@ def cmd_verificar(a):
             print(f"  {'✔' if ok else '✘'} {m.id or m.nombre:<5} {nombre}: {detalle}")
     print(f"\n{total - fallos}/{total} verificaciones superadas"
           + (f" — {fallos} FALLARON" if fallos else ""))
-    return 1 if fallos else 0
+    import fuentes
+    buenos, malos = fuentes.resumen(fuentes.auditar(modelos))
+    exigir = getattr(config, "EXIGIR_FUENTES", False)
+    print(f"{len(buenos)}/{len(buenos) + len(malos)} temas con fuentes verificadas contra la edición"
+          + ("" if not malos else f" — faltan: {', '.join(malos)}"
+             + ("" if exigir else " (aún no se exige; detalle: main.py fuentes)")))
+    return 1 if fallos or (exigir and malos) else 0
+
+
+def cmd_fuentes(a):
+    """Cada cita de cada tema, comprobada contra la hoja del PDF de la edición (fuentes.py)."""
+    import fuentes
+    modelos = [_cargar(a.modelo)] if a.modelo else _todos()
+    filas = fuentes.auditar(modelos)
+    for m, f, estado, detalle in filas:
+        marca = {"verificada": "✔", "aviso": "~"}.get(estado, "✘")
+        quien = f"calibre {f.calibre_id} p. {f.pagina}" if f else "—"
+        print(f"  {marca} {m.id:<5} {quien:<22} {estado}: {detalle}")
+    buenos, malos = fuentes.resumen(filas)
+    print(f"\n{len(buenos)}/{len(buenos) + len(malos)} temas con fuentes verificadas")
+    return 1 if malos else 0
 
 
 def cmd_app(_a=None):
@@ -235,6 +262,8 @@ def main():
     sub = ap.add_subparsers(dest="comando", required=True)
     sub.add_parser("app", help="abrir el laboratorio interactivo")
     sub.add_parser("listar", help="temas implementados por sección")
+    pfu = sub.add_parser("fuentes", help="comprobar las citas contra la edición (calibre_id, hoja, pasaje)")
+    pfu.add_argument("modelo", nargs="?")
     pf = sub.add_parser("ficha", help="ficha pedagógica de un tema")
     pf.add_argument("modelo")
     ps = sub.add_parser("simular", help="resultados / experimento directo")
@@ -260,7 +289,7 @@ def main():
     sys.exit({"app": cmd_app, "listar": cmd_listar, "ficha": cmd_ficha,
               "simular": cmd_simular, "comparar": cmd_comparar,
               "sensibilidad": cmd_sensibilidad, "reporte": cmd_reporte,
-              "verificar": cmd_verificar}[a.comando](a))
+              "verificar": cmd_verificar, "fuentes": cmd_fuentes}[a.comando](a))
 
 
 if __name__ == "__main__":

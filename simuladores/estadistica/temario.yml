@@ -1,0 +1,312 @@
+# estadistica/temario.yml — mapa de los temas del laboratorio de estadística: id, título, estado y temas de curso.yml que cubre.
+# Reconstruido el 2026-10-01 (E1, meta/diagnosticos/DIAGNOSTICO_SIMULADORES_2026-10.md): la lista original de 239 temas no se
+# versionó. estado: hecho = hay modelo · anclado = un modelo ya escrito cita ese número con ese significado (ancla) ·
+# propuesto = reconstrucción por aprobar. Los temas e240+ cubren lo que pide estadistica-para-economistas (S7).
+# El currículo de un curso sigue en su curso.yml; aquí solo se dice qué tema del curso ilustra cada modelo.
+tipo: temario_laboratorio
+disciplina: estadistica
+secciones:
+  - nivel: 1
+    nombre: "I · Fundamentos: datos y medición"
+    temas:
+      - {id: e01, titulo: "¿Qué es la estadística? Descriptiva, inferencial y su lugar en la economía", estado: propuesto, cursos: [{curso: estadistica, tema: '1.1'}, {curso: estadistica, tema: '1.2'}, {curso: estadistica-para-economistas, tema: '1.1'}, {curso: estadistica-para-economistas, tema: '1.5'}]}
+      - {id: e02, titulo: "Población y muestra", estado: hecho, modelo: e02_poblacion_muestra, cursos: [{curso: estadistica, tema: '1.3'}]}
+      - {id: e03, titulo: "Unidad de observación, variable y dato", estado: propuesto}
+      - {id: e04, titulo: "Tipos de variables: cualitativas y cuantitativas, discretas y continuas", estado: propuesto, cursos: [{curso: estadistica, tema: '1.4'}]}
+      - {id: e05, titulo: "Escalas de medición: nominal, ordinal, de intervalo y de razón", estado: propuesto, cursos: [{curso: estadistica, tema: '1.5'}]}
+      - {id: e06, titulo: "Estadística descriptiva e inferencial", estado: propuesto, cursos: [{curso: estadistica, tema: '1.6'}]}
+      - {id: e07, titulo: "Parámetro y estadístico", estado: propuesto}
+      - {id: e08, titulo: "Fuentes de datos: censos, encuestas y registros administrativos", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '1.3'}]}
+      - {id: e09, titulo: "Tipos de datos: corte transversal, series de tiempo y panel", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '1.2'}, {curso: estadistica-para-economistas, tema: '1.4'}]}
+      - {id: e10, titulo: "Datos observacionales y experimentales", estado: propuesto}
+      - {id: e11, titulo: "Error de medición: validez y confiabilidad", estado: propuesto}
+      - {id: e12, titulo: "Distribución de frecuencias", estado: propuesto, cursos: [{curso: estadistica, tema: '2.1'}]}
+      - {id: e13, titulo: "Tablas de frecuencia: absoluta, relativa y acumulada", estado: propuesto, cursos: [{curso: estadistica, tema: '2.2'}]}
+      - {id: e14, titulo: "Histograma y polígono de frecuencias (ancho de clase, Sturges)", estado: propuesto, cursos: [{curso: estadistica, tema: '2.3'}]}
+      - {id: e15, titulo: "Gráficos estadísticos: barras, sectores, caja y dispersión", estado: propuesto, cursos: [{curso: estadistica, tema: '2.4'}]}
+      - {id: e16, titulo: "Datos agrupados y no agrupados", estado: propuesto}
+  - nivel: 2
+    nombre: "II · Estadística descriptiva"
+    temas:
+      - {id: e17, titulo: "Media aritmética", estado: hecho, modelo: e17_media_aritmetica, cursos: [{curso: estadistica, tema: '2.5'}, {curso: estadistica, tema: '2.6'}, {curso: estadistica-para-economistas, tema: '2.1'}]}
+      - {id: e18, titulo: "Mediana", estado: hecho, modelo: e18_mediana, cursos: [{curso: estadistica, tema: '2.7'}]}
+      - {id: e19, titulo: "Moda", estado: hecho, modelo: e19_moda, cursos: [{curso: estadistica, tema: '2.8'}]}
+      - {id: e20, titulo: "Media ponderada", estado: hecho, modelo: e20_media_ponderada}
+      - {id: e21, titulo: "Media geométrica", estado: hecho, modelo: e21_media_geometrica}
+      - {id: e22, titulo: "Media armónica", estado: hecho, modelo: e22_media_armonica}
+      - {id: e23, titulo: "Cuartiles", estado: hecho, modelo: e23_cuartiles, cursos: [{curso: estadistica, tema: '2.13'}]}
+      - {id: e24, titulo: "Percentiles", estado: hecho, modelo: e24_percentiles, cursos: [{curso: estadistica, tema: '2.13'}]}
+      - {id: e25, titulo: "Deciles", estado: hecho, modelo: e25_deciles, cursos: [{curso: estadistica-para-economistas, tema: '2.6'}]}
+      - {id: e26, titulo: "Rango", estado: hecho, modelo: e26_rango, cursos: [{curso: estadistica, tema: '2.9'}]}
+      - {id: e27, titulo: "Varianza", estado: hecho, modelo: e27_varianza, cursos: [{curso: estadistica, tema: '2.10'}]}
+      - {id: e28, titulo: "Desviación estándar", estado: hecho, modelo: e28_desviacion_estandar, cursos: [{curso: estadistica, tema: '2.11'}, {curso: estadistica-para-economistas, tema: '2.1'}]}
+      - {id: e29, titulo: "Coeficiente de variación", estado: hecho, modelo: e29_coeficiente_variacion, cursos: [{curso: estadistica, tema: '2.12'}]}
+      - {id: e30, titulo: "Asimetría", estado: hecho, modelo: e30_asimetria, cursos: [{curso: estadistica, tema: '2.14'}]}
+      - {id: e31, titulo: "Curtosis", estado: hecho, modelo: e31_curtosis, cursos: [{curso: estadistica, tema: '2.14'}]}
+      - {id: e32, titulo: "Medidas robustas", estado: hecho, modelo: e32_robustez}
+      - {id: e33, titulo: "Detección de atípicos", estado: hecho, modelo: e33_deteccion_atipicos}
+      - {id: e240, titulo: "Números índice: Laspeyres, Paasche y Fisher", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '2.2'}, {curso: estadistica-para-economistas, tema: '2.3'}]}
+      - {id: e241, titulo: "Deflactación y valores reales", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '2.5'}]}
+      - {id: e242, titulo: "Tasas de crecimiento: simple, compuesta y logarítmica", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '2.4'}]}
+      - {id: e243, titulo: "Curva de Lorenz", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '2.7'}]}
+      - {id: e244, titulo: "Coeficiente de Gini y otras medidas de desigualdad", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '2.6'}, {curso: estadistica-para-economistas, tema: '2.8'}]}
+  - nivel: 3
+    nombre: "III · Probabilidad"
+    temas:
+      - {id: e34, titulo: "Experimentos aleatorios", estado: hecho, modelo: e34_experimentos_aleatorios, cursos: [{curso: estadistica, tema: '3.1'}]}
+      - {id: e35, titulo: "Espacio muestral", estado: hecho, modelo: e35_espacio_muestral, cursos: [{curso: estadistica, tema: '3.2'}]}
+      - {id: e36, titulo: "Eventos", estado: hecho, modelo: e36_eventos, cursos: [{curso: estadistica, tema: '3.2'}]}
+      - {id: e37, titulo: "Probabilidad clásica", estado: hecho, modelo: e37_probabilidad_clasica, cursos: [{curso: estadistica, tema: '3.1'}, {curso: estadistica-para-economistas, tema: '3.1'}]}
+      - {id: e38, titulo: "Probabilidad frecuentista", estado: hecho, modelo: e38_probabilidad_frecuentista, cursos: [{curso: estadistica, tema: '3.1'}]}
+      - {id: e39, titulo: "Probabilidad condicional", estado: anclado, ancla: "e34, e36", cursos: [{curso: estadistica, tema: '3.4'}]}
+      - {id: e40, titulo: "Axiomas de Kolmogórov y reglas de la probabilidad (complemento, suma, producto)", estado: propuesto, cursos: [{curso: estadistica, tema: '3.3'}]}
+      - {id: e41, titulo: "Independencia", estado: anclado, ancla: "e34, e36, e37", cursos: [{curso: estadistica, tema: '3.6'}]}
+      - {id: e42, titulo: "Técnicas de conteo: permutaciones y combinaciones", estado: propuesto, cursos: [{curso: estadistica, tema: '3.7'}]}
+      - {id: e43, titulo: "Probabilidad total", estado: anclado, ancla: "e20"}
+      - {id: e44, titulo: "Teorema de Bayes", estado: propuesto, cursos: [{curso: estadistica, tema: '3.5'}]}
+      - {id: e45, titulo: "Variable aleatoria", estado: propuesto, cursos: [{curso: estadistica, tema: '4.1'}, {curso: estadistica-para-economistas, tema: '3.2'}]}
+      - {id: e46, titulo: "Variable aleatoria discreta y función de probabilidad", estado: propuesto, cursos: [{curso: estadistica, tema: '4.2'}]}
+      - {id: e47, titulo: "Variable aleatoria continua y función de densidad", estado: anclado, ancla: "e35, e36", cursos: [{curso: estadistica, tema: '4.3'}]}
+      - {id: e48, titulo: "Función de distribución acumulada", estado: anclado, ancla: "docs §5"}
+  - nivel: 4
+    nombre: "IV · Distribuciones de probabilidad"
+    temas:
+      - {id: e49, titulo: "Esperanza y varianza de una variable aleatoria", estado: propuesto, cursos: [{curso: estadistica, tema: '4.4'}, {curso: estadistica, tema: '4.5'}, {curso: estadistica-para-economistas, tema: '3.3'}]}
+      - {id: e50, titulo: "Bernoulli y binomial", estado: anclado, ancla: "e37", cursos: [{curso: estadistica, tema: '5.1'}]}
+      - {id: e51, titulo: "Geométrica y binomial negativa", estado: propuesto}
+      - {id: e52, titulo: "Hipergeométrica", estado: propuesto}
+      - {id: e53, titulo: "Poisson", estado: propuesto, cursos: [{curso: estadistica, tema: '5.2'}]}
+      - {id: e54, titulo: "Uniforme continua", estado: propuesto}
+      - {id: e55, titulo: "Exponencial", estado: propuesto}
+      - {id: e56, titulo: "Gamma y beta", estado: propuesto}
+      - {id: e57, titulo: "Distribuciones conjuntas, marginales y covarianza", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '3.4'}, {curso: estadistica-para-economistas, tema: '3.5'}]}
+      - {id: e58, titulo: "Normal", estado: anclado, ancla: "e28, e30", cursos: [{curso: estadistica, tema: '5.3'}, {curso: estadistica-para-economistas, tema: '4.1'}]}
+      - {id: e59, titulo: "Lognormal", estado: anclado, ancla: "e21, e30"}
+      - {id: e60, titulo: "Normal estándar y tipificación", estado: propuesto, cursos: [{curso: estadistica, tema: '5.4'}]}
+      - {id: e61, titulo: "Chi-cuadrado", estado: propuesto, cursos: [{curso: estadistica, tema: '5.6'}]}
+      - {id: e62, titulo: "t de Student", estado: anclado, ancla: "e28, e02", cursos: [{curso: estadistica, tema: '5.5'}]}
+      - {id: e63, titulo: "F de Snedecor", estado: propuesto, cursos: [{curso: estadistica, tema: '5.7'}]}
+  - nivel: 5
+    nombre: "V · Teoremas fundamentales"
+    temas:
+      - {id: e64, titulo: "Ley de los grandes números", estado: anclado, ancla: "e02, e17, e34"}
+      - {id: e65, titulo: "Desigualdades de Markov y Chebyshev", estado: propuesto}
+      - {id: e66, titulo: "Convergencia en probabilidad y en distribución", estado: propuesto}
+      - {id: e67, titulo: "Teorema central del límite", estado: anclado, ancla: "animaciones/e67_tcl.py", cursos: [{curso: estadistica, tema: '6.3'}, {curso: estadistica-para-economistas, tema: '4.3'}]}
+      - {id: e68, titulo: "Falacia del jugador y regresión a la media", estado: anclado, ancla: "e34"}
+      - {id: e69, titulo: "Aproximación normal a la binomial (corrección por continuidad)", estado: propuesto}
+      - {id: e70, titulo: "Aproximación de Poisson a la binomial", estado: propuesto}
+      - {id: e71, titulo: "Método delta", estado: propuesto}
+  - nivel: 6
+    nombre: "VI · Muestreo"
+    temas:
+      - {id: e72, titulo: "Marco muestral y diseño muestral", estado: propuesto, cursos: [{curso: estadistica, tema: '6.1'}]}
+      - {id: e73, titulo: "Muestreo aleatorio simple", estado: propuesto, cursos: [{curso: estadistica, tema: '6.1'}]}
+      - {id: e74, titulo: "Muestreo sistemático", estado: propuesto}
+      - {id: e75, titulo: "Muestreo estratificado", estado: propuesto}
+      - {id: e76, titulo: "Muestreo por conglomerados", estado: propuesto}
+      - {id: e77, titulo: "Muestreo polietápico (el diseño de la ENAHO)", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '7.3'}]}
+      - {id: e78, titulo: "Factores de expansión", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '7.3'}]}
+      - {id: e79, titulo: "Sesgo de selección y no respuesta", estado: propuesto}
+      - {id: e80, titulo: "Error muestral y tamaño de muestra", estado: propuesto}
+      - {id: e81, titulo: "Efecto de diseño", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '7.3'}]}
+  - nivel: 7
+    nombre: "VII · Inferencia estadística"
+    temas:
+      - {id: e82, titulo: "Estimador y estimación puntual", estado: propuesto, cursos: [{curso: estadistica, tema: '6.4'}, {curso: estadistica-para-economistas, tema: '5.1'}]}
+      - {id: e83, titulo: "Distribución muestral de la media", estado: propuesto, cursos: [{curso: estadistica, tema: '6.2'}, {curso: estadistica-para-economistas, tema: '4.2'}]}
+      - {id: e84, titulo: "Distribución muestral de la proporción", estado: propuesto}
+      - {id: e85, titulo: "Distribución muestral de la varianza", estado: propuesto}
+      - {id: e86, titulo: "Insesgadez", estado: anclado, ancla: "e27", cursos: [{curso: estadistica, tema: '6.4'}]}
+      - {id: e87, titulo: "Eficiencia y error cuadrático medio", estado: propuesto}
+      - {id: e88, titulo: "Consistencia", estado: propuesto}
+      - {id: e89, titulo: "Error estándar", estado: anclado, ancla: "e02, e28"}
+      - {id: e90, titulo: "Método de los momentos", estado: propuesto}
+      - {id: e91, titulo: "Lógica del intervalo de confianza: qué cubre y qué no", estado: propuesto, cursos: [{curso: estadistica, tema: '6.5'}]}
+      - {id: e92, titulo: "Intervalo de confianza para la media", estado: anclado, ancla: "e02", cursos: [{curso: estadistica, tema: '6.5'}, {curso: estadistica-para-economistas, tema: '5.2'}]}
+      - {id: e93, titulo: "Intervalo de confianza para la proporción", estado: propuesto}
+      - {id: e94, titulo: "Intervalo de confianza para la varianza", estado: propuesto}
+      - {id: e95, titulo: "Intervalo para la diferencia de medias", estado: propuesto}
+      - {id: e96, titulo: "Tamaño de muestra para estimar", estado: propuesto}
+  - nivel: 8
+    nombre: "VIII · Pruebas de hipótesis"
+    temas:
+      - {id: e97, titulo: "Hipótesis nula y alternativa", estado: propuesto, cursos: [{curso: estadistica, tema: '6.6'}, {curso: estadistica-para-economistas, tema: '5.3'}]}
+      - {id: e98, titulo: "Estadístico de prueba y región crítica", estado: propuesto}
+      - {id: e99, titulo: "Errores tipo I y II", estado: propuesto, cursos: [{curso: estadistica, tema: '6.7'}]}
+      - {id: e100, titulo: "Potencia de una prueba", estado: propuesto}
+      - {id: e101, titulo: "Nivel de significancia y valor-p", estado: anclado, ancla: "e28"}
+      - {id: e102, titulo: "Qué es (y qué no es) un valor-p", estado: propuesto}
+      - {id: e103, titulo: "Pruebas múltiples y p-hacking", estado: anclado, ancla: "e34"}
+      - {id: e104, titulo: "Dualidad entre prueba e intervalo", estado: propuesto}
+      - {id: e105, titulo: "Potencia y tamaño de muestra", estado: propuesto}
+      - {id: e106, titulo: "Prueba z para la media", estado: propuesto}
+      - {id: e107, titulo: "Prueba t para una muestra", estado: propuesto, cursos: [{curso: estadistica, tema: '6.8'}, {curso: estadistica-para-economistas, tema: '5.4'}]}
+      - {id: e108, titulo: "Prueba para una proporción", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '5.4'}]}
+      - {id: e109, titulo: "Prueba t para dos muestras independientes (Welch)", estado: propuesto, cursos: [{curso: estadistica, tema: '6.8'}]}
+      - {id: e110, titulo: "Prueba t pareada", estado: propuesto}
+      - {id: e111, titulo: "Prueba F de razón de varianzas", estado: propuesto}
+      - {id: e112, titulo: "ANOVA de un factor", estado: propuesto, cursos: [{curso: estadistica, tema: '6.10'}]}
+  - nivel: 9
+    nombre: "IX · Pruebas no paramétricas"
+    temas:
+      - {id: e113, titulo: "Chi-cuadrado de bondad de ajuste", estado: propuesto, cursos: [{curso: estadistica, tema: '6.9'}]}
+      - {id: e114, titulo: "Chi-cuadrado de independencia (tablas de contingencia)", estado: propuesto, cursos: [{curso: estadistica, tema: '6.9'}]}
+      - {id: e115, titulo: "Prueba de los signos", estado: propuesto}
+      - {id: e116, titulo: "Wilcoxon de rangos con signo", estado: anclado, ancla: "e18"}
+      - {id: e117, titulo: "Mann-Whitney", estado: anclado, ancla: "e18"}
+      - {id: e118, titulo: "Kruskal-Wallis", estado: anclado, ancla: "e18"}
+      - {id: e119, titulo: "Friedman", estado: anclado, ancla: "e18"}
+      - {id: e120, titulo: "Gráfico cuantil-cuantil", estado: anclado, ancla: "e30"}
+      - {id: e121, titulo: "Kolmogórov-Smirnov y Lilliefors", estado: anclado, ancla: "e30"}
+      - {id: e122, titulo: "Shapiro-Wilk", estado: anclado, ancla: "e30, e31"}
+  - nivel: 10
+    nombre: "X · Correlación y asociación"
+    temas:
+      - {id: e123, titulo: "Diagrama de dispersión", estado: propuesto, cursos: [{curso: estadistica, tema: '7.4'}]}
+      - {id: e124, titulo: "Covarianza muestral", estado: propuesto}
+      - {id: e125, titulo: "Correlación de Pearson", estado: propuesto, cursos: [{curso: estadistica, tema: '7.1'}, {curso: estadistica, tema: '7.2'}, {curso: estadistica-para-economistas, tema: '6.1'}]}
+      - {id: e126, titulo: "Correlación de rangos: Spearman y Kendall", estado: propuesto}
+      - {id: e127, titulo: "Correlación parcial", estado: propuesto}
+      - {id: e128, titulo: "Asociación entre cualitativas: phi y V de Cramér", estado: propuesto}
+      - {id: e129, titulo: "Correlación espuria y confusión", estado: propuesto}
+      - {id: e130, titulo: "Correlación no es causalidad", estado: propuesto}
+  - nivel: 11
+    nombre: "XI · Regresión estadística"
+    temas:
+      - {id: e131, titulo: "Mínimos cuadrados: derivación de la recta", estado: anclado, ancla: "e17", cursos: [{curso: estadistica, tema: '7.3'}, {curso: estadistica-para-economistas, tema: '6.2'}]}
+      - {id: e132, titulo: "Propiedades algebraicas y R²", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '6.5'}]}
+      - {id: e133, titulo: "Regresión múltiple en forma matricial", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '6.4'}]}
+      - {id: e134, titulo: "Supuestos del modelo lineal y teorema de Gauss-Markov", estado: propuesto}
+      - {id: e135, titulo: "Inferencia sobre los coeficientes (t)", estado: anclado, ancla: "e62 citado en e27"}
+      - {id: e136, titulo: "Prueba F de significancia conjunta", estado: propuesto}
+      - {id: e137, titulo: "Predicción e intervalo de predicción", estado: propuesto}
+      - {id: e138, titulo: "Ceteris paribus: el teorema de Frisch-Waugh-Lovell", estado: propuesto}
+      - {id: e139, titulo: "Variables dicotómicas", estado: propuesto}
+      - {id: e140, titulo: "Interacciones", estado: propuesto}
+      - {id: e141, titulo: "Términos polinómicos", estado: propuesto}
+      - {id: e142, titulo: "Transformación logarítmica y elasticidades", estado: anclado, ancla: "e21, e30", cursos: [{curso: estadistica-para-economistas, tema: '6.3'}]}
+      - {id: e143, titulo: "Selección de variables y sobreajuste", estado: propuesto}
+  - nivel: 12
+    nombre: "XII · Diagnóstico de modelos"
+    temas:
+      - {id: e144, titulo: "Análisis de residuos", estado: propuesto}
+      - {id: e145, titulo: "Heterocedasticidad y mínimos cuadrados ponderados", estado: anclado, ancla: "e20"}
+      - {id: e146, titulo: "Errores estándar robustos", estado: propuesto}
+      - {id: e147, titulo: "Autocorrelación de los errores", estado: propuesto}
+      - {id: e148, titulo: "Regresión robusta", estado: anclado, ancla: "e32"}
+      - {id: e149, titulo: "Residuos estudentizados", estado: propuesto}
+      - {id: e150, titulo: "Apalancamiento", estado: anclado, ancla: "e33"}
+      - {id: e151, titulo: "Distancia de Cook", estado: anclado, ancla: "e32, e33"}
+      - {id: e152, titulo: "Multicolinealidad y VIF", estado: propuesto}
+  - nivel: 13
+    nombre: "XIII · Máxima verosimilitud"
+    temas:
+      - {id: e153, titulo: "Función de verosimilitud", estado: propuesto}
+      - {id: e154, titulo: "Log-verosimilitud y función score", estado: propuesto}
+      - {id: e155, titulo: "Estimadores de máxima verosimilitud (normal, binomial, Poisson)", estado: propuesto}
+      - {id: e156, titulo: "Información de Fisher y cota de Cramér-Rao", estado: propuesto}
+      - {id: e157, titulo: "Propiedades asintóticas del EMV", estado: propuesto}
+      - {id: e158, titulo: "Pruebas de razón de verosimilitudes, Wald y multiplicador de Lagrange", estado: propuesto}
+      - {id: e159, titulo: "Logit y probit", estado: propuesto}
+      - {id: e160, titulo: "Criterios de información: AIC y BIC", estado: propuesto}
+  - nivel: 14
+    nombre: "XIV · Métodos bayesianos"
+    temas:
+      - {id: e161, titulo: "Probabilidad subjetiva y enfoque bayesiano", estado: anclado, ancla: "e37, e38"}
+      - {id: e162, titulo: "Priori × verosimilitud → posteriori", estado: propuesto}
+      - {id: e163, titulo: "Beta-binomial", estado: propuesto}
+      - {id: e164, titulo: "Normal-normal", estado: propuesto}
+      - {id: e165, titulo: "Gamma-Poisson", estado: propuesto}
+      - {id: e166, titulo: "Prioris no informativas", estado: propuesto}
+      - {id: e167, titulo: "Intervalos de credibilidad", estado: propuesto}
+      - {id: e168, titulo: "Distribución predictiva posterior", estado: propuesto}
+      - {id: e169, titulo: "Factor de Bayes", estado: propuesto}
+      - {id: e170, titulo: "MCMC: Metropolis-Hastings", estado: anclado, ancla: "e38"}
+      - {id: e171, titulo: "Muestreo de Gibbs", estado: propuesto}
+      - {id: e172, titulo: "Regresión bayesiana", estado: propuesto}
+  - nivel: 15
+    nombre: "XV · Bootstrap y simulación"
+    temas:
+      - {id: e173, titulo: "Números pseudoaleatorios y semillas", estado: propuesto}
+      - {id: e174, titulo: "Bootstrap no paramétrico", estado: anclado, ancla: "e32"}
+      - {id: e175, titulo: "Intervalos bootstrap (percentil, BCa)", estado: propuesto}
+      - {id: e176, titulo: "Integración Monte Carlo", estado: anclado, ancla: "e37, e38"}
+      - {id: e177, titulo: "Método de la transformada inversa", estado: propuesto}
+      - {id: e178, titulo: "Aceptación-rechazo", estado: propuesto}
+      - {id: e179, titulo: "Pruebas de permutación", estado: propuesto}
+      - {id: e180, titulo: "Jackknife y validación cruzada", estado: propuesto}
+  - nivel: 16
+    nombre: "XVI · Multivariante"
+    temas:
+      - {id: e181, titulo: "Vectores aleatorios y matriz de covarianzas", estado: propuesto}
+      - {id: e182, titulo: "Normal multivariante", estado: propuesto}
+      - {id: e183, titulo: "Componentes principales", estado: propuesto}
+      - {id: e184, titulo: "Análisis factorial", estado: propuesto}
+      - {id: e185, titulo: "Análisis de correspondencias", estado: propuesto}
+      - {id: e186, titulo: "Clustering: k-medias", estado: anclado, ancla: "e19"}
+      - {id: e187, titulo: "Clustering jerárquico", estado: propuesto}
+      - {id: e188, titulo: "Distancia de Mahalanobis y atípicos multivariantes", estado: anclado, ancla: "e33"}
+      - {id: e189, titulo: "Análisis discriminante", estado: propuesto}
+      - {id: e190, titulo: "MANOVA", estado: propuesto}
+      - {id: e191, titulo: "Escalamiento multidimensional", estado: propuesto}
+      - {id: e192, titulo: "Correlación canónica", estado: propuesto}
+  - nivel: 17
+    nombre: "XVII · Series temporales"
+    temas:
+      - {id: e193, titulo: "Componentes de una serie", estado: propuesto, cursos: [{curso: estadistica-para-economistas, tema: '7.1'}]}
+      - {id: e194, titulo: "Medias móviles y suavizado exponencial", estado: propuesto}
+      - {id: e195, titulo: "Desestacionalización", estado: propuesto}
+      - {id: e196, titulo: "Estacionariedad", estado: propuesto}
+      - {id: e197, titulo: "Autocorrelación: ACF y PACF", estado: propuesto}
+      - {id: e198, titulo: "Ruido blanco y paseo aleatorio", estado: propuesto}
+      - {id: e199, titulo: "Procesos AR", estado: propuesto}
+      - {id: e200, titulo: "Procesos MA", estado: propuesto}
+      - {id: e201, titulo: "ARMA", estado: propuesto}
+      - {id: e202, titulo: "ARIMA y Box-Jenkins", estado: propuesto}
+      - {id: e203, titulo: "Raíz unitaria: Dickey-Fuller", estado: propuesto}
+      - {id: e204, titulo: "Pronóstico", estado: propuesto}
+      - {id: e205, titulo: "VAR", estado: propuesto}
+      - {id: e206, titulo: "Cointegración", estado: propuesto}
+      - {id: e207, titulo: "ARCH y GARCH", estado: propuesto}
+  - nivel: 18
+    nombre: "XVIII · Estadística espacial"
+    temas:
+      - {id: e208, titulo: "Datos espaciales y matriz de pesos", estado: propuesto}
+      - {id: e209, titulo: "I de Moran", estado: propuesto}
+      - {id: e210, titulo: "LISA: asociación espacial local", estado: propuesto}
+      - {id: e211, titulo: "C de Geary", estado: propuesto}
+      - {id: e212, titulo: "Regresión espacial: SAR y SEM", estado: propuesto}
+      - {id: e213, titulo: "Interpolación espacial y krigeado", estado: propuesto}
+  - nivel: 19
+    nombre: "XIX · Estadística causal"
+    temas:
+      - {id: e214, titulo: "Resultados potenciales", estado: propuesto}
+      - {id: e215, titulo: "Experimentos aleatorizados", estado: propuesto}
+      - {id: e216, titulo: "Grafos causales (DAG)", estado: propuesto}
+      - {id: e217, titulo: "Confusión y criterio de la puerta trasera", estado: propuesto}
+      - {id: e218, titulo: "Emparejamiento y puntaje de propensión", estado: propuesto}
+      - {id: e219, titulo: "Diferencias en diferencias", estado: propuesto}
+      - {id: e220, titulo: "Variables instrumentales", estado: propuesto}
+      - {id: e221, titulo: "Regresión discontinua", estado: propuesto}
+      - {id: e222, titulo: "Control sintético", estado: propuesto}
+      - {id: e223, titulo: "Panel con efectos fijos", estado: propuesto}
+      - {id: e224, titulo: "Paradoja de Simpson", estado: propuesto}
+  - nivel: 20
+    nombre: "XX · Computacional y ML"
+    temas:
+      - {id: e225, titulo: "Aprendizaje supervisado y no supervisado", estado: propuesto}
+      - {id: e226, titulo: "Compromiso sesgo-varianza", estado: propuesto}
+      - {id: e227, titulo: "Preprocesamiento: escalado y codificación", estado: anclado, ancla: "e28"}
+      - {id: e228, titulo: "Validación cruzada y sobreajuste", estado: propuesto}
+      - {id: e229, titulo: "Ridge", estado: propuesto}
+      - {id: e230, titulo: "Lasso y red elástica", estado: propuesto}
+      - {id: e231, titulo: "k vecinos más cercanos", estado: propuesto}
+      - {id: e232, titulo: "Regresión logística como clasificador", estado: propuesto}
+      - {id: e233, titulo: "Árboles de decisión", estado: propuesto}
+      - {id: e234, titulo: "Bosques aleatorios", estado: propuesto}
+      - {id: e235, titulo: "Boosting", estado: propuesto}
+      - {id: e236, titulo: "Métricas de clasificación: precisión, exhaustividad y F1", estado: anclado, ancla: "e22"}
+      - {id: e237, titulo: "Curva ROC y AUC", estado: propuesto}
+      - {id: e238, titulo: "Máquinas de vectores de soporte", estado: propuesto}
+      - {id: e239, titulo: "Redes neuronales", estado: propuesto}
