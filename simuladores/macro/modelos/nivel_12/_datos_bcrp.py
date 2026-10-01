@@ -62,7 +62,9 @@ def _lector_unico():
 
 def _archivos(codigo):
     """Versiones del JSON de una serie en el acervo (cualquier categoría), ordenadas."""
-    return sorted(glob.glob(str(_RAIZ_RAW / "*" / f"{codigo}_v*.json")))
+    # nombre fijo `<CÓDIGO>_<descripción>_<unidad>_<frecuencia>.json` desde el 2026-09-30 (02 analysis §7.53); el patrón
+    # cubre también la forma vieja `<CÓDIGO>_v003_….json`. Con `_v*` esto devolvía [] y hay_datos_mensuales() decía False
+    return sorted(glob.glob(str(_RAIZ_RAW / "*" / f"{codigo}_*.json")))
 
 _MES = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6,
         "Jul": 7, "Ago": 8, "Set": 9, "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12}
