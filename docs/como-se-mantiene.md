@@ -50,12 +50,12 @@ Orden obligatorio, de la regla al código y del código a las vistas:
 4. **Actualizar los scaffolds y las plantillas** (`scaffolds/`, `templates/`) y los scripts `new-*`.
 5. **Regenerar las vistas** (§2) y correr `./scripts/validate.sh --todos`.
 6. **Actualizar los punteros**, nunca copias: `README.md`, `CLAUDE.md`, `docencia/README.md`,
-   `prompts/05 docencia/`, `prompts/ECOSISTEMA_APRENDIZAJE.md` y `meta/workspace.yml` (`verdad:`).
+   `prompts/05 docencia/`, `prompts/docs/dominios/aprendizaje.md` y `meta/workspace.yml` (`verdad:`).
 7. **Anotar el cambio** en `CHANGELOG.md`; si fue una decisión con alternativas descartadas, también en
    la bitácora de la fase (`meta/reparaciones/<fase>/`).
 
 Si el cambio afecta a los apuntes de estudio, pasa además por la checklist de propagación de
-`prompts/ECOSISTEMA_APRENDIZAJE.md`.
+`prompts/docs/dominios/aprendizaje.md`.
 
 ## 4. Cuándo cambia la plataforma editorial
 

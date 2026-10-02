@@ -106,7 +106,7 @@ bash -n scripts/<archivo>.sh                    # un archivo por invocación
 | Datos de estudiantes: qué se puede y qué no | `registro/CLAUDE.md` |
 | El ciclo de trabajo del ecosistema | `prompts/00 metodo/CICLO.md` |
 | La taxonomía documental (docencia = tipo 22) | `prompts/00 metodo/ARQUITECTURA_DOCUMENTAL.md` |
-| El contrato con los apuntes de estudio y la web | `prompts/ECOSISTEMA_APRENDIZAJE.md` |
+| El contrato con los apuntes de estudio y la web | `prompts/docs/dominios/aprendizaje.md` |
 | La normativa de archivos del ecosistema | `meta/NORMATIVA_ARCHIVOS.md` |
 
 Si un documento, prompt o script habla de `areas/Academic_Class-<Área>/course_NN_<slug>/0N_…`, es
