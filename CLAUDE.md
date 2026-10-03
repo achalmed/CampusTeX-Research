@@ -73,10 +73,11 @@ bash -n scripts/<archivo>.sh                    # un archivo por invocación
 - **El tema Beamer se llama `academic` en minúsculas** (`\usetheme{academic}`) desde M7 (2026-09-15).
 - **`config/course.yml` es YAML plano**: los scripts lo parsean con grep/sed. No anidar las claves
   marcadas `[script]`. Todo parámetro nuevo va a este archivo, nunca al código de `scripts/lib/`.
-- **`compile_tex` prefiere el compilador universal del workspace**
-  (`scripts_for_latex/script_compilar_latex/main.sh`, autodetecta motor); si no existe, usa el motor de
-  `latex_engine()` (comentario `%!TEX`, clase `yaac-*`, `fontspec`) dos veces. Ojo: **ese compilador
-  borra el PDF cuando la compilación falla**; si es un PDF versionado, se recupera con `git checkout`.
+- **`compile_tex` envía los `academic-*` a `scripts/build.sh`**; el resto, al compilador universal
+  del workspace (`compilador` de `config/course.yml`, con `-s`) y, si no existe, a `latex_engine()`
+  dos veces. Los dos eligen el motor igual: el `%!TEX program` de las primeras líneas o lualatex.
+  Si la compilación falla, el compilador sale con 1, muestra el error y deja el PDF anterior y los
+  auxiliares en su sitio.
 - **Los decks Beamer son autocontenidos** (preámbulo propio + copia local del logo): al mover una
   sesión hay que mover su carpeta completa, porque los assets son hermanos del `.tex`.
 - **5 decks heredados no compilan** y es pendiente del docente, no del framework: esperan un
