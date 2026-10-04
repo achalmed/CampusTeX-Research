@@ -13,7 +13,7 @@ Vistas generadas (`generar`):
              un curso en `borrador` sin `unidades` también lo recibe, con «Qué falta» (DOC4, 2026-09-20)
   esqueleto  RETIRADO en M5: la nota se escribe cuando existe (archivo: null hasta entonces, §7)
   web        04 index/cursos/<materia_web>/index.qmd: sección «Contenidos / Sílabo» entre marcadores
-  skill      prompts/05 docencia/learning-skill/2 domains/_temarios/<dominio>.md + puntero en el dominio
+  skill      prompts/skills/learning/2 domains/_temarios/<dominio>.md + puntero en el dominio
   resumen    05 tasks/temarios-cursos.md — checklist por curso/unidad/tema (tipo: checklist; lleva marca GENERADO)
 
 Sin --aplicar todo es simulación: se imprime qué cambiaría y no se escribe nada.

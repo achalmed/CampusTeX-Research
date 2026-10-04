@@ -10,8 +10,9 @@ teoría o método reconstruido como **modelo ejecutable** con ficha pedagógica
 escenarios y **verificación numérica de sus teoremas**.
 
 Es **un solo laboratorio con varias disciplinas hermanas** que comparten un
-motor común. El motor (agnóstico a la disciplina) vive en la raíz; cada
-disciplina es una subcarpeta con su propia app, config y modelos.
+motor común. El motor (agnóstico a la disciplina) vive en la raíz, con la
+aplicación (`app.py`); cada disciplina es una subcarpeta con su `config.py`,
+su `main.py` y sus `modelos/`.
 
 ```
 simuladores/
@@ -19,10 +20,11 @@ simuladores/
 ├── graficos.py     Verificacion), cálculo y verificación (base); render
 ├── laboratorio.py  matplotlib con anti-solape y dibujo progresivo (graficos);
 ├── reporte.py      láminas de experimento (laboratorio); informe MD (reporte)
+├── app.py          la aplicación (recorrido pedagógico) que usan todas las disciplinas
 ├── fuentes.py      comprueba cada cita (calibre_id, hoja del PDF, pasaje) contra la edición
 │
-├── macro/          ✅ Macroeconomía — 115 modelos, 12 niveles, 569 verificaciones
-├── estadistica/    🚧 Estadística — 23 de 244 temas (temario.yml) (+ animaciones Manim)
+├── macro/          Macroeconomía — currículo completo por niveles
+├── estadistica/    Estadística — en curso (temario.yml) (+ animaciones Manim)
 └── …               econometría / micro / mate (futuras disciplinas hermanas)
 ```
 
@@ -54,8 +56,9 @@ muestra de tres formas complementarias:
 
 ## Estructura
 
-Una carpeta por disciplina (`macro/`, `estadistica/`, …), cada una con sus modelos por nivel, sus animaciones y su
-`README.md`; `CLAUDE.md` guarda las reglas del laboratorio. Detalle por disciplina en su propio README.
+Una carpeta por disciplina (`macro/`, `estadistica/`, …), cada una con sus modelos por nivel y su
+`matriz_trazabilidad.csv`; `CLAUDE.md` guarda las reglas del laboratorio. Cuántos modelos y verificaciones
+tiene cada disciplina lo dice `python3 main.py verificar` dentro de ella.
 
 ## Diseño y currículos
 
@@ -65,16 +68,15 @@ Una carpeta por disciplina (`macro/`, `estadistica/`, …), cada una con sus mod
 ## Convención al añadir una disciplina
 
 Crear `simuladores/<disciplina>/` con `config.py` (rutas + paleta), `main.py`
-(bootstrap que añade la raíz al path + CLI), `app.py` y `modelos/nivel_NN/`.
+(bootstrap que añade la raíz al path + CLI) y `modelos/nivel_NN/`; la app es la del motor.
 **Prohibido copiar el motor** (`base/graficos/reporte/laboratorio`): se importa
 de la raíz. `salidas/` de cada disciplina es regenerable (en `.gitignore`).
 
 ## Límite honesto
 
-- Es un laboratorio pedagógico: los modelos reproducen teoremas y escenarios de manual, no series reales ni pronósticos;
-  los datos vivos viven en `02 analysis`.
+- Es un laboratorio pedagógico: los modelos reproducen teoremas y escenarios de manual, no pronósticos. Los que usan
+  datos reales (el nivel 12 de macro, con series del BCRP) los leen de `02 analysis` por nombre; el laboratorio no adquiere datos.
 - «Página verificada» significa que el pasaje citado está en esa hoja del PDF del `calibre_id`: lo comprueba
   `fuentes.py` con el texto que da `core/py-common/biblioteca.py`. Sin la biblioteca en la máquina, la cita queda
   «no comprobable», no verificada; y la página impresa solo se confirma si el PDF trae el folio en su texto.
-- Vive dentro de `10 Class` desde 2026-09-20 (venía de `02 analysis`): las rutas de los currículos de cada disciplina
-  se citan desde su README, no desde aquí.
+- Las rutas de los currículos de cada disciplina se citan desde su README, no desde aquí.

@@ -1,5 +1,5 @@
 ---
-tipo: doc
+tipo: bitacora
 titulo: "Migración XeLaTeX → LuaLaTeX — Academic Class Framework"
 estado: hecho
 ---

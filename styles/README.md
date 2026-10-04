@@ -22,7 +22,7 @@ Para ver el efecto de un cambio: compilar **un deck, una evaluación y un sílab
 | Archivo | Qué es |
 |---|---|
 | `academic.sty` | meta-paquete: el ÚNICO punto de entrada; fija el orden de carga |
-| `academic-colors.sty` | la API de color estable: incluye `config/palette.tex` (generado) y deriva por `\colorlet` los siete roles; define `\academicbn` para la salida en gris |
+| `academic-colors.sty` | la API de color estable: valores por defecto, incluye `config/palette.tex` (generado, que define también `\academicbn` para la salida en gris) y deriva por `\colorlet` los siete roles |
 | `academic-fonts.sty` | la tipografía única (LuaLaTeX + fontspec): Libertinus para texto y matemática, Inconsolata para código |
 | `academic-math.sty` | matemática con `unicode-math` |
 | `academic-boxes.sty` | los bloques informativos (`instrucciones`, `datos`, `solucion`, `nota`…) sobre tcolorbox |
@@ -34,7 +34,7 @@ Para ver el efecto de un cambio: compilar **un deck, una evaluación y un sílab
 ## Límite honesto
 
 - **El orden importa**: `mathtools` (amsmath) se carga **antes** de `unicode-math`; al revés,
-  `\underbrace` y `\overbrace` salen como bloques negros (hallazgo de R9, 2026-09-15).
+  `\underbrace` y `\overbrace` salen como bloques negros.
 - **Bajo `unicode-math` no existe amssymb**: `\blacksquare` es `\mdlgblksquare`. `\nota{}` como
   comando ya no existe: es `\interpreta{}`.
 - **Los bloques son deliberadamente distintos según el medio**: en texto van sin caja, líneas ni

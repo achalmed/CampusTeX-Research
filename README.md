@@ -14,8 +14,8 @@ Este repositorio es dueño de **dos cosas** para la docencia de Edison Achalma B
 1. **El estándar** de organización del contenido docente —curso, sesión, dictado, registro,
    nomenclatura—, escrito una sola vez en [`docs/estandar-docencia.md`](docs/estandar-docencia.md) y
    en [`docs/estandar-evaluaciones.md`](docs/estandar-evaluaciones.md), exigido por
-   `scripts/validate.sh` y vigilado por `scripts/doctor.sh`. Lo cumplen hoy **52 cursos**,
-   **67 sesiones tipadas** y **708 fichas de evaluación** en `docencia/`.
+   `scripts/validate.sh` y vigilado por `scripts/doctor.sh`. Lo cumple todo el contenido de
+   `docencia/` (`./scripts/temario-generar.sh verificar` cuenta los cursos).
 2. **La plataforma editorial LaTeX** con identidad visual única que produce todo el material
    docente: diapositivas, exámenes, sílabos, calendarios, notas de docente y rúbricas. Motor
    **LuaLaTeX exclusivo**; arquitectura en [`docs/arquitectura.md`](docs/arquitectura.md).
@@ -48,7 +48,7 @@ cd ~/Documents/10\ Class          # CURSO y DICTADO aceptan slug o ruta
 ./scripts/build-session.sh econometria-i 07
 ./scripts/build.sh ARCHIVO.tex [--modo examen|claves|soluciones|todos]
 ./scripts/validate.sh --todos && ./scripts/doctor.sh
-./scripts/temario-generar.sh generar --que readme --aplicar                  # vistas desde curso.yml
+./scripts/temario-generar.sh generar --que readme --aplicar                  # README de curso desde curso.yml
 ./scripts/publish-session.sh 2026-ii-unsch-econometria econometria-i 07      # tag + publicacion/
 ./scripts/publish-web.sh     2026-ii-unsch-econometria --aplicar             # hardlinks a 04 index/cursos
 ```
@@ -62,7 +62,7 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
 | `styles/` | identidad visual única (`academic.sty` + colores, fuentes, math, iconos, bloques, código, tablas) | este repo |
 | `classes/` | clases delgadas: `academic-base` · `academic-exam` · `academic-report` · `academic-beamer` | este repo |
 | `themes/` | tema Beamer propio `academic` (minúsculas desde M7); consume `styles/` | este repo |
-| `config/` | `course.yml` (identidad del docente, YAML plano) · `palette.tex` **GENERADO** | `sistema-editorial/generador.py` |
+| `config/` | `course.yml` (identidad del docente, YAML plano) · `palette.tex` **GENERADO** | el autor · `palette.tex`, `sistema-editorial` |
 | `templates/` | documentos vacíos, sin diseño: `exam/` (12 tipos) · `presentation/` (8) · `report/` (4) | este repo |
 | `scaffolds/` | registros mínimos de curso, sesión y dictado (no árboles de carpetas) | este repo |
 | `scripts/` | automatización: crear, compilar, validar, generar vistas, publicar | este repo |
@@ -82,7 +82,7 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
 | [`docs/arquitectura.md`](docs/arquitectura.md) | la plataforma editorial: capas, decisiones, flujo de un documento |
 | [`docs/como-se-mantiene.md`](docs/como-se-mantiene.md) | ciclo de vida documental: quién actualiza qué cuando cambia el estándar |
 | [`docs/README.md`](docs/README.md) | índice completo, generado desde el frontmatter de `docs/` |
-| [`CHANGELOG.md`](CHANGELOG.md) | qué cambió y cuándo (R1–R13, M0–M8, F5.x, Fase 6) |
+| [`docs/decisiones.md`](docs/decisiones.md) | por qué se decidió cada cosa, por tema y con fecha; los pendientes |
 | [`CLAUDE.md`](CLAUDE.md) | reglas para el asistente y detalles que cuesta redescubrir |
 
 ## Límite honesto
@@ -93,10 +93,7 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
   que los pida se reconstruye, no se parchea.
 - **El framework no versiona datos de estudiantes**: eso es `registro/`, ignorado desde aquí y sin
   remoto. Tampoco versiona los productos de publicación ni las fuentes PDF de los expedientes.
-- **El legado sin clasificar se resolvió el 2026-09-20**: el inbox de docencia (410 archivos) salió del repo al archivo del vault
-  (`06 archives/2026-09-20-docencia-inbox/`) y `registro/_legado/` (306 MB, trabajos de estudiantes) se conserva como archivo
-  cerrado del registro privado, no como temporal.
-- **5 decks Beamer heredados no compilan** (falta la copia local de `cau-logo.png`, o piden XeLaTeX):
-  es pendiente del docente y se reconstruyen al usarlos.
+- **Algunos decks Beamer heredados no compilan** (falta la copia local de `cau-logo.png`, o piden
+  XeLaTeX): es pendiente del docente y se reconstruyen al usarlos (`docs/decisiones.md` §Pendientes).
 - **El color no se decide aquí**: `config/palette.tex` es un espejo generado por `sistema-editorial`;
   editarlo a mano se pierde en la siguiente generación.

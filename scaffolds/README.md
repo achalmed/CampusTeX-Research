@@ -3,10 +3,10 @@ tipo: readme
 titulo: "scaffolds — esqueletos mínimos de curso, sesión y dictado"
 estado: activo
 ---
-# scaffolds/ — esqueletos mínimos (M5, 2026-09-15)
+# scaffolds/ — esqueletos mínimos de curso, sesión y dictado
 
 Ya no hay árboles de carpetas que copiar: un curso, una sesión o un dictado nacen con **solo su registro** y el
-artefacto del tipo; las carpetas se crean al primer uso (una carpeta vacía es error del validador, §4.2).
+artefacto del tipo; las carpetas se crean al primer uso (una carpeta vacía es error del validador: `docs/estandar-docencia.md` §2).
 
 | Carpeta | Archivos | Lo usa |
 |---|---|---|

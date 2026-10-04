@@ -24,10 +24,10 @@ Las plantillas vacías de cada tipo están en `templates/`; los scripts `new-eva
 
 | Archivo | Qué es |
 |---|---|
-| `academic-base.cls` | el núcleo (sobre `article`): geometría, idioma, carga de `styles/academic.sty`. Las otras tres heredan de aquí |
+| `academic-base.cls` | el núcleo (sobre `article`): geometría, idioma, carga de `styles/academic.sty`. `academic-exam` y `academic-report` heredan de aquí |
 | `academic-exam.cls` | evaluaciones: tres modos de salida (examen · claves · soluciones), bloques de enunciado y solución, membrete institucional |
 | `academic-report.cls` | documentos de gestión docente: sílabo, calendario, nota docente, rúbrica |
-| `academic-beamer.cls` | diapositivas: `beamer` + `\usetheme{academic}` (el tema vive en `themes/`) |
+| `academic-beamer.cls` | diapositivas: carga `beamer` (no la base) y `\usetheme{academic}`, que trae la misma `styles/academic.sty` (el tema vive en `themes/`) |
 
 ## Límite honesto
 

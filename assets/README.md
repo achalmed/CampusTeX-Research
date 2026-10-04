@@ -26,9 +26,8 @@ a este archivo; si cambia el logo, se cambian los dos y las sesiones ya creadas 
 ## Límite honesto
 
 - **El logo está aquí, pero falta donde hace falta.** Los decks Beamer referencian el logo como
-  **hermano del `.tex`**, no esta ruta. Hoy nueve documentos de `docencia/` lo citan y solo dos tienen
-  su copia local: **cinco decks heredados no compilan por eso** (uno, además, declara
-  `%!TEX program = xelatex`). Remedio al reconstruirlos: copiar `assets/branding/cau-logo.png` a la
+  **hermano del `.tex`**, no esta ruta, y varios decks heredados no tienen su copia local: **por eso no
+  compilan** (alguno, además, declara `%!TEX program = xelatex`). Remedio al reconstruirlos: copiar `assets/branding/cau-logo.png` a la
   carpeta del deck. Es pendiente del docente, no del framework.
 - **Al mover una sesión hay que mover su carpeta completa**: los assets son hermanos del `.tex`.
 - **Aquí no viven las fotografías ni los kits de vídeo** del ecosistema (`~/Pictures`, `~/Videos`) ni

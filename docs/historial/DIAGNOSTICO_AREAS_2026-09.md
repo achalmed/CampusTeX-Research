@@ -1,5 +1,5 @@
 ---
-tipo: doc
+tipo: diagnostico
 titulo: "Diagnóstico de `areas/` y propuesta de reorganización (2026-09-15)"
 estado: hecho
 fecha: 2026-09-15

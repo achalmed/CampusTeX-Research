@@ -15,4 +15,5 @@ su fecha y pueden no existir hoy.
 | `2026-07-23-migracion-lualatex.md` | la migración XeLaTeX → LuaLaTeX, cambio a cambio, con la verificación de paginación (2026-07-23) |
 | `2026-09-17-cierre-r9-r13.md` | el banco de evaluaciones rendidas: piloto, migración masiva, la regla de las evaluaciones ajenas y la salida de Calibre (2026-09-15 → 2026-09-17) |
 
-Los respaldos y los `UNDO.sh` de cada fase no están aquí: viven en `meta/reparaciones/<fase>/`.
+Los respaldos de cada fase no están aquí: están en el disco externo del autor. El asiento de cada fase está en
+`meta/PROGRESO.md` y el porqué de lo decidido, en [`../decisiones.md`](../decisiones.md).

@@ -151,7 +151,7 @@ por dentro.
 1. **Procedencia declarada siempre** (regla 00 del framework). Los modelos de
    manual son `conocimiento macroeconómico general`; **prohibido citar capítulo
    o página sin verificar el libro** (la biblioteca tiene textos macro aún no
-   verificados — `docs/biblio/inventario_biblioteca.csv`). Las menciones
+   verificados). Las menciones
    históricas (Keynes 1936, Hicks 1937, Solow 1956) se marcan como *mención,
    no verificado contra edición*.
 2. **Calibraciones didácticas ≠ datos oficiales.** Si un parámetro evoca una
@@ -163,7 +163,7 @@ por dentro.
 4. **Etiquetas y docs en español**; claves y nombres de archivo en el esquema
    `mNN_slug.py`.
 5. **Cada modelo se registra en la matriz de trazabilidad**
-   (`docs/biblio/matriz_trazabilidad.csv`) al implementarse.
+   (`macro/matriz_trazabilidad.csv`) al implementarse.
 6. **`salidas/` es regenerable y no se versiona** (mismo estatus que
    `data/`): la fuente es el código, no el reporte.
 
@@ -446,7 +446,7 @@ Secuencia troncal (un modelo "ancla" por etapa, el resto del nivel después):
 - **Hito 13 (2026-08-19): nivel 12 (1/N) — el laboratorio aterriza en el Perú
   con datos BCRP reales.** Edison autorizó activar los conectores BCRP; se
   descargaron 6 series macro (PBI, IPC, tasa, tipo de cambio; 2004-2024) vía
-  `connectors/bcrp` y se destiló un **snapshot anual embebido**
+  `02 analysis/connectors/bcrp` y se destiló un **snapshot anual embebido**
   (`_series_bcrp.py`) para que los modelos sean auto-contenidos (`data/` está
   en `.gitignore`); los datos mensuales de `data/raw/` sirven como resolución
   fina cuando están presentes (`_datos_bcrp.py`). m97-m102 leen la serie,

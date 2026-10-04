@@ -158,8 +158,9 @@ IDDEA, MIT, UDEP, UP, UCR, UNNE… R13 las sacó de Calibre —**947 ítems → 
 `historia-economica` e `investigacion-operativa`; 24 ítems se quedaron en Calibre por no ser evaluaciones: solucionarios
 de libros de texto, artículos de un taller, talleres publicados de la BNP, un manual de Excel)— sin transformar nada.
 Herramienta y registros: `docencia/migracion/migrar-calibre.py` (`inventario` · `mapa` · `aplicar`),
-`inventario-calibre.json`, `mapa-calibre.csv`, `calibre-ids-migrados.txt`, `zotero-keys-migrados.txt`; bitácora y
-respaldo en `meta/reparaciones/R13_calibre-evaluaciones_2026-09-17/`.
+`inventario-calibre.json`, `mapa-calibre.csv`, `calibre-ids-migrados.txt`, `zotero-keys-migrados.txt`; la bitácora
+de la fase está en [`historial/2026-09-17-cierre-r9-r13.md`](historial/2026-09-17-cierre-r9-r13.md) y el respaldo, en el
+disco externo del autor.
 
 **El expediente pendiente** (estado `pendiente` de §7) tiene esta forma, que la fase de transformación consume tal cual:
 
@@ -171,8 +172,8 @@ respaldo en `meta/reparaciones/R13_calibre-evaluaciones_2026-09-17/`.
 └── (…_fuente_version_a/_b, _fuente_desarrollo_manuscrito, _fuente_grupo_01, _fuente_solucion_02…)
 ```
 
-- **Las fuentes no se versionan** (decisión del autor, R13: 552 MB de PDF): `docencia/.gitignore` ignora
-  `cursos/*/04-evaluaciones/*/*/*_fuente*.pdf`; el respaldo es el tarball de la bitácora (y la papelera de Calibre
+- **Las fuentes no se versionan** (decisión del autor, R13): `docencia/.gitignore` ignora
+  `cursos/*/04-evaluaciones/*/*/*_fuente*.pdf`; el respaldo está en el disco externo del autor (y la papelera de Calibre
   mientras dure). Se llaman en `snake_case` (`_fuente`, no `-fuente`) para que `core/archivos.py` no las marque y para
   que nunca choquen con los productos `<tallo>.pdf` y `<tallo>-soluciones.pdf` de `build.sh`.
 - **El tallo** sigue §3 con la fecha que Calibre conocía: semestre PUCP → `AAAAMM` (`201905` = 2019-1, `201910` =

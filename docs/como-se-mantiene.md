@@ -6,8 +6,9 @@ fecha: 2026-09-20
 ---
 # Cómo se mantiene este framework
 
-Responde a la pregunta que ningún otro documento respondía: **quién actualiza qué, cuándo y con qué
-comprobación**. Nace en DOC4 (2026-09-20) porque el `CLAUDE.md` lo suplía de facto y por eso crecía.
+Responde a una pregunta: **quién actualiza qué, cuándo y con qué comprobación**. Quién consume lo que
+este repo produce está en [`estandar-docencia.md`](estandar-docencia.md) §9; por qué se decidió cada
+cosa, en [`decisiones.md`](decisiones.md).
 
 ## 1. Las cuatro fuentes de verdad
 
@@ -27,17 +28,19 @@ llega aquí como `config/palette.tex` generado.
 
 | Derivado | Desde | Herramienta |
 |---|---|---|
-| `docencia/cursos/<slug>/README.md` (×52) | `curso.yml` | `./scripts/temario-generar.sh generar --que readme --aplicar` |
+| `docencia/cursos/<slug>/README.md` | `curso.yml` | `./scripts/temario-generar.sh generar --que readme --aplicar` |
 | Sección «Contenidos / Sílabo» de `04 index/cursos/<materia>/index.qmd` | `curso.yml` | `temario-generar.sh generar --que web --aplicar` (entre marcadores) |
-| `prompts/skills/learning/2 domains/_temarios/<dominio>.md` | `curso.yml` | `temario-generar.sh generar --que skill --aplicar` |
+| `prompts/skills/learning/2 domains/_temarios/<dominio>.md` y un puntero en `## Temario` del dominio | `curso.yml` | `temario-generar.sh generar --que skill --aplicar` |
 | `05 tasks/temarios-cursos.md` | todos los `curso.yml` | `temario-generar.sh generar --que resumen --aplicar` |
 | `curso.yml.banco_examenes`, recursos de tipo post y simulador | disco y `04 index/_pubs` | `python3 scripts/enlazar.py examenes\|posts\|simuladores --aplicar` |
-| `config/palette.tex` | `sistema-editorial/temas/docencia.yml` | `python3 generador.py generar --aplicar --espejo` (en `sistema-editorial`) |
+| `config/palette.tex` | `sistema-editorial/temas/docencia.yml` | `sistema-editorial` (órdenes en `sistema-editorial/docs/consumidores.md` §2 y §4) |
 | `docs/README.md` | frontmatter de `docs/*.md` | `python3 core/docs.py indice "10 Class" --aplicar` |
 | `04 index/cursos/<materia>/<edicion>/` | `dictado.yml` | `./scripts/publish-session.sh` + `./scripts/publish-web.sh --aplicar` (hardlinks) |
 
 Un derivado **no se edita a mano**: lleva su marca `GENERADO por … ; no editar` o vive entre
-marcadores. Lo escrito fuera de los marcadores se conserva al regenerar.
+marcadores. Lo escrito fuera de los marcadores se conserva al regenerar. `temario.py` toma los cursos
+como **rutas** (`docencia/cursos/<slug>`), no como slugs, y sin `--que` escribe todas las vistas, también
+las de otros repos: para tocar solo el README de un curso, `--que readme docencia/cursos/<slug>`.
 
 ## 3. Cuándo cambia el estándar de docencia
 
@@ -51,8 +54,8 @@ Orden obligatorio, de la regla al código y del código a las vistas:
 5. **Regenerar las vistas** (§2) y correr `./scripts/validate.sh --todos`.
 6. **Actualizar los punteros**, nunca copias: `README.md`, `CLAUDE.md`, `docencia/README.md`,
    `prompts/05 docencia/`, `prompts/docs/dominios/aprendizaje.md` y `meta/workspace.yml` (`verdad:`).
-7. **Anotar el cambio** en `CHANGELOG.md`; si fue una decisión con alternativas descartadas, también en
-   la bitácora de la fase (`meta/reparaciones/<fase>/`).
+7. **Anotar el porqué** en `docs/decisiones.md` (con fecha) y, si fue una fase, su asiento en
+   `meta/PROGRESO.md`; lo que se hizo va al mensaje de commit.
 
 Si el cambio afecta a los apuntes de estudio, pasa además por la checklist de propagación de
 `prompts/docs/dominios/aprendizaje.md`.
@@ -80,12 +83,15 @@ Un parámetro nuevo del docente va a `config/course.yml` (YAML plano), nunca al 
 ## 6. Comprobación periódica
 
 ```bash
+cd ~/Documents/10\ Class
 ./scripts/validate.sh --todos                  # el estándar, curso a curso y dictado a dictado
-./scripts/temario-generar.sh verificar         # ningún README de curso desfasado
+./scripts/temario-generar.sh verificar         # ningún README de curso desfasado (y cuenta los cursos)
 python3 scripts/enlazar.py verificar           # enlaces del currículo
+./scripts/doctor.sh                            # lo anterior + entorno + binarios + core/archivos.py
+
+cd ~/Documents
 python3 core/docs.py verificar "10 Class"      # el índice de docs/ al día
 python3 core/archivos.py validar "10 Class"    # normativa de archivos (D01–D12 incluidas)
-./scripts/doctor.sh                            # todo lo anterior + entorno + binarios
 ```
 
 El doctor devuelve 1 con avisos (no es un fallo) y 2 con fallos.
@@ -94,6 +100,5 @@ El doctor devuelve 1 con avisos (no es un fallo) y 2 con fallos.
 
 - Este documento describe el mantenimiento **documental y del estándar**; el mantenimiento pedagógico
   (qué se enseña y cómo) es el `guion.md` de cada sesión y el ciclo de `prompts/00 metodo/CICLO.md`.
-- No fija una cadencia de revisión: la revisión la dispara un cambio, no el calendario. La única fecha
-  comprometida de D10 se cerró el 2026-09-20: `_inbox/` salió al archivo del vault y `registro/_legado/` es archivo cerrado.
+- No fija una cadencia de revisión: la revisión la dispara un cambio, no el calendario.
 - No cubre el laboratorio `simuladores/`, que tiene su propia doctrina en `simuladores/CLAUDE.md`.

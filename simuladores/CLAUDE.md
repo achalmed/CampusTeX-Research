@@ -4,12 +4,11 @@ estado: activo
 ---
 # CLAUDE.md — simuladores (el laboratorio computacional)
 
-Laboratorio pedagógico multi-disciplina de `10 Class` (repo `Academic_Class_Framework`).
-Vivió en `02 analysis/simuladores/` hasta el 2026-09-20 (D02: `02 analysis/docs/ARQUITECTURA.md`
-§6); se trasladó con su historia git porque es **currículo** —fichas pedagógicas, verificaciones
-que son teoremas, animaciones— y lo consumen los cursos (`docencia/cursos/*/curso.yml`,
-recursos `{tipo: simulador}` enlazados por `scripts/enlazar.py simuladores`), no el pipeline de
-datos. Leer `README.md` de esta carpeta para el uso; lo que sigue es la doctrina.
+Laboratorio pedagógico multi-disciplina de `10 Class` (repo `Academic_Class_Framework`). Es
+**currículo** —fichas pedagógicas, verificaciones que son teoremas, animaciones— y lo consumen los
+cursos (`docencia/cursos/*/curso.yml`, recursos `{tipo: simulador}` enlazados por
+`scripts/enlazar.py simuladores`). Leer `README.md` de esta carpeta para el uso; lo que sigue es la
+doctrina. Guía anidada por excepción a §15.5, asentada en `../docs/decisiones.md` §Simuladores.
 
 ## Estructura: un laboratorio, varias disciplinas hermanas
 
@@ -45,14 +44,14 @@ Figuras con tipografía académica (mathtext STIX, notación `$…$` en ejes y l
 `USAR_TEX_COMPLETO` en config). Cada concepto se DERIVA, SIMULA y VISUALIZA: no es una
 fórmula (regresión = derivar $\hat\beta=(X'X)^{-1}X'Y$, no llamar `lm()`).
 
-## Macroeconomía (`macro/`, 2026-08-19)
+## Macroeconomía (`macro/`)
 
-Currículo COMPLETO: 115 modelos en 12 niveles, 569 verificaciones; plan vigente en
+Currículo completo por niveles (recuento: `cd macro && python3 main.py verificar`); plan vigente en
 `macro/docs/laboratorio-macro.md`. El nivel 12 es el laboratorio del Perú con datos reales del
 BCRP: m97-m115 usan series macro (PBI, IPC, tasa, tipo de cambio, cobre, términos de
 intercambio, bloque fiscal) que descarga `02 analysis/connectors/bcrp`; el detalle mensual se
 lee de `02 analysis/data/raw/bcrp/<categoría>/` **por nombre**, con el lector único de
-`02 analysis/metodos/series/lectores.py` cuando está (`nivel_12/_datos_bcrp.py` localiza
+`02 analysis/metodos/series/lectores.py` cuando está (`macro/modelos/nivel_12/_datos_bcrp.py` localiza
 `core/env.py: ANALYSIS_DIR`) y, si no está, cae al snapshot anual embebido en `_series_bcrp.py`
 (auto-contenido). Verifica contra el dato real, no contra calibración didáctica: coef. Taylor
 0,55 < 1 = sesgo de variable omitida (m100); correlación tasa-inflación = causalidad inversa
@@ -62,12 +61,12 @@ externo real y financiero (m110-m111); enclave minero (m112); passthrough ≈ 0 
 como shock de oferta (m114); síntesis (m115). Tras macro vendrán micro/econometría/mate (§9 del
 diseño); la econometría pedagógica NO duplicará `02 analysis/pipeline/`.
 
-## Estadística (`estadistica/`, 2026-08-20)
+## Estadística (`estadistica/`)
 
-Currículo de Edison: 239 temas en 20 secciones (I fundamentos → XX ML); diseño en
+Currículo por secciones (fundamentos → aprendizaje automático); diseño en
 `estadistica/docs/laboratorio-estadistica.md`; mapa de temas (id, estado, temas de `curso.yml`) en
-`estadistica/temario.yml`, reconstruido el 2026-10-01: los números que ya citan los modelos son anclas,
-no se renumeran. Estado: 23 modelos (niveles 1-3), 115 verificaciones en verde; plan de cierre E0–E7 en
+`estadistica/temario.yml`: los números que ya citan los modelos son anclas, no se renumeran. Estado:
+`cd estadistica && python3 main.py verificar`; plan de cierre en
 `meta/diagnosticos/DIAGNOSTICO_SIMULADORES_2026-10.md`; la app interactiva es la del motor (`app.py`) y ya sirve a esta
 disciplina. DOS renderizadores, un modelo: matplotlib (app + reportes) y **Manim**
 (`estadistica/animaciones/`, «ver el método en movimiento»), que corre en un env conda APARTE

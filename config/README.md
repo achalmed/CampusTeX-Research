@@ -10,16 +10,17 @@ Dos archivos con dueños distintos: uno se edita a mano y el otro **nunca**.
 
 ```bash
 $EDITOR config/course.yml                 # identidad del curso, docente, institución, logo, idioma
-cd ~/Documents/sistema-editorial && python3 generador.py verificar   # ¿palette.tex diverge del tema?
-cd ~/Documents/sistema-editorial && python3 generador.py generar --aplicar --espejo   # regenerarla
 ```
+
+`palette.tex` se regenera y se verifica desde `sistema-editorial`: las órdenes y el contrato están en
+`sistema-editorial/docs/consumidores.md` §2 y §4.
 
 ## Estructura
 
 | Archivo | Qué es | Dueño / generador |
 |---|---|---|
 | `course.yml` | fuente única de la identidad del curso: curso, código, ciclo, docente, institución, `logo`, tema Beamer, aspecto, idioma. Lo leen los scripts `new-*` al rellenar plantillas | el autor |
-| `palette.tex` | la paleta Academic: los once nombres `academic*`, de los que `styles/academic-colors.sty` deriva sus siete roles. **GENERADO** desde `sistema-editorial/temas/docencia.yml` y espejado aquí; lleva la marca `GENERADO … no editar` en la línea 1 | `sistema-editorial/generador.py` (Fase 6, 2026-09-20) |
+| `palette.tex` | la paleta Academic: los once nombres `academic*`, de los que `styles/academic-colors.sty` deriva sus siete roles, y `\academicbn` (salida en gris). **GENERADO** desde `sistema-editorial/temas/docencia.yml` y espejado aquí; lleva la marca `GENERADO … no editar` en la línea 1 | `sistema-editorial/generador.py` |
 
 ## Límite honesto
 
@@ -29,3 +30,5 @@ cd ~/Documents/sistema-editorial && python3 generador.py generar --aplicar --esp
   color se cambia en `sistema-editorial/temas/docencia.yml`, que es donde vive la decisión.
 - Todo parámetro nuevo de compilación o de identidad va a `course.yml`, nunca dentro de
   `scripts/lib/common.sh`.
+- La clave `compilador:` apunta al compilador universal de `scripts_for_latex`; qué espera de él este
+  repo está en `scripts_for_latex/docs/arquitectura.md` §Consumidores.

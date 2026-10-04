@@ -5,8 +5,10 @@ estado: activo
 # scripts/ — la automatización del framework: crear, compilar, validar, generar y publicar
 
 Dueña de todo lo que se ejecuta. Patrón fijo: el script de entrada **solo orquesta**; la lógica
-compartida está en `lib/common.sh` y los parámetros ajustables, en `config/course.yml`. Ningún
-script tiene rutas de máquina: `lib/common.sh` resuelve el repo desde su propia ubicación.
+compartida está en `lib/common.sh` y los parámetros ajustables, en `config/course.yml`. Los scripts
+Bash resuelven el repo desde su propia ubicación (`lib/common.sh`); `temario.py`, `enlazar.py` y
+`publicar-web.py` toman `~/Documents` como la carpeta padre del repo (no pasan por `core/env.py`), y la
+clave `compilador:` de `config/course.yml` escribe la ruta del compilador universal.
 
 Todos los argumentos `CURSO` y `DICTADO` aceptan **slug o ruta** (`docencia/cursos/<slug>`,
 `docencia/dictados/<clave>`) desde M5 (2026-09-15).
@@ -16,7 +18,7 @@ Todos los argumentos `CURSO` y `DICTADO` aceptan **slug o ruta** (`docencia/curs
 ```bash
 cd ~/Documents/10\ Class
 ./scripts/doctor.sh                       # lo primero ante cualquier duda
-./scripts/validate.sh --todos             # el estándar en los 52 cursos y los 2 dictados
+./scripts/validate.sh --todos             # el estándar en todos los cursos y dictados
 bash -n scripts/<archivo>.sh              # comprobación de sintaxis: UN archivo por invocación
 ```
 
@@ -38,7 +40,7 @@ bash -n scripts/<archivo>.sh              # comprobación de sintaxis: UN archiv
 | `validate.sh` | invariantes del estándar: lista cerrada de carpetas, sin vacías, artefacto por tipo, `guion.md`, núcleo del registro | `./scripts/validate.sh CURSO\|DICTADO\|--todos` |
 | `stats.sh` | resumen de un curso por sesión: tipo · estado · artefacto · PDF · guion | `./scripts/stats.sh CURSO` |
 | `doctor.sh` | entorno (git, lualatex, quarto, compilador universal) + `validate --todos` + los tres verificadores + binarios > 5 MB + remoto de `registro/` + `core/archivos.py` | `./scripts/doctor.sh` |
-| `temario-generar.sh` | fachada Bash de `temario.py` | `./scripts/temario-generar.sh migrar\|generar\|verificar [--aplicar] [--que readme,web,skill,resumen] [CURSO…]` |
+| `temario-generar.sh` | fachada Bash de `temario.py` | `./scripts/temario-generar.sh migrar\|generar\|verificar [--aplicar] [--que readme,web,skill,resumen] [docencia/cursos/<slug>…]` (rutas, no slugs) |
 | `temario.py` | el generador de vistas del currículo desde `curso.yml`: README del curso, ficha web, temario del learning-skill, checklist de `05 tasks` | ver `temario-generar.sh` |
 | `enlazar.py` | enlaza el currículo con lo que ya existe: posts de `04 index/_pubs`, modelos de `simuladores/`, bancos de `04-evaluaciones/` | `python3 scripts/enlazar.py posts\|simuladores\|examenes\|verificar [--aplicar]` |
 | `publish-session.sh` | congela una sesión: tag `dictado/<clave>/<sesion>` + producto en `publicacion/<web>/` (git-ignorado) | `./scripts/publish-session.sh DICTADO CURSO NN [--refrescar]` |
@@ -54,8 +56,8 @@ bash -n scripts/<archivo>.sh              # comprobación de sintaxis: UN archiv
   artefacto no significa que el artefacto esté bien.
 - **Sin `--aplicar` todo simula** en `temario.py`, `enlazar.py`, `publicar-web.py` y los dos
   normalizadores. Los `new-*.sh` y los `build-*.sh` sí escriben directamente.
-- **`compile_tex` prefiere el compilador universal del workspace** y ese compilador **borra el PDF**
-  cuando la compilación falla; si el PDF estaba versionado, se recupera con `git checkout`.
+- **`compile_tex` envía los `academic-*` a `build.sh`** y el resto al compilador universal del workspace;
+  si la compilación falla, el compilador sale con 1 y deja el PDF anterior y los auxiliares en su sitio.
 - **`bash -n` comprueba un archivo por invocación**: con varios argumentos solo mira el primero.
 - **En zsh y con rutas con espacios** (`10 Class`) se itera con `while read`, nunca con `for x in $(…)`.
 - `__pycache__/` no se versiona; si aparece, se borra.
