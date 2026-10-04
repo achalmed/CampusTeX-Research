@@ -141,7 +141,7 @@ solo.
 | fecha | pendiente | dueño |
 |---|---|---|
 | 2026-10-04 | ¿El framework publicará versiones (etiquetas o releases que alguien consuma)? Si sí, vuelve `CHANGELOG.md` con SemVer | el autor |
-| 2026-10-04 | Licencia de `docencia/` (repo público sin `LICENSE`): cuál para el material propio y cómo se excluye lo ajeno (`cursos/<slug>/05-recursos/vendor/`, evaluaciones de otras universidades): REUSE por archivo o nota en su README | el autor |
+| 2026-10-04 | *Cerrado el 2026-10-04: el repo es privado en GitHub, no corresponde `LICENSE`.* Licencia de `docencia/` (repo público sin `LICENSE`): cuál para el material propio y cómo se excluye lo ajeno (`cursos/<slug>/05-recursos/vendor/`, evaluaciones de otras universidades): REUSE por archivo o nota en su README | el autor |
 | 2026-10-04 | Los decks Beamer heredados que no compilan (esperan una copia local de `cau-logo.png` o piden XeLaTeX) se reconstruyen al usarlos | el autor (docente) |
 | 2026-10-04 | `scripts/temario.py`, `enlazar.py` y `publicar-web.py` derivan `~/Documents` como carpeta padre del repo y `config/course.yml` (`compilador:`) escribe `$HOME/Documents/...`: pasar por `core/env.py` | el autor |
 | 2026-10-04 | `scripts/lib/common.sh` (`INBOX_DIR`) y `scripts/doctor.sh` siguen tratando la bandeja `_inbox` de `docencia`, ya retirada | el autor |
