@@ -19,7 +19,7 @@ $EDITOR config/course.yml                 # identidad del curso, docente, instit
 
 | Archivo | Qué es | Dueño / generador |
 |---|---|---|
-| `course.yml` | fuente única de la identidad del curso: curso, código, ciclo, docente, institución, `logo`, tema Beamer, aspecto, idioma. Lo leen los scripts `new-*` al rellenar plantillas | el autor |
+| `course.yml` | fuente única de la identidad del curso: curso, código, ciclo, docente, institución, `logo`, `tema_beamer` y `aspecto` (los usa el `deck.tex` de `new-session.sh`), idioma. Lo leen los scripts `new-*` al rellenar plantillas | el autor |
 | `palette.tex` | la paleta Academic: los once nombres `academic*`, de los que `styles/academic-colors.sty` deriva sus siete roles, y `\academicbn` (salida en gris). **GENERADO** desde `sistema-editorial/temas/docencia.yml` y espejado aquí; lleva la marca `GENERADO … no editar` en la línea 1 | `sistema-editorial/generador.py` |
 
 ## Límite honesto

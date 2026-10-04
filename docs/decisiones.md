@@ -71,6 +71,11 @@ Las cinco carpetas del curso existen solo con contenido; `CURSO` y `DICTADO` ace
 `new-period.sh` queda como aviso de retiro; un dictado puede tomar sesiones de varios cursos y por eso
 tiene clave propia en `docencia/dictados/`.
 
+**Decidido (2026-10-04, DOC10): `docencia/` es un repo privado en GitHub y no lleva `LICENSE`**
+(`meta/NORMATIVA_ARCHIVOS.md` §15.11: la licencia corresponde solo con remoto público). Si algún día se
+publica, antes se separa lo ajeno (`cursos/<slug>/05-recursos/vendor/`, evaluaciones de otras
+universidades) de lo propio y el autor elige la licencia.
+
 **Decidido (2026-09-20): la bandeja `_inbox` de `docencia` sale del repo.**
 El legado sin clasificar pasó al archivo del vault (`06 archives/2026-09-20-docencia-inbox/`); nada
 se cita desde allí. Regla vigente: lo que llegue fuera del estándar se clasifica o sale al archivo.
@@ -133,18 +138,19 @@ El estándar se cuenta una vez (`estandar-docencia.md`, `estandar-evaluaciones.m
 **Decidido (2026-10-04, DOC10): sin `CHANGELOG.md`.** El repo no publica versiones (las dos etiquetas
 son hitos de migración); la línea de tiempo de fases quedó en este registro y en el historial de git.
 `docs/arquitectura.md` describe la plataforma como es; sus decisiones están aquí.
-`docencia/` recibe su propia guía de orientación (`CLAUDE.md`), porque es un repo público que se clona
-solo.
+`docencia/` recibe su propia guía de orientación (`CLAUDE.md`), porque es un repo que se clona solo y
+quien lo abre aislado no ve las reglas del framework.
 
 ## Pendientes
 
 | fecha | pendiente | dueño |
 |---|---|---|
 | 2026-10-04 | ¿El framework publicará versiones (etiquetas o releases que alguien consuma)? Si sí, vuelve `CHANGELOG.md` con SemVer | el autor |
-| 2026-10-04 | *Cerrado el 2026-10-04: el repo es privado en GitHub, no corresponde `LICENSE`.* Licencia de `docencia/` (repo público sin `LICENSE`): cuál para el material propio y cómo se excluye lo ajeno (`cursos/<slug>/05-recursos/vendor/`, evaluaciones de otras universidades): REUSE por archivo o nota en su README | el autor |
 | 2026-10-04 | Los decks Beamer heredados que no compilan (esperan una copia local de `cau-logo.png` o piden XeLaTeX) se reconstruyen al usarlos | el autor (docente) |
 | 2026-10-04 | `scripts/temario.py`, `enlazar.py` y `publicar-web.py` derivan `~/Documents` como carpeta padre del repo y `config/course.yml` (`compilador:`) escribe `$HOME/Documents/...`: pasar por `core/env.py` | el autor |
 | 2026-10-04 | `scripts/lib/common.sh` (`INBOX_DIR`) y `scripts/doctor.sh` siguen tratando la bandeja `_inbox` de `docencia`, ya retirada | el autor |
 | 2026-10-04 | `simuladores/macro/modelos/`: tres pendientes sin fecha (aviso A13) | campaña SIMULADORES |
 | 2026-10-04 | `docencia/migracion/migrar-calibre.py`: la constante del respaldo apunta a `meta/reparaciones/` (retirado) y el texto que escribe en las fichas cita la ruta antigua del estándar de evaluaciones (con prefijo `10-`) | el autor |
 | 2026-10-04 | Revisar la excepción de `simuladores/CLAUDE.md` al cerrar `DIAGNOSTICO_SIMULADORES_2026-10` | campaña SIMULADORES |
+| 2026-10-04 | `scripts/new-evaluacion.sh` escribe las siglas `lab`, `eo` y `tar` (laboratorio, examen oral, tarea) donde `estandar-evaluaciones.md` §2 fija `lb`, `or` y `ta`, y solo crea las doce plantillas de `templates/exam/`: alinear el script con la tabla | el autor |
+| 2026-10-04 | `scaffolds/sesion/deck.tex` (el deck que crea `new-session.sh --tipo clase`) es un Beamer autocontenido con `\usetheme` de `config/course.yml` (`tema_beamer`), no `academic-beamer`: decidir si el scaffold pasa a la clase del framework | el autor |

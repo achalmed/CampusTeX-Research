@@ -30,9 +30,11 @@ tipografía y bloques. Lo carga `classes/academic-beamer.cls`.
 
 ## Límite honesto
 
-- **El nombre es `academic`, en minúsculas**, desde M7 (2026-09-15); `\usetheme{Academic}` ya no
+- **El nombre es `academic`, en minúsculas**; `\usetheme{Academic}` ya no
   existe y los decks heredados que lo escriban así no compilan.
 - **Los colores se resuelven al usarlos**: por eso basta redefinir los once nombres `academic*`
   después de `\usetheme` para obtener la salida en blanco y negro (`\academicbn`).
 - **Los decks Beamer heredados son autocontenidos** (preámbulo propio y copia local del logo) y no
-  pasan por este tema: se reconstruyen al usarlos, no se parchean.
+  pasan por este tema: se reconstruyen al usarlos, no se parchean. Tampoco pasa por él el `deck.tex`
+  que `new-session.sh` crea desde `scaffolds/sesion/deck.tex` (`beamer` + `tema_beamer` de
+  `config/course.yml`); el deck con este tema lo crea `new-presentation.sh`.

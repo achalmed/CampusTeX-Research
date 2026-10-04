@@ -21,9 +21,11 @@ fecha: 2026-09-15
 │   ├── cursos/<slug>/          ← qué se enseña (uno por carpeta)
 │   ├── dictados/<AAAA-ciclo>-<institucion>-<materia>/   ← cada vez que se dicta (manifiesto + producto)
 │   ├── migracion/              ← ledger vivo del banco de exámenes; historico/ = mapas y migradores de M3–M6 (son el UNDO)
-│   └── README.md               ← puerta del repo de contenido (a mano; no hay generador)
+│   ├── README.md               ← puerta del repo de contenido (a mano; no hay generador)
+│   └── CLAUDE.md               ← guía de orientación del asistente (apunta al framework)
 └── registro/                   ← repo PRIVADO hermano, git-ignorado aquí; nunca con remote público
-    └── <clave-del-dictado>/    ← estudiantes, asistencia, calificaciones, evidencias
+    ├── <clave-del-dictado>/    ← estudiantes, asistencia, calificaciones, evidencias
+    └── _legado/                ← archivo cerrado (trabajos heredados)
 ```
 
 Tres repos, tres responsabilidades: el framework produce y valida; `docencia/` es la
@@ -80,7 +82,7 @@ ajeno: [{ruta: 05-recursos/vendor/plantilla-sbs, descripcion: …}]
 `validate.sh` exige `id` (= carpeta), `titulo`, `estado` y `tipo`. `temario-generar.sh`
 genera de aquí el README del curso, la sección «Contenidos / Sílabo» de la ficha web, el
 temario del learning-skill y la checklist de `05 tasks/temarios-cursos.md`; el doctor
-avisa si una vista se desfasó. `archivo:` de un tema es `null` hasta que la nota existe:
+avisa si el README de un curso se desfasó (`temario-generar.sh verificar` compara solo esa vista). `archivo:` de un tema es `null` hasta que la nota existe:
 **no hay esqueletos**.
 
 ## 3. La sesión: tipada por archivo, no por subcarpeta
@@ -107,7 +109,9 @@ avisa si una vista se desfasó. `archivo:` de un tema es `null` hasta que la not
   `guion.md` (esquema `presentacion-clase` de `03 writing/esquemas/`, alineamiento
   constructivo). Lo que antes iba en `01_Antes … 07_Notas` se fusionó ahí en M4.
 - Los decks Beamer siguen siendo autocontenidos (preámbulo propio + copia local del
-  logo): al mover una sesión se mueve la carpeta completa.
+  logo): al mover una sesión se mueve la carpeta completa. El `deck.tex` que crea
+  `new-session.sh --tipo clase` (`scaffolds/sesion/deck.tex`) usa `beamer` con el tema de
+  `config/course.yml` (`tema_beamer`); el deck sobre `academic-beamer` lo crea `new-presentation.sh`.
 
 ## 4. El dictado y el registro
 

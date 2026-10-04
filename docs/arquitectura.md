@@ -73,6 +73,8 @@ tipografías se eligen en `styles/academic-fonts.sty`.
 
 - No hay suite de pruebas: un cambio de diseño se comprueba compilando un deck, una evaluación y un
   sílabo y mirándolos.
-- Los decks Beamer heredados con preámbulo propio no pasan por estas capas y envejecen aparte.
+- Los decks Beamer con preámbulo propio —los heredados y el `deck.tex` que `new-session.sh --tipo clase`
+  crea desde `scaffolds/sesion/deck.tex` (`beamer` + `tema_beamer` de `config/course.yml`)— no pasan
+  por estas capas y envejecen aparte; el deck del framework es el de `new-presentation.sh`.
 - No hay clase de póster ni ejemplos compilados por tipo: el plan de julio de 2026 los preveía y no se
   construyeron (`decisiones.md`).

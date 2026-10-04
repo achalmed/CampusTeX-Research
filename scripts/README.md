@@ -11,7 +11,7 @@ Bash resuelven el repo desde su propia ubicación (`lib/common.sh`); `temario.py
 clave `compilador:` de `config/course.yml` escribe la ruta del compilador universal.
 
 Todos los argumentos `CURSO` y `DICTADO` aceptan **slug o ruta** (`docencia/cursos/<slug>`,
-`docencia/dictados/<clave>`) desde M5 (2026-09-15).
+`docencia/dictados/<clave>`).
 
 ## Uso
 
@@ -28,7 +28,7 @@ bash -n scripts/<archivo>.sh              # comprobación de sintaxis: UN archiv
 |---|---|---|
 | `lib/common.sh` | **la librería**: rutas (`FW_DIR`, `DOCENCIA_DIR`, `CURSOS_DIR`, `DICTADOS_DIR`, `INBOX_DIR`, `REGISTRO_DIR`), `yaml_get`, `config_get`, `slugify`, `latex_engine`, `compile_tex` y los resolutores `is_course`/`course_dir`/`dictado_dir`/`session_dir`/`list_*`/`session_artifact` | se carga con `source`; no se ejecuta |
 | `new-course.sh` | crea un curso: solo `curso.yml` y `README.md` desde `scaffolds/curso/` | `./scripts/new-course.sh SLUG "Título" [--tipo asignatura\|herramienta\|nivelacion\|taller] [--area a,b] [--materia-web m]` |
-| `new-session.sh` | crea una sesión: `sesion.yml`, `guion.md` y el artefacto que exige el tipo | `./scripts/new-session.sh CURSO NN "Título" [--tipo clase\|laboratorio\|taller\|evaluacion] [--quarto] [--artefacto NOMBRE]` |
+| `new-session.sh` | crea una sesión: `sesion.yml`, `guion.md` y el artefacto que exige el tipo (`clase`: el `deck.tex` autocontenido de `scaffolds/sesion/`, con el tema `tema_beamer` de `config/course.yml`, más la copia del logo) | `./scripts/new-session.sh CURSO NN "Título" [--tipo clase\|laboratorio\|taller\|evaluacion] [--quarto] [--artefacto NOMBRE]` |
 | `new-dictado.sh` | crea un dictado: `dictado.yml` + la carpeta hermana en `registro/` | `./scripts/new-dictado.sh AAAA-ciclo INSTITUCION MATERIA "Título" [--web-edicion EDICION]` |
 | `new-presentation.sh` | diapositivas `academic-beamer` (8 tipos) en la sesión; declara `artefacto` en `sesion.yml` | `./scripts/new-presentation.sh CURSO NN "Título" [--tipo TIPO]` |
 | `new-evaluacion.sh` | evaluación `academic-exam` (12 plantillas) en `04-evaluaciones/<sub>/AAAAMMDD_sig.tex` | `./scripts/new-evaluacion.sh CURSO TIPO "Título" [--fecha AAAAMMDD]` |

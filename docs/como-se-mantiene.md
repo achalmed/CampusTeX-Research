@@ -94,7 +94,7 @@ python3 core/docs.py verificar "10 Class"      # el índice de docs/ al día
 python3 core/archivos.py validar "10 Class"    # normativa de archivos (D01–D12 incluidas)
 ```
 
-El doctor devuelve 1 con avisos (no es un fallo) y 2 con fallos.
+El doctor devuelve 1 si hay fallos y 0 si no; los avisos (`[!!]`) no cambian el código de salida.
 
 ## 7. Límite honesto
 

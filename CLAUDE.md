@@ -98,7 +98,9 @@ python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
   Si la compilación falla, el compilador sale con 1, muestra el error y deja el PDF anterior y los
   auxiliares en su sitio.
 - **Los decks Beamer son autocontenidos** (preámbulo propio + copia local del logo): al mover una
-  sesión hay que mover su carpeta completa, porque los assets son hermanos del `.tex`.
+  sesión hay que mover su carpeta completa, porque los assets son hermanos del `.tex`. El `deck.tex`
+  de `new-session.sh --tipo clase` (`scaffolds/sesion/deck.tex`) usa `beamer` con `tema_beamer` de
+  `config/course.yml`, no `academic-beamer`; el deck del framework lo crea `new-presentation.sh`.
 - **Algunos decks heredados no compilan** y es pendiente del docente, no del framework: esperan un
   `cau-logo.png` **hermano del `.tex`** que no se copió, o declaran `%!TEX program = xelatex`. El logo
   canónico está en `assets/branding/cau-logo.png` (ver `assets/README.md`); se reconstruyen al usarlos.
@@ -110,7 +112,7 @@ python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
   `04 index`, `prompts` y `05 tasks`: para un solo README, `--que readme docencia/cursos/<slug>`.
 - **Antes de cerrar un expediente de evaluación**, el log no debe traer `Overfull \hbox` mayores de
   20 pt (los `\aplica{}` han de caber en una línea); lo cierra `docencia/migracion/cerrar-expediente.sh`.
-- **`scripts/new-period.sh` está retirado** (M5): los dictados viven en `docencia/dictados/<clave>/`.
+- **`scripts/new-period.sh` está retirado**: los dictados viven en `docencia/dictados/<clave>/`.
 
 ## Dónde está cada cosa
 

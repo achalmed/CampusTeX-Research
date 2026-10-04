@@ -61,13 +61,13 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
 |---|---|---|
 | `styles/` | identidad visual única (`academic.sty` + colores, fuentes, math, iconos, bloques, código, tablas) | este repo |
 | `classes/` | clases delgadas: `academic-base` · `academic-exam` · `academic-report` · `academic-beamer` | este repo |
-| `themes/` | tema Beamer propio `academic` (minúsculas desde M7); consume `styles/` | este repo |
+| `themes/` | tema Beamer propio `academic` (en minúsculas); consume `styles/` | este repo |
 | `config/` | `course.yml` (identidad del docente, YAML plano) · `palette.tex` **GENERADO** | el autor · `palette.tex`, `sistema-editorial` |
 | `templates/` | documentos vacíos, sin diseño: `exam/` (12 tipos) · `presentation/` (8) · `report/` (4) | este repo |
-| `scaffolds/` | registros mínimos de curso, sesión y dictado (no árboles de carpetas) | este repo |
+| `scaffolds/` | registros mínimos de curso, sesión y dictado (no árboles de carpetas); el `deck.tex` de sesión es un Beamer autocontenido | este repo |
 | `scripts/` | automatización: crear, compilar, validar, generar vistas, publicar | este repo |
 | `assets/` | `assets/branding/cau-logo.png`, el logo canónico | este repo |
-| `bibliography/` | `course.bib` heredado; la bibliografía viva se cita por `calibre_id` (F5.4) | Calibre |
+| `bibliography/` | `course.bib` heredado; la bibliografía viva se cita por `calibre_id` | Calibre |
 | `docs/` | documentación permanente e `historial/` | autor; `docs/README.md` lo genera `core/docs.py` |
 | `simuladores/` | el laboratorio computacional (motor + `macro/` + `estadistica/`) | `simuladores/CLAUDE.md` |
 | `docencia/` | **submódulo** (repo `Academic_Class`): `cursos/`, `dictados/`, `migracion/` | `docencia/README.md` |
@@ -78,7 +78,7 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
 | Documento | Para qué leerlo |
 |---|---|
 | [`docs/estandar-docencia.md`](docs/estandar-docencia.md) | **la fuente única** del estándar: curso, sesión, dictado, registro, nomenclatura |
-| [`docs/estandar-evaluaciones.md`](docs/estandar-evaluaciones.md) | evaluaciones: 16 tipos, siglas, subcarpetas, expediente, `code/`, ficha |
+| [`docs/estandar-evaluaciones.md`](docs/estandar-evaluaciones.md) | evaluaciones: tipos y siglas, subcarpetas, expediente, `code/`, ficha |
 | [`docs/arquitectura.md`](docs/arquitectura.md) | la plataforma editorial: capas, decisiones, flujo de un documento |
 | [`docs/como-se-mantiene.md`](docs/como-se-mantiene.md) | ciclo de vida documental: quién actualiza qué cuando cambia el estándar |
 | [`docs/README.md`](docs/README.md) | índice completo, generado desde el frontmatter de `docs/` |

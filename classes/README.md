@@ -35,4 +35,5 @@ Las plantillas vacías de cada tipo están en `templates/`; los scripts `new-eva
   generado desde `sistema-editorial`). Si una clase necesita un color nuevo, se añade a la paleta, no
   a la clase.
 - **No hay clase para tesis, monografía, ensayo ni artículo**: eso es `03 writing`.
-- Los decks heredados con preámbulo propio no usan `academic-beamer` y por eso envejecen aparte.
+- Los decks con preámbulo propio no usan `academic-beamer` y por eso envejecen aparte: los heredados y
+  el `deck.tex` que `new-session.sh --tipo clase` crea desde `scaffolds/sesion/deck.tex`.

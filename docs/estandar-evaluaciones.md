@@ -46,7 +46,10 @@ la transformación. **Migrar = transformar**, nunca mover:
 | Solucionario formal con portada | `sol` | 12 solucionario | `soluciones` |
 
 - La **sigla va en minúsculas** (normativa §4; así la escribe `new-evaluacion.sh` desde M7).
-  El prompt maestro decía mayúsculas: queda corregido.
+  El prompt maestro decía mayúsculas: queda corregido. `new-evaluacion.sh` crea solo las doce
+  plantillas de `templates/exam/` y escribe hoy `lab`, `eo` y `tar` para laboratorio, examen oral y
+  tarea, en vez de `lb`, `or` y `ta` (pendiente en `decisiones.md` §Pendientes); las demás siglas de la
+  tabla se ponen al nombrar el expediente.
 - El **momento** (parcial, final, sustitutorio, aplazados…) va en `\tipoevaluacion{}` y en la
   sigla; la **forma** (individual/grupal, presencial/virtual) en `\modalidad{}`.
 - `banco/` **no es destino final**: guarda bancos de preguntas (`bp`) y, transitoriamente, los
@@ -139,7 +142,7 @@ Una fila por expediente o PDF suelto: `curso; sub; expediente; estado; …`. Est
 `transformado` (solo `.tex` + PDF propios + `code/`), `parcial` (`.tex` hecho, quedan fuentes),
 `pendiente` (fuente sin transformar), `manual` (no transformable automáticamente: sin enunciado,
 escaneo ilegible, datos en formato sin lector…, con el motivo en `detalle`). Nada se da por
-migrado por estar dentro de `04-evaluaciones/`. El migrador `migrar-examenes.py` (R10) solo
+migrado por estar dentro de `04-evaluaciones/`. El migrador `docencia/migracion/historico/migrar-examenes.py` (R10) solo
 reorganizó y convirtió los `.tex` que ya existían; la transformación es trabajo por expediente
 según este estándar y el prompt maestro.
 
@@ -195,5 +198,5 @@ disco externo del autor.
   de la fase siguiente. `estado-examenes.py` y `enlazar.py examenes` ya la ignoran como fuente y cuentan los
   expedientes `bp` de `banco/` (carpetas, no solo PDF sueltos).
 - **Zotero:** los 934 ítems espejo (`archive: Calibre`) y sus adjuntos fueron enviados a la papelera de Zotero el
-  mismo día (bitácora R13, `zotero-papelera.py`); cada ficha conserva su `zotero_key` y la lista está en
+  mismo día (bitácora R13; el script de un solo uso que lo hizo no está en git); cada ficha conserva su `zotero_key` y la lista está en
   `zotero-keys-migrados.txt`.
