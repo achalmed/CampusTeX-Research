@@ -67,7 +67,9 @@ if [[ -f "$CORE_ENV" ]]; then
   echo
   echo "Normativa de archivos — core/archivos.py validar \"10 Class\""
   rc=0
-  python3 "$DOCS_ROOT/core/archivos.py" validar "$DOCS_ROOT/10 Class" --max 5 || rc=$?
+  # Con la línea base del programa (RQ-VAL-06) lo heredado no bloquea: falla solo lo que empeora.
+  python3 "$DOCS_ROOT/core/archivos.py" validar "$DOCS_ROOT/10 Class" --max 5 \
+    --linea-base "$LINEA_BASE_VALIDADOR" || rc=$?
   case $rc in
     0) ok "Normativa de archivos: sano" ;;
     1) warn "Normativa de archivos: avisos (ver arriba)" ;;
