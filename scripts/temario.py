@@ -29,12 +29,18 @@ from pathlib import Path
 
 import yaml
 
+_d = Path(__file__).resolve()
+while _d != _d.parent and not (_d / "core" / "env.py").is_file():   # core/env.py: la raíz y las carpetas por nombre
+    _d = _d.parent
+sys.path.insert(0, str(_d / "core"))
+import env  # noqa: E402
+
 FW = Path(__file__).resolve().parents[1]           # …/10 Class
-DOCS = FW.parent                                    # …/Documents
+DOCS = env.DOCS_ROOT                                # …/Documents
 CURSOS = FW / "docencia" / "cursos"                       # M5 (2026-09-15): los cursos viven en docencia/cursos/<slug>/ (curso.yml)
-WEB_CURSOS = DOCS / "04 index" / "cursos"
-DOMINIOS = DOCS / "prompts" / "skills" / "learning" / "2 domains"   # DOC9 (2026-09-20): el learning-skill vive en skills/learning
-TAREAS = DOCS / "05 tasks"
+WEB_CURSOS = env.INDEX_DIR / "cursos"
+DOMINIOS = env.PROMPTS_DIR / "skills" / "learning" / "2 domains"   # DOC9 (2026-09-20): el learning-skill vive en skills/learning
+TAREAS = env.TASKS_DIR
 RESUMEN = TAREAS / "temarios-cursos.md"                    # vista checklist (NORMATIVA_ARCHIVOS §5: derivado marcado)
 
 EMOJI_DEFAULT = "📘"
@@ -399,7 +405,7 @@ def bloque_temario_md(t: dict, rutas_desde: Path | None, curso_dir: Path) -> lis
 
 def posts_por_curso() -> dict[str, list[tuple[str, str, str]]]:
     """curso → [(url, título)] leyendo `curso:` del frontmatter de cada post y site-url del blog."""
-    pubs = DOCS / "04 index" / "_pubs"
+    pubs = env.INDEX_DIR / "_pubs"
     out: dict[str, list] = {}
     if not pubs.is_dir():
         return out

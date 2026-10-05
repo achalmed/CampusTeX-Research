@@ -11,7 +11,7 @@ lógica de simulación (dist_muestral) es la MISMA que alimentaría un modelo
 base.py; esta capa solo la VISUALIZA (el modelo nunca se mezcla con la interfaz).
 
 Render (env conda manim-datafw):
-  ~/anaconda3/envs/manim-datafw/bin/manim -qm e67_tcl.py TeoremaCentralLimite
+  conda run -n manim-datafw manim -qm e67_tcl.py TeoremaCentralLimite
 """
 
 from manim import *

@@ -7,7 +7,8 @@ estado: activo
 Dueña de todo lo que se ejecuta. Patrón fijo: el script de entrada **solo orquesta**; la lógica
 compartida está en `lib/common.sh` y los parámetros ajustables, en `config/course.yml`. Los scripts
 Bash resuelven el repo desde su propia ubicación (`lib/common.sh`); `temario.py`, `enlazar.py` y
-`publicar-web.py` toman `~/Documents` como la carpeta padre del repo (no pasan por `core/env.py`), y la
+`publicar-web.py` toman la raíz y las carpetas del hub, de `prompts` y de las tareas de `core/env.py`
+(`DOCS_ROOT`, `INDEX_DIR`, `PROMPTS_DIR`, `TASKS_DIR`), y la
 clave `compilador:` de `config/course.yml` escribe la ruta del compilador universal.
 
 Todos los argumentos `CURSO` y `DICTADO` aceptan **slug o ruta** (`docencia/cursos/<slug>`,

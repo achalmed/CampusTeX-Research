@@ -29,9 +29,15 @@ from pathlib import Path
 
 import yaml
 
+_d = Path(__file__).resolve()
+while _d != _d.parent and not (_d / "core" / "env.py").is_file():   # core/env.py: la raíz y las carpetas por nombre
+    _d = _d.parent
+sys.path.insert(0, str(_d / "core"))
+import env  # noqa: E402
+
 FW = Path(__file__).resolve().parents[1]
-DOCS = FW.parent
-WEB_CURSOS = DOCS / "04 index" / "cursos"
+DOCS = env.DOCS_ROOT
+WEB_CURSOS = env.INDEX_DIR / "cursos"
 SUBS = ("slides", "evaluation", "practice", "homework")
 IGNORAR = {".gitkeep", "_PUBLICADO.md", "index.md", "README.md"}
 

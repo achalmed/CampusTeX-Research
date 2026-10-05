@@ -21,10 +21,16 @@ from pathlib import Path
 
 import yaml
 
+_d = Path(__file__).resolve()
+while _d != _d.parent and not (_d / "core" / "env.py").is_file():   # core/env.py: la raíz y las carpetas por nombre
+    _d = _d.parent
+sys.path.insert(0, str(_d / "core"))
+import env  # noqa: E402
+
 FW = Path(__file__).resolve().parents[1]
-DOCS = FW.parent
+DOCS = env.DOCS_ROOT
 CURSOS = FW / "docencia" / "cursos"     # M5 (2026-09-15): docencia/cursos/<slug>/curso.yml
-PUBS = DOCS / "04 index" / "_pubs"
+PUBS = env.INDEX_DIR / "_pubs"
 LAB = Path(__file__).resolve().parents[1] / "simuladores"   # el laboratorio vive en este repo desde el 2026-09-20
 
 # blog → {carpeta temática (o 'posts'): curso}. None = sin curso equivalente (se deja sin enlazar).
