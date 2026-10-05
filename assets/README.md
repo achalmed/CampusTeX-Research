@@ -31,4 +31,4 @@ a este archivo; si cambia el logo, se cambian los dos y las sesiones ya creadas 
   carpeta del deck. Es pendiente del docente, no del framework.
 - **Al mover una sesión hay que mover su carpeta completa**: los assets son hermanos del `.tex`.
 - **Aquí no viven las fotografías ni los kits de vídeo** del ecosistema (`~/Pictures`, `~/Videos`) ni
-  el sistema de diseño (`sistema-editorial`, `identidad_visual`).
+  el sistema de diseño (`sistema-editorial`, `identidad-visual`).
