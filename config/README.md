@@ -30,5 +30,5 @@ $EDITOR config/course.yml                 # identidad del curso, docente, instit
   color se cambia en `sistema-editorial/temas/docencia.yml`, que es donde vive la decisión.
 - Todo parámetro nuevo de compilación o de identidad va a `course.yml`, nunca dentro de
   `scripts/lib/common.sh`.
-- La clave `compilador:` apunta al compilador universal de `scripts_for_latex`; qué espera de él este
-  repo está en `scripts_for_latex/docs/arquitectura.md` §Consumidores.
+- La clave `compilador:` apunta al compilador universal de `scripts-latex`; qué espera de él este
+  repo está en `scripts-latex/docs/arquitectura.md` §Consumidores.

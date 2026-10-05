@@ -93,7 +93,7 @@ python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
   marcadas `[script]`. Todo parámetro nuevo va a este archivo, nunca al código de `scripts/lib/`.
 - **`compile_tex` envía los `academic-*` a `scripts/build.sh`**; el resto, al compilador universal
   del workspace (`compilador` de `config/course.yml`, con `-s`; contrato en
-  `scripts_for_latex/docs/arquitectura.md` §Consumidores) y, si no existe, a `latex_engine()`
+  `scripts-latex/docs/arquitectura.md` §Consumidores) y, si no existe, a `latex_engine()`
   dos veces. Los dos eligen el motor igual: el `%!TEX program` de las primeras líneas o lualatex.
   Si la compilación falla, el compilador sale con 1, muestra el error y deja el PDF anterior y los
   auxiliares en su sitio.
