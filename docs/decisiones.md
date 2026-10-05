@@ -5,11 +5,11 @@ estado: activo
 ---
 # Decisiones y pendientes del framework de docencia
 
-Registro acumulativo por tema (`meta/NORMATIVA_ARCHIVOS.md` §15.6): una entrada por decisión, con su
+Registro acumulativo por tema (`meta/docs/historial/NORMATIVA_ARCHIVOS.md` §15.6): una entrada por decisión, con su
 fecha y su porqué. Cubre el framework, su contenido (`docencia/`) y su registro privado (`registro/`).
 Lo **decidido** no se vuelve a discutir sin anotar aquí por qué; lo abierto está en
 [§Pendientes](#pendientes), con fecha y dueño. El detalle de cada fase cerrada está en
-[`historial/`](historial/README.md) y en el asiento de `meta/PROGRESO.md`.
+[`historial/`](historial/README.md) y en el asiento de `meta/docs/historial/progreso-2026.md`.
 
 ## Plataforma editorial
 
@@ -72,7 +72,7 @@ Las cinco carpetas del curso existen solo con contenido; `CURSO` y `DICTADO` ace
 tiene clave propia en `docencia/dictados/`.
 
 **Decidido (2026-10-04, DOC10): `docencia/` es un repo privado en GitHub y no lleva `LICENSE`**
-(`meta/NORMATIVA_ARCHIVOS.md` §15.11: la licencia corresponde solo con remoto público). Si algún día se
+(`meta/docs/historial/NORMATIVA_ARCHIVOS.md` §15.11: la licencia corresponde solo con remoto público). Si algún día se
 publica, antes se separa lo ajeno (`cursos/<slug>/05-recursos/vendor/`, evaluaciones de otras
 universidades) de lo propio y el autor elige la licencia.
 
@@ -116,9 +116,9 @@ Vino de `02 analysis/simuladores/` con su historia git porque es currículo —f
 verificaciones que son teoremas, animaciones— y lo consumen los cursos, no el pipeline de datos.
 
 **Decidido (2026-10-04, DOC10): `simuladores/CLAUDE.md` se conserva como guía anidada**, excepción a
-`meta/NORMATIVA_ARCHIVOS.md` §15.5 (que solo admite guía anidada en un subárbol con manifiesto propio).
+`meta/docs/historial/NORMATIVA_ARCHIVOS.md` §15.5 (que solo admite guía anidada en un subárbol con manifiesto propio).
 Motivo: el laboratorio tiene doctrina propia y la usa una campaña en curso
-(`meta/diagnosticos/DIAGNOSTICO_SIMULADORES_2026-10.md`). Sin historial ni recuentos; `AGENTS.md` de la
+(`meta/docs/historial/diagnosticos/DIAGNOSTICO_SIMULADORES_2026-10.md`). Sin historial ni recuentos; `AGENTS.md` de la
 carpeta es su enlace. Se revisa al cerrar esa campaña.
 
 ## Registro privado
@@ -131,7 +131,7 @@ intacto, no se clasifica ni se cita; su respaldo es el disco externo del autor.
 
 ## Documentación
 
-**Decidido (2026-09-20, DOC4): la documentación sigue `meta/NORMATIVA_ARCHIVOS.md` §15.**
+**Decidido (2026-09-20, DOC4): la documentación sigue `meta/docs/historial/NORMATIVA_ARCHIVOS.md` §15.**
 El estándar se cuenta una vez (`estandar-docencia.md`, `estandar-evaluaciones.md`); README,
 `CLAUDE.md` y `docencia/README.md` apuntan; `docs/` en kebab-case con índice generado e `historial/`.
 

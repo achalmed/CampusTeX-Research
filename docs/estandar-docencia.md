@@ -142,7 +142,7 @@ dictados/2026-i-cau-unsch-metodologia/
   `s07-series-temporales/`, `1-2-medicion-del-pib.md`, `deck.tex`.
 - Prefijo numérico solo en las cinco carpetas fijas (`01-…05-`) y en las sesiones (`sNN-`).
 - Claves YAML `snake_case`; `id` = slug de la carpeta; `estado` del ciclo de vida
-  (`meta/NORMATIVA_ARCHIVOS.md` §2.1); línea 1 de identidad en cada registro.
+  (`meta/docs/historial/NORMATIVA_ARCHIVOS.md` §2.1); línea 1 de identidad en cada registro.
 - Períodos `AAAA-i` / `AAAA-ii`.
 - Fuera de norma solo `vendor/` (ajeno, declarado en `ajeno:`):
   el validador no entra en ellos. Los adjuntos heredados con espacios que lee código

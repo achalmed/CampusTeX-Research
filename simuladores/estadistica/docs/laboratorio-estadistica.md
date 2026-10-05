@@ -208,6 +208,6 @@ duplicará `pipeline/` (hará fichas sobre los métodos ya implementados allí).
 - **E0–E1 (2026-10-01): rigor verificable.** `Ficha.fuentes` y `fuentes.py` (la cita se
   comprueba contra la hoja del PDF); procedencia por defecto propia de la disciplina (antes
   heredaba el texto de macro); `temario.yml` con 244 temas. Plan de cierre E2–E7 en
-  `meta/diagnosticos/DIAGNOSTICO_SIMULADORES_2026-10.md`.
+  `meta/docs/historial/diagnosticos/DIAGNOSTICO_SIMULADORES_2026-10.md`.
 - **Siguiente (E2):** fuentes verificadas de los 23 temas, matriz de trazabilidad y enlaces de
   `curso.yml`; luego secciones I y III a XI.

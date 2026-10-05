@@ -13,7 +13,7 @@ submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/` (repo
 
 ## Reglas que no se negocian
 
-- **Dónde va cada cosa nueva** (`meta/NORMATIVA_ARCHIVOS.md` §15.11). En la raíz solo `README.md`,
+- **Dónde va cada cosa nueva** (`meta/docs/historial/NORMATIVA_ARCHIVOS.md` §15.11). En la raíz solo `README.md`,
   `CLAUDE.md`, `AGENTS.md`, `LICENSE` y los archivos de entorno (`.gitignore`, `.gitattributes`, `.gitmodules`).
 
   | lo que apareció | va a | nunca a |
@@ -56,7 +56,7 @@ submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/` (repo
   puntero). Clon nuevo: `git clone --recurse-submodules`.
 - **Toda reorganización sigue el ciclo** (auditoría → propuesta → aprobación → tag → cambio con
   dry-run → validate → doctor → commit), deja su mapa de rutas en `docencia/migracion/`, el porqué en
-  `docs/decisiones.md` y el asiento de la fase en `meta/PROGRESO.md`.
+  `docs/decisiones.md` y el asiento de la fase en `meta/docs/historial/progreso-2026.md`.
 
 ## Cómo se verifica un cambio
 
@@ -73,7 +73,7 @@ python3 scripts/enlazar.py verificar            # enlaces a posts, simuladores y
 bash -n scripts/<archivo>.sh                    # un archivo por invocación
 
 cd ~/Documents
-python3 core/archivos.py validar "10 Class"     # normativa de archivos (meta/NORMATIVA_ARCHIVOS.md)
+python3 core/archivos.py validar "10 Class"     # normativa de archivos (meta/docs/historial/NORMATIVA_ARCHIVOS.md)
 python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
 ```
 
@@ -132,7 +132,7 @@ python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
 | El ciclo de trabajo del ecosistema | `prompts/00 metodo/CICLO.md` |
 | La taxonomía documental (docencia = tipo 22) | `prompts/00 metodo/ARQUITECTURA_DOCUMENTAL.md` |
 | El contrato con los apuntes de estudio y la web | `prompts/docs/dominios/aprendizaje.md` |
-| La normativa de archivos del ecosistema | `meta/NORMATIVA_ARCHIVOS.md` |
+| La normativa de archivos del ecosistema | `meta/docs/historial/NORMATIVA_ARCHIVOS.md` |
 
 Si un documento, prompt o script habla de `areas/Academic_Class-<Área>/course_NN_<slug>/0N_…`, es
 histórico: léelo como `docencia/cursos/<slug>/0N-…` (mapas en `docencia/migracion/historico/`).

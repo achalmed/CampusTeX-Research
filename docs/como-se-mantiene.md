@@ -55,7 +55,7 @@ Orden obligatorio, de la regla al código y del código a las vistas:
 6. **Actualizar los punteros**, nunca copias: `README.md`, `CLAUDE.md`, `docencia/README.md`,
    `prompts/05 docencia/`, `prompts/docs/dominios/aprendizaje.md` y `meta/workspace.yml` (`verdad:`).
 7. **Anotar el porqué** en `docs/decisiones.md` (con fecha) y, si fue una fase, su asiento en
-   `meta/PROGRESO.md`; lo que se hizo va al mensaje de commit.
+   `meta/docs/historial/progreso-2026.md`; lo que se hizo va al mensaje de commit.
 
 Si el cambio afecta a los apuntes de estudio, pasa además por la checklist de propagación de
 `prompts/docs/dominios/aprendizaje.md`.
@@ -74,7 +74,7 @@ Un parámetro nuevo del docente va a `config/course.yml` (YAML plano), nunca al 
 | un diagnóstico o plan aplica su última fase | `estado: hecho` y se mueve a `docs/historial/` en el mismo commit |
 | un documento es absorbido por otro | línea 1 del cuerpo `> Superado por <ruta> (<fecha>).`, `estado: archivado`; se elimina en la siguiente higiene |
 | una regla se retira | se tacha en su documento con la fecha; no se borra el porqué |
-| se escribe un pendiente | con fecha y dueño (`meta/NORMATIVA_ARCHIVOS.md` §9.4) |
+| se escribe un pendiente | con fecha y dueño (`meta/docs/historial/NORMATIVA_ARCHIVOS.md` §9.4) |
 | se cita una ruta entre backticks | tiene que existir; las rutas históricas solo en `docs/historial/` |
 
 `CLAUDE.md` no lleva historial (≤ 150 líneas, ≤ 5 fechas ISO): lo que envejece se muda a

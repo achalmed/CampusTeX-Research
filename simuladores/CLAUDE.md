@@ -67,7 +67,7 @@ Currículo por secciones (fundamentos → aprendizaje automático); diseño en
 `estadistica/docs/laboratorio-estadistica.md`; mapa de temas (id, estado, temas de `curso.yml`) en
 `estadistica/temario.yml`: los números que ya citan los modelos son anclas, no se renumeran. Estado:
 `cd estadistica && python3 main.py verificar`; plan de cierre en
-`meta/diagnosticos/DIAGNOSTICO_SIMULADORES_2026-10.md`; la app interactiva es la del motor (`app.py`) y ya sirve a esta
+`meta/docs/historial/diagnosticos/DIAGNOSTICO_SIMULADORES_2026-10.md`; la app interactiva es la del motor (`app.py`) y ya sirve a esta
 disciplina. DOS renderizadores, un modelo: matplotlib (app + reportes) y **Manim**
 (`estadistica/animaciones/`, «ver el método en movimiento»), que corre en un env conda APARTE
 (`manim-datafw`, Manim 0.20.1 sobre ffmpeg + TeX Live) porque `manimpango` no tiene wheel para
@@ -80,4 +80,4 @@ py3.13; utilidades comunes en `_comun.py` (prohibido copiarlas).
 - Cursos: `docencia/cursos/<slug>/curso.yml` enlaza modelos como `recursos: [{tipo: simulador,
   archivo: 10 Class/simuladores/<disciplina>/modelos/…}]`; `scripts/enlazar.py simuladores`
   propone los enlaces por similitud de título y `enlazar.py verificar` los comprueba.
-- Forma de archivos: normativa `meta/NORMATIVA_ARCHIVOS.md` (`core/archivos.py validar "10 Class"`).
+- Forma de archivos: normativa `meta/docs/historial/NORMATIVA_ARCHIVOS.md` (`core/archivos.py validar "10 Class"`).
