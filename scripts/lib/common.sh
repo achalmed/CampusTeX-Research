@@ -28,6 +28,13 @@ DICTADOS_DIR="$DOCENCIA_DIR/dictados"
 INBOX_DIR="$DOCENCIA_DIR/_inbox"   # retirado el 2026-09-20 (06 archives/2026-09-20-docencia-inbox); el doctor lo trata como vacío
 REGISTRO_DIR="$FW_DIR/registro"                      # repo privado hermano (nunca con remote público)
 
+# Compilador universal del workspace: su carpeta la da core/env.sh (SCRIPTS_LATEX) cuando el framework
+# vive dentro de ~/Documents; fuera de él queda vacía y compile_tex compila con lualatex directo.
+if [[ -z "${SCRIPTS_LATEX:-}" && -f "$FW_DIR/../core/env.sh" ]]; then
+  SCRIPTS_LATEX="$(bash -c 'source "$1" && printf "%s" "$SCRIPTS_LATEX"' _ "$FW_DIR/../core/env.sh" 2>/dev/null)" || SCRIPTS_LATEX=""
+fi
+SCRIPTS_LATEX="${SCRIPTS_LATEX:-}"
+
 # --- Salida con color ---------------------------------------
 if [[ -t 1 ]]; then
   C_OK=$'\033[0;32m'; C_WARN=$'\033[0;33m'; C_ERR=$'\033[0;31m'

@@ -39,6 +39,6 @@ modalidad: "presencial"
 nivel: "pregrado"
 
 # --- Compilación ---------------------------------- [script]
-# Ruta al compilador universal del workspace (autodetecta motor).
-# Si no existe, el framework compila con lualatex directo (motor único 2026).
-compilador: "$HOME/Documents/scripts_for_latex/script_compilar_latex/main.sh"
+# Ruta al compilador universal del workspace (autodetecta motor). $SCRIPTS_LATEX la resuelve
+# core/env.sh (scripts/lib/common.sh la carga); sin core/, o si no existe, se compila con lualatex directo.
+compilador: "$SCRIPTS_LATEX/script_compilar_latex/main.sh"
