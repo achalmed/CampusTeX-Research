@@ -446,7 +446,7 @@ Secuencia troncal (un modelo "ancla" por etapa, el resto del nivel después):
 - **Hito 13 (2026-08-19): nivel 12 (1/N) — el laboratorio aterriza en el Perú
   con datos BCRP reales.** Edison autorizó activar los conectores BCRP; se
   descargaron 6 series macro (PBI, IPC, tasa, tipo de cambio; 2004-2024) vía
-  `02 analysis/connectors/bcrp` y se destiló un **snapshot anual embebido**
+  `datafw/connectors/bcrp` y se destiló un **snapshot anual embebido**
   (`_series_bcrp.py`) para que los modelos sean auto-contenidos (`data/` está
   en `.gitignore`); los datos mensuales de `data/raw/` sirven como resolución
   fina cuando están presentes (`_datos_bcrp.py`). m97-m102 leen la serie,

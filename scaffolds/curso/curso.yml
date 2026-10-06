@@ -16,5 +16,5 @@ materia_web: {{MATERIA_WEB}}      # ficha de 04 index/cursos/<materia> (varios c
 dominio_fuat: null                # dominio del learning-skill
 unidades: []                      # [{id, titulo, temas: [{id, titulo, archivo: 02-contenido/1-1-tema.md | null, recursos: []}]}]
 bibliografia: []                  # [{calibre_id, titulo, autor, origen}]
-datasets: []                      # [{clave, uso}] → catálogo de 02 analysis
+datasets: []                      # [{clave, uso}] → catálogo de datafw
 ajeno: []                         # [{ruta: 05-recursos/vendor/…, descripcion}]

@@ -29,7 +29,7 @@ corridas de Diamond-Dybvig m73, ataque cambiario que anticipa m74, zona de
 crisis de deuda m76, acelerador κ=λ²·impacto m79, contagio en red m80). El
 **nivel 12 es el laboratorio del Perú con datos reales del BCRP**: m97-m104
 descargan series macro (PBI, IPC, tasa de referencia, tipo de cambio, cobre;
-2004-2024) vía `02 analysis/connectors/bcrp`, destilan un snapshot anual embebido
+2004-2024) vía `datafw/connectors/bcrp`, destilan un snapshot anual embebido
 (`_series_bcrp.py`, para ser auto-contenidos) y **verifican contra el dato
 real** en vez de una calibración didáctica — con honestidad econométrica
 explícita (el coeficiente Taylor 0.55<1 como sesgo de variable omitida en m100;
@@ -55,7 +55,7 @@ completo de crecimiento (Solow → regla de oro → progreso técnico → conver
 → trampa de pobreza → AK → capital humano). Figuras con tipografía académica
 (serif + matemática STIX); cada experimento con mecanismo de transmisión.
 
-Dependencias: `numpy` + `matplotlib` (las de `02 analysis/pipeline/requirements.txt`).
+Dependencias: `numpy` + `matplotlib` (las de `datafw/pipeline/requirements.txt`).
 
 ## Uso
 

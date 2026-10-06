@@ -14,7 +14,7 @@
 #     evaluacion} · estado; guion.md; `artefacto` declarado, existente y coherente con el tipo
 #     (clase: .tex/.qmd · laboratorio: .ipynb/.do/.py/.r/.rmd/.html · taller: .ods/.xlsx/.xlsm · evaluacion: .tex).
 #     Con `revisar:` en sesion.yml la incoherencia es aviso, no error.
-#   - Binarios > 5 MB: aviso (regla §7.6: datos en 02 analysis, pesados fuera del repo).
+#   - Binarios > 5 MB: aviso (regla §7.6: datos en datafw, pesados fuera del repo).
 # Dictado (docencia/dictados/<clave>/):
 #   - dictado.yml con id (= carpeta) · periodo · institucion · estado; `legado: true` exime de sesiones.
 #   - sesiones[]: cada {curso, sesion, web} apunta a un curso y una sesión existentes.

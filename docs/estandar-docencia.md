@@ -75,7 +75,7 @@ dominio_fuat: econometria         # dominio del learning-skill
 unidades: [...]                   # id, titulo, temas[] {id, titulo, archivo: 02-contenido/1-1-tema.md | null, recursos[]}
 bibliografia: [{calibre_id: 1234, titulo: …, autor: …, origen: …}]
 banco_examenes: []                # enlazar.py examenes
-datasets: [{clave: inei/enaho/2019/sumaria, uso: "s01 pobreza"}]   # catálogo de 02 analysis
+datasets: [{clave: inei/enaho/2019/sumaria, uso: "s01 pobreza"}]   # catálogo de datafw
 ajeno: [{ruta: 05-recursos/vendor/plantilla-sbs, descripcion: …}]
 ```
 
@@ -153,8 +153,8 @@ dictados/2026-i-cau-unsch-metodologia/
 | Necesidad | Dónde vive | Cómo la cita el curso |
 |---|---|---|
 | Libros y artículos | Calibre (`biblioteca/`) | `bibliografia[].calibre_id` (`scripts-biblioteca/ingesta_cursos` lo escribe) |
-| Datasets oficiales (ENAHO, INEI, Damodaran…) | catálogo de `02 analysis` (`data/raw/…`) | `datasets[].clave`; el curso conserva solo muestras ≤ 5 MB |
-| Series para el `code/` de una evaluación o para un modelo del laboratorio | paquetes de resultados y datos de `02 analysis`, leídos por nombre (`core/env.py`) | el código del expediente o del modelo; contrato del proveedor en `02 analysis/docs/integracion-ecosistema.md` |
+| Datasets oficiales (ENAHO, INEI, Damodaran…) | catálogo de `datafw` (`data/raw/…`) | `datasets[].clave`; el curso conserva solo muestras ≤ 5 MB |
+| Series para el `code/` de una evaluación o para un modelo del laboratorio | paquetes de resultados y datos de `datafw`, leídos por nombre (`core/env.py`) | el código del expediente o del modelo; contrato del proveedor en `datafw/docs/integracion-ecosistema.md` |
 | Logo, fuentes, plantillas, clases | `assets/`, `styles/`, `templates/`, `classes/` del framework | `\documentclass{academic-*}`; el deck lleva **una** copia local del logo |
 | Apuntes de Edison como alumno | `01 notes/40-cursos-y-formacion/<curso>/` | enlazan al tema de `02-contenido/`; nunca escriben en `docencia/` |
 | Ficha web | `04 index/cursos/<materia>/` | `materia_web` (n cursos → 1 materia); ediciones por dictado |
@@ -173,7 +173,7 @@ dictados/2026-i-cau-unsch-metodologia/
    `id` = carpeta; `estado` del ciclo. Excepción solo `vendor/`.
 5. **Edita la fuente, no la vista.** README, ficha web, temarios del skill y checklists se
    regeneran con `temario-generar.sh`; nunca a mano.
-6. **Nada externo se copia.** Libros por `calibre_id`; datasets por clave de `02 analysis`;
+6. **Nada externo se copia.** Libros por `calibre_id`; datasets por clave de `datafw`;
    plantillas, logo y fuentes desde el framework. Dentro del curso solo material propio y
    muestras ≤ 5 MB; el doctor avisa de binarios mayores.
 7. **Sin esqueletos.** Una nota existe cuando está escrita; `estado: activo` significa

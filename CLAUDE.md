@@ -50,7 +50,7 @@ submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/` (repo
 - **Homogeneidad total**: al estandarizar se convierte todo al estándar; si un deck deja de compilar,
   se reconstruye, no se conserva la excepción.
 - **Lo externo no se copia**: libros por `calibre_id` en `curso.yml.bibliografia`, datasets por clave de
-  `02 analysis`, logo y plantillas desde el framework. En `05-recursos` solo material propio y muestras
+  `datafw`, logo y plantillas desde el framework. En `05-recursos` solo material propio y muestras
   ≤ 5 MB. Subir no es catalogar: antes de añadir, se busca en Calibre.
 - **Flujo de submódulo**: commit dentro de `docencia/` → `git add docencia` + commit aquí (mueve el
   puntero). Clon nuevo: `git clone --recurse-submodules`.

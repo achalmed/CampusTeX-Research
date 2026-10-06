@@ -75,7 +75,7 @@ de la raíz. `salidas/` de cada disciplina es regenerable (en `.gitignore`).
 ## Límite honesto
 
 - Es un laboratorio pedagógico: los modelos reproducen teoremas y escenarios de manual, no pronósticos. Los que usan
-  datos reales (el nivel 12 de macro, con series del BCRP) los leen de `02 analysis` por nombre; el laboratorio no adquiere datos.
+  datos reales (el nivel 12 de macro, con series del BCRP) los leen de `datafw` por nombre; el laboratorio no adquiere datos.
 - «Página verificada» significa que el pasaje citado está en esa hoja del PDF del `calibre_id`: lo comprueba
   `fuentes.py` con el texto que da `core/py-common/biblioteca.py`. Sin la biblioteca en la máquina, la cita queda
   «no comprobable», no verificada; y la página impresa solo se confirma si el PDF trae el folio en su texto.

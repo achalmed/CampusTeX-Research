@@ -3,9 +3,9 @@
 No es un modelo.
 
 Dos fuentes, en orden de preferencia:
-  (1) DATOS MENSUALES de 02 analysis/data/raw/bcrp/<categoría>/<código>_v…json
+  (1) DATOS MENSUALES de datafw/data/raw/bcrp/<categoría>/<código>_v…json
       (los descarga el conector connectors/bcrp; el archivo original es
-      SAGRADO — solo se lee, nunca se modifica). Mayor resolución. Si 02 analysis
+      SAGRADO — solo se lee, nunca se modifica). Mayor resolución. Si datafw
       está, se leen con su lector único (metodos/series/lectores.py: resuelve la
       ruta por el catálogo y omite los periodos sin dato); si no, con el lector
       propio de abajo.
@@ -27,7 +27,7 @@ import numpy as np
 
 from modelos.nivel_12 import _series_bcrp
 
-# raíz de datos crudos: 02 analysis/data/raw/bcrp, localizada por NOMBRE
+# raíz de datos crudos: datafw/data/raw/bcrp, localizada por NOMBRE
 # (core/env.py: ANALYSIS_DIR) porque el laboratorio vive en 10 Class desde el
 # 2026-09-20; si core/ no está, se usa el snapshot embebido (_series_bcrp).
 # Hasta el 2026-09-28 apuntaba a data/raw/peru/bcrp/<código>/, que dejó de existir
@@ -47,7 +47,7 @@ _RAIZ_RAW = (_ANALYSIS / "data" / "raw" / "bcrp") if _ANALYSIS else Path("/nonex
 
 
 def _lector_unico():
-    """`metodos.series.lectores` de 02 analysis si está disponible; None si no."""
+    """`metodos.series.lectores` de datafw si está disponible; None si no."""
     if _ANALYSIS is None or not (_ANALYSIS / "metodos" / "series" / "lectores.py").is_file():
         return None
     import sys
@@ -56,13 +56,13 @@ def _lector_unico():
     try:
         from metodos.series import lectores
         return lectores
-    except Exception:             # un 02 analysis a medias no tumba el laboratorio
+    except Exception:             # un datafw a medias no tumba el laboratorio
         return None
 
 
 def _archivos(codigo):
     """Versiones del JSON de una serie en el acervo (cualquier categoría), ordenadas."""
-    # nombre fijo `<CÓDIGO>_<descripción>_<unidad>_<frecuencia>.json` desde el 2026-09-30 (02 analysis §7.53); el patrón
+    # nombre fijo `<CÓDIGO>_<descripción>_<unidad>_<frecuencia>.json` desde el 2026-09-30 (datafw §7.53); el patrón
     # cubre también la forma vieja `<CÓDIGO>_v003_….json`. Con `_v*` esto devolvía [] y hay_datos_mensuales() decía False
     return sorted(glob.glob(str(_RAIZ_RAW / "*" / f"{codigo}_*.json")))
 

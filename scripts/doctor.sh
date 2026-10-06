@@ -47,7 +47,7 @@ if [[ -d "$CURSOS_DIR" ]]; then
   elif [[ "$(date +%F)" < "$PLAZO_TEMPORALES" ]]; then ok "_inbox/: $n_inbox archivos por clasificar — temporal con plazo $PLAZO_TEMPORALES (D10); nada se cita desde ahí"
   else warn "_inbox/: $n_inbox archivos por clasificar y el plazo $PLAZO_TEMPORALES ya venció (§7.11: nada se cita desde ahí)"; fi
   n_big="$(find "$CURSOS_DIR" -type f -size +5M -not -path '*/publicacion/*' 2>/dev/null | wc -l)"
-  [[ "$n_big" -eq 0 ]] && ok "Binarios > 5 MB en cursos/: ninguno" || warn "Binarios > 5 MB en cursos/: $n_big (§7.6: datos a 02 analysis; pesados fuera del repo o LFS)"
+  [[ "$n_big" -eq 0 ]] && ok "Binarios > 5 MB en cursos/: ninguno" || warn "Binarios > 5 MB en cursos/: $n_big (§7.6: datos a datafw; pesados fuera del repo o LFS)"
 else
   error "No existe $CURSOS_DIR (submódulo docencia/ sin inicializar: git submodule update --init)"; rc_total=1
 fi

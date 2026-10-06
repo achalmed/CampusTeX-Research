@@ -322,9 +322,9 @@ def render_readme_borrador(t: dict) -> str:
             "Mientras tanto `./scripts/temario-generar.sh verificar` lo lista como «sin unidades (temario por completar)».", ""]
     out += seccion_recursos(t)
     if t.get("datasets"):
-        out += ["## Datos", "", "Datasets que el registro declara (`datasets:`); los `catalogado` viven en `02 analysis` y su clave es un `dataset_id`, no una ruta de este curso:", ""]
+        out += ["## Datos", "", "Datasets que el registro declara (`datasets:`); los `catalogado` viven en `datafw` y su clave es un `dataset_id`, no una ruta de este curso:", ""]
         for d in t["datasets"]:
-            clave = f"{d.get('clave', '')} (clave de 02 analysis)" if d.get("estado") == "catalogado" else f"`{d.get('clave', '')}`"
+            clave = f"{d.get('clave', '')} (clave de datafw)" if d.get("estado") == "catalogado" else f"`{d.get('clave', '')}`"
             out.append(f"- {clave} — uso `{d.get('uso', '')}`" + (f", {d['mb']} MB" if d.get("mb") is not None else "") + (f", {d['estado']}" if d.get("estado") else ""))
         out.append("")
     out += seccion_bibliografia_y_ajeno(t)

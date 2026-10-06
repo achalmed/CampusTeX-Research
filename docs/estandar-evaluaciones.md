@@ -88,7 +88,7 @@ El nombre del expediente, del `.tex`, del script y de los PDF es **el mismo tall
 - `code/` se llama `code` (no `codigo`); el script lleva el tallo del examen; las carpetas
   `figures/` y `table/` existen solo si el código las produce; nada de gráficos a mano
   (TikZ) para lo que el examen manda calcular.
-- Datos pesados (> 5 MB) no viven aquí: el catálogo de `02 analysis` los aloja y `curso.yml`
+- Datos pesados (> 5 MB) no viven aquí: el catálogo de `datafw` los aloja y `curso.yml`
   los cita en `datasets[]` (§7.6 del estándar de docencia); en `code/data/` queda la muestra.
 - Lecturas y anexos de terceros (artículos, capítulos) van a la biblioteca Calibre
   (`bibliografia[]` del `curso.yml`), no al expediente.

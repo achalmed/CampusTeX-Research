@@ -63,7 +63,7 @@ Los 23 repos `Academic_Class-<Área>` con el estándar 00–09 se consolidaron c
 submódulo `docencia/` (tags `<área>/pre-reorg-2026-09`; tags del framework `pre-reorg-2026-09` y
 `reorg-2026-09-done`). Por qué y cómo: [`historial/DIAGNOSTICO_AREAS_2026-09.md`](historial/DIAGNOSTICO_AREAS_2026-09.md);
 los mapas archivo a archivo, en `docencia/migracion/historico/`. Lo que no era contenido docente salió:
-datasets a `02 analysis`, trabajos de estudiantes a `registro/`, material de inglés a `01 notes`.
+datasets a `datafw`, trabajos de estudiantes a `registro/`, material de inglés a `01 notes`.
 
 **Decidido (2026-09-15, M3–M5): `curso.yml` sucede a `temario.yml`; los scaffolds son registros, no
 árboles; el dictado vive fuera del curso.**
@@ -112,7 +112,7 @@ versionan (respaldo en el disco externo del autor). El estado de cada expediente
 ## Simuladores
 
 **Decidido (2026-09-20): el laboratorio `simuladores/` vive en este repo.**
-Vino de `02 analysis/simuladores/` con su historia git porque es currículo —fichas pedagógicas,
+Vino de `datafw/simuladores/` con su historia git porque es currículo —fichas pedagógicas,
 verificaciones que son teoremas, animaciones— y lo consumen los cursos, no el pipeline de datos.
 
 **Decidido (2026-10-04, DOC10): `simuladores/CLAUDE.md` se conserva como guía anidada**, excepción a

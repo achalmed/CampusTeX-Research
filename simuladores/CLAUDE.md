@@ -49,9 +49,9 @@ fórmula (regresión = derivar $\hat\beta=(X'X)^{-1}X'Y$, no llamar `lm()`).
 Currículo completo por niveles (recuento: `cd macro && python3 main.py verificar`); plan vigente en
 `macro/docs/laboratorio-macro.md`. El nivel 12 es el laboratorio del Perú con datos reales del
 BCRP: m97-m115 usan series macro (PBI, IPC, tasa, tipo de cambio, cobre, términos de
-intercambio, bloque fiscal) que descarga `02 analysis/connectors/bcrp`; el detalle mensual se
-lee de `02 analysis/data/raw/bcrp/<categoría>/` **por nombre**, con el lector único de
-`02 analysis/metodos/series/lectores.py` cuando está (`macro/modelos/nivel_12/_datos_bcrp.py` localiza
+intercambio, bloque fiscal) que descarga `datafw/connectors/bcrp`; el detalle mensual se
+lee de `datafw/data/raw/bcrp/<categoría>/` **por nombre**, con el lector único de
+`datafw/metodos/series/lectores.py` cuando está (`macro/modelos/nivel_12/_datos_bcrp.py` localiza
 `core/env.py: ANALYSIS_DIR`) y, si no está, cae al snapshot anual embebido en `_series_bcrp.py`
 (auto-contenido). Verifica contra el dato real, no contra calibración didáctica: coef. Taylor
 0,55 < 1 = sesgo de variable omitida (m100); correlación tasa-inflación = causalidad inversa
@@ -59,7 +59,7 @@ lee de `02 analysis/data/raw/bcrp/<categoría>/` **por nombre**, con el lector �
 pública corr ≈ 0 porque es contracíclica (m106-m108) vs exportaciones exógenas (m109); shock
 externo real y financiero (m110-m111); enclave minero (m112); passthrough ≈ 0 (m113); El Niño
 como shock de oferta (m114); síntesis (m115). Tras macro vendrán micro/econometría/mate (§9 del
-diseño); la econometría pedagógica NO duplicará `02 analysis/pipeline/`.
+diseño); la econometría pedagógica NO duplicará `datafw/pipeline/`.
 
 ## Estadística (`estadistica/`)
 
@@ -75,7 +75,7 @@ py3.13; utilidades comunes en `_comun.py` (prohibido copiarlas).
 
 ## Relación con el resto del ecosistema
 
-- Datos reales: siempre de `02 analysis` por nombre (`core/env.py`), nunca por rutas relativas
+- Datos reales: siempre de `datafw` por nombre (`core/env.py`), nunca por rutas relativas
   ni copias; el laboratorio no adquiere datos.
 - Cursos: `docencia/cursos/<slug>/curso.yml` enlaza modelos como `recursos: [{tipo: simulador,
   archivo: 10 Class/simuladores/<disciplina>/modelos/…}]`; `scripts/enlazar.py simuladores`
