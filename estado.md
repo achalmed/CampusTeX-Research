@@ -18,6 +18,7 @@ estado en `docencia/estado.md`; `registro/` es sensible y no se describe aquí.
 Bitácora de la ola 5 (etiqueta `antes-ola-05-2026-10-06` en este repo y en `docencia`):
 
 - 2026-10-06 · D1 · `estado.md` aquí y en `docencia`; los pendientes de `docs/decisiones.md` pasan a §Por hacer y la sección sale de decisiones.md.
+- 2026-10-06 · D2 · (en `docencia`) los scripts de los exámenes y `code_sesion_02.r` sin rutas absolutas: `NOTES_DIR` de `core/env` o la carpeta del script, con «Falta el dato» donde el origen ya no existe.
 
 ## En curso
 
