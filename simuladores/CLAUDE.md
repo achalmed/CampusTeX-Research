@@ -52,7 +52,7 @@ BCRP: m97-m115 usan series macro (PBI, IPC, tasa, tipo de cambio, cobre, términ
 intercambio, bloque fiscal) que descarga `datafw/connectors/bcrp`; el detalle mensual se
 lee de `datafw/data/raw/bcrp/<categoría>/` **por nombre**, con el lector único de
 `datafw/metodos/series/lectores.py` cuando está (`macro/modelos/nivel_12/_datos_bcrp.py` localiza
-`core/env.py: ANALYSIS_DIR`) y, si no está, cae al snapshot anual embebido en `_series_bcrp.py`
+`core/env.py: DATAFW_DIR`) y, si no está, cae al snapshot anual embebido en `_series_bcrp.py`
 (auto-contenido). Verifica contra el dato real, no contra calibración didáctica: coef. Taylor
 0,55 < 1 = sesgo de variable omitida (m100); correlación tasa-inflación = causalidad inversa
 (m101); canal del cobre (m103-m105: TdI mueven el INGRESO, no el PBI-volumen); inversión

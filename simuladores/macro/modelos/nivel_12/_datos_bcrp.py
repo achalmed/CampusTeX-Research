@@ -28,31 +28,31 @@ import numpy as np
 from modelos.nivel_12 import _series_bcrp
 
 # raíz de datos crudos: datafw/data/raw/bcrp, localizada por NOMBRE
-# (core/env.py: ANALYSIS_DIR) porque el laboratorio vive en 10 Class desde el
+# (core/env.py: DATAFW_DIR) porque el laboratorio vive en 10 Class desde el
 # 2026-09-20; si core/ no está, se usa el snapshot embebido (_series_bcrp).
 # Hasta el 2026-09-28 apuntaba a data/raw/peru/bcrp/<código>/, que dejó de existir
 # el 2026-09-25 (el acervo se aplanó y se agrupó por categoría): el laboratorio cayó
 # en silencio al snapshot anual durante tres días sin que ninguna verificación lo dijera.
-def _analysis_dir():
+def _datafw_dir():
     import importlib.util
     for carpeta in Path(__file__).resolve().parents:
         env = carpeta / "core" / "env.py"
         if env.is_file():
             spec = importlib.util.spec_from_file_location("core_env", env)
             mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
-            return Path(mod.ANALYSIS_DIR)
+            return Path(mod.DATAFW_DIR)
     return None                   # sin ecosistema: solo snapshot
-_ANALYSIS = _analysis_dir()
-_RAIZ_RAW = (_ANALYSIS / "data" / "raw" / "bcrp") if _ANALYSIS else Path("/nonexistent")
+_DATAFW = _datafw_dir()
+_RAIZ_RAW = (_DATAFW / "data" / "raw" / "bcrp") if _DATAFW else Path("/nonexistent")
 
 
 def _lector_unico():
     """`metodos.series.lectores` de datafw si está disponible; None si no."""
-    if _ANALYSIS is None or not (_ANALYSIS / "metodos" / "series" / "lectores.py").is_file():
+    if _DATAFW is None or not (_DATAFW / "metodos" / "series" / "lectores.py").is_file():
         return None
     import sys
-    if str(_ANALYSIS) not in sys.path:
-        sys.path.append(str(_ANALYSIS))
+    if str(_DATAFW) not in sys.path:
+        sys.path.append(str(_DATAFW))
     try:
         from metodos.series import lectores
         return lectores
@@ -75,7 +75,7 @@ def _leer_mensual(codigo):
     lectores = _lector_unico()
     if lectores is not None:
         try:
-            s = lectores.serie_bcrp(codigo, _ANALYSIS)
+            s = lectores.serie_bcrp(codigo, _DATAFW)
         except Exception:
             s = None
         if s is not None and s.frecuencia == "mensual":
