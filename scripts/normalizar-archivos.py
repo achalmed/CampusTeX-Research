@@ -34,7 +34,7 @@ import unicodedata
 from pathlib import Path
 
 FW = Path(__file__).resolve().parents[1]
-CURSOS = FW / "docencia" / "cursos"     # M5 (2026-09-15): docencia/cursos/<slug>/
+CURSOS = FW / "contenido" / "cursos"     # M5 (2026-09-15): docencia/cursos/<slug>/
 _d = FW
 while _d != _d.parent and not (_d / "core" / "env.py").exists():
     _d = _d.parent
@@ -259,7 +259,7 @@ def cmd_vendor():
             escribir(p, leer(p).replace("Path = fonts/", "Path = vendor/fonts/"))
         log("  yaac-*.cls: Path = vendor/fonts/")
     # tema beamer «wue» huérfano (la presentación que lo usaba ya no existe; quedan sus auxiliares)
-    wue = FW / "docencia" / "_inbox" / "gestion-empresarial" / "03_temas" / "sesiones" / "presentacion" / "wue.sty"
+    wue = FW / "contenido" / "_inbox" / "gestion-empresarial" / "03_temas" / "sesiones" / "presentacion" / "wue.sty"
     if wue.exists():
         mover(wue, wue.parent / "vendor" / "wue.sty")
 
@@ -403,7 +403,7 @@ def cmd_nombres():
     hechos = 0
     for raiz in raices:
         for p in recorrer(raiz):
-            if raiz == FW and p.relative_to(FW).parts[0] in ("areas", "docencia", "registro"):
+            if raiz == FW and p.relative_to(FW).parts[0] in ("areas", "contenido", "registro"):
                 continue
             if "02-contenido" in p.parts and p.suffix.lower() == ".md":
                 continue
@@ -629,7 +629,7 @@ def cmd_cabeceras():
     raices = [*areas(), FW]
     for raiz in raices:
         for p in recorrer(raiz):
-            if raiz == FW and p.relative_to(FW).parts[0] in ("areas", "docencia", "registro"):
+            if raiz == FW and p.relative_to(FW).parts[0] in ("areas", "contenido", "registro"):
                 continue
             fam = val.familia(p)
             if fam not in ("latex", "python", "bash", "yaml", "bib", "quarto"):
@@ -718,7 +718,7 @@ def cmd_frontmatter():
     n = 0
     for raiz in [*areas(), FW]:
         for p in recorrer(raiz):
-            if raiz == FW and p.relative_to(FW).parts[0] in ("areas", "docencia", "registro"):
+            if raiz == FW and p.relative_to(FW).parts[0] in ("areas", "contenido", "registro"):
                 continue
             if p.suffix.lower() != ".md" or p.name in EXENTOS_MD or p.name.endswith(".html.md"):
                 continue

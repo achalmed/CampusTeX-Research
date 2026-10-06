@@ -5,7 +5,7 @@ Objetivo: que cada apunte de un curso se llame en kebab-case (`1 1 curso 0.md` �
   `1-1-curso-0.md`) y lleve el frontmatter único (`tipo: apunte`, `titulo`, `estado`,
   `tags`), sin perder ningún enlace: los wikilinks, los enlaces Markdown relativos y
   los `archivo:` de cada `curso.yml` se reescriben con el nombre nuevo.
-Método: recorre `docencia/cursos/*/02-contenido/*.md` (salvo README.md), calcula el
+Método: recorre `contenido/cursos/*/02-contenido/*.md` (salvo README.md), calcula el
   nombre kebab y el frontmatter nuevo conservando todas las claves que ya hubiera,
   renombra con `git mv` cuando el archivo está versionado y sustituye las referencias
   en todos los `.md` y `curso.yml` de las áreas. Simula por defecto.
@@ -31,7 +31,7 @@ import urllib.parse
 from pathlib import Path
 
 FW = Path(__file__).resolve().parents[1]
-CURSOS = FW / "docencia" / "cursos"     # M5 (2026-09-15)
+CURSOS = FW / "contenido" / "cursos"     # M5 (2026-09-15)
 SALTAR = {".git", "_ESTANDARIZACION", "vendor", "_POR_REVISAR", "build", "data", "code", "legacy", "archive", "archivo", "registro", "logs", "originales", "respaldos", "backup", "backups"}
 ESTADO_MAP = {"completada": "hecho", "impartida": "hecho", "migrada": "borrador", "en_preparacion": "borrador",
               "en curso": "activo", "en-curso": "activo", "planeada": "borrador"}

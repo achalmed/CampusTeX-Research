@@ -5,7 +5,7 @@
 # Uso:
 #   ./scripts/publish-session.sh DICTADO CURSO NN [--refrescar]
 #
-# DICTADO: clave o ruta (docencia/dictados/<clave>). CURSO: slug o ruta. NN: sesión sNN-*.
+# DICTADO: clave o ruta (contenido/dictados/<clave>). CURSO: slug o ruta. NN: sesión sNN-*.
 # La sesión debe figurar en dictado.yml → sesiones[] {curso, sesion, web}; el módulo es
 #   docencia/dictados/<clave>/publicacion/<web>/{slides,evaluation,practice,homework}
 # (PRODUCTO git-ignorado; la web lo enlaza por hardlink con publish-web.sh). Contenido:

@@ -11,8 +11,8 @@ Bash resuelven el repo desde su propia ubicación (`lib/common.sh`); `temario.py
 (`DOCS_ROOT`, `INDEX_DIR`, `PROMPTS_DIR`, `TASKS_DIR`), y la
 clave `compilador:` de `config/course.yml` escribe la ruta del compilador universal.
 
-Todos los argumentos `CURSO` y `DICTADO` aceptan **slug o ruta** (`docencia/cursos/<slug>`,
-`docencia/dictados/<clave>`).
+Todos los argumentos `CURSO` y `DICTADO` aceptan **slug o ruta** (`contenido/cursos/<slug>`,
+`contenido/dictados/<clave>`).
 
 ## Uso
 
@@ -41,7 +41,7 @@ bash -n scripts/<archivo>.sh              # comprobación de sintaxis: UN archiv
 | `validate.sh` | invariantes del estándar: lista cerrada de carpetas, sin vacías, artefacto por tipo, `guion.md`, núcleo del registro | `./scripts/validate.sh CURSO\|DICTADO\|--todos` |
 | `stats.sh` | resumen de un curso por sesión: tipo · estado · artefacto · PDF · guion | `./scripts/stats.sh CURSO` |
 | `doctor.sh` | entorno (git, lualatex, quarto, compilador universal) + `validate --todos` + los tres verificadores + binarios > 5 MB + remoto de `registro/` + `core/archivos.py` | `./scripts/doctor.sh` |
-| `temario-generar.sh` | fachada Bash de `temario.py` | `./scripts/temario-generar.sh migrar\|generar\|verificar [--aplicar] [--que readme,web,skill,resumen] [docencia/cursos/<slug>…]` (rutas, no slugs) |
+| `temario-generar.sh` | fachada Bash de `temario.py` | `./scripts/temario-generar.sh migrar\|generar\|verificar [--aplicar] [--que readme,web,skill,resumen] [contenido/cursos/<slug>…]` (rutas, no slugs) |
 | `temario.py` | el generador de vistas del currículo desde `curso.yml`: README del curso, ficha web, temario del learning-skill, checklist de `05 tasks` | ver `temario-generar.sh` |
 | `enlazar.py` | enlaza el currículo con lo que ya existe: posts de `04 index/_pubs`, modelos de `simuladores/`, bancos de `04-evaluaciones/` | `python3 scripts/enlazar.py posts\|simuladores\|examenes\|verificar [--aplicar]` |
 | `publish-session.sh` | congela una sesión: tag `dictado/<clave>/<sesion>` + producto en `publicacion/<web>/` (git-ignorado) | `./scripts/publish-session.sh DICTADO CURSO NN [--refrescar]` |

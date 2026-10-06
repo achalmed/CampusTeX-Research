@@ -55,7 +55,7 @@ cursos/econometria-i/
   `02` → `02-contenido`; `03` → `03-sesiones`; `04` → `04-evaluaciones`; `05` →
   `registro/` (privado) o `04-evaluaciones/ejemplos/` (modelos anonimizados); `06`, `07`,
   `08` → `05-recursos/` (o junto al deck que los usa); `09` → `dictados/`. El mapa
-  archivo a archivo está en `docencia/migracion/historico/mapa-m3.csv`.
+  archivo a archivo está en `contenido/migracion/historico/mapa-m3.csv`.
 
 `curso.yml` (claves `snake_case`, normativa §7; `scaffolds/curso/curso.yml` es la plantilla):
 
@@ -159,7 +159,7 @@ dictados/2026-i-cau-unsch-metodologia/
 | Apuntes de Edison como alumno | `01 notes/40-cursos-y-formacion/<curso>/` | enlazan al tema de `02-contenido/`; nunca escriben en `docencia/` |
 | Ficha web | `04 index/cursos/<materia>/` | `materia_web` (n cursos → 1 materia); ediciones por dictado |
 | Temario del learning-skill | `prompts/skills/learning/2 domains/_temarios/` | generado desde `curso.yml`; `dominio_fuat` |
-| Posts, simuladores, bancos de exámenes | `04 index/_pubs`, `simuladores/` de este repo, `docencia/cursos/*/04-evaluaciones/banco` | `enlazar.py` (los ids antiguos se resuelven por `alias`) |
+| Posts, simuladores, bancos de exámenes | `04 index/_pubs`, `simuladores/` de este repo, `contenido/cursos/*/04-evaluaciones/banco` | `enlazar.py` (los ids antiguos se resuelven por `alias`) |
 
 ## 7. Reglas de mantenimiento
 
@@ -187,7 +187,7 @@ dictados/2026-i-cau-unsch-metodologia/
    archivo del vault (`06 archives/`), como se hizo con `_inbox/` el 2026-09-20.
 12. **Cambios estructurales por el ciclo**: auditoría → propuesta → aprobación → tag →
     cambio con dry-run → `validate.sh --todos` → `doctor.sh` → commit; mapa de rutas
-    versionado en `docencia/migracion/` como UNDO.
+    versionado en `contenido/migracion/` como UNDO.
 13. **Un repo de contenido, un commit por cambio.** No se crean repos por área ni por
     curso; si un curso debe publicarse aparte, se exporta (subtree), no se separa.
 14. **Todo curso declara `tipo`, `area[]`, `materia_web` y, si aplica, `malla`**
@@ -217,10 +217,10 @@ de qué.
 | consumidor | qué recibe o lee | cómo llega | qué no debe hacer |
 |---|---|---|---|
 | `04 index` | la sección «Contenidos / Sílabo» de `cursos/<materia>/index.qmd`, entre las marcas `temario:inicio`/`temario:fin` | `scripts/temario.py` (`--que web`) | editar entre las marcas |
-| `04 index` | el producto de cada dictado en `cursos/<materia>/<edicion>/` | `scripts/publish-web.sh` (hardlinks desde `docencia/dictados/<clave>/publicacion/`) | copiar en vez de enlazar |
+| `04 index` | el producto de cada dictado en `cursos/<materia>/<edicion>/` | `scripts/publish-web.sh` (hardlinks desde `contenido/dictados/<clave>/publicacion/`) | copiar en vez de enlazar |
 | `prompts` (learning-skill) | `skills/learning/2 domains/_temarios/<dominio>.md` y un puntero en `## Temario` del dominio | `scripts/temario.py` (`--que skill`), por `dominio_fuat` | editar el temario generado |
 | `05 tasks` | `temarios-cursos.md`, la checklist por curso, unidad y tema | `scripts/temario.py` (`--que resumen`) | editarla a mano |
-| `scripts-biblioteca` (`ingesta_cursos`) | lee `docencia/cursos/*/05-recursos/` y escribe `bibliografia[].calibre_id` en el `curso.yml` | su suite (`scripts-biblioteca/ingesta/README.md`) | cambiar otras claves del registro |
+| `scripts-biblioteca` (`ingesta_cursos`) | lee `contenido/cursos/*/05-recursos/` y escribe `bibliografia[].calibre_id` en el `curso.yml` | su suite (`scripts-biblioteca/ingesta/README.md`) | cambiar otras claves del registro |
 
 Un cambio en `curso.yml` (claves, `materia_web`, `dominio_fuat`) o en la lista cerrada de carpetas
 afecta a estos consumidores: se regeneran las vistas y se avisa al dueño del consumidor.

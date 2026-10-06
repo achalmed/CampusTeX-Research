@@ -62,14 +62,14 @@ salida en gris) la define el generado y la invocan las tres clases con `bn`/`sal
 Los 23 repos `Academic_Class-<Área>` con el estándar 00–09 se consolidaron con su historial en el
 submódulo `docencia/` (tags `<área>/pre-reorg-2026-09`; tags del framework `pre-reorg-2026-09` y
 `reorg-2026-09-done`). Por qué y cómo: [`historial/DIAGNOSTICO_AREAS_2026-09.md`](historial/DIAGNOSTICO_AREAS_2026-09.md);
-los mapas archivo a archivo, en `docencia/migracion/historico/`. Lo que no era contenido docente salió:
+los mapas archivo a archivo, en `contenido/migracion/historico/`. Lo que no era contenido docente salió:
 datasets a `datafw`, trabajos de estudiantes a `registro/`, material de inglés a `01 notes`.
 
 **Decidido (2026-09-15, M3–M5): `curso.yml` sucede a `temario.yml`; los scaffolds son registros, no
 árboles; el dictado vive fuera del curso.**
 Las cinco carpetas del curso existen solo con contenido; `CURSO` y `DICTADO` aceptan slug o ruta;
 `new-period.sh` queda como aviso de retiro; un dictado puede tomar sesiones de varios cursos y por eso
-tiene clave propia en `docencia/dictados/`.
+tiene clave propia en `contenido/dictados/`.
 
 **Decidido (2026-10-04, DOC10): `docencia/` es un repo privado en GitHub y no lleva `LICENSE`**
 (`meta/docs/historial/NORMATIVA_ARCHIVOS.md` §15.11: la licencia corresponde solo con remoto público). Si algún día se
@@ -107,7 +107,7 @@ cambiando solo el membrete y declarando el origen ajeno y toda clave reconstruid
 **Decidido (2026-09-17, R13): las evaluaciones catalogadas en Calibre salen de la biblioteca** a
 expedientes pendientes con su ficha `<tallo>.md` versionada; las fuentes `*_fuente*.pdf` no se
 versionan (respaldo en el disco externo del autor). El estado de cada expediente lo da
-`docencia/migracion/estado-examenes.csv`, no la prosa.
+`contenido/migracion/estado-examenes.csv`, no la prosa.
 
 ## Simuladores
 

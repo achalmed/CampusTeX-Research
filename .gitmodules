@@ -1,4 +1,4 @@
 [submodule "docencia"]
-	path = docencia
+	path = contenido
 	url = ../Academic_Class.git
 	branch = main

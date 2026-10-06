@@ -3,7 +3,7 @@
 # stats.sh — Resumen de un curso por sesión (M5, 2026-09-15)
 # ============================================================
 # Uso:
-#   ./scripts/stats.sh CURSO        # ruta o slug (docencia/cursos/<slug>)
+#   ./scripts/stats.sh CURSO        # ruta o slug (contenido/cursos/<slug>)
 #
 # Por sesión: número (carpeta sNN), título, tipo y estado (sesion.yml),
 # artefacto declarado (✓ existe / ✗ falta), PDF en la sesión y estado del guion.

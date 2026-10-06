@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """scripts/temario.py — el currículo de cada curso vive UNA sola vez en `curso.yml` (F5.1; M5 2026-09-15); desde ahí se generan todas las vistas.
 
-Registro del curso (NORMATIVA_ARCHIVOS §7): `docencia/cursos/<slug>/curso.yml` con núcleo `id · titulo · estado · tipo` (sucesor de temario.yml, M4).
+Registro del curso (NORMATIVA_ARCHIVOS §7): `contenido/cursos/<slug>/curso.yml` con núcleo `id · titulo · estado · tipo` (sucesor de temario.yml, M4).
 
 Uso (desde cualquier sitio; opera sobre todas las áreas o sobre los cursos indicados):
   temario.py migrar   [--aplicar] [CURSO_DIR ...]   README/02-contenido → curso.yml (unidades y temas) en cursos heredados sin registro
@@ -37,7 +37,7 @@ import env  # noqa: E402
 
 FW = Path(__file__).resolve().parents[1]           # …/10 Class
 DOCS = env.DOCS_ROOT                                # …/Documents
-CURSOS = FW / "docencia" / "cursos"                       # M5 (2026-09-15): los cursos viven en docencia/cursos/<slug>/ (curso.yml)
+CURSOS = FW / "contenido" / "cursos"                       # M5 (2026-09-15): los cursos viven en docencia/cursos/<slug>/ (curso.yml)
 WEB_CURSOS = env.INDEX_DIR / "cursos"
 DOMINIOS = env.PROMPTS_DIR / "skills" / "learning" / "2 domains"   # DOC9 (2026-09-20): el learning-skill vive en skills/learning
 TAREAS = env.TASKS_DIR
@@ -531,7 +531,7 @@ def generar_resumen(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> str:
         for u in t.get("unidades", []):
             out.append(f"- **{u['id']}. {u['titulo']}**")
             for tema in u["temas"]:
-                out.append(f"  - [ ] `{tema['id']}` [{tema['titulo']}](<../10 Class/docencia/cursos/{c.name}/{tema['archivo']}>)" if tema.get("archivo") else f"  - [ ] `{tema['id']}` {tema['titulo']}")
+                out.append(f"  - [ ] `{tema['id']}` [{tema['titulo']}](<../10 Class/contenido/cursos/{c.name}/{tema['archivo']}>)" if tema.get("archivo") else f"  - [ ] `{tema['id']}` {tema['titulo']}")
         out.append("")
     f = RESUMEN
     nuevo = "\n".join(out)

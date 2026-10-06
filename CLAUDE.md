@@ -56,7 +56,7 @@ submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/` (repo
 - **Flujo de submódulo**: commit dentro de `docencia/` → `git add docencia` + commit aquí (mueve el
   puntero). Clon nuevo: `git clone --recurse-submodules`.
 - **Toda reorganización sigue el ciclo** (auditoría → propuesta → aprobación → tag → cambio con
-  dry-run → validate → doctor → commit), deja su mapa de rutas en `docencia/migracion/`, el porqué en
+  dry-run → validate → doctor → commit), deja su mapa de rutas en `contenido/migracion/`, el porqué en
   `docs/decisiones.md` y el asiento de la fase en `meta/docs/historial/progreso-2026.md`.
 
 ## Cómo se verifica un cambio
@@ -109,11 +109,11 @@ python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
   `archivo: null` en `curso.yml` significa «la nota aún no existe» (sin esqueletos).
 - **En zsh y con rutas con espacios** (`10 Class`): iterar con `while read`, nunca con `for x in $(…)`.
 - **`*.sdr/`** son metadatos de KOReader: se ignoran.
-- **`temario.py` toma rutas, no slugs** (`docencia/cursos/<slug>`), y sin `--que` escribe también en
+- **`temario.py` toma rutas, no slugs** (`contenido/cursos/<slug>`), y sin `--que` escribe también en
   `04 index`, `prompts` y `05 tasks`: para un solo README, `--que readme docencia/cursos/<slug>`.
 - **Antes de cerrar un expediente de evaluación**, el log no debe traer `Overfull \hbox` mayores de
-  20 pt (los `\aplica{}` han de caber en una línea); lo cierra `docencia/migracion/cerrar-expediente.sh`.
-- **`scripts/new-period.sh` está retirado**: los dictados viven en `docencia/dictados/<clave>/`.
+  20 pt (los `\aplica{}` han de caber en una línea); lo cierra `contenido/migracion/cerrar-expediente.sh`.
+- **`scripts/new-period.sh` está retirado**: los dictados viven en `contenido/dictados/<clave>/`.
 
 ## Dónde está cada cosa
 
@@ -137,4 +137,4 @@ python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
 | La normativa de archivos del ecosistema | `meta/docs/historial/NORMATIVA_ARCHIVOS.md` |
 
 Si un documento, prompt o script habla de `areas/Academic_Class-<Área>/course_NN_<slug>/0N_…`, es
-histórico: léelo como `docencia/cursos/<slug>/0N-…` (mapas en `docencia/migracion/historico/`).
+histórico: léelo como `contenido/cursos/<slug>/0N-…` (mapas en `contenido/migracion/historico/`).

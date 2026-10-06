@@ -129,20 +129,20 @@ lecturas) no entra al framework: material al vault, lecturas publicadas a Calibr
 3. Revisar el PDF: título en tres líneas, datos del membrete, matemática, figuras, puntajes.
 4. `build.sh <tallo>.tex --clean` (los auxiliares nunca se versionan; **ojo**: `.log` también es la
    extensión de las bitácoras de Stata: el `--clean` del script solo borra `<tallo>*.log`).
-5. Registrar el estado en `docencia/migracion/estado-examenes.csv` y **eliminar las fuentes**
+5. Registrar el estado en `contenido/migracion/estado-examenes.csv` y **eliminar las fuentes**
    del expediente. `validate.sh CURSO` debe seguir limpio (sin carpetas vacías).
 6. `python3 scripts/enlazar.py examenes --aplicar` y `temario-generar.sh generar --aplicar --que readme
    docencia/cursos/<slug>` (el generador recibe rutas, no slugs) cuando cambie el conteo de una subcarpeta.
    Antes de cerrar, `grep -c "Overfull \\hbox ([2-9][0-9]" <tallo>-soluciones.log` debe dar 0: un
    `\aplica{}` o una celda de `{ecua}` que desborda se acorta o se parte, no se deja.
 
-## 7. Registro de la migración (`docencia/migracion/estado-examenes.csv`)
+## 7. Registro de la migración (`contenido/migracion/estado-examenes.csv`)
 
 Una fila por expediente o PDF suelto: `curso; sub; expediente; estado; …`. Estados:
 `transformado` (solo `.tex` + PDF propios + `code/`), `parcial` (`.tex` hecho, quedan fuentes),
 `pendiente` (fuente sin transformar), `manual` (no transformable automáticamente: sin enunciado,
 escaneo ilegible, datos en formato sin lector…, con el motivo en `detalle`). Nada se da por
-migrado por estar dentro de `04-evaluaciones/`. El migrador `docencia/migracion/historico/migrar-examenes.py` (R10) solo
+migrado por estar dentro de `04-evaluaciones/`. El migrador `contenido/migracion/historico/migrar-examenes.py` (R10) solo
 reorganizó y convirtió los `.tex` que ya existían; la transformación es trabajo por expediente
 según este estándar y el prompt maestro.
 
@@ -160,7 +160,7 @@ tests, hojas de ejercicios de sesión, casos, laboratorios, tareas) de 24 cursos
 IDDEA, MIT, UDEP, UP, UCR, UNNE… R13 las sacó de Calibre —**947 ítems → 707 expedientes en 33 cursos** (se crearon
 `historia-economica` e `investigacion-operativa`; 24 ítems se quedaron en Calibre por no ser evaluaciones: solucionarios
 de libros de texto, artículos de un taller, talleres publicados de la BNP, un manual de Excel)— sin transformar nada.
-Herramienta y registros: `docencia/migracion/migrar-calibre.py` (`inventario` · `mapa` · `aplicar`),
+Herramienta y registros: `contenido/migracion/migrar-calibre.py` (`inventario` · `mapa` · `aplicar`),
 `inventario-calibre.json`, `mapa-calibre.csv`, `calibre-ids-migrados.txt`, `zotero-keys-migrados.txt`; la bitácora
 de la fase está en [`historial/2026-09-17-cierre-r9-r13.md`](historial/2026-09-17-cierre-r9-r13.md) y el respaldo, en el
 disco externo del autor.

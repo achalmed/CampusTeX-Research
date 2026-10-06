@@ -29,7 +29,7 @@ import env  # noqa: E402
 
 FW = Path(__file__).resolve().parents[1]
 DOCS = env.DOCS_ROOT
-CURSOS = FW / "docencia" / "cursos"     # M5 (2026-09-15): docencia/cursos/<slug>/curso.yml
+CURSOS = FW / "contenido" / "cursos"     # M5 (2026-09-15): docencia/cursos/<slug>/curso.yml
 PUBS = env.INDEX_DIR / "_pubs"
 LAB = Path(__file__).resolve().parents[1] / "simuladores"   # el laboratorio vive en este repo desde el 2026-09-20
 

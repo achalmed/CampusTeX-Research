@@ -3,10 +3,10 @@
 # validate.sh — Valida cursos y dictados del estándar (§4, M5 2026-09-15)
 # ============================================================
 # Uso:
-#   ./scripts/validate.sh CURSO|DICTADO   # ruta o slug (docencia/cursos/<slug>, docencia/dictados/<clave>)
+#   ./scripts/validate.sh CURSO|DICTADO   # ruta o slug (contenido/cursos/<slug>, docencia/dictados/<clave>)
 #   ./scripts/validate.sh --todos         # todos los cursos y dictados de docencia/
 #
-# Curso (docencia/cursos/<slug>/):
+# Curso (contenido/cursos/<slug>/):
 #   - curso.yml con id (= carpeta) · titulo · estado · tipo ∈ {asignatura, herramienta, nivelacion, taller}; README.md.
 #   - Carpetas de primer nivel SOLO de la lista cerrada: 01-diseno 02-contenido 03-sesiones 04-evaluaciones 05-recursos.
 #   - Ninguna carpeta vacía ni .gitkeep en todo el curso; nombres de carpeta de primer nivel y de sesión en kebab-case.
@@ -15,7 +15,7 @@
 #     (clase: .tex/.qmd · laboratorio: .ipynb/.do/.py/.r/.rmd/.html · taller: .ods/.xlsx/.xlsm · evaluacion: .tex).
 #     Con `revisar:` en sesion.yml la incoherencia es aviso, no error.
 #   - Binarios > 5 MB: aviso (regla §7.6: datos en datafw, pesados fuera del repo).
-# Dictado (docencia/dictados/<clave>/):
+# Dictado (contenido/dictados/<clave>/):
 #   - dictado.yml con id (= carpeta) · periodo · institucion · estado; `legado: true` exime de sesiones.
 #   - sesiones[]: cada {curso, sesion, web} apunta a un curso y una sesión existentes.
 # Código de salida != 0 si hay errores (los [!!] no hacen fallar).

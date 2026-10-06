@@ -53,7 +53,7 @@ def frontmatter_title(qmd: Path) -> str | None:
     return m.group(1) if m else None
 
 
-DOCENCIA = FW / "docencia"
+DOCENCIA = FW / "contenido"
 
 
 def dictado_dir(arg: str) -> Path | None:

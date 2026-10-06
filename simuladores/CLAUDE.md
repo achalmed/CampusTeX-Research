@@ -6,7 +6,7 @@ estado: activo
 
 Laboratorio pedagógico multi-disciplina de `10 Class` (repo `Academic_Class_Framework`). Es
 **currículo** —fichas pedagógicas, verificaciones que son teoremas, animaciones— y lo consumen los
-cursos (`docencia/cursos/*/curso.yml`, recursos `{tipo: simulador}` enlazados por
+cursos (`contenido/cursos/*/curso.yml`, recursos `{tipo: simulador}` enlazados por
 `scripts/enlazar.py simuladores`). Leer `README.md` de esta carpeta para el uso; lo que sigue es la
 doctrina. Guía anidada por excepción a §15.5, asentada en `../docs/decisiones.md` §Simuladores.
 
@@ -77,7 +77,7 @@ py3.13; utilidades comunes en `_comun.py` (prohibido copiarlas).
 
 - Datos reales: siempre de `datafw` por nombre (`core/env.py`), nunca por rutas relativas
   ni copias; el laboratorio no adquiere datos.
-- Cursos: `docencia/cursos/<slug>/curso.yml` enlaza modelos como `recursos: [{tipo: simulador,
+- Cursos: `contenido/cursos/<slug>/curso.yml` enlaza modelos como `recursos: [{tipo: simulador,
   archivo: 10 Class/simuladores/<disciplina>/modelos/…}]`; `scripts/enlazar.py simuladores`
   propone los enlaces por similitud de título y `enlazar.py verificar` los comprueba.
 - Forma de archivos: normativa `meta/docs/historial/NORMATIVA_ARCHIVOS.md` (`core/archivos.py validar "10 Class"`).
