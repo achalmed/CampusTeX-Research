@@ -511,7 +511,7 @@ Secuencia troncal (un modelo "ancla" por etapa, el resto del nivel después):
 - **DSGE completo / Dynare** (nivel 8 avanzado): evaluar al llegar; el modelo
   de 3 ecuaciones (m56) se puede resolver con numpy/scipy sin Dynare.
 - **Libro del laboratorio**: compilar las fichas + reportes en un PDF vía la
-  plantilla LaTeX de `03 writing` cuando haya masa crítica de niveles.
+  plantilla LaTeX de `escritura` cuando haya masa crítica de niveles.
 - **Verificación bibliográfica**: cuando Edison verifique un manual de macro de
   la biblioteca (procedimiento pdftotext → localizar → extraer → ficha), las
   procedencias `conocimiento general` de los modelos afectados se elevan a

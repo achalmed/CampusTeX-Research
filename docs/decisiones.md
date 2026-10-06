@@ -35,7 +35,7 @@ decisiones del rediseño, vigentes:
   conservó toda su funcionalidad (entornos `pregunta`/`solucion`/`opciones`, modos de salida, puntaje).
 - **D5 · `templates/` único; `scaffolds/` aparte.** Una plantilla de documento es algo que se compila;
   un scaffold es el registro con el que nace un curso, una sesión o un dictado.
-- **D6 · No duplicar `03 writing`.** Tesis, monografías, ensayos y artículos tienen su framework; aquí
+- **D6 · No duplicar `escritura`.** Tesis, monografías, ensayos y artículos tienen su framework; aquí
   solo lo docente (presentaciones, evaluaciones, sílabos, calendarios, notas, rúbricas).
 - **D7 · `config/` separa datos de lógica.** Los valores ajustables y los datos del docente salen de las
   clases; la lógica queda en `styles/`.

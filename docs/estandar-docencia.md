@@ -106,7 +106,7 @@ avisa si el README de un curso se desfasó (`temario-generar.sh verificar` compa
   `evaluacion` → `.tex`). `revisar: <motivo>` en `sesion.yml` rebaja la incoherencia a
   aviso mientras se decide.
 - No hay anatomía de subcarpetas: el arco antes/durante/después son secciones de
-  `guion.md` (esquema `presentacion-clase` de `03 writing/esquemas/`, alineamiento
+  `guion.md` (esquema `presentacion-clase` de `escritura/esquemas/`, alineamiento
   constructivo). Lo que antes iba en `01_Antes … 07_Notas` se fusionó ahí en M4.
 - Los decks Beamer siguen siendo autocontenidos (preámbulo propio + copia local del
   logo): al mover una sesión se mueve la carpeta completa. El `deck.tex` que crea

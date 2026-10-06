@@ -5,7 +5,7 @@ estado: borrador
 ---
 # Guion — {{TITLE}}
 
-> Esquema de `03 writing/esquemas/presentacion-clase.tex` (alineamiento constructivo). Sesión `{{SESSION_SLUG}}` del curso `{{COURSE_SLUG}}` · {{DURATION}} min · {{MODALITY}}.
+> Esquema de `escritura/esquemas/presentacion-clase.tex` (alineamiento constructivo). Sesión `{{SESSION_SLUG}}` del curso `{{COURSE_SLUG}}` · {{DURATION}} min · {{MODALITY}}.
 
 ## Objetivos de aprendizaje
 

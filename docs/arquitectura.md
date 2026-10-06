@@ -11,7 +11,7 @@ un documento; **por qué** es así está en [`decisiones.md`](decisiones.md) §P
 estándar del contenido (curso, sesión, dictado) es otro documento:
 [`estandar-docencia.md`](estandar-docencia.md).
 
-Tesis, monografías, ensayos y artículos no son de esta plataforma: son de `03 writing`.
+Tesis, monografías, ensayos y artículos no son de esta plataforma: son de `escritura`.
 
 ## 1. Principios
 
