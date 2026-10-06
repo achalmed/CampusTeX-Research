@@ -220,7 +220,7 @@ de qué.
 | `04 index` | el producto de cada dictado en `cursos/<materia>/<edicion>/` | `scripts/publish-web.sh` (hardlinks desde `docencia/dictados/<clave>/publicacion/`) | copiar en vez de enlazar |
 | `prompts` (learning-skill) | `skills/learning/2 domains/_temarios/<dominio>.md` y un puntero en `## Temario` del dominio | `scripts/temario.py` (`--que skill`), por `dominio_fuat` | editar el temario generado |
 | `05 tasks` | `temarios-cursos.md`, la checklist por curso, unidad y tema | `scripts/temario.py` (`--que resumen`) | editarla a mano |
-| `scripts-biblioteca` (`ingesta_cursos`) | lee `docencia/cursos/*/05-recursos/` y escribe `bibliografia[].calibre_id` en el `curso.yml` | su suite (`scripts-biblioteca/ingesta_cursos/README.md`) | cambiar otras claves del registro |
+| `scripts-biblioteca` (`ingesta_cursos`) | lee `docencia/cursos/*/05-recursos/` y escribe `bibliografia[].calibre_id` en el `curso.yml` | su suite (`scripts-biblioteca/ingesta/README.md`) | cambiar otras claves del registro |
 
 Un cambio en `curso.yml` (claves, `materia_web`, `dominio_fuat`) o en la lista cerrada de carpetas
 afecta a estos consumidores: se regeneran las vistas y se avisa al dueño del consumidor.
