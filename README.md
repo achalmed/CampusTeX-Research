@@ -2,7 +2,7 @@
 tipo: readme
 estado: activo
 ---
-# 10 Class/ — el framework de docencia: estándar de contenido y plataforma editorial LuaLaTeX
+# docencia/ — el framework de docencia: estándar de contenido y plataforma editorial LuaLaTeX
 
 Repo `Academic_Class_Framework` (remoto `achalmed/CampusTeX-Research`). El contenido docente no vive
 aquí: vive en el submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/`.

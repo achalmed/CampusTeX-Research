@@ -8,7 +8,7 @@
 # (1) Herramientas (git, lualatex, quarto, compilador universal, config).
 # (2) docencia/: submódulo presente; validate.sh --todos; temario-generar.sh verificar; enlazar.py verificar;
 #     _inbox/ (temporal con plazo, D10); binarios > 5 MB fuera de publicacion/; registro/ sin remote público.
-# (3) Normativa de archivos: core/archivos.py validar "10 Class".
+# (3) Normativa de archivos: core/archivos.py validar "docencia".
 # No modifica nada. Código de salida 1 si hay errores.
 # ============================================================
 
@@ -65,10 +65,10 @@ if [[ -f "$CORE_ENV" ]]; then
   # shellcheck source=/dev/null
   source "$CORE_ENV"
   echo
-  echo "Normativa de archivos — core/archivos.py validar \"10 Class\""
+  echo "Normativa de archivos — core/archivos.py validar \"docencia\""
   rc=0
   # Con la línea base del programa (RQ-VAL-06) lo heredado no bloquea: falla solo lo que empeora.
-  python3 "$DOCS_ROOT/core/archivos.py" validar "$DOCS_ROOT/10 Class" --max 5 \
+  python3 "$DOCS_ROOT/core/archivos.py" validar "$DOCS_ROOT/docencia" --max 5 \
     --linea-base "$LINEA_BASE_VALIDADOR" || rc=$?
   case $rc in
     0) ok "Normativa de archivos: sano" ;;

@@ -2,7 +2,7 @@
 tipo: guia_ia
 estado: activo
 ---
-# CLAUDE.md — 10 Class (repo `Academic_Class_Framework`, remoto `CampusTeX-Research`)
+# CLAUDE.md — docencia (repo `Academic_Class_Framework`, remoto `CampusTeX-Research`)
 
 Guía para el asistente. En español, como todo el ecosistema. `AGENTS.md` es un enlace a este archivo.
 Léase antes: `README.md` (qué es y cómo se usa), `docs/README.md` (índice), `config/course.yml`,
@@ -74,8 +74,8 @@ python3 scripts/enlazar.py verificar            # enlaces a posts, simuladores y
 bash -n scripts/<archivo>.sh                    # un archivo por invocación
 
 cd ~/Documents
-python3 core/archivos.py validar "10 Class"     # normativa de archivos (meta/docs/historial/NORMATIVA_ARCHIVOS.md)
-python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
+python3 core/archivos.py validar "docencia"     # normativa de archivos (meta/docs/historial/NORMATIVA_ARCHIVOS.md)
+python3 core/docs.py verificar "docencia"       # el índice de docs/ al día
 ```
 
 ## Detalles que cuesta redescubrir
@@ -107,7 +107,7 @@ python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
   XeLaTeX). El logo canónico está en `assets/branding/cau-logo.png` (ver `assets/README.md`); se reconstruyen al usarlos.
 - **`revisar: <motivo>` en `sesion.yml`** rebaja a aviso una incoherencia tipo/artefacto;
   `archivo: null` en `curso.yml` significa «la nota aún no existe» (sin esqueletos).
-- **En zsh y con rutas con espacios** (`10 Class`): iterar con `while read`, nunca con `for x in $(…)`.
+- **En zsh y con rutas con espacios** (`docencia`): iterar con `while read`, nunca con `for x in $(…)`.
 - **`*.sdr/`** son metadatos de KOReader: se ignoran.
 - **`temario.py` toma rutas, no slugs** (`contenido/cursos/<slug>`), y sin `--que` escribe también en
   `04 index`, `prompts` y `05 tasks`: para un solo README, `--que readme docencia/cursos/<slug>`.

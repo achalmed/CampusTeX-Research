@@ -28,7 +28,7 @@ import numpy as np
 from modelos.nivel_12 import _series_bcrp
 
 # raíz de datos crudos: datafw/data/raw/bcrp, localizada por NOMBRE
-# (core/env.py: DATAFW_DIR) porque el laboratorio vive en 10 Class desde el
+# (core/env.py: DATAFW_DIR) porque el laboratorio vive en docencia desde el
 # 2026-09-20; si core/ no está, se usa el snapshot embebido (_series_bcrp).
 # Hasta el 2026-09-28 apuntaba a data/raw/peru/bcrp/<código>/, que dejó de existir
 # el 2026-09-25 (el acervo se aplanó y se agrupó por categoría): el laboratorio cayó

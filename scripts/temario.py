@@ -35,7 +35,7 @@ while _d != _d.parent and not (_d / "core" / "env.py").is_file():   # core/env.p
 sys.path.insert(0, str(_d / "core"))
 import env  # noqa: E402
 
-FW = Path(__file__).resolve().parents[1]           # …/10 Class
+FW = Path(__file__).resolve().parents[1]           # …/docencia
 DOCS = env.DOCS_ROOT                                # …/Documents
 CURSOS = FW / "contenido" / "cursos"                       # M5 (2026-09-15): los cursos viven en docencia/cursos/<slug>/ (curso.yml)
 WEB_CURSOS = env.INDEX_DIR / "cursos"
@@ -44,9 +44,9 @@ TAREAS = env.TASKS_DIR
 RESUMEN = TAREAS / "temarios-cursos.md"                    # vista checklist (NORMATIVA_ARCHIVOS §5: derivado marcado)
 
 EMOJI_DEFAULT = "📘"
-MARCA_INI, MARCA_FIN = "<!-- temario:inicio (generado por 10 Class/scripts/temario.py; no editar a mano) -->", "<!-- temario:fin -->"
+MARCA_INI, MARCA_FIN = "<!-- temario:inicio (generado por docencia/scripts/temario.py; no editar a mano) -->", "<!-- temario:fin -->"
 PUNTERO_SKILL = "<!-- curso.yml -->"   # marca de idempotencia del puntero en cada dominio (antes <!-- temario.yml -->, M6)
-RE_MARCA_README = re.compile(r"^<!-- GENERADO por 10 Class/scripts/temario\.py .*-->$", re.M)   # (DOC4, 2026-09-20)
+RE_MARCA_README = re.compile(r"^<!-- GENERADO por docencia/scripts/temario\.py .*-->$", re.M)   # (DOC4, 2026-09-20)
 
 
 def sin_marca(texto: str) -> str:
@@ -239,7 +239,7 @@ def cabecera_temario(curso: Path, cid: str) -> str:  # cabecera de curso.yml (no
     """Las tres líneas de comentario del registro del curso (identidad §6.2; el resto, cómo se usa)."""
     return (f"# cursos/{curso.name}/curso.yml — registro del curso {cid}: fuente única del currículo (unidades, temas, recursos, datos)\n"
             "# Se editan aquí unidades, temas y recursos; README, ficha web,\n"
-            "# temario del learning-skill y checklist de estudio se GENERAN con: 10 Class/scripts/temario-generar.sh\n")
+            "# temario del learning-skill y checklist de estudio se GENERAN con: docencia/scripts/temario-generar.sh\n")
 
 
 # ---------------------------------------------------------------- generadores
@@ -252,7 +252,7 @@ def cabecera_readme(t: dict, estado: str, sufijo: str = "") -> list[str]:
     """Frontmatter (§15.1), marca de derivado (§5, D06) y H1 §9.6 del README de un curso."""
     hoy = __import__("datetime").date.today().isoformat()
     return ["---", "tipo: readme", f"estado: {estado}", "---",
-            f"<!-- GENERADO por 10 Class/scripts/temario.py desde curso.yml ({hoy}); no editar -->", "",
+            f"<!-- GENERADO por docencia/scripts/temario.py desde curso.yml ({hoy}); no editar -->", "",
             f"# {t['id']}/ — {t.get('emoji', EMOJI_DEFAULT)} {t['titulo']}{sufijo}", ""]
 
 
@@ -286,7 +286,7 @@ def seccion_bibliografia_y_ajeno(t: dict) -> list[str]:
     return out
 
 
-PIE_README = "> Este README se genera desde `curso.yml` (`10 Class/scripts/temario-generar.sh`). Edita el registro del curso, no este archivo."
+PIE_README = "> Este README se genera desde `curso.yml` (`docencia/scripts/temario-generar.sh`). Edita el registro del curso, no este archivo."
 
 
 def render_readme_borrador(t: dict) -> str:
@@ -317,7 +317,7 @@ def render_readme_borrador(t: dict) -> str:
     out += ["", "## Qué falta", "",
             "El temario no está escrito: `unidades: []` en `curso.yml`. Este README solo refleja lo que el registro ya tiene y se regenera solo. Para escribirlo:", "",
             "1. Declara `unidades:` en `curso.yml` (cada unidad con `id`, `titulo` y `temas: [{id, titulo, archivo}]`; `archivo: null` mientras la nota no exista, NORMATIVA §7).",
-            f"2. Regenera las vistas desde `10 Class`: `./scripts/temario-generar.sh generar --que readme --aplicar docencia/cursos/{t['id']}` (sin `--aplicar` simula).",
+            f"2. Regenera las vistas desde `docencia`: `./scripts/temario-generar.sh generar --que readme --aplicar docencia/cursos/{t['id']}` (sin `--aplicar` simula).",
             "3. Cuando el curso se dicte, pasa el registro a `estado: activo`.", "",
             "Mientras tanto `./scripts/temario-generar.sh verificar` lo lista como «sin unidades (temario por completar)».", ""]
     out += seccion_recursos(t)
@@ -487,7 +487,7 @@ def generar_skill(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> list[str]
         # frontmatter de documento (NORMATIVA_ARCHIVOS §6.2; la forma que M8 dejó en prompts/) y la marca de derivado (§5)
         out = ["---", "tipo: doc", f"titulo: 'Temario oficial — dominio `{d}`'", "estado: activo", "---",
                f"# Temario oficial — dominio `{d}`", "",
-               "> Generado por `10 Class/scripts/temario.py` desde el `curso.yml` de cada curso (F5.1). No editar: edita el registro del curso.", ""]
+               "> Generado por `docencia/scripts/temario.py` desde el `curso.yml` de cada curso (F5.1). No editar: edita el registro del curso.", ""]
         for c, t in lst:
             out.append(f"## {t['titulo']} (`{t['id']}`, área {area_txt(t)})")
             out.append("")
@@ -522,7 +522,7 @@ def generar_resumen(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> str:
     """La checklist de estudio: nota del vault (`tipo: checklist`) marcada como derivado (NORMATIVA_ARCHIVOS §5)."""
     hoy = __import__("datetime").date.today().isoformat()
     out = ["---", "tipo: checklist", "titulo: Temarios de los cursos", "estado: activo", "tags: [checklist, temarios]", "---",
-           f"<!-- GENERADO por 10 Class/scripts/temario.py desde docencia/cursos/*/curso.yml ({hoy}); no editar -->", "",
+           f"<!-- GENERADO por docencia/scripts/temario.py desde docencia/cursos/*/curso.yml ({hoy}); no editar -->", "",
            "# Temarios de los cursos", "",
            "> Vista completa por curso/unidad/tema generada desde cada `curso.yml` (edita el registro del curso, no esta nota). El tablero vivo de estudio sigue en `kanban cursos.md`.", ""]
     for c, t in cursos_t:
@@ -531,7 +531,7 @@ def generar_resumen(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> str:
         for u in t.get("unidades", []):
             out.append(f"- **{u['id']}. {u['titulo']}**")
             for tema in u["temas"]:
-                out.append(f"  - [ ] `{tema['id']}` [{tema['titulo']}](<../10 Class/contenido/cursos/{c.name}/{tema['archivo']}>)" if tema.get("archivo") else f"  - [ ] `{tema['id']}` {tema['titulo']}")
+                out.append(f"  - [ ] `{tema['id']}` [{tema['titulo']}](<../docencia/contenido/cursos/{c.name}/{tema['archivo']}>)" if tema.get("archivo") else f"  - [ ] `{tema['id']}` {tema['titulo']}")
         out.append("")
     f = RESUMEN
     nuevo = "\n".join(out)

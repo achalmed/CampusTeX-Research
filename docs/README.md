@@ -2,7 +2,7 @@
 tipo: readme
 estado: activo
 ---
-# docs/ — documentación permanente de `10 Class`
+# docs/ — documentación permanente de `docencia`
 
 <!-- docs:inicio -->
 | documento | tipo | estado | qué es |

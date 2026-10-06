@@ -60,7 +60,7 @@ Cada disciplina reusa el motor de la raíz: su `main.py` añade la raíz al
 
 | Renderizador | Rol | Motor |
 |---|---|---|
-| **matplotlib** | app interactiva (sliders) + figuras de reporte | `10 Class/simuladores/graficos.py` |
+| **matplotlib** | app interactiva (sliders) + figuras de reporte | `docencia/simuladores/graficos.py` |
 | **Manim** | animaciones de "ver el método en movimiento" | `estadistica/animaciones/` (env conda aparte) |
 
 Un mismo tema puede tener figura estática (reporte), exploración interactiva
@@ -100,7 +100,7 @@ trazabilidad antes de dar un modelo por bueno; `salidas/` regenerable.
 **La cita es una aserción (E0, 2026-10-01).** Cada tema declara en `Ficha.fuentes` una o
 más `base.Fuente(calibre_id, pagina, pagina_pdf, pasaje, afirma)`: el libro por su id de
 Calibre, la página impresa que se cita, la hoja del PDF y un pasaje literal breve (≤ 15
-palabras) de esa hoja. `10 Class/simuladores/fuentes.py` pide el texto de la hoja al resolutor
+palabras) de esa hoja. `docencia/simuladores/fuentes.py` pide el texto de la hoja al resolutor
 (`core/py-common/biblioteca.py`) y comprueba que el pasaje esté ahí y que el folio impreso
 se vea en cabecera o pie (si no se ve, es aviso). `python3 main.py fuentes [<tema>]` lo
 detalla; `verificar` cuenta los temas con fuentes verificadas y, con

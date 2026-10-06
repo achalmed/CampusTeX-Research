@@ -10,7 +10,7 @@ Método: recorre `contenido/cursos/*/02-contenido/*.md` (salvo README.md), calcu
   renombra con `git mv` cuando el archivo está versionado y sustituye las referencias
   en todos los `.md` y `curso.yml` de las áreas. Simula por defecto.
 Fundamento: meta/NORMATIVA_ARCHIVOS.md §4 (nombres), §6.2 (Markdown), §10.4 (las notas
-  de estudio de 10 Class son régimen del vault); encargo M7 (2026-09-15) punto 4.
+  de estudio de docencia son régimen del vault); encargo M7 (2026-09-15) punto 4.
 Alternativa: renombrar con `rename` y arreglar enlaces a mano. Se descarta: 2 000
   archivos y 63 wikilinks + 9 enlaces relativos + 1 700 `archivo:` que se romperían.
 Límite: no toca notas fuera de `02-contenido` ni referencias en otros repos

@@ -3,7 +3,7 @@ tipo: estado
 estado: activo
 actualizado: 2026-10-06
 ---
-# estado.md — 10 Class (repo `Academic_Class_Framework`, remoto `CampusTeX-Research`)
+# estado.md — docencia (repo `Academic_Class_Framework`, remoto `CampusTeX-Research`)
 
 Lo primero que se lee y lo último que se escribe en cada sesión (regla 10 de la guía raíz). Lo decidido vive en
 `docs/decisiones.md`; lo pendiente, aquí, en §Por hacer, con fecha y dueño. El contenido docente lleva su propio
@@ -38,4 +38,4 @@ nada en curso
 
 ## Futuro
 
-- Fase B de la ola 5 (director): el submódulo `docencia` pasa a `contenido` y los alias `ANALYSIS_DIR`, `SCRIPTS_CALIBRE` y `SCRIPTS_FUENTES` salen de `core/env`; fase C: `10 Class` pasa a `docencia` (`meta/programa/06-olas/ola-05-reingenieria.md` §2 y §3).
+- Fase B de la ola 5 (director): el submódulo `docencia` pasa a `contenido` y los alias `ANALYSIS_DIR`, `SCRIPTS_CALIBRE` y `SCRIPTS_FUENTES` salen de `core/env`; fase C: `docencia` pasa a `docencia` (`meta/programa/06-olas/ola-05-reingenieria.md` §2 y §3).

@@ -60,5 +60,5 @@ bash -n scripts/<archivo>.sh              # comprobación de sintaxis: UN archiv
 - **`compile_tex` envía los `academic-*` a `build.sh`** y el resto al compilador universal del workspace;
   si la compilación falla, el compilador sale con 1 y deja el PDF anterior y los auxiliares en su sitio.
 - **`bash -n` comprueba un archivo por invocación**: con varios argumentos solo mira el primero.
-- **En zsh y con rutas con espacios** (`10 Class`) se itera con `while read`, nunca con `for x in $(…)`.
+- **En zsh y con rutas con espacios** (`docencia`) se itera con `while read`, nunca con `for x in $(…)`.
 - `__pycache__/` no se versiona; si aparece, se borra.

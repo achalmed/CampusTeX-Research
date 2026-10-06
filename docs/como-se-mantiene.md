@@ -34,7 +34,7 @@ llega aquí como `config/palette.tex` generado.
 | `05 tasks/temarios-cursos.md` | todos los `curso.yml` | `temario-generar.sh generar --que resumen --aplicar` |
 | `curso.yml.banco_examenes`, recursos de tipo post y simulador | disco y `04 index/_pubs` | `python3 scripts/enlazar.py examenes\|posts\|simuladores --aplicar` |
 | `config/palette.tex` | `sistema-editorial/temas/docencia.yml` | `sistema-editorial` (órdenes en `sistema-editorial/docs/consumidores.md` §2 y §4) |
-| `docs/README.md` | frontmatter de `docs/*.md` | `python3 core/docs.py indice "10 Class" --aplicar` |
+| `docs/README.md` | frontmatter de `docs/*.md` | `python3 core/docs.py indice "docencia" --aplicar` |
 | `04 index/cursos/<materia>/<edicion>/` | `dictado.yml` | `./scripts/publish-session.sh` + `./scripts/publish-web.sh --aplicar` (hardlinks) |
 
 Un derivado **no se edita a mano**: lleva su marca `GENERADO por … ; no editar` o vive entre
@@ -90,8 +90,8 @@ python3 scripts/enlazar.py verificar           # enlaces del currículo
 ./scripts/doctor.sh                            # lo anterior + entorno + binarios + core/archivos.py
 
 cd ~/Documents
-python3 core/docs.py verificar "10 Class"      # el índice de docs/ al día
-python3 core/archivos.py validar "10 Class"    # normativa de archivos (D01–D12 incluidas)
+python3 core/docs.py verificar "docencia"      # el índice de docs/ al día
+python3 core/archivos.py validar "docencia"    # normativa de archivos (D01–D12 incluidas)
 ```
 
 El doctor devuelve 1 si hay fallos y 0 si no; los avisos (`[!!]`) no cambian el código de salida.

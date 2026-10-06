@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """scripts/normalizar-archivos.py — migración M7 de la normativa de archivos en el framework y sus áreas.
 
-Objetivo: dejar `10 Class` (framework y 23 áreas) con 0 fallos de `core/archivos.py`
+Objetivo: dejar `docencia` (framework y 23 áreas) con 0 fallos de `core/archivos.py`
   sin tocar contenido académico: registros de sesión y de curso con las claves del
   núcleo, cursos con nombre `course_NN_<slug>`, nombres de archivo en snake/kebab,
   identidad en la línea 1 de todo código propio, frontmatter con `tipo` en todo
@@ -499,7 +499,7 @@ def migrar_temario(ty: Path, curso: Path) -> str:
     lineas = t.split("\n")
     cab = [f"# {rel_repo(ty)} — registro del curso {cid}: fuente única del currículo (unidades, temas, recursos)",
            "# Se editan aquí unidades, temas y recursos; README, ficha web,",
-           "# temario del learning-skill y checklist de estudio se GENERAN con: 10 Class/scripts/temario-generar.sh"]
+           "# temario del learning-skill y checklist de estudio se GENERAN con: docencia/scripts/temario-generar.sh"]
     i = 0
     while i < len(lineas) and lineas[i].startswith("#"):
         i += 1
@@ -686,7 +686,7 @@ def cmd_cabeceras():
 
 
 # --- frontmatter de Markdown suelto -----------------------------------------
-GENERADO_PUB = "<!-- GENERADO por 10 Class/scripts/publish-session.sh al publicar la sesión; no editar -->"
+GENERADO_PUB = "<!-- GENERADO por docencia/scripts/publish-session.sh al publicar la sesión; no editar -->"
 
 
 def titulo_h1(texto: str, p: Path) -> str:

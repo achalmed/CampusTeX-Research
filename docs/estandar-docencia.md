@@ -16,7 +16,7 @@ fecha: 2026-09-15
 ## 1. Dónde vive cada cosa
 
 ```
-10 Class/                       ← repo Academic_Class_Framework: tooling, clases, plantillas, scaffolds
+docencia/                       ← repo Academic_Class_Framework: tooling, clases, plantillas, scaffolds
 ├── docencia/                   ← UN submódulo: repo Academic_Class (todo el contenido docente)
 │   ├── cursos/<slug>/          ← qué se enseña (uno por carpeta)
 │   ├── dictados/<AAAA-ciclo>-<institucion>-<materia>/   ← cada vez que se dicta (manifiesto + producto)

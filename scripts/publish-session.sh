@@ -59,7 +59,7 @@ tipo: doc
 titulo: "Publicado — $CSLUG/$SNAME ($CLAVE)"
 estado: hecho
 ---
-<!-- GENERADO por 10 Class/scripts/publish-session.sh; producto no versionado (publicacion/ está en .gitignore) -->
+<!-- GENERADO por docencia/scripts/publish-session.sh; producto no versionado (publicacion/ está en .gitignore) -->
 # Publicado — $CSLUG/$SNAME  ($CLAVE → $WEB)
 
 - **Fecha:** $(date +%F)
