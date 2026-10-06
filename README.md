@@ -82,7 +82,8 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
 | [`docs/arquitectura.md`](docs/arquitectura.md) | la plataforma editorial: capas, decisiones, flujo de un documento |
 | [`docs/como-se-mantiene.md`](docs/como-se-mantiene.md) | ciclo de vida documental: quién actualiza qué cuando cambia el estándar |
 | [`docs/README.md`](docs/README.md) | índice completo, generado desde el frontmatter de `docs/` |
-| [`docs/decisiones.md`](docs/decisiones.md) | por qué se decidió cada cosa, por tema y con fecha; los pendientes |
+| [`docs/decisiones.md`](docs/decisiones.md) | por qué se decidió cada cosa, por tema y con fecha |
+| [`estado.md`](estado.md) | dónde está el repo: lo hecho, lo en curso y los pendientes con fecha y dueño |
 | [`CLAUDE.md`](CLAUDE.md) | reglas para el asistente y detalles que cuesta redescubrir |
 
 ## Límite honesto
@@ -94,6 +95,6 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
 - **El framework no versiona datos de estudiantes**: eso es `registro/`, ignorado desde aquí y sin
   remoto. Tampoco versiona los productos de publicación ni las fuentes PDF de los expedientes.
 - **Algunos decks Beamer heredados no compilan** (falta la copia local de `cau-logo.png`, o piden
-  XeLaTeX): es pendiente del docente y se reconstruyen al usarlos (`docs/decisiones.md` §Pendientes).
+  XeLaTeX): es pendiente del docente y se reconstruyen al usarlos (`docencia/estado.md` §Por hacer).
 - **El color no se decide aquí**: `config/palette.tex` es un espejo generado por `sistema-editorial`;
   editarlo a mano se pierde en la siguiente generación.

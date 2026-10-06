@@ -48,7 +48,7 @@ la transformación. **Migrar = transformar**, nunca mover:
 - La **sigla va en minúsculas** (normativa §4; así la escribe `new-evaluacion.sh` desde M7).
   El prompt maestro decía mayúsculas: queda corregido. `new-evaluacion.sh` crea solo las doce
   plantillas de `templates/exam/` y escribe hoy `lab`, `eo` y `tar` para laboratorio, examen oral y
-  tarea, en vez de `lb`, `or` y `ta` (pendiente en `decisiones.md` §Pendientes); las demás siglas de la
+  tarea, en vez de `lb`, `or` y `ta` (pendiente en `../estado.md` §Por hacer); las demás siglas de la
   tabla se ponen al nombrar el expediente.
 - El **momento** (parcial, final, sustitutorio, aplazados…) va en `\tipoevaluacion{}` y en la
   sigla; la **forma** (individual/grupal, presencial/virtual) en `\modalidad{}`.

@@ -1,14 +1,14 @@
 ---
 tipo: decision
-titulo: "Decisiones y pendientes del framework de docencia"
+titulo: "Decisiones del framework de docencia"
 estado: activo
 ---
-# Decisiones y pendientes del framework de docencia
+# Decisiones del framework de docencia
 
 Registro acumulativo por tema (`meta/docs/historial/NORMATIVA_ARCHIVOS.md` §15.6): una entrada por decisión, con su
 fecha y su porqué. Cubre el framework, su contenido (`docencia/`) y su registro privado (`registro/`).
-Lo **decidido** no se vuelve a discutir sin anotar aquí por qué; lo abierto está en
-[§Pendientes](#pendientes), con fecha y dueño. El detalle de cada fase cerrada está en
+Lo **decidido** no se vuelve a discutir sin anotar aquí por qué; lo abierto está en [`../estado.md`](../estado.md)
+§Por hacer (el del contenido, en `docencia/estado.md`), con fecha y dueño. El detalle de cada fase cerrada está en
 [`historial/`](historial/README.md) y en el asiento de `meta/docs/historial/progreso-2026.md`.
 
 ## Plataforma editorial
@@ -140,17 +140,3 @@ son hitos de migración); la línea de tiempo de fases quedó en este registro y
 `docs/arquitectura.md` describe la plataforma como es; sus decisiones están aquí.
 `docencia/` recibe su propia guía de orientación (`CLAUDE.md`), porque es un repo que se clona solo y
 quien lo abre aislado no ve las reglas del framework.
-
-## Pendientes
-
-| fecha | pendiente | dueño |
-|---|---|---|
-| 2026-10-04 | ¿El framework publicará versiones (etiquetas o releases que alguien consuma)? Si sí, vuelve `CHANGELOG.md` con SemVer | el autor |
-| 2026-10-04 | Los decks Beamer heredados que no compilan (esperan una copia local de `cau-logo.png` o piden XeLaTeX) se reconstruyen al usarlos | el autor (docente) |
-| 2026-10-04 | `scripts/temario.py`, `enlazar.py` y `publicar-web.py` derivan `~/Documents` como carpeta padre del repo y `config/course.yml` (`compilador:`) escribe `$HOME/Documents/...`: pasar por `core/env.py` | el autor |
-| 2026-10-04 | `scripts/lib/common.sh` (`INBOX_DIR`) y `scripts/doctor.sh` siguen tratando la bandeja `_inbox` de `docencia`, ya retirada | el autor |
-| 2026-10-04 | `simuladores/macro/modelos/`: tres pendientes sin fecha (aviso A13) | campaña SIMULADORES |
-| 2026-10-04 | `docencia/migracion/migrar-calibre.py`: la constante del respaldo apunta a `meta/reparaciones/` (retirado) y el texto que escribe en las fichas cita la ruta antigua del estándar de evaluaciones (con prefijo `10-`) | el autor |
-| 2026-10-04 | Revisar la excepción de `simuladores/CLAUDE.md` al cerrar `DIAGNOSTICO_SIMULADORES_2026-10` | campaña SIMULADORES |
-| 2026-10-04 | `scripts/new-evaluacion.sh` escribe las siglas `lab`, `eo` y `tar` (laboratorio, examen oral, tarea) donde `estandar-evaluaciones.md` §2 fija `lb`, `or` y `ta`, y solo crea las doce plantillas de `templates/exam/`: alinear el script con la tabla | el autor |
-| 2026-10-04 | `scaffolds/sesion/deck.tex` (el deck que crea `new-session.sh --tipo clase`) es un Beamer autocontenido con `\usetheme` de `config/course.yml` (`tema_beamer`), no `academic-beamer`: decidir si el scaffold pasa a la clase del framework | el autor |

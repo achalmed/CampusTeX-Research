@@ -14,7 +14,7 @@ submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/` (repo
 ## Reglas que no se negocian
 
 - **Dónde va cada cosa nueva** (`meta/docs/historial/NORMATIVA_ARCHIVOS.md` §15.11). En la raíz solo `README.md`,
-  `CLAUDE.md`, `AGENTS.md`, `LICENSE` y los archivos de entorno (`.gitignore`, `.gitattributes`, `.gitmodules`).
+  `CLAUDE.md`, `AGENTS.md`, `estado.md`, `LICENSE` y los archivos de entorno (`.gitignore`, `.gitattributes`, `.gitmodules`).
 
   | lo que apareció | va a | nunca a |
   |---|---|---|
@@ -22,7 +22,8 @@ submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/` (repo
   | una regla del contenido (curso, sesión, dictado, evaluación) | `docs/estandar-docencia.md` o `docs/estandar-evaluaciones.md` (sin renumerar §) | este archivo |
   | cómo está hecha la plataforma LaTeX | `docs/arquitectura.md` | un documento nuevo junto a él |
   | quién actualiza qué, qué se regenera | `docs/como-se-mantiene.md` | una nota suelta |
-  | por qué se decidió algo, o un pendiente (con fecha y dueño) | `docs/decisiones.md` (§Pendientes) | un `CHANGELOG.md`, un `TODO.md` |
+  | por qué se decidió algo | `docs/decisiones.md` | un `CHANGELOG.md` |
+  | un pendiente (con fecha y dueño) | `estado.md` §Por hacer (el del contenido, `docencia/estado.md`) | un `TODO.md`, `docs/decisiones.md` |
   | una vista de `curso.yml` (README de curso, ficha web, temario, checklist) | se regenera con `scripts/temario-generar.sh` | se edita a mano |
 
   Lo que hiciste en esta sesión va al mensaje de commit, no a un archivo. Si nada encaja, pregunta
@@ -122,7 +123,8 @@ python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
 | El estándar de evaluaciones (tipos, siglas, expediente, `code/`, ficha) | `docs/estandar-evaluaciones.md` |
 | La arquitectura de la plataforma editorial (capas, decisiones) | `docs/arquitectura.md` |
 | Quién actualiza qué cuando cambia el estándar | `docs/como-se-mantiene.md` |
-| Por qué se decidió cada cosa, y lo pendiente | `docs/decisiones.md` |
+| Por qué se decidió cada cosa | `docs/decisiones.md` |
+| Dónde está el repo y lo pendiente | `estado.md` (el contenido: `docencia/estado.md`) |
 | Diagnósticos y bitácoras cerradas | `docs/historial/README.md` |
 | Quién consume lo que produce este repo | `docs/estandar-docencia.md` §9 |
 | Qué hace cada script | `scripts/README.md` |
