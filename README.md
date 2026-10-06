@@ -94,7 +94,7 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
   que los pida se reconstruye, no se parchea.
 - **El framework no versiona datos de estudiantes**: eso es `registro/`, ignorado desde aquí y sin
   remoto. Tampoco versiona los productos de publicación ni las fuentes PDF de los expedientes.
-- **Algunos decks Beamer heredados no compilan** (falta la copia local de `cau-logo.png`, o piden
-  XeLaTeX): es pendiente del docente y se reconstruyen al usarlos (`docencia/estado.md` §Por hacer).
+- **Algunos decks Beamer heredados no compilan** (falta la copia local de `cau-logo.png`): es
+  pendiente del docente y se reconstruyen al usarlos (`docencia/estado.md` §Por hacer).
 - **El color no se decide aquí**: `config/palette.tex` es un espejo generado por `sistema-editorial`;
   editarlo a mano se pierde en la siguiente generación.

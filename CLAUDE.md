@@ -103,8 +103,8 @@ python3 core/docs.py verificar "10 Class"       # el índice de docs/ al día
   de `new-session.sh --tipo clase` (`scaffolds/sesion/deck.tex`) usa `beamer` con `tema_beamer` de
   `config/course.yml`, no `academic-beamer`; el deck del framework lo crea `new-presentation.sh`.
 - **Algunos decks heredados no compilan** y es pendiente del docente, no del framework: esperan un
-  `cau-logo.png` **hermano del `.tex`** que no se copió, o declaran `%!TEX program = xelatex`. El logo
-  canónico está en `assets/branding/cau-logo.png` (ver `assets/README.md`); se reconstruyen al usarlos.
+  `cau-logo.png` **hermano del `.tex`** que no se copió (desde la ola 5 ninguno declara pdfLaTeX ni
+  XeLaTeX). El logo canónico está en `assets/branding/cau-logo.png` (ver `assets/README.md`); se reconstruyen al usarlos.
 - **`revisar: <motivo>` en `sesion.yml`** rebaja a aviso una incoherencia tipo/artefacto;
   `archivo: null` en `curso.yml` significa «la nota aún no existe» (sin esqueletos).
 - **En zsh y con rutas con espacios** (`10 Class`): iterar con `while read`, nunca con `for x in $(…)`.
