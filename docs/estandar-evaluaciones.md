@@ -6,7 +6,7 @@ estado: activo
 # Estándar de evaluaciones (`04-evaluaciones/`)
 
 Consolida en un solo lugar lo que ya estaba acordado en tres sitios —el prompt maestro
-`prompts/05 docencia/prompt_resolucion_examenes_plantillas.md` (2026-07-23), el estándar de
+`prompts/skills/learning/references/resolucion-examenes-academic-exam.md` (2026-07-23; antes `05 docencia/prompt_resolucion_examenes_plantillas.md`), el estándar de
 docencia `docs/estandar-docencia.md` §2 y el script `scripts/new-evaluacion.sh`— y fija las
 decisiones que faltaban (2026-09-15, R10/R11). Donde el prompt y la normativa de archivos
 (`meta/docs/historial/NORMATIVA_ARCHIVOS.md`, 2026-09-13) discrepaban, manda la normativa y el prompt se
