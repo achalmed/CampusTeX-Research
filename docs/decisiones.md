@@ -112,7 +112,7 @@ versionan (respaldo en el disco externo del autor). El estado de cada expediente
 ## Simuladores
 
 **Decidido (2026-09-20): el laboratorio `simuladores/` vive en este repo.**
-Vino de `datafw/simuladores/` con su historia git porque es currículo —fichas pedagógicas,
+Vino de `02 analysis/simuladores/` (hoy `datafw`) con su historia git porque es currículo —fichas pedagógicas,
 verificaciones que son teoremas, animaciones— y lo consumen los cursos, no el pipeline de datos.
 
 **Decidido (2026-10-04, DOC10): `simuladores/CLAUDE.md` se conserva como guía anidada**, excepción a
