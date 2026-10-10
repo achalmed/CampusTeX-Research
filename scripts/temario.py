@@ -34,6 +34,8 @@ while _d != _d.parent and not (_d / "core" / "env.py").is_file():   # core/env.p
     _d = _d.parent
 sys.path.insert(0, str(_d / "core"))
 import env  # noqa: E402
+sys.path.insert(0, str(Path(env.__file__).resolve().parent / "py-common"))
+import pubs as registro_pubs  # noqa: E402  (los blogs, por _pubs/pubs.yml; ola 6)
 
 FW = Path(__file__).resolve().parents[1]           # …/docencia
 DOCS = env.DOCS_ROOT                                # …/Documents
@@ -409,7 +411,7 @@ def posts_por_curso() -> dict[str, list[tuple[str, str, str]]]:
     out: dict[str, list] = {}
     if not pubs.is_dir():
         return out
-    for blog in sorted(pubs.glob("pub_*")):
+    for blog in [p.ruta for p in registro_pubs.pubs() if p.ruta.is_dir()]:
         q = blog / "_quarto.yml"
         m = re.search(r"^\s*site-url:\s*(\S+)", q.read_text(encoding="utf-8"), re.M) if q.exists() else None
         base = m.group(1).rstrip("/") if m else ""
