@@ -25,7 +25,7 @@ BIBLIOGRAPHY_DIR="$FW_DIR/bibliography"              # archivos .bib
 DOCENCIA_DIR="$FW_DIR/contenido"                      # submódulo de contenido (repo Academic_Class)
 CURSOS_DIR="$DOCENCIA_DIR/cursos"
 DICTADOS_DIR="$DOCENCIA_DIR/dictados"
-INBOX_DIR="$DOCENCIA_DIR/_inbox"   # retirado el 2026-09-20 (06 archives/2026-09-20-docencia-inbox); el doctor lo trata como vacío
+INBOX_DIR="$DOCENCIA_DIR/_inbox"   # retirado el 2026-09-20 (archivo/2026-09-20-docencia-inbox); el doctor lo trata como vacío
 REGISTRO_DIR="$FW_DIR/registro"                      # repo privado hermano (nunca con remote público)
 
 # Compilador universal del workspace: su carpeta la da core/env.sh (SCRIPTS_LATEX) cuando el framework

@@ -77,7 +77,7 @@ publica, antes se separa lo ajeno (`cursos/<slug>/05-recursos/vendor/`, evaluaci
 universidades) de lo propio y el autor elige la licencia.
 
 **Decidido (2026-09-20): la bandeja `_inbox` de `docencia` sale del repo.**
-El legado sin clasificar pasó al archivo del vault (`06 archives/2026-09-20-docencia-inbox/`); nada
+El legado sin clasificar pasó al archivo del vault (`archivo/2026-09-20-docencia-inbox/`); nada
 se cita desde allí. Regla vigente: lo que llegue fuera del estándar se clasifica o sale al archivo.
 
 ## Currículo y publicación

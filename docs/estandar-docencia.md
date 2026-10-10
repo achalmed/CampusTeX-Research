@@ -184,7 +184,7 @@ dictados/2026-i-cau-unsch-metodologia/
 10. **Un dictado = `dictados/<AAAA-ciclo>-<institucion>-<materia>/dictado.yml`**, aunque
     tome sesiones de varios cursos.
 11. **Nada queda sin clasificar dentro del repo.** Lo que llegue fuera del estándar se clasifica en su curso o sale al
-   archivo del vault (`06 archives/`), como se hizo con `_inbox/` el 2026-09-20.
+   archivo del vault (`archivo/`), como se hizo con `_inbox/` el 2026-09-20.
 12. **Cambios estructurales por el ciclo**: auditoría → propuesta → aprobación → tag →
     cambio con dry-run → `validate.sh --todos` → `doctor.sh` → commit; mapa de rutas
     versionado en `contenido/migracion/` como UNDO.
