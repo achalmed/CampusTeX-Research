@@ -37,22 +37,22 @@ LAB = Path(__file__).resolve().parents[1] / "simuladores"   # el laboratorio viv
 
 # blog → {carpeta temática (o 'posts'): curso}. None = sin curso equivalente (se deja sin enlazar).
 MAPA_POSTS: dict[str, dict[str, str | None]] = {
-    "pub_numerus-scriptum": {"python": "python_curso_base", "r": "r_curso_base", "stata": "stata_curso_base", "eviews": "eviews_curso_base",
+    "numerus-scriptum": {"python": "python_curso_base", "r": "r_curso_base", "stata": "stata_curso_base", "eviews": "eviews_curso_base",
                              "latex": "latex_curso_base", "ofimatica": "ofimatica_curso_base", "power-bi": "ofimatica_curso_base",
                              "fundamentos-programacion": "programming_concepts_curso_base", "matlab": None, "cpp": None, "bloomberg": None, "posts": None},
-    "pub_epsilon-y-beta": {"00-econometria-general": "econometria_i", "01-fundamentos-econometria": "econometria_i", "02-macroeconometria": "econometria_ii",
+    "epsilon-y-beta": {"00-econometria-general": "econometria_i", "01-fundamentos-econometria": "econometria_i", "02-macroeconometria": "econometria_ii",
                            "03-microeconometria": "microeconometria_aplicada", "04-econometria-financiera": "econometria_ii", "05-econometria-bayesiana": "econometria_ii",
                            "06-evaluacion-de-impacto": "microeconometria_aplicada", "07-topicos-de-econometria": "econometria_ii",
                            "estadistica-para-economistas": "estadistica_para_economistas", "estadistica": "estadistica", "posts": "econometria_i"},
-    "pub_axiomata": {"economia-matematica": "matematicas_i", "posts": "matematicas_i"},
-    "pub_aequilibria": {"posts": "macroeconomia_i"},
-    "pub_optimums": {"organizacion-industrial": "organizacion_industrial", "posts": "microeconomia_i"},
-    "pub_pecunia-fluxus": {"finanzas-internacionales": "finanzas_iii", "posts": "finanzas_i"},
-    "pub_methodica": {"posts": "monografias"},
-    "pub_res-publica": {"posts": "economia_publica"},
-    "pub_actus-mercator": {"inteligencia-comercial": "investigacion_de_mercados", "posts": "formulacion_de_proyectos"},
-    "pub_dialectica-y-mercado": {"posts": "economia_politica"},
-    "pub_chaska": {"ciberseguridad-cybersoc-ccs": None, "ciberseguridad-ethical-hacking-ceh": None, "i3wm": None, "operating-system": None, "posts": None},
+    "axiomata": {"economia-matematica": "matematicas_i", "posts": "matematicas_i"},
+    "aequilibria": {"posts": "macroeconomia_i"},
+    "optimums": {"organizacion-industrial": "organizacion_industrial", "posts": "microeconomia_i"},
+    "pecunia-fluxus": {"finanzas-internacionales": "finanzas_iii", "posts": "finanzas_i"},
+    "methodica": {"posts": "monografias"},
+    "res-publica": {"posts": "economia_publica"},
+    "actus-mercator": {"inteligencia-comercial": "investigacion_de_mercados", "posts": "formulacion_de_proyectos"},
+    "dialectica-y-mercado": {"posts": "economia_politica"},
+    "chaska": {"ciberseguridad-cybersoc-ccs": None, "ciberseguridad-ethical-hacking-ceh": None, "i3wm": None, "operating-system": None, "posts": None},
 }
 
 # El banco de exámenes vive dentro de cada curso desde R10 (2026-09-15): cursos/<slug>/04-evaluaciones/<sub>/
