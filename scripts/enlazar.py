@@ -56,7 +56,7 @@ MAPA_POSTS: dict[str, dict[str, str | None]] = {
 }
 
 # El banco de exámenes vive dentro de cada curso desde R10 (2026-09-15): cursos/<slug>/04-evaluaciones/<sub>/
-# (antes, carpetas de 01 notes/50-examenes-y-practicas mapeadas aquí por curso; el mapa de la migración está en
+# (antes, carpetas de notas/50-examenes-y-practicas mapeadas aquí por curso; el mapa de la migración está en
 # docencia/migracion/migrar-examenes.py y mapa-examenes.csv). `banco/` cuenta archivos sueltos; las demás
 # subcarpetas cuentan expedientes (carpetas) y .tex sueltos.
 SUBS_EVALUACIONES = ("examen_parcial", "examen_final", "practicas", "laboratorios", "tareas", "proyectos", "banco", "soluciones")

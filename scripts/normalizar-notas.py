@@ -14,7 +14,7 @@ Fundamento: meta/NORMATIVA_ARCHIVOS.md §4 (nombres), §6.2 (Markdown), §10.4 (
 Alternativa: renombrar con `rename` y arreglar enlaces a mano. Se descarta: 2 000
   archivos y 63 wikilinks + 9 enlaces relativos + 1 700 `archivo:` que se romperían.
 Límite: no toca notas fuera de `02-contenido` ni referencias en otros repos
-  (`01 notes`, `prompts`): las imprime como `sed` para el informe.
+  (`notas`, `prompts`): las imprime como `sed` para el informe.
 
 Uso:
   python3 scripts/normalizar-notas.py [--aplicar] [--bitacora DIR] [CURSO_DIR ...]

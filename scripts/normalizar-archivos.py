@@ -15,7 +15,7 @@ Fundamento: meta/NORMATIVA_ARCHIVOS.md §1, §2.1, §4, §5, §6.2, §7 y fila M
   decisiones del encargo M7 (2026-09-15).
 Alternativa: editar a mano (2 700 archivos) o un `sed` por regla. Se descarta: sin
   bitácora no hay UNDO, y sin la lógica del validador se actúa sobre lo que no toca.
-Límite: no toca `web`, `prompts` ni `01 notes` (repos de otros agentes): imprime
+Límite: no toca `web`, `prompts` ni `notas` (repos de otros agentes): imprime
   el `sed` que les corresponde. No recorre `_ESTANDARIZACION`, `vendor/` ni `.git`.
   Las notas de estudio de `02-contenido` las normaliza `normalizar-notas.py`.
 
@@ -372,7 +372,7 @@ def cmd_cursos():
             log(f"      README de {a.name}: {viejo.name} → {nuevo.name}")
         seds.append(f"s|{a.name}/{viejo.name}/|{a.name}/{nuevo.name}/|g")
     if seds:
-        log("  Para los repos que no toca esta herramienta (web, prompts, 01 notes):")
+        log("  Para los repos que no toca esta herramienta (web, prompts, notas):")
         log("    sed -i -e '" + "' -e '".join(seds) + "' <archivos>")
     return plan
 

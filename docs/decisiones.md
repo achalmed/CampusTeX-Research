@@ -63,7 +63,7 @@ Los 23 repos `Academic_Class-<Área>` con el estándar 00–09 se consolidaron c
 submódulo `docencia/` (tags `<área>/pre-reorg-2026-09`; tags del framework `pre-reorg-2026-09` y
 `reorg-2026-09-done`). Por qué y cómo: [`historial/DIAGNOSTICO_AREAS_2026-09.md`](historial/DIAGNOSTICO_AREAS_2026-09.md);
 los mapas archivo a archivo, en `contenido/migracion/historico/`. Lo que no era contenido docente salió:
-datasets a `datafw`, trabajos de estudiantes a `registro/`, material de inglés a `01 notes`.
+datasets a `datafw`, trabajos de estudiantes a `registro/`, material de inglés a `notas`.
 
 **Decidido (2026-09-15, M3–M5): `curso.yml` sucede a `temario.yml`; los scaffolds son registros, no
 árboles; el dictado vive fuera del curso.**
@@ -83,7 +83,7 @@ se cita desde allí. Regla vigente: lo que llegue fuera del estándar se clasifi
 ## Currículo y publicación
 
 **Decidido (2026-09-06, F5.0): aquí solo hay docencia propia.** Los cursos que el autor toma y sus
-apuntes están en `01 notes/40-cursos-y-formacion/`.
+apuntes están en `notas/40-cursos-y-formacion/`.
 
 **Decidido (2026-09-06, F5.1): el currículo vive una vez, en `curso.yml`.** README del curso, ficha web,
 temario del learning-skill y checklist de `05 tasks` se generan (`scripts/temario.py`).

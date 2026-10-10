@@ -26,7 +26,7 @@ cambia en `sistema-editorial/temas/docencia.yml`, de donde se genera `config/pal
 exámenes, diapositivas y sílabos a la vez.
 
 **Qué no es**: no es una colección de plantillas sueltas, no es un gestor de notas de estudio (eso es
-`01 notes/40-cursos-y-formacion/` con el learning-skill) y no cubre tesis, monografías, ensayos ni
+`notas/40-cursos-y-formacion/` con el learning-skill) y no cubre tesis, monografías, ensayos ni
 artículos (eso es `escritura`, repo `Academic_Writing_Framework`).
 
 ## Uso

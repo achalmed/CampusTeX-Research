@@ -156,7 +156,7 @@ dictados/2026-i-cau-unsch-metodologia/
 | Datasets oficiales (ENAHO, INEI, Damodaran…) | catálogo de `datafw` (`data/raw/…`) | `datasets[].clave`; el curso conserva solo muestras ≤ 5 MB |
 | Series para el `code/` de una evaluación o para un modelo del laboratorio | paquetes de resultados y datos de `datafw`, leídos por nombre (`core/env.py`) | el código del expediente o del modelo; contrato del proveedor en `datafw/docs/integracion-ecosistema.md` |
 | Logo, fuentes, plantillas, clases | `assets/`, `styles/`, `templates/`, `classes/` del framework | `\documentclass{academic-*}`; el deck lleva **una** copia local del logo |
-| Apuntes de Edison como alumno | `01 notes/40-cursos-y-formacion/<curso>/` | enlazan al tema de `02-contenido/`; nunca escriben en `docencia/` |
+| Apuntes de Edison como alumno | `notas/40-cursos-y-formacion/<curso>/` | enlazan al tema de `02-contenido/`; nunca escriben en `docencia/` |
 | Ficha web | `web/cursos/<materia>/` | `materia_web` (n cursos → 1 materia); ediciones por dictado |
 | Temario del learning-skill | `prompts/skills/learning/2 domains/_temarios/` | generado desde `curso.yml`; `dominio_fuat` |
 | Posts, simuladores, bancos de exámenes | `web/_pubs`, `simuladores/` de este repo, `contenido/cursos/*/04-evaluaciones/banco` | `enlazar.py` (los ids antiguos se resuelven por `alias`) |
