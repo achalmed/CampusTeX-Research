@@ -110,7 +110,7 @@ python3 core/docs.py verificar "docencia"       # el índice de docs/ al día
 - **En zsh y con rutas con espacios** (`docencia`): iterar con `while read`, nunca con `for x in $(…)`.
 - **`*.sdr/`** son metadatos de KOReader: se ignoran.
 - **`temario.py` toma rutas, no slugs** (`contenido/cursos/<slug>`), y sin `--que` escribe también en
-  `04 index`, `prompts` y `05 tasks`: para un solo README, `--que readme docencia/cursos/<slug>`.
+  `web`, `prompts` y `05 tasks`: para un solo README, `--que readme docencia/cursos/<slug>`.
 - **Antes de cerrar un expediente de evaluación**, el log no debe traer `Overfull \hbox` mayores de
   20 pt (los `\aplica{}` han de caber en una línea); lo cierra `contenido/migracion/cerrar-expediente.sh`.
 - **`scripts/new-period.sh` está retirado**: los dictados viven en `contenido/dictados/<clave>/`.

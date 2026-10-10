@@ -2,7 +2,7 @@
 """
 enlazar.py — Enlaza el currículo (curso.yml) con lo que ya existe fuera del framework (F5.3, 2026-09-06; M5 2026-09-15).
 
-  enlazar.py posts       [--aplicar]   cada post de 04 index/_pubs declara `curso: <id>` (por su carpeta temática)
+  enlazar.py posts       [--aplicar]   cada post de web/_pubs declara `curso: <id>` (por su carpeta temática)
   enlazar.py simuladores [--aplicar]   modelos de simuladores/ (este repo) → recursos {tipo: simulador} del tema (por similitud de título)
   enlazar.py examenes    [--aplicar]   subcarpetas de 04-evaluaciones/ del curso → `banco_examenes` (R10, 2026-09-15)
   enlazar.py verificar                 recursos y bancos con rutas existentes; posts con curso desconocido; posts sin curso

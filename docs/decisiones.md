@@ -89,7 +89,7 @@ apuntes están en `01 notes/40-cursos-y-formacion/`.
 temario del learning-skill y checklist de `05 tasks` se generan (`scripts/temario.py`).
 
 **Decidido (2026-09-06, F5.2): la web se alimenta por hardlink.** `publish-session.sh` congela (tag) y
-`publish-web.sh` enlaza en `04 index/cursos/`; la web nunca tiene copias.
+`publish-web.sh` enlaza en `web/cursos/`; la web nunca tiene copias.
 
 **Decidido (2026-09-06, F5.3–F5.4): los recursos se enlazan, no se copian.** `enlazar.py` une temas con
 posts, modelos de `simuladores/` y bancos; la bibliografía externa se cita por `calibre_id`. Una

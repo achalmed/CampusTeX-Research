@@ -29,13 +29,13 @@ llega aquí como `config/palette.tex` generado.
 | Derivado | Desde | Herramienta |
 |---|---|---|
 | `contenido/cursos/<slug>/README.md` | `curso.yml` | `./scripts/temario-generar.sh generar --que readme --aplicar` |
-| Sección «Contenidos / Sílabo» de `04 index/cursos/<materia>/index.qmd` | `curso.yml` | `temario-generar.sh generar --que web --aplicar` (entre marcadores) |
+| Sección «Contenidos / Sílabo» de `web/cursos/<materia>/index.qmd` | `curso.yml` | `temario-generar.sh generar --que web --aplicar` (entre marcadores) |
 | `prompts/skills/learning/2 domains/_temarios/<dominio>.md` y un puntero en `## Temario` del dominio | `curso.yml` | `temario-generar.sh generar --que skill --aplicar` |
 | `05 tasks/temarios-cursos.md` | todos los `curso.yml` | `temario-generar.sh generar --que resumen --aplicar` |
-| `curso.yml.banco_examenes`, recursos de tipo post y simulador | disco y `04 index/_pubs` | `python3 scripts/enlazar.py examenes\|posts\|simuladores --aplicar` |
+| `curso.yml.banco_examenes`, recursos de tipo post y simulador | disco y `web/_pubs` | `python3 scripts/enlazar.py examenes\|posts\|simuladores --aplicar` |
 | `config/palette.tex` | `sistema-editorial/temas/docencia.yml` | `sistema-editorial` (órdenes en `sistema-editorial/docs/consumidores.md` §2 y §4) |
 | `docs/README.md` | frontmatter de `docs/*.md` | `python3 core/docs.py indice "docencia" --aplicar` |
-| `04 index/cursos/<materia>/<edicion>/` | `dictado.yml` | `./scripts/publish-session.sh` + `./scripts/publish-web.sh --aplicar` (hardlinks) |
+| `web/cursos/<materia>/<edicion>/` | `dictado.yml` | `./scripts/publish-session.sh` + `./scripts/publish-web.sh --aplicar` (hardlinks) |
 
 Un derivado **no se edita a mano**: lleva su marca `GENERADO por … ; no editar` o vive entre
 marcadores. Lo escrito fuera de los marcadores se conserva al regenerar. `temario.py` toma los cursos

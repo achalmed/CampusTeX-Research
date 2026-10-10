@@ -9,7 +9,7 @@ descripcion: ""
 cursos: []                        # slugs de docencia/cursos/
 sesiones: []                      # [{orden, curso, sesion: sNN-<slug>, web: session_NN_<slug>}]
 web:
-  materia: {{MATERIA_WEB}}        # 04 index/cursos/<materia>
-  edicion: {{EDICION_WEB}}        # 04 index/cursos/<materia>/<edicion>
+  materia: {{MATERIA_WEB}}        # web/cursos/<materia>
+  edicion: {{EDICION_WEB}}        # web/cursos/<materia>/<edicion>
 registro: registro/{{DICTADO}}    # repo privado hermano (estudiantes, calificaciones, evidencias)
 publicacion: publicacion/<web>/ (producto de publish-session; git-ignorado; la web lo enlaza por hardlink)

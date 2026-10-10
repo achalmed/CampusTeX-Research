@@ -11,7 +11,7 @@ Lee docencia/dictados/<clave>/dictado.yml:
     - {orden: 1, curso: monografias, sesion: s01-la-monografia, web: session_01_la_monografia}
 
 Para cada sesión toma su módulo `publicacion/<web>/` (creado por publish-session.sh) y en
-`04 index/cursos/<web.materia>/<web.edicion>/<web>/`:
+`web/cursos/<web.materia>/<web.edicion>/<web>/`:
   · slides/ evaluation/ practice/ homework/ → cada archivo pasa a ser un HARDLINK del módulo
     (si la web tenía una copia, se sustituye por el enlace: un solo inodo, dos canales);
   · index.qmd y resources/_links.md se CREAN si faltan (desde sesion.yml de la sesión) y nunca se sobrescriben;

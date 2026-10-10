@@ -50,7 +50,7 @@ cd ~/Documents/10\ Class          # CURSO y DICTADO aceptan slug o ruta
 ./scripts/validate.sh --todos && ./scripts/doctor.sh
 ./scripts/temario-generar.sh generar --que readme --aplicar                  # README de curso desde curso.yml
 ./scripts/publish-session.sh 2026-ii-unsch-econometria econometria-i 07      # tag + publicacion/
-./scripts/publish-web.sh     2026-ii-unsch-econometria --aplicar             # hardlinks a 04 index/cursos
+./scripts/publish-web.sh     2026-ii-unsch-econometria --aplicar             # hardlinks a web/cursos
 ```
 
 Cada script está descrito en [`scripts/README.md`](scripts/README.md).

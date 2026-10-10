@@ -68,7 +68,7 @@ estado: borrador                  # borrador | activo | archivado
 tipo: asignatura                  # asignatura | herramienta | nivelacion | taller
 area: [estadistica, econometria]  # etiquetas, no carpetas; un curso puede tener varias
 malla: {plan: economia-unsch, ciclo: 5, orden: 13}
-materia_web: econometria          # ficha de 04 index/cursos/<materia>; varios cursos → una materia
+materia_web: econometria          # ficha de web/cursos/<materia>; varios cursos → una materia
 prerrequisitos: [estadistica-para-economistas]
 etiqueta: econometria
 dominio_fuat: econometria         # dominio del learning-skill
@@ -129,7 +129,7 @@ dictados/2026-i-cau-unsch-metodologia/
   en `publicacion/<web>/` (con `_PUBLICADO.md`) y pone el tag
   `dictado/<clave>/<sesion>` sobre el commit de las fuentes. No se copia nada al repo.
 - `publish-web.sh DICTADO --aplicar` enlaza el producto **por hardlink** (un solo inodo)
-  en `04 index/cursos/<materia>/<edicion>/<web>/`. La web nunca es fuente; el doctor avisa
+  en `web/cursos/<materia>/<edicion>/<web>/`. La web nunca es fuente; el doctor avisa
   de copias y huérfanos. `legado: true` marca dictados anteriores al estándar que no se
   republican (2025-I).
 - `registro/<clave>/` (repo privado) guarda estudiantes, asistencia, calificaciones,
@@ -157,9 +157,9 @@ dictados/2026-i-cau-unsch-metodologia/
 | Series para el `code/` de una evaluación o para un modelo del laboratorio | paquetes de resultados y datos de `datafw`, leídos por nombre (`core/env.py`) | el código del expediente o del modelo; contrato del proveedor en `datafw/docs/integracion-ecosistema.md` |
 | Logo, fuentes, plantillas, clases | `assets/`, `styles/`, `templates/`, `classes/` del framework | `\documentclass{academic-*}`; el deck lleva **una** copia local del logo |
 | Apuntes de Edison como alumno | `01 notes/40-cursos-y-formacion/<curso>/` | enlazan al tema de `02-contenido/`; nunca escriben en `docencia/` |
-| Ficha web | `04 index/cursos/<materia>/` | `materia_web` (n cursos → 1 materia); ediciones por dictado |
+| Ficha web | `web/cursos/<materia>/` | `materia_web` (n cursos → 1 materia); ediciones por dictado |
 | Temario del learning-skill | `prompts/skills/learning/2 domains/_temarios/` | generado desde `curso.yml`; `dominio_fuat` |
-| Posts, simuladores, bancos de exámenes | `04 index/_pubs`, `simuladores/` de este repo, `contenido/cursos/*/04-evaluaciones/banco` | `enlazar.py` (los ids antiguos se resuelven por `alias`) |
+| Posts, simuladores, bancos de exámenes | `web/_pubs`, `simuladores/` de este repo, `contenido/cursos/*/04-evaluaciones/banco` | `enlazar.py` (los ids antiguos se resuelven por `alias`) |
 
 ## 7. Reglas de mantenimiento
 
@@ -216,8 +216,8 @@ de qué.
 
 | consumidor | qué recibe o lee | cómo llega | qué no debe hacer |
 |---|---|---|---|
-| `04 index` | la sección «Contenidos / Sílabo» de `cursos/<materia>/index.qmd`, entre las marcas `temario:inicio`/`temario:fin` | `scripts/temario.py` (`--que web`) | editar entre las marcas |
-| `04 index` | el producto de cada dictado en `cursos/<materia>/<edicion>/` | `scripts/publish-web.sh` (hardlinks desde `contenido/dictados/<clave>/publicacion/`) | copiar en vez de enlazar |
+| `web` | la sección «Contenidos / Sílabo» de `cursos/<materia>/index.qmd`, entre las marcas `temario:inicio`/`temario:fin` | `scripts/temario.py` (`--que web`) | editar entre las marcas |
+| `web` | el producto de cada dictado en `cursos/<materia>/<edicion>/` | `scripts/publish-web.sh` (hardlinks desde `contenido/dictados/<clave>/publicacion/`) | copiar en vez de enlazar |
 | `prompts` (learning-skill) | `skills/learning/2 domains/_temarios/<dominio>.md` y un puntero en `## Temario` del dominio | `scripts/temario.py` (`--que skill`), por `dominio_fuat` | editar el temario generado |
 | `05 tasks` | `temarios-cursos.md`, la checklist por curso, unidad y tema | `scripts/temario.py` (`--que resumen`) | editarla a mano |
 | `scripts-biblioteca` (`ingesta_cursos`) | lee `contenido/cursos/*/05-recursos/` y escribe `bibliografia[].calibre_id` en el `curso.yml` | su suite (`scripts-biblioteca/ingesta/README.md`) | cambiar otras claves del registro |
