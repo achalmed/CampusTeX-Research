@@ -19,7 +19,7 @@ Cada cosa se escribe **una sola vez**, en su dueño. Todo lo demás apunta o se 
 | El estándar de contenido (curso · sesión · dictado · nomenclatura) | `docs/estandar-docencia.md` | `README.md`, `CLAUDE.md`, `docencia/README.md`, `scripts/validate.sh`, `prompts/00 metodo/ARQUITECTURA_DOCUMENTAL.md` (tipo 22), `prompts/05 docencia/` |
 | El estándar de evaluaciones | `docs/estandar-evaluaciones.md` | `scripts/new-evaluacion.sh`, `contenido/migracion/cerrar-expediente.sh`, el prompt maestro de resolución de exámenes |
 | La arquitectura editorial (capas, clases, tema) | `docs/arquitectura.md` | `styles/`, `classes/`, `themes/`, `templates/` |
-| El currículo de un curso | `contenido/cursos/<slug>/curso.yml` | README del curso, ficha web, temario del learning-skill, checklist de `05 tasks` |
+| El currículo de un curso | `contenido/cursos/<slug>/curso.yml` | README del curso, ficha web, temario del learning-skill, checklist de `tareas` |
 
 Fuera del repo hay una quinta: **el color**, que vive en `sistema-editorial/temas/docencia.yml` y
 llega aquí como `config/palette.tex` generado.
@@ -31,7 +31,7 @@ llega aquí como `config/palette.tex` generado.
 | `contenido/cursos/<slug>/README.md` | `curso.yml` | `./scripts/temario-generar.sh generar --que readme --aplicar` |
 | Sección «Contenidos / Sílabo» de `web/cursos/<materia>/index.qmd` | `curso.yml` | `temario-generar.sh generar --que web --aplicar` (entre marcadores) |
 | `prompts/skills/learning/2 domains/_temarios/<dominio>.md` y un puntero en `## Temario` del dominio | `curso.yml` | `temario-generar.sh generar --que skill --aplicar` |
-| `05 tasks/temarios-cursos.md` | todos los `curso.yml` | `temario-generar.sh generar --que resumen --aplicar` |
+| `tareas/temarios-cursos.md` | todos los `curso.yml` | `temario-generar.sh generar --que resumen --aplicar` |
 | `curso.yml.banco_examenes`, recursos de tipo post y simulador | disco y `web/_pubs` | `python3 scripts/enlazar.py examenes\|posts\|simuladores --aplicar` |
 | `config/palette.tex` | `sistema-editorial/temas/docencia.yml` | `sistema-editorial` (órdenes en `sistema-editorial/docs/consumidores.md` §2 y §4) |
 | `docs/README.md` | frontmatter de `docs/*.md` | `python3 core/docs.py indice "docencia" --aplicar` |

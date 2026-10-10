@@ -81,7 +81,7 @@ ajeno: [{ruta: 05-recursos/vendor/plantilla-sbs, descripcion: …}]
 
 `validate.sh` exige `id` (= carpeta), `titulo`, `estado` y `tipo`. `temario-generar.sh`
 genera de aquí el README del curso, la sección «Contenidos / Sílabo» de la ficha web, el
-temario del learning-skill y la checklist de `05 tasks/temarios-cursos.md`; el doctor
+temario del learning-skill y la checklist de `tareas/temarios-cursos.md`; el doctor
 avisa si el README de un curso se desfasó (`temario-generar.sh verificar` compara solo esa vista). `archivo:` de un tema es `null` hasta que la nota existe:
 **no hay esqueletos**.
 
@@ -219,7 +219,7 @@ de qué.
 | `web` | la sección «Contenidos / Sílabo» de `cursos/<materia>/index.qmd`, entre las marcas `temario:inicio`/`temario:fin` | `scripts/temario.py` (`--que web`) | editar entre las marcas |
 | `web` | el producto de cada dictado en `cursos/<materia>/<edicion>/` | `scripts/publish-web.sh` (hardlinks desde `contenido/dictados/<clave>/publicacion/`) | copiar en vez de enlazar |
 | `prompts` (learning-skill) | `skills/learning/2 domains/_temarios/<dominio>.md` y un puntero en `## Temario` del dominio | `scripts/temario.py` (`--que skill`), por `dominio_fuat` | editar el temario generado |
-| `05 tasks` | `temarios-cursos.md`, la checklist por curso, unidad y tema | `scripts/temario.py` (`--que resumen`) | editarla a mano |
+| `tareas` | `temarios-cursos.md`, la checklist por curso, unidad y tema | `scripts/temario.py` (`--que resumen`) | editarla a mano |
 | `scripts-biblioteca` (`ingesta_cursos`) | lee `contenido/cursos/*/05-recursos/` y escribe `bibliografia[].calibre_id` en el `curso.yml` | su suite (`scripts-biblioteca/ingesta/README.md`) | cambiar otras claves del registro |
 
 Un cambio en `curso.yml` (claves, `materia_web`, `dominio_fuat`) o en la lista cerrada de carpetas

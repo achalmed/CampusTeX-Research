@@ -32,7 +32,7 @@ submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/` (repo
   `docs/estandar-evaluaciones.md`). Este archivo, el `README.md` y `docencia/README.md` **apuntan**;
   nunca lo reescriben. Un cambio del estándar se hace allí y se propaga según `docs/como-se-mantiene.md`.
 - **`curso.yml` es la única fuente del currículo**: README del curso, ficha web, temario del
-  learning-skill y checklist de `05 tasks` son vistas generadas (`scripts/temario-generar.sh`).
+  learning-skill y checklist de `tareas` son vistas generadas (`scripts/temario-generar.sh`).
   Edita el registro, no las vistas; el doctor avisa si un README se desfasó.
 - **El documento depende del framework, nunca al revés.** El diseño vive una vez en `styles/` +
   `classes/`; un documento solo elige clase y rellena contenido. Ni plantillas ni documentos fijan estilo.
@@ -110,7 +110,7 @@ python3 core/docs.py verificar "docencia"       # el índice de docs/ al día
 - **En zsh y con rutas con espacios** (`docencia`): iterar con `while read`, nunca con `for x in $(…)`.
 - **`*.sdr/`** son metadatos de KOReader: se ignoran.
 - **`temario.py` toma rutas, no slugs** (`contenido/cursos/<slug>`), y sin `--que` escribe también en
-  `web`, `prompts` y `05 tasks`: para un solo README, `--que readme docencia/cursos/<slug>`.
+  `web`, `prompts` y `tareas`: para un solo README, `--que readme docencia/cursos/<slug>`.
 - **Antes de cerrar un expediente de evaluación**, el log no debe traer `Overfull \hbox` mayores de
   20 pt (los `\aplica{}` han de caber en una línea); lo cierra `contenido/migracion/cerrar-expediente.sh`.
 - **`scripts/new-period.sh` está retirado**: los dictados viven en `contenido/dictados/<clave>/`.

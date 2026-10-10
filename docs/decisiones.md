@@ -86,7 +86,7 @@ se cita desde allí. Regla vigente: lo que llegue fuera del estándar se clasifi
 apuntes están en `notas/40-cursos-y-formacion/`.
 
 **Decidido (2026-09-06, F5.1): el currículo vive una vez, en `curso.yml`.** README del curso, ficha web,
-temario del learning-skill y checklist de `05 tasks` se generan (`scripts/temario.py`).
+temario del learning-skill y checklist de `tareas` se generan (`scripts/temario.py`).
 
 **Decidido (2026-09-06, F5.2): la web se alimenta por hardlink.** `publish-session.sh` congela (tag) y
 `publish-web.sh` enlaza en `web/cursos/`; la web nunca tiene copias.

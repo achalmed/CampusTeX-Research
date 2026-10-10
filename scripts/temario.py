@@ -14,7 +14,7 @@ Vistas generadas (`generar`):
   esqueleto  RETIRADO en M5: la nota se escribe cuando existe (archivo: null hasta entonces, §7)
   web        web/cursos/<materia_web>/index.qmd: sección «Contenidos / Sílabo» entre marcadores
   skill      prompts/skills/learning/2 domains/_temarios/<dominio>.md + puntero en el dominio
-  resumen    05 tasks/temarios-cursos.md — checklist por curso/unidad/tema (tipo: checklist; lleva marca GENERADO)
+  resumen    tareas/temarios-cursos.md — checklist por curso/unidad/tema (tipo: checklist; lleva marca GENERADO)
 
 Sin --aplicar todo es simulación: se imprime qué cambiaría y no se escribe nada.
 Dependencias: python3 ≥ 3.9, pyyaml.
