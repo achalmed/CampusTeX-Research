@@ -95,6 +95,17 @@ temario del learning-skill y checklist de `tareas` se generan (`scripts/temario.
 posts, modelos de `simuladores/` y bancos; la bibliografía externa se cita por `calibre_id`. Una
 variante del mismo día (F5a: cada área como submódulo) se revirtió en M2.
 
+**Decidido (2026-10-20, plataforma educativa, fase 1): `area` es un vocabulario cerrado de 12 áreas, una
+por sitio.** El autor decidió que los 11 pubs sean las aulas de los cursos y que este repo sea la fuente
+única del currículo (`web/docs/plataforma-educativa.md` §0, A1–A4). `area` tenía 20 valores que mezclaban
+áreas y herramientas (`python`, `stata`) y grafías dobles (`math`/`matematicas`); `config/areas.yml` fija
+las 12 áreas y el pub de cada una, y el primer `area` de un curso decide su pub, para que el vínculo no se
+repita en 52 archivos. Movidos de área: microeconometría aplicada, econometría con Python, con R y Python
+e indicadores de pobreza con la ENAHO → estadística y econometría; evaluación social de proyectos → gestión
+pública; bash → sistemas y seguridad (área nueva de `chaska`). Mapa y migrador:
+`contenido/migracion/mapa-areas.csv` y `aplicar-areas.py`; etiqueta `antes-areas-2026-10-20` en el
+contenido. `validate.sh` lo exige.
+
 ## Evaluaciones
 
 **Decidido (2026-09-15, R9–R11): los exámenes propios pasan al sistema `.tex`.** Expediente =

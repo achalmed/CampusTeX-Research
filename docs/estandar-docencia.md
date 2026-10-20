@@ -66,7 +66,7 @@ alias: [course_03_econometria_i]  # ids anteriores; los resuelven enlazar.py y l
 titulo: "Econometría I"
 estado: borrador                  # borrador | activo | archivado
 tipo: asignatura                  # asignatura | herramienta | nivelacion | taller
-area: [estadistica, econometria]  # etiquetas, no carpetas; un curso puede tener varias
+area: [estadistica-econometria]  # vocabulario cerrado de config/areas.yml; el 1.º decide el pub, los demás son secundarios
 malla: {plan: economia-unsch, ciclo: 5, orden: 13}
 materia_web: econometria          # ficha de web/cursos/<materia>; varios cursos → una materia
 prerrequisitos: [estadistica-para-economistas]
@@ -191,8 +191,11 @@ dictados/2026-i-cau-unsch-metodologia/
 13. **Un repo de contenido, un commit por cambio.** No se crean repos por área ni por
     curso; si un curso debe publicarse aparte, se exporta (subtree), no se separa.
 14. **Todo curso declara `tipo`, `area[]`, `materia_web` y, si aplica, `malla`**
-    (paralelo a «todo documento declara su esquema», 2026-09-11). `validate.sh` exige hoy
-    `tipo`; `area`/`materia_web` los rellena `new-course.sh` y los lee la web.
+    (paralelo a «todo documento declara su esquema», 2026-09-11). `validate.sh` exige
+    `tipo` y que cada `area` pertenezca al vocabulario cerrado de `config/areas.yml`
+    (2026-10-20): el primer valor es el área principal y decide en qué pub vive el curso
+    (`scripts/areas.py pub CURSO`); los siguientes lo listan también en otros pubs. El vínculo
+    área ↔ pub se escribe solo en `config/areas.yml`, nunca en el `curso.yml`.
 
 ## 8. Herramientas del estándar
 

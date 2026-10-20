@@ -1,0 +1,44 @@
+# config/areas.yml — vocabulario cerrado de áreas del currículo y el sitio (pub) que aloja cada una
+# Fuente única del vínculo área ↔ pub (web/docs/plataforma-educativa.md §5, decisión A3 del autor, 2026-10-20).
+# En cada curso.yml, el PRIMER valor de `area` es el área principal y decide en qué pub vive el curso;
+# los siguientes son áreas secundarias (el curso se lista también allí). Ningún curso.yml repite el pub.
+# Lo comprueban scripts/areas.py verificar y scripts/validate.sh; lo leen temario.py y divulgacion.
+# `pub` es la carpeta en web/_pubs/ (registro carpeta ↔ repo ↔ dominio: web/_pubs/pubs.yml);
+# null = el sitio aún no existe (preuniversitario: decisión B3 del autor pendiente).
+areas:
+  - id: macroeconomia
+    nombre: Macroeconomía
+    pub: aequilibria
+  - id: microeconomia
+    nombre: Microeconomía
+    pub: optimums
+  - id: estadistica-econometria
+    nombre: Estadística y econometría
+    pub: epsilon-y-beta
+  - id: matematicas
+    nombre: Matemáticas
+    pub: axiomata
+  - id: finanzas
+    nombre: Finanzas
+    pub: pecunia-fluxus
+  - id: gestion-empresarial
+    nombre: Gestión empresarial y proyectos
+    pub: actus-mercator
+  - id: gestion-publica
+    nombre: Gestión y economía pública
+    pub: res-publica
+  - id: filosofia-economia-politica
+    nombre: Filosofía, historia y economía política
+    pub: dialectica-y-mercado
+  - id: metodologia-investigacion
+    nombre: Metodología de la investigación
+    pub: methodica
+  - id: programacion-software
+    nombre: Programación y software
+    pub: numerus-scriptum
+  - id: sistemas-seguridad
+    nombre: Sistemas y seguridad
+    pub: chaska
+  - id: preuniversitario
+    nombre: Preuniversitario y nivelación
+    pub: null

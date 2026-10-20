@@ -6,7 +6,7 @@
 #   ./scripts/new-course.sh SLUG "TÍTULO" [--tipo asignatura|herramienta|nivelacion|taller] [--area a,b] [--materia-web m]
 #
 # Ejemplo:
-#   ./scripts/new-course.sh econometria-iii "Econometría III" --tipo asignatura --area estadistica,econometria --materia-web econometria
+#   ./scripts/new-course.sh econometria-iii "Econometría III" --tipo asignatura --area estadistica-econometria --materia-web econometria
 #
 # Crea SOLO el registro (curso.yml) y el README.md generado. Las carpetas 01-diseno … 05-recursos
 # se crean al primer uso (new-session.sh, new-evaluacion.sh, new-report.sh); una carpeta vacía es error del validador.

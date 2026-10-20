@@ -8,6 +8,7 @@
 #
 # Curso (contenido/cursos/<slug>/):
 #   - curso.yml con id (= carpeta) · titulo · estado · tipo ∈ {asignatura, herramienta, nivelacion, taller}; README.md.
+#   - `area` no vacía y cada valor en el vocabulario cerrado de config/areas.yml (el primero decide el pub).
 #   - Carpetas de primer nivel SOLO de la lista cerrada: 01-diseno 02-contenido 03-sesiones 04-evaluaciones 05-recursos.
 #   - Ninguna carpeta vacía ni .gitkeep en todo el curso; nombres de carpeta de primer nivel y de sesión en kebab-case.
 #   - Sesión (03-sesiones/sNN-<slug>/): sesion.yml con id (= carpeta) · titulo · tipo ∈ {clase, laboratorio, taller,
@@ -78,6 +79,7 @@ validate_course() {
   done
   id="$(yaml_get "$cy" id)"; [[ -z "$id" || "$id" == "$name" ]] || err "$name: id '$id' ≠ carpeta"
   tipo="$(yaml_get "$cy" tipo)"; in_list "$tipo" $TIPOS_CURSO || err "$name: tipo '$tipo' no admitido ($TIPOS_CURSO)"
+  local mal; mal="$(python3 "$FW_DIR/scripts/areas.py" verificar "$cy")" || err "${mal#\[XX\] }"
   while IFS= read -r d; do
     in_list "$(basename "$d")" $COURSE_DIRS || err "$name: carpeta fuera de la lista cerrada: $(basename "$d")/"
   done < <(find "$course" -mindepth 1 -maxdepth 1 -type d)
