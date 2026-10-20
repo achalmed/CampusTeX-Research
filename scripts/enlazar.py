@@ -3,7 +3,7 @@
 enlazar.py — Enlaza el currículo (curso.yml) con lo que ya existe fuera del framework (F5.3, 2026-09-06; M5 2026-09-15).
 
   enlazar.py posts       [--aplicar]   cada post de web/_pubs declara `curso: <id>` (por su carpeta temática)
-  enlazar.py simuladores [--aplicar]   modelos de simuladores/ (este repo) → recursos {tipo: simulador} del tema (por similitud de título)
+  enlazar.py simuladores [--aplicar]   modelos del laboratorio (SIMULADORES_DIR) → recursos {tipo: simulador} del tema (por similitud de título)
   enlazar.py examenes    [--aplicar]   subcarpetas de 04-evaluaciones/ del curso → `banco_examenes` (R10, 2026-09-15)
   enlazar.py verificar                 recursos y bancos con rutas existentes; posts con curso desconocido; posts sin curso
 
@@ -33,7 +33,20 @@ FW = Path(__file__).resolve().parents[1]
 DOCS = env.DOCS_ROOT
 CURSOS = FW / "contenido" / "cursos"     # M5 (2026-09-15): docencia/cursos/<slug>/curso.yml
 PUBS = env.INDEX_DIR / "_pubs"
-LAB = Path(__file__).resolve().parents[1] / "simuladores"   # el laboratorio vive en este repo desde el 2026-09-20
+# El laboratorio es repo propio desde el 2026-10-20 (SIMULADORES_DIR; antes docencia/simuladores, 2026-09-20 → 2026-10-20).
+# Compatibilidad durante la migración: con un core sin la variable se usa la carpeta nueva por nombre, y si no está, la
+# vieja; y los `archivo:` de curso.yml que aún dicen `docencia/simuladores/…` se resuelven contra LAB (RUTA_VIEJA_LAB).
+LAB = Path(getattr(env, "SIMULADORES_DIR", DOCS / "simuladores"))
+if not LAB.is_dir() and (FW / "simuladores").is_dir():
+    LAB = FW / "simuladores"
+RUTA_VIEJA_LAB = "docencia/simuladores/"
+
+
+def ruta_recurso(archivo: str) -> Path:
+    """Ruta en disco de un `archivo:` de recurso (relativa a DOCS_ROOT); la vieja del laboratorio se traduce a LAB."""
+    if archivo.startswith(RUTA_VIEJA_LAB):
+        return LAB / archivo[len(RUTA_VIEJA_LAB):]
+    return DOCS / archivo
 
 # blog → {carpeta temática (o 'posts'): curso}. None = sin curso equivalente (se deja sin enlazar).
 MAPA_POSTS: dict[str, dict[str, str | None]] = {
@@ -254,7 +267,7 @@ def cmd_verificar(cs: dict) -> int:
         for u in t.get("unidades", []):
             for tema in u["temas"]:
                 for r in tema.get("recursos", []):
-                    if "archivo" in r and not (DOCS / r["archivo"]).exists() and not (cdir / r["archivo"]).exists():
+                    if "archivo" in r and not ruta_recurso(r["archivo"]).exists() and not (cdir / r["archivo"]).exists():
                         fallos += 1; print(f"  recurso roto: {cid}:{tema['id']} → {r['archivo']}")
         for b in t.get("banco_examenes", []) or []:
             if not (cdir / b["ruta"]).is_dir() and not (DOCS / b["ruta"]).is_dir():

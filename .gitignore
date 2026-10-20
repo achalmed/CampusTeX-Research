@@ -11,6 +11,3 @@ __pycache__/
 registro/
 # árbol generado por Filesystem Studio
 estructura.txt
-# simuladores/ (laboratorio computacional, desde datafw el 2026-09-20): salidas regenerables
-simuladores/**/salidas/
-simuladores/**/*.pdf

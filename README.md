@@ -69,7 +69,6 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
 | `assets/` | `assets/branding/cau-logo.png`, el logo canónico | este repo |
 | `bibliography/` | `course.bib` heredado; la bibliografía viva se cita por `calibre_id` | Calibre |
 | `docs/` | documentación permanente e `historial/` | autor; `docs/README.md` lo genera `core/docs.py` |
-| `simuladores/` | el laboratorio computacional (motor + `macro/` + `estadistica/`) | `simuladores/CLAUDE.md` |
 | `docencia/` | **submódulo** (repo `Academic_Class`): `cursos/`, `dictados/`, `migracion/` | `docencia/README.md` |
 | `registro/` | repo privado hermano, git-ignorado: estudiantes, calificaciones, evidencias | `registro/CLAUDE.md` |
 

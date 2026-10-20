@@ -122,6 +122,14 @@ versionan (respaldo en el disco externo del autor). El estado de cada expediente
 
 ## Simuladores
 
+**Decidido (2026-10-20, fase 3 de `web/docs/plataforma-educativa.md`, A6 del autor): el laboratorio sale de este
+repo a uno propio, `~/Documents/simuladores` (`SIMULADORES_DIR` de `core/env`), con su historia (63 commits por
+`git subtree split`).** Es complementario de `docencia`, `divulgacion`, `datafw` y, después, de los pubs, que leerán su
+`catalogo.json`; ya no es solo currículo de este repo. Etiqueta `antes-simuladores-2026-10-20`; respaldo y `UNDO.sh` en
+`$RESPALDOS_DIR/renombres/2026-10-20-docencia-simuladores-a-simuladores/`. Compatibilidad durante la migración:
+`scripts/enlazar.py` traduce los `archivo: docencia/simuladores/…` de `curso.yml` a la carpeta nueva. Las dos
+decisiones siguientes quedan como historia.
+
 **Decidido (2026-09-20): el laboratorio `simuladores/` vive en este repo.**
 Vino de `02 analysis/simuladores/` (hoy `datafw`) con su historia git porque es currículo —fichas pedagógicas,
 verificaciones que son teoremas, animaciones— y lo consumen los cursos, no el pipeline de datos.

@@ -128,7 +128,7 @@ python3 core/docs.py verificar "docencia"       # el índice de docs/ al día
 | Diagnósticos y bitácoras cerradas | `docs/historial/README.md` |
 | Quién consume lo que produce este repo | `docs/estandar-docencia.md` §9 |
 | Qué hace cada script | `scripts/README.md` |
-| El laboratorio computacional (motor, macro, estadística) | `simuladores/CLAUDE.md` |
+| El laboratorio computacional (motor, macro, estadística): repo propio desde 2026-10-20 | `$SIMULADORES_DIR` (`~/Documents/simuladores`), su `CLAUDE.md` |
 | El contenido docente y sus carpetas | `docencia/README.md` |
 | Datos de estudiantes: qué se puede y qué no | `registro/CLAUDE.md` |
 | El ciclo de trabajo del ecosistema | `prompts/00 metodo/CICLO.md` |

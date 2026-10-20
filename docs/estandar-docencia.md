@@ -159,7 +159,7 @@ dictados/2026-i-cau-unsch-metodologia/
 | Apuntes de Edison como alumno | `notas/40-cursos-y-formacion/<curso>/` | enlazan al tema de `02-contenido/`; nunca escriben en `docencia/` |
 | Ficha web | `web/cursos/<materia>/` | `materia_web` (n cursos → 1 materia); ediciones por dictado |
 | Temario del learning-skill | `prompts/skills/learning/2 domains/_temarios/` | generado desde `curso.yml`; `dominio_fuat` |
-| Posts, simuladores, bancos de exámenes | `web/_pubs`, `simuladores/` de este repo, `contenido/cursos/*/04-evaluaciones/banco` | `enlazar.py` (los ids antiguos se resuelven por `alias`) |
+| Posts, simuladores, bancos de exámenes | `web/_pubs`, el repo `simuladores` (`SIMULADORES_DIR`; su `catalogo.json`), `contenido/cursos/*/04-evaluaciones/banco` | `enlazar.py` (los ids antiguos se resuelven por `alias`) |
 
 ## 7. Reglas de mantenimiento
 

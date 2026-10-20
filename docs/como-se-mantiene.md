@@ -101,4 +101,4 @@ El doctor devuelve 1 si hay fallos y 0 si no; los avisos (`[!!]`) no cambian el 
 - Este documento describe el mantenimiento **documental y del estándar**; el mantenimiento pedagógico
   (qué se enseña y cómo) es el `guion.md` de cada sesión y el ciclo de `prompts/00 metodo/CICLO.md`.
 - No fija una cadencia de revisión: la revisión la dispara un cambio, no el calendario.
-- No cubre el laboratorio `simuladores/`, que tiene su propia doctrina en `simuladores/CLAUDE.md`.
+- No cubre el laboratorio computacional, repo propio desde el 2026-10-20 (`SIMULADORES_DIR`) con su doctrina en su `CLAUDE.md`.
