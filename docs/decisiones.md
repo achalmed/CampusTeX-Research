@@ -135,6 +135,22 @@ temas sin lección (16 de Python, unidades 1 y 2) pasaron al pub como lecciones 
 `archivo:` apunta al post, relativo a `DOCS_ROOT`; `temario.py` resuelve las dos formas. Porqué y reglas del
 generador: `web/docs/decisiones.md` §4.6.
 
+**Decidido (2026-10-21, director por encargo del autor): C1, segunda tanda, y regla para los cursos que quedan.** Las 16
+lecciones «a revisar» del mapa eran esqueletos vacíos de series de pubs cuyos cursos tenían un índice genérico tipo
+w3schools en inglés, así que ningún tema casaba. Se resolvieron reconstruyendo con C1 los seis cursos a los que
+pertenecían (`temario-c1.py`, mismas reglas que la primera tanda): **eviews**, **conceptos-de-programacion** y
+**microeconomia-i** desde su serie (en Microeconomía I el temario anterior se absorbe en ella, porque coincide con su
+banco de evaluaciones); **stata**, **latex** y **excel** desde las sesiones dictadas, emparejadas con su serie (la de
+Excel desdobla la unidad de VBA). El índice genérico se retira; ningún tema viejo tenía nota ni recursos. Cada post
+de esas series es la lección de su tema (`FIJOS` de `mapa-lecciones.py`) y `web/scripts/cursos.py` creó los esqueletos
+de los temas sin lección. Tres casos sueltos: dos guías de `numerus-scriptum/ofimatica` quedan como blog, y
+`propaedeutica/economia/04` (costos) queda como lección sin tema, como la 03 (producción), porque el temario del libro
+no tiene ese tema. Resultado: 21 cursos con `temario: revisado` y ningún post «a revisar».
+**Regla para los 39 restantes:** un curso entra a C1 cuando tiene una serie de lecciones en su pub, sesiones dictadas
+o un sílabo oficial; mientras no tenga ninguna de las tres, conserva su temario sin revisar y no aparece en el aula,
+porque revisarlo solo crearía esqueletos vacíos. Hoy los que tienen serie y siguen sin revisar son finanzas-i
+(pecunia-fluxus, 6 posts) y macroeconomia-ii (aequilibria 01–11, ya asignada por `FIJOS`); son la tanda siguiente.
+
 ## Evaluaciones
 
 **Decidido (2026-09-15, R9–R11): los exámenes propios pasan al sistema `.tex`.** Expediente =
