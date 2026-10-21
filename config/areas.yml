@@ -4,7 +4,7 @@
 # los siguientes son áreas secundarias (el curso se lista también allí). Ningún curso.yml repite el pub.
 # Lo comprueban scripts/areas.py verificar y scripts/validate.sh; lo leen temario.py y divulgacion.
 # `pub` es la carpeta en web/_pubs/ (registro carpeta ↔ repo ↔ dominio: web/_pubs/pubs.yml);
-# null = el sitio aún no existe (preuniversitario: decisión B3 del autor pendiente).
+# null = el sitio aún no existe. preuniversitario → propaedeutica, el 12.º sitio (decisión B3, 2026-10-21).
 areas:
   - id: macroeconomia
     nombre: Macroeconomía
@@ -41,4 +41,4 @@ areas:
     pub: chaska
   - id: preuniversitario
     nombre: Preuniversitario y nivelación
-    pub: null
+    pub: propaedeutica
