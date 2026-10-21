@@ -106,6 +106,18 @@ pública; bash → sistemas y seguridad (área nueva de `chaska`). Mapa y migrad
 `contenido/migracion/mapa-areas.csv` y `aplicar-areas.py`; etiqueta `antes-areas-2026-10-20` en el
 contenido. `validate.sh` lo exige.
 
+**Decidido (2026-10-20, director por encargo del autor): el temario de cada curso se reconstruye desde su mejor
+fuente (C1 de `web/docs/plataforma-educativa.md` §6.1).** El mapa `contenido/migracion/mapa-lecciones.py` mostró
+que muchos temarios eran esquemas genéricos (índices tipo w3schools en las herramientas, unidades vagas en
+economía) y que las series de los pubs tenían mejor estructura. `curso.yml` sigue siendo la fuente única (A3), pero
+su temario se reescribe curso por curso a partir de una base elegida (sílabo oficial, serie del pub o sesiones
+dictadas) y las demás fuentes se emparejan contra ella. Casos resueltos ese día: **Power BI** es curso propio
+(serie y carpeta propias en numerus-scriptum; antes colgaba de `excel`); **ciberseguridad** no es curso docente
+(el post de chaska es un apunte para la certificación CEH: curso tomado, regla F5.0; queda como blog); la
+**serie 01–11 de aequilibria es Macroeconomía II** por unidades (economía abierta, consumo e inversión, dinero,
+fluctuaciones), asignada en `FIJOS` del mapa; **SQL** no se da de alta mientras no haya material. Desde ese día
+`new-course.sh` regenera el README con `temario.py` al crear el curso.
+
 ## Evaluaciones
 
 **Decidido (2026-09-15, R9–R11): los exámenes propios pasan al sistema `.tex`.** Expediente =

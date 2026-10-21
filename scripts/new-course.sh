@@ -41,5 +41,7 @@ for f in curso.yml README.md; do
       "$SCAFFOLDS_DIR/curso/$f" > "$DEST/$f"
 done
 ok "Curso creado: $DEST"
+# El README del scaffold es un arranque: la vista definitiva la escribe temario.py, o `verificar` lo daría por desfasado.
+"$FW_DIR/scripts/temario-generar.sh" generar --que readme --aplicar "$DEST" >/dev/null && ok "README generado por temario.py"
 "$FW_DIR/scripts/validate.sh" "$DEST" >/dev/null && ok "validate.sh: sin errores"
 echo "Siguiente: ./scripts/new-session.sh $SLUG 01 \"Título de la sesión\" [--tipo clase|laboratorio|taller|evaluacion]"

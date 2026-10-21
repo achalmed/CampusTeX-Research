@@ -28,8 +28,6 @@ nada en curso
 
 ## Por hacer
 
-- 2026-10-20 · dueño: director · `scripts/new-course.sh` escribe un README que `temario-generar.sh verificar` da por desfasado al nacer (visto con `matlab` y `linux`): que el alta llame a `temario.py generar --que readme`.
-- 2026-10-20 · dueño: el autor · Plataforma educativa, fase 1: ¿Power BI se separa de `excel` (sus 7 posts apuntan a `excel`)? ¿Se da de alta `ciberseguridad` en `sistemas-seguridad` (chaska tiene 1 post; ¿es docencia propia o un curso tomado?)? ¿Y SQL (solo una ficha web vacía)? Las fichas web de álgebra lineal, cálculo y optimización son unidades de `matematicas-ii`/`-iii`, no cursos.
 - 2026-10-04 · dueño: el autor · ¿El framework publicará versiones (etiquetas o releases que alguien consuma)? Si sí, vuelve `CHANGELOG.md` con SemVer.
 - 2026-10-04 · dueño: el autor · `scripts/lib/common.sh` (`INBOX_DIR`) y `scripts/doctor.sh` siguen tratando la bandeja `_inbox` de `docencia`, ya retirada.
 - 2026-10-20 · dueño: director · los `archivo:` de los recursos `{tipo: simulador}` de ocho `curso.yml` (29 rutas) aún dicen `docencia/simuladores/…`: pasarlos a `simuladores/…` y regenerar los README (`temario-generar.sh`); mientras, `enlazar.py` los traduce (`RUTA_VIEJA_LAB`). Los dos pendientes de la campaña SIMULADORES pasaron a `simuladores/estado.md`.
