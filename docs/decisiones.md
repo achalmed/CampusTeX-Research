@@ -118,6 +118,14 @@ dictadas) y las demás fuentes se emparejan contra ella. Casos resueltos ese dí
 fluctuaciones), asignada en `FIJOS` del mapa; **SQL** no se da de alta mientras no haya material. Desde ese día
 `new-course.sh` regenera el README con `temario.py` al crear el curso.
 
+**Decidido (2026-10-20, director por encargo del autor): sin solapamientos entre cursos tras C1.** La
+identificación causal con microdatos (experimentos, diferencias en diferencias, regresión discontinua, panel,
+estudios de eventos) vive solo en `microeconometria-aplicada`; `econometria-ii` se queda con los estimadores
+(MCG, máxima verosimilitud, GMM, variables instrumentales), las series de tiempo y la bayesiana. **Finanzas III**
+es derivados y riesgo (lo respaldan su temario y su banco de evaluaciones dictadas); finanzas internacionales es
+una unidad. Las **guías de terminal** de chaska son lecciones del curso `linux`. Traza en
+`contenido/migracion/mapa-temas-c1.csv` y `FIJOS` de `mapa-lecciones.py`.
+
 ## Evaluaciones
 
 **Decidido (2026-09-15, R9–R11): los exámenes propios pasan al sistema `.tex`.** Expediente =
