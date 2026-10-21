@@ -51,8 +51,8 @@ def ruta_recurso(archivo: str) -> Path:
 # blog → {carpeta temática (o 'posts'): curso}. None = sin curso equivalente (se deja sin enlazar).
 MAPA_POSTS: dict[str, dict[str, str | None]] = {
     "numerus-scriptum": {"python": "python_curso_base", "r": "r_curso_base", "stata": "stata_curso_base", "eviews": "eviews_curso_base",
-                             "latex": "latex_curso_base", "ofimatica": "ofimatica_curso_base", "power-bi": "ofimatica_curso_base",
-                             "fundamentos-programacion": "programming_concepts_curso_base", "matlab": None, "cpp": None, "bloomberg": None, "posts": None},
+                             "latex": "latex_curso_base", "ofimatica": "ofimatica_curso_base", "power-bi": "power-bi",
+                             "fundamentos-programacion": "programming_concepts_curso_base", "matlab": "matlab", "cpp": None, "bloomberg": None, "posts": None},
     "epsilon-y-beta": {"00-econometria-general": "econometria_i", "01-fundamentos-econometria": "econometria_i", "02-macroeconometria": "econometria_ii",
                            "03-microeconometria": "microeconometria_aplicada", "04-econometria-financiera": "econometria_ii", "05-econometria-bayesiana": "econometria_ii",
                            "06-evaluacion-de-impacto": "microeconometria_aplicada", "07-topicos-de-econometria": "econometria_ii",
@@ -65,7 +65,7 @@ MAPA_POSTS: dict[str, dict[str, str | None]] = {
     "res-publica": {"posts": "economia_publica"},
     "actus-mercator": {"inteligencia-comercial": "investigacion_de_mercados", "posts": "formulacion_de_proyectos"},
     "dialectica-y-mercado": {"posts": "economia_politica"},
-    "chaska": {"ciberseguridad-cybersoc-ccs": None, "ciberseguridad-ethical-hacking-ceh": None, "i3wm": None, "operating-system": None, "posts": None},
+    "chaska": {"ciberseguridad-cybersoc-ccs": None, "ciberseguridad-ethical-hacking-ceh": None, "i3wm": "linux", "operating-system": "linux", "posts": None},
 }
 
 # El banco de exámenes vive dentro de cada curso desde R10 (2026-09-15): cursos/<slug>/04-evaluaciones/<sub>/
