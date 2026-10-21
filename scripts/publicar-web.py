@@ -10,8 +10,8 @@ Lee docencia/dictados/<clave>/dictado.yml:
   sesiones:
     - {orden: 1, curso: monografias, sesion: s01-la-monografia, web: session_01_la_monografia}
 
-Para cada sesión toma su módulo `publicacion/<web>/` (creado por publish-session.sh) y en
-`web/cursos/<web.materia>/<web.edicion>/<web>/`:
+Para cada sesión toma su módulo `publicacion/<web>/` (creado por publish-session.sh) y en el pub del curso,
+`web/_pubs/<pub>/_ediciones/<clave del dictado>/<web>/` (desde la fase 7, 2026-10-20; antes, web/cursos/…):
   · slides/ evaluation/ practice/ homework/ → cada archivo pasa a ser un HARDLINK del módulo
     (si la web tenía una copia, se sustituye por el enlace: un solo inodo, dos canales);
   · index.qmd y resources/_links.md se CREAN si faltan (desde sesion.yml de la sesión) y nunca se sobrescriben;
@@ -37,7 +37,7 @@ import env  # noqa: E402
 
 FW = Path(__file__).resolve().parents[1]
 DOCS = env.DOCS_ROOT
-WEB_CURSOS = env.INDEX_DIR / "cursos"
+PUBS = env.INDEX_DIR / "_pubs"   # desde la fase 7 (2026-10-20) la edición vive en su pub: _pubs/<pub>/_ediciones/<dictado>/
 SUBS = ("slides", "evaluation", "practice", "homework")
 IGNORAR = {".gitkeep", "_PUBLICADO.md", "index.md", "README.md"}
 
@@ -128,11 +128,15 @@ def main() -> int:
     if d.get("legado"):
         print(f"{dictado.name}: dictado legado (sin fuentes en el framework); la web conserva su copia. Nada que publicar."); return 0
     web = d["web"]; institucion = d.get("institucion", "")
-    web_curso_dir = WEB_CURSOS / (web.get("materia") or web.get("curso"))
-    if not web_curso_dir.is_dir():
-        print(f"No existe la ficha web {web_curso_dir} (créala con temario-generar o desde _plantillas/curso.qmd)"); return 3
-    titulo_web = frontmatter_title(web_curso_dir / "index.qmd") or web["curso"]
-    edicion_dir = web_curso_dir / web["edicion"]
+    # El pub de la edición es el del primer curso del dictado (área principal: config/areas.yml).
+    sys.path.insert(0, str(FW / "scripts"))
+    import areas  # noqa: E402
+    cursos_d = list(d.get("cursos") or []) or [s["curso"] for s in d["sesiones"]]
+    pub = areas.pub_de(FW / "contenido" / "cursos" / cursos_d[0] / "curso.yml")
+    if not pub or not (PUBS / pub).is_dir():
+        print(f"{dictado.name}: el curso {cursos_d[0]} no tiene pub (config/areas.yml) o el pub no existe: {pub}"); return 3
+    titulo_web = leer_yaml(FW / "contenido" / "cursos" / cursos_d[0] / "curso.yml").get("titulo") or web.get("materia")
+    edicion_dir = PUBS / pub / "_ediciones" / dictado.name
     periodo_web = web["edicion"].split("-cau")[0] if "-cau" in web["edicion"] else d.get("periodo", web["edicion"])
     enlaces = sustituidos = creados = huerfanos = 0
     faltan = []

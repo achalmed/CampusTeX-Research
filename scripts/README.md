@@ -47,7 +47,7 @@ bash -n scripts/<archivo>.sh              # comprobación de sintaxis: UN archiv
 | `enlazar.py` | enlaza el currículo con lo que ya existe: posts de `web/_pubs`, modelos del laboratorio (`SIMULADORES_DIR`), bancos de `04-evaluaciones/` | `python3 scripts/enlazar.py posts\|simuladores\|examenes\|verificar [--aplicar]` |
 | `publish-session.sh` | congela una sesión: tag `dictado/<clave>/<sesion>` + producto en `publicacion/<web>/` (git-ignorado) | `./scripts/publish-session.sh DICTADO CURSO NN [--refrescar]` |
 | `publish-web.sh` | fachada de `publicar-web.py` | `./scripts/publish-web.sh DICTADO [--aplicar]` |
-| `publicar-web.py` | enlaza el producto de un dictado **por hardlink** en `web/cursos/<materia>/<edicion>/`; crea `index.qmd`/`_links.md` solo si faltan | `python3 scripts/publicar-web.py DICTADO [--aplicar]` |
+| `publicar-web.py` | enlaza el producto de un dictado **por hardlink** en `web/_pubs/<pub>/_ediciones/<dictado>/<web>/`; crea `index.qmd`/`_links.md` solo si faltan | `python3 scripts/publicar-web.py DICTADO [--aplicar]` |
 | `normalizar-archivos.py` | normativa de archivos en el framework y el contenido: registros, nombres, cabeceras, frontmatter, artefactos, `vendor/` | `python3 scripts/normalizar-archivos.py todo\|registros\|cursos\|nombres\|cabeceras\|frontmatter\|artefactos\|vendor [--aplicar] [--bitacora DIR]` |
 | `normalizar-notas.py` | las notas de `02-contenido/` al régimen del vault: kebab-case y frontmatter, reescribiendo wikilinks y `archivo:` | `python3 scripts/normalizar-notas.py [--aplicar] [--bitacora DIR] [CURSO…]` |
 | `new-period.sh` | **retirado** en M5: imprime el sustituto y sale con 2 | `./scripts/new-dictado.sh` en su lugar |

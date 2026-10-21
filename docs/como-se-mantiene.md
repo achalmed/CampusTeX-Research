@@ -35,7 +35,7 @@ llega aquí como `config/palette.tex` generado.
 | `curso.yml.banco_examenes`, recursos de tipo post y simulador | disco y `web/_pubs` | `python3 scripts/enlazar.py examenes\|posts\|simuladores --aplicar` |
 | `config/palette.tex` | `sistema-editorial/temas/docencia.yml` | `sistema-editorial` (órdenes en `sistema-editorial/docs/consumidores.md` §2 y §4) |
 | `docs/README.md` | frontmatter de `docs/*.md` | `python3 core/docs.py indice "docencia" --aplicar` |
-| `web/cursos/<materia>/<edicion>/` | `dictado.yml` | `./scripts/publish-session.sh` + `./scripts/publish-web.sh --aplicar` (hardlinks) |
+| `web/_pubs/<pub>/_ediciones/<dictado>/` | `dictado.yml` | `./scripts/publish-session.sh` + `./scripts/publish-web.sh --aplicar` (hardlinks) |
 
 Un derivado **no se edita a mano**: lleva su marca `GENERADO por … ; no editar` o vive entre
 marcadores. Lo escrito fuera de los marcadores se conserva al regenerar. `temario.py` toma los cursos

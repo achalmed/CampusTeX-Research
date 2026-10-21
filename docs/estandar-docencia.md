@@ -137,7 +137,7 @@ dictados/2026-i-cau-unsch-metodologia/
   en `publicacion/<web>/` (con `_PUBLICADO.md`) y pone el tag
   `dictado/<clave>/<sesion>` sobre el commit de las fuentes. No se copia nada al repo.
 - `publish-web.sh DICTADO --aplicar` enlaza el producto **por hardlink** (un solo inodo)
-  en `web/cursos/<materia>/<edicion>/<web>/`. La web nunca es fuente; el doctor avisa
+  en `web/_pubs/<pub>/_ediciones/<dictado>/<web>/` (el pub del curso; hasta la fase 7, `web/cursos/…`). La web nunca es fuente; el doctor avisa
   de copias y huérfanos. `legado: true` marca dictados anteriores al estándar que no se
   republican (2025-I).
 - `registro/<clave>/` (repo privado) guarda estudiantes, asistencia, calificaciones,
@@ -165,7 +165,7 @@ dictados/2026-i-cau-unsch-metodologia/
 | Series para el `code/` de una evaluación o para un modelo del laboratorio | paquetes de resultados y datos de `datafw`, leídos por nombre (`core/env.py`) | el código del expediente o del modelo; contrato del proveedor en `datafw/docs/integracion-ecosistema.md` |
 | Logo, fuentes, plantillas, clases | `assets/`, `styles/`, `templates/`, `classes/` del framework | `\documentclass{academic-*}`; el deck lleva **una** copia local del logo |
 | Apuntes de Edison como alumno | `notas/40-cursos-y-formacion/<curso>/` | enlazan al tema de `02-contenido/`; nunca escriben en `docencia/` |
-| Ficha web | `web/cursos/<materia>/` | `materia_web` (n cursos → 1 materia); ediciones por dictado |
+| Curso y ediciones en la web | el pub del área (`config/areas.yml`): la vitrina `web/_aula` genera `/cursos/<curso>/` y `/ediciones/<dictado>/` | `curso.yml` y `dictado.yml`; `materia_web` solo para las fichas heredadas del hub |
 | Temario del learning-skill | `prompts/skills/learning/2 domains/_temarios/` | generado desde `curso.yml`; `dominio_fuat` |
 | Posts, simuladores, bancos de exámenes | `web/_pubs`, el repo `simuladores` (`SIMULADORES_DIR`; su `catalogo.json`), `contenido/cursos/*/04-evaluaciones/banco` | `enlazar.py` (los ids antiguos se resuelven por `alias`) |
 
