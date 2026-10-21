@@ -151,6 +151,20 @@ o un sílabo oficial; mientras no tenga ninguna de las tres, conserva su temario
 porque revisarlo solo crearía esqueletos vacíos. Hoy los que tienen serie y siguen sin revisar son finanzas-i
 (pecunia-fluxus, 6 posts) y macroeconomia-ii (aequilibria 01–11, ya asignada por `FIJOS`); son la tanda siguiente.
 
+**Decidido (2026-10-21, director por encargo del autor): C1, tercera tanda: finanzas-i y macroeconomia-ii.** Los dos
+cursos con serie que quedaban se reconstruyen con `temario-c1.py`; en ambos el temario anterior se absorbe entero (ningún
+tema viejo se retira) y los recursos de simulador viajan con su tema. **finanzas-i** (9 temas) sigue la serie
+pecunia-fluxus/posts 01–06, con la renta fija antes de la renta variable, y conserva como temas propios la matemática
+financiera (tasas e interés compuesto; anualidades y perpetuidades) y el presupuesto de capital, porque su banco de
+evaluaciones los pide (exámenes 2018–2022, casos CAF); los posts 05 (derivados) y 06 (portafolio) quedan como panorama,
+porque el detalle es de finanzas-iii y finanzas-ii. **macroeconomia-ii** (12 temas) sigue el orden de la serie aequilibria
+01–11 (consumo e inversión, economía abierta, dinero y empleo, fluctuaciones y crecimiento) y añade la curva de Phillips
+del temario anterior, que la serie no trae. Sus notas de `02-contenido` son apuntes de estudio de un curso externo con
+material de terceros: confirman ese orden, pero no son lección ni se publican (`archivo: null`). Los `FIJOS` de
+aequilibria pasan a los ids nuevos y se añaden los de pecunia-fluxus; `web/scripts/cursos.py` creó cuatro esqueletos
+(finanzas-i 1.2, 1.3 y 2.2; macroeconomia-ii 3.3). Resultado: 23 cursos con `temario: revisado` y ningún post «a
+revisar». Ningún otro curso cumple hoy la regla de entrada.
+
 ## Evaluaciones
 
 **Decidido (2026-09-15, R9–R11): los exámenes propios pasan al sistema `.tex`.** Expediente =
