@@ -65,6 +65,7 @@ id: econometria-i                 # = nombre de la carpeta
 alias: [course_03_econometria_i]  # ids anteriores; los resuelven enlazar.py y las fichas de Calibre
 titulo: "Econometría I"
 estado: borrador                  # borrador | activo | archivado
+temario: revisado                 # opcional: el temario se reconstruyó con C1 (decisiones.md, 2026-10-20)
 tipo: asignatura                  # asignatura | herramienta | nivelacion | taller
 area: [estadistica-econometria]  # vocabulario cerrado de config/areas.yml; el 1.º decide el pub, los demás son secundarios
 malla: {plan: economia-unsch, ciclo: 5, orden: 13}
@@ -83,7 +84,14 @@ ajeno: [{ruta: 05-recursos/vendor/plantilla-sbs, descripcion: …}]
 genera de aquí el README del curso, la sección «Contenidos / Sílabo» de la ficha web, el
 temario del learning-skill y la checklist de `tareas/temarios-cursos.md`; el doctor
 avisa si el README de un curso se desfasó (`temario-generar.sh verificar` compara solo esa vista). `archivo:` de un tema es `null` hasta que la nota existe:
-**no hay esqueletos**.
+**no hay esqueletos**. Desde la fase 5 de la plataforma educativa (2026-10-20), `archivo:` puede apuntar también a la
+lección del tema en su pub, como ruta relativa a `DOCS_ROOT` (`web/_pubs/<pub>/<sección>/<post>/index.qmd`): la nota
+de `02-contenido/` se llevó al pub, que es su casa (`web/docs/plataforma-educativa.md` §4.2).
+
+`temario: revisado` marca un curso cuyo temario se reconstruyó desde su mejor fuente (decisión C1, `decisiones.md`,
+2026-10-20); un curso sin la clave tiene el temario sin revisar. Solo los cursos revisados entran en
+`web/scripts/cursos.py`, que da a cada tema una lección en el pub del curso (la existente, declarada con `curso:` y
+`tema:` en su frontmatter, o un esqueleto en borrador). El resto espera a que su temario se revise.
 
 ## 3. La sesión: tipada por archivo, no por subcarpeta
 

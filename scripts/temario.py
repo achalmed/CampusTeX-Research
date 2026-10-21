@@ -177,6 +177,12 @@ def unidades_desde_carpetas(curso: Path) -> list[dict]:
     return unidades
 
 
+def ruta_archivo(curso: Path, archivo: str) -> Path:
+    """Ruta en disco del `archivo:` de un tema: la nota en `02-contenido/` del curso o, desde la fase 5 de la plataforma
+    educativa (2026-10-20), la lección en su pub, relativa a DOCS_ROOT (`web/_pubs/<pub>/<sección>/<post>/index.qmd`)."""
+    return DOCS / archivo if str(archivo).startswith("web/") else curso / archivo
+
+
 def ruta_tema(curso: Path, uid: int, tid: str, titulo: str) -> str:
     """Archivo del tema si YA existe en 02-contenido/ (<n>-<m>-*.md); si no, None (§7: la nota se escribe cuando existe)."""
     n, m = tid.split(".")
@@ -533,7 +539,7 @@ def generar_resumen(cursos_t: list[tuple[Path, dict]], aplicar: bool) -> str:
         for u in t.get("unidades", []):
             out.append(f"- **{u['id']}. {u['titulo']}**")
             for tema in u["temas"]:
-                out.append(f"  - [ ] `{tema['id']}` [{tema['titulo']}](<../docencia/contenido/cursos/{c.name}/{tema['archivo']}>)" if tema.get("archivo") else f"  - [ ] `{tema['id']}` {tema['titulo']}")
+                out.append(f"  - [ ] `{tema['id']}` [{tema['titulo']}](<../{ruta_archivo(c, tema['archivo']).relative_to(DOCS)}>)" if tema.get("archivo") else f"  - [ ] `{tema['id']}` {tema['titulo']}")
         out.append("")
     f = RESUMEN
     nuevo = "\n".join(out)
@@ -587,7 +593,7 @@ def main() -> int:
             if not rd.exists() or sin_marca(rd.read_text(encoding="utf-8")) != sin_marca(render_readme(t)):
                 drift += 1
                 log(f"  README desfasado: {c.relative_to(DOCS)}")
-            faltan = [x["archivo"] for u in t.get("unidades", []) for x in u["temas"] if x.get("archivo") and not (c / x["archivo"]).exists()]   # archivo: null = nota aún no escrita (M3)
+            faltan = [x["archivo"] for u in t.get("unidades", []) for x in u["temas"] if x.get("archivo") and not ruta_archivo(c, x["archivo"]).exists()]   # archivo: null = nota aún no escrita (M3)
             if faltan:
                 log(f"  {len(faltan)} archivo(s) de tema declarados y ausentes en {c.name} (pon archivo: null o escribe la nota)")
         log(f"{'OK' if drift == 0 else 'DRIFT'}: {len(cursos_t)} cursos, {drift} README desfasados")

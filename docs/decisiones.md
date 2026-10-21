@@ -126,6 +126,15 @@ es derivados y riesgo (lo respaldan su temario y su banco de evaluaciones dictad
 una unidad. Las **guías de terminal** de chaska son lecciones del curso `linux`. Traza en
 `contenido/migracion/mapa-temas-c1.csv` y `FIJOS` de `mapa-lecciones.py`.
 
+**Decidido (2026-10-20, fase 5 de `web/docs/plataforma-educativa.md`, director por encargo del autor): un curso con
+temario revisado tiene una lección por tema en su pub, declarada en el post.** `curso.yml` marca con `temario: revisado`
+los 10 cursos de C1 (`estandar-docencia.md` §2); solo ellos entran en `web/scripts/cursos.py`, que escribe `curso:` y
+`tema:` en el frontmatter de cada lección y crea un esqueleto en borrador para cada tema sin lección. Desde entonces
+`mapa-lecciones.py` toma lo declarado (confianza «declarada») en vez de adivinarlo. Las notas de `02-contenido/` de los
+temas sin lección (16 de Python, unidades 1 y 2) pasaron al pub como lecciones —el texto vive en el pub, A3— y su
+`archivo:` apunta al post, relativo a `DOCS_ROOT`; `temario.py` resuelve las dos formas. Porqué y reglas del
+generador: `web/docs/decisiones.md` §4.6.
+
 ## Evaluaciones
 
 **Decidido (2026-09-15, R9–R11): los exámenes propios pasan al sistema `.tex`.** Expediente =
