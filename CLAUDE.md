@@ -64,7 +64,7 @@ submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/` (repo
 No hay suite de tests: se valida, se compila y se mira el PDF.
 
 ```bash
-cd ~/Documents/10\ Class
+cd ~/Documents/docencia                         # $CLASS_DIR de core/env.sh
 ./scripts/validate.sh CURSO|DICTADO|--todos     # invariantes del estándar (CURSO acepta slug o ruta)
 ./scripts/build-session.sh CURSO NN             # compila el artefacto declarado en sesion.yml
 ./scripts/build.sh ARCHIVO.tex [--modo examen|claves|soluciones|todos]
