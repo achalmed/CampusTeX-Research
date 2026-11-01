@@ -160,7 +160,7 @@ dictados/2026-i-cau-unsch-metodologia/
 
 | Necesidad | Dónde vive | Cómo la cita el curso |
 |---|---|---|
-| Libros y artículos | Calibre (`biblioteca/`) | `bibliografia[].calibre_id` (`scripts-biblioteca/ingesta_cursos` lo escribe) |
+| Libros y artículos | Calibre (`biblioteca/`) | `bibliografia[].calibre_id` (`biblioteca-studio/ingesta_cursos` lo escribe) |
 | Datasets oficiales (ENAHO, INEI, Damodaran…) | catálogo de `datafw` (`data/raw/…`) | `datasets[].clave`; el curso conserva solo muestras ≤ 5 MB |
 | Series para el `code/` de una evaluación o para un modelo del laboratorio | paquetes de resultados y datos de `datafw`, leídos por nombre (`core/env.py`) | el código del expediente o del modelo; contrato del proveedor en `datafw/docs/integracion-ecosistema.md` |
 | Logo, fuentes, plantillas, clases | `assets/`, `styles/`, `templates/`, `classes/` del framework | `\documentclass{academic-*}`; el deck lleva **una** copia local del logo |
@@ -231,7 +231,7 @@ de qué.
 | `web` | el producto de cada dictado en `cursos/<materia>/<edicion>/` | `scripts/publish-web.sh` (hardlinks desde `contenido/dictados/<clave>/publicacion/`) | copiar en vez de enlazar |
 | `prompts` (learning-skill) | `skills/learning/2 domains/_temarios/<dominio>.md` y un puntero en `## Temario` del dominio | `scripts/temario.py` (`--que skill`), por `dominio_fuat` | editar el temario generado |
 | `tareas` | `temarios-cursos.md`, la checklist por curso, unidad y tema | `scripts/temario.py` (`--que resumen`) | editarla a mano |
-| `scripts-biblioteca` (`ingesta_cursos`) | lee `contenido/cursos/*/05-recursos/` y escribe `bibliografia[].calibre_id` en el `curso.yml` | su suite (`scripts-biblioteca/ingesta/README.md`) | cambiar otras claves del registro |
+| `biblioteca-studio` (`ingesta_cursos`) | lee `contenido/cursos/*/05-recursos/` y escribe `bibliografia[].calibre_id` en el `curso.yml` | su suite (`biblioteca-studio/ingesta/README.md`) | cambiar otras claves del registro |
 
 Un cambio en `curso.yml` (claves, `materia_web`, `dominio_fuat`) o en la lista cerrada de carpetas
 afecta a estos consumidores: se regeneran las vistas y se avisa al dueño del consumidor.
