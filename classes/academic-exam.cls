@@ -353,18 +353,38 @@
     \noindent\ifevc@numeropaso{\bfseries\color{colorprimario}Paso \theevpaso.}\ifevc@titulopaso\enspace\fi\fi
     \ifevc@titulopaso{\itshape\color{gristexto}#1}\fi\par\nobreak\vspace{0.1em}%
   \fi\noindent\ignorespaces}
-\newcommand{\aplica}[1]{\ifevc@aplica\expandafter\ev@aplica\else\expandafter\@gobble\fi{#1}}
-% la fórmula que se aplica (2026-11-08): una ficha de referencia, no un paso más de la resolución. Centrada y de ancho
-% natural (se parte si no cabe), en blanco sobre el fondo de la solución, entre dos filetes finos, con el rótulo
-% «se aplica» en versalitas encima; la fórmula, un punto más pequeña
+\NewDocumentCommand{\aplica}{O{formula} m}{\ifevc@aplica\ev@aplica[#1]{#2}\fi}
+% lo que se aplica en un paso (2026-11-08): \aplica[tipo]{contenido}. Un recuadro ajustado al contenido (no de margen a
+% margen), centrado, con un fondo tenue y un filete fino del color de su tipo; sin rótulos: basta el nombre dentro
+% («Propiedad distributiva: …», «Vieta: …»). Los colores salen de la paleta de la identidad (academicData1–4 y sus
+% mezclas), así que en salida bn pasan solos a gris. Tipos: formula (por omisión) · propiedad · teorema · definicion ·
+% regla (de derivación, de cálculo) · identidad · criterio (de estabilidad, de convergencia)
 \RequirePackage{varwidth}
-\newtcolorbox{ev@cajaaplica}{enhanced, frame hidden, boxrule=0pt, sharp corners, colback=white,
-  borderline north={0.4pt}{0pt}{grislinea}, borderline south={0.4pt}{0pt}{grislinea},
-  hbox, center, left=1.4em, right=1.4em, top=0.25em, bottom=0.45em,
-  before skip=0.55em, after skip=0.65em, fontupper=\small}
-\newcommand{\ev@aplica}[1]{\par\nobreak\begin{ev@cajaaplica}%
-  \begin{varwidth}{\dimexpr\linewidth-6em\relax}\centering
-  {\scriptsize\scshape\color{gristexto}se aplica}\par\vspace{0.15em}#1\end{varwidth}\end{ev@cajaaplica}\nobreak\noindent\ignorespaces}
+\colorlet{evaplica@formula}{academicData3}
+\colorlet{evaplica@propiedad}{academicData4}
+\colorlet{evaplica@teorema}{academicData2}
+\colorlet{evaplica@definicion}{academicData1}
+\colorlet{evaplica@regla}{academicData3!45!academicData2}          % violeta grisáceo
+\colorlet{evaplica@identidad}{academicData4!55!academicData2}      % ocre
+\colorlet{evaplica@criterio}{academicData3!50!academicData4}       % verde azulado
+\newtcolorbox{ev@cajaaplica}[1]{enhanced, hbox, center, arc=1.5pt, boxrule=0.45pt,
+  colframe=evaplica@#1!70, colback=evaplica@#1!11, left=0.75em, right=0.75em, top=0.2em, bottom=0.2em,
+  before skip=0.45em, after skip=0.55em, fontupper=\small}
+\newcommand{\ev@aplica}[2][formula]{\par\nobreak
+  \ifcsname\string\color@evaplica@#1\endcsname\def\ev@tipoaplica{#1}\else
+    \ClassWarning{academic-exam}{\string\aplica: tipo desconocido «#1» (formula, propiedad, teorema, definicion,
+      regla, identidad, criterio)}\def\ev@tipoaplica{formula}\fi
+  \begin{ev@cajaaplica}{\ev@tipoaplica}\begin{varwidth}{\dimexpr\linewidth-5em\relax}\centering #2\end{varwidth}%
+  \end{ev@cajaaplica}\nobreak\noindent\ignorespaces}
+% lo que cambia en una línea de la resolución, para verlo sin leer: \resalta{…} pinta el término que se transforma,
+% \cancela{…} tacha lo que se simplifica y \razon{…} anota a la derecha, breve, por qué (en {ecua} y {sistema})
+\colorlet{evcambio}{academicData2}
+\newcommand{\resalta}[1]{{\color{evcambio}#1}}
+% la diagonal con TikZ (la carga tcolorbox): \cancel de cancel.sty sale muy fina y no admite grosor
+\newcommand{\cancela}[1]{\mathpalette\ev@cancela{#1}}
+\newcommand{\ev@cancela}[2]{\tikz[baseline=(ev@c.base)]{\node[inner sep=0.4pt, outer sep=0pt] (ev@c) {$\m@th#1#2$};
+  \draw[evcambio!85, line width=0.8pt] (ev@c.south west) -- (ev@c.north east);}}
+\newcommand{\razon}[1]{\qquad\text{\footnotesize\itshape\color{gristexto}#1}}
 % \interpreta{...}: interpretación breve intercalada (antes \nota; renombrado para
 % no chocar con la caja {nota} de la identidad compartida).
 \newcommand{\interpreta}[1]{\ifevc@interpreta\expandafter\ev@interpreta\else\expandafter\@gobble\fi{#1}}

@@ -122,6 +122,14 @@ término; detalle en la guía de resolución del skill `learning`). Las citas so
 `scripts/bib-zotero.py` desde Zotero mientras no exista `zotero.bib`); ningún código de Calibre entra en el documento.
 Cada pregunta es un marcador del PDF (la clase lo pone y el lector abre el panel).
 
+**La resolución se ve; la explicación la acompaña, breve (regla universal, 2026-11-08).** Detallado no es explicar en
+prosa y luego dar el resultado: el desarrollo avanza a la vista, línea a línea, y cada línea lleva su porqué breve y
+exacto a la derecha (`\razon{restamos $m$}`). Lo que cambia se marca (`\resalta{}` el término que se transforma,
+`\cancela{}` lo que se simplifica); una fórmula, propiedad o teorema no se explica en prosa, se nombra en su recuadro,
+`\aplica[tipo]{Nombre: …}`, con `tipo` ∈ `formula` (por omisión) · `propiedad` · `teorema` · `definicion` · `regla` ·
+`identidad` · `criterio`: la clase le da un recuadro ajustado y tenue del color de su tipo, sin rótulos. Las
+interpretaciones son breves. Detalle y ejemplo: la guía de resolución del skill `learning`.
+
 **Elementos visibles y LaTeX Studio (2026-11-08).** `\configuracion{clave=true|false, …}` en el preámbulo muestra u
 oculta cada elemento sin tocar el contenido: `nivel`, `tiempo`, `puntaje`; `etapas`, `numeropaso`, `titulopaso`,
 `aplica`, `interpreta`, `rotulorespuesta`; `instrucciones`; `membrete`, `docente`, `estudiante`, `duracion`, `periodo`,
@@ -131,8 +139,7 @@ las opciones `bn` y `compacto` se editan desde LaTeX Studio («Configurar el doc
 por separado, `etapa<clave>=visible|sin título|oculta` (`etapadatos`, `etapaobjetivo`, `etapamarcoteorico`,
 `etapaprocedimiento`, `etapaverificacion`, `etapainterpretacion`, `etapadiscusion`; la clave es el título sin tildes,
 espacios ni mayúsculas): «sin título» deja el contenido sin su rótulo; «oculta» quita rótulo y contenido hasta la
-siguiente etapa, salvo la `\respuesta`, que siempre se ve. `\aplica{}` compone la fórmula sin marco: un filete fino de
-color a la izquierda y un fondo apenas tintado, centrada (2026-11-08).
+siguiente etapa, salvo la `\respuesta`, que siempre se ve.
 
 **Alineación vertical de los sistemas (regla universal, 2026-11-08).** Todo sistema de ecuaciones, de definiciones o
 de condiciones que ocupe más de un renglón —en el enunciado o en la solución— se escribe con `{sistema}`
