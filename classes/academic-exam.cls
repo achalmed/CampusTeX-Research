@@ -46,7 +46,8 @@
 
 % Citas en APA 7 (biblatex-apa + Biber; scripts/build.sh corre Biber si el documento cita). Las claves son las de
 % Better BibTeX en Zotero, la autoridad de citas del ecosistema; el .bib es la exportación de Zotero (zotero.bib) o el
-% referencias.bib que genera scripts/bib-zotero.py desde Zotero. \referencias imprime la lista solo en el solucionario.
+% referencias.bib que genera scripts/bib-zotero.py desde Zotero. \referencias imprime la lista solo en el solucionario y
+% solo con \configuracion{referencias=true} (2026-11-08: por omisión, oculta).
 \RequirePackage{csquotes}
 \RequirePackage[style=apa, backend=biber]{biblatex}
 \DeclareLanguageMapping{spanish}{spanish-apa}   % «y» entre autores, «Recuperado de», etc.
@@ -54,8 +55,10 @@
 % referencias y en las citas entre paréntesis.
 \DeclareDelimFormat[bib,biblist]{finalnamedelim}{\addspace\bibstring{and}\space}
 \DeclareDelimFormat[parencite]{finalnamedelim}{\addspace\bibstring{and}\space}
-\newcommand{\referencias}{\ifev@soluciones\pdfbookmark[0]{Referencias}{referencias}%
-  \printbibliography[heading=bibintoc, title=Referencias]\fi}
+% \referencias: la lista APA al final, solo en el solucionario y si \configuracion{referencias=true} (apagada por omisión)
+\newcommand{\referencias}{\ifev@soluciones\ifevc@referencias\ev@listareferencias\fi\fi}
+\newcommand{\ev@listareferencias}{\pdfbookmark[0]{Referencias}{referencias}%
+  \printbibliography[heading=bibintoc, title=Referencias]}
 
 % Alias de color: nombres previos → identidad «Academic» (sin duplicar paleta)
 \colorlet{colorprimario}{acento}
@@ -91,6 +94,8 @@
 \def\ev@logo{}\newcommand{\logoinstitucional}[1]{\def\ev@logo{#1}}
 \def\ev@estudiante{Achalma Mendoza, Elmer Edison}
 \newcommand{\estudiante}[1]{\def\ev@estudiante{#1}}
+% el nombre y el código se escriben solo en el solucionario y si datosestudiante (por omisión); si no, líneas en blanco
+\newcommand{\ev@sillenaestudiante}[2]{\ifev@soluciones\ifevc@datosestudiante#1\else#2\fi\else#2\fi}
 \def\ev@codigoestudiante{09170105}   % código del estudiante por defecto (junto al nombre); solo se imprime en modo soluciones
 \newcommand{\codigoestudiante}[1]{\def\ev@codigoestudiante{#1}}
 \def\ev@seccion{}\newcommand{\seccion}[1]{\def\ev@seccion{#1}}
@@ -113,7 +118,7 @@
 % salida de siempre). Lo edita LaTeX Studio desde config/latex-studio.yml (2026-11-08); también se escribe a mano.
 %   preguntas: nivel, tiempo, puntaje        solución: etapas, numeropaso, titulopaso, aplica, interpreta, rotulorespuesta
 %   cajas: instrucciones                     membrete: membrete, docente, estudiante, duracion, periodo, solucionario, subtitulo
-%   página: encabezado, numeropagina
+%   página: encabezado, numeropagina       estudiante: datosestudiante     al final: referencias (false por omisión)
 % Cada etapa de la solución, una a una (2026-11-08): etapadatos, etapaobjetivo, etapamarcoteorico, etapaprocedimiento,
 % etapaverificacion, etapainterpretacion, etapadiscusion = visible | sin título | oculta («sin título»: el contenido sin su
 % rótulo; «oculta»: ni rótulo ni contenido, hasta la siguiente \etapa, la \respuesta o el fin de la solución). La clave
@@ -127,6 +132,9 @@
 \ev@nuevaopcion{membrete}\ev@nuevaopcion{docente}\ev@nuevaopcion{estudiante}\ev@nuevaopcion{duracion}
 \ev@nuevaopcion{periodo}\ev@nuevaopcion{solucionario}\ev@nuevaopcion{subtitulo}
 \ev@nuevaopcion{encabezado}\ev@nuevaopcion{numeropagina}
+% 2026-11-08: datosestudiante=false deja en blanco el nombre y el código también en el solucionario; referencias=true
+% imprime la lista APA al final del solucionario (apagada por omisión: las citas del texto bastan)
+\ev@nuevaopcion{datosestudiante}\ev@nuevaopcion{referencias}\evc@referenciasfalse
 \newcommand{\ev@nuevaetapa}[1]{\pgfkeys{/evconfig/etapa#1/.initial=visible}}
 \ev@nuevaetapa{datos}\ev@nuevaetapa{objetivo}\ev@nuevaetapa{marcoteorico}\ev@nuevaetapa{procedimiento}
 \ev@nuevaetapa{verificacion}\ev@nuevaetapa{interpretacion}\ev@nuevaetapa{discusion}
@@ -176,8 +184,8 @@
    \ev@filauna{Curso}{\ev@curso\ifdefempty{\ev@codigocurso}{}{\ \ (\ev@codigocurso)}}%
    \ifevc@docente\ev@filauna{Docente}{\ev@docente}\fi
    \ifevc@estudiante\makebox[2.4cm][l]{\ev@lbl{Estudiante}}%
-     \ifev@soluciones\ev@estudiante\else\makebox[6cm][l]{\hrulefill}\fi\hfill
-     \makebox[5cm][l]{\ev@lbl{Código:}\ \ifev@soluciones\ev@campocorto{\ev@codigoestudiante}\else\hrulefill\fi}\par\fi
+     \ev@sillenaestudiante{\ev@estudiante}{\makebox[6cm][l]{\hrulefill}}\hfill
+     \makebox[5cm][l]{\ev@lbl{Código:}\ \ev@sillenaestudiante{\ev@campocorto{\ev@codigoestudiante}}{\hrulefill}}\par\fi
    \ifevc@duracion\ifdefempty{\ev@duracion}{}{\makebox[2.4cm][l]{\ev@lbl{Duración}}\ev@duracion\par}\fi}%
   \vspace{0.55em}{\color{colorprimario}\hrule height 0.6pt}\vspace{0.5em}
   \begin{center}
@@ -384,14 +392,21 @@
 \newcommand{\cancela}[1]{\mathpalette\ev@cancela{#1}}
 \newcommand{\ev@cancela}[2]{\tikz[baseline=(ev@c.base)]{\node[inner sep=0.4pt, outer sep=0pt] (ev@c) {$\m@th#1#2$};
   \draw[evcambio!85, line width=0.8pt] (ev@c.south west) -- (ev@c.north east);}}
-\newcommand{\razon}[1]{\qquad\text{\footnotesize\itshape\color{gristexto}#1}}
+\newcommand{\razon}[1]{\qquad\text{\footnotesize\itshape\color{gristexto}#1}}   % fuera de {ecua}; dentro, columna propia
 % \interpreta{...}: interpretación breve intercalada (antes \nota; renombrado para
 % no chocar con la caja {nota} de la identidad compartida).
 \newcommand{\interpreta}[1]{\ifevc@interpreta\expandafter\ev@interpreta\else\expandafter\@gobble\fi{#1}}
 \newcommand{\ev@interpreta}[1]{\par\nobreak\vspace{0.05em}\noindent{\footnotesize\itshape\color{colorsecundario}#1}\par\nobreak\vspace{0.12em}\noindent\ignorespaces}
+% {ecua}: una igualdad por línea, alineada en «&=». Tres columnas (2026-11-08): el lado izquierdo, la fórmula (ancho
+% natural) y las notas de \razon{…}, que en cada bloque empiezan todas a la misma altura, tras la fórmula más ancha, y
+% ocupan el resto de la línea (tabularx; una nota larga se parte en su columna)
+\RequirePackage{tabularx}
+\newcommand{\ev@razontabla}[1]{&#1}
 \newenvironment{ecua}{\par\addvspace{0.35em}\noindent\renewcommand{\arraystretch}{1.5}\setlength{\tabcolsep}{0pt}%
-  \begin{tabular}{@{}>{\raggedleft\arraybackslash$\displaystyle}p{.17\hsize}<{$}@{\ }>{$\displaystyle{}}p{\dimexpr.83\hsize-1em\relax}<{$}@{}}}%
-  {\end{tabular}\par\addvspace{0.35em}\noindent\ignorespaces}
+  \let\razon\ev@razontabla
+  \tabularx{\linewidth}{@{}>{\raggedleft\arraybackslash$\displaystyle}p{.17\linewidth}<{$}@{\ }>{$\displaystyle{}}l<{$}%
+    @{\hspace{2.2em}}>{\raggedright\arraybackslash\footnotesize\itshape\leavevmode\color{gristexto}}X@{}}}%
+  {\endtabularx\par\addvspace{0.35em}\noindent\ignorespaces}
 \newenvironment{ecuac}{\par\addvspace{0.35em}\[\begin{gathered}}{\end{gathered}\]\par\addvspace{0.1em}\noindent\ignorespaces}
 \newcommand{\respuesta}[1]{\ifev@etapaoculta\ev@cerraretapa\ev@respuesta{#1}\ev@abriroculta\else\ev@respuesta{#1}\fi}
 \newcommand{\ev@respuesta}[1]{\par\addvspace{0.45em}\noindent\ifevc@rotulorespuesta{\bfseries\scshape\color{colorprimario}Respuesta.}\enspace\fi #1\par\addvspace{0.35em}}

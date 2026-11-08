@@ -21,6 +21,10 @@
 \duracion{100 minutos}
 \modalidad{Presencial}
 \autorevaluacion{Edison Achalma}
+% Lo visible se elige sin tocar el contenido (o desde LaTeX Studio, «Configurar el documento»), p. ej.:
+% \configuracion{referencias=true, datosestudiante=false, etapadatos=oculta, etapaobjetivo=sin título}
+% Resolución (regla universal, docs/estandar-evaluaciones.md): el cálculo avanza línea a línea con su porqué en
+% \razon{}, lo que cambia en \resalta{}/\cancela{} y cada fórmula nombrada en \aplica[tipo]{}.
 
 \begin{document}
 \portada[Expediente: \texttt{economia-internacional-ii/parciales/2021-1-parcial-02}]
@@ -44,19 +48,25 @@ $P = 104{,}5$.
         competitividad. \pts{3}
 \end{apartados}
 \begin{solucion}
-\textbf{a)} El tipo de cambio real es
-\[
-  q = \frac{E\,P^{*}}{P} = \frac{3{,}80 \times 110}{104{,}5} = 4{,}00:
-\]
-una canasta estadounidense cuesta el equivalente a 4 canastas... en
-rigor, $q$ indica cuántas canastas internas se requieren para adquirir
-una canasta externa; valores mayores implican un país más
-\emph{competitivo} (producción interna relativamente barata).
+\etapa{Procedimiento}
+\paso{Calculamos el tipo de cambio real (a)}
+\aplica[definicion]{Tipo de cambio real: $q=\dfrac{E\,P^{*}}{P}$}
+\begin{ecua}
+  q &= \frac{3{,}80\times110}{104{,}5}\razon{$E=3{,}80$, $P^{*}=110$, $P=104{,}5$}\\[8pt]
+    &= \frac{418}{104{,}5}\razon{$3{,}80\times110=418$}\\[8pt]
+    &= 4{,}00\razon{dividimos}
+\end{ecua}
+\interpreta{Se requieren 4 canastas internas por una externa: un $q$ alto, un país más competitivo.}
 
-\textbf{b)} En tasas: $\hat q = \hat E + \pi^{*} - \pi
-= 3\,\% + 2\,\% - 6\,\% = -1\,\%$. El tipo de cambio real se
-\emph{aprecia} 1\,\%: la depreciación nominal no compensa el diferencial
-de inflación y la competitividad se deteriora.
+\paso{Calculamos la variación del tipo de cambio real (b)}
+\aplica[identidad]{En tasas: $\hat q=\hat E+\pi^{*}-\pi$}
+\begin{ecua}
+  \hat q &= 3\,\%+2\,\%-6\,\%\razon{$\hat E=3\,\%$, $\pi^{*}=2\,\%$, $\pi=6\,\%$}\\
+         &= 5\,\%-6\,\%\razon{sumamos los dos primeros}\\
+         &= -1\,\%\razon{apreciación real}
+\end{ecua}
+\respuesta{a) $q=4{,}00$. b) El tipo de cambio real se aprecia 1\,\%: la depreciación nominal no compensa el
+diferencial de inflación y la competitividad se deteriora.}
 \end{solucion}
 \end{pregunta}
 

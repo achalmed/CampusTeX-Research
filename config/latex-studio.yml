@@ -38,6 +38,7 @@ documentos:
         campos:
           - {clave: estudiante, etiqueta: Nombre del estudiante, tipo: texto, ayuda: Vacío usa el titular por omisión de la clase., destino: {orden: '\estudiante'}}
           - {clave: codigoestudiante, etiqueta: Código del estudiante, tipo: texto, destino: {orden: '\codigoestudiante'}}
+          - {clave: datosestudiante, etiqueta: Llenar nombre y código en el solucionario, tipo: interruptor, omision: true, ayuda: "Apagado: quedan las líneas en blanco, como en el examen.", destino: {lista: '\configuracion', clave: datosestudiante}}
       - titulo: Institución
         icono: view-bank
         campos:
@@ -81,6 +82,7 @@ documentos:
           - {clave: membrete, etiqueta: Membrete completo, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: membrete}}
           - {clave: docente_visible, etiqueta: Fila del docente, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: docente}}
           - {clave: estudiante_visible, etiqueta: Fila del estudiante y su código, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: estudiante}}
+          - {clave: referencias, etiqueta: "Lista de referencias (APA, de Zotero) al final del solucionario", tipo: interruptor, omision: false, ayuda: "Las citas del texto siguen; la lista sale solo si se enciende.", destino: {lista: '\configuracion', clave: referencias}}
           - {clave: duracion_visible, etiqueta: Fila de la duración, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: duracion}}
           - {clave: periodo_visible, etiqueta: Período y fecha (arriba a la derecha), tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: periodo}}
           - {clave: solucionario, etiqueta: "Rótulo «Solucionario» bajo el título", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: solucionario}}

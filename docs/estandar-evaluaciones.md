@@ -118,7 +118,7 @@ vacío, no se inventa. Símbolos: unicode-math (`\mdlgblksquare`, no `\blacksqua
 **Resolución sin pasos omitidos, citas APA y marcadores (reglas universales, 2026-11-08).** Cada procedimiento muestra
 todas sus operaciones (una por paso, sin cálculo mental, con la fórmula usada en `\aplica{}` y aplicada término a
 término; detalle en la guía de resolución del skill `learning`). Las citas son APA 7 con claves de Zotero
-(`\textcite`, `\parencite`; `\referencias` al final imprime la lista en el solucionario; el `.bib` lo genera
+(`\textcite`, `\parencite`; `\referencias` al final imprime la lista en el solucionario si se activa; el `.bib` lo genera
 `scripts/bib-zotero.py` desde Zotero mientras no exista `zotero.bib`); ningún código de Calibre entra en el documento.
 Cada pregunta es un marcador del PDF (la clase lo pone y el lector abre el panel).
 
@@ -128,7 +128,16 @@ exacto a la derecha (`\razon{restamos $m$}`). Lo que cambia se marca (`\resalta{
 `\cancela{}` lo que se simplifica); una fórmula, propiedad o teorema no se explica en prosa, se nombra en su recuadro,
 `\aplica[tipo]{Nombre: …}`, con `tipo` ∈ `formula` (por omisión) · `propiedad` · `teorema` · `definicion` · `regla` ·
 `identidad` · `criterio`: la clase le da un recuadro ajustado y tenue del color de su tipo, sin rótulos. Las
-interpretaciones son breves. Detalle y ejemplo: la guía de resolución del skill `learning`.
+interpretaciones son breves. Las notas de `\razon` de un mismo `{ecua}` empiezan todas a la misma altura, tras la
+fórmula más ancha (la clase les da su propia columna). **Un símbolo, un significado:** dentro de una pregunta ninguna
+letra nombra dos cosas (si $\Delta$ es la diferencia, el discriminante es $D$; si $a,b$ son parámetros, la fórmula
+general se escribe con $\alpha,\beta,\gamma$). Detalle y ejemplo: la guía de resolución del skill `learning` y la
+plantilla `templates/exam/solucionario/`.
+
+**Lista de referencias y datos del estudiante (2026-11-08).** Las citas del texto van siempre en APA desde Zotero;
+la lista final (`\referencias`) está **oculta por omisión** y sale en el solucionario con
+`\configuracion{referencias=true}`. `\configuracion{datosestudiante=false}` deja en blanco el nombre y el código del
+estudiante también en el solucionario (por omisión llevan los del titular). Ambas se eligen en LaTeX Studio.
 
 **Elementos visibles y LaTeX Studio (2026-11-08).** `\configuracion{clave=true|false, …}` en el preámbulo muestra u
 oculta cada elemento sin tocar el contenido: `nivel`, `tiempo`, `puntaje`; `etapas`, `numeropaso`, `titulopaso`,
