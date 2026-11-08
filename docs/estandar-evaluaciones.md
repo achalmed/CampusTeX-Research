@@ -16,7 +16,11 @@ actualizó. **Este documento es la fuente; el prompt maestro remite aquí.**
 
 Un **examen es un `.tex` de la clase `academic-exam`**, no un PDF, un `.docx` ni una foto. El
 mismo `.tex` produce el examen en blanco, la hoja de claves y el solucionario
-(`scripts/build.sh ARCHIVO.tex --modo examen|claves|soluciones|todos`). Un PDF o documento
+(`scripts/build.sh ARCHIVO.tex --modo examen|claves|soluciones|todos`; cada versión sale con su nombre,
+`ARCHIVO[-claves|-soluciones].pdf`). Sin `--modo` se compila la versión que el documento declara en su cabecera,
+`% !MODO = soluciones` (si no declara, `examen`): así F5 de LaTeX Studio y de TeXstudio compila la que se pidió, y
+LaTeX Studio la elige en su barra o la fija en «Configurar el documento» (versiones declaradas en
+`config/latex-studio.yml`, 2026-11-08). Un PDF o documento
 ofimático es solo una **fuente**: existe mientras no se haya transformado y se elimina al validar
 la transformación. **Migrar = transformar**, nunca mover:
 

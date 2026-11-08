@@ -11,7 +11,9 @@
 #
 # --modo (solo evaluaciones, academic-exam): examen | claves | soluciones | todos
 #   Aplica la opción de clase SIN editar el .tex (\PassOptionsToClass) y nombra
-#   la salida ARCHIVO[-claves|-soluciones].pdf.
+#   la salida ARCHIVO[-claves|-soluciones].pdf. Sin --modo vale el que declare el
+#   documento en sus 30 primeras líneas (% !MODO = soluciones); si no declara, examen.
+#   Así F5 de LaTeX Studio y de TeXstudio compila la versión que el documento pide.
 # --clean : elimina auxiliares del documento.
 #
 # Reemplaza a build-session/build-course/build-evaluacion (todo es LuaLaTeX ahora).
@@ -36,6 +38,13 @@ done
 
 DIR="$(cd "$(dirname "$FILE")" && pwd)"
 BASE="$(basename "$FILE" .tex)"
+
+# Sin --modo, el que declara el documento: «% !MODO = soluciones» en sus 30 primeras líneas
+if [[ -z "$MODO" ]]; then
+  MODO="$(head -n 30 "$FILE" | sed -nE 's/^[[:space:]]*%[[:space:]]*![[:space:]]*MODO[[:space:]]*=[[:space:]]*([[:alnum:]]+).*/\1/Ip' | head -n 1)"
+  MODO="${MODO,,}"
+  [[ -n "$MODO" ]] && info "Modo declarado en el documento: $MODO"
+fi
 
 # TEXINPUTS: capas del framework (+ evaluaciones/ mientras exista, compat.)
 export TEXINPUTS=".:$FW_DIR/classes:$FW_DIR/styles:$FW_DIR/config:$FW_DIR/themes:$FW_DIR/assets:${TEXINPUTS:-}"
@@ -85,5 +94,6 @@ case "$MODO" in
     exit "$fail" ;;
   claves)     info "Modo claves";     compila "$BASE-claves" "$(modo_pre claves)" ;;
   soluciones) info "Modo soluciones"; compila "$BASE-soluciones" "$(modo_pre soluciones)" ;;
-  *)          compila "$BASE" "" ;;
+  examen|"")  compila "$BASE" "" ;;
+  *)          die "MODO no válido: $MODO (examen|claves|soluciones|todos)" ;;
 esac

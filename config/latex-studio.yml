@@ -8,6 +8,15 @@ documentos:
     categoria: Docencia y evaluaciones
     icono: view-calendar-tasks
     clases: [academic-exam]
+    versiones:                     # lo que build.sh produce de un mismo .tex (--modo; docs/estandar-evaluaciones.md)
+      comentario: MODO             # «% !MODO = soluciones» al inicio: la versión que compila F5 (LaTeX Studio y TeXstudio)
+      argumento: --modo
+      omision: examen
+      lista:
+        - {clave: examen, nombre: Estudiante (enunciados), job: "{nombre}"}
+        - {clave: claves, nombre: Con claves (respuestas finales), job: "{nombre}-claves"}
+        - {clave: soluciones, nombre: Solucionario (paso a paso), job: "{nombre}-soluciones"}
+        - {clave: todos, nombre: Las tres (se ve el solucionario), job: "{nombre}-soluciones"}
     secciones:
       - titulo: Datos de la evaluación
         icono: document-properties
