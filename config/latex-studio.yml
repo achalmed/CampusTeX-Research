@@ -60,9 +60,20 @@ documentos:
           - {clave: etapas, etiqueta: "Títulos de etapa (Datos, Objetivo, Procedimiento…)", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: etapas}}
           - {clave: numeropaso, etiqueta: "Número de paso («Paso 1.»)", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: numeropaso}}
           - {clave: titulopaso, etiqueta: "Título del paso («Escribimos el sistema…»)", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: titulopaso}}
-          - {clave: aplica, etiqueta: Recuadro con la fórmula que se aplica, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: aplica}}
+          - {clave: aplica, etiqueta: Fórmula que se aplica (con filete y fondo tenue), tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: aplica}}
           - {clave: interpreta, etiqueta: Interpretaciones breves intercaladas, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: interpreta}}
           - {clave: rotulorespuesta, etiqueta: "Rótulo «Respuesta.»", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: rotulorespuesta}}
+      - titulo: Etapas de la solución
+        icono: view-list-tree
+        descripcion: "Cada etapa por separado: visible, «sin título» (el contenido sin su rótulo) u «oculta» (ni rótulo ni contenido; la respuesta se ve igual). «Títulos de etapa», en Solución, apaga todos los rótulos a la vez."
+        campos:
+          - {clave: etapadatos, etiqueta: "Datos", tipo: opcion, opciones: [visible, sin título, oculta], omision: visible, destino: {lista: '\configuracion', clave: etapadatos}}
+          - {clave: etapaobjetivo, etiqueta: "Objetivo", tipo: opcion, opciones: [visible, sin título, oculta], omision: visible, destino: {lista: '\configuracion', clave: etapaobjetivo}}
+          - {clave: etapamarcoteorico, etiqueta: "Marco teórico", tipo: opcion, opciones: [visible, sin título, oculta], omision: visible, destino: {lista: '\configuracion', clave: etapamarcoteorico}}
+          - {clave: etapaprocedimiento, etiqueta: "Procedimiento", tipo: opcion, opciones: [visible, sin título, oculta], omision: visible, destino: {lista: '\configuracion', clave: etapaprocedimiento}}
+          - {clave: etapaverificacion, etiqueta: "Verificación", tipo: opcion, opciones: [visible, sin título, oculta], omision: visible, destino: {lista: '\configuracion', clave: etapaverificacion}}
+          - {clave: etapainterpretacion, etiqueta: "Interpretación", tipo: opcion, opciones: [visible, sin título, oculta], omision: visible, destino: {lista: '\configuracion', clave: etapainterpretacion}}
+          - {clave: etapadiscusion, etiqueta: "Discusión", tipo: opcion, opciones: [visible, sin título, oculta], omision: visible, destino: {lista: '\configuracion', clave: etapadiscusion}}
       - titulo: Cajas y membrete
         icono: view-split-top-bottom
         campos:

@@ -127,7 +127,12 @@ oculta cada elemento sin tocar el contenido: `nivel`, `tiempo`, `puntaje`; `etap
 `aplica`, `interpreta`, `rotulorespuesta`; `instrucciones`; `membrete`, `docente`, `estudiante`, `duracion`, `periodo`,
 `solucionario`, `subtitulo`; `encabezado`, `numeropagina` (todo activado por omisión). Esas claves, los metadatos y
 las opciones `bn` y `compacto` se editan desde LaTeX Studio («Configurar el documento», Ctrl+Alt+D), que las lee de
-`config/latex-studio.yml`; una clave nueva de la clase entra también en ese esquema.
+`config/latex-studio.yml`; una clave nueva de la clase entra también en ese esquema. Cada etapa se controla además
+por separado, `etapa<clave>=visible|sin título|oculta` (`etapadatos`, `etapaobjetivo`, `etapamarcoteorico`,
+`etapaprocedimiento`, `etapaverificacion`, `etapainterpretacion`, `etapadiscusion`; la clave es el título sin tildes,
+espacios ni mayúsculas): «sin título» deja el contenido sin su rótulo; «oculta» quita rótulo y contenido hasta la
+siguiente etapa, salvo la `\respuesta`, que siempre se ve. `\aplica{}` compone la fórmula sin marco: un filete fino de
+color a la izquierda y un fondo apenas tintado, centrada (2026-11-08).
 
 **Alineación vertical de los sistemas (regla universal, 2026-11-08).** Todo sistema de ecuaciones, de definiciones o
 de condiciones que ocupe más de un renglón —en el enunciado o en la solución— se escribe con `{sistema}`

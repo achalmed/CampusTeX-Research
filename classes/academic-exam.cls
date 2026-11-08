@@ -114,6 +114,10 @@
 %   preguntas: nivel, tiempo, puntaje        solución: etapas, numeropaso, titulopaso, aplica, interpreta, rotulorespuesta
 %   cajas: instrucciones                     membrete: membrete, docente, estudiante, duracion, periodo, solucionario, subtitulo
 %   página: encabezado, numeropagina
+% Cada etapa de la solución, una a una (2026-11-08): etapadatos, etapaobjetivo, etapamarcoteorico, etapaprocedimiento,
+% etapaverificacion, etapainterpretacion, etapadiscusion = visible | sin título | oculta («sin título»: el contenido sin su
+% rótulo; «oculta»: ni rótulo ni contenido, hasta la siguiente \etapa, la \respuesta o el fin de la solución). La clave
+% sale del título: sin tildes, espacios ni mayúsculas («Marco teórico» → marcoteorico).
 \newcommand{\ev@nuevaopcion}[1]{\expandafter\newif\csname ifevc@#1\endcsname\csname evc@#1true\endcsname
   \pgfkeys{/evconfig/#1/.is if=evc@#1}}
 \ev@nuevaopcion{nivel}\ev@nuevaopcion{tiempo}\ev@nuevaopcion{puntaje}
@@ -123,6 +127,9 @@
 \ev@nuevaopcion{membrete}\ev@nuevaopcion{docente}\ev@nuevaopcion{estudiante}\ev@nuevaopcion{duracion}
 \ev@nuevaopcion{periodo}\ev@nuevaopcion{solucionario}\ev@nuevaopcion{subtitulo}
 \ev@nuevaopcion{encabezado}\ev@nuevaopcion{numeropagina}
+\newcommand{\ev@nuevaetapa}[1]{\pgfkeys{/evconfig/etapa#1/.initial=visible}}
+\ev@nuevaetapa{datos}\ev@nuevaetapa{objetivo}\ev@nuevaetapa{marcoteorico}\ev@nuevaetapa{procedimiento}
+\ev@nuevaetapa{verificacion}\ev@nuevaetapa{interpretacion}\ev@nuevaetapa{discusion}
 \pgfkeys{/evconfig/.unknown/.code={\ClassWarning{academic-exam}{\string\configuracion: clave desconocida
   «\pgfkeyscurrentname»}}}
 \newcommand{\configuracion}[1]{\pgfkeys{/evconfig/.cd,#1}}
@@ -287,6 +294,7 @@
 % enunciado solo por tipografía y espacio (directriz visual de evaluaciones, R10).
 \ifev@soluciones
   \NewTColorBox{solucion}{}{academicbox, title={\textsc{Solución}}}
+  \AtEndEnvironment{solucion}{\ev@cerraretapa}     % una etapa oculta al final de la solución
 \else
   \excludecomment{solucion}
 \fi
@@ -313,8 +321,31 @@
   \par\nobreak\vspace{-0.85em}{\footnotesize\itshape\color{gristexto}%
    \ifevc@nivel\ev@fitem{Nivel}{\pgfkeysvalueof{/evficha/nivel}}\fi
    \ifevc@tiempo\ev@fitem{Tiempo}{\pgfkeysvalueof{/evficha/tiempo}}\fi\par}\vspace{0.4em}\fi\ignorespaces}
-\newcommand{\etapa}[1]{\setcounter{evpaso}{0}\ifevc@etapas\par\addvspace{0.55em}\needspace{2.2\baselineskip}%
-  \noindent{\small\bfseries\scshape\color{colorsecundario}#1}\par\nobreak\vspace{0.15em}\noindent\else\par\fi\ignorespaces}
+% la clave de una etapa a partir de su título (Lua: sin tildes, espacios ni mayúsculas)
+\directlua{
+  function ev_clave_etapa(s)
+    local tildes = {["á"]="a", ["é"]="e", ["í"]="i", ["ó"]="o", ["ú"]="u", ["ü"]="u", ["ñ"]="n",
+                    ["Á"]="a", ["É"]="e", ["Í"]="i", ["Ó"]="o", ["Ú"]="u", ["Ü"]="u", ["Ñ"]="n"}
+    for k, v in pairs(tildes) do s = s:gsub(k, v) end
+    s = s:lower():gsub("[^a-z]", "")
+    tex.sprint(s)
+  end}
+\newcommand{\ev@claveetapa}[1]{\directlua{ev_clave_etapa("\luaescapestring{\detokenize{#1}}")}}
+% una etapa oculta se compone en una caja que se descarta; se cierra en la siguiente \etapa, en \respuesta (que siempre
+% se ve: la reabre después) y al terminar la solución
+\newif\ifev@etapaoculta
+\newbox\ev@descarte
+\newcommand{\ev@abriroculta}{\global\ev@etapaocultatrue\setbox\ev@descarte\vbox\bgroup\hsize=\linewidth
+  \renewenvironment{figure}[1][]{\par}{\par}\renewenvironment{table}[1][]{\par}{\par}}
+\newcommand{\ev@cerraretapa}{\ifev@etapaoculta\egroup\global\ev@etapaocultafalse\fi}
+\newcommand{\ev@tituloetapa}[1]{\ifevc@etapas\par\addvspace{0.55em}\needspace{2.2\baselineskip}%
+  \noindent{\small\bfseries\scshape\color{colorsecundario}#1}\par\nobreak\vspace{0.15em}\noindent\else\par\fi}
+\newcommand{\etapa}[1]{\ev@cerraretapa\setcounter{evpaso}{0}%
+  \edef\ev@claveactual{\ev@claveetapa{#1}}%
+  \pgfkeysifdefined{/evconfig/etapa\ev@claveactual}%
+    {\edef\ev@estadoetapa{\pgfkeysvalueof{/evconfig/etapa\ev@claveactual}}}{\def\ev@estadoetapa{visible}}%
+  \ifdefstring{\ev@estadoetapa}{oculta}{\par\ev@abriroculta}%
+    {\ifdefstring{\ev@estadoetapa}{sin título}{\par\addvspace{0.35em}\noindent}{\ev@tituloetapa{#1}}}\ignorespaces}
 \newcounter{evpaso}[pregunta]
 \newcommand{\paso}[1]{\par\addvspace{0.3em}\stepcounter{evpaso}%
   \ifevc@numeropaso\def\ev@pasoun{1}\else\ifevc@titulopaso\def\ev@pasoun{1}\else\def\ev@pasoun{0}\fi\fi
@@ -323,8 +354,17 @@
     \ifevc@titulopaso{\itshape\color{gristexto}#1}\fi\par\nobreak\vspace{0.1em}%
   \fi\noindent\ignorespaces}
 \newcommand{\aplica}[1]{\ifevc@aplica\expandafter\ev@aplica\else\expandafter\@gobble\fi{#1}}
-\newcommand{\ev@aplica}[1]{\par\nobreak\vspace{0.2em}\noindent\hspace*{1.2em}%
-  {\setlength{\fboxsep}{5pt}\setlength{\fboxrule}{0.4pt}\fcolorbox{grislinea}{white}{\small #1}}\par\nobreak\vspace{0.25em}\noindent\ignorespaces}
+% la fórmula que se aplica (2026-11-08): una ficha de referencia, no un paso más de la resolución. Centrada y de ancho
+% natural (se parte si no cabe), en blanco sobre el fondo de la solución, entre dos filetes finos, con el rótulo
+% «se aplica» en versalitas encima; la fórmula, un punto más pequeña
+\RequirePackage{varwidth}
+\newtcolorbox{ev@cajaaplica}{enhanced, frame hidden, boxrule=0pt, sharp corners, colback=white,
+  borderline north={0.4pt}{0pt}{grislinea}, borderline south={0.4pt}{0pt}{grislinea},
+  hbox, center, left=1.4em, right=1.4em, top=0.25em, bottom=0.45em,
+  before skip=0.55em, after skip=0.65em, fontupper=\small}
+\newcommand{\ev@aplica}[1]{\par\nobreak\begin{ev@cajaaplica}%
+  \begin{varwidth}{\dimexpr\linewidth-6em\relax}\centering
+  {\scriptsize\scshape\color{gristexto}se aplica}\par\vspace{0.15em}#1\end{varwidth}\end{ev@cajaaplica}\nobreak\noindent\ignorespaces}
 % \interpreta{...}: interpretación breve intercalada (antes \nota; renombrado para
 % no chocar con la caja {nota} de la identidad compartida).
 \newcommand{\interpreta}[1]{\ifevc@interpreta\expandafter\ev@interpreta\else\expandafter\@gobble\fi{#1}}
@@ -333,7 +373,8 @@
   \begin{tabular}{@{}>{\raggedleft\arraybackslash$\displaystyle}p{.17\hsize}<{$}@{\ }>{$\displaystyle{}}p{\dimexpr.83\hsize-1em\relax}<{$}@{}}}%
   {\end{tabular}\par\addvspace{0.35em}\noindent\ignorespaces}
 \newenvironment{ecuac}{\par\addvspace{0.35em}\[\begin{gathered}}{\end{gathered}\]\par\addvspace{0.1em}\noindent\ignorespaces}
-\newcommand{\respuesta}[1]{\par\addvspace{0.45em}\noindent\ifevc@rotulorespuesta{\bfseries\scshape\color{colorprimario}Respuesta.}\enspace\fi #1\par\addvspace{0.35em}}
+\newcommand{\respuesta}[1]{\ifev@etapaoculta\ev@cerraretapa\ev@respuesta{#1}\ev@abriroculta\else\ev@respuesta{#1}\fi}
+\newcommand{\ev@respuesta}[1]{\par\addvspace{0.45em}\noindent\ifevc@rotulorespuesta{\bfseries\scshape\color{colorprimario}Respuesta.}\enspace\fi #1\par\addvspace{0.35em}}
 
 % ------------------------------------------------------- metadatos del PDF --
 \AtBeginDocument{%
