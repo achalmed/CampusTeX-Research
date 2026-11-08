@@ -5,8 +5,9 @@
 # Uso:
 #   ./scripts/build.sh ARCHIVO.tex [--modo MODO] [--clean]
 #
-# Motor único: LuaLaTeX (dos pasadas). Localiza clases, estilos, tema Beamer y
-# config vía TEXINPUTS, así el documento solo hace \documentclass{academic-*}.
+# Motor único: LuaLaTeX (dos pasadas; con citas, LuaLaTeX → Biber → LuaLaTeX × 2). Localiza clases, estilos, tema
+# Beamer y config vía TEXINPUTS, así el documento solo hace \documentclass{academic-*}. Las citas (APA, Zotero) se
+# buscan en la carpeta del documento y en la de la exportación de Zotero (ZOTERO_BIB de core/env.sh), por BIBINPUTS.
 #
 # --modo (solo evaluaciones, academic-exam): examen | claves | soluciones | todos
 #   Aplica la opción de clase SIN editar el .tex (\PassOptionsToClass) y nombra
@@ -39,20 +40,31 @@ BASE="$(basename "$FILE" .tex)"
 # TEXINPUTS: capas del framework (+ evaluaciones/ mientras exista, compat.)
 export TEXINPUTS=".:$FW_DIR/classes:$FW_DIR/styles:$FW_DIR/config:$FW_DIR/themes:$FW_DIR/assets:${TEXINPUTS:-}"
 
+# BIBINPUTS: la carpeta del documento (su referencias.bib) y la de la exportación automática de Zotero (zotero.bib)
+if [[ -z "${ZOTERO_BIB:-}" && -f "$FW_DIR/../core/env.sh" ]]; then
+  ZOTERO_BIB="$(bash -c 'source "$1" && printf "%s" "$ZOTERO_BIB"' _ "$FW_DIR/../core/env.sh" 2>/dev/null)" || ZOTERO_BIB=""
+fi
+export BIBINPUTS=".:${ZOTERO_BIB:+$(dirname "$ZOTERO_BIB")}:$FW_DIR/bibliography:${BIBINPUTS:-}"
+
 if [[ "$CLEAN" -eq 1 ]]; then
   ( cd "$DIR" && rm -f "$BASE"*.aux "$BASE"*.log "$BASE"*.out "$BASE"*.toc \
-      "$BASE"*.nav "$BASE"*.snm "$BASE"*.vrb "$BASE"*.fls "$BASE"*.fdb_latexmk )
+      "$BASE"*.nav "$BASE"*.snm "$BASE"*.vrb "$BASE"*.fls "$BASE"*.fdb_latexmk \
+      "$BASE"*.bcf "$BASE"*.bbl "$BASE"*.blg "$BASE"*.run.xml )
   ok "Auxiliares de $BASE eliminados."; exit 0
 fi
 
 require_cmd "$ENGINE"
 
-# compila JOBNAME PREAMBULO — dos pasadas LuaLaTeX
+# compila JOBNAME PREAMBULO — LuaLaTeX; si el documento cita (hay citas en el .bcf), Biber y dos pasadas más
 compila() {
   local jobname="$1" pre="$2"
-  ( cd "$DIR" \
-    && "$ENGINE" -interaction=nonstopmode -halt-on-error -jobname "$jobname" "${pre}\\input{$BASE.tex}" >/dev/null 2>&1 \
-    && "$ENGINE" -interaction=nonstopmode -halt-on-error -jobname "$jobname" "${pre}\\input{$BASE.tex}" >/dev/null 2>&1 ) \
+  pasada() { "$ENGINE" -interaction=nonstopmode -halt-on-error -jobname "$jobname" "${pre}\\input{$BASE.tex}" >/dev/null 2>&1; }
+  ( cd "$DIR" && pasada \
+    && if [[ -f "$jobname.bcf" ]] && grep -q "<bcf:citekey" "$jobname.bcf"; then
+         biber --quiet "$jobname" >/dev/null 2>&1 || { echo "Biber falló: revise $DIR/$jobname.blg" >&2; exit 1; }
+         pasada
+       fi \
+    && pasada ) \
     && ok "PDF: $DIR/$jobname.pdf" || { error "Falló: $jobname. Revise $DIR/$jobname.log"; return 1; }
 }
 

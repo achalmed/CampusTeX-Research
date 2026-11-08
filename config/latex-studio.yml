@@ -1,0 +1,109 @@
+# config/latex-studio.yml — lo que LaTeX Studio puede configurar en los documentos de docencia (contrato:
+# latex-studio/docs/configuracion-de-documentos.md). Los interruptores de academic-exam son las claves de
+# \configuracion{…} (classes/academic-exam.cls, 2026-11-08); los metadatos, sus órdenes de un argumento.
+version: 1
+marco: docencia
+documentos:
+  - nombre: Evaluación (examen, práctica, tarea, solucionario)
+    clases: [academic-exam]
+    secciones:
+      - titulo: Datos de la evaluación
+        icono: document-properties
+        descripcion: Lo que imprimen el membrete y el encabezado de cada página.
+        campos:
+          - {clave: tipoevaluacion, etiqueta: Tipo y número, tipo: texto, ayuda: "Solo el tipo con su número: «Práctica Calificada 02», «Examen Parcial».", destino: {orden: '\tipoevaluacion'}}
+          - {clave: subtitulo, etiqueta: Tema, tipo: texto, ayuda: Solo el tema, sin tipo, año ni curso., destino: {orden: '\subtitulo'}}
+          - {clave: curso, etiqueta: Curso, tipo: texto, destino: {orden: '\curso'}}
+          - {clave: codigocurso, etiqueta: Código del curso, tipo: texto, destino: {orden: '\codigocurso'}}
+          - {clave: docente, etiqueta: Docente, tipo: texto, destino: {orden: '\docente'}}
+          - {clave: periodo, etiqueta: Período, tipo: texto, ayuda: "Por ejemplo 2026-II.", destino: {orden: '\periodo'}}
+          - {clave: fechaevaluacion, etiqueta: Fecha, tipo: texto, ayuda: "Por ejemplo «21 de julio de 2026».", destino: {orden: '\fechaevaluacion'}}
+          - {clave: duracion, etiqueta: Duración, tipo: texto, destino: {orden: '\duracion'}}
+          - {clave: modalidad, etiqueta: Modalidad, tipo: texto, ayuda: "Breve: «Presencial · individual».", destino: {orden: '\modalidad'}}
+          - {clave: seccion, etiqueta: Sección o grupo, tipo: texto, destino: {orden: '\seccion'}}
+      - titulo: Estudiante
+        icono: user-identity
+        descripcion: Solo se imprime en el solucionario; en el examen en blanco queda la línea para llenar.
+        campos:
+          - {clave: estudiante, etiqueta: Nombre del estudiante, tipo: texto, ayuda: Vacío usa el titular por omisión de la clase., destino: {orden: '\estudiante'}}
+          - {clave: codigoestudiante, etiqueta: Código del estudiante, tipo: texto, destino: {orden: '\codigoestudiante'}}
+      - titulo: Institución
+        icono: view-bank
+        campos:
+          - {clave: universidad, etiqueta: Universidad, tipo: texto, destino: {orden: '\universidad'}}
+          - {clave: facultad, etiqueta: Facultad, tipo: texto, destino: {orden: '\facultad'}}
+          - {clave: escuela, etiqueta: Escuela, tipo: texto, destino: {orden: '\escuela'}}
+          - {clave: logoinstitucional, etiqueta: Logo, tipo: archivo, ayuda: Imagen a la derecha del membrete (sustituye al período y la fecha); vacío = sin logo., destino: {orden: '\logoinstitucional'}}
+          - {clave: autorevaluacion, etiqueta: Autor (metadatos del PDF), tipo: texto, destino: {orden: '\autorevaluacion'}}
+      - titulo: Preguntas
+        icono: view-list-details
+        descripcion: Lo que acompaña a cada pregunta.
+        campos:
+          - {clave: puntaje, etiqueta: "Puntaje «(1 punto)» y de cada inciso", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: puntaje}}
+          - {clave: nivel, etiqueta: "Nivel (Básico, Intermedio, Avanzado)", tipo: interruptor, omision: true, ayuda: Solo en el solucionario., destino: {lista: '\configuracion', clave: nivel}}
+          - {clave: tiempo, etiqueta: Tiempo estimado, tipo: interruptor, omision: true, ayuda: Solo en el solucionario., destino: {lista: '\configuracion', clave: tiempo}}
+      - titulo: Solución
+        icono: games-solve
+        descripcion: Cómo se presenta el desarrollo en el solucionario.
+        campos:
+          - {clave: etapas, etiqueta: "Títulos de etapa (Datos, Objetivo, Procedimiento…)", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: etapas}}
+          - {clave: numeropaso, etiqueta: "Número de paso («Paso 1.»)", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: numeropaso}}
+          - {clave: titulopaso, etiqueta: "Título del paso («Escribimos el sistema…»)", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: titulopaso}}
+          - {clave: aplica, etiqueta: Recuadro con la fórmula que se aplica, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: aplica}}
+          - {clave: interpreta, etiqueta: Interpretaciones breves intercaladas, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: interpreta}}
+          - {clave: rotulorespuesta, etiqueta: "Rótulo «Respuesta.»", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: rotulorespuesta}}
+      - titulo: Cajas y membrete
+        icono: view-split-top-bottom
+        campos:
+          - {clave: instrucciones, etiqueta: Caja de instrucciones, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: instrucciones}}
+          - {clave: membrete, etiqueta: Membrete completo, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: membrete}}
+          - {clave: docente_visible, etiqueta: Fila del docente, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: docente}}
+          - {clave: estudiante_visible, etiqueta: Fila del estudiante y su código, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: estudiante}}
+          - {clave: duracion_visible, etiqueta: Fila de la duración, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: duracion}}
+          - {clave: periodo_visible, etiqueta: Período y fecha (arriba a la derecha), tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: periodo}}
+          - {clave: solucionario, etiqueta: "Rótulo «Solucionario» bajo el título", tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: solucionario}}
+          - {clave: subtitulo_visible, etiqueta: Tema bajo el título, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: subtitulo}}
+      - titulo: Página y salida
+        icono: document-print
+        campos:
+          - {clave: encabezado, etiqueta: Encabezado (curso y tipo) en cada página, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: encabezado}}
+          - {clave: numeropagina, etiqueta: Número de página, tipo: interruptor, omision: true, destino: {lista: '\configuracion', clave: numeropagina}}
+          - {clave: bn, etiqueta: Blanco y negro, tipo: interruptor, omision: false, ayuda: Pasa los colores a gris por luminancia (impresión económica)., destino: {opcion_clase: bn}}
+          - {clave: compacto, etiqueta: Márgenes compactos, tipo: interruptor, omision: false, destino: {opcion_clase: compacto}}
+
+  - nombre: Informe docente (sílabo, guía, reporte)
+    clases: [academic-report]
+    secciones:
+      - titulo: Datos del documento
+        icono: document-properties
+        campos:
+          - {clave: tipodocumento, etiqueta: Tipo de documento, tipo: texto, destino: {orden: '\tipodocumento'}}
+          - {clave: titulodocumento, etiqueta: Título, tipo: texto, destino: {orden: '\titulodocumento'}}
+          - {clave: subtitulo, etiqueta: Subtítulo, tipo: texto, destino: {orden: '\subtitulo'}}
+          - {clave: curso, etiqueta: Curso, tipo: texto, destino: {orden: '\curso'}}
+          - {clave: codigocurso, etiqueta: Código del curso, tipo: texto, destino: {orden: '\codigocurso'}}
+          - {clave: docente, etiqueta: Docente, tipo: texto, destino: {orden: '\docente'}}
+          - {clave: periodo, etiqueta: Período, tipo: texto, destino: {orden: '\periodo'}}
+      - titulo: Institución
+        icono: view-bank
+        campos:
+          - {clave: universidad, etiqueta: Universidad, tipo: texto, destino: {orden: '\universidad'}}
+          - {clave: facultad, etiqueta: Facultad, tipo: texto, destino: {orden: '\facultad'}}
+          - {clave: escuela, etiqueta: Escuela, tipo: texto, destino: {orden: '\escuela'}}
+          - {clave: logoinstitucional, etiqueta: Logo, tipo: archivo, destino: {orden: '\logoinstitucional'}}
+      - titulo: Salida
+        icono: document-print
+        campos:
+          - {clave: bn, etiqueta: Blanco y negro, tipo: interruptor, omision: false, destino: {opcion_clase: bn}}
+
+  - nombre: Presentación de clase (diapositivas)
+    clases: [academic-beamer]
+    secciones:
+      - titulo: Portada
+        icono: view-presentation
+        campos:
+          - {clave: institute, etiqueta: Institución, tipo: texto, destino: {orden: '\institute'}}
+      - titulo: Salida
+        icono: document-print
+        campos:
+          - {clave: bn, etiqueta: Blanco y negro, tipo: interruptor, omision: false, destino: {opcion_clase: bn}}

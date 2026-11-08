@@ -69,6 +69,7 @@ El nombre del expediente, del `.tex`, del script y de los PDF es **el mismo tall
 ├── AAAAMMDD_sig.tex               ← LA fuente (academic-exam): enunciado fiel + solución modelo
 ├── AAAAMMDD_sig.pdf               ← examen en blanco   (build.sh --modo examen)
 ├── AAAAMMDD_sig-soluciones.pdf    ← solucionario       (build.sh --modo soluciones)
+├── referencias.bib                ← GENERADO desde Zotero (scripts/bib-zotero.py), solo si el documento cita
 └── code/                          ← solo si hay datos, cálculos, figuras o tablas
     ├── AAAAMMDD_sig.py            ← reproduce TODOS los números del solucionario con una orden
     ├── data/                      ← data.xlsx (trabajo) + fuentes con el mismo tallo: data.wf1, data.dta, data.sav, data.ods
@@ -109,6 +110,20 @@ para la lectura breve (antes `\nota{}`), `\respuesta{}` para el resultado. Sin r
 corrección: la solución es la versión oficial correcta. Valores por defecto: UNSCH, Facultad y
 Escuela de Economía, estudiante titular y su código (los pone la clase); lo que no se sabe se deja
 vacío, no se inventa. Símbolos: unicode-math (`\mdlgblksquare`, no `\blacksquare`).
+
+**Resolución sin pasos omitidos, citas APA y marcadores (reglas universales, 2026-11-08).** Cada procedimiento muestra
+todas sus operaciones (una por paso, sin cálculo mental, con la fórmula usada en `\aplica{}` y aplicada término a
+término; detalle en la guía de resolución del skill `learning`). Las citas son APA 7 con claves de Zotero
+(`\textcite`, `\parencite`; `\referencias` al final imprime la lista en el solucionario; el `.bib` lo genera
+`scripts/bib-zotero.py` desde Zotero mientras no exista `zotero.bib`); ningún código de Calibre entra en el documento.
+Cada pregunta es un marcador del PDF (la clase lo pone y el lector abre el panel).
+
+**Elementos visibles y LaTeX Studio (2026-11-08).** `\configuracion{clave=true|false, …}` en el preámbulo muestra u
+oculta cada elemento sin tocar el contenido: `nivel`, `tiempo`, `puntaje`; `etapas`, `numeropaso`, `titulopaso`,
+`aplica`, `interpreta`, `rotulorespuesta`; `instrucciones`; `membrete`, `docente`, `estudiante`, `duracion`, `periodo`,
+`solucionario`, `subtitulo`; `encabezado`, `numeropagina` (todo activado por omisión). Esas claves, los metadatos y
+las opciones `bn` y `compacto` se editan desde LaTeX Studio («Configurar el documento», Ctrl+Alt+D), que las lee de
+`config/latex-studio.yml`; una clave nueva de la clase entra también en ese esquema.
 
 **Alineación vertical de los sistemas (regla universal, 2026-11-08).** Todo sistema de ecuaciones, de definiciones o
 de condiciones que ocupe más de un renglón —en el enunciado o en la solución— se escribe con `{sistema}`

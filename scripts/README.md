@@ -35,7 +35,8 @@ bash -n scripts/<archivo>.sh              # comprobación de sintaxis: UN archiv
 | `new-presentation.sh` | diapositivas `academic-beamer` (8 tipos) en la sesión; declara `artefacto` en `sesion.yml` | `./scripts/new-presentation.sh CURSO NN "Título" [--tipo TIPO]` |
 | `new-evaluacion.sh` | evaluación `academic-exam` (12 plantillas) en `04-evaluaciones/<sub>/AAAAMMDD_sig.tex` | `./scripts/new-evaluacion.sh CURSO TIPO "Título" [--fecha AAAAMMDD]` |
 | `new-report.sh` | documento de gestión `academic-report` en `01-diseno/` | `./scripts/new-report.sh CURSO silabo\|calendario\|nota-docente\|rubrica "Título"` |
-| `build.sh` | compila **cualquier** `.tex` del framework con LuaLaTeX, en el modo pedido | `./scripts/build.sh ARCHIVO.tex [--modo examen\|claves\|soluciones\|todos] [--clean]` |
+| `build.sh` | compila **cualquier** `.tex` del framework con LuaLaTeX, en el modo pedido; si el documento cita, corre Biber (APA 7) con `BIBINPUTS` = su carpeta y la de `zotero.bib` | `./scripts/build.sh ARCHIVO.tex [--modo examen\|claves\|soluciones\|todos] [--clean]` |
+| `bib-zotero.py` | el `referencias.bib` de un documento, generado desde Zotero (solo lectura; claves de Better BibTeX citadas en el `.tex`); simula por omisión | `python3 scripts/bib-zotero.py ARCHIVO.tex [--aplicar]` |
 | `build-session.sh` | compila el artefacto declarado en `sesion.yml` (`.tex` o `.qmd`) | `./scripts/build-session.sh CURSO NN` |
 | `build-course.sh` | compila un curso entero | `./scripts/build-course.sh CURSO [--solo-sesiones]` |
 | `clean.sh` | borra auxiliares de LaTeX (y los PDF con `--pdf`) | `./scripts/clean.sh [--pdf] [DIR]` |
