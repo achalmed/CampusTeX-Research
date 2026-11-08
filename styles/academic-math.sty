@@ -20,4 +20,62 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator{\plim}{plim}
+
+% {sistema}: un sistema de ecuaciones (o de definiciones, o de condiciones) como bloque centrado, con todo alineado en
+% vertical (regla universal de resolución, docs/estandar-evaluaciones.md §5): el signo de igualdad o de relación de cada
+% ecuación, la numeración y el signo de cada condición. Cinco columnas separadas por &:
+%   lado izquierdo & =/</≤ lado derecho & numeración & lado izquierdo de la condición & >/</≥ lado derecho
+% Las columnas que una fila no usa se dejan vacías.
+%   \begin{sistema}
+%     \dot f &= \frac{p-m}{\mu}   & (1) & \mu          &> 0 \\
+%     \dot p &= \beta\theta(f-p)  & (2) & \beta,\theta &> 0
+%   \end{sistema}
+% La separación (\qquad) es de columna entera, no de celda: el entorno lee su cuerpo y la pone antes de la numeración si
+% alguna fila numera, y antes de la condición si alguna fila tiene condición. Así el signo de cada condición queda en la
+% misma vertical aunque unas filas tengan lado izquierdo de condición y otras no, y un sistema sin número ni condición
+% queda centrado (las columnas vacías no ocupan ancho).
+\RequirePackage{array}
+\ExplSyntaxOn
+\bool_new:N \l__ac_sis_num_bool
+\bool_new:N \l__ac_sis_cond_bool
+\seq_new:N \l__ac_sis_filas_seq
+\seq_new:N \l__ac_sis_celdas_seq
+\tl_new:N \l__ac_sis_sepnum_tl
+\tl_new:N \l__ac_sis_sepcond_tl
+\cs_new_protected:Npn \__ac_sis_analizar:n #1
+  {
+    \bool_set_false:N \l__ac_sis_num_bool
+    \bool_set_false:N \l__ac_sis_cond_bool
+    \seq_set_split:Nnn \l__ac_sis_filas_seq { \\ } {#1}
+    \seq_map_inline:Nn \l__ac_sis_filas_seq
+      {
+        \seq_set_split:Nnn \l__ac_sis_celdas_seq { & } {##1}
+        \tl_if_blank:eF { \seq_item:Nn \l__ac_sis_celdas_seq { 3 } }
+          { \bool_set_true:N \l__ac_sis_num_bool }
+        \tl_if_blank:eF { \seq_item:Nn \l__ac_sis_celdas_seq { 4 } \seq_item:Nn \l__ac_sis_celdas_seq { 5 } }
+          { \bool_set_true:N \l__ac_sis_cond_bool }
+      }
+    \tl_set:Ne \l__ac_sis_sepnum_tl { \bool_if:NTF \l__ac_sis_num_bool { \exp_not:N \qquad } { } }
+    \tl_set:Ne \l__ac_sis_sepcond_tl { \bool_if:NTF \l__ac_sis_cond_bool { \exp_not:N \qquad } { } }
+  }
+% El cuerpo se captura (+b) para analizarlo antes de componer.
+\NewDocumentEnvironment{sistema}{+b}
+  {
+    \__ac_sis_analizar:n {#1}
+    \par\addvspace{0.35em}
+    \[
+      \renewcommand{\arraystretch}{1.55}
+      \setlength{\arraycolsep}{0pt}
+      \exp_args:Nne \use:nn
+        { \begin{array} }
+        { { >{\exp_not:N\displaystyle}r >{\exp_not:N\displaystyle{}}l
+            @{\exp_not:o{\l__ac_sis_sepnum_tl}} >{\exp_not:N\displaystyle}l
+            @{\exp_not:o{\l__ac_sis_sepcond_tl}} >{\exp_not:N\displaystyle}r >{\exp_not:N\displaystyle{}}l } }
+      #1
+      \end{array}
+    \]
+    \par\addvspace{0.1em}\noindent\ignorespaces
+  }
+  { }
+\ExplSyntaxOff
 \endinput

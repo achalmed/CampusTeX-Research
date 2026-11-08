@@ -103,11 +103,19 @@ metadatos (`\universidad`, `\facultad`, `\escuela`, `\curso`, `\codigocurso`, `\
 `\pts{}` · `{solucion}` con `\etapa{}` por disciplina (econometría: Modelo y variables ·
 Hipótesis y supuestos · Método · Estimación · Resultados · Pruebas · Bondad de ajuste ·
 Interpretación · Implicaciones), `\paso{}` en primera persona del plural, `{ecua}` para una
-igualdad por línea, `{ecuac}` para varias, `\aplica{}` para la fórmula usada, `\interpreta{}`
+igualdad por línea, `{ecuac}` para varias en un mismo renglón, `{sistema}` para varias ecuaciones apiladas,
+`\aplica{}` para la fórmula usada, `\interpreta{}`
 para la lectura breve (antes `\nota{}`), `\respuesta{}` para el resultado. Sin rastro de
 corrección: la solución es la versión oficial correcta. Valores por defecto: UNSCH, Facultad y
 Escuela de Economía, estudiante titular y su código (los pone la clase); lo que no se sabe se deja
 vacío, no se inventa. Símbolos: unicode-math (`\mdlgblksquare`, no `\blacksquare`).
+
+**Alineación vertical de los sistemas (regla universal, 2026-11-08).** Todo sistema de ecuaciones, de definiciones o
+de condiciones que ocupe más de un renglón —en el enunciado o en la solución— se escribe con `{sistema}`
+(`styles/academic-math.sty`, disponible en todas las clases `academic-*`), que alinea en vertical tres cosas: el signo de
+igualdad o de relación de cada ecuación, la numeración y el signo de cada condición (`>`, `<`, `\ge`, `\le`). Cinco
+columnas: `izquierda &= derecha & (n) & condición &> valor \\`; las que una fila no usa quedan vacías. Nunca se
+apilan ecuaciones con `\\` dentro de `{ecuac}` ni se numeran o se ponen condiciones con `\qquad` a ojo.
 
 **Evaluaciones de otras universidades (R12, 2026-09-17).** Se transforman exactamente igual que las
 propias y se archivan en el curso del framework al que corresponde su contenido; solo cambian los
