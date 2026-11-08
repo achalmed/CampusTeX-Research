@@ -49,7 +49,7 @@ export BIBINPUTS=".:${ZOTERO_BIB:+$(dirname "$ZOTERO_BIB")}:$FW_DIR/bibliography
 if [[ "$CLEAN" -eq 1 ]]; then
   ( cd "$DIR" && rm -f "$BASE"*.aux "$BASE"*.log "$BASE"*.out "$BASE"*.toc \
       "$BASE"*.nav "$BASE"*.snm "$BASE"*.vrb "$BASE"*.fls "$BASE"*.fdb_latexmk \
-      "$BASE"*.bcf "$BASE"*.bbl "$BASE"*.blg "$BASE"*.run.xml )
+      "$BASE"*.bcf "$BASE"*.bbl "$BASE"*.blg "$BASE"*.run.xml "$BASE"*.synctex.gz )
   ok "Auxiliares de $BASE eliminados."; exit 0
 fi
 
@@ -58,7 +58,8 @@ require_cmd "$ENGINE"
 # compila JOBNAME PREAMBULO — LuaLaTeX; si el documento cita (hay citas en el .bcf), Biber y dos pasadas más
 compila() {
   local jobname="$1" pre="$2"
-  pasada() { "$ENGINE" -interaction=nonstopmode -halt-on-error -jobname "$jobname" "${pre}\\input{$BASE.tex}" >/dev/null 2>&1; }
+  # -synctex=1: saltar entre el PDF y el código (LaTeX Studio, TeXstudio, Okular)
+  pasada() { "$ENGINE" -synctex=1 -interaction=nonstopmode -halt-on-error -jobname "$jobname" "${pre}\\input{$BASE.tex}" >/dev/null 2>&1; }
   ( cd "$DIR" && pasada \
     && if [[ -f "$jobname.bcf" ]] && grep -q "<bcf:citekey" "$jobname.bcf"; then
          biber --quiet "$jobname" >/dev/null 2>&1 || { echo "Biber falló: revise $DIR/$jobname.blg" >&2; exit 1; }
