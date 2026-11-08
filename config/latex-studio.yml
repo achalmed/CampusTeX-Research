@@ -5,6 +5,8 @@ version: 1
 marco: docencia
 documentos:
   - nombre: Evaluación (examen, práctica, tarea, solucionario)
+    categoria: Docencia y evaluaciones
+    icono: view-calendar-tasks
     clases: [academic-exam]
     secciones:
       - titulo: Datos de la evaluación
@@ -72,6 +74,8 @@ documentos:
           - {clave: compacto, etiqueta: Márgenes compactos, tipo: interruptor, omision: false, destino: {opcion_clase: compacto}}
 
   - nombre: Informe docente (sílabo, guía, reporte)
+    categoria: Docencia y evaluaciones
+    icono: view-calendar-tasks
     clases: [academic-report]
     secciones:
       - titulo: Datos del documento
@@ -97,6 +101,8 @@ documentos:
           - {clave: bn, etiqueta: Blanco y negro, tipo: interruptor, omision: false, destino: {opcion_clase: bn}}
 
   - nombre: Presentación de clase (diapositivas)
+    categoria: Docencia y evaluaciones
+    icono: view-calendar-tasks
     clases: [academic-beamer]
     secciones:
       - titulo: Portada
@@ -107,3 +113,8 @@ documentos:
         icono: document-print
         campos:
           - {clave: bn, etiqueta: Blanco y negro, tipo: interruptor, omision: false, destino: {opcion_clase: bn}}
+
+  - nombre: Material docente (sesiones, prácticas, diapositivas)
+    categoria: Docencia y evaluaciones
+    icono: view-calendar-tasks
+    secciones: []                 # sin campos propios: solo la sección genérica (título, autor, fecha, opciones)
