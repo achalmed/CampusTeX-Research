@@ -22,7 +22,7 @@ Este repositorio es dueño de **dos cosas** para la docencia de Edison Achalma B
 
 Principio rector: **el documento depende del framework, nunca al revés.** El diseño vive una sola vez
 en `styles/` + `classes/`; cada documento solo *elige* su clase y *rellena* contenido. El color se
-cambia en `sistema-editorial/temas/docencia.yml`, de donde se genera `config/palette.tex`, y re-tinta
+cambia en `estilos-visuales/temas/docencia.yml`, de donde se genera `config/palette.tex`, y re-tinta
 exámenes, diapositivas y sílabos a la vez.
 
 **Qué no es**: no es una colección de plantillas sueltas, no es un gestor de notas de estudio (eso es
@@ -62,7 +62,7 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
 | `styles/` | identidad visual única (`academic.sty` + colores, fuentes, math, iconos, bloques, código, tablas) | este repo |
 | `classes/` | clases delgadas: `academic-base` · `academic-exam` · `academic-report` · `academic-beamer` | este repo |
 | `themes/` | tema Beamer propio `academic` (en minúsculas); consume `styles/` | este repo |
-| `config/` | `course.yml` (identidad del docente, YAML plano) · `palette.tex` **GENERADO** | el autor · `palette.tex`, `sistema-editorial` |
+| `config/` | `course.yml` (identidad del docente, YAML plano) · `palette.tex` **GENERADO** | el autor · `palette.tex`, `estilos-visuales` |
 | `templates/` | documentos vacíos, sin diseño: `exam/` (12 tipos) · `presentation/` (8) · `report/` (4) | este repo |
 | `scaffolds/` | registros mínimos de curso, sesión y dictado (no árboles de carpetas); el `deck.tex` de sesión es un Beamer autocontenido | este repo |
 | `scripts/` | automatización: crear, compilar, validar, generar vistas, publicar | este repo |
@@ -95,5 +95,5 @@ Cada script está descrito en [`scripts/README.md`](scripts/README.md).
   remoto. Tampoco versiona los productos de publicación ni las fuentes PDF de los expedientes.
 - **Algunos decks Beamer heredados no compilan** (falta la copia local de `cau-logo.png`): es
   pendiente del docente y se reconstruyen al usarlos (`docencia/estado.md` §Por hacer).
-- **El color no se decide aquí**: `config/palette.tex` es un espejo generado por `sistema-editorial`;
+- **El color no se decide aquí**: `config/palette.tex` es un espejo generado por `estilos-visuales`;
   editarlo a mano se pierde en la siguiente generación.

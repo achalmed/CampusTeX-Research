@@ -7,7 +7,7 @@
 %% Motor: LuaLaTeX exclusivamente.
 %%
 %% Opciones: bn (= salida=bn): la paleta en gris por luminancia (\academicbn de
-%% config/palette.tex, GENERADO desde sistema-editorial/temas/docencia.yml; Fase 7,
+%% config/palette.tex, GENERADO desde estilos-visuales/temas/docencia.yml; Fase 7,
 %% 2026-09-20); las demas se pasan a beamer (p. ej. aspectratio=169, handout).
 %% ============================================================================
 \NeedsTeXFormat{LaTeX2e}

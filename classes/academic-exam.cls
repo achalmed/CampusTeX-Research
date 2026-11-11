@@ -20,7 +20,7 @@
 \DeclareOption{claves}{\ev@clavestrue}
 \DeclareOption{compacto}{\ev@compactotrue}
 %% Fase 6 del sistema de diseno (2026-09-20): salida en blanco y negro. La paleta
-%% (config/palette.tex, GENERADA desde sistema-editorial/temas/docencia.yml) trae
+%% (config/palette.tex, GENERADA desde estilos-visuales/temas/docencia.yml) trae
 %% \academicbn, que pasa los once nombres academic* a gris por luminancia y vuelve
 %% a derivar los siete roles de academic-colors.sty. Se acepta `bn' y `salida=bn'.
 \newif\ifev@bn \ev@bnfalse

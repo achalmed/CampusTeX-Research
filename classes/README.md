@@ -32,7 +32,7 @@ Las plantillas vacías de cada tipo están en `templates/`; los scripts `new-eva
 ## Límite honesto
 
 - **Una clase no fija colores ni fuentes**: eso es `styles/` (y el color, `config/palette.tex`,
-  generado desde `sistema-editorial`). Si una clase necesita un color nuevo, se añade a la paleta, no
+  generado desde `estilos-visuales`). Si una clase necesita un color nuevo, se añade a la paleta, no
   a la clase.
 - **No hay clase para tesis, monografía, ensayo ni artículo**: eso es `escritura`.
 - Los decks con preámbulo propio no usan `academic-beamer` y por eso envejecen aparte: los heredados y

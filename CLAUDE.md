@@ -38,8 +38,8 @@ submódulo `docencia/` (repo `Academic_Class`) y lo privado en `registro/` (repo
   `classes/`; un documento solo elige clase y rellena contenido. Ni plantillas ni documentos fijan estilo.
 - **Motor LuaLaTeX exclusivo** (fontspec, Libertinus + Inconsolata, `unicode-math`, microtype con
   protrusion **y** expansion). No se introducen dependencias de pdfLaTeX ni XeLaTeX.
-- **El color se cambia en `sistema-editorial/temas/docencia.yml`**, no aquí: `config/palette.tex` es un
-  archivo GENERADO y espejado (órdenes en `sistema-editorial/docs/consumidores.md` §2 y §4).
+- **El color se cambia en `estilos-visuales/temas/docencia.yml`**, no aquí: `config/palette.tex` es un
+  archivo GENERADO y espejado (órdenes en `estilos-visuales/docs/consumidores.md` §2 y §4).
   Las tipografías, en `styles/academic-fonts.sty`.
 - **`registro/` nunca tiene remoto** (datos de estudiantes). Lo comprueba `scripts/doctor.sh`; su
   política está en `registro/CLAUDE.md`.

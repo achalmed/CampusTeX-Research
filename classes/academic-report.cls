@@ -10,7 +10,7 @@
 \ProvidesClass{academic-report}[2026/07/23 v1 Gestion docente Academic (LuaLaTeX)]
 
 %% bn (= salida=bn): la paleta en gris por luminancia (\academicbn de config/palette.tex,
-%% GENERADO desde sistema-editorial/temas/docencia.yml; Fase 7, 2026-09-20), como en academic-exam.
+%% GENERADO desde estilos-visuales/temas/docencia.yml; Fase 7, 2026-09-20), como en academic-exam.
 \newif\ifar@bn \ar@bnfalse
 \DeclareOption{bn}{\ar@bntrue}
 \DeclareOption{salida=bn}{\ar@bntrue}

@@ -34,7 +34,7 @@ clases · tema    classes/academic-*.cls  ·  themes/beamer*themeacademic.sty
     ▲  \RequirePackage{academic}
 identidad        styles/academic.sty y sus paquetes academic-*.sty
     ▲  \InputIfFileExists{palette.tex}
-configuración    config/palette.tex (GENERADO por sistema-editorial) · config/course.yml (datos del docente)
+configuración    config/palette.tex (GENERADO por estilos-visuales) · config/course.yml (datos del docente)
 ```
 
 | capa | carpeta | contiene | no contiene |
@@ -65,8 +65,8 @@ Cada carpeta tiene su `README.md` con la lista de archivos; la lista no se repit
 ## 4. Regla de dependencias
 
 `config/` ← `styles/` ← {`classes/`, `themes/`} ← `templates/` ← documento. Ninguna flecha apunta hacia
-arriba. El color no se decide en el repo: se cambia en `sistema-editorial/temas/docencia.yml` y se
-regenera `config/palette.tex` (contrato en `sistema-editorial/docs/consumidores.md` §2). Las
+arriba. El color no se decide en el repo: se cambia en `estilos-visuales/temas/docencia.yml` y se
+regenera `config/palette.tex` (contrato en `estilos-visuales/docs/consumidores.md` §2). Las
 tipografías se eligen en `styles/academic-fonts.sty`.
 
 ## 5. Límite honesto

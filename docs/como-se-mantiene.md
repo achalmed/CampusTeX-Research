@@ -21,7 +21,7 @@ Cada cosa se escribe **una sola vez**, en su dueño. Todo lo demás apunta o se 
 | La arquitectura editorial (capas, clases, tema) | `docs/arquitectura.md` | `styles/`, `classes/`, `themes/`, `templates/` |
 | El currículo de un curso | `contenido/cursos/<slug>/curso.yml` | README del curso, ficha web, temario del learning-skill, checklist de `tareas` |
 
-Fuera del repo hay una quinta: **el color**, que vive en `sistema-editorial/temas/docencia.yml` y
+Fuera del repo hay una quinta: **el color**, que vive en `estilos-visuales/temas/docencia.yml` y
 llega aquí como `config/palette.tex` generado.
 
 ## 2. Qué se genera y con qué
@@ -33,7 +33,7 @@ llega aquí como `config/palette.tex` generado.
 | `prompts/skills/learning/2 domains/_temarios/<dominio>.md` y un puntero en `## Temario` del dominio | `curso.yml` | `temario-generar.sh generar --que skill --aplicar` |
 | `tareas/temarios-cursos.md` | todos los `curso.yml` | `temario-generar.sh generar --que resumen --aplicar` |
 | `curso.yml.banco_examenes`, recursos de tipo post y simulador | disco y `web/_pubs` | `python3 scripts/enlazar.py examenes\|posts\|simuladores --aplicar` |
-| `config/palette.tex` | `sistema-editorial/temas/docencia.yml` | `sistema-editorial` (órdenes en `sistema-editorial/docs/consumidores.md` §2 y §4) |
+| `config/palette.tex` | `estilos-visuales/temas/docencia.yml` | `estilos-visuales` (órdenes en `estilos-visuales/docs/consumidores.md` §2 y §4) |
 | `docs/README.md` | frontmatter de `docs/*.md` | `python3 core/docs.py indice "docencia" --aplicar` |
 | `web/_pubs/<pub>/_ediciones/<dictado>/` | `dictado.yml` | `./scripts/publish-session.sh` + `./scripts/publish-web.sh --aplicar` (hardlinks) |
 
@@ -64,7 +64,7 @@ Si el cambio afecta a los apuntes de estudio, pasa además por la checklist de p
 
 El diseño se toca en `styles/` (identidad) o `classes/` (clase delgada), nunca en un documento ni en
 una plantilla. Después: compilar **un deck, una evaluación y un sílabo** y mirarlos; si el cambio
-afecta al color, hacerlo en `sistema-editorial` y espejarlo, no editar `config/palette.tex`.
+afecta al color, hacerlo en `estilos-visuales` y espejarlo, no editar `config/palette.tex`.
 Un parámetro nuevo del docente va a `config/course.yml` (YAML plano), nunca al código de `scripts/lib/`.
 
 ## 5. Ciclo de vida de un documento de este repo

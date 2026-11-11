@@ -40,5 +40,5 @@ Para ver el efecto de un cambio: compilar **un deck, una evaluación y un sílab
 - **Los bloques son deliberadamente distintos según el medio**: en texto van sin caja, líneas ni
   iconos (lavado `fondobloque`, rótulo en versalitas); en Beamer conservan caja, filete e icono.
 - **Aquí no se decide el color**: los valores están en `config/palette.tex`, generado desde
-  `sistema-editorial/temas/docencia.yml`.
+  `estilos-visuales/temas/docencia.yml`.
 - **Solo LuaLaTeX.** `fontspec` y `unicode-math` no funcionan bajo pdfLaTeX y no se van a condicionar.

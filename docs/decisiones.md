@@ -51,10 +51,10 @@ exámenes, no descuido.
 **Decidido (2026-09-15, M7): el tema Beamer se llama `academic`, en minúsculas.**
 
 **Decidido (2026-09-20, Fase 6 del sistema de diseño): el color sale del repo.**
-`config/palette.tex` es un espejo generado desde `sistema-editorial/temas/docencia.yml`; los once
+`config/palette.tex` es un espejo generado desde `estilos-visuales/temas/docencia.yml`; los once
 nombres `academic*` conservan valores y modelo, de modo que ningún examen cambió. `\academicbn` (la
 salida en gris) la define el generado y la invocan las tres clases con `bn`/`salida=bn`. Contrato en
-`sistema-editorial/docs/consumidores.md` §2.
+`estilos-visuales/docs/consumidores.md` §2.
 
 ## Estándar de docencia
 
