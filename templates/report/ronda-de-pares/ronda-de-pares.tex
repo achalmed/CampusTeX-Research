@@ -1,0 +1,202 @@
+% ============================================================================
+% templates/report/ronda-de-pares/ronda-de-pares.tex: plantilla, ronda de pares
+% ----------------------------------------------------------------------------
+% Guía de la revisión anónima entre estudiantes: por qué, cómo se anonimiza,
+% deberes del revisor, un comentario bueno y uno malo, y referencias; después,
+% para imprimir, el formulario del revisor y la respuesta del autor, cada uno
+% en su página. SIN diseño: lo pone academic-report.
+% La tabla código ↔ estudiante NUNCA va aquí: vive en el registro del docente.
+% Uso: scripts/build.sh ronda-de-pares.tex   (LuaLaTeX)
+% ============================================================================
+\documentclass{academic-report}
+\tipodocumento{Ronda de pares}
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\escuela{Escuela Profesional de Economía}
+\curso{Nombre del curso}\docente{Edison Achalma B.Sc. Econ.}\periodo{2026-I}
+\titulodocumento{Guía de la revisión anónima entre estudiantes}
+
+\begin{document}
+\encabezado
+
+\section*{Por qué}
+Revisar el trabajo de un compañero con una rúbrica, y recibir su revisión, mejora el rendimiento
+académico. Un metaanálisis de 54 estudios con grupo de control encontró un efecto pequeño a
+mediano frente a no tener evaluación ($g = 0{,}31$) y frente a la sola evaluación del docente
+($g = 0{,}28$); frente a la autoevaluación, la diferencia no fue significativa (Double et~al.,
+2020). La ronda es anónima en las dos direcciones para que el comentario se juzgue por lo que
+dice y no por quién lo escribe, y sus deberes siguen las pautas éticas para revisores de COPE
+Council (2017).
+
+\noindent\textbf{Fuente:} Double et~al. (2020); COPE Council (2017).
+
+\section*{Cómo se anonimiza}
+\begin{enumerate}
+  \item El autor entrega su trabajo sin nombre: ni en la portada, ni en el encabezado, ni en las
+        propiedades del archivo. El docente lo devuelve si lo encuentra.
+  \item El docente asigna a cada trabajo un código de autor (por ejemplo, A-07) y a cada
+        estudiante un código de revisor (por ejemplo, R-12), al azar y distintos entre sí.
+  \item \textbf{La tabla código ↔ estudiante vive solo en el registro privado del docente.}
+        Nunca se escribe en este documento, en el aula virtual ni en el nombre de un archivo.
+  \item Cada trabajo recibe dos revisores; nadie revisa el suyo. El docente reparte los
+        trabajos por código y recibe las revisiones por código.
+  \item El autor recibe las revisiones con el código del revisor, nunca con su nombre.
+\end{enumerate}
+
+\section*{Deberes del revisor}
+Inspirados en las pautas de COPE Council (2017); el último aplica al curso el deber de
+confidencialidad.
+\begin{description}
+  \item[Confidencialidad.] El trabajo ajeno no se comparte, no se copia y no se usa en el
+        propio. Lo leído en la ronda se queda en la ronda.
+  \item[Competencia.] Si un criterio escapa a lo que sabes, dilo en tu comentario en vez de
+        opinar como si lo dominaras.
+  \item[Conflicto de intereses.] Si reconoces al autor (por el tema, el estilo o porque te lo
+        contó), avisa al docente antes de revisar; él reasigna el trabajo.
+  \item[Tono constructivo.] Se comenta el texto, no a la persona. Cada observación dice dónde
+        está el problema, qué criterio de la rúbrica toca y cómo se arreglaría.
+  \item[Sin inteligencia artificial.] No uses herramientas de IA para revisar el trabajo ajeno ni
+        subas el trabajo a ellas: el autor no lo autorizó y la revisión debe ser tuya.
+  \item[Plazo.] Entrega en la fecha fijada; si no podrás, avisa al docente cuanto antes.
+\end{description}
+
+% --------------------------------------------------------------- ejemplo ---
+\section*{Ejemplo: un comentario bueno y uno malo}
+El trabajo A-07 es un informe de replicación de la tasa de pobreza monetaria de 2019 con la
+ENAHO. Su cuadro 2 da 17,2\,\%; la cifra oficial es 20,2\,\% (INEI, 2026, p.~72).
+
+\begin{ejemplo}[Comentario bueno]
+\textbf{Criterio:} Uso de evidencia. \textbf{Dónde:} sección 3, cuadro 2.
+La tasa replicada (17,2\,\%) queda 3 puntos por debajo de la oficial (20,2\,\%). El código
+calcula la proporción de hogares pobres sin el factor de expansión, y la cifra
+oficial es de personas. Sugerencia: ponderar por \texttt{factor07} $\times$ \texttt{mieperho}, declarar
+el diseño (\texttt{svyset conglome [pw=factor07], strata(estrato)}) y, si aún queda
+diferencia, explicarla en el texto. ¿Usaste la base \texttt{sumaria} de 2019 o la de otro año?
+\end{ejemplo}
+
+\begin{importante}[Comentario malo]
+“La tasa está mal y el informe es confuso. Como siempre, te faltó revisar. Rehazlo todo.”
+
+No dice qué criterio toca, ni dónde está el problema, ni cómo se arregla; juzga a la persona y
+no al texto, y “como siempre” delata que el revisor cree saber quién es el autor: debió
+declararlo al docente.
+\end{importante}
+
+
+\section*{Referencias}
+{\setlength{\parindent}{0pt}
+\hangindent=1.27cm\hangafter=1
+COPE Council. (2017). \textit{COPE ethical guidelines for peer reviewers} (versión 2).
+\url{https://doi.org/10.24318/cope.2019.1.9}\par
+\hangindent=1.27cm\hangafter=1
+Double, K. S., McGrane, J. A., y Hopfenbeck, T. N. (2020). The impact of peer assessment on
+academic performance: A meta-analysis of control group studies. \textit{Educational Psychology
+Review, 32}(2), 481–509. \url{https://doi.org/10.1007/s10648-019-09510-3}\par
+\hangindent=1.27cm\hangafter=1
+Instituto Nacional de Estadística e Informática. (2026). \textit{Perú: Evolución de la pobreza
+monetaria 2016-2025. Informe técnico}. INEI.\par}
+
+
+% ----------------------------------------------------- formulario revisor ---
+\newpage
+\section*{Formulario del revisor}
+\noindent
+\begin{tabularx}{\linewidth}{|X|X|X|}
+\hline
+\textbf{Código del trabajo:} & \textbf{Código del revisor:} & \textbf{Fecha:} \\[0.5em]
+\hline
+\end{tabularx}
+
+\vspace{0.5em}\noindent
+\textbf{Conflicto de intereses.}\quad
+$\mdlgwhtsquare$ No reconozco al autor.\quad
+$\mdlgwhtsquare$ Lo reconozco y avisé al docente.
+
+\vspace{0.5em}\noindent
+\begin{tabularx}{\linewidth}{|X|}
+\hline
+\textbf{Fortalezas} (dos o tres, concretas) \\
+\rule[-1.8cm]{0pt}{1.8cm} \\
+\hline
+\end{tabularx}
+
+\vspace{0.5em}\noindent
+\textbf{Tres comentarios priorizados} (el primero, el que más mejora el trabajo)
+
+\noindent
+\begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash}p{0.22\linewidth}|p{0.14\linewidth}|X|}
+\hline
+\textbf{N.º} & \textbf{Criterio de la rúbrica} & \textbf{Dónde} & \textbf{Comentario y sugerencia} \\
+\hline
+1 & & & \rule[-1.8cm]{0pt}{1.8cm} \\
+\hline
+2 & & & \rule[-1.8cm]{0pt}{1.8cm} \\
+\hline
+3 & & & \rule[-1.8cm]{0pt}{1.8cm} \\
+\hline
+\end{tabularx}
+
+\vspace{0.5em}\noindent
+\begin{tabularx}{\linewidth}{|X|}
+\hline
+\textbf{Una pregunta al autor} \\
+\rule[-1.1cm]{0pt}{1.1cm} \\
+\hline
+\end{tabularx}
+
+\vspace{0.5em}\noindent
+\textbf{Puntaje tentativo por criterio} (el puntaje final lo pone el docente)
+
+\noindent
+\begin{tabularx}{\linewidth}{|l|c|c|X|}
+\hline
+\textbf{Criterio} & \textbf{Máx.} & \textbf{Tentativo} & \textbf{Razón en una línea} \\
+\hline
+Dominio conceptual  & 5 & & \\[0.6em]
+\hline
+Argumentación       & 5 & & \\[0.6em]
+\hline
+Uso de evidencia    & 5 & & \\[0.6em]
+\hline
+Redacción y formato & 5 & & \\[0.6em]
+\hline
+\textbf{Total}      & \textbf{20} & & \\[0.6em]
+\hline
+\end{tabularx}
+\notatabla{Los criterios son los de la rúbrica del producto; si la rúbrica cambia, cambian aquí.}
+
+\vspace{0.3em}\noindent
+$\mdlgwhtsquare$ Revisé este trabajo sin herramientas de inteligencia artificial y no lo compartí con nadie.
+
+% ---------------------------------------------------- respuesta del autor ---
+\newpage
+\section*{Respuesta del autor}
+Por cada comentario, qué cambiaste y dónde; si no cambiaste algo, por qué. No hace falta aceptar
+todo: hace falta responder todo.
+
+\vspace{0.3em}\noindent
+\begin{tabularx}{\linewidth}{|X|X|}
+\hline
+\textbf{Código del trabajo:} & \textbf{Fecha:} \\[0.5em]
+\hline
+\end{tabularx}
+
+\vspace{0.5em}\noindent
+\begin{tabularx}{\linewidth}{|p{0.16\linewidth}|c|X|X|}
+\hline
+\textbf{Revisor y N.º} & \textbf{¿Cambió?} & \textbf{Qué cambió y dónde} & \textbf{Por qué no cambió} \\
+\hline
+ & $\mdlgwhtsquare$ Sí\ \ $\mdlgwhtsquare$ No & & \rule[-2.3cm]{0pt}{2.3cm} \\
+\hline
+ & $\mdlgwhtsquare$ Sí\ \ $\mdlgwhtsquare$ No & & \rule[-2.3cm]{0pt}{2.3cm} \\
+\hline
+ & $\mdlgwhtsquare$ Sí\ \ $\mdlgwhtsquare$ No & & \rule[-2.3cm]{0pt}{2.3cm} \\
+\hline
+ & $\mdlgwhtsquare$ Sí\ \ $\mdlgwhtsquare$ No & & \rule[-2.3cm]{0pt}{2.3cm} \\
+\hline
+ & $\mdlgwhtsquare$ Sí\ \ $\mdlgwhtsquare$ No & & \rule[-2.3cm]{0pt}{2.3cm} \\
+\hline
+ & $\mdlgwhtsquare$ Sí\ \ $\mdlgwhtsquare$ No & & \rule[-2.3cm]{0pt}{2.3cm} \\
+\hline
+\end{tabularx}
+
+\end{document}

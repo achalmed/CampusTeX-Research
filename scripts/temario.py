@@ -340,6 +340,27 @@ def render_readme_borrador(t: dict) -> str:
     return "\n".join(out)
 
 
+def seccion_alineamiento(t: dict) -> list[str]:
+    """Resultados y evaluaciones del curso (estándar §10); la matriz con las sesiones la imprime alineamiento.py."""
+    al = t.get("alineamiento")
+    if not al:
+        return []
+    out = ["## Alineamiento", ""]
+    if al.get("alcance"):
+        out += [f"Alcance: {al['alcance']}.", ""]
+    out += ["**Resultados de aprendizaje**", ""]
+    out += [f"- `{r['id']}` {r['enunciado']}" + (f" (SOLO: {r['nivel'].replace('_', ' ')})" if r.get("nivel") else "")
+            for r in al.get("resultados") or []]
+    out += ["", "**Evaluaciones**", ""]
+    for e in al.get("evaluaciones") or []:
+        peso = f", {e['peso']} %" if e.get("peso") else ""
+        out.append(f"- {e['titulo']} ({e['tipo']}{peso}; IA: {e.get('politica_ia', '?')}) → "
+                   + ", ".join(f"`{x}`" for x in e.get("resultados") or []))
+    out += ["", f"Matriz con sesiones: `python3 scripts/alineamiento.py matriz {t['id']}`; anexo del sílabo: "
+            "`01-diseno/alineamiento/alineamiento.tex`. Por qué · " + al.get("fuente", "Biggs (1996)"), ""]
+    return out
+
+
 def render_readme(t: dict) -> str:
     if not t.get("unidades"):
         return render_readme_borrador(t)
@@ -363,6 +384,7 @@ def render_readme(t: dict) -> str:
         for tema in u["temas"]:
             out.append(f"- `{tema['id']}` {tema['titulo']}")
         out.append("")
+    out += seccion_alineamiento(t)
     out += seccion_recursos(t)
     out += seccion_bibliografia_y_ajeno(t)
     out += ["## Metadata de cada archivo", "",

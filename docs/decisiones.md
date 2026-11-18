@@ -80,6 +80,29 @@ universidades) de lo propio y el autor elige la licencia.
 El legado sin clasificar pasó al archivo del vault (`archivo/2026-09-20-docencia-inbox/`); nada
 se cita desde allí. Regla vigente: lo que llegue fuera del estándar se clasifica o sale al archivo.
 
+**Decidido (2026-11-18): el curso verifica su alineamiento, y rúbricas, bancos y política de IA son objetos del curso.**
+La norma `prompts/00 metodo/FLUJO_DE_CONOCIMIENTO.md` (campo 10) pide que el estándar de curso verifique el
+alineamiento (Biggs, 1996; Wiggins y McTighe, 2005). Se decidió (estándar §10):
+
+- **La actividad es la sesión.** No se crea una lista de actividades aparte: `sesion.yml` ya tenía
+  `resultados_aprendizaje`; en un curso alineado lleva los `id` de `curso.yml`. Una sola fuente de verdad.
+- **Un verificador en Python, llamado por `validate.sh`** (`scripts/alineamiento.py`), como `areas.py`: el YAML
+  anidado no cabe en el `yaml_get` de `common.sh`. Errores y avisos llevan «por qué · fuente».
+- **Alcance declarado.** Un curso puede alinear solo la parte del temario que tiene sesiones escritas
+  (`alineamiento.alcance`); así el verificador es estricto sin inventar sesiones vacías (regla «sin esqueletos»).
+- **Rúbricas en el formato común con escritura.** Mientras `escritura/config/entrega/rubrica.schema.yml` no exista,
+  se usa su reserva `{titulo, fuente, criterios: [{clave, nombre, peso, niveles: [{puntaje, descriptor}]}]}`, con
+  `id`, `escala` y `resultado` como extensiones. Cuando escritura publique el esquema, se valida contra él.
+- **Repaso a 1, 2, 4 y 8 sesiones.** El beneficio del espaciado es de Cepeda et al. (2006); las distancias son
+  decisión de diseño, revisable con los datos de la prueba antes y después.
+- **Vocabulario de IA en cuatro niveles** (`prohibida`, `apoyo`, `asistida`, `libre`): decisión propia sobre los
+  principios de transparencia y responsabilidad de Comisión Europea (2025) y CONCYTEC (2024); ninguna de las dos
+  fija niveles.
+- **Tablas partidas por fila.** La clase no carga `longtable`; el generador apila un `tabularx` por fila para que la
+  matriz y las rúbricas puedan cortar página sin añadir paquetes.
+- **Los datos de la unidad aplicada salen de datafw** (`core/env.py` → `DATAFW_DIR`, y su estimador con diseño `datafw/metodos/encuestas/diseno.py`):
+  la réplica de la pobreza 2019 y 2024 coincide al decimal con el INEI (Calibre 10192, pp. 67–69).
+
 ## Currículo y publicación
 
 **Decidido (2026-09-06, F5.0): aquí solo hay docencia propia.** Los cursos que el autor toma y sus

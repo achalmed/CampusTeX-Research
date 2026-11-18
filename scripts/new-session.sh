@@ -3,31 +3,35 @@
 # new-session.sh — Crea una sesión en un curso (§4.3, M5)
 # ============================================================
 # Uso:
-#   ./scripts/new-session.sh CURSO NN "TÍTULO" [--tipo clase|laboratorio|taller|evaluacion] [--quarto] [--artefacto NOMBRE]
+#   ./scripts/new-session.sh CURSO NN "TÍTULO" [--tipo clase|laboratorio|taller|evaluacion] [--quarto] [--artefacto NOMBRE] [--activo]
 #
 # Ejemplos:
 #   ./scripts/new-session.sh econometria-i 07 "Series temporales"                 # clase → deck.tex (Beamer)
 #   ./scripts/new-session.sh econometria-i 08 "Panel" --tipo laboratorio          # → cuaderno.ipynb
 #   ./scripts/new-session.sh excel 21 "Tablas dinámicas" --tipo taller --artefacto tablas.ods
+#   ./scripts/new-session.sh econometria-i 04 "Heterocedasticidad" --activo      # aprendizaje activo (§10.4)
 #
 # Crea docencia/cursos/<curso>/03-sesiones/sNN-<slug>/ con sesion.yml, guion.md y el artefacto del tipo
 # (clase: deck.tex o deck.qmd con --quarto, con el logo al lado; laboratorio: cuaderno.ipynb; evaluacion:
 # evaluacion.tex de academic-exam; taller: el .ods/.xlsx lo creas tú — se declara y el validador lo exige).
 # Sin subcarpetas de anatomía: el arco antes/durante/después vive en guion.md.
+# --activo: declara `dinamica: aprendizaje_activo` y usa el guion de tres fases (problema, trabajo en parejas,
+# puesta en común; scaffolds/sesion/guion-activo.md); validate.sh exige las tres fases.
 # ============================================================
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
 
-usage() { sed -n '2,17p' "${BASH_SOURCE[0]}"; exit 1; }
+usage() { sed -n '2,20p' "${BASH_SOURCE[0]}"; exit 1; }
 [[ $# -ge 3 ]] || usage
 COURSE="$(course_dir "$1")" || die "No es un curso (falta curso.yml): $1"
 NUM="$(printf '%02d' "$((10#$2))")"; TITLE="$3"; shift 3
-TIPO="clase"; QUARTO=0; ART=""
+TIPO="clase"; QUARTO=0; ART=""; ACTIVO=0
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --tipo) TIPO="$2"; shift 2 ;;
     --quarto) QUARTO=1; shift ;;
     --artefacto) ART="$2"; shift 2 ;;
+    --activo) ACTIVO=1; shift ;;
     *) usage ;;
   esac
 done
@@ -60,7 +64,12 @@ render() {  # render PLANTILLA DESTINO
       -e "s|{{LEVEL}}|$(config_get nivel pregrado)|g" "$1" > "$2"
 }
 render "$SCAFFOLDS_DIR/sesion/sesion.yml" "$DEST/sesion.yml"
-render "$SCAFFOLDS_DIR/sesion/guion.md" "$DEST/guion.md"
+if [[ "$ACTIVO" -eq 1 ]]; then
+  render "$SCAFFOLDS_DIR/sesion/guion-activo.md" "$DEST/guion.md"
+  sed -i -E "0,/^tipo: /s//dinamica: aprendizaje_activo   # problema, trabajo en parejas, puesta en común (§10.4)\ntipo: /" "$DEST/sesion.yml"
+else
+  render "$SCAFFOLDS_DIR/sesion/guion.md" "$DEST/guion.md"
+fi
 case "$TIPO" in
   clase)
     if [[ "$ART" == *.qmd ]]; then render "$SCAFFOLDS_DIR/sesion/deck.qmd" "$DEST/$ART"; else render "$SCAFFOLDS_DIR/sesion/deck.tex" "$DEST/$ART"; fi

@@ -22,10 +22,15 @@ Cada plantilla es un `.tex` que solo declara `\documentclass{academic-*}` y estr
 |---|---|---|
 | `exam/` | evaluaciones (`academic-exam`), una carpeta por tipo con su `.tex` | 12: `banco-de-preguntas`, `caso-estudio`, `control-de-lectura`, `examen-desarrollo`, `examen-objetivo`, `examen-oral`, `examen-problemas`, `laboratorio`, `practica-calificada`, `practica-dirigida`, `solucionario`, `tarea` |
 | `presentation/` | diapositivas (`academic-beamer`) | 8: `clase`, `conferencia`, `defensa-tesis`, `institucional`, `masterclass`, `ponencia`, `seminario`, `workshop` |
-| `report/` | documentos de gestión docente (`academic-report`) | 4: `silabo`, `calendario`, `nota-docente`, `rubrica` |
+| `report/` | documentos de gestión docente (`academic-report`) | 7: `silabo`, `calendario`, `nota-docente`, `rubrica`, `cornell` (hoja de apuntes, también en `.md` para la web), `ronda-de-pares` (guía y formularios), `prueba-de-comprension` (exposiciones) |
 
 La lista de tipos de evaluación y sus siglas es normativa y vive en `docs/estandar-evaluaciones.md`;
 aquí solo está su plantilla.
+
+Las rúbricas de un curso concreto no se copian de `report/rubrica/`: se declaran en YAML en la carpeta
+01-diseno/rubricas del curso (ejemplo: `contenido/cursos/econometria-i/01-diseno/rubricas/`) y su tabla la genera `scripts/alineamiento.py` (`docs/estandar-docencia.md` §10.3). Las
+plantillas `cornell`, `ronda-de-pares` y `prueba-de-comprension` citan su fuente (norma FLUJO_DE_CONOCIMIENTO,
+mejoras C3.5, C11.3 y C9.4).
 
 ## Límite honesto
 

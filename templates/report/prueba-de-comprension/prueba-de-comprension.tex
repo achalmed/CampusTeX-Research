@@ -1,0 +1,201 @@
+% ============================================================================
+% templates/report/prueba-de-comprension/prueba-de-comprension.tex: plantilla,
+% prueba de comprensión de la audiencia tras una exposición de estudiantes
+% ----------------------------------------------------------------------------
+% Por qué, instrucciones al expositor y criterio de la rúbrica; después, cada
+% una en su página para imprimir, la hoja del expositor y la de la audiencia; al
+% final, el conteo del docente, un ejemplo completo y las referencias. SIN diseño:
+% lo pone academic-report.
+% Uso: scripts/build.sh prueba-de-comprension.tex   (LuaLaTeX)
+% ============================================================================
+\documentclass{academic-report}
+\tipodocumento{Prueba de comprensión}
+\universidad{Universidad Nacional de San Cristóbal de Huamanga}
+\escuela{Escuela Profesional de Economía}
+\curso{Nombre del curso}\docente{Edison Achalma B.Sc. Econ.}\periodo{2026-I}
+\titulodocumento{Lo que la audiencia entendió de una exposición}
+
+\begin{document}
+\encabezado
+
+\section*{Por qué}
+Una exposición se juzga por lo que la audiencia entendió, no por lo que el expositor dijo. Así
+se midió en el estudio de Garner y Alley (2013): con 110 estudiantes de ingeniería, las
+respuestas escritas de quienes vieron láminas de aserción y evidencia mostraron mejor
+comprensión y menos concepciones erróneas que las de quienes vieron láminas con los formatos
+por defecto (p.~1564). Además, responder preguntas tras estudiar retiene más que volver a
+estudiar cuando se mide a los dos días o a la semana (Roediger y Karpicke, 2006): la prueba
+mide al expositor y, de paso, hace aprender a la audiencia.
+
+\noindent\textbf{Fuente:} Garner y Alley (2013); Roediger y Karpicke (2006).
+
+\section*{Instrucciones al expositor}
+\begin{enumerate}
+  \item Antes de exponer, escribe tu \textbf{mensaje central} en una oración y \textbf{dos o tres
+        preguntas} sobre él, con su respuesta esperada y qué se acepta como correcto. Entrégalas
+        al docente antes de la sesión; la audiencia no las ve hasta el final.
+  \item Cada pregunta pide una idea de tu mensaje, no un detalle de una lámina. Respuesta breve:
+        una cifra, una palabra o una oración.
+  \item Al terminar, el docente apaga el proyector y reparte la hoja de la audiencia. Se responde
+        en tres minutos, sin láminas a la vista y sin apuntes.
+  \item La hoja de la audiencia no lleva nombre: mide la exposición, no a quien responde.
+  \item El docente cuenta los aciertos y te entrega el porcentaje por pregunta. Una pregunta que
+        resultó ambigua se descarta antes de contar, y se dice.
+\end{enumerate}
+
+\section*{Cómo entra en la rúbrica de exposiciones}
+El promedio de aciertos es el criterio \textbf{Comprensión de la audiencia} de la rúbrica de
+exposiciones. Los puntos de cada nivel los fija la rúbrica del curso.
+
+\noindent
+\begin{tabularx}{\linewidth}{@{}l c X c@{}}
+\toprule
+\textbf{Nivel} & \textbf{Aciertos} & \textbf{Qué significa} & \textbf{Pts.} \\\midrule
+Destacado  & 75\,\% o más    & La audiencia se lleva el mensaje central y sabe explicarlo. & \\
+Logrado    & 50 a 74\,\%     & Se lleva el dato, pero no siempre el porqué.                & \\
+En proceso & 25 a 49\,\%     & Se lleva fragmentos; el mensaje central no quedó claro.     & \\
+En inicio  & menos de 25\,\% & El mensaje no llegó: revisar estructura y láminas.          & \\
+\bottomrule
+\end{tabularx}
+
+
+% ------------------------------------------------------ hoja del expositor ---
+\newpage
+\section*{Hoja del expositor}
+Se entrega al docente antes de la sesión; la audiencia no la ve.
+
+\vspace{0.3em}
+\noindent
+\begin{tabularx}{\linewidth}{|X|X|X|}
+\hline
+\textbf{Expositor (código):} & \textbf{Título:} & \textbf{Fecha:} \\[0.5em]
+\hline
+\multicolumn{3}{|l|}{\textbf{Mensaje central} (una oración):} \\[1.6em]
+\hline
+\end{tabularx}
+
+\vspace{0.4em}\noindent
+\begin{tabularx}{\linewidth}{|c|X|X|X|}
+\hline
+\textbf{N.º} & \textbf{Pregunta} & \textbf{Respuesta esperada} & \textbf{Se acepta si\ldots} \\
+\hline
+1 & & & \rule[-4.2cm]{0pt}{4.2cm} \\
+\hline
+2 & & & \rule[-4.2cm]{0pt}{4.2cm} \\
+\hline
+3 & & & \rule[-4.2cm]{0pt}{4.2cm} \\
+\hline
+\end{tabularx}
+
+% ---------------------------------------------------- hoja de la audiencia ---
+\newpage
+\section*{Hoja de la audiencia}
+Sin nombre. Responde sin mirar láminas ni apuntes; si no sabes, déjalo en blanco.
+
+\vspace{0.3em}\noindent
+\begin{tabularx}{\linewidth}{|X|X|}
+\hline
+\textbf{Exposición:} & \textbf{Fecha:} \\[0.5em]
+\hline
+\end{tabularx}
+
+\vspace{0.5em}\noindent
+\begin{tabularx}{\linewidth}{|c|X|}
+\hline
+\textbf{N.º} & \textbf{Pregunta y tu respuesta} \\
+\hline
+1 & \rule[-5.4cm]{0pt}{5.4cm} \\
+\hline
+2 & \rule[-5.4cm]{0pt}{5.4cm} \\
+\hline
+3 & \rule[-5.4cm]{0pt}{5.4cm} \\
+\hline
+\end{tabularx}
+
+% ------------------------------------------------------- conteo del docente ---
+\newpage
+\section*{Conteo del docente}
+\noindent
+\begin{tabularx}{\linewidth}{|X|X|X|}
+\hline
+\textbf{Exposición:} & \textbf{Hojas recibidas ($n$):} & \textbf{Fecha:} \\[0.5em]
+\hline
+\end{tabularx}
+
+\vspace{0.4em}\noindent
+\begin{tabularx}{\linewidth}{|c|Y|Y|Y|X|}
+\hline
+\textbf{N.º} & \textbf{Respuestas} & \textbf{Aciertos} & \textbf{\% de aciertos} & \textbf{Observación} \\
+\hline
+1 & & & & \\[0.6em]
+\hline
+2 & & & & \\[0.6em]
+\hline
+3 & & & & \\[0.6em]
+\hline
+\multicolumn{3}{|r|}{\textbf{Promedio de las preguntas}} & & \\[0.6em]
+\hline
+\end{tabularx}
+\notatabla{\% de aciertos = aciertos / hojas recibidas × 100; una hoja en blanco en una
+pregunta cuenta como respuesta no acertada. El promedio es simple entre las preguntas que no se
+descartaron.}
+
+% --------------------------------------------------------------- ejemplo ---
+\section*{Ejemplo completo}
+Exposición de 5 minutos: \textit{¿Por qué la pobreza de 2024 (27,6\,\%) sigue por encima de la
+de 2019 (20,2\,\%)?}
+
+\textbf{Mensaje central.} La pobreza monetaria de 2024 sigue 7,4 puntos por encima de la de 2019
+porque el gasto real por persona no volvió a su nivel previo a la pandemia: 903 soles al mes en
+2024 frente a 999 en 2019, a precios de 2025 (INEI, 2026, pp.~24, 72). Como pobre es quien gasta
+menos que la línea de pobreza, el costo de una canasta básica de alimentos y de otros bienes y
+servicios (INEI, 2026, p.~11), menos gasto real significa más personas bajo la línea.
+
+\noindent
+\begin{tabularx}{\linewidth}{@{}c >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.22\linewidth} >{\raggedright\arraybackslash}p{0.2\linewidth}@{}}
+\toprule
+\textbf{N.º} & \textbf{Pregunta} & \textbf{Respuesta esperada} & \textbf{Se acepta si\ldots} \\\midrule
+1 & ¿Cuántos puntos porcentuales separan la pobreza de 2024 de la de 2019?
+  & 7,4 (27,6 menos 20,2). & da entre 7 y 7,5. \\\addlinespace
+2 & Según la exposición, ¿qué no ha vuelto a su nivel de 2019 y explica la diferencia?
+  & El gasto real por persona. & dice gasto o ingreso real de los hogares. \\\addlinespace
+3 & ¿Con qué se compara el gasto de una persona para decir que es pobre?
+  & Con la línea de pobreza (el costo de una canasta básica). & nombra la línea o la canasta. \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.6em}\noindent
+\textbf{Conteo} (datos ilustrativos, 30 hojas recibidas):
+
+\noindent
+\begin{tabularx}{\linewidth}{@{}c c c c X@{}}
+\toprule
+\textbf{N.º} & \textbf{Respuestas} & \textbf{Aciertos} & \textbf{\% de aciertos} & \textbf{Observación} \\\midrule
+1 & 30 & 24 & 80\,\% & El dato llegó. \\
+2 & 30 & 18 & 60\,\% & Varios responden “la pandemia”, no el gasto. \\
+3 & 30 & 12 & 40\,\% & La línea de pobreza se explicó en una lámina recargada. \\\midrule
+\multicolumn{3}{@{}r}{\textbf{Promedio de las preguntas}} & \textbf{60\,\%} & Nivel aceptable. \\
+\bottomrule
+\end{tabularx}
+\notatabla{Cifras de pobreza y gasto: INEI (2026, pp.~24, 72). El conteo es un ejemplo, no un
+resultado real.}
+
+\textbf{Devolución al expositor.} La audiencia retuvo la cifra, pero no el mecanismo. Para la
+próxima, una lámina cuyo titular sea la aserción (“Menos gasto real, más personas bajo la línea”)
+y como evidencia el gráfico del gasto de 2019 a 2024.
+
+\section*{Referencias}
+{\setlength{\parindent}{0pt}
+\hangindent=1.27cm\hangafter=1
+Garner, J. K., y Alley, M. (2013). How the design of presentation slides affects audience
+comprehension: A case for the assertion-evidence approach. \textit{International Journal of
+Engineering Education, 29}(6), 1564–1579.\par
+\hangindent=1.27cm\hangafter=1
+Instituto Nacional de Estadística e Informática. (2026). \textit{Perú: Evolución de la pobreza
+monetaria 2016-2025. Informe técnico}. INEI.\par
+\hangindent=1.27cm\hangafter=1
+Roediger, H. L., III, y Karpicke, J. D. (2006). Test-enhanced learning: Taking memory tests
+improves long-term retention. \textit{Psychological Science, 17}(3), 249–255.
+\url{https://doi.org/10.1111/j.1467-9280.2006.01693.x}\par}
+
+\end{document}

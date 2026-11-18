@@ -21,6 +21,7 @@ Bitácora de la ola 5 (etiqueta `antes-ola-05-2026-10-06` en este repo y en `doc
 - 2026-10-06 · D2 · (en `docencia`) los scripts de los exámenes y `code_sesion_02.r` sin rutas absolutas: `NOTES_DIR` de `core/env` o la carpeta del script, con «Falta el dato» donde el origen ya no existe.
 - 2026-10-06 · D3 · (en `docencia`) los dos `slides.tex` pdflatex/xelatex pasan a LuaLaTeX y compilan; `yaac-xelatex.cls` retirado. `README.md` y `CLAUDE.md` ya no dicen que haya decks que pidan XeLaTeX.
 - 2026-10-06 · D4 · `simuladores/macro/modelos/nivel_12/_datos_bcrp.py` y `simuladores/CLAUDE.md` usan `DATAFW_DIR`, no `ANALYSIS_DIR` (el lector resuelve `datafw/data/raw/bcrp` y `metodos/series/lectores.py`); en `docencia`, los tres exámenes de econometría II. `grep` de los tres alias = 0 en el código de ambos repos (quedan en la prosa de §Futuro).
+- 2026-11-18 · F10 · Estándar §10: `scripts/alineamiento.py` (matriz de alineamiento verificada, rúbricas, bancos de recuperación, política de IA, sesión activa, prueba antes y después) en `validate.sh`; aplicado a `econometria-i` (s01 a s03 con la ENAHO, réplica 6 de 6 al decimal del INEI); plantillas `cornell`, `ronda-de-pares` y `prueba-de-comprension`; en `seminario-de-investigacion`, la guía de tesis UNSCH y tres talleres.
 
 ## En curso
 
@@ -36,6 +37,10 @@ nada en curso
 - 2026-10-20 · dueño: director · los `archivo:` de los recursos `{tipo: simulador}` de ocho `curso.yml` (29 rutas) aún dicen `docencia/simuladores/…`: pasarlos a `simuladores/…` y regenerar los README (`temario-generar.sh`); mientras, `enlazar.py` los traduce (`RUTA_VIEJA_LAB`). Los dos pendientes de la campaña SIMULADORES pasaron a `simuladores/estado.md`.
 - 2026-10-04 · dueño: el autor · `scripts/new-evaluacion.sh` escribe las siglas `lab`, `eo` y `tar` (laboratorio, examen oral, tarea) donde `docs/estandar-evaluaciones.md` §2 fija `lb`, `or` y `ta`, y solo crea las doce plantillas de `templates/exam/`: alinear el script con la tabla.
 - 2026-10-04 · dueño: el autor · `scaffolds/sesion/deck.tex` (el deck que crea `new-session.sh --tipo clase`) es un Beamer autocontenido con `\usetheme` de `config/course.yml` (`tema_beamer`), no `academic-beamer`: decidir si el scaffold pasa a la clase del framework.
+- 2026-11-18 · dueño: autor · Validar las rúbricas de `econometria-i` contra `escritura/config/entrega/rubrica.schema.yml` cuando escritura lo publique (hoy rige su formato de reserva; estándar §10.3).
+- 2026-11-18 · dueño: autor · Dictar la unidad aplicada de `econometria-i` (s01 a s03), tomar la prueba antes y después (`alineamiento.py pre-post`) y anotar los resultados por pregunta en `registro/` (C10.6); con ellos, revisar las distancias del repaso (1, 2, 4, 8).
+- 2026-11-18 · dueño: autor · Alinear el resto del temario de `econometria-i` (unidades 1 a 4) a medida que se escriban sus sesiones, y declarar `alineamiento` en `seminario-de-investigacion`.
+- 2026-11-18 · dueño: autor · Taller de reescritura (`seminario-de-investigacion/05-recursos/talleres/reescritura/`): sustituir los párrafos construidos por párrafos reales anonimizados de tesis (la norma los pide reales).
 
 ## Futuro
 

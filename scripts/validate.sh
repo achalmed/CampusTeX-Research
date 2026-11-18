@@ -16,6 +16,9 @@
 #     (clase: .tex/.qmd · laboratorio: .ipynb/.do/.py/.r/.rmd/.html · taller: .ods/.xlsx/.xlsm · evaluacion: .tex).
 #     Con `revisar:` en sesion.yml la incoherencia es aviso, no error.
 #   - Binarios > 5 MB: aviso (regla §7.6: datos en datafw, pesados fuera del repo).
+#   - Alineamiento (§10, scripts/alineamiento.py): si curso.yml declara `alineamiento`, todo resultado con su evaluación
+#     y su sesión, toda evaluación con su resultado, rúbricas, bancos de recuperación, política de IA y vistas al día;
+#     en todo curso, las sesiones con `dinamica: aprendizaje_activo` tienen sus tres fases en guion.md.
 # Dictado (contenido/dictados/<clave>/):
 #   - dictado.yml con id (= carpeta) · periodo · institucion · estado; `legado: true` exime de sesiones.
 #   - sesiones[]: cada {curso, sesion, web} apunta a un curso y una sesión existentes.
@@ -88,6 +91,15 @@ validate_course() {
   while IFS= read -r d; do warn "$name: binario > 5 MB (§7.6): ${d#"$course"/} ($(du -h "$d" | cut -f1))"; done \
     < <(find "$course" -type f -size +5M -not -path '*/publicacion/*')
   while IFS= read -r s; do [[ -n "$s" ]] && validate_session "$course" "$s"; done < <(list_sessions "$course")
+  if grep -q '^alineamiento:' "$cy" || grep -qs '^dinamica:' "$course"/03-sesiones/s[0-9][0-9]-*/sesion.yml; then
+    local linea
+    while IFS= read -r linea; do
+      case "$linea" in
+        "[XX]"*) err "${linea#\[XX\] }" ;;
+        "[!!]"*) warn "${linea#\[!!\] }" ;;
+      esac
+    done < <(python3 "$FW_DIR/scripts/alineamiento.py" verificar "$course")
+  fi
   while IFS= read -r d; do
     [[ "$(basename "$d")" =~ ^s[0-9]{2}- ]] || err "$name: en 03-sesiones/ solo caben sesiones sNN-<slug>: $(basename "$d")/"
   done < <(find "$course/03-sesiones" -mindepth 1 -maxdepth 1 -type d 2>/dev/null)

@@ -235,3 +235,81 @@ de qué.
 
 Un cambio en `curso.yml` (claves, `materia_web`, `dominio_fuat`) o en la lista cerrada de carpetas
 afecta a estos consumidores: se regeneran las vistas y se avisa al dueño del consumidor.
+
+## 10. Alineamiento, recuperación, rúbricas y uso de IA
+
+> Desde el 2026-11-18. Implementa el campo 10 (y C11.3, C12.4) de la norma
+> `prompts/00 metodo/FLUJO_DE_CONOCIMIENTO.md`; cada regla cita la obra que la funda, tal como está en su fundamento.
+> Lo verifica `scripts/alineamiento.py verificar`, que `validate.sh` llama en cada curso que declara `alineamiento:`
+> o tiene sesiones con `dinamica:`. Cada error lleva su línea «por qué · fuente». Aplicado en `econometria-i`.
+
+### 10.1 Matriz de alineamiento (`curso.yml` → `alineamiento`)
+
+Resultado → evidencia → actividad: cada **resultado** se evidencia en al menos una **evaluación** y se trabaja en al
+menos una **sesión**; cada evaluación declara los resultados que mide (Biggs, 1996; Wiggins y McTighe, 2005).
+
+```yaml
+alineamiento:
+  fuente: Biggs (1996); Wiggins y McTighe (2005)
+  alcance: <qué parte del temario cubre, si no es todo>
+  resultados:                   # nivel: taxonomía SOLO (uniestructural, multiestructural, relacional, abstracto_ampliado)
+  - {id: ra1, nivel: relacional, enunciado: …}
+  evaluaciones:                 # tipo: formativa | sumativa; las sumativas suman peso 100
+  - {id: ev-x, titulo: …, tipo: sumativa, peso: 40, resultados: [ra1], rubrica: 01-diseno/rubricas/x.yml,
+     consigna: 03-sesiones/sNN-…/consigna.tex, sesion: sNN-…, politica_ia: asistida}
+  evaluacion_curso: {resultados: [ra1, ra2], descripcion: …, fuente: …}   # §10.6
+```
+
+La **actividad** es la sesión: `sesion.yml` declara `resultados_aprendizaje: [ra1, …]` con los `id` del curso. Son
+error: un resultado sin evaluación o sin sesión, una evaluación sin resultado o con uno inexistente, pesos sumativos
+que no suman 100, una sesión con un resultado no declarado y un criterio de rúbrica que mide un resultado que su
+evaluación no declara. Una sumativa sin rúbrica (ni `instrumento: prueba`) y un resultado solo con evaluación
+formativa son aviso. La matriz se imprime con `alineamiento.py matriz CURSO [--formato md|tex]`.
+
+### 10.2 Banco de recuperación por sesión (`03-sesiones/sNN-…/recuperacion.yml`)
+
+`{sesion, fuente, preguntas: [{id, resultado, tipo: abierta|opcion|numerica, enunciado, opciones?, respuesta,
+explicacion?}]}`. Mínimo tres preguntas por sesión con resultados; `id` únicos en el curso; cada pregunta recupera
+un resultado declarado. `alineamiento.py banco CURSO sNN` arma el cuestionario de una clase: las preguntas de la
+sesión y un repaso intercalado de las sesiones a 1, 2, 4 y 8 de distancia (`--examen`: muestra de todas las
+anteriores). Se responde sin apuntes (Roediger y Karpicke, 2006); el espaciado multiplica el efecto (Cepeda et al.,
+2006). Las distancias exactas son decisión de diseño (`decisiones.md`), no de la obra.
+
+### 10.3 Rúbricas analíticas (`01-diseno/rubricas/<id>.yml`)
+
+Formato común con escritura (`escritura/config/entrega/rubrica.schema.yml`; mientras no exista, su reserva):
+`{titulo, fuente, criterios: [{clave, nombre, peso, niveles: [{puntaje, descriptor}]}]}`, más las extensiones
+`id`, `escala: [{puntaje, nombre}]` y `resultado` por criterio. Los pesos suman 100; cada criterio, dos o más niveles
+con puntaje numérico distinto y descriptor. La rúbrica se **publica con la consigna**: `generar` escribe la tabla
+`<id>.tex` (generada, no se edita) y la consigna la incluye con `\input`. `alineamiento.py calificar RUBRICA.yml
+PUNTAJES.csv` da la nota vigesimal (Σ peso × puntaje ÷ máximo) desde una tabla que vive en `registro/`. Las rúbricas
+ayudan cuando se comparten antes y se usan para formar (Jonsson y Svingby, 2007; Panadero y Jonsson, 2013).
+
+### 10.4 Sesión de aprendizaje activo (`dinamica: aprendizaje_activo`)
+
+En `sesion.yml`, con cualquier `tipo`. Su `guion.md` tiene `## Problema`, `## Trabajo en parejas` y
+`## Puesta en común`, cada uno con su tiempo `(NN min)` (sin tiempo, aviso). `new-session.sh … --activo` la crea
+desde `scaffolds/sesion/guion-activo.md` (Freeman et al., 2014; Allgood et al., 2015).
+
+### 10.5 Política de IA por curso y por evaluación
+
+`curso.yml` → `politica_ia: {regla, declaracion, datos, fuente}`; cada evaluación declara `politica_ia` de un
+vocabulario cerrado: `prohibida`, `apoyo` (ideas, dudas y lenguaje, declarado), `asistida` (código o borrador
+verificado, declarado) y `libre` (todo uso, declarado y verificado). Se imprime en el anexo del sílabo (Comisión
+Europea, 2025; CONCYTEC, 2024). Ningún dato de estudiantes ni de `registro/` va a una herramienta externa.
+
+### 10.6 Evaluación del propio curso
+
+`alineamiento.evaluacion_curso` elige dos o tres resultados clave, cada uno con al menos dos preguntas en los bancos;
+`alineamiento.py pre-post CURSO` imprime la prueba que se toma al iniciar y al cerrar. Los resultados por pregunta se
+anotan en `registro/<dictado>/`, nunca aquí (Black y Wiliam, 1998; Allgood et al., 2015).
+
+### 10.7 Vistas y plantillas
+
+`alineamiento.py generar CURSO [--aplicar]` (simula sin `--aplicar`) escribe el anexo del sílabo del curso
+(ejemplo: `contenido/cursos/econometria-i/01-diseno/alineamiento/alineamiento.tex`; anexo: matriz, evaluaciones con su política de IA, medición del curso y rúbricas) y la tabla `.tex` de
+cada rúbrica; `verificar` falla si una vista se desfasó. Plantillas del framework (`templates/report/`): `cornell`
+(C3.5), `ronda-de-pares` (C11.3), `prueba-de-comprension` (C9.4). Material de Metodología:
+`contenido/cursos/seminario-de-investigacion/01-diseno/guia-de-tesis/` (C7.5) y
+`contenido/cursos/seminario-de-investigacion/05-recursos/talleres/` (matrices comentadas C1.4, lectura lateral C2.6,
+reescritura C6.4).
