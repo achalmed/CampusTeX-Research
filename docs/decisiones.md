@@ -121,6 +121,19 @@ diapositiva (la consigna terminaba en `slides/`): ahora decide primero por el no
 preguntas se conozcan antes de la prueba de la unidad, que las reusa: se acepta porque el repaso es el fin del banco,
 y queda como pregunta al autor.
 
+**Decidido (2026-11-18, noche): el repaso fuera de clase es un mazo con la respuesta al reverso; el banco de la web
+sigue sin claves.** El banco se responde sin apuntes al comenzar la clase siguiente (Roediger y Karpicke, 2006), así
+que la página del curso en el aula y `evaluation/recuperacion.md` lo muestran sin respuesta. Para repasar después, con
+el espaciado que da el beneficio (Cepeda et al., 2006), una tarjeta sin reverso no sirve: `alineamiento.py mazo` pone
+la respuesta de la puesta en común al reverso y `publish-session.sh` lo publica con la sesión (`mazo.tsv`, en
+practice). Viajan solo los campos del estudiante (enunciado, opciones, respuesta, explicación); el formato por defecto
+es el TSV de Anki, con un identificador estable por pregunta (`<curso>:<id>`) para que reimportar actualice en lugar
+de duplicar, y las etiquetas jerárquicas `<curso>::sNN` y `<curso>::raN`. Agrava lo dicho arriba sobre la prueba de la
+unidad y la prueba antes y después: el estudiante tendrá las respuestas de las preguntas que volverán; queda como
+pregunta al autor. Las sesiones de laboratorio cuyo artefacto resuelve el ejercicio (`laboratorio.py`,
+`inferencia.py`) llevan una hoja del estudiante, `practica-laboratorio.tex`, con las cifras esperadas en
+`paradocente`.
+
 **Decidido (2026-11-18, tarde): la política de IA va en el sílabo.** Un fragmento generado
 (`01-diseno/politica-ia.tex`) lo incluyen el sílabo (plantilla `templates/report/silabo/`) y el anexo; el anexo deja
 la columna de IA de su tabla de evaluaciones, porque el fragmento ya la trae.

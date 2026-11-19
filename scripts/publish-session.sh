@@ -19,6 +19,8 @@
 # Y además (estándar §10.7):
 #   evaluation/recuperacion.md ← el banco de recuperación de la sesión, sin claves
 #                                 (`alineamiento.py banco CURSO sNN --estudiante`), si hay recuperacion.yml
+#   practice/mazo.tsv          ← el mismo banco como mazo para Anki, con la respuesta al reverso, para repasar fuera
+#                                 de clase (`alineamiento.py mazo CURSO sNN`), si hay recuperacion.yml; el aula lo enlaza
 #   practice/cornell.md        ← la hoja Cornell para la web (templates/report/cornell/), si el curso declara alineamiento
 #
 # --simular : dice qué publicaría y no escribe ni etiqueta nada (regla 3 del ecosistema: simular antes de aplicar).
@@ -28,7 +30,7 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh"
 
-usage() { sed -n '2,28p' "${BASH_SOURCE[0]}"; exit 1; }
+usage() { sed -n '2,30p' "${BASH_SOURCE[0]}"; exit 1; }
 REFRESCAR=0; SIMULAR=0; POS=()
 for a in "$@"; do
   case "$a" in
@@ -85,6 +87,7 @@ done < <(find "$SES" -maxdepth 1 -type f \( -iname "*.pdf" -o -iname "*.odt" -o 
           -o -iname "*.docx" -o -iname "*.xlsx" -o -iname "*.pptx" -o -iname "*.csv" -o -iname "*.zip" \
           -o -iname "plantilla*.md" \) 2>/dev/null | sort)
 [[ -f "$SES/recuperacion.yml" ]] && PLAN+=("evaluation"$'\t'"banco:$SNAME"$'\t'"recuperacion.md")
+[[ -f "$SES/recuperacion.yml" ]] && PLAN+=("practice"$'\t'"mazo:$SNAME"$'\t'"mazo.tsv")
 [[ -n "$ALINEADO" && -f "$FW_DIR/templates/report/cornell/cornell.md" ]] \
   && PLAN+=("practice"$'\t'"cornell:$FW_DIR/templates/report/cornell/cornell.md"$'\t'"cornell.md")
 
@@ -94,6 +97,7 @@ if [[ "$SIMULAR" == 1 ]]; then
     IFS=$'\t' read -r sub orig nombre <<<"$item"
     case "$orig" in
       banco:*)   desde="alineamiento.py banco $CSLUG $SNAME --estudiante (sin claves)" ;;
+      mazo:*)    desde="alineamiento.py mazo $CSLUG ${SNAME:0:3} (mazo para Anki)" ;;
       cornell:*) desde="templates/report/cornell/cornell.md" ;;
       *)         desde="${orig#"$SES"/}" ;;
     esac
@@ -113,6 +117,8 @@ for item in "${PLAN[@]}"; do
   case "$orig" in
     banco:*)   python3 "$FW_DIR/scripts/alineamiento.py" banco "$COURSE" "$SNAME" --estudiante > "$MOD/$sub/$nombre" \
                  || die "No se pudo generar el banco de recuperación de $SNAME" ;;
+    mazo:*)    python3 "$FW_DIR/scripts/alineamiento.py" mazo "$COURSE" "$SNAME" --salida "$MOD/$sub/$nombre" \
+                 || die "No se pudo generar el mazo de repaso de $SNAME" ;;
     cornell:*) cp "${orig#cornell:}" "$MOD/$sub/$nombre" ;;
     *)         cp "$orig" "$MOD/$sub/$nombre" ;;
   esac

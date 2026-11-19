@@ -8,10 +8,16 @@ Uso:
   python3 scripts/alineamiento.py calificar RUBRICA.yml PUNTAJES.csv   # columnas: codigo,<clave>,<clave>…
   python3 scripts/alineamiento.py banco CURSO SESION [--examen] [--semilla N] [--formato md|tex] [--estudiante]
   python3 scripts/alineamiento.py pre-post CURSO [--formato md|tex] [--estudiante]
+  python3 scripts/alineamiento.py mazo CURSO [sNN…] [--formato anki|csv] [--salida RUTA]   # sin sesiones, todas
   python3 scripts/alineamiento.py generar CURSO [--aplicar]       # vistas .tex; sin --aplicar solo simula
 
 --estudiante: la versión que se publica, sin claves. `calificar` da la nota vigesimal (nota_100 × 20 / 100) y la
 ponderada sobre 100 del formato común de rúbricas, con sus vetos.
+`mazo`: los bancos de recuperación como mazo para repasar fuera de clase, con la pregunta al frente y la respuesta
+(la de la puesta en común) al reverso. `anki` (por defecto) es un TSV con las cabeceras de importación de Anki (2.1.55
+o posterior: separador, HTML, columna de etiquetas e identificador estable, así reimportar actualiza y no duplica);
+`csv`, el mismo contenido en texto plano. Etiquetas `<curso>::sNN` y `<curso>::raN`. Solo viajan el enunciado, las
+opciones, la respuesta y la explicación: nada del guion ni de las notas del docente. Sin `--salida`, a la pantalla.
 
 CURSO es el slug (contenido/cursos/<slug>) o la ruta; SESION, `sNN` o el nombre de la carpeta.
 Salida: 0 bien · 1 algún error ([XX]; los avisos [!!] no hacen fallar) · 2 error de uso.
@@ -673,6 +679,54 @@ def pre_post(curso: Path) -> list[tuple[str, dict]]:
             if p.get("resultado") in clave]
 
 
+# ---------------------------------------------------------------------------------------------------- mazo
+
+def tarjetas(curso: Path, elegidas: list[Path]) -> list[dict]:
+    """Una tarjeta por pregunta de los bancos de las sesiones elegidas (todas las que tienen banco, si no se elige).
+
+    Solo se copian los campos del estudiante (enunciado, opciones, respuesta, explicación): el mazo es la versión que
+    se publica, y lo demás del banco o de la sesión no viaja.
+    """
+    out = []
+    for s in elegidas or [x for x in sesiones(curso) if banco_de(x)]:
+        banco = banco_de(s)
+        if banco is None:
+            raise SystemExit(f"{s.name} no tiene recuperacion.yml")
+        for p in banco.get("preguntas") or []:
+            out.append({"id": f"{curso.name}:{p['id']}", "sesion": s.name[:3], "resultado": p.get("resultado"),
+                        "enunciado": str(p["enunciado"]), "opciones": [str(o) for o in p.get("opciones") or []],
+                        "respuesta": str(p["respuesta"]), "explicacion": str(p.get("explicacion") or "")})
+    return out
+
+
+def mazo_texto(curso: Path, cartas: list[dict], formato: str) -> str:
+    """El mazo: `anki` (TSV con cabeceras de importación y HTML mínimo) o `csv` (texto plano, con encabezado)."""
+    import html
+    import io
+    etiquetas = lambda t: " ".join(f"{curso.name}::{x}" for x in (t["sesion"], t["resultado"]) if x)   # noqa: E731
+    letras = "abcdefghijklmnopqrstuvwxyz"
+    if formato == "csv":
+        f = io.StringIO()
+        w = csv.writer(f, lineterminator="\n")
+        w.writerow(["frente", "reverso", "etiquetas", "id"])
+        for t in cartas:
+            frente = "\n".join([t["enunciado"]] + [f"{letras[i]}) {o}" for i, o in enumerate(t["opciones"])])
+            reverso = t["respuesta"] + (f"\n\n{t['explicacion']}" if t["explicacion"] else "")
+            w.writerow([frente, reverso, etiquetas(t), t["id"]])
+        return f.getvalue()
+    # sin tabuladores ni saltos (partirían la fila) y con las comillas como entidades (el lector CSV de Anki las toma como
+    # delimitadores al comienzo de un campo)
+    limpio = lambda x: html.escape(" ".join(x.split()), quote=True)   # noqa: E731
+    cy = leer(curso / "curso.yml")
+    out = ["#separator:tab", "#html:true", "#columns:Frente\tReverso\tEtiquetas\tId", "#tags column:3",
+           "#guid column:4", f"#deck:{' '.join(str(cy.get('titulo', curso.name)).split())}"]
+    for t in cartas:
+        frente = limpio(t["enunciado"]) + "".join(f"<br>{letras[i]}) {limpio(o)}" for i, o in enumerate(t["opciones"]))
+        reverso = limpio(t["respuesta"]) + (f"<br><br><i>{limpio(t['explicacion'])}</i>" if t["explicacion"] else "")
+        out.append("\t".join([frente, reverso, etiquetas(t), t["id"]]))
+    return "\n".join(out) + "\n"
+
+
 # ---------------------------------------------------------------------------------------------------- órdenes
 
 def opcion(args: list[str], nombre: str, defecto=None):
@@ -685,11 +739,29 @@ def opcion(args: list[str], nombre: str, defecto=None):
 
 
 def main(argv: list[str]) -> int:
-    if not argv or argv[0] not in {"verificar", "matriz", "rubrica", "calificar", "banco", "pre-post", "generar"}:
+    if not argv or argv[0] not in {"verificar", "matriz", "rubrica", "calificar", "banco", "pre-post", "mazo", "generar"}:
         print(__doc__, file=sys.stderr)
         return 2
     orden, args = argv[0], list(argv[1:])
-    formato = opcion(args, "--formato", "md")
+    formato = opcion(args, "--formato", "anki" if orden == "mazo" else "md")
+    if orden == "mazo":
+        salida = opcion(args, "--salida")
+        if formato not in ("anki", "csv") or not args:
+            print(__doc__, file=sys.stderr)
+            return 2
+        c = curso_dir(args[0])
+        cartas = tarjetas(c, [sesion_dir(c, a) for a in args[1:]])
+        if not cartas:
+            print(f"[XX] {c.name}: ninguna sesión con recuperacion.yml", file=sys.stderr)
+            return 1
+        texto = mazo_texto(c, cartas, formato)
+        if salida:
+            Path(salida).parent.mkdir(parents=True, exist_ok=True)
+            Path(salida).write_text(texto, encoding="utf-8")
+            print(f"{len(cartas)} tarjetas → {salida}", file=sys.stderr)
+        else:
+            print(texto, end="")
+        return 0
     if orden == "verificar":
         rutas = [curso_dir(a) for a in args] or sorted(p.parent for p in CURSOS.glob("*/curso.yml"))
         errores = 0

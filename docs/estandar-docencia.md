@@ -234,6 +234,7 @@ de qué.
 | `web` | el producto de cada dictado en `cursos/<materia>/<edicion>/` | `scripts/publish-web.sh` (hardlinks desde `contenido/dictados/<clave>/publicacion/`) | copiar en vez de enlazar |
 | `prompts` (learning-skill) | `skills/learning/2 domains/_temarios/<dominio>.md` y un puntero en `## Temario` del dominio | `scripts/temario.py` (`--que skill`), por `dominio_fuat` | editar el temario generado |
 | `tareas` | `temarios-cursos.md`, la checklist por curso, unidad y tema | `scripts/temario.py` (`--que resumen`) | editarla a mano |
+| `web/_aula` (vitrina de los pubs) | `curso.yml` (temario, `alineamiento`, `politica_ia`), las rúbricas de `01-diseno/rubricas/`, `sesion.yml` y `recuperacion.yml` de cada sesión, `dictado.yml` y su `publicacion/` | lectura directa en cada build (`web/_aula/src/lib/fuentes.mjs`); el banco, sin `respuesta` ni `explicacion` | escribir en el contenido |
 | `biblioteca-studio` (`ingesta_cursos`) | lee `contenido/cursos/*/05-recursos/` y escribe `bibliografia[].calibre_id` en el `curso.yml` | su suite (`biblioteca-studio/ingesta/README.md`) | cambiar otras claves del registro |
 
 Un cambio en `curso.yml` (claves, `materia_web`, `dominio_fuat`) o en la lista cerrada de carpetas
@@ -276,7 +277,12 @@ explicacion?}]}`. Mínimo tres preguntas por sesión con resultados; `id` único
 un resultado declarado. `alineamiento.py banco CURSO sNN` arma el cuestionario de una clase: las preguntas de la
 sesión y un repaso intercalado de las sesiones a 1, 2, 4 y 8 de distancia (`--examen`: muestra de todas las
 anteriores). Se responde sin apuntes (Roediger y Karpicke, 2006); el espaciado multiplica el efecto (Cepeda et al.,
-2006). Las distancias exactas son decisión de diseño (`decisiones.md`), no de la obra.
+2006). Las distancias exactas son decisión de diseño (`decisiones.md`), no de la obra. Para repasar fuera de clase,
+`alineamiento.py mazo CURSO [sNN…] [--formato anki|csv] [--salida RUTA]` exporta los bancos (todas las sesiones, si no
+se eligen) como mazo: la pregunta al frente y la respuesta de la puesta en común al reverso, con las etiquetas
+`<curso>::sNN` y `<curso>::raN` y un identificador estable por pregunta (reimportar actualiza, no duplica). `anki` es un
+TSV con las cabeceras de importación de Anki (2.1.55 o posterior); `csv`, el mismo contenido en texto plano. Solo viajan
+el enunciado, las opciones, la respuesta y la explicación.
 
 ### 10.3 Rúbricas analíticas (`01-diseno/rubricas/<clave>.yml`)
 
@@ -332,10 +338,15 @@ cada rúbrica; `verificar` falla si una vista se desfasó. Plantillas del framew
 reescritura C6.4).
 
 **Lo que llega al estudiante.** `publish-session.sh` publica, además de los documentos de la sesión, el banco de
-recuperación sin claves (`evaluation/recuperacion.md`, de `alineamiento.py banco CURSO sNN --estudiante`), la hoja
-Cornell para la web (`practice/cornell.md`, en los cursos con `alineamiento`) y toda `plantilla*.md` de la raíz de la
-sesión (`practice/`). La clave, el solucionario y la nota para el docente de un taller o una guía (`academic-report`)
-van dentro de `\begin{paradocente}…\end{paradocente}`; `build.sh X.tex --modo estudiante` compila
-`X-estudiante.pdf` sin ellos (y `\versionestudiante{texto del estudiante}{texto del docente}` adapta una consigna),
-y la publicación toma esa versión con el nombre `X.pdf`. Nunca se publican `*-claves.pdf`, `*-soluciones.pdf` ni
-`*-docente.pdf`.
+recuperación sin claves (`evaluation/recuperacion.md`, de `alineamiento.py banco CURSO sNN --estudiante`), el mismo
+banco como mazo para Anki (`mazo.tsv` en practice, de `alineamiento.py mazo CURSO sNN`), la hoja Cornell para la web
+(`practice/cornell.md`, en los cursos con `alineamiento`) y toda `plantilla*.md` de la raíz de la sesión
+(`practice/`). La clave, el solucionario y la nota para el docente de un taller o una guía (`academic-report`) van
+dentro de `\begin{paradocente}…\end{paradocente}`; `build.sh X.tex --modo estudiante` compila `X-estudiante.pdf` sin
+ellos (y `\versionestudiante{texto del estudiante}{texto del docente}` adapta una consigna), y la publicación toma esa
+versión con el nombre `X.pdf`. Nunca se publican `*-claves.pdf`, `*-soluciones.pdf` ni `*-docente.pdf`. Una sesión de
+laboratorio cuyo artefacto es código que resuelve el laboratorio (`laboratorio.py`) no lo publica: lleva una hoja del
+estudiante, `practica-laboratorio.tex` (`academic-report`: enunciado, pasos y preguntas; las cifras esperadas en
+`paradocente`), que se publica en practice como `practica-laboratorio.pdf`. El aula (`web/_aula`) muestra en la página
+del curso los resultados con su evidencia, la evaluación con su uso de IA, las rúbricas y, por sesión, el banco sin
+claves con el enlace a su mazo publicado (`web/_aula/docs/decisiones.md` §1.23).
