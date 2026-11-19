@@ -1,7 +1,7 @@
 ---
 tipo: estado
 estado: activo
-actualizado: 2026-10-06
+actualizado: 2026-11-18
 ---
 # estado.md — docencia (repo `Academic_Class_Framework`, remoto `CampusTeX-Research`)
 
@@ -22,6 +22,7 @@ Bitácora de la ola 5 (etiqueta `antes-ola-05-2026-10-06` en este repo y en `doc
 - 2026-10-06 · D3 · (en `docencia`) los dos `slides.tex` pdflatex/xelatex pasan a LuaLaTeX y compilan; `yaac-xelatex.cls` retirado. `README.md` y `CLAUDE.md` ya no dicen que haya decks que pidan XeLaTeX.
 - 2026-10-06 · D4 · `simuladores/macro/modelos/nivel_12/_datos_bcrp.py` y `simuladores/CLAUDE.md` usan `DATAFW_DIR`, no `ANALYSIS_DIR` (el lector resuelve `datafw/data/raw/bcrp` y `metodos/series/lectores.py`); en `docencia`, los tres exámenes de econometría II. `grep` de los tres alias = 0 en el código de ambos repos (quedan en la prosa de §Futuro).
 - 2026-11-18 · F10 · Estándar §10: `scripts/alineamiento.py` (matriz de alineamiento verificada, rúbricas, bancos de recuperación, política de IA, sesión activa, prueba antes y después) en `validate.sh`; aplicado a `econometria-i` (s01 a s03 con la ENAHO, réplica 6 de 6 al decimal del INEI); plantillas `cornell`, `ronda-de-pares` y `prueba-de-comprension`; en `seminario-de-investigacion`, la guía de tesis UNSCH y tres talleres.
+- 2026-11-18 · F10b · Las rúbricas de `econometria-i` cumplen `escritura/config/entrega/rubrica.schema.yml` (validadas con su `rubrica.py` en `alineamiento.py verificar`; el resultado de cada criterio, en `curso.yml` → `alineamiento.rubricas`; nota vigesimal derivada); la política de IA entra en la plantilla del sílabo (`01-diseno/politica-ia.tex`); `publish-session.sh --simular` y la versión del estudiante (`build.sh --modo estudiante`, entorno `paradocente`) con banco sin claves, hoja Cornell y `plantilla*.md`; dictado `2026-ii-unsch-econometria` en borrador (s01 a s03).
 
 ## En curso
 
@@ -37,7 +38,8 @@ nada en curso
 - 2026-10-20 · dueño: director · los `archivo:` de los recursos `{tipo: simulador}` de ocho `curso.yml` (29 rutas) aún dicen `docencia/simuladores/…`: pasarlos a `simuladores/…` y regenerar los README (`temario-generar.sh`); mientras, `enlazar.py` los traduce (`RUTA_VIEJA_LAB`). Los dos pendientes de la campaña SIMULADORES pasaron a `simuladores/estado.md`.
 - 2026-10-04 · dueño: el autor · `scripts/new-evaluacion.sh` escribe las siglas `lab`, `eo` y `tar` (laboratorio, examen oral, tarea) donde `docs/estandar-evaluaciones.md` §2 fija `lb`, `or` y `ta`, y solo crea las doce plantillas de `templates/exam/`: alinear el script con la tabla.
 - 2026-10-04 · dueño: el autor · `scaffolds/sesion/deck.tex` (el deck que crea `new-session.sh --tipo clase`) es un Beamer autocontenido con `\usetheme` de `config/course.yml` (`tema_beamer`), no `academic-beamer`: decidir si el scaffold pasa a la clase del framework.
-- 2026-11-18 · dueño: autor · Validar las rúbricas de `econometria-i` contra `escritura/config/entrega/rubrica.schema.yml` cuando escritura lo publique (hoy rige su formato de reserva; estándar §10.3).
+- 2026-11-18 · dueño: director · La vitrina `web/_aula` no lee `alineamiento`, `politica_ia`, las rúbricas ni los bancos de recuperación de `curso.yml` (estándar §10): la página del curso no muestra resultados, evaluaciones con su uso de IA ni rúbricas. Llevarlos al generador del aula (fuera del encargo del 2026-11-18).
+- 2026-11-18 · dueño: autor · Las sesiones de laboratorio s01 y s02 de `econometria-i` no tienen material para el estudiante (solo el guion del docente y el `.py`, que resuelve el laboratorio): decidir si llevan una hoja de enunciado (`practica-*.pdf` o `taller-*.tex` con `paradocente`) que `publish-session.sh` publique.
 - 2026-11-18 · dueño: autor · Dictar la unidad aplicada de `econometria-i` (s01 a s03), tomar la prueba antes y después (`alineamiento.py pre-post`) y anotar los resultados por pregunta en `registro/` (C10.6); con ellos, revisar las distancias del repaso (1, 2, 4, 8).
 - 2026-11-18 · dueño: autor · Alinear el resto del temario de `econometria-i` (unidades 1 a 4) a medida que se escriban sus sesiones, y declarar `alineamiento` en `seminario-de-investigacion`.
 - 2026-11-18 · dueño: autor · Taller de reescritura (`seminario-de-investigacion/05-recursos/talleres/reescritura/`): sustituir los párrafos construidos por párrafos reales anonimizados de tesis (la norma los pide reales).

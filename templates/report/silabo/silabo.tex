@@ -55,6 +55,13 @@ Examen final & 40\,\% \\\bottomrule
 \end{tabularx}
 \end{table}
 
+\section{Uso de la inteligencia artificial}
+% La política de IA del curso (curso.yml → politica_ia y el uso que admite cada evaluación) la escribe
+% `scripts/alineamiento.py generar CURSO --aplicar` en 01-diseno/politica-ia.tex, junto a este sílabo.
+\InputIfFileExists{politica-ia.tex}{}{%
+  Declara \texttt{politica\_ia} en el \texttt{curso.yml} y corre
+  \texttt{scripts/alineamiento.py generar CURSO -{}-aplicar}: esta sección se llena sola.}
+
 \section{Cronograma}
 Ver el calendario del curso.
 

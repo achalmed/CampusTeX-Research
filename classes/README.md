@@ -26,7 +26,7 @@ Las plantillas vacías de cada tipo están en `templates/`; los scripts `new-eva
 |---|---|
 | `academic-base.cls` | el núcleo (sobre `article`): geometría, idioma, carga de `styles/academic.sty`. `academic-exam` y `academic-report` heredan de aquí |
 | `academic-exam.cls` | evaluaciones: tres modos de salida (examen · claves · soluciones), bloques de enunciado y solución, membrete institucional |
-| `academic-report.cls` | documentos de gestión docente: sílabo, calendario, nota docente, rúbrica |
+| `academic-report.cls` | documentos de gestión docente: sílabo, calendario, nota docente, rúbrica, talleres y guías; opción `estudiante` (o `build.sh --modo estudiante`) que omite el entorno `paradocente` (clave, solucionario, nota para el docente) y elige el primer argumento de `\versionestudiante{…}{…}` |
 | `academic-beamer.cls` | diapositivas: carga `beamer` (no la base) y `\usetheme{academic}`, que trae la misma `styles/academic.sty` (el tema vive en `themes/`) |
 
 ## Límite honesto

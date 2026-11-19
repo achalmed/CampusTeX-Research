@@ -133,9 +133,12 @@ dictados/2026-i-cau-unsch-metodologia/
 
 - Un dictado puede tomar sesiones de **varios cursos** (Metodología 2026-I cruza cuatro)
   y por eso vive fuera del curso, con clave `<AAAA-ciclo>-<institucion>-<materia>`.
-- **Congelar = etiquetar**: `publish-session.sh` compila el artefacto, deposita el producto
+- **Congelar = etiquetar**: `publish-session.sh` deposita el producto (la versión del estudiante, §10.7)
   en `publicacion/<web>/` (con `_PUBLICADO.md`) y pone el tag
-  `dictado/<clave>/<sesion>` sobre el commit de las fuentes. No se copia nada al repo.
+  `dictado/<clave>/<sesion>` sobre el commit de las fuentes. No se copia nada al repo. `--simular` dice qué
+  publicaría sin escribir ni etiquetar.
+- Un dictado con datos que solo sabe el docente lleva `estado: borrador` y la lista `por_confirmar:`; al
+  confirmarlos se borra la lista y pasa a `activo` (ejemplo: `dictados/2026-ii-unsch-econometria/`).
 - `publish-web.sh DICTADO --aplicar` enlaza el producto **por hardlink** (un solo inodo)
   en `web/_pubs/<pub>/_ediciones/<dictado>/<web>/` (el pub del curso; hasta la fase 7, `web/cursos/…`). La web nunca es fuente; el doctor avisa
   de copias y huérfanos. `legado: true` marca dictados anteriores al estándar que no se
@@ -275,15 +278,24 @@ sesión y un repaso intercalado de las sesiones a 1, 2, 4 y 8 de distancia (`--e
 anteriores). Se responde sin apuntes (Roediger y Karpicke, 2006); el espaciado multiplica el efecto (Cepeda et al.,
 2006). Las distancias exactas son decisión de diseño (`decisiones.md`), no de la obra.
 
-### 10.3 Rúbricas analíticas (`01-diseno/rubricas/<id>.yml`)
+### 10.3 Rúbricas analíticas (`01-diseno/rubricas/<clave>.yml`)
 
-Formato común con escritura (`escritura/config/entrega/rubrica.schema.yml`; mientras no exista, su reserva):
-`{titulo, fuente, criterios: [{clave, nombre, peso, niveles: [{puntaje, descriptor}]}]}`, más las extensiones
-`id`, `escala: [{puntaje, nombre}]` y `resultado` por criterio. Los pesos suman 100; cada criterio, dos o más niveles
-con puntaje numérico distinto y descriptor. La rúbrica se **publica con la consigna**: `generar` escribe la tabla
-`<id>.tex` (generada, no se edita) y la consigna la incluye con `\input`. `alineamiento.py calificar RUBRICA.yml
-PUNTAJES.csv` da la nota vigesimal (Σ peso × puntaje ÷ máximo) desde una tabla que vive en `registro/`. Las rúbricas
-ayudan cuando se comparten antes y se usan para formar (Jonsson y Svingby, 2007; Panadero y Jonsson, 2013).
+Cumplen el **formato común del ecosistema**, `escritura/config/entrega/rubrica.schema.yml`, sin claves propias:
+`{clave, titulo, fuente, curso, criterios: [{clave, nombre, peso, niveles: [{puntaje, nombre, descriptor}]}]}`
+(opcionales del esquema: `descripcion`, `aprobatorio`, `para`; por criterio, `descripcion` y `veto`). Así LaTeX Studio
+las lee para la autoevaluación del estudiante («Antes de entregar», con `rubrica:` de su `registro/entrega.yml`
+apuntando al YAML del curso). Lo comprueba `alineamiento.py verificar` en **todo** YAML de `01-diseno/rubricas/` de
+cualquier curso, con el validador de escritura (`$WRITING_DIR/scripts/entrega/rubrica.py`, sin copiarlo), más la regla
+del curso: los pesos suman 100. El nombre de cada nivel (Destacado, Logrado…) va en `nombre` del nivel. Lo que el
+esquema no guarda se declara en `curso.yml`: el **resultado que mide cada criterio**, en
+`alineamiento.rubricas: {<clave de la rúbrica>: {<criterio>: raN}}` (error si el criterio o el resultado no existen,
+o si la evaluación que usa la rúbrica no declara ese resultado; aviso si un criterio queda sin resultado). La
+**nota**: el esquema da la ponderada sobre 100 (Σ (puntaje ÷ máximo del criterio) × peso ÷ Σ peso); la vigesimal del
+registro se deriva, nota sobre 100 × 20 ÷ 100, sin redondeo intermedio: `alineamiento.py calificar RUBRICA.yml
+PUNTAJES.csv` da las columnas `codigo`, `nota` (vigesimal), `nota_100` y `vetos` desde una tabla que vive en `registro/`. La rúbrica se
+**publica con la consigna**: `generar` escribe la tabla `<clave>.tex` (generada, no se edita) y la consigna la
+incluye con `\input`; en el anexo del sílabo cada rúbrica sale una vez, con las evaluaciones que la usan. Las
+rúbricas ayudan cuando se comparten antes y se usan para formar (Jonsson y Svingby, 2007; Panadero y Jonsson, 2013).
 
 ### 10.4 Sesión de aprendizaje activo (`dinamica: aprendizaje_activo`)
 
@@ -295,8 +307,12 @@ desde `scaffolds/sesion/guion-activo.md` (Freeman et al., 2014; Allgood et al., 
 
 `curso.yml` → `politica_ia: {regla, declaracion, datos, fuente}`; cada evaluación declara `politica_ia` de un
 vocabulario cerrado: `prohibida`, `apoyo` (ideas, dudas y lenguaje, declarado), `asistida` (código o borrador
-verificado, declarado) y `libre` (todo uso, declarado y verificado). Se imprime en el anexo del sílabo (Comisión
-Europea, 2025; CONCYTEC, 2024). Ningún dato de estudiantes ni de `registro/` va a una herramienta externa.
+verificado, declarado) y `libre` (todo uso, declarado y verificado). Va **en el sílabo**: `generar` escribe
+`01-diseno/politica-ia.tex` (regla, uso permitido en cada evaluación, cómo se declara, datos vedados y fuente) y la
+plantilla `templates/report/silabo/` lo incluye en su sección «Uso de la inteligencia artificial»
+(`\InputIfFileExists`; sin el fragmento, la sección dice cómo llenarla); el anexo del sílabo incluye el mismo
+fragmento (Comisión Europea, 2025; CONCYTEC, 2024). Ningún dato de estudiantes ni de `registro/` va a una herramienta
+externa.
 
 ### 10.6 Evaluación del propio curso
 
@@ -306,10 +322,20 @@ anotan en `registro/<dictado>/`, nunca aquí (Black y Wiliam, 1998; Allgood et a
 
 ### 10.7 Vistas y plantillas
 
-`alineamiento.py generar CURSO [--aplicar]` (simula sin `--aplicar`) escribe el anexo del sílabo del curso
+`alineamiento.py generar CURSO [--aplicar]` (simula sin `--aplicar`) escribe el fragmento de la política de IA
+(`01-diseno/politica-ia.tex`, en todo curso que la declare), el anexo del sílabo del curso
 (ejemplo: `contenido/cursos/econometria-i/01-diseno/alineamiento/alineamiento.tex`; anexo: matriz, evaluaciones con su política de IA, medición del curso y rúbricas) y la tabla `.tex` de
 cada rúbrica; `verificar` falla si una vista se desfasó. Plantillas del framework (`templates/report/`): `cornell`
 (C3.5), `ronda-de-pares` (C11.3), `prueba-de-comprension` (C9.4). Material de Metodología:
 `contenido/cursos/seminario-de-investigacion/01-diseno/guia-de-tesis/` (C7.5) y
 `contenido/cursos/seminario-de-investigacion/05-recursos/talleres/` (matrices comentadas C1.4, lectura lateral C2.6,
 reescritura C6.4).
+
+**Lo que llega al estudiante.** `publish-session.sh` publica, además de los documentos de la sesión, el banco de
+recuperación sin claves (`evaluation/recuperacion.md`, de `alineamiento.py banco CURSO sNN --estudiante`), la hoja
+Cornell para la web (`practice/cornell.md`, en los cursos con `alineamiento`) y toda `plantilla*.md` de la raíz de la
+sesión (`practice/`). La clave, el solucionario y la nota para el docente de un taller o una guía (`academic-report`)
+van dentro de `\begin{paradocente}…\end{paradocente}`; `build.sh X.tex --modo estudiante` compila
+`X-estudiante.pdf` sin ellos (y `\versionestudiante{texto del estudiante}{texto del docente}` adapta una consigna),
+y la publicación toma esa versión con el nombre `X.pdf`. Nunca se publican `*-claves.pdf`, `*-soluciones.pdf` ni
+`*-docente.pdf`.

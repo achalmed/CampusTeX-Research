@@ -22,7 +22,7 @@ Cada plantilla es un `.tex` que solo declara `\documentclass{academic-*}` y estr
 |---|---|---|
 | `exam/` | evaluaciones (`academic-exam`), una carpeta por tipo con su `.tex` | 12: `banco-de-preguntas`, `caso-estudio`, `control-de-lectura`, `examen-desarrollo`, `examen-objetivo`, `examen-oral`, `examen-problemas`, `laboratorio`, `practica-calificada`, `practica-dirigida`, `solucionario`, `tarea` |
 | `presentation/` | diapositivas (`academic-beamer`) | 8: `clase`, `conferencia`, `defensa-tesis`, `institucional`, `masterclass`, `ponencia`, `seminario`, `workshop` |
-| `report/` | documentos de gestión docente (`academic-report`) | 7: `silabo`, `calendario`, `nota-docente`, `rubrica`, `cornell` (hoja de apuntes, también en `.md` para la web), `ronda-de-pares` (guía y formularios), `prueba-de-comprension` (exposiciones) |
+| `report/` | documentos de gestión docente (`academic-report`) | 7: `silabo` (su sección «Uso de la inteligencia artificial» incluye `01-diseno/politica-ia.tex`, que genera `alineamiento.py generar` desde `politica_ia` del `curso.yml`), `calendario`, `nota-docente`, `rubrica`, `cornell` (hoja de apuntes, también en `.md` para la web), `ronda-de-pares` (guía y formularios), `prueba-de-comprension` (exposiciones) |
 
 La lista de tipos de evaluación y sus siglas es normativa y vive en `docs/estandar-evaluaciones.md`;
 aquí solo está su plantilla.

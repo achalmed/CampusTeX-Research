@@ -92,7 +92,38 @@ alineamiento (Biggs, 1996; Wiggins y McTighe, 2005). Se decidió (estándar §10
   (`alineamiento.alcance`); así el verificador es estricto sin inventar sesiones vacías (regla «sin esqueletos»).
 - **Rúbricas en el formato común con escritura.** Mientras `escritura/config/entrega/rubrica.schema.yml` no exista,
   se usa su reserva `{titulo, fuente, criterios: [{clave, nombre, peso, niveles: [{puntaje, descriptor}]}]}`, con
-  `id`, `escala` y `resultado` como extensiones. Cuando escritura publique el esquema, se valida contra él.
+  `id`, `escala` y `resultado` como extensiones. Cuando escritura publique el esquema, se valida contra él (hecho el
+  mismo día: ver la entrada siguiente).
+
+**Decidido (2026-11-18, tarde): las rúbricas del curso cumplen el esquema de escritura sin extensiones.**
+El esquema publicado rechaza toda clave desconocida, así que LaTeX Studio no leía las rúbricas de `econometria-i`
+para la autoevaluación. Conversión mínima, sin perder nada del curso:
+
+- `id` pasa a `clave` (campo opcional del esquema) y se añade `curso`; `escala: [{puntaje, nombre}]` pasa al
+  `nombre` de cada nivel, que el esquema admite.
+- El resultado de cada criterio sale de la rúbrica y va a `curso.yml` → `alineamiento.rubricas: {<rúbrica>:
+  {<criterio>: raN}}`. Alternativa descartada: pedir a escritura un campo `resultado` en el esquema; el alineamiento
+  es del curso, y la rúbrica queda reutilizable en otro curso con otros resultados.
+- La nota: el esquema califica sobre 100; el registro, sobre 20. La vigesimal se deriva (× 20 ÷ 100) en
+  `alineamiento.py calificar`, con la fórmula del esquema y sin redondear antes (13,75 y no 13,76). No se declara un
+  campo vigesimal: sería un número que el esquema no conoce.
+- Se llama al validador de escritura (`$WRITING_DIR/scripts/entrega/rubrica.py`, por `core/env.py`), no se copia: una
+  sola definición del formato. Sin escritura en el disco, `verificar` falla con el motivo; la regla propia del curso
+  (pesos que suman 100) se suma a la del esquema, que solo pide pesos positivos.
+
+**Decidido (2026-11-18, tarde): lo que llega al estudiante es su versión, sin claves.** Los talleres de
+`academic-report` traían clave o solucionario en el mismo PDF. La clase gana la opción `estudiante` y el entorno
+`paradocente` (y `\versionestudiante` para adaptar una consigna); `build.sh --modo estudiante` compila
+`X-estudiante.pdf` sin editar el `.tex`, igual que `--modo claves` en los exámenes. `publish-session.sh` publica esa
+versión con el nombre `X.pdf`, nunca `*-claves`, `*-soluciones` ni `*-docente`, y suma el banco de recuperación sin
+claves, la hoja Cornell y las `plantilla*.md`; antes copiaba solo documentos de oficina y clasificaba todo PDF como
+diapositiva (la consigna terminaba en `slides/`): ahora decide primero por el nombre. Publicar el banco hace que las
+preguntas se conozcan antes de la prueba de la unidad, que las reusa: se acepta porque el repaso es el fin del banco,
+y queda como pregunta al autor.
+
+**Decidido (2026-11-18, tarde): la política de IA va en el sílabo.** Un fragmento generado
+(`01-diseno/politica-ia.tex`) lo incluyen el sílabo (plantilla `templates/report/silabo/`) y el anexo; el anexo deja
+la columna de IA de su tabla de evaluaciones, porque el fragmento ya la trae.
 - **Repaso a 1, 2, 4 y 8 sesiones.** El beneficio del espaciado es de Cepeda et al. (2006); las distancias son
   decisión de diseño, revisable con los datos de la prueba antes y después.
 - **Vocabulario de IA en cuatro niveles** (`prohibida`, `apoyo`, `asistida`, `libre`): decisión propia sobre los

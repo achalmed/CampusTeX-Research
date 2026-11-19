@@ -16,6 +16,11 @@
 \DeclareOption{salida=bn}{\ar@bntrue}
 \DeclareOption{salida=pantalla}{}
 \DeclareOption{salida=impresion}{}
+%% estudiante: la versión que se publica, sin lo que va dentro de paradocente (claves, solucionarios, notas para el
+%% docente); sin la opción, la versión del docente, completa. build.sh --modo estudiante la pasa sin editar el .tex.
+\newif\ifar@estudiante \ar@estudiantefalse
+\DeclareOption{estudiante}{\ar@estudiantetrue}
+\DeclareOption{docente}{\ar@estudiantefalse}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{academic-base}}
 \ProcessOptions\relax
 \LoadClass{academic-base}
@@ -72,6 +77,11 @@
 % ---------------------------------------------------- utilidades de gestión --
 % \datofila{Etiqueta}{valor} — fila de datos generales (sílabo, etc.)
 \newcommand{\datofila}[2]{\noindent\makebox[4.2cm][l]{\textbf{\color{acento}#1}}#2\par\addvspace{2pt}}
+
+% \begin{paradocente} … \end{paradocente} — lo que solo ve el docente (clave, solucionario, nota para el docente):
+% sale en la versión del docente y desaparece entera en la del estudiante (opción estudiante).
+\NewDocumentEnvironment{paradocente}{+b}{\ifar@estudiante\else#1\fi}{}
+\newcommand{\versionestudiante}[2]{\ifar@estudiante#1\else#2\fi}% {texto del estudiante}{texto del docente}
 
 % Metadatos del PDF
 \AtBeginDocument{\hypersetup{pdftitle={\ar@tipodocumento\ — \ar@curso},

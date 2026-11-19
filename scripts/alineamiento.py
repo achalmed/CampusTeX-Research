@@ -6,9 +6,12 @@ Uso:
   python3 scripts/alineamiento.py matriz CURSO [--formato md|tex]
   python3 scripts/alineamiento.py rubrica RUBRICA.yml [--formato md|tex]
   python3 scripts/alineamiento.py calificar RUBRICA.yml PUNTAJES.csv   # columnas: codigo,<clave>,<clave>…
-  python3 scripts/alineamiento.py banco CURSO SESION [--examen] [--semilla N] [--formato md|tex]
-  python3 scripts/alineamiento.py pre-post CURSO [--formato md|tex]
+  python3 scripts/alineamiento.py banco CURSO SESION [--examen] [--semilla N] [--formato md|tex] [--estudiante]
+  python3 scripts/alineamiento.py pre-post CURSO [--formato md|tex] [--estudiante]
   python3 scripts/alineamiento.py generar CURSO [--aplicar]       # vistas .tex; sin --aplicar solo simula
+
+--estudiante: la versión que se publica, sin claves. `calificar` da la nota vigesimal (nota_100 × 20 / 100) y la
+ponderada sobre 100 del formato común de rúbricas, con sus vetos.
 
 CURSO es el slug (contenido/cursos/<slug>) o la ruta; SESION, `sNN` o el nombre de la carpeta.
 Salida: 0 bien · 1 algún error ([XX]; los avisos [!!] no hacen fallar) · 2 error de uso.
@@ -16,7 +19,9 @@ Salida: 0 bien · 1 algún error ([XX]; los avisos [!!] no hacen fallar) · 2 er
 Qué verifica (docs/estandar-docencia.md §10; norma FLUJO_DE_CONOCIMIENTO, campos 10, 11 y 12):
   - Alineamiento constructivo: todo resultado con su evidencia (evaluación) y su actividad (sesión); toda
     evaluación con al menos un resultado declarado. Biggs (1996); Wiggins y McTighe (2005).
-  - Rúbricas analíticas: criterios con peso (suman 100), dos o más niveles con puntaje y descriptor.
+  - Rúbricas analíticas: todo YAML de 01-diseno/rubricas/ cumple el formato común del ecosistema
+    (escritura/config/entrega/rubrica.schema.yml, validado por escritura/scripts/entrega/rubrica.py), con los pesos
+    sumando 100; el resultado que mide cada criterio va en curso.yml → alineamiento.rubricas.
     Jonsson y Svingby (2007); Panadero y Jonsson (2013).
   - Banco de recuperación por sesión: preguntas ligadas a un resultado; el cuestionario de cada clase intercala
     sesiones anteriores espaciadas. Roediger y Karpicke (2006); Cepeda et al. (2006).
@@ -40,6 +45,19 @@ import yaml
 
 FRAMEWORK = Path(__file__).resolve().parents[1]
 CURSOS = FRAMEWORK / "contenido" / "cursos"
+
+# core/env.py: la raíz del workspace y la carpeta de escritura (WRITING_DIR), dueña del formato común de rúbricas.
+_d = FRAMEWORK
+while _d != _d.parent and not (_d / "core" / "env.py").is_file():
+    _d = _d.parent
+if (_d / "core" / "env.py").is_file():
+    sys.path.insert(0, str(_d / "core"))
+    import env  # noqa: E402
+    ESCRITURA = Path(env.WRITING_DIR)
+else:
+    ESCRITURA = Path(os.environ.get("WRITING_DIR", FRAMEWORK.parent / "escritura"))
+VALIDADOR_RUBRICA = ESCRITURA / "scripts" / "entrega" / "rubrica.py"   # lee config/entrega/rubrica.schema.yml
+NOTA_VIGESIMAL = 20.0   # el esquema califica sobre 100; el registro del curso, sobre 20 (nota_100 × 20 / 100)
 
 FUENTE = {
     "alineamiento": "Biggs (1996); Wiggins y McTighe (2005)",
@@ -115,51 +133,74 @@ def banco_de(sesion: Path) -> dict | None:
 
 # ---------------------------------------------------------------------------------------------------- rúbricas
 
+_FORMATO = None
+
+
+def formato_comun():
+    """El módulo de escritura que valida el formato común de rúbricas (None si escritura no está)."""
+    global _FORMATO
+    if _FORMATO is None and VALIDADOR_RUBRICA.is_file():
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("rubrica_escritura", VALIDADOR_RUBRICA)
+        _FORMATO = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_FORMATO)
+    return _FORMATO
+
+
 def problemas_rubrica(rub: dict) -> list[str]:
-    """Errores de forma de una rúbrica analítica (formato común de escritura o su formato de reserva)."""
-    out = []
-    for k in ("titulo", "fuente", "criterios"):
-        if not rub.get(k):
-            out.append(f"sin `{k}`")
-    crit = rub.get("criterios") or []
-    claves = [c.get("clave") for c in crit]
-    if len(set(claves)) != len(claves) or not all(claves):
-        out.append("claves de criterio vacías o repetidas")
+    """Errores de una rúbrica: el esquema común de escritura (rubrica.schema.yml) más la regla del curso (pesos = 100).
+
+    Sin escritura en el disco, solo la regla del curso y un error que lo dice: una rúbrica que no pasó por el esquema
+    no se da por buena.
+    """
+    if not isinstance(rub, dict):
+        return ["no es un mapa YAML"]
+    fc = formato_comun()
+    out = list(fc.validar(rub)) if fc else [f"no se encuentra el validador del formato común ({VALIDADOR_RUBRICA})"]
+    crit = [c for c in rub.get("criterios") or [] if isinstance(c, dict)]
     try:
         total = sum(float(c.get("peso", 0)) for c in crit)
     except (TypeError, ValueError):
         total = -1
     if crit and abs(total - 100) > 1e-6:
-        out.append(f"los pesos suman {total:g}, no 100")
-    for c in crit:
-        niv = c.get("niveles") or []
-        if len(niv) < 2:
-            out.append(f"criterio «{c.get('clave')}» con menos de dos niveles")
-        pts = [n.get("puntaje") for n in niv]
-        if any(not isinstance(p, (int, float)) for p in pts) or len(set(pts)) != len(pts):
-            out.append(f"criterio «{c.get('clave')}» con puntajes no numéricos o repetidos")
-        if any(not str(n.get("descriptor") or "").strip() for n in niv):
-            out.append(f"criterio «{c.get('clave')}» con un nivel sin descriptor")
+        out.append(f"los pesos suman {total:g}, no 100 (regla del curso: la nota se lee como porcentaje)")
     return out
 
 
 def escala(rub: dict) -> list[tuple[float, str]]:
-    """Los puntajes de la rúbrica (de mayor a menor) con su nombre, si lo declara."""
-    nombres = {e["puntaje"]: e.get("nombre", "") for e in rub.get("escala") or []}
+    """Los puntajes de la rúbrica (de mayor a menor) con el nombre del nivel (`nombre` del esquema), si lo declara."""
+    nombres: dict[float, str] = {}
+    for c in rub.get("criterios") or []:
+        for n in c.get("niveles") or []:
+            if n.get("nombre"):
+                nombres.setdefault(n["puntaje"], n["nombre"])
     pts = sorted({n["puntaje"] for c in rub.get("criterios") or [] for n in c.get("niveles") or []}, reverse=True)
     return [(p, nombres.get(p, "")) for p in pts]
 
 
-def calificar(rub: dict, puntajes: dict[str, float], nota_max: float = 20.0) -> float:
-    """Nota de 0 a nota_max: Σ peso · (puntaje / puntaje máximo del criterio)."""
-    nota = 0.0
+def calificar(rub: dict, puntajes: dict[str, float], nota_max: float = NOTA_VIGESIMAL) -> dict:
+    """{nota (de 0 a nota_max), nota_100, vetos}: la ponderada del esquema común (`nota` de escritura) llevada a nota_max.
+
+    Cada puntaje ha de ser uno de los niveles de su criterio.
+    """
+    leidos = {}
     for c in rub["criterios"]:
-        maximo = max(n["puntaje"] for n in c["niveles"])
         p = float(puntajes[c["clave"]])
         if p not in {float(n["puntaje"]) for n in c["niveles"]}:
             raise ValueError(f"puntaje {p:g} fuera de los niveles de «{c['clave']}»")
-        nota += float(c["peso"]) / 100 * p / maximo
-    return round(nota * nota_max, 2)
+        leidos[c["clave"]] = p
+    fc = formato_comun()
+    if fc is None:
+        raise SystemExit(f"No se encuentra el validador del formato común de rúbricas: {VALIDADOR_RUBRICA}")
+    r = fc.nota(rub, leidos)   # la ponderada sobre 100 (redondeada a un decimal) y los vetos, del formato común
+    # la vigesimal, con la misma fórmula sin el redondeo intermedio (68,75 / 100 × 20 = 13,75, no 13,76)
+    exacta = sum(leidos[c["clave"]] / fc.maximo(c) * c["peso"] for c in rub["criterios"]) / sum(c["peso"] for c in rub["criterios"])
+    return {"nota": round(exacta * nota_max, 2), "nota_100": r["nota"], "vetos": r["vetos"]}
+
+
+def rubricas_del_curso(curso: Path) -> list[Path]:
+    """Todos los YAML de `01-diseno/rubricas/` (los use o no una evaluación: todos han de cumplir el esquema)."""
+    return sorted((curso / "01-diseno" / "rubricas").glob("*.yml"))
 
 
 # ---------------------------------------------------------------------------------------------------- verificación
@@ -227,6 +268,19 @@ def verificar_curso(curso: Path) -> Informe:
     inf = Informe(curso.name)
     cy = leer(curso / "curso.yml")
     al = cy.get("alineamiento")
+    # toda rúbrica del curso cumple el formato común (escritura/config/entrega/rubrica.schema.yml), la use o no
+    # una evaluación: así LaTeX Studio la puede leer para la autoevaluación
+    rubricas: dict[str, dict] = {}
+    for ruta in rubricas_del_curso(curso):
+        try:
+            rub = leer(ruta)
+        except yaml.YAMLError as ex:
+            inf.error(f"rúbrica {ruta.name}: YAML ilegible ({ex})", "rubrica")
+            continue
+        for p in problemas_rubrica(rub):
+            inf.error(f"rúbrica {ruta.name}: {p}", "rubrica")
+        if isinstance(rub, dict):
+            rubricas[ruta.relative_to(curso).as_posix()] = rub
     if not al:
         verificar_sesiones(curso, inf, None)
         return inf
@@ -270,21 +324,44 @@ def verificar_curso(curso: Path) -> Informe:
         if e.get("consigna") and not (curso / e["consigna"]).is_file():
             inf.error(f"evaluación «{eid}»: consigna «{e['consigna']}» inexistente", "rubrica")
         if e.get("rubrica"):
-            ruta = curso / e["rubrica"]
-            if not ruta.is_file():
-                inf.error(f"evaluación «{eid}»: rúbrica «{e['rubrica']}» inexistente", "rubrica")
+            rub = rubricas.get(Path(e["rubrica"]).as_posix())
+            if rub is None:
+                inf.error(f"evaluación «{eid}»: rúbrica «{e['rubrica']}» inexistente (o fuera de 01-diseno/rubricas/)",
+                          "rubrica")
             else:
-                rub = leer(ruta)
-                for p in problemas_rubrica(rub):
-                    inf.error(f"rúbrica {ruta.name}: {p}", "rubrica")
+                mide = (al.get("rubricas") or {}).get(rub.get("clave") or Path(e["rubrica"]).stem) or {}
                 for c in rub.get("criterios") or []:
-                    if c.get("resultado") and c["resultado"] not in rs:
-                        inf.error(f"rúbrica {ruta.name}: el criterio «{c.get('clave')}» mide «{c['resultado']}», "
+                    x = mide.get(c.get("clave"))
+                    if x and x not in rs:
+                        inf.error(f"rúbrica {Path(e['rubrica']).name}: el criterio «{c.get('clave')}» mide «{x}», "
                                   f"que la evaluación «{eid}» no declara", "alineamiento")
         elif e.get("tipo") == "sumativa" and e.get("instrumento") != "prueba":
             inf.aviso(f"evaluación sumativa «{eid}» sin rúbrica (o `instrumento: prueba`)", "rubrica")
     if evs and abs(peso_sumativo - 100) > 1e-6:
         inf.error(f"los pesos de las evaluaciones sumativas suman {peso_sumativo:g}, no 100", "alineamiento")
+    # criterio → resultado (alineamiento.rubricas: el formato común de rúbricas no guarda el resultado)
+    por_clave = {(r.get("clave") or Path(k).stem): r for k, r in rubricas.items()}
+    usadas = {(por_clave.get(Path(e["rubrica"]).stem) or {}).get("clave") or Path(e["rubrica"]).stem
+              for e in evs if e.get("rubrica")}
+    mapa = al.get("rubricas") or {}
+    for clave_rub, mide in mapa.items():
+        rub = por_clave.get(clave_rub)
+        if rub is None:
+            inf.error(f"alineamiento.rubricas: «{clave_rub}» no es la clave de ninguna rúbrica de 01-diseno/rubricas/",
+                      "alineamiento")
+            continue
+        criterios = {c.get("clave") for c in rub.get("criterios") or []}
+        for c, x in (mide or {}).items():
+            if c not in criterios:
+                inf.error(f"alineamiento.rubricas.{clave_rub}: criterio «{c}» inexistente en la rúbrica", "alineamiento")
+            if x not in ids_res:
+                inf.error(f"alineamiento.rubricas.{clave_rub}.{c}: resultado «{x}» no declarado", "alineamiento")
+    for clave_rub in sorted(usadas):
+        rub = por_clave.get(clave_rub) or {}
+        sin = [c.get("clave") for c in rub.get("criterios") or [] if c.get("clave") not in (mapa.get(clave_rub) or {})]
+        if sin:
+            inf.aviso(f"rúbrica «{clave_rub}»: criterios sin resultado en alineamiento.rubricas: {', '.join(sin)}",
+                      "alineamiento")
     # resultado → evidencia → actividad
     actividad: dict[str, list[str]] = {x: [] for x in ids_res}
     for s in sesiones(curso):
@@ -411,9 +488,10 @@ def rubrica_tex(rub: dict) -> str:
         por = {n["puntaje"]: n["descriptor"] for n in c["niveles"]}
         filas.append(rf"\textbf{{{tex(c['nombre'])}}} & " + " & ".join(tex(por.get(p, "")) for p, _ in esc)
                      + rf" & {num(c['peso'])}\,\%")
-    out = [MARCA_GENERADO, f"% Rúbrica «{rub.get('id', '')}»: {rub.get('titulo', '')}", r"\begingroup\small"]
+    out = [MARCA_GENERADO, f"% Rúbrica «{rub.get('clave', '')}»: {rub.get('titulo', '')}", r"\begingroup\small"]
     out += tabla_partida(columnas, cab, filas)
-    out += [r"\par\smallskip{\footnotesize Nota: Σ peso × (puntaje ÷ puntaje máximo del criterio) × 20. "
+    out += [r"\par\smallskip{\footnotesize Nota sobre 100: Σ peso × (puntaje ÷ puntaje máximo del criterio); "
+            r"la vigesimal es esa nota ÷ 5. "
             rf"Por qué esta rúbrica: se comparte antes y se usa para formar, no solo para calificar · {tex(rub['fuente'])}.}}",
             r"\endgroup"]
     return "\n".join(out) + "\n"
@@ -444,42 +522,76 @@ def documento_alineamiento(curso: Path) -> str:
            rf"Cada resultado tiene la evidencia que lo comprueba y la sesión que lo trabaja (alineamiento constructivo; "
            rf"{tex(FUENTE['alineamiento'])}).", "", r"\begingroup\small", matriz_tex(curso).rstrip(), r"\endgroup", "",
            r"\section*{Evaluaciones}", r"\begingroup\small",
-           r"\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.30\linewidth} c c Y@{}}", r"\toprule",
-           r"\textbf{Evaluación} & \textbf{Tipo} & \textbf{Peso} & \textbf{Uso de IA permitido} \\\midrule"]
+           r"\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X c c@{}}", r"\toprule",
+           r"\textbf{Evaluación} & \textbf{Tipo} & \textbf{Peso} \\\midrule"]
     for e in al.get("evaluaciones") or []:
         peso = num(e["peso"]) + r"\,\%" if e.get("peso") else "--"
-        pol = e.get("politica_ia", "")
-        out.append(rf"{tex(e['titulo'])} & {tex(e['tipo'])} & {peso} & \textbf{{{tex(pol)}}}: {tex(POLITICA_IA.get(pol, ''))} \\")
-    out += [r"\bottomrule", r"\end{tabularx}", r"\endgroup", "",
-            r"\section*{Política de uso de la inteligencia artificial}", tex(pia.get("regla", "")), ""]
-    if pia.get("declaracion"):
-        out += [rf"\textbf{{Cómo se declara.}} {tex(pia['declaracion'])}", ""]
-    if pia.get("datos"):
-        out += [rf"\textbf{{Datos que nunca van a una herramienta de IA.}} {tex(pia['datos'])}", ""]
-    out += [rf"{{\footnotesize Por qué · {tex(pia.get('fuente', FUENTE['ia']))}.}}", ""]
+        out.append(rf"{tex(e['titulo'])} & {tex(e['tipo'])} & {peso} \\")
+    out += [r"\bottomrule", r"\end{tabularx}", r"\endgroup", ""]
+    if pia.get("regla"):
+        out += [r"\section*{Política de uso de la inteligencia artificial}",
+                r"\input{../politica-ia.tex}", ""]
     ec = al.get("evaluacion_curso")
     if ec:
         out += [r"\section*{Evaluación del propio curso}",
                 tex(ec.get("descripcion", "")) + " Resultados clave: " +
                 ", ".join(tex(x) for x in ec.get("resultados") or []) + ".",
                 rf"{{\footnotesize Por qué · {tex(ec.get('fuente', FUENTE['curso']))}.}}", ""]
-    rubs = [(e, curso / e["rubrica"]) for e in al.get("evaluaciones") or [] if e.get("rubrica")]
+    # una rúbrica por archivo, aunque la usen varias evaluaciones (la de réplica sirve a la ronda de pares y al informe)
+    rubs: dict[Path, list[dict]] = {}
+    for e in al.get("evaluaciones") or []:
+        if e.get("rubrica"):
+            rubs.setdefault(curso / e["rubrica"], []).append(e)
     if rubs:
         out.append(r"\section*{Rúbricas}")
-        for e, ruta in rubs:
+        for ruta, evs in rubs.items():
             rub = leer(ruta)
-            out += [rf"\subsection*{{{tex(rub['titulo'])}}}", rf"\input{{{os.path.relpath(ruta.with_suffix('.tex'), curso / '01-diseno' / 'alineamiento')}}}", ""]
+            usan = "; ".join(tex(e["titulo"]) for e in evs)
+            out += [rf"\subsection*{{{tex(rub['titulo'])}}}",
+                    rf"{{\footnotesize La usa{'n' if len(evs) > 1 else ''}: {usan}.}}\par\smallskip",
+                    rf"\input{{{os.path.relpath(ruta.with_suffix('.tex'), curso / '01-diseno' / 'alineamiento')}}}", ""]
     out += [r"\end{document}"]
     return "\n".join(out) + "\n"
 
 
+def politica_ia_tex(curso: Path) -> str:
+    """El fragmento de la política de IA (`curso.yml` → `politica_ia` y el uso de cada evaluación), sin título.
+
+    Lo incluyen la sección «Uso de la inteligencia artificial» del sílabo (`templates/report/silabo/`, con
+    `\\InputIfFileExists{politica-ia.tex}`) y el anexo del sílabo: una sola fuente para los dos.
+    """
+    cy = leer(curso / "curso.yml")
+    pia = cy.get("politica_ia") or {}
+    evs = (cy.get("alineamiento") or {}).get("evaluaciones") or []
+    out = [MARCA_GENERADO, f"% Fuente: {curso.name}/curso.yml (politica_ia y alineamiento.evaluaciones[].politica_ia).",
+           tex(pia.get("regla", "")), ""]
+    if evs:
+        out += [r"\begingroup\small",
+                r"\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.38\linewidth} >{\raggedright\arraybackslash}X@{}}",
+                r"\toprule", r"\textbf{Evaluación} & \textbf{Uso de IA permitido} \\\midrule"]
+        for e in evs:
+            pol = e.get("politica_ia", "")
+            out.append(rf"{tex(e['titulo'])} & \textbf{{{tex(pol)}}}: {tex(POLITICA_IA.get(pol, ''))} \\")
+        out += [r"\bottomrule", r"\end{tabularx}", r"\endgroup", ""]
+    if pia.get("declaracion"):
+        out += [rf"\textbf{{Cómo se declara.}} {tex(pia['declaracion'])}", ""]
+    if pia.get("datos"):
+        out += [rf"\textbf{{Datos que nunca van a una herramienta de IA.}} {tex(pia['datos'])}", ""]
+    out += [rf"{{\footnotesize Por qué · {tex(pia.get('fuente', FUENTE['ia']))}.}}"]
+    return "\n".join(out) + "\n"
+
+
 def vistas(curso: Path) -> dict[Path, str]:
-    """Las vistas generadas de un curso alineado: el anexo del sílabo y la tabla de cada rúbrica."""
+    """Las vistas generadas de un curso: la política de IA (si la declara) y, si está alineado, el anexo del sílabo y
+    la tabla de cada rúbrica."""
     cy = leer(curso / "curso.yml")
     al = cy.get("alineamiento")
+    out = {}
+    if (cy.get("politica_ia") or {}).get("regla"):
+        out[curso / "01-diseno" / "politica-ia.tex"] = politica_ia_tex(curso)
     if not al:
-        return {}
-    out = {curso / "01-diseno" / "alineamiento" / "alineamiento.tex": documento_alineamiento(curso)}
+        return out
+    out[curso / "01-diseno" / "alineamiento" / "alineamiento.tex"] = documento_alineamiento(curso)
     for e in al.get("evaluaciones") or []:
         if e.get("rubrica") and (curso / e["rubrica"]).is_file():
             rub = leer(curso / e["rubrica"])
@@ -514,23 +626,29 @@ def cuestionario(curso: Path, sesion: Path, examen: bool, semilla: int) -> list[
     return elegidas
 
 
-def cuestionario_md(curso: Path, items: list[tuple[str, dict]], titulo: str) -> str:
-    out = [f"# {titulo}", "", f"Responde sin mirar apuntes; después compara. Por qué · {FUENTE['banco']}", ""]
+def cuestionario_md(curso: Path, items: list[tuple[str, dict]], titulo: str, claves: bool = True) -> str:
+    """El cuestionario en Markdown; con `claves=False`, la versión del estudiante (las claves se ven en la puesta en común)."""
+    despues = "después compara con las claves." if claves else "las claves se revisan en la puesta en común de la clase."
+    out = [f"# {titulo}", "", f"Responde sin mirar apuntes; {despues} Por qué · {FUENTE['banco']}", ""]
     for i, (origen, p) in enumerate(items, 1):
         out.append(f"{i}. ({origen}) {p['enunciado']}")
         for o in p.get("opciones") or []:
             out.append(f"    - {o}")
+    if not claves:
+        return "\n".join(out) + "\n"
     out += ["", "## Claves", ""]
     for i, (_, p) in enumerate(items, 1):
         out.append(f"{i}. {p['respuesta']}" + (f". {p['explicacion']}" if p.get("explicacion") else ""))
     return "\n".join(out) + "\n"
 
 
-def cuestionario_tex(curso: Path, items: list[tuple[str, dict]], titulo: str) -> str:
+def cuestionario_tex(curso: Path, items: list[tuple[str, dict]], titulo: str, claves: bool = True) -> str:
     cy = leer(curso / "curso.yml")
     out = [r"\documentclass{academic-report}", r"\tipodocumento{Práctica de recuperación}",
            rf"\curso{{{tex(cy['titulo'])}}}", rf"\titulodocumento{{{tex(titulo)}}}", r"\begin{document}", r"\encabezado",
-           rf"Responde sin mirar apuntes; después compara con las claves. {{\footnotesize Por qué · {tex(FUENTE['banco'])}.}}",
+           (r"Responde sin mirar apuntes; después compara con las claves. " if claves else
+            r"Responde sin mirar apuntes; las claves se revisan en la puesta en común de la clase. ")
+           + rf"{{\footnotesize Por qué · {tex(FUENTE['banco'])}.}}",
            r"\begin{enumerate}"]
     for origen, p in items:
         out.append(rf"\item {{\footnotesize[{tex(origen)}]}} {tex(p['enunciado'])}")
@@ -538,6 +656,8 @@ def cuestionario_tex(curso: Path, items: list[tuple[str, dict]], titulo: str) ->
             out.append(r"\begin{itemize}")
             out += [rf"\item {tex(o)}" for o in p["opciones"]]
             out.append(r"\end{itemize}")
+    if not claves:
+        return "\n".join(out + [r"\end{enumerate}", r"\end{document}"]) + "\n"
     out += [r"\end{enumerate}", r"\newpage", r"\section*{Claves}", r"\begin{enumerate}"]
     for _, p in items:
         out.append(rf"\item {tex(p['respuesta'])}" + (f". {tex(p['explicacion'])}" if p.get("explicacion") else ""))
@@ -599,10 +719,13 @@ def main(argv: list[str]) -> int:
         with open(args[1], encoding="utf-8", newline="") as f:
             filas = list(csv.DictReader(f))
         w = csv.writer(sys.stdout)
-        w.writerow(["codigo", "nota"])
+        w.writerow(["codigo", "nota", "nota_100", "vetos"])   # nota: vigesimal (nota_100 × 20 / 100)
         for fila in filas:
-            w.writerow([fila.get("codigo", ""), num(calificar(rub, fila))])
+            r = calificar(rub, fila)
+            w.writerow([fila.get("codigo", ""), num(r["nota"]), num(r["nota_100"]), " ".join(r["vetos"])])
         return 0
+    estudiante = "--estudiante" in args   # versión del estudiante: sin claves (banco y pre-post)
+    args = [a for a in args if a != "--estudiante"]
     if orden == "banco":
         examen = "--examen" in args
         args = [a for a in args if a != "--examen"]
@@ -611,13 +734,15 @@ def main(argv: list[str]) -> int:
         s = sesion_dir(c, args[1])
         items = cuestionario(c, s, examen, semilla)
         titulo = f"{'Examen' if examen else 'Recuperación'}: {leer(s / 'sesion.yml').get('titulo', s.name)}"
-        print(cuestionario_tex(c, items, titulo) if formato == "tex" else cuestionario_md(c, items, titulo), end="")
+        print(cuestionario_tex(c, items, titulo, not estudiante) if formato == "tex"
+              else cuestionario_md(c, items, titulo, not estudiante), end="")
         return 0
     if orden == "pre-post":
         c = curso_dir(args[0])
         items = pre_post(c)
         titulo = "Prueba antes y después (resultados clave)"
-        print(cuestionario_tex(c, items, titulo) if formato == "tex" else cuestionario_md(c, items, titulo), end="")
+        print(cuestionario_tex(c, items, titulo, not estudiante) if formato == "tex"
+              else cuestionario_md(c, items, titulo, not estudiante), end="")
         return 0
     # generar
     aplicar = "--aplicar" in args

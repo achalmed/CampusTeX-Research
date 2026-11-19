@@ -9,9 +9,11 @@
 # Beamer y config vía TEXINPUTS, así el documento solo hace \documentclass{academic-*}. Las citas (APA, Zotero) se
 # buscan en la carpeta del documento y en la de la exportación de Zotero (ZOTERO_BIB de core/env.sh), por BIBINPUTS.
 #
-# --modo (solo evaluaciones, academic-exam): examen | claves | soluciones | todos
+# --modo (evaluaciones, academic-exam): examen | claves | soluciones | todos
 #   Aplica la opción de clase SIN editar el .tex (\PassOptionsToClass) y nombra
-#   la salida ARCHIVO[-claves|-soluciones].pdf. Sin --modo vale el que declare el
+#   la salida ARCHIVO[-claves|-soluciones].pdf.
+# --modo estudiante (talleres y guías, academic-report): ARCHIVO-estudiante.pdf, sin lo que va dentro de
+#   \begin{paradocente} (clave, solucionario, nota para el docente); es la que publica publish-session.sh. Sin --modo vale el que declare el
 #   documento en sus 30 primeras líneas (% !MODO = soluciones); si no declara, examen.
 #   Así F5 de LaTeX Studio y de TeXstudio compila la versión que el documento pide.
 # --clean : elimina auxiliares del documento.
@@ -82,7 +84,8 @@ modo_pre() { case "$1" in
   examen|"") echo "" ;;
   claves)     echo "\\PassOptionsToClass{claves}{academic-exam}" ;;
   soluciones) echo "\\PassOptionsToClass{soluciones}{academic-exam}" ;;
-  *) die "MODO no válido: $1 (examen|claves|soluciones|todos)" ;;
+  estudiante) echo "\\PassOptionsToClass{estudiante}{academic-report}" ;;
+  *) die "MODO no válido: $1 (examen|claves|soluciones|todos|estudiante)" ;;
 esac; }
 
 case "$MODO" in
@@ -94,6 +97,7 @@ case "$MODO" in
     exit "$fail" ;;
   claves)     info "Modo claves";     compila "$BASE-claves" "$(modo_pre claves)" ;;
   soluciones) info "Modo soluciones"; compila "$BASE-soluciones" "$(modo_pre soluciones)" ;;
+  estudiante) info "Modo estudiante (sin paradocente)"; compila "$BASE-estudiante" "$(modo_pre estudiante)" ;;
   examen|"")  compila "$BASE" "" ;;
-  *)          die "MODO no válido: $MODO (examen|claves|soluciones|todos)" ;;
+  *)          die "MODO no válido: $MODO (examen|claves|soluciones|todos|estudiante)" ;;
 esac
